@@ -1,0 +1,87 @@
+.sv {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.sv-facts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 14px;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.sv-grid {
+  display: grid;
+  grid-template-columns: 74px repeat(15, minmax(0, 1fr));
+  gap: 3px;
+  align-items: stretch;
+  font-size: 0.85rem;
+}
+
+.sv-head {
+  font-weight: 800;
+  text-align: left;
+  align-self: center;
+  line-height: 1.1;
+}
+
+.sv-cell {
+  background: var(--white);
+  border: 2px solid var(--grey);
+  border-radius: 8px;
+  min-height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.sv-week {
+  background: transparent;
+  border-color: transparent;
+  min-height: 28px;
+  font-size: 0.85rem;
+}
+
+.sv-cell.sv-done {
+  opacity: 0.45;
+}
+
+.sv-cell.sv-week.sv-buy {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--white);
+}
+
+.sv-cell.sv-week.sv-rain {
+  background: var(--white);
+  border-color: var(--teal);
+}
+
+.sv-say {
+  min-height: 3em;
+  font-weight: 700;
+  background: var(--white);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  padding: 6px 12px;
+  text-align: left;
+}
+
+.sv-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.sv-week.sv-both {
+  font-size: 0.65rem;
+  white-space: nowrap;
+  letter-spacing: -1px;
+}
