@@ -1,3 +1,4 @@
+import { hasLesson } from "../content";
 import { LESSONS } from "../lessons";
 import { t } from "../i18n";
 import { LESSON_ORDER } from "../lessons";
@@ -102,7 +103,7 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
                   </span>
                   <span className="place-tag">
                     {state === "done" ? "🏅" : state === "next" ? t(lang, "nextUp") : t(lang, "locked")}
-                    {state !== "locked" && !l.built ? ` · ${t(lang, "comingSoon")}` : ""}
+                    {state !== "locked" && !hasLesson(l.id) ? ` · ${t(lang, "comingSoon")}` : ""}
                   </span>
                 </span>
               </button>

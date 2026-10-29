@@ -7,6 +7,7 @@ interface Props {
   progress: Progress;
   onRestore: (p: Progress) => void;
   onReset: () => void;
+  onFacts: () => void;
   onClose: () => void;
 }
 
@@ -15,7 +16,7 @@ function makeGate() {
 }
 
 /** Parent area. A small multiplication gate keeps a young child out of it. */
-export function ParentPanel({ progress, onRestore, onReset, onClose }: Props) {
+export function ParentPanel({ progress, onRestore, onReset, onFacts, onClose }: Props) {
   const lang = progress.lang;
   const [gate] = useState(makeGate);
   const [open, setOpen] = useState(false);
@@ -64,6 +65,12 @@ export function ParentPanel({ progress, onRestore, onReset, onClose }: Props) {
   return (
     <main className="screen center">
       <div className="panel">
+        <h2>{t(lang, "factCards")}</h2>
+        <p>{t(lang, "factCardsHelp")}</p>
+        <button className="btn" type="button" onClick={onFacts}>
+          {t(lang, "factCards")}
+        </button>
+
         <h2>{t(lang, "saveTitle")}</h2>
         <p>{t(lang, "saveHelp")}</p>
         <textarea className="text-input code" readOnly value={code} rows={3} aria-label={t(lang, "saveTitle")} />
