@@ -1,0 +1,107 @@
+.ig-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.ig-modes {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ig-modes .btn {
+  min-height: 46px;
+  font-size: 0.95rem;
+  padding: 0 16px;
+}
+
+.ig-chart {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--white);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+}
+
+.ig-bar-start {
+  fill: var(--teal);
+}
+
+.ig-bar-extra-save {
+  fill: var(--green);
+}
+
+.ig-bar-extra-loan {
+  fill: var(--orange);
+}
+
+.ig-band {
+  fill: var(--green);
+  opacity: 0.45;
+}
+
+.ig-mark {
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+}
+
+.ig-axis {
+  font-size: 11px;
+  fill: var(--ink);
+}
+
+.ig-readout {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ig-big {
+  font-size: 1.35rem;
+  color: var(--teal-dark);
+}
+
+.ig-small {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.ig-sliders {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px 18px;
+  width: 100%;
+  text-align: left;
+}
+
+.ig-sliders.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ig-sliders .slider {
+  width: 100%;
+  gap: 2px;
+}
+
+.ig-sliders .slider input[type="range"] {
+  height: 28px;
+}
+
+.ig-sliders .slider-label {
+  font-size: 0.92rem;
+}
+
+@media (max-width: 760px) {
+  .ig-sliders,
+  .ig-sliders.two {
+    grid-template-columns: 1fr;
+  }
+}
