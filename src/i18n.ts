@@ -1,0 +1,94 @@
+import type { Lang } from "./progress";
+
+type Dict = Record<string, string>;
+
+const en: Dict = {
+  appName: "Ripples",
+  tagline: "Everything makes a ripple.",
+  askName: "Hi! I'm Otto. What's your name?",
+  namePlaceholder: "Your name",
+  nameGo: "Let's go",
+  welcome: "Hi {name}! Pick a place on the trail.",
+  welcomeBack: "Welcome back, {name}!",
+  continue: "Continue",
+  nextUp: "Next",
+  comingSoon: "Coming soon",
+  locked: "Finish the one before first",
+  badges: "My badges",
+  back: "Back",
+  readAloud: "Read aloud",
+  mute: "Sound off",
+  unmute: "Sound on",
+  language: "Language",
+  parents: "For parents",
+  lessonBuilding: "This lesson is still being built. Come back soon!",
+  allDone: "You earned every badge on this trail!",
+  gateQuestion: "For parents: what is {a} × {b}?",
+  gateWrong: "Not quite. Try again.",
+  gateGo: "Open",
+  saveTitle: "Save progress",
+  saveHelp: "Copy this code. It holds the name, language and badges.",
+  copy: "Copy",
+  copied: "Copied",
+  restoreTitle: "Restore progress",
+  restoreHelp: "Paste a saved code to bring the badges back on this device.",
+  restoreGo: "Restore",
+  restoreBad: "That code does not work. Check it and try again.",
+  restoreOk: "Progress restored.",
+  resetTitle: "Start over",
+  resetHelp: "Deletes the name and all badges on this device.",
+  resetGo: "Delete everything",
+  resetSure: "Really delete everything on this device?",
+  close: "Close",
+};
+
+const de: Dict = {
+  appName: "Ripples",
+  tagline: "Alles zieht Kreise.",
+  askName: "Hallo! Ich bin Otto. Wie heißt du?",
+  namePlaceholder: "Dein Name",
+  nameGo: "Los geht's",
+  welcome: "Hallo {name}! Such dir einen Ort auf dem Weg aus.",
+  welcomeBack: "Willkommen zurück, {name}!",
+  continue: "Weiter",
+  nextUp: "Als Nächstes",
+  comingSoon: "Bald da",
+  locked: "Schließ zuerst die Lektion davor ab",
+  badges: "Meine Abzeichen",
+  back: "Zurück",
+  readAloud: "Vorlesen",
+  mute: "Ton aus",
+  unmute: "Ton an",
+  language: "Sprache",
+  parents: "Für Eltern",
+  lessonBuilding: "Diese Lektion wird noch gebaut. Komm bald wieder!",
+  allDone: "Du hast alle Abzeichen auf diesem Weg!",
+  gateQuestion: "Für Eltern: Was ist {a} × {b}?",
+  gateWrong: "Nicht ganz. Versuch es noch einmal.",
+  gateGo: "Öffnen",
+  saveTitle: "Fortschritt sichern",
+  saveHelp: "Kopiere diesen Code. Er enthält Name, Sprache und Abzeichen.",
+  copy: "Kopieren",
+  copied: "Kopiert",
+  restoreTitle: "Fortschritt wiederherstellen",
+  restoreHelp: "Füge einen gesicherten Code ein, um die Abzeichen auf diesem Gerät zurückzuholen.",
+  restoreGo: "Wiederherstellen",
+  restoreBad: "Dieser Code funktioniert nicht. Prüfe ihn und versuche es noch einmal.",
+  restoreOk: "Fortschritt wiederhergestellt.",
+  resetTitle: "Neu anfangen",
+  resetHelp: "Löscht Name und alle Abzeichen auf diesem Gerät.",
+  resetGo: "Alles löschen",
+  resetSure: "Wirklich alles auf diesem Gerät löschen?",
+  close: "Schließen",
+};
+
+const dicts: Record<Lang, Dict> = { en, de };
+
+export type UiKey = keyof typeof en;
+
+export function t(lang: Lang, key: UiKey, vars: Record<string, string | number> = {}): string {
+  const raw = dicts[lang][key] ?? en[key];
+  return raw.replace(/\{(\w+)\}/g, (_m, k: string) => String(vars[k] ?? ""));
+}
+
+export const SPEECH_LANG: Record<Lang, string> = { en: "en-US", de: "de-DE" };
