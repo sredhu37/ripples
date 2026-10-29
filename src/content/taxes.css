@@ -1,0 +1,71 @@
+.tb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.tb-items {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tb-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 118px;
+  padding: 4px 10px;
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  font-weight: 700;
+}
+
+.tb-off {
+  opacity: 0.6;
+  border-style: dashed;
+}
+
+.tb-icon {
+  font-size: 1.9rem;
+  line-height: 1.1;
+}
+
+.tb-cost {
+  font-size: 0.95rem;
+}
+
+.tb-line {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.tb-sub {
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.tb-coins {
+  margin-left: 10px;
+  letter-spacing: 2px;
+}
+
+.tb-keep {
+  border-radius: 12px;
+  padding: 4px 12px;
+  border: 2px solid var(--ink);
+  background: var(--white);
+}
+
+.tb-low {
+  background: #ffe1d6;
+}
+
+.tb-ok {
+  background: #e3f6d9;
+}
