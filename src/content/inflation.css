@@ -1,0 +1,73 @@
+.inf {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  align-items: center;
+}
+
+.inf-sliders {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  justify-content: center;
+  width: 100%;
+}
+
+.inf-board {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 26px;
+  width: 100%;
+}
+
+.inf-tag {
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  padding: 6px 16px;
+  font-weight: 800;
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
+
+.inf-tag strong {
+  display: block;
+  font-size: 2rem;
+}
+
+.inf-scoops {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px 6px;
+  max-width: 460px;
+  font-size: 2.1rem;
+  line-height: 1.1;
+}
+
+.inf-scoop.gone {
+  opacity: 0.18;
+  filter: grayscale(1);
+}
+
+.inf-count {
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+
+@media (max-height: 800px) {
+  .inf-scoops {
+    font-size: 1.8rem;
+  }
+  .inf-tag strong {
+    font-size: 1.7rem;
+  }
+}
+
+.inf-sliders .slider {
+  width: 310px;
+  max-width: 100%;
+}
