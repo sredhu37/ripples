@@ -1,0 +1,90 @@
+.job {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+.job-title {
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+
+.job-pay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.job-coins {
+  font-size: 1.7rem;
+  line-height: 1.2;
+  min-height: 2rem;
+  letter-spacing: 1px;
+}
+
+.job-pay strong {
+  font-size: 1.4rem;
+}
+
+.job-reasons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.job-reason {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--white);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  padding: 4px 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.job-reason.job-up {
+  border-color: #357a3e;
+}
+
+.job-reason.job-down {
+  border-color: #b3402a;
+}
+
+.job-sliders {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 18px;
+}
+
+.job-sliders .slider {
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 700px) {
+  .job-sliders {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-height: 800px) {
+  .job {
+    gap: 6px;
+  }
+  .job-coins {
+    font-size: 1.4rem;
+    min-height: 1.7rem;
+  }
+  .job-pay strong {
+    font-size: 1.2rem;
+  }
+  .job-sliders .slider input[type="range"] {
+    height: 28px;
+  }
+}
