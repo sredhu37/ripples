@@ -12,6 +12,7 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Trail | The map screen listing the lessons in order | menu, home |
 | Group | A set of lessons on one theme (Money and Work, Business, ...) | course, level |
 | Fact card | One screen per lesson: 5 claims, a source for each, what was simplified | review sheet |
+| Ripple Town | The made-up town where all lesson stories happen | island |
 | Ask Dad | The closing conversation question for the parent | homework |
 | In real life card | The Germany and euros example at the end of a lesson | case study |
 | Save code | Parent-only text code that restores name, language and badges | backup, password |

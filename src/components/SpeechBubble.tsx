@@ -1,6 +1,6 @@
 import { t } from "../i18n";
 import type { Lang } from "../progress";
-import { canSpeak, speak } from "../speech";
+import { speak, useHasVoice } from "../speech";
 import { sfx } from "../sound";
 
 interface Props {
@@ -10,10 +10,11 @@ interface Props {
 
 /** Otto's speech bubble with a read-aloud button. */
 export function SpeechBubble({ text, lang }: Props) {
+  const voice = useHasVoice(lang);
   return (
     <div className="bubble">
       <p>{text}</p>
-      {canSpeak() && (
+      {voice && (
         <button
           type="button"
           className="icon-btn"
