@@ -12,7 +12,7 @@ Live site: https://sredhu37.github.io/ripples/ (add it to the iPad home screen; 
 
 | Group | Lessons | State |
 | --- | --- | --- |
-| Money and Work | 10 | App shell done, lesson content next (lesson 1 first) |
+| Money and Work | 10 | All 10 lessons written (EN and DE), fact cards waiting for Sunny's review |
 | Business, Markets, Governments, History, Technology | to be planned | Not started |
 
 The full list of design decisions is in [docs/design.md](docs/design.md).
