@@ -64,7 +64,7 @@ function TradeBoard({ lang, onBread }: { lang: Lang; onBread?: () => void }) {
           <span className="trade-who">🧔 Finn</span>
           <span className="trade-things" aria-label="Finn has">
             {b.fish && "🐟"} {b.coins > 0 && "🪙".repeat(b.coins)} {b.bread && "🍞"}
-            {!b.fish && b.coins === 0 && !b.bread && "–"}
+            {!b.fish && b.coins === 0 && !b.bread && "-"}
           </span>
         </div>
         <div className="trade-row">

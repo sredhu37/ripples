@@ -35,3 +35,7 @@ Lessons unlock in order: the next one opens after the badge. Finished lessons ca
 - Progress is saved in browser storage on the device (name, language, mute, badges). Parents get a Save/Restore code (`RIP1.<payload>.<checksum>`) behind a maths gate. No server.
 - Offline: a small service worker caches the app after the first visit.
 - Tablet first (iPad), also works on phone and Mac. Touch targets are at least 60 px.
+
+## Review status
+
+All 10 group 1 lessons exist. None is approved yet: Sunny reads each fact card in the app (gear icon, maths question, Fact cards) and fixes or approves. German text has not been read by a native speaker.
