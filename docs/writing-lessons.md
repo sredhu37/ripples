@@ -6,9 +6,18 @@ One lesson is one file: `src/content/<id>.tsx` exporting `lesson: Lesson` (type 
 
 Story (5 to 8 beats), then a toy the child plays with, then 3 questions, then a badge, then an "In real life" card (Germany, euros), then an "Ask Dad" question. The engine (`src/lesson/LessonRunner.tsx`) does all of that. A lesson file only provides content and the toy.
 
+## Animated story beats
+
+Prefer `animatedBeat(lines, Diagram, mood?)` from `src/lesson/toolkit.tsx` over emoji `scene` beats. Each tap shows the next line and the next part of the diagram. The money lesson (`src/content/money.tsx`, `money.diagrams.tsx`) is the reference.
+
+- **Lines:** 2 to 6 per beat, one idea each, written like a friendly teacher talking to the child: warm full sentences, not caption fragments. Say what a job is called ("Finn is a fisherman. That means his job is to catch fish.").
+- **Terms:** when a new word first appears, name it and say what it is called, in both languages: "Swapping things without any money has a name. It is called *barter*." Put the word between *stars*; the app highlights it and reads it without the stars. EN and DE must have the same number of terms. Also show the word on a `TermChip` in the diagram.
+- **Diagram:** a component receiving `{ lang, step }`. Show a part with `step >= n` (parts mount on their tap and pop in). Build from `src/components/diagram.tsx` and the SVG icons in `src/components/icons.tsx`. Add new icons there, flat shapes, no emoji. Use icons and arrows rather than text; a name or term label must work in both languages.
+- **Canvas:** 640 x 280. Check every tap in a browser at 1366x768, on an iPad-size window, and in German.
+
 ## Rules
 
-1. **Reader:** an 8-year-old who reads simply. Story beats: one idea each, at most 190 characters in English, short sentences, concrete things (fish, bread, coins) before any word like "economy".
+1. **Reader:** an 8-year-old who reads simply. Story beats (or each line of an animated beat): one idea each, at most 190 characters in English, short sentences, concrete things (fish, bread, coins) before any word like "economy".
 2. **Two languages, written together.** English and German for every text. German is natural child German (du-form, "Papa"), not a word-for-word copy. Check grammar and umlauts.
 3. **No em dashes or en dashes** anywhere (tests fail on them). No filler, no "Great job!" padding.
 4. **The world:** Ripple Town. Otto the otter is the guide. Recurring cast: Finn (fisherman), Bea (baker), Sam (shoemaker). Add new town people if needed (for example Mayor Moss in the tax lesson). Town money is "coins". Do not reuse a lesson's toy idea from another lesson.

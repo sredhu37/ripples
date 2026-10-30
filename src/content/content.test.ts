@@ -5,7 +5,10 @@ import type { Lesson, Text } from "../lesson/types";
 
 function texts(l: Lesson): { where: string; text: Text }[] {
   const out: { where: string; text: Text }[] = [];
-  l.story.forEach((b, i) => out.push({ where: `story ${i + 1}`, text: b.text }));
+  l.story.forEach((b, i) => {
+    if (b.lines) b.lines.forEach((line, j) => out.push({ where: `story ${i + 1} line ${j + 1}`, text: line }));
+    else out.push({ where: `story ${i + 1}`, text: b.text });
+  });
   out.push({ where: "toyIntro", text: l.toyIntro });
   l.questions.forEach((q, i) => {
     out.push({ where: `q${i + 1} prompt`, text: q.prompt });
@@ -64,8 +67,29 @@ describe.each(LESSONS.filter((m) => hasLesson(m.id)))("lesson $id", (meta) => {
 
   it("keeps story beats short for an 8-year-old", () => {
     for (const b of lesson.story) {
-      expect(b.text.en.length).toBeLessThanOrEqual(190);
-      expect(b.text.de.length).toBeLessThanOrEqual(230);
+      // an animated beat is read one line per tap, so each line is the unit
+      for (const line of b.lines ?? [b.text]) {
+        expect(line.en.length).toBeLessThanOrEqual(190);
+        expect(line.de.length).toBeLessThanOrEqual(230);
+      }
+    }
+  });
+
+  it("gives every animated beat 2 to 6 taps and a diagram", () => {
+    for (const b of lesson.story) {
+      if (!b.lines) continue;
+      expect(b.lines.length).toBeGreaterThanOrEqual(2);
+      expect(b.lines.length).toBeLessThanOrEqual(6);
+      expect(b.Diagram).toBeDefined();
+    }
+  });
+
+  it("marks new terms with balanced stars in both languages", () => {
+    for (const { where, text } of texts(lesson)) {
+      for (const lang of ["en", "de"] as const) {
+        expect((text[lang].match(/\*/g) ?? []).length % 2, `${where} ${lang} stars`).toBe(0);
+      }
+      expect((text.en.match(/\*/g) ?? []).length, `${where} same terms`).toBe((text.de.match(/\*/g) ?? []).length);
     }
   });
 

@@ -505,6 +505,21 @@ p {
   font-size: 0.95rem;
 }
 
+.btn-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.trade .btn-toy {
+  padding: 0 12px;
+}
+
+.inline-icon {
+  flex: none;
+  display: block;
+}
+
 .btn-toy[aria-pressed="true"] {
   background: var(--green);
   box-shadow: 0 4px 0 #357a3e;
@@ -596,23 +611,6 @@ p {
   width: 100%;
 }
 
-.trade-row {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  font-size: 1.15rem;
-}
-
-.trade-who {
-  font-weight: 800;
-  min-width: 96px;
-  text-align: left;
-}
-
-.trade-things {
-  text-align: left;
-}
-
 .trade-say {
   min-height: 3em;
   font-weight: 700;
@@ -679,4 +677,95 @@ p {
     animation: none !important;
     transition: none !important;
   }
+  .arrow-line {
+    stroke-dashoffset: 0;
+  }
+  .arrow-head {
+    opacity: 1;
+  }
+}
+
+/* animated story diagrams */
+.stage-diagram {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 6px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.diagram {
+  width: 100%;
+  height: auto;
+  max-height: 44vh;
+  display: block;
+}
+
+.pop {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pop-in 0.4s ease-out both;
+}
+
+.arrow-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-line 0.6s ease-out 0.1s forwards;
+}
+
+.arrow-head {
+  opacity: 0;
+  animation: fade-in 0.2s ease-out 0.6s forwards;
+}
+
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+.diagram-name {
+  font: 700 22px ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif;
+  fill: var(--ink);
+}
+
+.diagram-small {
+  font: 700 15px ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif;
+  fill: #5b7078;
+}
+
+.chip-text {
+  font: 700 26px ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif;
+  fill: #fff;
+}
+
+.steps {
+  display: flex;
+  gap: 8px;
+}
+
+.step {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--grey);
+  transition: background 0.2s;
+}
+
+.step.on {
+  background: var(--teal);
+}
+
+mark.term {
+  background: #ffd96b;
+  color: var(--ink);
+  font-weight: 800;
+  border-radius: 8px;
+  padding: 0 6px;
 }

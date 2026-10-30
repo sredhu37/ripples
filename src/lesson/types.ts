@@ -4,12 +4,26 @@ import type { Lang } from "../progress";
 /** A text in both languages. Every field must be filled in both. */
 export type Text = Record<Lang, string>;
 
-/** One screen of the story: Otto says `text`, the stage shows `scene`. */
+/** What an animated diagram receives: how many lines have been tapped so far. */
+export interface DiagramProps {
+  lang: Lang;
+  /** 1 on the first tap, up to lines.length. Show a part with `step >= n`. */
+  step: number;
+}
+
+/**
+ * One screen of the story: Otto says `text`, the stage shows `scene`.
+ * An animated beat (build it with `animatedBeat`) has `lines` and a `Diagram`
+ * instead: each tap shows the next line and the next part of the diagram.
+ */
 export interface Beat {
   text: Text;
-  /** Emoji row shown big on the stage, for example "🐟 ➡️ 🍞". */
+  /** Emoji row shown big on the stage, for example "🐟 ➡️ 🍞". Old style, still works. */
   scene?: string;
   mood?: "happy" | "think";
+  /** One Otto line per tap. `text` is these lines joined, so tests and old code still work. */
+  lines?: Text[];
+  Diagram?: ComponentType<DiagramProps>;
 }
 
 /** The free-play toy. No score, the child just tries things. */

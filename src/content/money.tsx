@@ -1,106 +1,10 @@
 import { useState } from "react";
-import { CheckButton, Stage, ToyButton } from "../lesson/toolkit";
+import { CheckButton, animatedBeat } from "../lesson/toolkit";
 import type { Lesson, Text, ToyProps, WidgetProps } from "../lesson/types";
-import type { Lang } from "../progress";
+import { BarterDiagram, JobsDiagram, MeetDiagram, MoneyDiagram, SearchDiagram, SwapWithCoinsDiagram } from "./money.diagrams";
+import { TradeBoard } from "./money.toy";
 
 const T = (en: string, de: string): Text => ({ en, de });
-
-interface Board {
-  coinsOn: boolean;
-  fish: boolean;
-  coins: number;
-  bread: boolean;
-  say: Text;
-}
-
-const START: Board = {
-  coinsOn: false,
-  fish: true,
-  coins: 0,
-  bread: false,
-  say: T("Finn has a fish. He wants bread.", "Finn hat einen Fisch. Er will Brot."),
-};
-
-/** Finn tries to get bread. Without coins nobody wants his fish. With coins it works. */
-function TradeBoard({ lang, onBread }: { lang: Lang; onBread?: () => void }) {
-  const [b, setB] = useState<Board>(START);
-
-  const offer = (who: "Bea" | "Sam") => {
-    if (!b.coinsOn) {
-      setB({
-        ...b,
-        say:
-          who === "Bea"
-            ? T("Bea: No thanks! I don't want fish. I need shoes.", "Bea: Nein danke! Ich will keinen Fisch. Ich brauche Schuhe.")
-            : T("Sam: No thanks! I don't want fish. I want apples.", "Sam: Nein danke! Ich will keinen Fisch. Ich will Äpfel."),
-      });
-      return;
-    }
-    setB({
-      ...b,
-      fish: false,
-      coins: b.coins + 2,
-      say:
-        who === "Bea"
-          ? T("Bea: Fish! Here are 2 coins.", "Bea: Fisch! Hier sind 2 Münzen.")
-          : T("Sam: Fish! Here are 2 coins.", "Sam: Fisch! Hier sind 2 Münzen."),
-    });
-  };
-
-  const buy = () => {
-    setB({
-      ...b,
-      coins: b.coins - 2,
-      bread: true,
-      say: T("Bea: Thank you for 2 coins! Here is your bread.", "Bea: Danke für 2 Münzen! Hier ist dein Brot."),
-    });
-    onBread?.();
-  };
-
-  return (
-    <Stage label="Finn, Bea and Sam">
-      <div className="trade">
-        <div className="trade-row">
-          <span className="trade-who">🧔 Finn</span>
-          <span className="trade-things" aria-label="Finn has">
-            {b.fish && "🐟"} {b.coins > 0 && "🪙".repeat(b.coins)} {b.bread && "🍞"}
-            {!b.fish && b.coins === 0 && !b.bread && "-"}
-          </span>
-        </div>
-        <div className="trade-row">
-          <span className="trade-who">👩‍🍳 Bea</span>
-          <span className="trade-things">
-            {lang === "en" ? "has 🍞, wants 👟" : "hat 🍞, will 👟"}
-          </span>
-        </div>
-        <div className="trade-row">
-          <span className="trade-who">🧑 Sam</span>
-          <span className="trade-things">
-            {lang === "en" ? "has 👟, wants 🍎" : "hat 👟, will 🍎"}
-          </span>
-        </div>
-        <p className="trade-say" role="status">
-          {b.say[lang]}
-        </p>
-        <div className="row wrap">
-          <ToyButton pressed={b.coinsOn} onClick={() => setB({ ...b, coinsOn: !b.coinsOn })}>
-            🪙 {lang === "en" ? (b.coinsOn ? "Coins: ON" : "Coins: OFF") : b.coinsOn ? "Münzen: AN" : "Münzen: AUS"}
-          </ToyButton>
-          <ToyButton disabled={!b.fish} onClick={() => offer("Bea")}>
-            🐟 → Bea
-          </ToyButton>
-          <ToyButton disabled={!b.fish} onClick={() => offer("Sam")}>
-            🐟 → Sam
-          </ToyButton>
-          <ToyButton disabled={!b.coinsOn || b.coins < 2 || b.bread} onClick={buy}>
-            🪙🪙 → 🍞
-          </ToyButton>
-          <ToyButton onClick={() => setB(START)}>↺</ToyButton>
-        </div>
-      </div>
-    </Stage>
-  );
-}
 
 function Toy({ lang }: ToyProps) {
   return <TradeBoard lang={lang} />;
@@ -121,58 +25,107 @@ function GetBreadWidget({ lang, onAnswer }: WidgetProps) {
 export const lesson: Lesson = {
   id: "money",
   story: [
-    {
-      scene: "🧔 🐟🐟🐟",
-      text: T("This is Finn. Finn catches fish. Today he caught three!", "Das ist Finn. Finn fängt Fische. Heute hat er drei gefangen!"),
-    },
-    {
-      scene: "😋 🍞 👩‍🍳",
-      text: T(
-        "Finn is hungry for bread. Bea the baker has lots of bread.",
-        "Finn hat Hunger auf Brot. Bäckerin Bea hat jede Menge Brot.",
-      ),
-    },
-    {
-      scene: "🐟 ➡️ 👩‍🍳 🙅 👟",
-      mood: "think",
-      text: T(
-        "Finn offers a fish. But Bea says: No thanks! I need new shoes.",
-        "Finn bietet einen Fisch an. Aber Bea sagt: Nein danke! Ich brauche neue Schuhe.",
-      ),
-    },
-    {
-      scene: "🔍 👟 ❓ 🐟",
-      mood: "think",
-      text: T(
-        "Now Finn must find someone with shoes who wants fish. That could take all day!",
-        "Jetzt muss Finn jemanden finden, der Schuhe hat und Fisch will. Das kann den ganzen Tag dauern!",
-      ),
-    },
-    {
-      scene: "🐟 ➡️ 🪙🪙",
-      text: T(
-        "So people invented money. Everyone takes coins. Finn sells his fish for coins.",
-        "Darum haben Menschen Geld erfunden. Alle nehmen Münzen. Finn verkauft seinen Fisch für Münzen.",
-      ),
-    },
-    {
-      scene: "🪙🪙 ➡️ 🍞",
-      text: T(
-        "Then Finn buys bread with the coins. Easy! Money helps us swap.",
-        "Dann kauft Finn mit den Münzen Brot. Ganz leicht! Geld hilft uns beim Tauschen.",
-      ),
-    },
-    {
-      scene: "🏷️ 🍞 = 🪙🪙   🐷 🪙",
-      text: T(
-        "Money does two more jobs. It shows the price of things. And you can keep it for later.",
-        "Geld kann noch mehr. Es zeigt, was etwas kostet. Und du kannst es für später aufheben.",
-      ),
-    },
+    animatedBeat(
+      [
+        T("Let's meet Finn. Finn lives in Ripple Town.", "Das ist Finn. Finn wohnt in Ripple Town."),
+        T(
+          "Finn is a fisherman. That means his job is to catch fish.",
+          "Finn ist Fischer. Das heißt, sein Beruf ist es, Fische zu fangen.",
+        ),
+        T("Today he caught three fish. One, two, three!", "Heute hat er drei Fische gefangen. Eins, zwei, drei!"),
+        T("Now Finn is hungry. He would love some bread.", "Jetzt hat Finn Hunger. Er hätte so gern Brot."),
+        T(
+          "Bea is a baker. That means she bakes bread, and she has lots of it!",
+          "Bea ist Bäckerin. Das heißt, sie backt Brot, und sie hat jede Menge davon!",
+        ),
+      ],
+      MeetDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "Finn has an idea. He can swap one of his fish for some of Bea's bread.",
+          "Finn hat eine Idee. Er kann einen Fisch gegen etwas von Beas Brot tauschen.",
+        ),
+        T(
+          "Swapping things without any money has a name. It is called *barter*. Finn wants to barter his fish for bread.",
+          "Tauschen ohne Geld hat einen Namen: *Tauschhandel*. Finn möchte seinen Fisch gegen Brot eintauschen.",
+        ),
+        T(
+          "But Bea says: No thanks! I don't need fish. I need new shoes.",
+          "Aber Bea sagt: Nein danke! Ich brauche keinen Fisch. Ich brauche neue Schuhe.",
+        ),
+      ],
+      BarterDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "So Finn must find someone who has shoes and who wants fish.",
+          "Also muss Finn jemanden finden, der Schuhe hat und Fisch will.",
+        ),
+        T(
+          "Sam is a shoemaker, and Sam has lots of shoes. Finn asks him.",
+          "Sam ist Schuhmacher und hat jede Menge Schuhe. Finn fragt ihn.",
+        ),
+        T(
+          "But Sam says: No thanks! I want apples, not fish.",
+          "Aber Sam sagt: Nein danke! Ich will Äpfel, keinen Fisch.",
+        ),
+        T(
+          "Barter only works when both people want what the other one has. Finn could search all day, and he is still hungry!",
+          "Tauschhandel klappt nur, wenn beide das wollen, was der andere hat. Finn könnte den ganzen Tag suchen, und sein Magen knurrt immer noch!",
+        ),
+      ],
+      SearchDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "People thought: there must be an easier way. So they invented *money*.",
+          "Die Menschen dachten: Es muss einfacher gehen. Also haben sie *Geld* erfunden.",
+        ),
+        T(
+          "Money is something that everybody agrees to accept. In Ripple Town, the money is coins.",
+          "Geld ist etwas, das alle annehmen. In Ripple Town ist das Geld aus Münzen.",
+        ),
+      ],
+      MoneyDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "Now Finn sells one fish to Sam. Sam pays 2 coins.",
+          "Jetzt verkauft Finn einen Fisch an Sam. Sam bezahlt 2 Münzen.",
+        ),
+        T("Finn walks to Bea with his 2 coins.", "Finn geht mit seinen 2 Münzen zu Bea."),
+        T(
+          "Finn buys bread from Bea. She is happy to take the coins. Now Finn has bread, and nobody had to want fish!",
+          "Finn kauft bei Bea Brot. Sie nimmt die Münzen gern. Jetzt hat Finn Brot, und niemand musste Fisch wollen!",
+        ),
+      ],
+      SwapWithCoinsDiagram,
+    ),
+    animatedBeat(
+      [
+        T("Money does three jobs. Job one: it helps us swap.", "Geld hat drei Aufgaben. Aufgabe eins: Es hilft uns beim Tauschen."),
+        T(
+          "Job two: it shows the *price*. A price tells us how many coins something costs. Bread costs 2 coins.",
+          "Aufgabe zwei: Es zeigt den *Preis*. Ein Preis sagt uns, wie viele Münzen etwas kostet. Brot kostet 2 Münzen.",
+        ),
+        T(
+          "Job three: you can *save* it. When you save coins, you keep them for later.",
+          "Aufgabe drei: Du kannst es *sparen*. Wer Münzen spart, hebt sie für später auf.",
+        ),
+      ],
+      JobsDiagram,
+    ),
   ],
   toyIntro: T(
-    "Help Finn get bread! First try without coins. Then switch the coins on.",
-    "Hilf Finn, Brot zu bekommen! Probier es zuerst ohne Münzen. Schalte dann die Münzen an.",
+    "Help Finn get bread! First try without coins. That is barter. Then switch the coins on.",
+    "Hilf Finn, Brot zu bekommen! Probier es zuerst ohne Münzen. Das ist Tauschhandel. Schalte dann die Münzen an.",
   ),
   Toy,
   questions: [

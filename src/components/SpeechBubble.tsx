@@ -2,6 +2,7 @@ import { t } from "../i18n";
 import type { Lang } from "../progress";
 import { speak, useHasVoice } from "../speech";
 import { sfx } from "../sound";
+import { Marked, plain } from "./Marked";
 
 interface Props {
   text: string;
@@ -13,7 +14,9 @@ export function SpeechBubble({ text, lang }: Props) {
   const voice = useHasVoice(lang);
   return (
     <div className="bubble">
-      <p>{text}</p>
+      <p>
+        <Marked text={text} />
+      </p>
       {voice && (
         <button
           type="button"
@@ -21,7 +24,7 @@ export function SpeechBubble({ text, lang }: Props) {
           aria-label={t(lang, "readAloud")}
           onClick={() => {
             sfx.tap();
-            speak(text, lang);
+            speak(plain(text), lang);
           }}
         >
           <SpeakerIcon />

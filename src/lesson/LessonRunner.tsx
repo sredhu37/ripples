@@ -18,7 +18,7 @@ interface Props {
 }
 
 type Phase =
-  | { k: "story"; i: number }
+  | { k: "story"; i: number; back?: boolean }
   | { k: "toy" }
   | { k: "quiz"; i: number }
   | { k: "badge" }
@@ -53,10 +53,12 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit 
 
       {phase.k === "story" && (
         <StoryView
+          key={`${phase.i}-${phase.back ? "end" : "start"}`}
           lesson={lesson}
           index={phase.i}
+          fromEnd={phase.back}
           lang={lang}
-          onPrev={() => setPhase(phase.i === 0 ? phase : { k: "story", i: phase.i - 1 })}
+          onPrev={() => setPhase(phase.i === 0 ? phase : { k: "story", i: phase.i - 1, back: true })}
           onNext={() =>
             setPhase(phase.i + 1 < lesson.story.length ? { k: "story", i: phase.i + 1 } : { k: "toy" })
           }
@@ -145,44 +147,67 @@ function Dots({ total, position, lang }: { total: number; position: number; lang
 function StoryView({
   lesson,
   index,
+  fromEnd,
   lang,
   onPrev,
   onNext,
 }: {
   lesson: Lesson;
   index: number;
+  fromEnd?: boolean;
   lang: Lang;
   onPrev: () => void;
   onNext: () => void;
 }) {
   const beat = lesson.story[index];
+  const count = beat.lines?.length ?? 0;
+  // step = how many lines of an animated beat are showing (unused for old emoji beats)
+  const [step, setStep] = useState(count > 0 && fromEnd ? count : 1);
+  const Diagram = beat.Diagram;
+  const line = count > 0 ? beat.lines![step - 1] : beat.text;
+
+  const advance = () => {
+    sfx.tap();
+    if (count > 0 && step < count) setStep(step + 1);
+    else onNext();
+  };
+  const goBack = () => {
+    if (count > 0 && step > 1) setStep(step - 1);
+    else onPrev();
+  };
+
   return (
     <section className="lesson-body">
-      <div className="stage" key={index}>
-        {beat.scene && (
+      <div
+        className={`stage${Diagram ? " stage-diagram" : ""}`}
+        key={index}
+        onClick={Diagram && step < count ? advance : undefined}
+      >
+        {Diagram && <Diagram lang={lang} step={step} />}
+        {!Diagram && beat.scene && (
           <div className="scene" aria-hidden="true">
             {beat.scene}
+          </div>
+        )}
+        {count > 1 && (
+          <div className="steps" aria-hidden="true">
+            {beat.lines!.map((_, i) => (
+              <span key={i} className={i < step ? "step on" : "step"} />
+            ))}
           </div>
         )}
       </div>
       <div className="hello">
         <Otto size={96} mood={beat.mood ?? "happy"} />
-        <SpeechBubble text={beat.text[lang]} lang={lang} />
+        <SpeechBubble key={step} text={line[lang]} lang={lang} />
       </div>
       <div className="row nav">
-        {index > 0 && (
-          <button type="button" className="btn btn-quiet" onClick={onPrev}>
+        {(index > 0 || step > 1) && (
+          <button type="button" className="btn btn-quiet" onClick={goBack}>
             {t(lang, "prev")}
           </button>
         )}
-        <button
-          type="button"
-          className="btn"
-          onClick={() => {
-            sfx.tap();
-            onNext();
-          }}
-        >
+        <button type="button" className="btn" onClick={advance}>
           {t(lang, "next")}
         </button>
       </div>
