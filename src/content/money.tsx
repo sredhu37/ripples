@@ -7,17 +7,26 @@ import { TradeBoard } from "./money.toy";
 const T = (en: string, de: string): Text => ({ en, de });
 
 function Toy({ lang }: ToyProps) {
-  return <TradeBoard lang={lang} />;
+  return <TradeBoard lang={lang} mode="toy" />;
 }
 
 function GetBreadWidget({ lang, onAnswer }: WidgetProps) {
   const [hasBread, setHasBread] = useState(false);
+  const [passed, setPassed] = useState(false);
   return (
     <>
-      <TradeBoard lang={lang} onBread={() => setHasBread(true)} />
-      <div className="row nav">
-        <CheckButton lang={lang} onClick={() => onAnswer(hasBread)} />
-      </div>
+      <TradeBoard lang={lang} mode="quiz" onBread={() => setHasBread(true)} />
+      {!passed && (
+        <div className="row nav">
+          <CheckButton
+            lang={lang}
+            onClick={() => {
+              if (hasBread) setPassed(true);
+              onAnswer(hasBread);
+            }}
+          />
+        </div>
+      )}
     </>
   );
 }
@@ -124,8 +133,8 @@ export const lesson: Lesson = {
     ),
   ],
   toyIntro: T(
-    "Help Finn get bread! First try without coins. That is barter. Then switch the coins on.",
-    "Hilf Finn, Brot zu bekommen! Probier es zuerst ohne Münzen. Das ist Tauschhandel. Schalte dann die Münzen an.",
+    "Help Finn get bread! Follow the steps. Step 1 is barter: swapping without coins.",
+    "Hilf Finn, an Brot zu kommen! Folge den Schritten. Schritt 1 ist Tauschhandel: tauschen ohne Münzen.",
   ),
   Toy,
   questions: [
@@ -145,8 +154,8 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "Get Finn his bread. Turn the coins on, sell the fish, then buy bread. Press Check when Finn has bread.",
-        "Besorge Finn sein Brot. Schalte die Münzen an, verkaufe den Fisch und kaufe dann Brot. Drücke Prüfen, wenn Finn Brot hat.",
+        "Help Finn get his bread. Follow the 3 steps, then press Check.",
+        "Hilf Finn, an sein Brot zu kommen. Folge den 3 Schritten und drücke dann Prüfen.",
       ),
       Widget: GetBreadWidget,
       hint: T(
