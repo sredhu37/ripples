@@ -33,8 +33,17 @@
   line-height: 1.25;
 }
 
-.inf-tag strong {
-  display: block;
+.inf-tag-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.inf-price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   font-size: 2rem;
 }
 
@@ -43,9 +52,12 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 2px 6px;
-  max-width: 460px;
-  font-size: 2.1rem;
-  line-height: 1.1;
+  max-width: 270px;
+  margin: 0 auto;
+}
+
+.inf-scoop {
+  display: block;
 }
 
 .inf-scoop.gone {
@@ -54,15 +66,18 @@
 }
 
 .inf-count {
+  display: flex;
+  justify-content: center;
   font-weight: 800;
-  font-size: 1.15rem;
+  font-size: 1.3rem;
+}
+
+.inf-count .btn-icons {
+  gap: 8px;
 }
 
 @media (max-height: 800px) {
-  .inf-scoops {
-    font-size: 1.8rem;
-  }
-  .inf-tag strong {
+  .inf-price {
     font-size: 1.7rem;
   }
 }
