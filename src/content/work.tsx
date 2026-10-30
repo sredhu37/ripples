@@ -19,8 +19,8 @@ export type { Market } from "./work.toy";
 
 const T = (en: string, de: string): Text => ({ en, de });
 
-function Toy({ lang }: ToyProps) {
-  return <JobMarket lang={lang} start={NORMAL} />;
+function Toy({ lang, onDone }: ToyProps) {
+  return <JobMarket lang={lang} start={NORMAL} onChange={() => onDone?.()} />;
 }
 
 function PayMoreWidget({ lang, onAnswer }: WidgetProps) {

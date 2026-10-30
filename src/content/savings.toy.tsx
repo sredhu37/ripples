@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { ReactNode } from "react";
 import { CAST } from "../components/cast";
 import { Coin, InlineIcon, Person } from "../components/icons";
@@ -155,11 +155,13 @@ export function Planner({
   full,
   save,
   setSave,
+  onDone,
 }: {
   lang: Lang;
   full: boolean;
   save: number;
   setSave: (v: number) => void;
+  onDone?: () => void;
 }) {
   const [cushion, setCushion] = useState(false);
   const [rain, setRain] = useState(false);
@@ -167,6 +169,12 @@ export function Planner({
   const eff = Math.min(save, max);
   const p = plan(eff, cushion, rain);
   const en = lang === "en";
+
+  useEffect(() => {
+    if (full && (cushion || rain || save !== 2)) {
+      onDone?.();
+    }
+  }, [cushion, rain, save, full, onDone]);
 
   return (
     <Stage label={en ? "Pip's pocket money planner" : "Pips Taschengeld-Planer"}>

@@ -124,7 +124,15 @@ function PriceTag({ lang, printed, loaves }: { lang: Lang; printed: number; loav
  * The coin press toy. Press the coin press to print 10 new coins, ask Bea to bake more loaves.
  * With `onCheck` it shows the Check button for the widget question.
  */
-export function PrintToy({ lang, onCheck }: { lang: Lang; onCheck?: (correct: boolean) => void }) {
+export function PrintToy({
+  lang,
+  onCheck,
+  onInteract,
+}: {
+  lang: Lang;
+  onCheck?: (correct: boolean) => void;
+  onInteract?: () => void;
+}) {
   const [printed, setPrinted] = useState(0);
   const [loaves, setLoaves] = useState(START_LOAVES);
   const t = (en: string, de: string) => (lang === "en" ? en : de);
@@ -138,7 +146,13 @@ export function PrintToy({ lang, onCheck }: { lang: Lang; onCheck?: (correct: bo
         </div>
       </Stage>
       <div className="row wrap pr-btns">
-        <ToyButton disabled={printed >= MAX_PRINTED} onClick={() => setPrinted(printed + 10)}>
+        <ToyButton
+          disabled={printed >= MAX_PRINTED}
+          onClick={() => {
+            setPrinted(printed + 10);
+            onInteract?.();
+          }}
+        >
           <span className="btn-icons">
             <InlineIcon size={30}>
               <CoinPress />
@@ -151,7 +165,13 @@ export function PrintToy({ lang, onCheck }: { lang: Lang; onCheck?: (correct: bo
             <span className="sr-only">{t("Print 10 new coins", "10 neue Münzen drucken")}</span>
           </span>
         </ToyButton>
-        <ToyButton disabled={printed <= 0} onClick={() => setPrinted(printed - 10)}>
+        <ToyButton
+          disabled={printed <= 0}
+          onClick={() => {
+            setPrinted(printed - 10);
+            onInteract?.();
+          }}
+        >
           <span className="btn-icons">
             <InlineIcon size={30}>
               <CoinStack />
@@ -160,7 +180,13 @@ export function PrintToy({ lang, onCheck }: { lang: Lang; onCheck?: (correct: bo
             <span className="sr-only">{t("Take 10 printed coins away", "10 gedruckte Münzen wegnehmen")}</span>
           </span>
         </ToyButton>
-        <ToyButton disabled={loaves >= MAX_LOAVES} onClick={() => setLoaves(loaves + 5)}>
+        <ToyButton
+          disabled={loaves >= MAX_LOAVES}
+          onClick={() => {
+            setLoaves(loaves + 5);
+            onInteract?.();
+          }}
+        >
           <span className="btn-icons">
             <InlineIcon size={30}>
               <Person {...CAST.Bea} />
@@ -173,7 +199,13 @@ export function PrintToy({ lang, onCheck }: { lang: Lang; onCheck?: (correct: bo
             <span className="sr-only">{t("Bea bakes 5 more loaves", "Bea backt 5 Brote mehr")}</span>
           </span>
         </ToyButton>
-        <ToyButton disabled={loaves <= START_LOAVES} onClick={() => setLoaves(loaves - 5)}>
+        <ToyButton
+          disabled={loaves <= START_LOAVES}
+          onClick={() => {
+            setLoaves(loaves - 5);
+            onInteract?.();
+          }}
+        >
           <span className="btn-icons">
             <InlineIcon size={30}>
               <Bread />

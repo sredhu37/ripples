@@ -131,8 +131,8 @@ function MiniHasWants({
 function nextAction(phase: Phase): Text | null {
   if (phase === "barter") {
     return T(
-      "Drag Finn's fish to Bea (or tap Bea) to offer a barter trade.",
-      "Ziehe Finns Fisch zu Bea (oder tippe auf Bea), um zu tauschen."
+      "Drag Finn's fish to Bea to offer a barter trade.",
+      "Ziehe Finns Fisch zu Bea, um zu tauschen."
     );
   }
   if (phase === "coins") {
@@ -143,14 +143,14 @@ function nextAction(phase: Phase): Text | null {
   }
   if (phase === "sell") {
     return T(
-      "Drag Finn's fish to Sam (or tap Sam) to sell it for coins.",
-      "Ziehe Finns Fisch zu Sam (oder tippe auf Sam), um ihn für Münzen zu verkaufen."
+      "Drag Finn's fish to Sam to sell it for coins.",
+      "Ziehe Finns Fisch zu Sam, um ihn für Münzen zu verkaufen."
     );
   }
   if (phase === "bread") {
     return T(
-      "Drag Finn's coins to Bea (or tap Bea) to buy fresh bread.",
-      "Ziehe Finns Münzen zu Bea (oder tippe auf Bea), um Brot zu kaufen."
+      "Drag Finn's coins to Bea to buy fresh bread.",
+      "Ziehe Finns Münzen zu Bea, um Brot zu kaufen."
     );
   }
   return null;
@@ -329,10 +329,6 @@ export function TradeBoard({
             name="Bea"
             isTarget={targetBea}
             targetLabel={lang === "en" ? "Drop here" : "Hier ablegen"}
-            onClick={() => {
-              if (b.phase === "barter") doBarterBea();
-              else if (b.phase === "bread") doBuyBea();
-            }}
           />
 
           <Villager
@@ -343,9 +339,6 @@ export function TradeBoard({
             name="Sam"
             isTarget={targetSam}
             targetLabel={lang === "en" ? "Drop here" : "Hier ablegen"}
-            onClick={() => {
-              if (b.phase === "sell") doSellSam();
-            }}
           />
 
           {/* Has / Wants Cards for Bea and Sam */}
@@ -467,23 +460,9 @@ export function TradeBoard({
         {b.phase !== "done" && prompt ? (
           <div className="guided-action">
             <ActionPrompt lang={lang}>{prompt[lang]}</ActionPrompt>
-            {b.phase === "coins" ? (
+            {b.phase === "coins" && (
               <ToyButton onClick={doBringCoins}>
                 {lang === "en" ? "Bring coins to town" : "Münzen in die Stadt bringen"}
-              </ToyButton>
-            ) : (
-              <ToyButton
-                onClick={() => {
-                  if (b.phase === "barter") doBarterBea();
-                  else if (b.phase === "sell") doSellSam();
-                  else if (b.phase === "bread") doBuyBea();
-                }}
-              >
-                {b.phase === "barter"
-                  ? lang === "en" ? "Give fish to Bea" : "Fisch Bea geben"
-                  : b.phase === "sell"
-                    ? lang === "en" ? "Sell fish to Sam" : "Fisch an Sam verkaufen"
-                    : lang === "en" ? "Buy bread from Bea" : "Brot bei Bea kaufen"}
               </ToyButton>
             )}
           </div>

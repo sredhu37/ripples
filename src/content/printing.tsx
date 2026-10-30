@@ -15,8 +15,8 @@ import "./printing.css";
 
 const T = (en: string, de: string): Text => ({ en, de });
 
-function Toy({ lang }: ToyProps) {
-  return <PrintToy lang={lang} />;
+function Toy({ lang, onDone }: ToyProps) {
+  return <PrintToy lang={lang} onInteract={onDone} />;
 }
 
 /** Print some new coins but keep a loaf at 2 coins: the widget only passes when it really is 2 coins. */

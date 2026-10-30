@@ -18,9 +18,9 @@ export type { Plan, PlanWeek, RainPaidBy } from "./savings.toy";
 
 const T = (en: string, de: string): Text => ({ en, de });
 
-function Toy({ lang }: ToyProps) {
+function Toy({ lang, onDone }: ToyProps) {
   const [save, setSave] = useState(2);
-  return <Planner lang={lang} full save={save} setSave={setSave} />;
+  return <Planner lang={lang} full save={save} setSave={setSave} onDone={onDone} />;
 }
 
 function BikeInFourWidget({ lang, onAnswer }: WidgetProps) {

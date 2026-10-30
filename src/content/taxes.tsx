@@ -8,9 +8,18 @@ export { budget };
 
 const T = (en: string, de: string): Text => ({ en, de });
 
-function Toy({ lang }: ToyProps) {
+function Toy({ lang, onDone }: ToyProps) {
   const [tax, setTax] = useState(0);
-  return <BudgetBoard lang={lang} tax={tax} onTax={setTax} />;
+  return (
+    <BudgetBoard
+      lang={lang}
+      tax={tax}
+      onTax={(next) => {
+        setTax(next);
+        onDone?.();
+      }}
+    />
+  );
 }
 
 function BudgetWidget({ lang, onAnswer }: WidgetProps) {

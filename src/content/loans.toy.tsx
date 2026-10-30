@@ -207,8 +207,22 @@ export function LoanBoard({ lang, coins, weeks, onCoins, onWeeks }: LoanBoardPro
   );
 }
 
-export function Toy({ lang }: { lang: Lang }) {
+export function Toy({ lang, onDone }: { lang: Lang; onDone?: () => void }) {
   const [coins, setCoins] = useState(30);
   const [weeks, setWeeks] = useState(4);
-  return <LoanBoard lang={lang} coins={coins} weeks={weeks} onCoins={setCoins} onWeeks={setWeeks} />;
+  return (
+    <LoanBoard
+      lang={lang}
+      coins={coins}
+      weeks={weeks}
+      onCoins={(c) => {
+        setCoins(c);
+        onDone?.();
+      }}
+      onWeeks={(w) => {
+        setWeeks(w);
+        onDone?.();
+      }}
+    />
+  );
 }

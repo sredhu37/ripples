@@ -18,9 +18,18 @@ export { priceTenths, scoopsFor } from "./inflation.toy";
 
 const T = (en: string, de: string): Text => ({ en, de });
 
-function Toy({ lang }: ToyProps) {
+function Toy({ lang, onDone }: ToyProps) {
   const [s, setS] = useState<Setting>(START);
-  return <TimeMachine lang={lang} value={s} onChange={setS} />;
+  return (
+    <TimeMachine
+      lang={lang}
+      value={s}
+      onChange={(next) => {
+        setS(next);
+        onDone?.();
+      }}
+    />
+  );
 }
 
 /** The child must set the machine so that 10 coins buy half as many scoops as at the start (5). */
