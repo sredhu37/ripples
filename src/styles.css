@@ -110,6 +110,20 @@ p {
   color: var(--white);
 }
 
+.app-icon {
+  display: inline-block;
+  vertical-align: middle;
+  flex: none;
+}
+
+.lesson-title,
+.card h3,
+.fact-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .icon-btn {
   width: 52px;
   height: 52px;
@@ -391,10 +405,10 @@ p {
 }
 
 .place-icon {
-  font-size: 2.2rem;
   flex: none;
   width: 52px;
-  text-align: center;
+  display: grid;
+  place-items: center;
 }
 
 .place-text {

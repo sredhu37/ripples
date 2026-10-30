@@ -1,3 +1,4 @@
+import { LessonIcon } from "./appIcons";
 import { hasLesson, getLesson } from "../content";
 import { t } from "../i18n";
 import { LESSONS } from "../lessons";
@@ -20,7 +21,7 @@ export function FactCards({ lang, onClose }: { lang: Lang; onClose: () => void }
         return (
           <article key={meta.id} className="panel fact-card">
             <h2>
-              {meta.icon} {meta.title.en}
+              <LessonIcon id={meta.id} size={32} /> {meta.title.en}
             </h2>
             <h3>{t(lang, "claims")}</h3>
             <ol>

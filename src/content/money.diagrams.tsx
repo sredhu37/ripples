@@ -1,56 +1,9 @@
-import type { ReactNode } from "react";
+import { Counter, Villager } from "../components/cast";
 import { Arrow, Bubble, DiagramCanvas, Pop, TermChip } from "../components/diagram";
-import { Apple, Bread, Clock, Coin, Fish, Magnifier, NoSign, Person, Piggy, Shoe, Swap, Tag } from "../components/icons";
-import type { Mood } from "../components/icons";
+import { Apple, Bread, Clock, Coin, Fish, Magnifier, NoSign, Piggy, Shoe, Swap, Tag } from "../components/icons";
 import type { DiagramProps } from "../lesson/types";
 
 /** Animated diagrams for the Money lesson, one per story beat. `step` is how many taps so far. */
-
-const FINN = "#2f7fb8";
-const BEA = "#e68aa0";
-const SAM = "#5aa05f";
-
-type Who = "Finn" | "Bea" | "Sam";
-
-const LOOK: Record<Who, { hat: "fisher" | "baker" | "cap"; shirt: string }> = {
-  Finn: { hat: "fisher", shirt: FINN },
-  Bea: { hat: "baker", shirt: BEA },
-  Sam: { hat: "cap", shirt: SAM },
-};
-
-/** A villager with a name under them. */
-function Villager({
-  who,
-  x,
-  y = 90,
-  size = 130,
-  mood = "happy",
-}: {
-  who: Who;
-  x: number;
-  y?: number;
-  size?: number;
-  mood?: Mood;
-}) {
-  return (
-    <Pop x={x} y={y}>
-      <Person {...LOOK[who]} mood={mood} size={size} />
-      <text className="diagram-name" x={size / 2} y={size + 30} textAnchor="middle">
-        {who}
-      </text>
-    </Pop>
-  );
-}
-
-/** A plank with goods on it, in front of Bea or Sam. */
-function Counter({ x, goods }: { x: number; goods: ReactNode }) {
-  return (
-    <Pop x={x} y={0}>
-      <rect x="0" y="214" width="190" height="16" rx="8" fill="#a86f3c" />
-      {goods}
-    </Pop>
-  );
-}
 
 const alt = (en: string, de: string, lang: DiagramProps["lang"]) => (lang === "en" ? en : de);
 

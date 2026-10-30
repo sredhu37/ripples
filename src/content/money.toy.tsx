@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { ReactElement } from "react";
+import { CAST } from "../components/cast";
 import { Arrow, Bubble, DiagramCanvas } from "../components/diagram";
 import { Apple, Bread, Coin, Fish, InlineIcon, NoSign, Person, Shoe } from "../components/icons";
 import type { Mood } from "../components/icons";
@@ -126,9 +127,9 @@ export function TradeBoard({ lang, onBread }: { lang: Lang; onBread?: () => void
               : "Finn hat einen Fisch. Bea hat Brot und will Schuhe. Sam hat Schuhe und will Äpfel."
           }
         >
-          <Villager x={FINN_X} mood={finnMood} hat="fisher" shirt="#2f7fb8" name="Finn" />
-          <Villager x={BEA_X} mood="happy" hat="baker" shirt="#e68aa0" name="Bea" />
-          <Villager x={SAM_X} mood="happy" hat="cap" shirt="#5aa05f" name="Sam" />
+          <Villager x={FINN_X} mood={finnMood} {...CAST.Finn} name="Finn" />
+          <Villager x={BEA_X} mood="happy" {...CAST.Bea} name="Bea" />
+          <Villager x={SAM_X} mood="happy" {...CAST.Sam} name="Sam" />
 
           {/* what Finn holds */}
           {held.map((icon, i) => (
@@ -180,7 +181,7 @@ export function TradeBoard({ lang, onBread }: { lang: Lang; onBread?: () => void
               </InlineIcon>
               <span aria-hidden="true">→</span>
               <InlineIcon size={30}>
-                <Person hat="baker" shirt="#e68aa0" />
+                <Person {...CAST.Bea} />
               </InlineIcon>
               <span className="sr-only">{lang === "en" ? "Offer fish to Bea" : "Fisch Bea anbieten"}</span>
             </span>
@@ -192,7 +193,7 @@ export function TradeBoard({ lang, onBread }: { lang: Lang; onBread?: () => void
               </InlineIcon>
               <span aria-hidden="true">→</span>
               <InlineIcon size={30}>
-                <Person hat="cap" shirt="#5aa05f" />
+                <Person {...CAST.Sam} />
               </InlineIcon>
               <span className="sr-only">{lang === "en" ? "Offer fish to Sam" : "Fisch Sam anbieten"}</span>
             </span>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { LessonIcon, UiIcon } from "../components/appIcons";
 import { Otto } from "../components/Otto";
 import { SpeechBubble } from "../components/SpeechBubble";
 import { t } from "../i18n";
@@ -39,7 +40,6 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit 
           ? lesson.story.length + 1 + phase.i
           : total;
 
-  const title = `${meta.icon} ${meta.title[lang]}`;
 
   return (
     <main className="screen lesson">
@@ -47,7 +47,9 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit 
         <button type="button" className="btn btn-quiet btn-small" onClick={onExit}>
           ← {t(lang, "back")}
         </button>
-        <h2 className="lesson-title">{title}</h2>
+        <h2 className="lesson-title">
+          <LessonIcon id={meta.id} size={34} /> {meta.title[lang]}
+        </h2>
         <Dots total={total} position={position} lang={lang} />
       </header>
 
@@ -105,7 +107,9 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit 
       {phase.k === "real" && (
         <section className="lesson-body">
           <div className="card real">
-            <h3>🌍 {lesson.realLife.title[lang]}</h3>
+            <h3>
+              <UiIcon name="globe" size={30} /> {lesson.realLife.title[lang]}
+            </h3>
             <p>{lesson.realLife.body[lang]}</p>
           </div>
           <SpeechBubble text={lesson.realLife.body[lang]} lang={lang} />
@@ -120,7 +124,9 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit 
       {phase.k === "dad" && (
         <section className="lesson-body">
           <div className="card dad">
-            <h3>🗣 {t(lang, "askDad")}</h3>
+            <h3>
+              <UiIcon name="chat" size={30} /> {t(lang, "askDad")}
+            </h3>
             <p>{lesson.askDad[lang]}</p>
           </div>
           <div className="row nav">
@@ -319,7 +325,7 @@ function BadgeView({
   return (
     <section className="lesson-body center-text">
       <div className="big-medal" aria-hidden="true">
-        {meta.icon}
+        <LessonIcon id={meta.id} size={96} />
       </div>
       <h3>{again ? t(lang, "badgeAgain") : t(lang, "badgeEarned")}</h3>
       <p>{meta.title[lang]}</p>

@@ -12,7 +12,7 @@ export interface IconProps {
 
 const INK = "#23383f";
 
-function Box({ x = 0, y = 0, size = 100, children }: IconProps & { children: ReactNode }) {
+export function Box({ x = 0, y = 0, size = 100, children }: IconProps & { children: ReactNode }) {
   return (
     <svg x={x} y={y} width={size} height={size} viewBox="0 0 100 100" overflow="visible" aria-hidden="true">
       {children}
@@ -21,16 +21,18 @@ function Box({ x = 0, y = 0, size = 100, children }: IconProps & { children: Rea
 }
 
 export type Mood = "happy" | "sad" | "think";
-export type Hat = "fisher" | "baker" | "cap";
+export type Hat = "fisher" | "baker" | "cap" | "mayor" | "beanie" | "hardhat" | "none";
 
 interface PersonProps extends IconProps {
   hat: Hat;
   shirt: string;
   mood?: Mood;
+  /** Skin tone of the head. Default is a light peach. */
+  skin?: string;
 }
 
 /** A villager: round head, simple face, a hat that shows the job. */
-export function Person({ hat, shirt, mood = "happy", ...pos }: PersonProps) {
+export function Person({ hat, shirt, mood = "happy", skin = "#f3cfa6", ...pos }: PersonProps) {
   return (
     <Box {...pos}>
       {/* body */}
@@ -39,7 +41,7 @@ export function Person({ hat, shirt, mood = "happy", ...pos }: PersonProps) {
       {hat === "cap" && <path d="M30 72 H70 V100 H30 Z" fill="#3a6b3c" />}
       {/* neck and head */}
       <rect x="43" y="54" width="14" height="12" rx="5" fill="#e8b98c" />
-      <circle cx="50" cy="38" r="21" fill="#f3cfa6" />
+      <circle cx="50" cy="38" r="21" fill={skin} />
       <circle cx="37" cy="45" r="4" fill="#f4a79a" opacity="0.55" />
       <circle cx="63" cy="45" r="4" fill="#f4a79a" opacity="0.55" />
       {/* eyes */}
@@ -69,6 +71,28 @@ export function Person({ hat, shirt, mood = "happy", ...pos }: PersonProps) {
           <circle cx="50" cy="9" r="12" />
           <circle cx="63" cy="14" r="11" />
           <rect x="33" y="14" width="34" height="14" rx="3" />
+        </g>
+      )}
+      {hat === "none" && <path d="M29 36 C27 12 73 12 71 36 C66 24 56 20 50 20 C42 20 34 24 29 36 Z" fill="#6f4627" />}
+      {hat === "mayor" && (
+        <g>
+          <rect x="30" y="31" width="40" height="6" rx="3" fill="#23383f" />
+          <rect x="35" y="3" width="30" height="31" rx="4" fill="#23383f" />
+          <rect x="35" y="22" width="30" height="6" fill="#c0392b" />
+        </g>
+      )}
+      {hat === "beanie" && (
+        <g>
+          <path d="M28 34 C28 12 72 12 72 34 Z" fill="#d6403a" />
+          <rect x="25" y="30" width="50" height="8" rx="4" fill="#f4f1e8" />
+          <circle cx="50" cy="9" r="6" fill="#f4f1e8" />
+        </g>
+      )}
+      {hat === "hardhat" && (
+        <g>
+          <path d="M27 34 C27 12 73 12 73 34 Z" fill="#f2b632" />
+          <rect x="22" y="30" width="56" height="7" rx="3.5" fill="#e0a21f" />
+          <rect x="45" y="12" width="10" height="20" rx="3" fill="#e0a21f" />
         </g>
       )}
       {hat === "cap" && (
