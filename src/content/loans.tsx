@@ -1,159 +1,25 @@
 import { useState } from "react";
-import { CheckButton, Slider, Stage } from "../lesson/toolkit";
+import { CheckButton, animatedBeat } from "../lesson/toolkit";
 import type { Lesson, Text, ToyProps, WidgetProps } from "../lesson/types";
-import type { Lang } from "../progress";
-import "./loans.css";
+import {
+  BigOvenDiagram,
+  BuyOvenDiagram,
+  CarefulDiagram,
+  ExtraDiagram,
+  LoanDiagram,
+  PayBackDiagram,
+  ReasonsDiagram,
+  TinyOvenDiagram,
+} from "./loans.diagrams";
+import { LoanBoard, OVEN_COST, Toy as LoanToy, plan } from "./loans.toy";
+
+export { OVEN_COST, SALES_PER_WEEK, plan } from "./loans.toy";
+export type { Plan } from "./loans.toy";
 
 const T = (en: string, de: string): Text => ({ en, de });
 
-/** The oven costs this many coins. */
-export const OVEN_COST = 40;
-/** What the new oven adds to Bea's bread sales each week. */
-export const SALES_PER_WEEK = 8;
-/** Toy rule: the lender asks 1 extra coin for every 10 coins, for every 4 weeks of waiting. */
-const COINS_PER_EXTRA = 10;
-const WEEKS_PER_EXTRA = 4;
-const BAR_MAX = 24;
-
-export interface Plan {
-  extra: number;
-  total: number;
-  weekly: number;
-  ovenBought: boolean;
-  leftOver: number;
-  covered: boolean;
-  shortBy: number;
-}
-
-/** Pure toy maths. coins is a multiple of 10, weeks a multiple of 4. */
-export function plan(coins: number, weeks: number): Plan {
-  const extra = (coins / COINS_PER_EXTRA) * (weeks / WEEKS_PER_EXTRA);
-  const total = coins + extra;
-  const weekly = Math.ceil(total / weeks);
-  return {
-    extra,
-    total,
-    weekly,
-    ovenBought: coins >= OVEN_COST,
-    leftOver: Math.max(0, coins - OVEN_COST),
-    covered: weekly <= SALES_PER_WEEK,
-    shortBy: Math.max(0, weekly - SALES_PER_WEEK),
-  };
-}
-
-function sayFor(p: Plan, lang: Lang): { text: string; ok: boolean } {
-  if (!p.ovenBought) {
-    return {
-      ok: false,
-      text:
-        lang === "en"
-          ? `Not enough for the oven yet. It costs ${OVEN_COST} coins.`
-          : `Das reicht noch nicht für den Ofen. Er kostet ${OVEN_COST} Münzen.`,
-    };
-  }
-  if (!p.covered) {
-    return {
-      ok: false,
-      text:
-        lang === "en"
-          ? `Too much each week! Bea's bread money is ${p.shortBy} coin${p.shortBy === 1 ? "" : "s"} short every week.`
-          : `Pro Woche zu viel! Beas Brotgeld fehlt jede Woche ${p.shortBy} ${p.shortBy === 1 ? "Münze" : "Münzen"}.`,
-    };
-  }
-  if (p.leftOver > 0) {
-    return {
-      ok: true,
-      text:
-        lang === "en"
-          ? `Bea can pay each week. But ${p.leftOver} borrowed coins are left over, and she pays them back too!`
-          : `Bea kann jede Woche zahlen. Aber ${p.leftOver} geliehene Münzen bleiben übrig, und die zahlt sie auch zurück!`,
-    };
-  }
-  return {
-    ok: true,
-    text:
-      lang === "en"
-        ? "Bea buys the oven and her bread money pays each week. It works!"
-        : "Bea kauft den Ofen und ihr Brotgeld zahlt jede Woche. Es klappt!",
-  };
-}
-
-interface LoanBoardProps {
-  lang: Lang;
-  coins: number;
-  weeks: number;
-  onCoins: (v: number) => void;
-  onWeeks: (v: number) => void;
-}
-
-/** Bea chooses a loan size and how many weeks to pay it back. */
-function LoanBoard({ lang, coins, weeks, onCoins, onWeeks }: LoanBoardProps) {
-  const p = plan(coins, weeks);
-  const say = sayFor(p, lang);
-  const en = lang === "en";
-  const pct = (n: number) => `${Math.min(100, (n / BAR_MAX) * 100)}%`;
-
-  return (
-    <Stage label={en ? "Bea's loan" : "Beas Darlehen"}>
-      <div className="loan">
-        <div className="loan-sliders">
-          <Slider
-            label={en ? "Coins Bea borrows" : "Münzen, die Bea leiht"}
-            value={coins}
-            min={10}
-            max={80}
-            step={10}
-            onChange={onCoins}
-          />
-          <Slider
-            label={en ? "Weeks to pay back" : "Wochen zum Zurückzahlen"}
-            value={weeks}
-            min={4}
-            max={20}
-            step={4}
-            onChange={onWeeks}
-          />
-        </div>
-        <dl className="loan-sums">
-          <dt>{en ? "👵 Pim lends Bea" : "👵 Pim leiht Bea"}</dt>
-          <dd>{coins} 🪙</dd>
-          <dt>{en ? "➕ The extra, for waiting" : "➕ Das Extra fürs Warten"}</dt>
-          <dd>+ {p.extra} 🪙</dd>
-          <dt className="loan-total">{en ? "Bea pays back in total" : "Bea zahlt insgesamt zurück"}</dt>
-          <dd className="loan-total">{p.total} 🪙</dd>
-          <dt>{en ? `Each week, for ${weeks} weeks` : `Jede Woche, ${weeks} Wochen lang`}</dt>
-          <dd>{p.weekly} 🪙</dd>
-        </dl>
-        <div className="loan-bars">
-          <div className="loan-bar">
-            <span>{en ? "Payment each week" : "Zahlung pro Woche"}</span>
-            <div className="loan-track" aria-hidden="true">
-              <div className="loan-fill pay" style={{ width: pct(p.weekly) }}>
-                {p.weekly}
-              </div>
-            </div>
-          </div>
-          <div className="loan-bar">
-            <span>{en ? "🍞 Bread sales each week" : "🍞 Brotverkauf pro Woche"}</span>
-            <div className="loan-track" aria-hidden="true">
-              <div className="loan-fill sales" style={{ width: pct(SALES_PER_WEEK) }}>
-                {SALES_PER_WEEK}
-              </div>
-            </div>
-          </div>
-        </div>
-        <p className={`loan-say ${say.ok ? "ok" : "bad"}`} role="status">
-          {say.text}
-        </p>
-      </div>
-    </Stage>
-  );
-}
-
 function Toy({ lang }: ToyProps) {
-  const [coins, setCoins] = useState(30);
-  const [weeks, setWeeks] = useState(4);
-  return <LoanBoard lang={lang} coins={coins} weeks={weeks} onCoins={setCoins} onWeeks={setWeeks} />;
+  return <LoanToy lang={lang} />;
 }
 
 function PayWeeklyWidget({ lang, onAnswer }: WidgetProps) {
@@ -173,70 +39,152 @@ function PayWeeklyWidget({ lang, onAnswer }: WidgetProps) {
 export const lesson: Lesson = {
   id: "loans",
   story: [
-    {
-      scene: "👩‍🍳 🔥 🍞",
-      text: T(
-        "Bea the baker has a tiny oven. It bakes only a few loaves a day. People in Ripple Town keep asking for more bread.",
-        "Bäckerin Bea hat einen winzigen Ofen. Er backt nur ein paar Brote am Tag. Die Leute in Ripple Town wollen immer mehr Brot.",
-      ),
-    },
-    {
-      scene: "🔥🔥 ➡️ 🪙🪙🪙🪙 ❓",
-      mood: "think",
-      text: T(
-        "A big oven would bake lots more bread. But it costs 40 coins, and Bea has only 5. She cannot buy it.",
-        "Ein großer Ofen würde viel mehr Brot backen. Aber er kostet 40 Münzen, und Bea hat nur 5. Sie kann ihn nicht kaufen.",
-      ),
-    },
-    {
-      scene: "👵 🫙🪙 ➡️ 👩‍🍳",
-      text: T(
-        "Pim has saved lots of coins in a jar. Pim says: I can lend you 40 coins. You give them back later. That is called a loan.",
-        "Pim hat viele Münzen in einem Glas gespart. Pim sagt: Ich kann dir 40 Münzen leihen. Du gibst sie später zurück. Das nennt man ein Darlehen.",
-      ),
-    },
-    {
-      scene: "🪙🪙🪙🪙 ➡️ 🔥 ➡️ 🍞🍞🍞🍞",
-      mood: "happy",
-      text: T(
-        "Bea borrows the 40 coins and buys the big oven. Now she bakes lots more bread and sells it for coins.",
-        "Bea leiht sich die 40 Münzen und kauft den großen Ofen. Jetzt backt sie viel mehr Brot und verkauft es für Münzen.",
-      ),
-    },
-    {
-      scene: "🍞 ➡️ 🪙 ➡️ 👵",
-      text: T(
-        "Every week Bea pays some coins back to Pim. Little by little she gives back everything she borrowed.",
-        "Jede Woche zahlt Bea ein paar Münzen an Pim zurück. Nach und nach gibt sie alles zurück, was sie geliehen hat.",
-      ),
-    },
-    {
-      scene: "👵 ⏳ 😟 🪙❓",
-      mood: "think",
-      text: T(
-        "But Pim wants back a little more than 40 coins. Why? First, she must wait for her coins. Second, Bea might not be able to pay. That is a risk for Pim. It could go wrong.",
-        "Aber Pim will etwas mehr als 40 Münzen zurück. Warum? Erstens muss sie auf ihre Münzen warten. Zweitens kann Bea vielleicht nicht zahlen. Das ist ein Risiko für Pim. Es kann schiefgehen.",
-      ),
-    },
-    {
-      scene: "🧥 🪙🪙 ➕🪙",
-      text: T(
-        "Third, Pim could have used her coins herself, for a warm coat. So she asks for a little extra. The extra is the price of the loan.",
-        "Drittens hätte Pim ihre Münzen selbst nutzen können, zum Beispiel für einen warmen Mantel. Darum bittet sie um ein kleines Extra. Das Extra ist der Preis für das Darlehen.",
-      ),
-    },
-    {
-      scene: "⚠️ 🍞📉 🪙🪙🪙",
-      mood: "think",
-      text: T(
-        "Careful! Bea must pay back even in a week when bread sells badly. Borrow too much and the weekly payments get too big. Borrow only what you need.",
-        "Vorsicht! Bea muss auch in einer Woche zurückzahlen, in der sich Brot schlecht verkauft. Wer zu viel leiht, hat zu große Raten. Leih dir nur, was du brauchst.",
-      ),
-    },
+    animatedBeat(
+      [
+        T(
+          "Let's visit Bea again. Bea is the baker of Ripple Town.",
+          "Besuchen wir Bea noch einmal. Bea ist die Bäckerin von Ripple Town.",
+        ),
+        T(
+          "Bea bakes her bread in an oven. But her oven is tiny.",
+          "Bea backt ihr Brot in einem Ofen. Aber ihr Ofen ist winzig.",
+        ),
+        T("It bakes only a few loaves a day.", "Er backt nur ein paar Brote am Tag."),
+        T(
+          "Lots of people in Ripple Town keep asking for more bread.",
+          "Viele Leute in Ripple Town wollen immer mehr Brot.",
+        ),
+      ],
+      TinyOvenDiagram,
+    ),
+    animatedBeat(
+      [
+        T("Bea has a dream. She would love a big oven.", "Bea hat einen Traum. Sie hätte so gern einen großen Ofen."),
+        T(
+          "A big oven bakes lots more bread, so Bea could sell much more.",
+          "Ein großer Ofen backt viel mehr Brot, und Bea könnte viel mehr verkaufen.",
+        ),
+        T("But a big oven costs 40 coins.", "Aber ein großer Ofen kostet 40 Münzen."),
+        T(
+          "Bea has only 5 coins. That is far too few, so she cannot buy the oven.",
+          "Bea hat nur 5 Münzen. Das ist viel zu wenig, also kann sie den Ofen nicht kaufen.",
+        ),
+      ],
+      BigOvenDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "This is Pim. Pim has saved lots of coins in a jar.",
+          "Das ist Pim. Pim hat viele Münzen in einem Glas gespart.",
+        ),
+        T(
+          "Pim says: Bea, I can lend you 40 coins. You can give them back to me later.",
+          "Pim sagt: Bea, ich kann dir 40 Münzen leihen. Du kannst sie mir später zurückgeben.",
+        ),
+        T(
+          "Bea takes the coins and promises to give them back. Taking something for a while like this is called *borrowing*.",
+          "Bea nimmt die Münzen und verspricht, sie zurückzugeben. Etwas auf diese Weise für eine Zeit zu nehmen, nennt man *leihen*.",
+        ),
+        T(
+          "What Bea gets from Pim has a name too. It is called a *loan*. A loan is money that you must give back.",
+          "Das, was Bea von Pim bekommt, hat auch einen Namen: *Darlehen*. Ein Darlehen ist Geld, das man zurückgeben muss.",
+        ),
+      ],
+      LoanDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "Bea uses the 40 coins to buy the big oven.",
+          "Bea kauft von den 40 Münzen den großen Ofen.",
+        ),
+        T("Now she bakes lots more bread every day.", "Jetzt backt sie jeden Tag viel mehr Brot."),
+        T(
+          "She sells the bread to the people of Ripple Town and earns coins.",
+          "Sie verkauft das Brot an die Leute in Ripple Town und verdient Münzen.",
+        ),
+      ],
+      BuyOvenDiagram,
+      "happy",
+    ),
+    animatedBeat(
+      [
+        T("Every week Bea pays some coins back to Pim.", "Jede Woche zahlt Bea ein paar Münzen an Pim zurück."),
+        T(
+          "She pays them from the coins that she earns with her bread.",
+          "Sie zahlt sie von den Münzen, die sie mit ihrem Brot verdient.",
+        ),
+        T(
+          "Little by little, she gives back everything she borrowed.",
+          "Nach und nach gibt sie alles zurück, was sie sich geliehen hat.",
+        ),
+      ],
+      PayBackDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "But Pim wants back a little more than 40 coins. She has three reasons.",
+          "Aber Pim will etwas mehr als 40 Münzen zurückhaben. Dafür hat sie drei Gründe.",
+        ),
+        T(
+          "Reason one: Pim has to wait. She does not have her coins back for many weeks.",
+          "Grund eins: Pim muss warten. Viele Wochen lang hat sie ihre Münzen nicht zurück.",
+        ),
+        T(
+          "Reason two: Bea might not be able to pay. That is a *risk* for Pim. It means that things could go wrong.",
+          "Grund zwei: Vielleicht kann Bea nicht zahlen. Das ist ein *Risiko* für Pim. Es heißt, dass etwas schiefgehen kann.",
+        ),
+        T(
+          "Reason three: Pim could have used her coins herself, for example to buy a warm coat.",
+          "Grund drei: Pim hätte ihre Münzen selbst nutzen können, zum Beispiel für einen warmen Mantel.",
+        ),
+      ],
+      ReasonsDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "So Pim asks for a little extra when Bea pays back.",
+          "Darum bittet Pim um ein kleines Extra, wenn Bea zurückzahlt.",
+        ),
+        T(
+          "Bea gives back the 40 coins she borrowed, plus a few extra coins on top.",
+          "Bea gibt die 40 geliehenen Münzen zurück und noch ein paar Münzen obendrauf.",
+        ),
+        T(
+          "The extra is the price of the loan. It is what Bea pays for being allowed to use Pim's coins.",
+          "Das Extra ist der Preis für das Darlehen. Den zahlt Bea dafür, dass sie Pims Münzen nutzen darf.",
+        ),
+      ],
+      ExtraDiagram,
+      "happy",
+    ),
+    animatedBeat(
+      [
+        T(
+          "Careful! Bea must pay back every week, even in a week when bread sells badly.",
+          "Vorsicht! Bea muss jede Woche zurückzahlen, auch in einer Woche, in der sich das Brot schlecht verkauft.",
+        ),
+        T(
+          "If Bea borrows too much, the weekly payments get too big for her bread money.",
+          "Wenn Bea zu viel leiht, werden die Zahlungen pro Woche zu groß für ihr Brotgeld.",
+        ),
+        T(
+          "So borrow only what you need, and only what you can pay back.",
+          "Darum leih dir nur, was du brauchst und was du zurückzahlen kannst.",
+        ),
+      ],
+      CarefulDiagram,
+      "think",
+    ),
   ],
   toyIntro: T(
-    "Help Bea plan her loan! Choose how many coins she borrows and how many weeks she takes. Watch the bars: can her bread sales pay each week?",
-    "Hilf Bea, ihr Darlehen zu planen! Wähle, wie viele Münzen sie leiht und wie viele Wochen sie braucht. Schau auf die Balken: Reicht ihr Brotverkauf für jede Woche?",
+    "Help Bea plan her loan! Pick the coins and the weeks. Orange is what she pays each week. Green is what her bread earns. Is green big enough?",
+    "Hilf Bea, ihr Darlehen zu planen! Wähle Münzen und Wochen. Orange ist, was sie jede Woche zahlt. Grün ist, was ihr Brot einbringt. Reicht das Grün?",
   ),
   Toy,
   questions: [

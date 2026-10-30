@@ -1,7 +1,21 @@
-import type { ReactNode } from "react";
+import type { ComponentType, ReactNode } from "react";
 import { t } from "../i18n";
 import type { Lang } from "../progress";
 import { sfx } from "../sound";
+import type { Beat, DiagramProps, Text } from "./types";
+
+/**
+ * A story beat that builds up tap by tap. `lines` are what Otto says, one per tap;
+ * the Diagram shows one more part for each tap. Put new words between *stars*.
+ */
+export function animatedBeat(lines: Text[], Diagram: ComponentType<DiagramProps>, mood?: Beat["mood"]): Beat {
+  return {
+    lines,
+    Diagram,
+    mood,
+    text: { en: lines.map((l) => l.en).join(" "), de: lines.map((l) => l.de).join(" ") },
+  };
+}
 
 /** Big picture area of a lesson. Put emoji, numbers and small toy parts inside. */
 export function Stage({ children, label }: { children: ReactNode; label?: string }) {

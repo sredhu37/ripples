@@ -1,3 +1,4 @@
+import { LessonIcon } from "./appIcons";
 import { LESSONS } from "../lessons";
 import { t } from "../i18n";
 import type { Progress } from "../progress";
@@ -18,7 +19,7 @@ export function LessonPlaceholder({ lessonId, progress, onBack }: Props) {
   return (
     <main className="screen center">
       <h2 className="lesson-title">
-        <span aria-hidden="true">{lesson?.icon} </span>
+        {lesson && <LessonIcon id={lesson.id} size={36} />} 
         {lesson?.title[lang]}
       </h2>
       <Otto size={170} mood="think" />

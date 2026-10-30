@@ -1,7 +1,7 @@
 .sv {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   width: 100%;
 }
 
@@ -9,9 +9,53 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 4px 14px;
+  gap: 4px 18px;
   font-weight: 800;
   font-size: 1rem;
+}
+
+.sv-fact {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sv-split {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.sv-split-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 800;
+  margin-right: 6px;
+}
+
+.sv-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 38px;
+  border-radius: 10px;
+  border: 2px solid var(--grey);
+  background: var(--white);
+}
+
+.sv-tile-bike {
+  border-color: var(--green);
+}
+
+.sv-tile-rain {
+  border-color: var(--teal);
+}
+
+.sv-tile-treat {
+  border-color: #f06a8d;
 }
 
 .sv-grid {
@@ -52,9 +96,8 @@
 }
 
 .sv-cell.sv-week.sv-buy {
-  background: var(--green);
+  background: #d8f0c8;
   border-color: var(--green);
-  color: var(--white);
 }
 
 .sv-cell.sv-week.sv-rain {
@@ -63,12 +106,13 @@
 }
 
 .sv-say {
-  min-height: 3em;
+  min-height: 2.7em;
   font-weight: 700;
   background: var(--white);
   border: 2px solid var(--ink);
   border-radius: 14px;
-  padding: 6px 12px;
+  padding: 4px 12px;
+  margin: 0;
   text-align: left;
 }
 
@@ -80,8 +124,6 @@
   width: 100%;
 }
 
-.sv-week.sv-both {
-  font-size: 0.65rem;
-  white-space: nowrap;
-  letter-spacing: -1px;
+.sv-head .inline-icon {
+  margin: 0 auto 0 0;
 }

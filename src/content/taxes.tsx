@@ -1,110 +1,12 @@
 import { useState } from "react";
-import { CheckButton, Slider, Stage } from "../lesson/toolkit";
+import { CheckButton, animatedBeat } from "../lesson/toolkit";
 import type { Lesson, Text, ToyProps, WidgetProps } from "../lesson/types";
-import type { Lang } from "../progress";
-import "./taxes.css";
+import { BalanceDiagram, EarnDiagram, NeedsDiagram, PotDiagram, RoadDiagram, ShareDiagram, VoteDiagram } from "./taxes.diagrams";
+import { BudgetBoard, budget } from "./taxes.toy";
+
+export { budget };
 
 const T = (en: string, de: string): Text => ({ en, de });
-
-/** Every person in Ripple Town earns this many coins a week. */
-const INCOME = 10;
-/** How many people put coins into the pot. */
-const PEOPLE = 10;
-/** Coins a person needs to keep for bread and shoes. */
-const NEED = 6;
-/** The slider goes from none up to this many coins out of every 10. */
-const MAX_TAX = 6;
-
-interface Item {
-  id: "road" | "school" | "fire" | "park";
-  icon: string;
-  broken: string;
-  name: Text;
-  cost: number;
-}
-
-/** Mayor Moss pays for these in this order, until the pot runs out. */
-const ITEMS: Item[] = [
-  { id: "road", icon: "🛣️", broken: "🕳️", name: T("Road", "Straße"), cost: 10 },
-  { id: "school", icon: "🏫", broken: "🚧", name: T("School", "Schule"), cost: 20 },
-  { id: "fire", icon: "🚒", broken: "🔥", name: T("Fire brigade", "Feuerwehr"), cost: 10 },
-  { id: "park", icon: "🌳", broken: "🪨", name: T("Park", "Park"), cost: 10 },
-];
-
-/** What a tax rate does. Pure, so the toy and the question agree. */
-export function budget(tax: number) {
-  const pot = PEOPLE * tax;
-  let left = pot;
-  const funded: Item["id"][] = [];
-  for (const item of ITEMS) {
-    if (left >= item.cost) {
-      left -= item.cost;
-      funded.push(item.id);
-    } else break;
-  }
-  const keep = INCOME - tax;
-  return { pot, funded, keep, enough: keep >= NEED };
-}
-
-function BudgetBoard({ lang, tax, onTax }: { lang: Lang; tax: number; onTax: (v: number) => void }) {
-  const b = budget(tax);
-  return (
-    <Stage label={lang === "en" ? "Mayor Moss's tax board" : "Bürgermeister Moss' Steuer-Tafel"}>
-      <div className="tb">
-        <div className="tb-items">
-          {ITEMS.map((it) => {
-            const on = b.funded.includes(it.id);
-            return (
-              <div key={it.id} className={`tb-item ${on ? "tb-on" : "tb-off"}`}>
-                <span className="tb-icon" aria-hidden="true">
-                  {on ? it.icon : it.broken}
-                </span>
-                <span className="tb-name">{it.name[lang]}</span>
-                <span className="tb-cost">
-                  {it.cost} 🪙 {on ? "✅" : ""}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-        <p className="tb-line" role="status">
-          🫙 {lang === "en" ? "Pot" : "Topf"}: <strong>{b.pot}</strong> 🪙
-          <span className="tb-sub">
-            {" "}
-            ({PEOPLE} {lang === "en" ? "people" : "Leute"} × {tax})
-          </span>
-        </p>
-        <p className="tb-line">
-          🧑 {lang === "en" ? "Each person earns 10" : "Jeder verdient 10"} 🪙
-          <span className="tb-coins" aria-hidden="true">
-            {"🫙".repeat(tax)}
-            {"🪙".repeat(INCOME - tax)}
-          </span>
-        </p>
-        <p className={`tb-line tb-keep ${b.enough ? "tb-ok" : "tb-low"}`}>
-          {lang === "en" ? "Each person keeps" : "Jeder behält"} <strong>{b.keep}</strong> 🪙
-          {" · "}
-          {b.enough
-            ? lang === "en"
-              ? `🙂 enough (needs ${NEED})`
-              : `🙂 genug (nötig: ${NEED})`
-            : lang === "en"
-              ? `😟 too few (needs ${NEED})`
-              : `😟 zu wenig (nötig: ${NEED})`}
-        </p>
-        <Slider
-          label={lang === "en" ? "Tax from every 10 coins" : "Steuer von je 10 Münzen"}
-          value={tax}
-          min={0}
-          max={MAX_TAX}
-          onChange={onTax}
-          left={lang === "en" ? "0 (no tax)" : "0 (keine Steuer)"}
-          right={String(MAX_TAX)}
-        />
-      </div>
-    </Stage>
-  );
-}
 
 function Toy({ lang }: ToyProps) {
   const [tax, setTax] = useState(0);
@@ -130,68 +32,155 @@ function BudgetWidget({ lang, onAnswer }: WidgetProps) {
 export const lesson: Lesson = {
   id: "taxes",
   story: [
-    {
-      scene: "🛣️🕳️🕳️ 🛒",
-      text: T(
-        "Ripple Town has a problem. The road to the harbour is full of holes. Carts get stuck!",
-        "In Ripple Town gibt es ein Problem. Die Straße zum Hafen hat lauter Löcher. Die Karren bleiben stecken!",
-      ),
-    },
-    {
-      scene: "🧔 🔨 😓 🛣️",
-      mood: "think",
-      text: T(
-        "Finn tries to fix it alone. But a whole road is too big for one person. And Bea and Sam use it too.",
-        "Finn will sie allein reparieren. Aber eine ganze Straße ist zu groß für einen allein. Und Bea und Sam benutzen sie auch.",
-      ),
-    },
-    {
-      scene: "🏫 🚒 🌳",
-      text: T(
-        "A school, a fire brigade, a park: nobody can build these alone. The whole town needs them.",
-        "Eine Schule, eine Feuerwehr, ein Park: Das kann keiner allein bauen. Die ganze Stadt braucht sie.",
-      ),
-    },
-    {
-      scene: "🐢 🫙 🪙🪙🪙",
-      text: T(
-        "Mayor Moss has an idea. Everyone puts some coins into one big pot. These coins are called taxes. Moss pays for what the town needs.",
-        "Bürgermeister Moss hat eine Idee. Alle legen ein paar Münzen in einen großen Topf. Diese Münzen heißen Steuern. Moss bezahlt davon, was die Stadt braucht.",
-      ),
-    },
-    {
-      scene: "🛣️ 🚶 🚲 🛒",
-      text: T(
-        "Taxes are not a price for each time you use the road. It is a cost we share, because everybody can use the road.",
-        "Steuern sind kein Preis für jedes Mal, wenn du die Straße benutzt. Alle teilen sich die Kosten, denn alle dürfen die Straße benutzen.",
-      ),
-    },
-    {
-      scene: "🧔 10🪙 ➡️ 2🪙   👩‍🍳 20🪙 ➡️ 4🪙",
-      text: T(
-        "Finn earns 10 coins and puts in 2. Bea earns 20 coins and puts in 4. Who earns more usually puts in more.",
-        "Finn verdient 10 Münzen und legt 2 hinein. Bea verdient 20 Münzen und legt 4 hinein. Wer mehr verdient, zahlt meistens mehr.",
-      ),
-    },
-    {
-      scene: "🫙 ⚖️ 🪙",
-      mood: "think",
-      text: T(
-        "The pot is hard to get right. Too small: not enough for roads and school. Too big: people keep too few coins for bread and shoes.",
-        "Den Topf richtig zu füllen ist schwer. Zu klein: Es reicht nicht für Straßen und Schule. Zu groß: Den Leuten bleiben zu wenige Münzen für Brot und Schuhe.",
-      ),
-    },
-    {
-      scene: "🗳️ 🐢 🏘️",
-      text: T(
-        "So the town decides together. People vote for the mayor and the council who choose the taxes. Now try the tax board yourself!",
-        "Darum entscheidet die Stadt gemeinsam. Die Leute wählen den Bürgermeister und den Rat, die über die Steuern bestimmen. Probier jetzt die Steuer-Tafel selbst aus!",
-      ),
-    },
+    animatedBeat(
+      [
+        T(
+          "Ripple Town has a problem. The road to the harbour is full of holes.",
+          "In Ripple Town gibt es ein Problem. Die Straße zum Hafen ist voller Löcher.",
+        ),
+        T(
+          "Look! A cart is stuck in one of the holes. It cannot get through.",
+          "Schau! Ein Karren steckt in einem der Löcher fest. Er kommt nicht weiter.",
+        ),
+        T(
+          "Finn wants to fix the road all by himself. He has brought his hammer.",
+          "Finn will die Straße ganz allein reparieren. Er hat seinen Hammer mitgebracht.",
+        ),
+        T(
+          "But a whole road is much too big for one person. Finn gets tired and sad.",
+          "Aber eine ganze Straße ist viel zu groß für einen allein. Finn wird müde und traurig.",
+        ),
+        T(
+          "Bea and Sam use the road too. So the broken road is a problem for the whole town.",
+          "Auch Bea und Sam benutzen die Straße. Die kaputte Straße ist also ein Problem für die ganze Stadt.",
+        ),
+      ],
+      RoadDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "A town needs more than a road. It needs a school, where children learn.",
+          "Eine Stadt braucht mehr als eine Straße. Sie braucht eine Schule, in der Kinder lernen.",
+        ),
+        T(
+          "It needs a fire brigade. Firefighters put out fires and help everybody.",
+          "Sie braucht eine Feuerwehr. Feuerwehrleute löschen Brände und helfen allen.",
+        ),
+        T(
+          "And it needs a park, where everybody can play and rest.",
+          "Und sie braucht einen Park, in dem alle spielen und sich ausruhen können.",
+        ),
+        T(
+          "Nobody can build these alone. The whole town needs them.",
+          "Das kann keiner allein bauen. Die ganze Stadt braucht sie.",
+        ),
+      ],
+      NeedsDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "This is Moss. He is the leader of Ripple Town. The leader of a town is called a *mayor*.",
+          "Das ist Moss. Er leitet Ripple Town. Wer eine Stadt leitet, heißt *Bürgermeister*.",
+        ),
+        T(
+          "Mayor Moss has an idea. Everybody puts a few coins into one big pot.",
+          "Bürgermeister Moss hat eine Idee. Alle legen ein paar Münzen in einen großen Topf.",
+        ),
+        T(
+          "The coins that everybody puts into the pot have a name. They are called *taxes*.",
+          "Die Münzen, die alle in den Topf legen, haben einen Namen. Sie heißen *Steuern*.",
+        ),
+        T(
+          "Moss pays from the pot for what the whole town needs: the road, the school, the fire brigade and the park.",
+          "Moss bezahlt aus dem Topf, was die ganze Stadt braucht: die Straße, die Schule, die Feuerwehr und den Park.",
+        ),
+      ],
+      PotDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "Taxes are not a price. You do not pay coins every time you walk or ride on the road.",
+          "Steuern sind kein Preis. Du zahlst nicht jedes Mal Münzen, wenn du auf der Straße gehst oder fährst.",
+        ),
+        T(
+          "Taxes are a cost that we share, because everybody can use the road.",
+          "Steuern sind Kosten, die wir uns teilen, denn alle dürfen die Straße benutzen.",
+        ),
+      ],
+      ShareDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "Let's see who puts in how much. Finn earns 10 coins.",
+          "Schauen wir, wer wie viel einzahlt. Finn verdient 10 Münzen.",
+        ),
+        T(
+          "From those 10 coins, he puts 2 into the pot as taxes.",
+          "Von diesen 10 Münzen legt er 2 als Steuern in den Topf.",
+        ),
+        T(
+          "Bea earns 20 coins, so she puts 4 coins into the pot.",
+          "Bea verdient 20 Münzen, deshalb legt sie 4 Münzen in den Topf.",
+        ),
+        T(
+          "Whoever earns more usually puts in more. Bea earns more than Finn, so she puts in more.",
+          "Wer mehr verdient, zahlt meistens mehr. Bea verdient mehr als Finn, also zahlt sie mehr.",
+        ),
+      ],
+      EarnDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "Now Moss has a hard job. He must decide how many coins everybody puts in.",
+          "Jetzt hat Moss eine schwere Aufgabe. Er muss entscheiden, wie viele Münzen jeder einzahlt.",
+        ),
+        T(
+          "If the pot is too small, there is not enough for the road and the school.",
+          "Ist der Topf zu klein, reicht es nicht für die Straße und die Schule.",
+        ),
+        T(
+          "If the pot is too big, people keep too few coins for bread and shoes.",
+          "Ist der Topf zu groß, bleiben den Leuten zu wenige Münzen für Brot und Schuhe.",
+        ),
+        T(
+          "So Moss has to find the right amount, not too small and not too big.",
+          "Moss muss also die richtige Menge finden, nicht zu klein und nicht zu groß.",
+        ),
+      ],
+      BalanceDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "But Moss does not choose the taxes all alone. The town decides together.",
+          "Aber Moss bestimmt die Steuern nicht ganz allein. Die Stadt entscheidet gemeinsam.",
+        ),
+        T(
+          "The people of the town *vote*. To vote means to choose together, for example with a paper in a box.",
+          "Die Leute der Stadt *wählen*. Wählen heißt, gemeinsam zu entscheiden, zum Beispiel mit einem Zettel in einer Box.",
+        ),
+        T(
+          "They vote for the mayor and for the council, a group of townspeople who decide together. The mayor and the council choose the taxes.",
+          "Sie wählen den Bürgermeister und den Rat, eine Gruppe von Leuten aus der Stadt, die gemeinsam entscheiden. Bürgermeister und Rat bestimmen die Steuern.",
+        ),
+        T(
+          "Now it is your turn. Be Mayor Moss for a day and try the tax board!",
+          "Jetzt bist du dran. Sei einen Tag lang Bürgermeister Moss und probier die Steuer-Tafel aus!",
+        ),
+      ],
+      VoteDiagram,
+    ),
   ],
   toyIntro: T(
     "Be Mayor Moss for a day. Everyone earns 10 coins and needs 6 for bread and shoes. Slide the tax and watch what the pot can pay for.",
-    "Sei einen Tag lang Bürgermeister Moss. Alle verdienen 10 Münzen und brauchen 6 für Brot und Schuhe. Schiebe die Steuer und schau, was der Topf bezahlen kann.",
+    "Sei einen Tag lang Bürgermeister Moss. Alle verdienen 10 Münzen und brauchen 6 für Brot und Schuhe. Schiebe die Steuer und schau, was der Topf bezahlt.",
   ),
   Toy,
   questions: [
@@ -315,6 +304,7 @@ export const lesson: Lesson = {
       "'Many employees never see their income tax' is told as: the employer takes it from pay and sends it on. Tax class, allowances and social contributions are left out. 'Many' is used because the sources say the employer must withhold it; the lesson does not claim an exact share.",
       "A tax return is told as 'a form to check the town got the right amount'. In real life it also lets people claim costs that lower the tax, not everyone must file, and deadlines differ (tax adviser, extensions, voluntary filing). The lesson gives no advice on whether to file.",
       "Mayor Moss, Finn, Bea and Sam are made up. People vote for a mayor and council in towns; the lesson does not describe Germany's election system.",
+      "The story says 'a mayor is the leader of a town', 'to vote means to choose together, for example with a paper in a box' and 'the council is a group of townspeople who decide together'. These are child-sized descriptions: in Germany only eligible citizens vote, the exact rules differ between states, and councils are elected bodies. The lesson names no election rules.",
     ],
   },
 };

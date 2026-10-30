@@ -1,7 +1,19 @@
 import { useEffect, useState } from "react";
-import { CheckButton, Slider, Stage, ToyButton } from "../lesson/toolkit";
+import { CAST } from "../components/cast";
+import { InlineIcon, Person } from "../components/icons";
+import { CheckButton, Slider, Stage, ToyButton, animatedBeat } from "../lesson/toolkit";
 import type { Lesson, Text, ToyProps, WidgetProps } from "../lesson/types";
 import type { Lang } from "../progress";
+import {
+  BusyTownDiagram,
+  CentralBankDiagram,
+  FamilyDiagram,
+  KeyRateDiagram,
+  LowerDiagram,
+  RaiseDiagram,
+  SlowDiagram,
+} from "./rates.diagrams";
+import { BankBuilding, Dial, Thermometer, TownScene, ZONE_COLOR } from "./rates.icons";
 import "./rates.css";
 
 const T = (en: string, de: string): Text => ({ en, de });
@@ -64,7 +76,13 @@ const OTTO_SAYS: Record<Zone, Text> = {
   ),
 };
 
-const TOWN_PIC: Record<Zone, string> = { hot: "🏘️🔥", right: "🏘️😊", cold: "🏘️🥶" };
+const TOWN_LABEL: Record<Zone, Text> = {
+  hot: T("The town is too hot.", "Die Stadt ist zu heiß."),
+  right: T("The town is just right.", "Die Stadt ist genau richtig."),
+  cold: T("The town is too cold.", "Die Stadt ist zu kalt."),
+};
+
+const fmt = (n: number, lang: Lang) => (lang === "en" ? `${n.toFixed(1)}%` : `${n.toFixed(1).replace(".", ",")} %`);
 
 function Thermostat({ lang, sim, setSim }: { lang: Lang; sim: Sim; setSim: (s: Sim) => void }) {
   const en = lang === "en";
@@ -75,9 +93,10 @@ function Thermostat({ lang, sim, setSim }: { lang: Lang; sim: Sim; setSim: (s: S
   return (
     <Stage label={en ? "Town thermostat" : "Stadt-Thermostat"}>
       <div className="thermo">
-        <div className="thermo-town" aria-hidden="true">
-          {TOWN_PIC[zone]}
-        </div>
+        <svg className="thermo-town" viewBox="0 0 640 176" role="img" aria-label={TOWN_LABEL[zone][lang]}>
+          <Dial x={6} y={14} size={170} value={sim.rate} ghost={sim.felt} />
+          <TownScene zone={zone} people scale={1.2} x={236} y={4} />
+        </svg>
         <div className="thermo-controls">
           <Slider
             label={en ? "Key rate in %" : "Leitzins in %"}
@@ -90,15 +109,28 @@ function Thermostat({ lang, sim, setSim }: { lang: Lang; sim: Sim; setSim: (s: S
             right={en ? "loans costly" : "Kredite teuer"}
           />
           <p className="thermo-rates">
-            🏦 {en ? "Rates people in town feel now" : "Zinsen, die die Leute jetzt spüren"}: <strong>{en ? `${sim.felt.toFixed(1)}%` : `${sim.felt.toFixed(1).replace(".", ",")} %`}</strong>
+            <InlineIcon size={26}>
+              <BankBuilding />
+            </InlineIcon>
+            <span>
+              {en ? "Rates people in town feel now" : "Zinsen, die die Leute jetzt spüren"}: <strong>{fmt(sim.felt, lang)}</strong>
+            </span>
           </p>
-          <p className="thermo-wait">{catchingUp ? (en ? "⏳ Rates are still catching up..." : "⏳ Die Zinsen kommen erst langsam an...") : ""}</p>
-          <ToyButton onClick={() => setSim(START_SIM)}>↺ {en ? "Start again" : "Von vorn"}</ToyButton>
+          <p className="thermo-wait" role="status">
+            {catchingUp ? (en ? "Rates are still catching up..." : "Die Zinsen kommen erst langsam an...") : ""}
+          </p>
+          <ToyButton onClick={() => setSim(START_SIM)}>
+            <span className="sr-only">{en ? "Start again" : "Von vorn"}</span>
+            <span aria-hidden="true">↺</span>
+          </ToyButton>
         </div>
         <div className="thermo-gauges">
           <div>
             <div className="gauge-name">
-              <span>🌡️ {en ? "Prices rising" : "Preise steigen"}</span>
+              <InlineIcon size={30}>
+                <Thermometer level={sim.heat / 100} color={ZONE_COLOR[zone]} />
+              </InlineIcon>
+              <span>{en ? "Prices rising" : "Preise steigen"}</span>
             </div>
             <div
               className="gauge-track"
@@ -119,7 +151,10 @@ function Thermostat({ lang, sim, setSim }: { lang: Lang; sim: Sim; setSim: (s: S
           </div>
           <div>
             <div className="gauge-name">
-              <span>🧑‍🔧 {en ? "Jobs" : "Arbeit"}</span>
+              <InlineIcon size={26}>
+                <Person hat="hardhat" shirt={CAST.Pip.shirt} />
+              </InlineIcon>
+              <span>{en ? "Jobs" : "Arbeit"}</span>
             </div>
             <div
               className="gauge-track"
@@ -137,7 +172,7 @@ function Thermostat({ lang, sim, setSim }: { lang: Lang; sim: Sim; setSim: (s: S
             </div>
           </div>
           <p className="thermo-otto" role="status">
-            🦦 {OTTO_SAYS[zone][lang]}
+            {OTTO_SAYS[zone][lang]}
           </p>
         </div>
       </div>
@@ -166,57 +201,133 @@ function CoolDownWidget({ lang, onAnswer }: WidgetProps) {
 export const lesson: Lesson = {
   id: "rates",
   story: [
-    {
-      scene: "🏘️ 🔥 🍞 👟",
-      text: T(
-        "Ripple Town is very busy. Everyone buys a lot. Bread costs more this week, and shoes cost more too. Otto says: The town is too hot!",
-        "In Ripple Town ist viel los. Alle kaufen ganz viel ein. Das Brot kostet diese Woche mehr, und die Schuhe auch. Otto sagt: Die Stadt ist zu heiß!",
-      ),
-    },
-    {
-      scene: "🏦 ➡️ 🏦",
-      mood: "think",
-      text: T(
-        "Banks have a bank of their own. It is the central bank, the bank for the banks. It also looks after the country's money, even the printing of notes.",
-        "Auch Banken haben eine eigene Bank. Das ist die Zentralbank, die Bank für die Banken. Sie kümmert sich auch ums Geld des Landes, sogar ums Drucken der Scheine.",
-      ),
-    },
-    {
-      scene: "🏦 🎚️ 📊",
-      text: T(
-        "The central bank sets one special interest rate, the key rate. Other banks watch it. When it moves, loan rates and saving rates usually move the same way.",
-        "Die Zentralbank legt einen besonderen Zinssatz fest, den Leitzins. Die anderen Banken schauen darauf. Wenn er sich bewegt, ziehen die Zinsen für Kredite und Sparen meistens mit.",
-      ),
-    },
-    {
-      scene: "🔥 🎚️⬆️ ➡️ 😌",
-      text: T(
-        "Town too hot? The central bank raises the key rate. Loans cost more, so people borrow and spend less. Saving pays more. Prices calm down.",
-        "Die Stadt ist zu heiß? Dann erhöht die Zentralbank den Leitzins. Kredite kosten mehr, also leihen und kaufen die Leute weniger. Sparen bringt mehr. Die Preise beruhigen sich.",
-      ),
-    },
-    {
-      scene: "🥶 🎚️⬇️ ➡️ 🏗️ 🛍️",
-      text: T(
-        "Town too cold? Shops are empty and people lose their jobs. The central bank lowers the key rate. Loans get cheaper, so people build and buy again.",
-        "Die Stadt ist zu kalt? Die Läden sind leer und Leute verlieren ihre Arbeit. Dann senkt die Zentralbank den Leitzins. Kredite werden billiger, also bauen und kaufen die Leute wieder.",
-      ),
-    },
-    {
-      scene: "⏳ 🎚️ 🌡️",
-      mood: "think",
-      text: T(
-        "But it works slowly, like a thermostat in a big house. It can take many months to feel it. And the central bank never gets it exactly right.",
-        "Aber es wirkt langsam, wie ein Thermostat in einem großen Haus. Es kann viele Monate dauern, bis man es spürt. Und ganz genau trifft die Zentralbank es nie.",
-      ),
-    },
-    {
-      scene: "👨‍👩‍👧 🏠 🎚️",
-      text: T(
-        "It reaches families too. When rates are high, a new loan for a house costs more. When rates are low, it costs less. Saving pays more when rates are high.",
-        "Das betrifft auch Familien. Bei hohen Zinsen kostet ein neuer Kredit für ein Haus mehr. Bei niedrigen Zinsen kostet er weniger. Sparen bringt bei hohen Zinsen mehr.",
-      ),
-    },
+    animatedBeat(
+      [
+        T("Ripple Town is very busy this week.", "In Ripple Town ist diese Woche richtig viel los."),
+        T(
+          "Everybody is out shopping, and everybody wants to buy a lot.",
+          "Alle sind zum Einkaufen unterwegs, und alle wollen ganz viel kaufen.",
+        ),
+        T(
+          "Bread costs more than last week, and shoes cost more too.",
+          "Das Brot kostet mehr als letzte Woche, und die Schuhe kosten auch mehr.",
+        ),
+        T(
+          "Prices are going up fast. You know that from inflation. We say the town is too hot!",
+          "Die Preise steigen schnell. Das kennst du von der Inflation. Wir sagen: Die Stadt ist zu heiß!",
+        ),
+      ],
+      BusyTownDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "Do you remember banks? People bring their coins to a bank.",
+          "Erinnerst du dich an Banken? Die Leute bringen ihre Münzen zu einer Bank.",
+        ),
+        T("And guess what: banks have a bank of their own, too!", "Und stell dir vor: Auch die Banken haben eine eigene Bank!"),
+        T(
+          "It is the bank for the banks. It is called the *central bank*.",
+          "Das ist die Bank für die Banken. Sie heißt *Zentralbank*.",
+        ),
+        T(
+          "The central bank also looks after the money of the whole country, even the printing of the notes.",
+          "Die Zentralbank kümmert sich auch um das Geld des ganzen Landes, sogar um das Drucken der Scheine.",
+        ),
+      ],
+      CentralBankDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "The central bank decides on one special interest rate for the whole country.",
+          "Die Zentralbank legt einen besonderen Zinssatz für das ganze Land fest.",
+        ),
+        T(
+          "You know interest rates from before. This special one is called the *key rate*.",
+          "Zinsen kennst du schon. Dieser besondere heißt *Leitzins*.",
+        ),
+        T("All the other banks watch the key rate closely.", "Alle anderen Banken schauen genau auf den Leitzins."),
+        T(
+          "When the key rate moves, the interest rates for loans and for saving usually move the same way.",
+          "Wenn sich der Leitzins bewegt, ziehen die Zinsen für Kredite und fürs Sparen meistens mit.",
+        ),
+      ],
+      KeyRateDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "Remember the hot town? The central bank can cool it down.",
+          "Weißt du noch, die heiße Stadt? Die Zentralbank kann sie abkühlen.",
+        ),
+        T("To do that, it raises the key rate.", "Dafür erhöht sie den Leitzins."),
+        T(
+          "Now loans cost more, so people borrow less and buy less.",
+          "Jetzt kosten Kredite mehr. Darum leihen sich die Leute weniger Geld und kaufen weniger.",
+        ),
+        T(
+          "Saving pays more now, too. The bank gives more interest for coins you leave there.",
+          "Sparen bringt jetzt auch mehr. Die Bank gibt mehr Zinsen für Münzen, die du dort lässt.",
+        ),
+        T(
+          "When people buy less, prices calm down. The town cools off and is just right again.",
+          "Wenn weniger gekauft wird, beruhigen sich die Preise. Die Stadt kühlt ab und ist wieder genau richtig.",
+        ),
+      ],
+      RaiseDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "Sometimes it is the other way round, and the town is too cold.",
+          "Manchmal ist es umgekehrt, und die Stadt ist zu kalt.",
+        ),
+        T("The shops are empty and people lose their jobs.", "Die Läden sind leer, und Leute verlieren ihre Arbeit."),
+        T("Then the central bank lowers the key rate.", "Dann senkt die Zentralbank den Leitzins."),
+        T(
+          "Loans get cheaper, so people build and buy again, and there is more work.",
+          "Kredite werden billiger. Darum bauen und kaufen die Leute wieder, und es gibt mehr Arbeit.",
+        ),
+      ],
+      LowerDiagram,
+    ),
+    animatedBeat(
+      [
+        T("But there is a catch: the key rate works slowly.", "Aber es gibt einen Haken: Der Leitzins wirkt nur langsam."),
+        T(
+          "After the central bank turns the dial, it can take many months until people in town feel it.",
+          "Wenn die Zentralbank am Regler dreht, kann es viele Monate dauern, bis die Leute in der Stadt es spüren.",
+        ),
+        T(
+          "It is like a thermostat in a big house. After you turn it up, the house needs time to warm up.",
+          "Das ist wie bei einem Thermostat in einem großen Haus. Wenn du aufdrehst, braucht es Zeit, bis es warm wird.",
+        ),
+        T(
+          "The central bank never gets it exactly right. Sometimes the town ends up a bit too warm.",
+          "Ganz genau trifft die Zentralbank es nie. Manchmal wird die Stadt etwas zu warm.",
+        ),
+        T("And sometimes it ends up a bit too cool.", "Und manchmal wird sie etwas zu kühl."),
+      ],
+      SlowDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "The key rate reaches families, too. Imagine a family that wants a new house and needs a loan.",
+          "Der Leitzins betrifft auch Familien. Stell dir vor, eine Familie will ein Haus und braucht einen Kredit.",
+        ),
+        T("When rates are high, a new loan costs more.", "Sind die Zinsen hoch, kostet ein neuer Kredit mehr."),
+        T("When rates are low, a new loan costs less.", "Sind die Zinsen niedrig, kostet ein neuer Kredit weniger."),
+        T(
+          "And there is good news for savers: when rates are high, saving pays more.",
+          "Und für Sparer gibt es gute Nachrichten: Sind die Zinsen hoch, bringt Sparen mehr.",
+        ),
+      ],
+      FamilyDiagram,
+    ),
   ],
   toyIntro: T(
     "Turn the key rate like a thermostat. Watch prices and jobs. Be patient: the town reacts slowly!",

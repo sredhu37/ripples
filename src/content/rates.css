@@ -2,7 +2,7 @@
 .thermo {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-  gap: 14px 22px;
+  gap: 8px 22px;
   width: 100%;
   align-items: center;
   text-align: left;
@@ -10,22 +10,20 @@
 
 .thermo-town {
   grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  font-size: 2.4rem;
-  line-height: 1.1;
+  width: 100%;
+  height: auto;
+  max-height: 124px;
+  display: block;
 }
 
 .thermo-otto {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   background: var(--white);
   border: 2px solid var(--ink);
   border-radius: 14px;
   padding: 6px 12px;
-  min-height: 4.3em;
+  min-height: 3.6em;
   display: flex;
   align-items: center;
 }
@@ -47,7 +45,8 @@
   font-weight: 800;
   font-size: 0.95rem;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
 }
 
 .gauge-track {
@@ -106,6 +105,9 @@
 .thermo-rates {
   font-size: 0.95rem;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .thermo-wait {

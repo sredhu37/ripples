@@ -1,108 +1,22 @@
 import { useState } from "react";
-import { CheckButton, Slider, Stage } from "../lesson/toolkit";
+import { CheckButton, animatedBeat } from "../lesson/toolkit";
 import type { Lesson, Text, ToyProps, WidgetProps } from "../lesson/types";
-import type { Lang } from "../progress";
-import "./inflation.css";
+import {
+  CostsDiagram,
+  DeflationDiagram,
+  InflationDiagram,
+  JarDiagram,
+  LastSummerDiagram,
+  ManyWantDiagram,
+  SamDiagram,
+  TwoCoinsDiagram,
+} from "./inflation.diagrams";
+import { POCKET, START, TimeMachine, scoopsFor } from "./inflation.toy";
+import type { Setting } from "./inflation.toy";
+
+export { priceTenths, scoopsFor } from "./inflation.toy";
 
 const T = (en: string, de: string): Text => ({ en, de });
-
-/** Coins in Finn's pocket. At the start one scoop costs 1 coin, so they buy 10 scoops. */
-const POCKET = 10;
-
-/** The scoop price in tenths of a coin after some years of price rises (the seller rounds to 0.1). */
-export function priceTenths(years: number, percent: number): number {
-  return Math.round(10 * Math.pow(1 + percent / 100, years));
-}
-
-/** How many whole scoops the pocket buys. Works in tenths so there is no rounding surprise. */
-export function scoopsFor(years: number, percent: number): number {
-  return Math.floor((POCKET * 10) / priceTenths(years, percent));
-}
-
-interface Setting {
-  years: number;
-  percent: number;
-}
-
-const START: Setting = { years: 3, percent: 5 };
-
-const fmt = (tenths: number, lang: Lang) => {
-  const s = (tenths / 10).toFixed(1);
-  return lang === "de" ? s.replace(".", ",") : s;
-};
-
-function sayFor(s: Setting, tenths: number, scoops: number): Text {
-  if (scoops === 0) {
-    return T("Now 10 coins do not even buy one scoop!", "Jetzt reichen 10 Münzen nicht mal für eine Kugel!");
-  }
-  if (tenths === 10) {
-    return T(
-      "The price has not moved. 10 coins still buy 10 scoops. Try more years or a bigger rise.",
-      "Der Preis hat sich nicht bewegt. 10 Münzen kaufen noch 10 Kugeln. Probier mehr Jahre oder einen größeren Anstieg.",
-    );
-  }
-  return T(
-    `At the start, 10 coins bought 10 scoops. After ${s.years} ${s.years === 1 ? "year" : "years"}, they buy ${scoops}.`,
-    `Am Anfang kauften 10 Münzen 10 Kugeln. Nach ${s.years} ${s.years === 1 ? "Jahr" : "Jahren"} kaufen sie ${scoops}.`,
-  );
-}
-
-/** Ice cream time machine: jump ahead some years, set how fast prices rise, see what 10 coins buy. */
-function TimeMachine({ lang, value, onChange }: { lang: Lang; value: Setting; onChange: (s: Setting) => void }) {
-  const tenths = priceTenths(value.years, value.percent);
-  const scoops = scoopsFor(value.years, value.percent);
-  const say = sayFor(value, tenths, scoops);
-  const en = lang === "en";
-  return (
-    <Stage label={en ? "Ice cream time machine" : "Eis-Zeitmaschine"}>
-      <div className="inf">
-        <div className="inf-sliders">
-          <Slider
-            label={en ? "Years later" : "Jahre später"}
-            value={value.years}
-            min={0}
-            max={10}
-            onChange={(years) => onChange({ ...value, years })}
-            left={en ? "now" : "jetzt"}
-            right={en ? "10 years" : "10 Jahre"}
-          />
-          <Slider
-            label={en ? "Price rise each year (%)" : "Preisanstieg pro Jahr (%)"}
-            value={value.percent}
-            min={0}
-            max={20}
-            onChange={(percent) => onChange({ ...value, percent })}
-            left={en ? "none" : "keiner"}
-            right={en ? "20 out of 100" : "20 von 100"}
-          />
-        </div>
-        <div className="inf-board">
-          <div className="inf-tag">
-            🍦 {en ? "One scoop costs" : "Eine Kugel kostet"}
-            <strong>
-              {fmt(tenths, lang)} 🪙
-            </strong>
-          </div>
-          <div>
-            <div className="inf-scoops" role="img" aria-label={en ? `${scoops} scoops` : `${scoops} Kugeln`}>
-              {Array.from({ length: POCKET }, (_, i) => (
-                <span key={i} className={i < scoops ? "inf-scoop" : "inf-scoop gone"} aria-hidden="true">
-                  🍦
-                </span>
-              ))}
-            </div>
-            <div className="inf-count">
-              {en ? `10 🪙 buy ${scoops} ${scoops === 1 ? "scoop" : "scoops"}` : `10 🪙 kaufen ${scoops} ${scoops === 1 ? "Kugel" : "Kugeln"}`}
-            </div>
-          </div>
-        </div>
-        <p className="trade-say" role="status">
-          {say[lang]}
-        </p>
-      </div>
-    </Stage>
-  );
-}
 
 function Toy({ lang }: ToyProps) {
   const [s, setS] = useState<Setting>(START);
@@ -125,64 +39,136 @@ function HalfScoopsWidget({ lang, onAnswer }: WidgetProps) {
 export const lesson: Lesson = {
   id: "inflation",
   story: [
-    {
-      scene: "🍦 = 🪙",
-      text: T(
-        "Last summer, one scoop of ice cream in Ripple Town cost 1 coin. Finn bought one every Friday.",
-        "Letzten Sommer kostete eine Kugel Eis in Ripple Town 1 Münze. Finn kaufte sich jeden Freitag eine.",
-      ),
-    },
-    {
-      scene: "🍦 = 🪙🪙   🧔 🪙 ➡️ ½ 🍦",
-      mood: "think",
-      text: T(
-        "This summer a scoop costs 2 coins! Finn still has his 1 coin. Now it buys only half a scoop.",
-        "Diesen Sommer kostet eine Kugel 2 Münzen! Finn hat immer noch seine 1 Münze. Damit bekommt er nur noch eine halbe Kugel.",
-      ),
-    },
-    {
-      scene: "🧒🧑👧 ➡️ 🍦 🏷️⬆️",
-      text: T(
-        "Why? One reason: everybody wants ice cream, but there is only so much. The seller can ask for more coins.",
-        "Warum? Ein Grund: Alle wollen Eis, aber es gibt nur so viel. Der Eisverkäufer kann mehr Münzen verlangen.",
-      ),
-    },
-    {
-      scene: "🥛🍬 🏷️⬆️ ➡️ 🍦 🏷️⬆️",
-      text: T(
-        "Another reason: milk and sugar cost the seller more. So the scoop costs more too.",
-        "Noch ein Grund: Milch und Zucker kosten den Eisverkäufer mehr. Darum kostet auch die Kugel mehr.",
-      ),
-    },
-    {
-      scene: "🍦🏷️⬆️ 🍞🏷️⬆️ 👟🏷️⬆️ ➡️ 🪙 = ½",
-      text: T(
-        "When most prices in a town go up over time, we call it inflation. The same coin buys less than before.",
-        "Wenn die meisten Preise in einer Stadt mit der Zeit steigen, nennt man das Inflation. Dieselbe Münze kauft dann weniger als früher.",
-      ),
-    },
-    {
-      scene: "🧑 🪙×10 ➡️ 🏷️⬆️⬆️ ➡️ 🍦⬇️",
-      mood: "think",
-      text: T(
-        "A little inflation is normal. A lot is hard. Sam still gets 10 coins a day for his shoes, but if prices climb fast, those coins buy less and less.",
-        "Ein bisschen Inflation ist normal. Viel davon ist hart. Sam bekommt für seine Schuhe weiter 10 Münzen am Tag. Steigen die Preise schnell, kaufen sie immer weniger.",
-      ),
-    },
-    {
-      scene: "🫙🪙×10 ⏳ ➡️ 🍦⬇️",
-      text: T(
-        "Finn keeps 10 coins in a jar. If prices rise, next year they buy fewer scoops. Interest from a bank helps, but only if it is as big as the price rise.",
-        "Finn hebt 10 Münzen in einem Glas auf. Steigen die Preise, kaufen sie nächstes Jahr weniger Kugeln. Zinsen von der Bank helfen, aber nur, wenn sie so groß sind wie der Preisanstieg.",
-      ),
-    },
-    {
-      scene: "🏷️⬇️ 🍦 ➡️ 🏪 😟",
-      text: T(
-        "Prices can fall too. That is called deflation. It sounds nice, but then shops earn less and may let workers go.",
-        "Preise können auch sinken. Das nennt man Deflation. Es klingt schön, aber dann verdienen die Läden weniger und müssen vielleicht Leute entlassen.",
-      ),
-    },
+    animatedBeat(
+      [
+        T("Finn loves ice cream.", "Finn liebt Eis."),
+        T(
+          "In Ripple Town, the ice cream seller sells it from a little stand. That is the seller's job.",
+          "In Ripple Town verkauft der Eisverkäufer es an einem kleinen Stand. Das ist sein Beruf.",
+        ),
+        T("Last summer, one scoop of ice cream cost 1 coin.", "Letzten Sommer kostete eine Kugel Eis 1 Münze."),
+        T(
+          "Finn bought one scoop every Friday. He gave his coin, and he got his scoop.",
+          "Finn kaufte sich jeden Freitag eine Kugel. Er gab seine Münze, und er bekam sein Eis.",
+        ),
+      ],
+      LastSummerDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "But this summer, something is different. One scoop now costs 2 coins!",
+          "Aber diesen Sommer ist etwas anders. Eine Kugel kostet jetzt 2 Münzen!",
+        ),
+        T("Finn still has just his 1 coin.", "Finn hat immer noch nur seine 1 Münze."),
+        T(
+          "Now his coin buys only half a scoop. Finn is sad.",
+          "Jetzt bekommt er für seine Münze nur noch eine halbe Kugel. Finn ist traurig.",
+        ),
+      ],
+      TwoCoinsDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "Why did the price go up? Here is the first reason. Everybody in town wants ice cream.",
+          "Warum ist der Preis gestiegen? Hier ist der erste Grund. Alle in der Stadt wollen Eis.",
+        ),
+        T("But the seller can only make so much ice cream.", "Aber der Eisverkäufer kann nur so viel Eis machen."),
+        T(
+          "When lots of people want something and there is only so much of it, the seller can ask for more coins.",
+          "Wenn viele Leute etwas wollen und es nur so viel davon gibt, kann der Verkäufer mehr Münzen verlangen.",
+        ),
+      ],
+      ManyWantDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "Here is the second reason. To make ice cream, the seller needs milk and sugar.",
+          "Hier ist der zweite Grund. Für Eis braucht der Eisverkäufer Milch und Zucker.",
+        ),
+        T(
+          "Now milk and sugar cost the seller more coins than before.",
+          "Jetzt kosten Milch und Zucker den Eisverkäufer mehr Münzen als früher.",
+        ),
+        T(
+          "So the seller asks for more coins for each scoop, too.",
+          "Darum verlangt der Verkäufer auch für jede Kugel mehr Münzen.",
+        ),
+      ],
+      CostsDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "It is not only ice cream. Bread costs more than before, and shoes do too.",
+          "Nicht nur Eis ist teurer geworden. Auch Brot kostet mehr als früher, und Schuhe auch.",
+        ),
+        T(
+          "When most prices in a town go up over time, that has a name. It is called *inflation*.",
+          "Wenn die meisten Preise in einer Stadt mit der Zeit steigen, hat das einen Namen. Man nennt es *Inflation*.",
+        ),
+        T(
+          "With inflation, the same coin buys less than before.",
+          "Bei Inflation kauft dieselbe Münze weniger als früher.",
+        ),
+      ],
+      InflationDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "Sam is a shoemaker. That means his job is to make shoes. He still gets 10 coins a day for them.",
+          "Sam ist Schuhmacher. Das heißt, sein Beruf ist es, Schuhe zu machen. Er bekommt dafür weiter 10 Münzen am Tag.",
+        ),
+        T(
+          "A little inflation is normal. Prices go up slowly, and his coins buy only a bit less.",
+          "Ein bisschen Inflation ist normal. Die Preise steigen langsam, und seine Münzen kaufen nur etwas weniger.",
+        ),
+        T(
+          "A lot of inflation is hard. If prices climb fast, his 10 coins buy less and less.",
+          "Viel Inflation ist hart. Steigen die Preise schnell, kaufen seine 10 Münzen immer weniger.",
+        ),
+      ],
+      SamDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "Finn keeps 10 coins in a jar. He is saving them for later.",
+          "Finn hebt 10 Münzen in einem Glas auf. Er spart sie für später.",
+        ),
+        T(
+          "If prices rise, his 10 coins buy fewer scoops next year than they buy today.",
+          "Steigen die Preise, kaufen seine 10 Münzen nächstes Jahr weniger Kugeln als heute.",
+        ),
+        T(
+          "Interest from a bank helps. But it only keeps up if it is as big as the price rise.",
+          "Zinsen von der Bank helfen. Aber nur, wenn sie so groß sind wie der Preisanstieg.",
+        ),
+      ],
+      JarDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "Prices can also fall. When most prices in a town go down over time, it is called *deflation*.",
+          "Preise können auch sinken. Wenn die meisten Preise in einer Stadt mit der Zeit sinken, nennt man das *Deflation*.",
+        ),
+        T(
+          "That sounds nice, but then the shops earn less money.",
+          "Das klingt schön, aber dann verdienen die Läden weniger Geld.",
+        ),
+        T(
+          "A shop that earns less may have to let some workers go. That means the workers lose their jobs.",
+          "Ein Laden, der weniger verdient, muss vielleicht Leute entlassen. Das heißt, sie verlieren ihre Arbeit.",
+        ),
+      ],
+      DeflationDiagram,
+    ),
   ],
   toyIntro: T(
     "Ice cream time machine! Jump ahead some years and pick how fast prices rise. Percent means out of 100: at 10, a 100-coin thing costs 110 next year. Watch what 10 coins buy.",
@@ -214,7 +200,7 @@ export const lesson: Lesson = {
       ),
       Widget: HalfScoopsWidget,
       hint: T(
-        "Half of 10 scoops is 5 scoops. Look at the scoops under the price tag. Move the sliders until exactly 5 are bright.",
+        "Half of 10 scoops is 5 scoops. Look at the scoops next to the price tag. Move the sliders until exactly 5 are bright.",
         "Die Hälfte von 10 Kugeln sind 5 Kugeln. Schau auf die Kugeln neben dem Preisschild. Schiebe die Regler, bis genau 5 hell sind.",
       ),
     },

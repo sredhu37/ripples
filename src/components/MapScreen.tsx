@@ -4,6 +4,7 @@ import { t } from "../i18n";
 import { LESSON_ORDER } from "../lessons";
 import { lessonState, nextLessonId, type Lang, type Progress } from "../progress";
 import { sfx } from "../sound";
+import { LessonIcon, UiIcon } from "./appIcons";
 import { LangSwitch } from "./NameScreen";
 import { Otto } from "./Otto";
 import { SpeechBubble } from "./SpeechBubble";
@@ -35,10 +36,10 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
             aria-pressed={muted}
             onClick={onToggleMute}
           >
-            {muted ? "🔇" : "🔊"}
+            <UiIcon name={muted ? "speakerOff" : "speakerOn"} />
           </button>
           <button type="button" className="icon-btn" aria-label={t(lang, "parents")} onClick={onParents}>
-            ⚙️
+            <UiIcon name="gear" />
           </button>
         </div>
       </header>
@@ -68,9 +69,9 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
             const earned = progress.badges.includes(l.id);
             return (
               <li key={l.id} className={earned ? "medal medal-on" : "medal"} title={l.title[lang]}>
-                <span aria-hidden="true">{earned ? l.icon : ""}</span>
+                <span aria-hidden="true">{earned ? <LessonIcon id={l.id} size={34} /> : null}</span>
                 <span className="sr-only">
-                  {l.title[lang]}: {earned ? "✓" : "-"}
+                  {l.title[lang]}: {earned ? (lang === "en" ? "done" : "fertig") : "-"}
                 </span>
               </li>
             );
@@ -95,14 +96,14 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
                 }}
               >
                 <span className="place-icon" aria-hidden="true">
-                  {state === "locked" ? "🔒" : l.icon}
+                  {state === "locked" ? <UiIcon name="lock" size={40} /> : <LessonIcon id={l.id} size={48} />}
                 </span>
                 <span className="place-text">
                   <span className="place-title">
                     {i + 1}. {l.title[lang]}
                   </span>
                   <span className="place-tag">
-                    {state === "done" ? "🏅" : state === "next" ? t(lang, "nextUp") : t(lang, "locked")}
+                    {state === "done" ? <UiIcon name="medal" size={22} label={t(lang, "badges")} /> : state === "next" ? t(lang, "nextUp") : t(lang, "locked")}
                     {state !== "locked" && !hasLesson(l.id) ? ` · ${t(lang, "comingSoon")}` : ""}
                   </span>
                 </span>
