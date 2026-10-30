@@ -19,6 +19,19 @@ Settled with Sunny before building. Change one only by naming it as a change.
 
 Lessons unlock in order: the next one opens after the badge. Finished lessons can be replayed.
 
+## Group 2 lessons (Business), in order
+
+11. Costs and profit (profit)
+12. Making sales (sales)
+13. Small and big prices (ticketsize)
+14. Market share (marketshare)
+15. Friendly competition (competition)
+16. Spreading the word (marketing)
+17. Hiring and risk (hiring)
+18. Big and small business (scale)
+
+See docs/adr/0001-group-2-business-curriculum.md for the full curriculum and toy mechanics specification.
+
 ## Experience
 
 - **Map and badges.** A trail on a map with one stop per lesson, and a shelf of badges. No coins, no streaks, no timers.
