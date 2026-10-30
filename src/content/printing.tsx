@@ -1,205 +1,168 @@
-import { useState } from "react";
-import { CheckButton, Slider, Stage } from "../lesson/toolkit";
+import { animatedBeat } from "../lesson/toolkit";
 import type { Lesson, Text, ToyProps, WidgetProps } from "../lesson/types";
-import type { Lang } from "../progress";
+import {
+  BreadPriceDiagram,
+  FineDiagram,
+  HyperDiagram,
+  IdeaDiagram,
+  InflationDiagram,
+  PriceUpDiagram,
+  PrintDiagram,
+  ProblemDiagram,
+} from "./printing.diagrams";
+import { PrintToy } from "./printing.toy";
 import "./printing.css";
 
 const T = (en: string, de: string): Text => ({ en, de });
 
-/** Ripple Town starts with 20 coins and 10 loaves a day, so one loaf costs 2 coins. */
-const START_COINS = 20;
-const START_LOAVES = 10;
-const START_PRICE = 2;
-
-function fmt(n: number, lang: Lang): string {
-  const s = Number.isInteger(n) ? String(n) : n.toFixed(1);
-  return lang === "de" ? s.replace(".", ",") : s;
-}
-
-/** The price of one loaf is simply: coins in town divided by loaves baked. */
-function loafPrice(printed: number, loaves: number): number {
-  return (START_COINS + printed) / loaves;
-}
-
-/** True when the price is still exactly the starting price (integer maths, no rounding). */
-function priceUnchanged(printed: number, loaves: number): boolean {
-  return START_COINS + printed === START_PRICE * loaves;
-}
-
-function say(printed: number, loaves: number): Text {
-  const total = START_COINS + printed;
-  if (total === START_PRICE * loaves) {
-    return printed === 0
-      ? T("Nothing printed yet. A loaf costs 2 coins.", "Noch nichts gedruckt. Ein Brot kostet 2 Münzen.")
-      : T(
-          "More coins AND more bread. The price stays at 2 coins!",
-          "Mehr Münzen UND mehr Brot. Der Preis bleibt bei 2 Münzen!",
-        );
-  }
-  if (total > START_PRICE * loaves) {
-    return T(
-      "More coins want the same bread, so each coin buys less. Prices go up!",
-      "Mehr Münzen wollen das gleiche Brot, also kauft jede Münze weniger. Die Preise steigen!",
-    );
-  }
-  return T(
-    "Lots of bread and not so many coins. Bread gets cheaper.",
-    "Viel Brot und nicht so viele Münzen. Das Brot wird billiger.",
-  );
-}
-
-function PrintBoard({ lang, printed, loaves }: { lang: Lang; printed: number; loaves: number }) {
-  const total = START_COINS + printed;
-  const price = loafPrice(printed, loaves);
-  const cls = priceUnchanged(printed, loaves) ? "same" : total > START_PRICE * loaves ? "up" : "down";
-  return (
-    <Stage label={lang === "en" ? "Ripple Town coins and bread" : "Münzen und Brot in Ripple Town"}>
-      <div className="pr">
-        <div className="pr-row">
-          <strong>{lang === "en" ? `Coins in town: ${total}` : `Münzen in der Stadt: ${total}`}</strong>
-          <span>{lang === "en" ? "(💰 = 10 coins)" : "(💰 = 10 Münzen)"}</span>
-        </div>
-        <div className="pr-pile" aria-hidden="true">
-          {"💰".repeat(total / 10)}
-        </div>
-        <div className="pr-row">
-          <strong>{lang === "en" ? `Loaves baked: ${loaves}` : `Gebackene Brote: ${loaves}`}</strong>
-        </div>
-        <div className="pr-pile" aria-hidden="true">
-          {"🍞".repeat(loaves)}
-        </div>
-        <div className={`pr-tag ${cls}`} role="status">
-          🏷️ {lang === "en" ? `1 loaf = ${fmt(price, lang)} coins` : `1 Brot = ${fmt(price, lang)} Münzen`}
-        </div>
-        <p className="pr-say">{say(printed, loaves)[lang]}</p>
-      </div>
-    </Stage>
-  );
-}
-
-interface SlidersProps {
-  lang: Lang;
-  printed: number;
-  loaves: number;
-  setPrinted: (n: number) => void;
-  setLoaves: (n: number) => void;
-}
-
-function Sliders({ lang, printed, loaves, setPrinted, setLoaves }: SlidersProps) {
-  return (
-    <div className="pr-sliders">
-      <Slider
-        label={lang === "en" ? "🖨️ New coins printed" : "🖨️ Neue Münzen gedruckt"}
-        value={printed}
-        min={0}
-        max={80}
-        step={10}
-        onChange={setPrinted}
-        left={lang === "en" ? "none" : "keine"}
-        right={lang === "en" ? "lots" : "viele"}
-      />
-      <Slider
-        label={lang === "en" ? "🥖 Loaves Bea bakes" : "🥖 Brote, die Bea backt"}
-        value={loaves}
-        min={START_LOAVES}
-        max={40}
-        step={5}
-        onChange={setLoaves}
-        left={lang === "en" ? "10 (as now)" : "10 (wie jetzt)"}
-        right={lang === "en" ? "more" : "mehr"}
-      />
-    </div>
-  );
-}
-
 function Toy({ lang }: ToyProps) {
-  const [printed, setPrinted] = useState(0);
-  const [loaves, setLoaves] = useState(START_LOAVES);
-  return (
-    <div className="stage-wrap">
-      <PrintBoard lang={lang} printed={printed} loaves={loaves} />
-      <Sliders lang={lang} printed={printed} loaves={loaves} setPrinted={setPrinted} setLoaves={setLoaves} />
-    </div>
-  );
+  return <PrintToy lang={lang} />;
 }
 
+/** Print some new coins but keep a loaf at 2 coins: the widget only passes when it really is 2 coins. */
 function KeepPriceWidget({ lang, onAnswer }: WidgetProps) {
-  const [printed, setPrinted] = useState(0);
-  const [loaves, setLoaves] = useState(START_LOAVES);
-  return (
-    <div className="stage-wrap">
-      <PrintBoard lang={lang} printed={printed} loaves={loaves} />
-      <Sliders lang={lang} printed={printed} loaves={loaves} setPrinted={setPrinted} setLoaves={setLoaves} />
-      <div className="row nav">
-        <CheckButton lang={lang} onClick={() => onAnswer(printed > 0 && priceUnchanged(printed, loaves))} />
-      </div>
-    </div>
-  );
+  return <PrintToy lang={lang} onCheck={onAnswer} />;
 }
 
 export const lesson: Lesson = {
   id: "printing",
   story: [
-    {
-      scene: "🏛️ 🧓 🪙❓",
-      text: T(
-        "Mayor Moss has a problem. The town chest is empty. There are no coins left to pay for a new bridge.",
-        "Bürgermeister Moss hat ein Problem. Die Stadtkasse ist leer. Es sind keine Münzen mehr da, um eine neue Brücke zu bezahlen.",
-      ),
-    },
-    {
-      scene: "💡 🖨️ 🪙🪙🪙",
-      mood: "happy",
-      text: T(
-        "Then he has an idea: I have a coin press! I will print lots of new coins. Then the town will be rich!",
-        "Da hat er eine Idee: Ich habe eine Münzpresse! Ich drucke ganz viele neue Münzen. Dann ist die Stadt reich!",
-      ),
-    },
-    {
-      scene: "🍞🍞🍞🍞🍞 🍞🍞🍞🍞🍞",
-      text: T(
-        "But look at the bread first. Bea bakes 10 loaves a day. The town has 20 coins. So one loaf costs 2 coins.",
-        "Aber schau zuerst aufs Brot. Bea backt am Tag 10 Brote. In der Stadt gibt es 20 Münzen. Also kostet ein Brot 2 Münzen.",
-      ),
-    },
-    {
-      scene: "🖨️ ➡️ 🪙🪙🪙🪙 🏃🏃🏃",
-      text: T(
-        "Moss prints 20 new coins. Now the town has 40! Everybody feels rich and runs to Bea to buy bread.",
-        "Moss druckt 20 neue Münzen. Jetzt hat die Stadt 40! Alle fühlen sich reich und rennen zu Bea, um Brot zu kaufen.",
-      ),
-    },
-    {
-      scene: "🍞🍞🍞🍞🍞 🍞🍞🍞🍞🍞 🏷️ 2 ➡️ 4",
-      mood: "think",
-      text: T(
-        "But Bea still bakes only 10 loaves. Coins cannot bake bread! Twice the coins want the same bread, so a loaf now costs 4 coins.",
-        "Aber Bea backt immer noch nur 10 Brote. Münzen können kein Brot backen! Doppelt so viele Münzen wollen das gleiche Brot, also kostet ein Brot jetzt 4 Münzen.",
-      ),
-    },
-    {
-      scene: "🏷️⬆️ 🪙 = 🍞/2",
-      mood: "think",
-      text: T(
-        "Prices went up. You know this word: inflation. The town has more coins, but nobody can buy more bread. Nobody got richer.",
-        "Die Preise sind gestiegen. Dieses Wort kennst du: Inflation. Die Stadt hat mehr Münzen, aber niemand kann mehr Brot kaufen. Niemand ist reicher geworden.",
-      ),
-    },
-    {
-      scene: "🖨️🖨️🖨️ 🪙🪙🪙🪙🪙🪙 😟 🏷️ 100",
-      text: T(
-        "If Moss keeps printing, a loaf costs 10 coins, then 100. People stop trusting the coins. Then coins are just metal.",
-        "Wenn Moss weiter druckt, kostet ein Brot 10 Münzen, dann 100. Die Leute vertrauen den Münzen nicht mehr. Dann sind Münzen nur noch Metall.",
-      ),
-    },
-    {
-      scene: "👩‍🍳 🍞🍞🍞🍞 + 🪙🪙 ✅",
-      mood: "happy",
-      text: T(
-        "A few new coins are fine if the town makes more bread and other things too. Coins are worth something because they buy real things.",
-        "Ein paar neue Münzen sind in Ordnung, wenn die Stadt auch mehr Brot und andere Dinge herstellt. Münzen sind etwas wert, weil man echte Sachen damit kaufen kann.",
-      ),
-    },
+    animatedBeat(
+      [
+        T("This is Mayor Moss. He looks after Ripple Town.", "Das ist Bürgermeister Moss. Er kümmert sich um Ripple Town."),
+        T("The town needs a new bridge over the river.", "Die Stadt braucht eine neue Brücke über den Fluss."),
+        T(
+          "But there is a problem. The town chest is empty, so there are no coins left to pay for the bridge.",
+          "Aber es gibt ein Problem. Die Stadtkasse ist leer, also sind keine Münzen mehr da, um die Brücke zu bezahlen.",
+        ),
+      ],
+      ProblemDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "Then Moss has an idea. He owns a coin press. That is a machine that makes new coins.",
+          "Da hat Moss eine Idee. Er hat eine Münzpresse. Das ist eine Maschine, die neue Münzen macht.",
+        ),
+        T(
+          "He thinks: I will make lots and lots of new coins, and then the whole town will be rich!",
+          "Er denkt: Ich mache ganz viele neue Münzen, und dann ist die ganze Stadt reich!",
+        ),
+        T(
+          "Making new money just because you want more has a name. It is called *printing money*.",
+          "Neues Geld zu machen, nur weil man mehr haben will, hat einen Namen. Es heißt *Geld drucken*.",
+        ),
+      ],
+      IdeaDiagram,
+      "happy",
+    ),
+    animatedBeat(
+      [
+        T(
+          "But first, let's look at the bread. Bea the baker bakes 10 loaves every day.",
+          "Aber schauen wir zuerst aufs Brot. Bäckerin Bea backt jeden Tag 10 Brote.",
+        ),
+        T("Right now, the whole town has 20 coins.", "Im Moment hat die ganze Stadt 20 Münzen."),
+        T(
+          "20 coins for 10 loaves: one loaf costs 2 coins. That is its price.",
+          "20 Münzen für 10 Brote: Ein Brot kostet 2 Münzen. Das ist sein Preis.",
+        ),
+      ],
+      BreadPriceDiagram,
+    ),
+    animatedBeat(
+      [
+        T("Now Moss uses the coin press. It makes 20 new coins.", "Jetzt benutzt Moss die Münzpresse. Sie macht 20 neue Münzen."),
+        T(
+          "Before, there were 20 coins in town. Now there are 40!",
+          "Vorher gab es 20 Münzen in der Stadt. Jetzt sind es 40!",
+        ),
+        T(
+          "Everybody feels rich and runs to Bea to buy bread.",
+          "Alle fühlen sich reich und rennen zu Bea, um Brot zu kaufen.",
+        ),
+      ],
+      PrintDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "But Bea still bakes only 10 loaves a day. Coins cannot bake bread!",
+          "Aber Bea backt immer noch nur 10 Brote am Tag. Münzen können kein Brot backen!",
+        ),
+        T(
+          "Now 40 coins want the same 10 loaves. That is twice as many coins as before.",
+          "Jetzt wollen 40 Münzen die gleichen 10 Brote. Das sind doppelt so viele Münzen wie vorher.",
+        ),
+        T(
+          "Everybody offers more coins for the little bread there is. Now one loaf costs 4 coins.",
+          "Alle bieten mehr Münzen für das wenige Brot, das es gibt. Jetzt kostet ein Brot 4 Münzen.",
+        ),
+      ],
+      PriceUpDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "Prices went up. When most prices in a town go up, that is called inflation. You already know this word.",
+          "Die Preise sind gestiegen. Wenn die meisten Preise in einer Stadt steigen, nennt man das Inflation. Das Wort kennst du schon.",
+        ),
+        T(
+          "The town has more coins, but still only 10 loaves. Nobody can buy more bread than before.",
+          "Die Stadt hat mehr Münzen, aber immer noch nur 10 Brote. Niemand kann mehr Brot kaufen als vorher.",
+        ),
+        T(
+          "So nobody got richer. Printing coins does not make real things appear.",
+          "Also ist niemand reicher geworden. Münzen zu drucken lässt keine echten Dinge entstehen.",
+        ),
+      ],
+      InflationDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "What if Moss keeps printing and printing? Then a loaf costs 10 coins, and then 100 coins.",
+          "Was, wenn Moss immer weiter druckt? Dann kostet ein Brot 10 Münzen und danach 100 Münzen.",
+        ),
+        T(
+          "When prices shoot up this fast, it has its own name. It is called *hyperinflation*.",
+          "Wenn Preise so schnell in die Höhe schießen, hat das einen eigenen Namen. Es heißt *Hyperinflation*.",
+        ),
+        T(
+          "People stop trusting the coins. Then the coins are just pieces of metal.",
+          "Die Leute vertrauen den Münzen nicht mehr. Dann sind die Münzen nur noch Stücke aus Metall.",
+        ),
+      ],
+      HyperDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "Does that mean a town may never make new coins? No. A few new coins can be fine.",
+          "Heißt das, eine Stadt darf nie neue Münzen machen? Nein. Ein paar neue Münzen können in Ordnung sein.",
+        ),
+        T(
+          "It works when the town also makes more bread and other things to buy.",
+          "Das klappt, wenn die Stadt auch mehr Brot und andere Dinge zum Kaufen herstellt.",
+        ),
+        T(
+          "Then a loaf still costs 2 coins. Coins are worth something because you can buy real things with them.",
+          "Dann kostet ein Brot weiter 2 Münzen. Münzen sind etwas wert, weil man echte Dinge damit kaufen kann.",
+        ),
+        T(
+          "In real life, a special bank looks after a country's money. It is called the *central bank*.",
+          "Im echten Leben kümmert sich eine besondere Bank um das Geld eines Landes. Sie heißt *Zentralbank*.",
+        ),
+        T(
+          "Its main job is to keep prices steady, so that your coins buy about the same tomorrow.",
+          "Ihre wichtigste Aufgabe ist es, die Preise stabil zu halten, damit deine Münzen morgen ungefähr so viel kaufen wie heute.",
+        ),
+      ],
+      FineDiagram,
+      "happy",
+    ),
   ],
   toyIntro: T(
     "The coin press is ready! Print new coins and watch the bread price. Then make Bea bake more bread.",
@@ -226,8 +189,8 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "Print some new coins, but keep a loaf at 2 coins. Use both sliders, then press Check.",
-        "Drucke ein paar neue Münzen, aber lass ein Brot bei 2 Münzen. Nutze beide Regler und drücke dann Prüfen.",
+        "Print some new coins, but keep a loaf at 2 coins. Use the buttons, then press Check.",
+        "Drucke ein paar neue Münzen, aber lass ein Brot bei 2 Münzen. Nutze die Knöpfe und drücke dann Prüfen.",
       ),
       Widget: KeepPriceWidget,
       hint: T(
@@ -250,8 +213,8 @@ export const lesson: Lesson = {
         },
       ],
       hint: T(
-        "Remember the sliders: when Bea baked more bread, the price could stay the same. New coins are fine when there are more real things to buy too.",
-        "Denk an die Regler: Wenn Bea mehr Brot backte, konnte der Preis gleich bleiben. Neue Münzen sind in Ordnung, wenn es auch mehr echte Dinge zu kaufen gibt.",
+        "Remember the toy: when Bea baked more bread, the price could stay the same. New coins are fine when there are more real things to buy too.",
+        "Denk an das Spielzeug: Wenn Bea mehr Brot backte, konnte der Preis gleich bleiben. Neue Münzen sind in Ordnung, wenn es auch mehr echte Dinge zu kaufen gibt.",
       ),
     },
   ],
@@ -304,6 +267,18 @@ export const lesson: Lesson = {
         text: "As a result of past inflation experiences, central banks became independent institutions tasked with safeguarding the value of the currency; the Bundesbank was the model for the structure of the Eurosystem.",
         source: "https://www.bundesbank.de/en/tasks/topics/inflation-lessons-learnt-from-history-666006",
       },
+      {
+        text: "The European Central Bank (ECB) is the central bank for the euro. Its main objective is to keep prices stable in the countries that use the euro.",
+        source: "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/five_things.en.html",
+      },
+      {
+        text: "In 1923, during the months of hyperinflation, the value of the German currency fell at such a rate that wages were paid daily. Once the Mark was declining rapidly almost daily, the currency could no longer function as a general means of payment or store of value.",
+        source: "https://www.bundesbank.de/en/tasks/topics/inflation-lessons-learnt-from-history-666006",
+      },
+      {
+        text: "Fiat money such as the euro is declared legal tender and issued by a central bank. It is accepted because it is widely usable and central banks work to keep the value of money stable.",
+        source: "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/what_is_money.en.html",
+      },
     ],
     simplified: [
       "The town numbers (20 coins, 10 loaves, a 2-coin loaf) are made up. In the toy the price of a loaf is simply coins divided by loaves. Real prices depend on many things (costs, wages, what people expect, trade), so the toy shows the idea 'more coins for the same goods pushes prices up', not a formula.",
@@ -312,6 +287,9 @@ export const lesson: Lesson = {
       "The lesson says 'a few new coins are fine if the town makes more things'. Real central banks decide carefully how much money to create, and the ECB aims for a small, steady rise in prices (2%), not zero. The child-sized picture is 'printing for nothing, without more goods'.",
       "In the real life card, 'EU rules do not let it simply print money to pay a government's bills' sums up Article 123, which bans direct credit to governments and direct purchases of their debt. The ECB may still buy bonds on the market under its monetary policy, to steer inflation. That is not explained to the child.",
       "1923 hyperinflation had several causes (war debts, reparations, the occupation of the Ruhr, falling trust). The lesson only tells the part about printing money without more goods. The bread price is the nominal price from a Bundestag history page, in marks of that time.",
+      "The lesson story is told with new words: 'printing money' (making new money without more goods), 'hyperinflation' (prices rising extremely fast; the Bundesbank uses the word for 1923) and 'central bank' (the institution that issues money and works for stable prices, such as the ECB). Central banks also supervise banks and do more than the child is told.",
+      "Mayor Moss, his coin press, the bridge and the empty town chest are made up. 'People stop trusting the coins, then coins are just metal' is a child-sized version of the Bundesbank statement that in 1923 the currency could no longer work as a means of payment or store of value.",
+      "The toy changes in steps of 10 coins and 5 loaves, and the picture shows one stack for 10 coins. Real money is not counted in neat stacks.",
       "Money in the town is simplified to coins only. Most real money is bank account money, not cash, but an 8-year-old does not need that here.",
     ],
   },
