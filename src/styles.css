@@ -788,122 +788,68 @@ mark.term {
   padding: 0 6px;
 }
 
-/* money toy: step guide and coin switch */
-.guide {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* guided learning prompt and actions */
+.action-prompt {
+  background: #fbf6ec;
+  border: 2px dashed #b98e3b;
+  border-radius: 16px;
+  padding: 10px 14px;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
 }
 
-.guide-step {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 3px 10px 3px 4px;
-  border-radius: 999px;
-  background: var(--white);
-  border: 3px solid var(--grey);
+.action-prompt-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #7d5918;
+}
+
+.action-prompt-text {
+  font-size: 0.95rem;
   font-weight: 700;
-  font-size: 0.8rem;
-  color: #5b7078;
-}
-
-.guide-num {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: var(--grey);
-  color: var(--white);
-  font-weight: 800;
-  flex: none;
-}
-
-.guide-step.now {
-  border-color: var(--orange);
-  background: #fff3df;
   color: var(--ink);
 }
 
-.guide-step.now .guide-num {
-  background: var(--orange);
+.guided-action {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }
 
-.guide-step.done {
-  border-color: var(--green);
-  color: var(--ink);
+.guided-action .btn-toy {
+  width: 100%;
+  min-height: 54px;
+  font-size: 1.05rem;
 }
 
-.guide-step.done .guide-num {
-  background: var(--green);
-}
-
-.btn-hint {
-  box-shadow: 0 4px 0 var(--teal-dark), 0 0 0 5px rgba(240, 138, 46, 0.55);
-  animation: hint-pulse 1.4s ease-in-out infinite;
-}
-
-@keyframes hint-pulse {
-  50% {
-    box-shadow: 0 4px 0 var(--teal-dark), 0 0 0 9px rgba(240, 138, 46, 0.2);
-  }
-}
-
-.switch-track {
-  position: relative;
-  display: inline-flex;
+.guided-done {
+  display: flex;
   align-items: center;
-  width: 78px;
-  height: 34px;
-  border-radius: 17px;
-  background: #8a9ca2;
-  padding: 0 10px;
-  justify-content: flex-end;
-  margin-left: 4px;
-  transition: background 0.2s;
-}
-
-.switch-knob {
-  position: absolute;
-  left: 4px;
-  top: 4px;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--white);
-  transition: transform 0.2s;
-}
-
-.switch-word {
-  font-size: 0.85rem;
+  justify-content: space-between;
+  gap: 12px;
+  background: #eef8ef;
+  border: 2px solid var(--green);
+  border-radius: 16px;
+  padding: 10px 14px;
   font-weight: 800;
-  color: var(--white);
 }
 
-.coin-switch.is-on .switch-track {
-  background: var(--green);
-  justify-content: flex-start;
+.restart-link {
+  border: 0;
+  background: transparent;
+  color: var(--teal-dark);
+  text-decoration: underline;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-.coin-switch.is-on .switch-knob {
-  transform: translateX(44px);
-}
-
-.coin-switch.is-on {
-  background: var(--teal);
-  box-shadow: 0 4px 0 var(--teal-dark);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .btn-hint {
-    animation: none;
-  }
-}
 
 .trade .btn-toy {
   min-height: 48px;

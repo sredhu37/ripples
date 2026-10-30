@@ -63,6 +63,21 @@ export function Slider({ label, value, min, max, step = 1, onChange, left, right
   );
 }
 
+interface ActionPromptProps {
+  lang: Lang;
+  children: ReactNode;
+}
+
+/** A passive card that tells the child what to do. It is deliberately not button-shaped. */
+export function ActionPrompt({ lang, children }: ActionPromptProps) {
+  return (
+    <div className="action-prompt" role="status">
+      <span className="action-prompt-label">{lang === "en" ? "What to do now" : "Was du jetzt tun kannst"}</span>
+      <span className="action-prompt-text">{children}</span>
+    </div>
+  );
+}
+
 /** The Check button every widget question needs. */
 export function CheckButton({ lang, onClick }: { lang: Lang; onClick: () => void }) {
   return (

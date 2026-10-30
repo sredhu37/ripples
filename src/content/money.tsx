@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { CheckButton, animatedBeat } from "../lesson/toolkit";
+import { animatedBeat } from "../lesson/toolkit";
 import type { Lesson, Text, ToyProps, WidgetProps } from "../lesson/types";
 import { BarterDiagram, JobsDiagram, MeetDiagram, MoneyDiagram, SearchDiagram, SwapWithCoinsDiagram } from "./money.diagrams";
 import { TradeBoard } from "./money.toy";
@@ -11,24 +10,7 @@ function Toy({ lang }: ToyProps) {
 }
 
 function GetBreadWidget({ lang, onAnswer }: WidgetProps) {
-  const [hasBread, setHasBread] = useState(false);
-  const [passed, setPassed] = useState(false);
-  return (
-    <>
-      <TradeBoard lang={lang} mode="quiz" onBread={() => setHasBread(true)} />
-      {!passed && (
-        <div className="row nav">
-          <CheckButton
-            lang={lang}
-            onClick={() => {
-              if (hasBread) setPassed(true);
-              onAnswer(hasBread);
-            }}
-          />
-        </div>
-      )}
-    </>
-  );
+  return <TradeBoard lang={lang} mode="quiz" onBread={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -133,8 +115,8 @@ export const lesson: Lesson = {
     ),
   ],
   toyIntro: T(
-    "Help Finn get bread! Follow the steps. Step 1 is barter: swapping without coins.",
-    "Hilf Finn, an Brot zu kommen! Folge den Schritten. Schritt 1 ist Tauschhandel: tauschen ohne Münzen.",
+    "Help Finn get bread. Read what to do now, then tap the action button.",
+    "Hilf Finn, an Brot zu kommen. Lies, was du tun kannst, und tippe auf den Knopf.",
   ),
   Toy,
   questions: [
@@ -154,13 +136,13 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "Help Finn get his bread. Follow the 3 steps, then press Check.",
-        "Hilf Finn, an sein Brot zu kommen. Folge den 3 Schritten und drücke dann Prüfen.",
+        "Help Finn get his bread. Read each card and press the button until he has bread.",
+        "Hilf Finn, an sein Brot zu kommen. Folge den Kärtchen und tippe auf die Knöpfe.",
       ),
       Widget: GetBreadWidget,
       hint: T(
-        "Finn has no bread yet. Turn the coins on, sell the fish, then buy the bread.",
-        "Finn hat noch kein Brot. Schalte die Münzen an, verkaufe den Fisch und kaufe dann das Brot.",
+        "Read what to do now, then tap the action button.",
+        "Lies, was du tun kannst, und tippe auf den Knopf.",
       ),
     },
     {

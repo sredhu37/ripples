@@ -182,7 +182,13 @@ export function Controls({ lang, s, set }: { lang: Lang; s: Board; set: (b: Boar
             <InlineIcon size={30}>
               <Crowd />
             </InlineIcon>
-            {en ? "Bank run" : "Ansturm"}
+            {s.rush
+              ? en
+                ? "Calm the crowd down"
+                : "Ansturm beenden"
+              : en
+                ? "Start a bank run"
+                : "Einen Ansturm auslösen"}
           </span>
         </ToyButton>
         <ToyButton onClick={() => set(START)}>
