@@ -5,71 +5,8 @@
   width: 100%;
 }
 
-.bk-cols {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  gap: 8px;
-}
-
-.bk-col {
-  flex: 1 1 0;
-  min-width: 0;
-  background: var(--white);
-  border: 2px solid var(--ink);
-  border-radius: 14px;
-  padding: 6px 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
-
-.bk-bank {
-  border-color: var(--green);
-  border-width: 3px;
-}
-
-.bk-bank.bk-rush {
-  border-color: var(--orange);
-  background: #fff4e4;
-}
-
-.bk-bank.bk-bad {
-  border-color: #c0392b;
-  background: #fdeaea;
-}
-
-.bk-who {
-  font-weight: 800;
-  font-size: 1.05rem;
-}
-
-.bk-coins {
-  font-size: 0.9rem;
-  line-height: 1.2;
-  min-height: 2.4em;
-  word-break: break-all;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.bk-note {
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-.bk-asks {
-  font-size: 1rem;
-  min-height: 1.3em;
-  line-height: 1.2;
-}
-
-.bk-arrow {
-  align-self: center;
-  font-size: 1.4rem;
+.bk-svg {
+  max-height: 32vh;
 }
 
 .bk-says {
@@ -95,7 +32,6 @@
 
 .bk-controls {
   display: flex;
-  flex-wrap: wrap;
   align-items: flex-end;
   justify-content: center;
   gap: 4px 16px;
@@ -104,10 +40,15 @@
 
 .bk-controls .slider {
   width: 200px;
+  gap: 2px;
+}
+
+.bk-controls .slider-label {
+  font-size: 0.95rem;
 }
 
 .bk-controls .slider input[type="range"] {
-  height: 28px;
+  height: 24px;
 }
 
 .bk-buttons {
@@ -117,27 +58,6 @@
 
 .bk-buttons .btn {
   min-height: 50px;
-  padding-left: 18px;
-  padding-right: 18px;
-}
-
-.bk-controls .slider-label {
-  font-size: 0.95rem;
-}
-
-.bk-controls .slider {
-  gap: 2px;
-}
-
-.bk-controls .slider input[type="range"] {
-  height: 24px;
-}
-
-.bk-col {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-.bk-who {
-  font-size: 1rem;
+  padding-left: 14px;
+  padding-right: 14px;
 }

@@ -1,159 +1,20 @@
 import { useState } from "react";
-import { CheckButton, Slider, Stage, ToyButton } from "../lesson/toolkit";
+import { CheckButton, animatedBeat } from "../lesson/toolkit";
 import type { Lesson, Text, ToyProps, WidgetProps } from "../lesson/types";
-import type { Lang } from "../progress";
-import "./banks.css";
+import {
+  BedDiagram,
+  CardDiagram,
+  DepositDiagram,
+  LendDiagram,
+  OvenDiagram,
+  ProtectDiagram,
+  ReadyDiagram,
+  RunDiagram,
+} from "./banks.diagrams";
+import { BankBoard, Controls, START, bankIsBalanced } from "./banks.toy";
+import type { Board } from "./banks.toy";
 
 const T = (en: string, de: string): Text => ({ en, de });
-
-/** Bea needs this many coins for her oven. */
-const OVEN_NEED = 4;
-const MAX_SAVED = 16;
-
-interface Board {
-  /** Coins the savers have put into the bank. */
-  saved: number;
-  /** Coins the bank has lent to Bea. */
-  lent: number;
-  /** Is it a rush day (many savers come at once)? */
-  rush: boolean;
-}
-
-const START: Board = { saved: 10, lent: 0, rush: false };
-
-/** How many coins the savers ask for today. A normal day: about one fifth. A rush day: half. */
-function coinsAsked(saved: number, rush: boolean): number {
-  return rush ? Math.ceil(saved / 2) : Math.ceil(saved / 5);
-}
-
-/** The widget question is solved when Bea can build her oven AND a rush day is still fine. */
-function bankIsBalanced(b: Board): boolean {
-  const ready = b.saved - b.lent;
-  return b.lent >= OVEN_NEED && ready >= coinsAsked(b.saved, true);
-}
-
-function BankBoard({ lang, s }: { lang: Lang; s: Board }) {
-  const ready = s.saved - s.lent;
-  const asks = coinsAsked(s.saved, s.rush);
-  const missing = Math.max(0, asks - ready);
-  const trouble = s.saved > 0 && missing > 0;
-
-  let saverSay: Text;
-  if (s.saved === 0) {
-    saverSay = T(
-      "The bank is empty. Slide the first slider to bring in coins.",
-      "Die Bank ist leer. Schiebe den ersten Regler, um Münzen zu bringen.",
-    );
-  } else if (trouble) {
-    saverSay = T(
-      `Uh-oh! Savers want ${asks} coins, but only ${ready} are ready. ${missing} must wait.`,
-      `Oje! Die Sparer wollen ${asks} Münzen, aber nur ${ready} sind bereit. ${missing} müssen warten.`,
-    );
-  } else if (s.rush) {
-    saverSay = T(
-      `Rush day! Savers want ${asks} coins back. The bank has them ready.`,
-      `Ansturm! Die Sparer wollen ${asks} Münzen zurück. Die Bank hat sie bereit.`,
-    );
-  } else {
-    saverSay = T(
-      `A normal day: savers want ${asks} coins back. The bank hands them over.`,
-      `Ein normaler Tag: Die Sparer wollen ${asks} Münzen zurück. Die Bank gibt sie her.`,
-    );
-  }
-
-  let beaSay: Text;
-  if (s.lent === 0) {
-    beaSay = T("Bea gets no coins, so no new oven.", "Bea bekommt keine Münzen, also keinen neuen Ofen.");
-  } else if (s.lent < OVEN_NEED) {
-    beaSay = T(
-      `Bea has ${s.lent} coins. She needs ${OVEN_NEED} for her oven.`,
-      `Bea hat ${s.lent} Münzen. Für ihren Ofen braucht sie ${OVEN_NEED}.`,
-    );
-  } else {
-    beaSay = T("Bea has enough for her oven. She bakes more bread!", "Bea hat genug für ihren Ofen. Sie backt mehr Brot!");
-  }
-
-  const en = lang === "en";
-
-  return (
-    <Stage label={en ? "Savers, the bank and Bea" : "Sparer, die Bank und Bea"}>
-      <div className="bk">
-        <div className="bk-cols">
-          <div className="bk-col">
-            <div className="bk-who">🧔 {en ? "Savers" : "Sparer"}</div>
-            <div className="bk-coins" aria-label={en ? `${s.saved} coins saved` : `${s.saved} gesparte Münzen`}>
-              {s.saved === 0 ? "0" : "🪙".repeat(s.saved)}
-            </div>
-            <div className="bk-note">{en ? `${s.saved} saved` : `${s.saved} gespart`}</div>
-          </div>
-          <div className="bk-arrow" aria-hidden="true">
-            ➡️
-          </div>
-          <div className={`bk-col bk-bank${trouble ? " bk-bad" : ""}${s.rush ? " bk-rush" : ""}`}>
-            <div className="bk-who">🏦 Bank</div>
-            <div className="bk-coins" aria-label={en ? `${ready} coins ready` : `${ready} Münzen bereit`}>
-              {ready === 0 ? "0" : "🪙".repeat(ready)}
-            </div>
-            <div className="bk-note">{en ? `${ready} ready for savers` : `${ready} bereit für Sparer`}</div>
-            <div className="bk-asks" aria-hidden="true">
-              {"✋".repeat(asks)}
-            </div>
-          </div>
-          <div className="bk-arrow" aria-hidden="true">
-            ➡️
-          </div>
-          <div className="bk-col">
-            <div className="bk-who">👩‍🍳 Bea</div>
-            <div className="bk-coins" aria-label={en ? `${s.lent} coins lent` : `${s.lent} Münzen geliehen`}>
-              {s.lent === 0 ? "0" : "🪙".repeat(s.lent)}
-            </div>
-            <div className="bk-note">
-              {s.lent >= OVEN_NEED ? "🔥" : "🧱"} {en ? `${s.lent} lent` : `${s.lent} geliehen`}
-            </div>
-          </div>
-        </div>
-        <div className="bk-says" role="status">
-          <p className={`bk-say${trouble ? " bk-say-bad" : ""}`}>{saverSay[lang]}</p>
-          <p className="bk-say">{beaSay[lang]}</p>
-        </div>
-      </div>
-    </Stage>
-  );
-}
-
-function Controls({ lang, s, set }: { lang: Lang; s: Board; set: (b: Board) => void }) {
-  const en = lang === "en";
-  return (
-    <div className="bk-controls">
-      <Slider
-        label={en ? "Coins saved" : "Gespart"}
-        value={s.saved}
-        min={0}
-        max={MAX_SAVED}
-        onChange={(v) => set({ ...s, saved: v, lent: Math.min(s.lent, v) })}
-      />
-      <Slider
-        label={en ? "Lent to Bea" : "An Bea verliehen"}
-        value={s.lent}
-        min={0}
-        max={s.saved}
-        onChange={(v) => set({ ...s, lent: v })}
-      />
-      <div className="row wrap bk-buttons">
-        <ToyButton pressed={s.rush} onClick={() => set({ ...s, rush: !s.rush })}>
-          {s.rush
-            ? en
-              ? "😌 Normal day"
-              : "😌 Normaler Tag"
-            : en
-              ? "🏃 Rush day"
-              : "🏃 Ansturm"}
-        </ToyButton>
-        <ToyButton onClick={() => set(START)}>↺</ToyButton>
-      </div>
-    </div>
-  );
-}
 
 function Toy({ lang }: ToyProps) {
   const [s, set] = useState<Board>(START);
@@ -181,70 +42,144 @@ function BalanceWidget({ lang, onAnswer }: WidgetProps) {
 export const lesson: Lesson = {
   id: "banks",
   story: [
-    {
-      scene: "🧔 🛏️ 🪙🪙🪙 🐈",
-      text: T(
-        "Finn has spare coins. He hides them under his bed. But what if the cat finds them? Or a thief? Or he forgets where they are?",
-        "Finn hat Münzen übrig. Er versteckt sie unter dem Bett. Aber was, wenn die Katze sie findet? Oder ein Dieb? Oder er vergisst, wo sie sind?",
-      ),
-    },
-    {
-      scene: "👩‍🍳 🔥 ❓ 🚪🚪🚪",
-      mood: "think",
-      text: T(
-        "Bea wants a big new oven and must borrow coins. But who has coins to spare? She cannot knock on every door in town.",
-        "Bea möchte einen großen neuen Ofen und muss sich Münzen leihen. Aber wer hat Münzen übrig? Sie kann ja nicht an jeder Tür im Ort klingeln.",
-      ),
-    },
-    {
-      scene: "🧔 ➡️ 🏦 🪙🪙🪙🪙",
-      mood: "happy",
-      text: T(
-        "Ripple Town has a bank. A bank is a safe place for coins. Finn brings his coins. The bank writes down: these are Finn's.",
-        "In Ripple Town gibt es eine Bank. Eine Bank ist ein sicherer Ort für Münzen. Finn bringt seine Münzen. Die Bank schreibt auf: Die gehören Finn.",
-      ),
-    },
-    {
-      scene: "👩‍🍳 🙋 ➡️ 🏦 ➡️ 🪙🪙🪙",
-      text: T(
-        "Bea asks the bank if she can borrow coins. The bank lends her some of the saved coins. Bea buys her oven and pays them back later.",
-        "Bea fragt die Bank, ob sie sich Münzen leihen darf. Die Bank leiht ihr einige der gesparten Münzen. Bea kauft ihren Ofen und zahlt später zurück.",
-      ),
-    },
-    {
-      scene: "🏦 🪙🪙 ✋ 🧔",
-      mood: "think",
-      text: T(
-        "But Finn may want coins back soon. So the bank never lends everything. Some coins stay ready in its safe.",
-        "Aber Finn will vielleicht bald Münzen zurück. Darum verleiht die Bank nie alles. Ein paar Münzen bleiben im Tresor bereit.",
-      ),
-    },
-    {
-      scene: "🧔 👵 🧒 🧑 ✋✋✋ 🏦 😰",
-      mood: "think",
-      text: T(
-        "What if all the savers come on the same day? Some coins are with Bea, so the bank cannot give everything back at once. Enough must stay ready.",
-        "Und wenn alle Sparer am selben Tag kommen? Ein Teil der Münzen ist bei Bea. Die Bank kann nicht alles auf einmal zurückgeben. Es muss genug bereit bleiben.",
-      ),
-    },
-    {
-      scene: "🧑 💳 ➡️ 🏦 🔢 ➡️ 👩‍🍳",
-      text: T(
-        "A bank helps with paying too. Sam pays Bea with a card. No coins move! The bank just changes numbers: less for Sam, more for Bea.",
-        "Eine Bank hilft auch beim Bezahlen. Sam zahlt Bea mit einer Karte. Es wandern keine Münzen! Die Bank ändert nur Zahlen: weniger bei Sam, mehr bei Bea.",
-      ),
-    },
-    {
-      scene: "🧔 ➡️ 🏦 ➡️ 👩‍🍳",
-      mood: "happy",
-      text: T(
-        "Money in a bank is mostly numbers on a computer. The bank stands in the middle: savers on one side, people who borrow on the other.",
-        "Geld auf der Bank besteht meistens aus Zahlen im Computer. Die Bank steht in der Mitte: auf der einen Seite die Sparer, auf der anderen alle, die sich Geld leihen.",
-      ),
-    },
+    animatedBeat(
+      [
+        T(
+          "This is Finn again. He has a few spare coins that he does not need today.",
+          "Das ist wieder Finn. Er hat ein paar Münzen übrig, die er heute nicht braucht.",
+        ),
+        T("So he hides them under his bed.", "Darum versteckt er sie unter seinem Bett."),
+        T(
+          "But what if the cat finds them? Or what if Finn forgets where he hid them?",
+          "Aber was, wenn die Katze sie findet? Oder wenn Finn vergisst, wo er sie versteckt hat?",
+        ),
+        T("A bed is not a very safe place for coins.", "Ein Bett ist kein besonders sicherer Ort für Münzen."),
+      ],
+      BedDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "Bea is a baker, and she has a big wish. She wants a new oven, so she can bake more bread.",
+          "Bea ist Bäckerin und hat einen großen Wunsch. Sie möchte einen neuen Ofen, damit sie mehr Brot backen kann.",
+        ),
+        T(
+          "The oven costs 4 coins. But Bea does not have 4 coins, so she needs to borrow them.",
+          "Der Ofen kostet 4 Münzen. Aber Bea hat keine 4 Münzen, also muss sie sich welche leihen.",
+        ),
+        T(
+          "But who has coins to spare? Bea cannot knock on every door in town.",
+          "Aber wer hat Münzen übrig? Bea kann ja nicht an jeder Tür im Ort klingeln.",
+        ),
+      ],
+      OvenDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "Luckily, Ripple Town has a *bank*. A bank is a safe place that looks after people's coins.",
+          "Zum Glück gibt es in Ripple Town eine *Bank*. Eine Bank ist ein sicherer Ort, der auf die Münzen der Leute aufpasst.",
+        ),
+        T("Finn brings his spare coins to the bank.", "Finn bringt seine übrigen Münzen zur Bank."),
+        T(
+          "Putting coins into a bank has a name. It is called a *deposit*. Finn makes a deposit.",
+          "Münzen auf die Bank zu bringen hat einen Namen. Es heißt *Einzahlung*. Finn zahlt seine Münzen ein.",
+        ),
+        T(
+          "The bank writes down whose coins they are. These coins belong to Finn.",
+          "Die Bank schreibt auf, wem die Münzen gehören. Diese Münzen gehören Finn.",
+        ),
+      ],
+      DepositDiagram,
+      "happy",
+    ),
+    animatedBeat(
+      [
+        T(
+          "Now Bea goes to the bank. She asks if she can borrow 4 coins.",
+          "Jetzt geht Bea zur Bank. Sie fragt, ob sie sich 4 Münzen leihen darf.",
+        ),
+        T("The bank lends her some of the saved coins.", "Die Bank leiht ihr einige der gesparten Münzen."),
+        T("Now Bea can buy her new oven!", "Jetzt kann Bea ihren neuen Ofen kaufen!"),
+        T("Later, Bea pays the coins back to the bank.", "Später zahlt Bea die Münzen an die Bank zurück."),
+      ],
+      LendDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "But Finn may want his coins back soon. Savers can ask for their coins on any day.",
+          "Aber Finn will seine Münzen vielleicht bald zurückhaben. Sparer dürfen an jedem Tag nach ihren Münzen fragen.",
+        ),
+        T(
+          "So the bank never lends out everything. Some coins stay ready in its safe.",
+          "Darum verleiht die Bank nie alles. Ein paar Münzen bleiben im Tresor bereit.",
+        ),
+        T(
+          "On a normal day only a few savers come. Then the coins in the safe are enough.",
+          "An einem normalen Tag kommen nur wenige Sparer. Dann reichen die Münzen im Tresor.",
+        ),
+      ],
+      ReadyDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "But what if lots of savers come on the very same day?",
+          "Aber was, wenn ganz viele Sparer am selben Tag kommen?",
+        ),
+        T(
+          "Some of the coins are with Bea, so the bank cannot give everything back at once.",
+          "Ein Teil der Münzen ist bei Bea. Die Bank kann nicht alles auf einmal zurückgeben.",
+        ),
+        T(
+          "When many savers want their coins back at the same time, it is called a *bank run*.",
+          "Wenn viele Sparer gleichzeitig ihre Münzen zurückwollen, nennt man das einen *Ansturm auf die Bank*.",
+        ),
+      ],
+      RunDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "In real life, the law protects the money that people keep in a bank.",
+          "In echt schützt das Gesetz das Geld, das Leute auf der Bank haben.",
+        ),
+        T(
+          "This is called *deposit protection*. If a bank ever fails, savers still get their money back, up to a limit.",
+          "Das heißt *Einlagensicherung*. Wenn eine Bank einmal pleitegeht, bekommen die Sparer ihr Geld trotzdem zurück, bis zu einer Grenze.",
+        ),
+        T(
+          "So Finn's coins are protected. You can read the limit on the card at the end of the lesson.",
+          "So sind Finns Münzen geschützt. Die Grenze steht auf der Karte am Ende der Lektion.",
+        ),
+      ],
+      ProtectDiagram,
+      "happy",
+    ),
+    animatedBeat(
+      [
+        T(
+          "A bank also helps with paying. Sam wants to pay Bea, but he does not use coins. He uses a card.",
+          "Eine Bank hilft auch beim Bezahlen. Sam will Bea bezahlen, aber nicht mit Münzen. Er nimmt eine Karte.",
+        ),
+        T(
+          "No coins have to move! The bank just changes numbers on its computer.",
+          "Es müssen keine Münzen wandern! Die Bank ändert nur Zahlen in ihrem Computer.",
+        ),
+        T(
+          "Sam's number gets smaller and Bea's number gets bigger. Money in a bank is mostly numbers like these.",
+          "Sams Zahl wird kleiner und Beas Zahl wird größer. Geld auf der Bank besteht meistens aus solchen Zahlen.",
+        ),
+      ],
+      CardDiagram,
+    ),
   ],
   toyIntro: T(
-    "Move coins into the bank and lend some to Bea. Then press Rush day. Can everyone get coins back?",
+    "Put coins into the bank and lend some to Bea. Then press Bank run. Can everyone get their coins back?",
     "Bringe Münzen zur Bank und verleihe einige. Drück dann Ansturm. Bekommen alle ihre Münzen zurück?",
   ),
   Toy,
@@ -257,7 +192,7 @@ export const lesson: Lesson = {
       ),
       options: [
         { text: T("Bea only needs a few coins", "Bea braucht nur ein paar Münzen") },
-        { text: T("Lending is not allowed", "Verleihen ist nicht erlaubt") },
+        { text: T("Lending coins is not allowed in Ripple Town", "Münzen verleihen ist in Ripple Town nicht erlaubt") },
         { text: T("Savers can ask for their coins back", "Sparer können ihre Münzen zurückverlangen"), correct: true },
       ],
       hint: T(
@@ -268,12 +203,12 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "Set the bank so Bea gets her oven AND a rush day still works. Test it with Rush day. Then press Check.",
+        "Set the bank so Bea gets her oven AND a bank run still works. Test it with Bank run. Then press Check.",
         "Stelle die Bank so ein, dass Bea ihren Ofen bekommt UND ein Ansturm trotzdem klappt. Teste es mit Ansturm. Drücke dann Prüfen.",
       ),
       Widget: BalanceWidget,
       hint: T(
-        "Bea needs 4 coins. And on a rush day, enough coins must stay ready. Try Rush day!",
+        "Bea needs 4 coins. And on a bank run day, enough coins must stay ready. Try Bank run!",
         "Bea braucht 4 Münzen. Beim Ansturm müssen genug bereit bleiben. Probier ihn aus!",
       ),
     },
@@ -282,8 +217,8 @@ export const lesson: Lesson = {
       prompt: T("Sam pays Bea with a card. What does the bank do?", "Sam bezahlt Bea mit einer Karte. Was macht die Bank?"),
       options: [
         { text: T("It changes numbers: less for Sam, more for Bea", "Sie ändert Zahlen: weniger bei Sam, mehr bei Bea"), correct: true },
-        { text: T("It sends a bag of coins to Bea", "Sie schickt Bea einen Beutel Münzen") },
-        { text: T("It waits until Sam brings coins", "Sie wartet, bis Sam Münzen bringt") },
+        { text: T("It carries a bag of coins from Sam's house to Bea", "Sie trägt einen Beutel Münzen von Sams Haus zu Bea") },
+        { text: T("It waits until Sam brings enough coins to the bank", "Sie wartet, bis Sam genug Münzen zur Bank bringt") },
       ],
       hint: T(
         "No coins have to move. Money in a bank is mostly numbers on a computer, so the bank just changes the numbers.",
