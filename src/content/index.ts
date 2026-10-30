@@ -16,10 +16,29 @@ import { lesson as competition } from "./competition";
 import { lesson as marketing } from "./marketing";
 import { lesson as hiring } from "./hiring";
 import { lesson as scale } from "./scale";
+import { lesson as whygovernment } from "./whygovernment";
 import type { Lesson } from "../lesson/types";
 
 const ALL: Record<string, Lesson | undefined> = {
-  money, work, savings, loans, banks, interest, taxes, inflation, printing, rates, profit, sales, ticketsize, marketshare, competition, marketing, hiring, scale,
+  money,
+  work,
+  savings,
+  loans,
+  banks,
+  interest,
+  taxes,
+  inflation,
+  printing,
+  rates,
+  profit,
+  sales,
+  ticketsize,
+  marketshare,
+  competition,
+  marketing,
+  hiring,
+  scale,
+  whygovernment,
 };
 
 export function getLesson(id: string): Lesson | undefined {

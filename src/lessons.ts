@@ -26,6 +26,16 @@ export const LESSONS: LessonMeta[] = [
   { id: "marketing", title: { en: "Spreading the word", de: "Bekanntheit" } },
   { id: "hiring", title: { en: "Hiring and risk", de: "Mitarbeiter einstellen" } },
   { id: "scale", title: { en: "Big and small business", de: "Wachsen und Grosswerden" } },
+  // Group 3: Community lessons 19-26 would go here
+  // Group 4: Governments lessons 27-34
+  { id: "whygovernment", title: { en: "Why Government?", de: "Warum gibt es eine Regierung?" } },
+  { id: "elections", title: { en: "How Leaders are Chosen", de: "Wie Anfuehrer gewaehlt werden" } },
+  { id: "democracy", title: { en: "Democracy", de: "Demokratie" } },
+  { id: "monarchy", title: { en: "Monarchy", de: "Monarchie" } },
+  { id: "dictatorship", title: { en: "Dictatorship", de: "Diktatur" } },
+  { id: "capitalism", title: { en: "Capitalism", de: "Kapitalismus" } },
+  { id: "communism", title: { en: "Communism", de: "Planwirtschaft" } },
+  { id: "powertriangle", title: { en: "The Power Triangle", de: "Das Macht-Dreieck" } },
 ];
 
 export const LESSON_ORDER = LESSONS.map((l) => l.id);
