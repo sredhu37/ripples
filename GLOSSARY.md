@@ -18,3 +18,11 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Animated beat | A story beat that builds up tap by tap: one Otto line and one new diagram part per tap | slideshow, animation |
 | Term | A new word the lesson teaches by name (barter, money, price, save). Written between *stars* in lesson text, shown highlighted | keyword, vocabulary |
 | Save code | Parent-only text code that restores name, language and badges | backup, password |
+| Government | The group of people chosen to make shared rules and look after public services | rulers, bosses |
+| Election | A peaceful process where citizens cast secret ballots to choose leaders | contest, fight |
+| Democracy | A system where citizens choose lawmakers and laws protect rights | regime, state |
+| Monarchy | A system where leadership passes down within a ruling family | dynasty, reign |
+| Dictatorship | Rule by one leader or group who holds total power without free elections | strongman, regime |
+| Capitalism | An economic system where individuals and private businesses own tools and shops | free-for-all, greed |
+| Communism | An economic system where tools and factories are owned collectively or by the state | commune, state rule |
+| Power Triangle | The dynamic balance between citizens, businesses, and government | power web, system |

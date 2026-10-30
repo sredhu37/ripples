@@ -19,6 +19,12 @@ Settled with Sunny before building. Change one only by naming it as a change.
 
 Lessons unlock in order: the next one opens after the badge. Finished lessons can be replayed.
 
+## Group 4 lessons (Governments), in order
+
+27. Why Government? 28. How Leaders are Chosen (Elections) 29. Democracy 30. Monarchy 31. Dictatorship 32. Capitalism 33. Communism 34. The Power Triangle
+
+Political neutrality and framing decisions: see [docs/adr/0002-group-4-governments-neutrality-framing.md](adr/0002-group-4-governments-neutrality-framing.md).
+
 ## Experience
 
 - **Map and badges.** A trail on a map with one stop per lesson, and a shelf of badges. No coins, no streaks, no timers.
