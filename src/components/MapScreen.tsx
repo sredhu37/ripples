@@ -71,7 +71,7 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
               <li key={l.id} className={earned ? "medal medal-on" : "medal"} title={l.title[lang]}>
                 <span aria-hidden="true">{earned ? <LessonIcon id={l.id} size={34} /> : null}</span>
                 <span className="sr-only">
-                  {l.title[lang]}: {earned ? "✓" : "-"}
+                  {l.title[lang]}: {earned ? (lang === "en" ? "done" : "fertig") : "-"}
                 </span>
               </li>
             );

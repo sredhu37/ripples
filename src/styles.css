@@ -625,6 +625,10 @@ p {
   width: 100%;
 }
 
+.trade .diagram {
+  max-height: 34vh;
+}
+
 .trade-say {
   min-height: 3em;
   font-weight: 700;

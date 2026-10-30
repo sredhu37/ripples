@@ -18,7 +18,7 @@ export interface DiagramProps {
  */
 export interface Beat {
   text: Text;
-  /** Emoji row shown big on the stage, for example "🐟 ➡️ 🍞". Old style, still works. */
+  /** Old style: a row of emoji shown big on the stage. Still works, but use an animated beat instead. */
   scene?: string;
   mood?: "happy" | "think";
   /** One Otto line per tap. `text` is these lines joined, so tests and old code still work. */
