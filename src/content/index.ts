@@ -8,10 +8,12 @@ import { lesson as taxes } from "./taxes";
 import { lesson as inflation } from "./inflation";
 import { lesson as printing } from "./printing";
 import { lesson as rates } from "./rates";
+import { lesson as whygovernment } from "./whygovernment";
 import type { Lesson } from "../lesson/types";
 
 const ALL: Record<string, Lesson | undefined> = {
   money, work, savings, loans, banks, interest, taxes, inflation, printing, rates,
+  whygovernment,
 };
 
 export function getLesson(id: string): Lesson | undefined {
