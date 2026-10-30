@@ -40,13 +40,47 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit 
           ? lesson.story.length + 1 + phase.i
           : total;
 
+  const handleOneStepBack = () => {
+    if (phase.k === "story") {
+      if (phase.i === 0) {
+        onExit();
+      } else {
+        setPhase({ k: "story", i: phase.i - 1, back: true });
+      }
+    } else if (phase.k === "toy") {
+      setPhase({ k: "story", i: lesson.story.length - 1, back: true });
+    } else if (phase.k === "quiz") {
+      if (phase.i === 0) {
+        setPhase({ k: "toy" });
+      } else {
+        setPhase({ k: "quiz", i: phase.i - 1 });
+      }
+    } else if (phase.k === "badge") {
+      setPhase({ k: "quiz", i: lesson.questions.length - 1 });
+    } else if (phase.k === "real") {
+      setPhase({ k: "badge" });
+    } else if (phase.k === "dad") {
+      setPhase({ k: "real" });
+    }
+  };
+
+  const handleRestart = () => {
+    setPhase({ k: "story", i: 0 });
+  };
 
   return (
     <main className="screen lesson">
       <header className="lesson-head">
-        <button type="button" className="btn btn-quiet btn-small" onClick={onExit}>
-          ← {t(lang, "back")}
-        </button>
+        <div className="lesson-head-actions">
+          <button type="button" className="btn btn-quiet btn-small" onClick={handleOneStepBack} aria-label={t(lang, "back")}>
+            ← {t(lang, "back")}
+          </button>
+          {(phase.k !== "story" || phase.i > 0) && (
+            <button type="button" className="btn btn-quiet btn-small btn-restart" onClick={handleRestart}>
+              {t(lang, "restartLesson")}
+            </button>
+          )}
+        </div>
         <h2 className="lesson-title">
           <LessonIcon id={meta.id} size={34} /> {meta.title[lang]}
         </h2>
