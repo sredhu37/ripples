@@ -7,6 +7,9 @@
 }
 
 .job-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-weight: 800;
   font-size: 1.15rem;
 }
@@ -19,10 +22,11 @@
 }
 
 .job-coins {
-  font-size: 1.7rem;
-  line-height: 1.2;
-  min-height: 2rem;
-  letter-spacing: 1px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+  min-height: 28px;
 }
 
 .job-pay strong {
@@ -36,10 +40,25 @@
   gap: 8px;
 }
 
-.job-reason {
+.job-reason-head {
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+.job-reason-row {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 1px;
+  min-height: 30px;
+}
+
+.job-reason {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
   background: var(--white);
   border: 2px solid var(--ink);
   border-radius: 14px;
@@ -78,8 +97,7 @@
     gap: 6px;
   }
   .job-coins {
-    font-size: 1.4rem;
-    min-height: 1.7rem;
+    min-height: 26px;
   }
   .job-pay strong {
     font-size: 1.2rem;
