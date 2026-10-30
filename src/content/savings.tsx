@@ -1,221 +1,22 @@
 import { useState } from "react";
-import { CheckButton, Slider, Stage, ToyButton } from "../lesson/toolkit";
+import { CheckButton, animatedBeat } from "../lesson/toolkit";
 import type { Lesson, Text, ToyProps, WidgetProps } from "../lesson/types";
-import type { Lang } from "../progress";
-import "./savings.css";
+import {
+  BikeGoalDiagram,
+  BootDiagram,
+  PocketMoneyDiagram,
+  RainyJarDiagram,
+  SaveDiagram,
+  SweetsDiagram,
+  WeeksDiagram,
+} from "./savings.diagrams";
+import { Planner, plan } from "./savings.toy";
+
+// The planner logic lives in savings.toy.tsx; re-exported here for the tests.
+export { plan } from "./savings.toy";
+export type { Plan, PlanWeek, RainPaidBy } from "./savings.toy";
 
 const T = (en: string, de: string): Text => ({ en, de });
-
-const POCKET = 4; // coins of pocket money each week
-const BIKE = 12; // price of the bike in coins
-const RAIN_WEEK = 4; // week in which the surprise happens
-const RAIN_COST = 3; // what the surprise costs
-const WEEKS = 15; // columns shown
-
-export interface PlanWeek {
-  n: number;
-  bike: number;
-  rainy: number;
-  rain: boolean;
-  buy: boolean;
-}
-
-export type RainPaidBy = "none" | "rainy" | "bike" | "mix" | "short";
-
-export interface Plan {
-  weeks: PlanWeek[];
-  /** Week in which the bike is bought, or null if it is not bought within WEEKS. */
-  bikeWeek: number | null;
-  /** Coins left for sweets each week. */
-  treats: number;
-  /** Coins really put into the bike jar each week. */
-  saved: number;
-  rainPaidBy: RainPaidBy;
-}
-
-/**
- * Pip gets POCKET coins each week. `save` coins go to the bike jar.
- * With a cushion, 1 coin each week goes to the rainy-day jar first, the rest is for sweets.
- * Saved coins stay the same (no interest in this lesson).
- */
-export function plan(save: number, cushion: boolean, rain: boolean): Plan {
-  const keep = cushion ? 1 : 0;
-  const saved = Math.max(0, Math.min(save, POCKET - keep));
-  let bike = 0;
-  let rainy = 0;
-  let bikeWeek: number | null = null;
-  let rainPaidBy: RainPaidBy = "none";
-  const weeks: PlanWeek[] = [];
-  for (let n = 1; n <= WEEKS; n++) {
-    if (bikeWeek === null) bike += saved;
-    rainy += keep;
-    const isRain = rain && n === RAIN_WEEK;
-    if (isRain) {
-      if (rainy >= RAIN_COST) {
-        rainy -= RAIN_COST;
-        rainPaidBy = "rainy";
-      } else if (rainy + bike >= RAIN_COST) {
-        bike -= RAIN_COST - rainy;
-        rainPaidBy = rainy > 0 ? "mix" : "bike";
-        rainy = 0;
-      } else {
-        rainPaidBy = "short";
-      }
-    }
-    let buy = false;
-    if (bikeWeek === null && saved > 0 && bike >= BIKE) {
-      bike -= BIKE;
-      bikeWeek = n;
-      buy = true;
-    }
-    weeks.push({ n, bike, rainy, rain: isRain, buy });
-  }
-  return { weeks, bikeWeek, treats: POCKET - saved - keep, saved, rainPaidBy };
-}
-
-function statusText(p: Plan, rain: boolean): Text {
-  const parts: Text[] = [];
-  if (p.saved === 0) {
-    parts.push(T("Pip saves nothing, so the bike never gets closer.", "Pip spart nichts, also kommt das Fahrrad nie näher."));
-  } else if (p.bikeWeek === null) {
-    parts.push(
-      T(
-        `That is too slow: the bike needs more than ${WEEKS} weeks.`,
-        `Das ist zu langsam: Pip braucht für das Fahrrad mehr als ${WEEKS} Wochen.`,
-      ),
-    );
-  } else {
-    parts.push(T(`Pip buys the bike in week ${p.bikeWeek}.`, `Pip kauft das Fahrrad in Woche ${p.bikeWeek}.`));
-  }
-  if (rain) {
-    const by: Record<RainPaidBy, Text> = {
-      none: T("", ""),
-      rainy: T(
-        `Rain in week ${RAIN_WEEK}! The rainy-day jar pays ${RAIN_COST} coins. The bike plan is safe.`,
-        `Regen in Woche ${RAIN_WEEK}! Das Regentag-Glas zahlt ${RAIN_COST} Münzen. Der Fahrrad-Plan bleibt sicher.`,
-      ),
-      mix: T(
-        `Rain in week ${RAIN_WEEK}! The rainy-day jar is too small, so the bike jar helps. The bike comes later.`,
-        `Regen in Woche ${RAIN_WEEK}! Das Regentag-Glas ist zu klein, also hilft das Fahrrad-Glas. Das Fahrrad kommt später.`,
-      ),
-      bike: T(
-        `Rain in week ${RAIN_WEEK}! The bike jar pays ${RAIN_COST} coins, so the bike comes later.`,
-        `Regen in Woche ${RAIN_WEEK}! Das Fahrrad-Glas zahlt ${RAIN_COST} Münzen, darum kommt das Fahrrad später.`,
-      ),
-      short: T(
-        `Rain in week ${RAIN_WEEK}! Pip has no saved coins for the fix and must wait.`,
-        `Regen in Woche ${RAIN_WEEK}! Pip hat keine gesparten Münzen für die Reparatur und muss warten.`,
-      ),
-    };
-    parts.push(by[p.rainPaidBy]);
-  }
-  return T(
-    parts.map((x) => x.en).join(" "),
-    parts.map((x) => x.de).join(" "),
-  );
-}
-
-function Planner({
-  lang,
-  full,
-  save,
-  setSave,
-}: {
-  lang: Lang;
-  full: boolean;
-  save: number;
-  setSave: (v: number) => void;
-}) {
-  const [cushion, setCushion] = useState(false);
-  const [rain, setRain] = useState(false);
-  const max = POCKET - (cushion ? 1 : 0);
-  const eff = Math.min(save, max);
-  const p = plan(eff, cushion, rain);
-  const en = lang === "en";
-
-  return (
-    <Stage label={en ? "Pip's pocket money planner" : "Pips Taschengeld-Planer"}>
-      <div className="sv">
-        <div className="sv-facts">
-          <span>
-            🧒 {en ? "Pocket money" : "Taschengeld"}: {POCKET} 🪙 {en ? "a week" : "pro Woche"}
-          </span>
-          <span>
-            🚲 {en ? "Bike" : "Fahrrad"}: {BIKE} 🪙
-          </span>
-          <span>
-            🍬 {en ? "Sweets" : "Naschen"}: {p.treats} 🪙
-          </span>
-        </div>
-        <div className="sv-grid" aria-hidden="true">
-          <span className="sv-head">{en ? "Week" : "Woche"}</span>
-          {p.weeks.map((w) => (
-            <span
-              key={`w${w.n}`}
-              className={`sv-cell sv-week${w.buy ? " sv-buy" : ""}${w.rain ? " sv-rain" : ""}${w.buy && w.rain ? " sv-both" : ""}`}
-            >
-              {w.buy && w.rain ? "🚲🌧️" : w.buy ? "🚲" : w.rain ? "🌧️" : w.n}
-            </span>
-          ))}
-          <span className="sv-head">🐷🚲</span>
-          {p.weeks.map((w) => (
-            <span key={`b${w.n}`} className={`sv-cell${p.bikeWeek !== null && w.n > p.bikeWeek ? " sv-done" : ""}`}>
-              {w.bike}
-            </span>
-          ))}
-          {full && cushion && (
-            <>
-              <span className="sv-head">🐷🌧️</span>
-              {p.weeks.map((w) => (
-                <span key={`r${w.n}`} className="sv-cell">
-                  {w.rainy}
-                </span>
-              ))}
-            </>
-          )}
-        </div>
-        <p className="sv-say" role="status">
-          {statusText(p, rain)[lang]}
-        </p>
-        <div className="sv-controls">
-          <Slider
-            label={en ? "Coins saved for the bike each week" : "Münzen pro Woche fürs Fahrrad gespart"}
-            value={eff}
-            min={0}
-            max={max}
-            onChange={setSave}
-            left={en ? "more sweets" : "mehr Naschen"}
-            right={en ? "bike sooner" : "Fahrrad früher"}
-          />
-          {full && (
-            <div className="row wrap">
-              <ToyButton pressed={cushion} onClick={() => setCushion(!cushion)}>
-                🐷🌧️{" "}
-                {en
-                  ? cushion
-                    ? "Rainy-day jar: ON"
-                    : "Rainy-day jar: OFF"
-                  : cushion
-                    ? "Regentag-Glas: AN"
-                    : "Regentag-Glas: AUS"}
-              </ToyButton>
-              <ToyButton pressed={rain} onClick={() => setRain(!rain)}>
-                🌧️{" "}
-                {en
-                  ? rain
-                    ? "Rain in week 4: ON"
-                    : "Rain in week 4: OFF"
-                  : rain
-                    ? "Regen in Woche 4: AN"
-                    : "Regen in Woche 4: AUS"}
-              </ToyButton>
-            </div>
-          )}
-        </div>
-      </div>
-    </Stage>
-  );
-}
 
 function Toy({ lang }: ToyProps) {
   const [save, setSave] = useState(2);
@@ -240,67 +41,145 @@ function BikeInFourWidget({ lang, onAnswer }: WidgetProps) {
 export const lesson: Lesson = {
   id: "savings",
   story: [
-    {
-      scene: "🧒 🪙🪙🪙🪙 📅",
-      text: T(
-        "This is Pip. Every week Pip gets 4 coins of pocket money from Dad. What should Pip do with them?",
-        "Das ist Pip. Jede Woche bekommt Pip 4 Münzen Taschengeld von Papa. Was soll Pip damit machen?",
-      ),
-    },
-    {
-      scene: "🚲 🏷️ 12 🪙",
-      text: T(
-        "In a shop window Pip sees a red bike. It costs 12 coins. That is much more than 4. Pip cannot buy it today.",
-        "Im Schaufenster sieht Pip ein rotes Fahrrad. Es kostet 12 Münzen. Das ist viel mehr als 4. Heute kann Pip es nicht kaufen.",
-      ),
-    },
-    {
-      scene: "🍬🍬🍬🍬 😋 ➡️ 🪙 0",
-      mood: "think",
-      text: T(
-        "Pip could buy sweets with all 4 coins. Yum! But then the coins are gone, and the bike is no closer.",
-        "Pip könnte von allen 4 Münzen Süßes kaufen. Lecker! Aber dann sind die Münzen weg, und das Fahrrad ist keinen Schritt näher.",
-      ),
-    },
-    {
-      scene: "🐷 🪙🪙🪙",
-      text: T(
-        "Or Pip can save. Saving means you do not spend everything now. You keep some coins for later, in a piggy bank.",
-        "Oder Pip spart. Sparen heißt: Du gibst nicht alles sofort aus. Du hebst Münzen für später in einem Sparschwein auf.",
-      ),
-    },
-    {
-      scene: "🍬 👀 ⏳ 🐷",
-      mood: "think",
-      text: T(
-        "Saving is a choice: sweets now, or a bike later. Waiting is hard! But every week the piggy bank gets fuller.",
-        "Sparen ist eine Entscheidung: jetzt Süßes oder später ein Fahrrad. Warten ist schwer! Aber jede Woche wird das Sparschwein voller.",
-      ),
-    },
-    {
-      scene: "3 + 3 + 3 + 3 = 12 🪙 ➡️ 🚲",
-      mood: "happy",
-      text: T(
-        "Pip saves 3 coins a week and keeps 1 for sweets. After 4 weeks the piggy bank holds 12 coins. Pip buys the bike!",
-        "Pip spart jede Woche 3 Münzen und behält 1 zum Naschen. Nach 4 Wochen liegen 12 Münzen im Sparschwein. Pip kauft das Fahrrad!",
-      ),
-    },
-    {
-      scene: "🌧️ 🥾💥 🪙🪙🪙",
-      mood: "think",
-      text: T(
-        "One day it rains and Pip's boot breaks! Fixing it costs 3 coins. If the bike coins pay, the bike comes later.",
-        "Eines Tages regnet es, und Pips Stiefel geht kaputt! Die Reparatur kostet 3 Münzen. Zahlen die Fahrrad-Münzen, kommt das Fahrrad später.",
-      ),
-    },
-    {
-      scene: "🐷🚲   🐷🌧️",
-      mood: "happy",
-      text: T(
-        "So Pip keeps a second jar, a rainy-day jar, only for surprises. Two reasons to save: a goal you want, and a cushion.",
-        "Darum hat Pip ein zweites Glas, das Regentag-Glas, nur für Überraschungen. Zwei Gründe zum Sparen: ein Ziel und ein Polster.",
-      ),
-    },
+    animatedBeat(
+      [
+        T("This is Pip. Pip lives in Ripple Town too.", "Das ist Pip. Pip wohnt auch in Ripple Town."),
+        T("Every week Pip gets 4 coins from Dad.", "Jede Woche bekommt Pip 4 Münzen von Papa."),
+        T(
+          "Money that a child gets regularly has a name. It is called *pocket money*.",
+          "Geld, das ein Kind regelmäßig bekommt, hat einen Namen. Es heißt *Taschengeld*.",
+        ),
+        T(
+          "Pip can decide what to do with it. But what should Pip do?",
+          "Pip darf selbst entscheiden, was damit passiert. Aber was soll Pip tun?",
+        ),
+      ],
+      PocketMoneyDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "One day Pip sees a red bike in a shop window.",
+          "Eines Tages sieht Pip in einem Schaufenster ein rotes Fahrrad.",
+        ),
+        T("The price tag says 12 coins.", "Auf dem Preisschild stehen 12 Münzen."),
+        T(
+          "That is much more than the 4 coins Pip gets in a week. Pip cannot buy the bike today.",
+          "Das ist viel mehr als die 4 Münzen, die Pip in einer Woche bekommt. Heute kann Pip das Fahrrad nicht kaufen.",
+        ),
+        T(
+          "But Pip really wants this bike. Something you save up for has a name. It is called a *savings goal*. The bike is Pip's savings goal.",
+          "Aber Pip möchte dieses Fahrrad unbedingt. Etwas, auf das du sparst, hat einen Namen. Es heißt *Sparziel*. Das Fahrrad ist Pips Sparziel.",
+        ),
+      ],
+      BikeGoalDiagram,
+    ),
+    animatedBeat(
+      [
+        T("Pip could spend all 4 coins on sweets. Yum!", "Pip könnte alle 4 Münzen für Süßes ausgeben. Lecker!"),
+        T(
+          "Pip hands over the 4 coins and gets 4 sweets.",
+          "Pip gibt die 4 Münzen her und bekommt dafür 4 Süßigkeiten.",
+        ),
+        T(
+          "But sweets get eaten, and then the coins are gone. Pip has 0 coins left.",
+          "Aber Süßes wird aufgegessen, und dann sind die Münzen weg. Pip hat keine Münzen mehr.",
+        ),
+        T(
+          "Next week it is the same again, and the bike never gets closer.",
+          "Nächste Woche ist es genauso, und das Fahrrad kommt nie näher.",
+        ),
+      ],
+      SweetsDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "Or Pip can save. You already know it: when you save, you keep coins for later instead of spending them.",
+          "Oder Pip spart. Das weißt du schon: Wer spart, hebt Münzen für später auf, statt sie auszugeben.",
+        ),
+        T(
+          "Saving is a choice: sweets now, or a bike later.",
+          "Sparen ist eine Entscheidung: jetzt Süßes oder später ein Fahrrad.",
+        ),
+        T(
+          "Pip decides: 3 coins go into the piggy bank, and 1 coin is for a sweet. Pip does this every week.",
+          "Pip entscheidet: 3 Münzen kommen ins Sparschwein, und 1 Münze ist zum Naschen. Das macht Pip jede Woche.",
+        ),
+        T(
+          "Waiting is hard! But every week the piggy bank gets a little fuller.",
+          "Warten ist schwer! Aber jede Woche wird das Sparschwein ein bisschen voller.",
+        ),
+      ],
+      SaveDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "Week 1: Pip puts 3 coins into the piggy bank. Now it holds 3 coins.",
+          "Woche 1: Pip legt 3 Münzen ins Sparschwein. Jetzt sind 3 Münzen drin.",
+        ),
+        T(
+          "Week 2: 3 more coins. Now there are 6 coins in the piggy bank.",
+          "Woche 2: 3 Münzen kommen dazu. Jetzt sind 6 Münzen im Sparschwein.",
+        ),
+        T("Week 3: 3 more coins. Now there are 9.", "Woche 3: wieder 3 Münzen. Jetzt sind es 9."),
+        T(
+          "Week 4: 3 more coins. Now there are 12 coins. That is exactly the price of the bike!",
+          "Woche 4: wieder 3 Münzen. Jetzt sind es 12 Münzen. Das ist genau der Preis vom Fahrrad!",
+        ),
+        T(
+          "Pip buys the bike. Pip reached the savings goal!",
+          "Pip kauft das Fahrrad. Pip hat das Sparziel erreicht!",
+        ),
+      ],
+      WeeksDiagram,
+      "happy",
+    ),
+    animatedBeat(
+      [
+        T("One day it rains hard.", "Eines Tages regnet es in Strömen."),
+        T("Oh no! Pip's boot breaks.", "Oh nein! Pips Stiefel geht kaputt."),
+        T(
+          "Fixing the boot costs 3 coins, and Pip needs the boot right now.",
+          "Die Reparatur kostet 3 Münzen, und Pip braucht den Stiefel sofort.",
+        ),
+        T(
+          "If the 3 coins come out of the bike's piggy bank, the bike comes later.",
+          "Kommen die 3 Münzen aus dem Sparschwein fürs Fahrrad, kommt das Fahrrad später.",
+        ),
+      ],
+      BootDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "Pip keeps the bike coins in the piggy bank.",
+          "Pip hebt die Fahrrad-Münzen im Sparschwein auf.",
+        ),
+        T(
+          "Now Pip adds a second jar, only for surprises like a broken boot.",
+          "Jetzt bekommt Pip ein zweites Glas, nur für Überraschungen wie einen kaputten Stiefel.",
+        ),
+        T(
+          "A jar for surprise costs has a name. It is called a *rainy-day jar*.",
+          "Ein Glas für überraschende Kosten hat einen Namen. Es heißt *Regentag-Glas*.",
+        ),
+        T(
+          "Every week Pip puts 1 coin into it. That is the coin that used to buy a sweet.",
+          "Jede Woche legt Pip 1 Münze hinein. Das ist die Münze, die vorher für Süßes da war.",
+        ),
+        T(
+          "Now Pip has two reasons to save: a goal to reach, and coins ready for surprises.",
+          "Jetzt hat Pip zwei Gründe zum Sparen: ein Ziel und Münzen für Überraschungen.",
+        ),
+      ],
+      RainyJarDiagram,
+      "happy",
+    ),
   ],
   toyIntro: T(
     "Plan Pip's pocket money! Slide the coins for the bike. Then switch on the rain, and then the rainy-day jar.",
@@ -403,6 +282,8 @@ export const lesson: Lesson = {
       "The surprise always comes in week 4 and always costs 3 coins so that the child can compare plans. Real surprises come at random and cost different amounts.",
       "'Waiting is hard but every week the piggy bank gets fuller' is a story point, not a research claim. No study is cited for it.",
       "The German rule that children from 7 may buy small things is shown as 'you may buy small things with your pocket money'. The full rule has more conditions (for example, paying at once with money given for free use).",
+      "The lesson says pocket money is money a child gets regularly. Some families give it less regularly or in other ways; the regular weekly kind is the simplest to show.",
+      "'Rainy-day jar' is the lesson's child-friendly word. Grown-ups call it a rainy-day fund or emergency fund (see the second claim).",
       "The DJI amounts are euros and only a recommendation, not a law. The lesson says 'about 3 to 4 euros a week' and the toy uses coins, not euros.",
     ],
   },
