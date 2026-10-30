@@ -1,282 +1,149 @@
-import { useState } from "react";
-import { CheckButton, Slider, Stage, ToyButton } from "../lesson/toolkit";
-import type { Lesson, Text, ToyProps, WidgetProps } from "../lesson/types";
-import type { Lang } from "../progress";
-import "./interest.css";
+import { animatedBeat } from "../lesson/toolkit";
+import type { Lesson, Text } from "../lesson/types";
+import {
+  BankLoanDiagram,
+  CompoundDiagram,
+  InterestDiagram,
+  LoanCostDiagram,
+  PercentDiagram,
+  SaverDiagram,
+  SplitDiagram,
+} from "./interest.diagrams";
+import { Garden, GardenWidget } from "./interest.toy";
+
+export { grow, reachesTarget, TARGET_HIGH, TARGET_LOW } from "./interest.toy";
 
 const T = (en: string, de: string): Text => ({ en, de });
-
-/**
- * Balance at the end of each year, from year 0 to `years`.
- * The extra of each year is added to the pile, so next year it earns extra too.
- */
-export function grow(start: number, ratePercent: number, years: number): number[] {
-  const out: number[] = [];
-  for (let y = 0; y <= years; y++) out.push(start * Math.pow(1 + ratePercent / 100, y));
-  return out;
-}
-
-/** The widget question wants the garden to end between these two numbers (whole coins). */
-export const TARGET_LOW = 150;
-export const TARGET_HIGH = 170;
-
-export function reachesTarget(rate: number, years: number): boolean {
-  const total = Math.round(grow(100, rate, years)[years]);
-  return total >= TARGET_LOW && total <= TARGET_HIGH;
-}
-
-type Mode = "save" | "loan";
-
-interface ChartProps {
-  values: number[];
-  start: number;
-  mode: Mode;
-  scaleMax?: number;
-  band?: [number, number];
-  label: string;
-}
-
-const W = 720;
-const H = 116;
-const AXIS = 16;
-
-/** Bars for each year. Teal is the coins you started with, green or orange is the extra. */
-function Chart({ values, start, mode, scaleMax, band, label }: ChartProps) {
-  const max = scaleMax ?? Math.max(...values, 1);
-  const n = values.length;
-  const gap = n > 12 ? 2 : 4;
-  const bw = (W - gap * (n - 1)) / n;
-  const y = (v: number) => H - (Math.min(v, max) / max) * H;
-  return (
-    <svg className="ig-chart" viewBox={`0 0 ${W} ${H + AXIS}`} role="img" aria-label={label}>
-      {band && (
-        <>
-          <rect className="ig-band" x={0} y={y(band[1])} width={W} height={y(band[0]) - y(band[1])} />
-          <line className="ig-mark" x1={0} x2={W} y1={y(band[0])} y2={y(band[0])} />
-          <line className="ig-mark" x1={0} x2={W} y1={y(band[1])} y2={y(band[1])} />
-        </>
-      )}
-      {values.map((v, i) => {
-        const x = i * (bw + gap);
-        const startH = (Math.min(start, max) / max) * H;
-        const totalH = (Math.min(v, max) / max) * H;
-        return (
-          <g key={i}>
-            <rect className="ig-bar-start" x={x} y={H - startH} width={bw} height={startH} />
-            <rect
-              className={mode === "save" ? "ig-bar-extra-save" : "ig-bar-extra-loan"}
-              x={x}
-              y={H - totalH}
-              width={bw}
-              height={Math.max(0, totalH - startH)}
-            />
-          </g>
-        );
-      })}
-      <text className="ig-axis" x={10} y={H + 13}>
-        0
-      </text>
-      <text className="ig-axis" x={W - 10} y={H + 13} textAnchor="end">
-        {n - 1}
-      </text>
-    </svg>
-  );
-}
-
-function ratePhrase(lang: Lang, rate: number): string {
-  return lang === "en"
-    ? `${rate}% = ${rate} extra coins for every 100 coins, each year`
-    : `${rate} % = ${rate} Extra-Münzen für je 100 Münzen, jedes Jahr`;
-}
-
-function Garden({ lang }: ToyProps) {
-  const [mode, setMode] = useState<Mode>("save");
-  const [start, setStart] = useState(100);
-  const [rate, setRate] = useState(5);
-  const [years, setYears] = useState(10);
-
-  const values = grow(start, rate, years);
-  const total = Math.round(values[years]);
-  const extra = total - start;
-  const simple = Math.round((start * rate * years) / 100);
-  const onExtra = Math.max(0, extra - simple);
-  const save = mode === "save";
-
-  const chartLabel =
-    lang === "en"
-      ? `Bars for each year from 0 to ${years}. After ${years} years: ${total} coins.`
-      : `Balken für jedes Jahr von 0 bis ${years}. Nach ${years} Jahren: ${total} Münzen.`;
-
-  return (
-    <Stage label={lang === "en" ? "The money garden" : "Der Geldgarten"}>
-      <div className="ig-wrap">
-        <div className="ig-modes">
-          <ToyButton pressed={save} onClick={() => setMode("save")}>
-            🌱 {lang === "en" ? "Saving" : "Sparen"}
-          </ToyButton>
-          <ToyButton pressed={!save} onClick={() => setMode("loan")}>
-            🤝 {lang === "en" ? "Loan" : "Geld leihen"}
-          </ToyButton>
-        </div>
-        <Chart values={values} start={start} mode={mode} label={chartLabel} />
-        <div className="ig-readout" role="status">
-          {save ? (
-            <>
-              <span className="ig-big">
-                {lang === "en" ? `After ${years} years: ${total} coins` : `Nach ${years} Jahren: ${total} Münzen`}
-              </span>
-              <span className="ig-small">
-                {lang === "en"
-                  ? `You put in ${start}. Interest added ${extra}.`
-                  : `Du hast ${start} eingezahlt. Die Zinsen bringen ${extra}.`}
-                {onExtra > 0 &&
-                  (lang === "en"
-                    ? ` 🌱 ${onExtra} of them are extra on extra!`
-                    : ` 🌱 Davon sind ${onExtra} Extra auf Extra!`)}
-              </span>
-            </>
-          ) : (
-            <>
-              <span className="ig-big">
-                {lang === "en"
-                  ? `After ${years} years you pay back: ${total} coins`
-                  : `Nach ${years} Jahren zahlst du zurück: ${total} Münzen`}
-              </span>
-              <span className="ig-small">
-                {lang === "en"
-                  ? `You borrowed ${start}. The loan cost ${extra} extra coins.`
-                  : `Du hast ${start} geliehen. Das Leihen kostet ${extra} Extra-Münzen.`}
-              </span>
-            </>
-          )}
-          <span className="ig-small">{ratePhrase(lang, rate)}</span>
-        </div>
-        <div className="ig-sliders">
-          <Slider
-            label={
-              save
-                ? lang === "en"
-                  ? "Coins put in"
-                  : "Eingezahlte Münzen"
-                : lang === "en"
-                  ? "Coins borrowed"
-                  : "Geliehene Münzen"
-            }
-            value={start}
-            min={10}
-            max={200}
-            step={10}
-            onChange={setStart}
-          />
-          <Slider label={lang === "en" ? "Interest (%)" : "Zinsen (%)"} value={rate} min={0} max={10} onChange={setRate} />
-          <Slider label={lang === "en" ? "Years" : "Jahre"} value={years} min={1} max={20} onChange={setYears} />
-        </div>
-      </div>
-    </Stage>
-  );
-}
-
-function GardenWidget({ lang, onAnswer }: WidgetProps) {
-  const [rate, setRate] = useState(2);
-  const [years, setYears] = useState(3);
-  const values = grow(100, rate, years);
-  const total = Math.round(values[years]);
-
-  return (
-    <>
-      <Stage label={lang === "en" ? "Bea's money garden" : "Beas Geldgarten"}>
-        <div className="ig-wrap">
-          <Chart
-            values={values}
-            start={100}
-            mode="save"
-            scaleMax={270}
-            band={[TARGET_LOW, TARGET_HIGH]}
-            label={
-              lang === "en"
-                ? `Bea's coins after ${years} years: ${total}. The goal is between ${TARGET_LOW} and ${TARGET_HIGH}.`
-                : `Beas Münzen nach ${years} Jahren: ${total}. Das Ziel liegt zwischen ${TARGET_LOW} und ${TARGET_HIGH}.`
-            }
-          />
-          <div className="ig-readout" role="status">
-            <span className="ig-big">
-              {lang === "en" ? `Bea has ${total} coins after ${years} years` : `Bea hat nach ${years} Jahren ${total} Münzen`}
-            </span>
-            <span className="ig-small">
-              {lang === "en"
-                ? `Goal: the green stripe, ${TARGET_LOW} to ${TARGET_HIGH} coins. ${ratePhrase(lang, rate)}`
-                : `Ziel: der grüne Streifen, ${TARGET_LOW} bis ${TARGET_HIGH} Münzen. ${ratePhrase(lang, rate)}`}
-            </span>
-          </div>
-          <div className="ig-sliders two">
-            <Slider label={lang === "en" ? "Interest (%)" : "Zinsen (%)"} value={rate} min={0} max={10} onChange={setRate} />
-            <Slider label={lang === "en" ? "Years" : "Jahre"} value={years} min={1} max={10} onChange={setYears} />
-          </div>
-        </div>
-      </Stage>
-      <div className="row nav">
-        <CheckButton lang={lang} onClick={() => onAnswer(reachesTarget(rate, years))} />
-      </div>
-    </>
-  );
-}
 
 export const lesson: Lesson = {
   id: "interest",
   story: [
-    {
-      scene: "👩‍🍳 🪙 ➡️ 🏦 ➡️ 🧔 ⛵",
-      text: T(
-        "Bea keeps 100 coins in the town bank. The bank lends them to Finn, so he can buy a new boat.",
-        "Bea hat 100 Münzen in der Stadtbank. Die Bank leiht sie Finn, damit er ein neues Boot kaufen kann.",
-      ),
-    },
-    {
-      scene: "🧔 ➡️ 🪙100 + 🪙5",
-      mood: "think",
-      text: T(
-        "After a year Finn pays back 105 coins, not 100. The 5 extra coins are the price of the loan. This extra has a name: interest.",
-        "Nach einem Jahr zahlt Finn 105 Münzen zurück, nicht 100. Die 5 Extra-Münzen sind der Preis fürs Leihen. Dieses Extra heißt Zinsen.",
-      ),
-    },
-    {
-      scene: "🪙×100 ➡️ +5 ➡️ 5 %",
-      text: T(
-        "We say: 5 extra coins for every 100 coins, each year. That is 5 percent a year, or 5%. Percent means out of a hundred.",
-        "Wir sagen: 5 Extra-Münzen für je 100 Münzen, jedes Jahr. Das sind 5 Prozent im Jahr, kurz 5 %. Prozent heißt von hundert.",
-      ),
-    },
-    {
-      scene: "🏦 ➡️ 👩‍🍳 🪙🪙🪙",
-      mood: "happy",
-      text: T(
-        "The bank pays Bea too, because she lent out her coins. Bea gets 3 extra coins for her 100. That is 3% a year, a bit less than Finn pays.",
-        "Die Bank zahlt auch Bea etwas, weil sie ihre Münzen verliehen hat: 3 Extra-Münzen für ihre 100. Das sind 3 % im Jahr, etwas weniger als Finn zahlt.",
-      ),
-    },
-    {
-      scene: "🧔 5 ➡️ 🏦 ➡️ 3 👩‍🍳   🏦 2",
-      mood: "think",
-      text: T(
-        "Finn pays 5, Bea gets 3, and the bank keeps 2. That pays for the bank's work, and for loans that are never paid back.",
-        "Finn zahlt 5, Bea bekommt 3 und die Bank behält 2. Davon bezahlt sie ihre Arbeit und auch geliehenes Geld, das nie zurückkommt.",
-      ),
-    },
-    {
-      scene: "🌱 ➡️ 🌿 ➡️ 🌳",
-      text: T(
-        "Bea leaves her coins and her extra in the bank. Next year the extra coins earn extra too! Like seeds that grow into more seeds.",
-        "Bea lässt ihre Münzen und das Extra in der Bank. Im nächsten Jahr bringen auch die Extra-Münzen Extra! Wie Samen, aus denen noch mehr Samen werden.",
-      ),
-    },
-    {
-      scene: "⛵ 5 % ➡️ 105   ⛵ 10 % ➡️ 110",
-      mood: "think",
-      text: T(
-        "Now the other side. A loan with higher interest costs more. At 10% Finn pays back 110 coins, at 5% only 105. A loan that waits for years grows like a garden.",
-        "Jetzt die andere Seite. Leihen kostet mehr, wenn die Zinsen höher sind. Bei 10 % zahlt Finn 110 Münzen zurück, bei 5 % nur 105. Geliehenes Geld, das Jahre wartet, wächst wie ein Garten.",
-      ),
-    },
+    animatedBeat(
+      [
+        T(
+          "Remember Bea the baker? She keeps 100 coins safe in the town bank.",
+          "Weißt du noch, Bea die Bäckerin? Sie bewahrt 100 Münzen sicher in der Stadtbank auf.",
+        ),
+        T(
+          "Finn the fisherman wants a new boat, but he does not have enough coins.",
+          "Fischer Finn möchte ein neues Boot, aber er hat nicht genug Münzen.",
+        ),
+        T(
+          "So the bank lends Bea's coins to Finn, and he can buy his boat. Finn borrows the money.",
+          "Also leiht die Bank Beas Münzen an Finn, und er kann sein Boot kaufen. Finn leiht sich das Geld.",
+        ),
+      ],
+      BankLoanDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "One year later, Finn pays the coins back. But he does not pay back only 100 coins. He pays back 105!",
+          "Ein Jahr später gibt Finn die Münzen zurück. Aber er zahlt nicht nur 100 Münzen zurück. Er zahlt 105!",
+        ),
+        T(
+          "The 5 extra coins are the price of the loan. Finn pays them to the bank, because he borrowed money.",
+          "Die 5 Extra-Münzen sind der Preis fürs Leihen. Finn zahlt sie der Bank, weil er sich Geld geliehen hat.",
+        ),
+        T(
+          "This extra money has a name. It is called *interest*.",
+          "Dieses Extra-Geld hat einen Namen. Es heißt *Zinsen*.",
+        ),
+      ],
+      InterestDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "Banks count interest in a special way. Finn pays 5 extra coins for every 100 coins he borrows, each year.",
+          "Banken zählen Zinsen auf eine besondere Art. Finn zahlt jedes Jahr 5 Extra-Münzen für je 100 Münzen, die er sich leiht.",
+        ),
+        T(
+          "That is 5 out of every hundred. Out of a hundred has its own name. It is called *percent*.",
+          "Das sind 5 von hundert. Von hundert hat einen eigenen Namen. Es heißt *Prozent*.",
+        ),
+        T(
+          "We write percent with a special sign: 5%. So Finn pays 5 percent interest a year.",
+          "Prozent schreibt man mit einem besonderen Zeichen: 5 %. Finn zahlt also 5 Prozent Zinsen im Jahr.",
+        ),
+      ],
+      PercentDiagram,
+    ),
+    animatedBeat(
+      [
+        T(
+          "The bank pays interest to Bea too, because her coins were lent out.",
+          "Die Bank zahlt auch Bea Zinsen, weil ihre Münzen verliehen wurden.",
+        ),
+        T(
+          "Bea gets 3 extra coins each year for her 100 coins. That is 3 percent.",
+          "Bea bekommt jedes Jahr 3 Extra-Münzen für ihre 100 Münzen. Das sind 3 Prozent.",
+        ),
+        T(
+          "Finn pays 5 percent, but Bea gets 3 percent. The bank pays savers a bit less than borrowers pay.",
+          "Finn zahlt 5 Prozent, aber Bea bekommt 3 Prozent. Die Bank gibt Sparern etwas weniger, als die zahlen, die sich Geld leihen.",
+        ),
+      ],
+      SaverDiagram,
+      "happy",
+    ),
+    animatedBeat(
+      [
+        T(
+          "Let's follow the extra coins. Finn pays the bank 5 coins of interest.",
+          "Schauen wir uns die Extra-Münzen an. Finn zahlt der Bank 5 Münzen Zinsen.",
+        ),
+        T("The bank gives 3 of them to Bea.", "Die Bank gibt 3 davon an Bea weiter."),
+        T("The bank keeps the other 2 coins.", "Die anderen 2 Münzen behält die Bank."),
+        T(
+          "Those 2 coins pay for the bank's work, and for loans that are never paid back.",
+          "Mit diesen 2 Münzen bezahlt die Bank ihre Arbeit und auch Geld, das nie zurückkommt.",
+        ),
+      ],
+      SplitDiagram,
+      "think",
+    ),
+    animatedBeat(
+      [
+        T(
+          "Bea leaves all her coins in the bank. Let's pretend the interest is 10 percent, so the numbers are easy to see.",
+          "Bea lässt alle ihre Münzen in der Bank. Tun wir so, als gäbe es 10 Prozent Zinsen, dann sind die Zahlen leicht.",
+        ),
+        T(
+          "After one year Bea has 110 coins: her 100, plus 10 extra.",
+          "Nach einem Jahr hat Bea 110 Münzen: ihre 100 und 10 extra.",
+        ),
+        T(
+          "In year two the bank pays interest on all 110 coins. That is 11 extra coins, not only 10!",
+          "Im zweiten Jahr zahlt die Bank Zinsen auf alle 110 Münzen. Das sind 11 Extra-Münzen, nicht nur 10!",
+        ),
+        T(
+          "Interest that earns interest has a name. It is called *compound interest*.",
+          "Zinsen, die selbst Zinsen bringen, haben einen Namen. Es heißt *Zinseszins*.",
+        ),
+      ],
+      CompoundDiagram,
+      "happy",
+    ),
+    animatedBeat(
+      [
+        T(
+          "Interest works for loans too. The higher the interest, the more Finn must pay back.",
+          "Zinsen gibt es auch beim Leihen. Je höher die Zinsen, desto mehr muss Finn zurückzahlen.",
+        ),
+        T(
+          "For 100 coins, Finn pays back 105 coins at 5 percent, but 110 coins at 10 percent.",
+          "Für 100 Münzen zahlt Finn bei 5 Prozent 105 Münzen zurück, bei 10 Prozent aber 110 Münzen.",
+        ),
+        T(
+          "If Finn pays back nothing for 10 years, the interest grows too. At 10 percent he would owe 259 coins!",
+          "Wenn Finn 10 Jahre lang nichts zurückzahlt, wachsen auch die Zinsen. Bei 10 Prozent schuldet er dann 259 Münzen!",
+        ),
+      ],
+      LoanCostDiagram,
+      "think",
+    ),
   ],
   toyIntro: T(
     "Welcome to the money garden! Pick the coins, the interest and the years. Then switch to a loan and see what the same numbers cost.",
@@ -324,8 +191,8 @@ export const lesson: Lesson = {
         { text: T("The extra coins start to earn extra too", "Die Extra-Münzen bringen selbst auch Extra"), correct: true },
       ],
       hint: T(
-        "Bea leaves the extra coins in the bank. Next year they earn extra too, like seeds that grow into more seeds.",
-        "Bea lässt die Extra-Münzen in der Bank. Im nächsten Jahr bringen sie auch Extra, wie Samen, aus denen noch mehr Samen werden.",
+        "Bea leaves the extra coins in the bank. Next year they earn interest too. That is compound interest, and it makes the pile grow faster and faster.",
+        "Bea lässt die Extra-Münzen in der Bank. Im nächsten Jahr bringen sie auch Zinsen. Das ist der Zinseszins, und er lässt den Haufen immer schneller wachsen.",
       ),
     },
   ],
@@ -394,7 +261,8 @@ export const lesson: Lesson = {
       "The loan side assumes nothing is paid back until the end. Real loans are usually repaid in parts, so interest is charged on a shrinking amount. The point shown is only that a higher rate costs more, and that waiting costs more.",
       "Numbers are rounded to whole coins in the toy. Money in the toy is 'coins', not euros.",
       "The tax rule is told as 'a grown-up can earn up to 1,000 euros of savings interest a year without paying tax if they tell their bank'. In practice it is the Freistellungsauftrag, and extra tax paid can also be refunded in the tax return. Taxes are only named here; the next lesson covers them.",
-      "Compound interest is shown with yearly steps and described as 'extra coins earn extra too'. The term 'compound interest' is not used with the child.",
+      "Compound interest is shown with yearly steps and the child learns the word (Zinseszins in German): interest that earns interest, because the interest stays in the account. It is explained with a pretend 10% so the extra is easy to see: 100 becomes 110 after year one and 121 after year two, because year two's interest (11) is paid on 110. The same logic as the sourced 5% example.",
+      "The loan beat says that if Finn pays back nothing for 10 years at 10%, he would owe about 259 coins (100 x 1.1 to the power 10 = 259.37). That is the same yearly compounding as the toy and assumes no part-payments, as in the line above.",
     ],
   },
 };
