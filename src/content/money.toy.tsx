@@ -2,22 +2,20 @@ import { useState } from "react";
 import type { ReactElement } from "react";
 import { CAST } from "../components/cast";
 import { Arrow, Bubble, DiagramCanvas } from "../components/diagram";
-import { Apple, Bread, Coin, Fish, InlineIcon, NoSign, Person, Shoe } from "../components/icons";
+import { Apple, Bread, Coin, Fish, NoSign, Person, Shoe } from "../components/icons";
 import type { Mood } from "../components/icons";
-import { Stage, ToyButton } from "../lesson/toolkit";
-import { sfx } from "../sound";
+import { ActionPrompt, Stage, ToyButton } from "../lesson/toolkit";
 import type { Text } from "../lesson/types";
 import type { Lang } from "../progress";
 
 const T = (en: string, de: string): Text => ({ en, de });
 
 type Who = "Bea" | "Sam";
+type Phase = "barter" | "coins" | "sell" | "bread" | "done";
 type Talk = { n: number; who: Who; kind: "no" | "coins" | "bread" } | null;
 
 interface Board {
-  /** true once somebody refused the fish: the child has seen why barter fails */
-  refused: boolean;
-  coinsOn: boolean;
+  phase: Phase;
   fish: boolean;
   coins: number;
   bread: boolean;
@@ -26,8 +24,7 @@ interface Board {
 }
 
 const START: Board = {
-  refused: false,
-  coinsOn: false,
+  phase: "barter",
   fish: true,
   coins: 0,
   bread: false,
@@ -42,7 +39,6 @@ const PERSON_Y = 64;
 const PERSON = 110;
 const ROW_Y = 208;
 
-/** Same cast, colours and icons as the story diagrams. */
 function Villager({ x, mood, hat, shirt, name }: { x: number; mood: Mood; hat: "fisher" | "baker" | "cap"; shirt: string; name: string }) {
   return (
     <g transform={`translate(${x} 0)`}>
@@ -54,7 +50,6 @@ function Villager({ x, mood, hat, shirt, name }: { x: number; mood: Mood; hat: "
   );
 }
 
-/** "has" thing, arrow, "wants" thing, under a villager. */
 function HasWants({ x, has, wants, lang }: { x: number; has: ReactElement; wants: ReactElement; lang: Lang }) {
   return (
     <g transform={`translate(${x + 2} 0)`}>
@@ -71,119 +66,79 @@ function HasWants({ x, has, wants, lang }: { x: number; has: ReactElement; wants
   );
 }
 
-type GuideId = "offer" | "coins" | "sell" | "bread";
-
-/** The numbered "what to do" list. Done steps get a tick, the next one is highlighted. */
-function Guide({ lang, steps }: { lang: Lang; steps: { id: GuideId; done: boolean; now: boolean; text: Text }[] }) {
-  return (
-    <ol className="guide" aria-label={lang === "en" ? "What to do" : "Was zu tun ist"}>
-      {steps.map((st, i) => (
-        <li key={st.id} className={st.done ? "guide-step done" : st.now ? "guide-step now" : "guide-step"}>
-          <span className="guide-num" aria-hidden="true">
-            {st.done ? (
-              <svg viewBox="0 0 24 24" width="18" height="18">
-                <path d="M5 12.5 L10 17.5 L19 7" stroke="#fff" strokeWidth="3.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            ) : (
-              i + 1
-            )}
-          </span>
-          {st.text[lang]}
-          <span className="sr-only">{st.done ? (lang === "en" ? " (done)" : " (erledigt)") : ""}</span>
-        </li>
-      ))}
-    </ol>
-  );
+function nextAction(phase: Phase): Text | null {
+  if (phase === "barter") return T("Try giving Finn's fish to Bea. Can she give him bread?", "Gib Finns Fisch Bea. Kann sie ihm Brot geben?");
+  if (phase === "coins") return T("Barter did not work. Bring coins to Ripple Town.", "Tauschhandel hat nicht geklappt. Bring Münzen nach Ripple Town.");
+  if (phase === "sell") return T("Now Sam can buy Finn's fish with coins.", "Jetzt kann Sam Finns Fisch mit Münzen kaufen.");
+  if (phase === "bread") return T("Finn has two coins. Bea can now sell him bread.", "Finn hat zwei Münzen. Bea kann ihm jetzt Brot verkaufen.");
+  return null;
 }
 
-/** A real on/off switch. The word says what it controls, the switch shows the state. */
-function CoinSwitch({ lang, on, hint, onClick }: { lang: Lang; on: boolean; hint: boolean; onClick: () => void }) {
-  return (
-    <button
-      type="button"
-      role="switch"
-      aria-checked={on}
-      className={`btn btn-toy coin-switch${on ? " is-on" : ""}${hint ? " btn-hint" : ""}`}
-      onClick={() => {
-        sfx.tap();
-        onClick();
-      }}
-    >
-      <span className="btn-icons">
-        <InlineIcon size={30}>
-          <Coin />
-        </InlineIcon>
-        {lang === "en" ? "Coins" : "Münzen"}
-        <span className="switch-track" aria-hidden="true">
-          <span className="switch-knob" />
-          <span className="switch-word">{on ? (lang === "en" ? "ON" : "AN") : lang === "en" ? "OFF" : "AUS"}</span>
-        </span>
-      </span>
-    </button>
-  );
+function ActionButton({ phase, lang, onClick }: { phase: Exclude<Phase, "done">; lang: Lang; onClick: () => void }) {
+  const label =
+    phase === "barter"
+      ? T("Give fish to Bea", "Fisch Bea geben")
+      : phase === "coins"
+        ? T("Bring coins to town", "Münzen in die Stadt bringen")
+        : phase === "sell"
+          ? T("Sell fish to Sam", "Fisch an Sam verkaufen")
+          : T("Buy bread from Bea", "Brot bei Bea kaufen");
+  return <ToyButton onClick={onClick}>{label[lang]}</ToyButton>;
 }
 
-/** Finn tries to get bread. Without coins nobody wants his fish. With coins it works. */
+/** Finn gets bread in one guided action at a time. */
 export function TradeBoard({ lang, onBread, mode = "toy" }: { lang: Lang; onBread?: () => void; mode?: "toy" | "quiz" }) {
   const [b, setB] = useState<Board>(START);
+  const prompt = nextAction(b.phase);
 
-  const offer = (who: Who) => {
+  const advance = () => {
     const n = (b.talk?.n ?? 0) + 1;
-    if (!b.coinsOn) {
+    if (b.phase === "barter") {
       setB({
         ...b,
-        refused: true,
-        talk: { n, who, kind: "no" },
-        say:
-          who === "Bea"
-            ? T("Bea: No thanks! I don't want fish. I need shoes.", "Bea: Nein danke! Ich will keinen Fisch. Ich brauche Schuhe.")
-            : T("Sam: No thanks! I don't want fish. I want apples.", "Sam: Nein danke! Ich will keinen Fisch. Ich will Äpfel."),
+        phase: "coins",
+        talk: { n, who: "Bea", kind: "no" },
+        say: T("Bea needs shoes, not fish. Finn cannot get bread by swapping today.", "Bea braucht Schuhe, keinen Fisch. Finn bekommt heute durch Tauschen kein Brot."),
       });
       return;
     }
-    setB({
-      ...b,
-      fish: false,
-      coins: b.coins + 2,
-      talk: { n, who, kind: "coins" },
-      say:
-        who === "Bea"
-          ? T("Bea: Fish! Here are 2 coins.", "Bea: Fisch! Hier sind 2 Münzen.")
-          : T("Sam: Fish! Here are 2 coins.", "Sam: Fisch! Hier sind 2 Münzen."),
-    });
+    if (b.phase === "coins") {
+      setB({
+        ...b,
+        phase: "sell",
+        say: T("Coins are now available in Ripple Town.", "Jetzt gibt es Münzen in Ripple Town."),
+      });
+      return;
+    }
+    if (b.phase === "sell") {
+      setB({
+        ...b,
+        phase: "bread",
+        fish: false,
+        coins: 2,
+        talk: { n, who: "Sam", kind: "coins" },
+        say: T("Sam buys the fish. Finn gets 2 coins.", "Sam kauft den Fisch. Finn bekommt 2 Münzen."),
+      });
+      return;
+    }
+    if (b.phase === "bread") {
+      setB({
+        ...b,
+        phase: "done",
+        coins: 0,
+        bread: true,
+        talk: { n, who: "Bea", kind: "bread" },
+        say: T("Bea takes the 2 coins and gives Finn bread. He did it!", "Bea nimmt die 2 Münzen und gibt Finn Brot. Geschafft!"),
+      });
+      onBread?.();
+    }
   };
 
-  const buy = () => {
-    setB({
-      ...b,
-      coins: b.coins - 2,
-      bread: true,
-      talk: { n: (b.talk?.n ?? 0) + 1, who: "Bea", kind: "bread" },
-      say: T("Bea: Thank you for 2 coins! Here is your bread.", "Bea: Danke für 2 Münzen! Hier ist dein Brot."),
-    });
-    onBread?.();
-  };
-
-  const finnMood: Mood = b.bread ? "happy" : b.talk?.kind === "no" ? "sad" : b.coins > 0 ? "happy" : "think";
-
-  // what Finn holds, left to right
+  const finnMood: Mood = b.bread ? "happy" : b.phase === "coins" ? "sad" : b.coins > 0 ? "happy" : "think";
   const held: ReactElement[] = [];
   if (b.fish) held.push(<Fish key="fish" size={44} />);
   for (let i = 0; i < b.coins; i++) held.push(<Coin key={`c${i}`} size={44} />);
   if (b.bread) held.push(<Bread key="bread" size={44} />);
-
-  // The guide: what to do, in order. The first undone step is the one to do now.
-  const all: { id: GuideId; done: boolean; text: Text }[] = [
-    ...(mode === "toy"
-      ? [{ id: "offer" as const, done: b.refused || !b.fish, text: T("Offer the fish", "Fisch anbieten") }]
-      : []),
-    { id: "coins", done: b.coinsOn || !b.fish, text: T("Turn coins on", "Münzen anschalten") },
-    { id: "sell", done: !b.fish, text: T("Sell the fish", "Fisch verkaufen") },
-    { id: "bread", done: b.bread, text: T("Buy bread", "Brot kaufen") },
-  ];
-  const now = all.find((st) => !st.done)?.id;
-  const steps = all.map((st) => ({ ...st, now: st.id === now }));
-
   const talkX = b.talk ? (b.talk.who === "Bea" ? BEA_X : SAM_X) + 27 : 0;
 
   return (
@@ -199,24 +154,20 @@ export function TradeBoard({ lang, onBread, mode = "toy" }: { lang: Lang; onBrea
           <Villager x={FINN_X} mood={finnMood} {...CAST.Finn} name="Finn" />
           <Villager x={BEA_X} mood="happy" {...CAST.Bea} name="Bea" />
           <Villager x={SAM_X} mood="happy" {...CAST.Sam} name="Sam" />
-
-          {/* what Finn holds */}
           {held.map((icon, i) => (
             <g key={i} transform={`translate(${FINN_X + 2 + i * 50} ${ROW_Y})`}>
               {icon}
             </g>
           ))}
-
           <HasWants x={BEA_X} lang={lang} has={<Bread size={40} />} wants={<Shoe size={40} />} />
           <HasWants x={SAM_X} lang={lang} has={<Shoe size={40} />} wants={<Apple size={40} />} />
-
           {b.talk && (
             <Bubble key={b.talk.n} x={talkX} y={2} w={118} h={54} tail="bottom-left">
               {b.talk.kind === "no" && (
                 <>
                   <Fish x={10} y={7} size={40} />
                   <NoSign x={10} y={7} size={40} />
-                  {b.talk.who === "Bea" ? <Shoe x={62} y={6} size={42} /> : <Apple x={62} y={6} size={42} />}
+                  <Shoe x={62} y={6} size={42} />
                 </>
               )}
               {b.talk.kind === "coins" && (
@@ -229,58 +180,20 @@ export function TradeBoard({ lang, onBread, mode = "toy" }: { lang: Lang; onBrea
             </Bubble>
           )}
         </DiagramCanvas>
-
-        <Guide lang={lang} steps={steps} />
-
         <p className="trade-say" role="status">
           {b.say[lang]}
         </p>
-
-        <div className="row wrap">
-          <CoinSwitch lang={lang} on={b.coinsOn} hint={now === "coins"} onClick={() => setB({ ...b, coinsOn: !b.coinsOn })} />
-          <ToyButton disabled={!b.fish} hint={now === "offer" || now === "sell"} onClick={() => offer("Bea")}>
-            <span className="btn-icons">
-              <InlineIcon size={30}>
-                <Fish />
-              </InlineIcon>
-              <span aria-hidden="true">→</span>
-              <InlineIcon size={30}>
-                <Person {...CAST.Bea} />
-              </InlineIcon>
-              {lang === "en" ? "Fish to Bea" : "Fisch an Bea"}
-            </span>
-          </ToyButton>
-          <ToyButton disabled={!b.fish} hint={now === "offer" || now === "sell"} onClick={() => offer("Sam")}>
-            <span className="btn-icons">
-              <InlineIcon size={30}>
-                <Fish />
-              </InlineIcon>
-              <span aria-hidden="true">→</span>
-              <InlineIcon size={30}>
-                <Person {...CAST.Sam} />
-              </InlineIcon>
-              {lang === "en" ? "Fish to Sam" : "Fisch an Sam"}
-            </span>
-          </ToyButton>
-          <ToyButton disabled={!b.coinsOn || b.coins < 2 || b.bread} hint={now === "bread"} onClick={buy}>
-            <span className="btn-icons">
-              <InlineIcon size={30}>
-                <Coin />
-              </InlineIcon>
-              <span aria-hidden="true">→</span>
-              <InlineIcon size={30}>
-                <Bread />
-              </InlineIcon>
-              {lang === "en" ? "Buy bread" : "Brot kaufen"}
-            </span>
-          </ToyButton>
-          <ToyButton onClick={() => setB(START)}>
-            <span className="btn-icons">
-              <span aria-hidden="true">↺</span>
-              {lang === "en" ? "Start again" : "Von vorn"}
-            </span>
-          </ToyButton>
-        </div>
+        {b.phase !== "done" && prompt ? (
+          <div className="guided-action">
+            <ActionPrompt lang={lang}>{prompt[lang]}</ActionPrompt>
+            <ActionButton phase={b.phase} lang={lang} onClick={advance} />
+          </div>
+        ) : (
+          <div className="guided-done">
+            <span>{mode === "toy" ? (lang === "en" ? "Finn has bread." : "Finn hat Brot.") : lang === "en" ? "Finn has bread. Now press Next." : "Finn hat Brot. Drücke jetzt Weiter."}</span>
+            {mode === "toy" && <button type="button" className="restart-link" onClick={() => setB(START)}>{lang === "en" ? "Try again" : "Noch einmal"}</button>}
+          </div>
+        )}
       </div>
     </Stage>
   );

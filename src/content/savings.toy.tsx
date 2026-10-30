@@ -273,11 +273,11 @@ export function Planner({
                   </Ico>
                   {en
                     ? cushion
-                      ? "Rainy-day jar: ON"
-                      : "Rainy-day jar: OFF"
+                      ? "Put coins in rainy-day jar"
+                      : "Open rainy-day jar"
                     : cushion
-                      ? "Regentag-Glas: AN"
-                      : "Regentag-Glas: AUS"}
+                      ? "Münzen ins Regentag-Glas legen"
+                      : "Regentag-Glas öffnen"}
                 </span>
               </ToyButton>
               <ToyButton pressed={rain} onClick={() => setRain(!rain)}>
@@ -287,11 +287,11 @@ export function Planner({
                   </Ico>
                   {en
                     ? rain
-                      ? "Rain in week 4: ON"
-                      : "Rain in week 4: OFF"
+                      ? "Make it a rainy week 4"
+                      : "Clear rain in week 4"
                     : rain
-                      ? "Regen in Woche 4: AN"
-                      : "Regen in Woche 4: AUS"}
+                      ? "Woche 4 verregnen lassen"
+                      : "Regen in Woche 4 beenden"}
                 </span>
               </ToyButton>
             </div>
