@@ -85,16 +85,19 @@ export function ToyButton({
   onClick,
   disabled,
   pressed,
+  hint,
 }: {
   children: ReactNode;
   onClick: () => void;
   disabled?: boolean;
   pressed?: boolean;
+  /** Gently pulses to show this is the button to press next */
+  hint?: boolean;
 }) {
   return (
     <button
       type="button"
-      className="btn btn-toy"
+      className={hint ? "btn btn-toy btn-hint" : "btn btn-toy"}
       disabled={disabled}
       aria-pressed={pressed}
       onClick={() => {

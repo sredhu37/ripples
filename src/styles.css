@@ -626,11 +626,11 @@ p {
 }
 
 .trade .diagram {
-  max-height: 34vh;
+  max-height: 28vh;
 }
 
 .trade-say {
-  min-height: 3em;
+  min-height: 2.2em;
   font-weight: 700;
   background: var(--white);
   border: 2px solid var(--ink);
@@ -786,4 +786,130 @@ mark.term {
   font-weight: 800;
   border-radius: 8px;
   padding: 0 6px;
+}
+
+/* money toy: step guide and coin switch */
+.guide {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.guide-step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px 3px 4px;
+  border-radius: 999px;
+  background: var(--white);
+  border: 3px solid var(--grey);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #5b7078;
+}
+
+.guide-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--grey);
+  color: var(--white);
+  font-weight: 800;
+  flex: none;
+}
+
+.guide-step.now {
+  border-color: var(--orange);
+  background: #fff3df;
+  color: var(--ink);
+}
+
+.guide-step.now .guide-num {
+  background: var(--orange);
+}
+
+.guide-step.done {
+  border-color: var(--green);
+  color: var(--ink);
+}
+
+.guide-step.done .guide-num {
+  background: var(--green);
+}
+
+.btn-hint {
+  box-shadow: 0 4px 0 var(--teal-dark), 0 0 0 5px rgba(240, 138, 46, 0.55);
+  animation: hint-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes hint-pulse {
+  50% {
+    box-shadow: 0 4px 0 var(--teal-dark), 0 0 0 9px rgba(240, 138, 46, 0.2);
+  }
+}
+
+.switch-track {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 78px;
+  height: 34px;
+  border-radius: 17px;
+  background: #8a9ca2;
+  padding: 0 10px;
+  justify-content: flex-end;
+  margin-left: 4px;
+  transition: background 0.2s;
+}
+
+.switch-knob {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--white);
+  transition: transform 0.2s;
+}
+
+.switch-word {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--white);
+}
+
+.coin-switch.is-on .switch-track {
+  background: var(--green);
+  justify-content: flex-start;
+}
+
+.coin-switch.is-on .switch-knob {
+  transform: translateX(44px);
+}
+
+.coin-switch.is-on {
+  background: var(--teal);
+  box-shadow: 0 4px 0 var(--teal-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-hint {
+    animation: none;
+  }
+}
+
+.trade .btn-toy {
+  min-height: 48px;
+  font-size: 0.9rem;
+}
+
+.trade .row.wrap {
+  gap: 8px;
 }
