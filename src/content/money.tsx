@@ -5,8 +5,8 @@ import { TradeBoard } from "./money.toy";
 
 const T = (en: string, de: string): Text => ({ en, de });
 
-function Toy({ lang }: ToyProps) {
-  return <TradeBoard lang={lang} mode="toy" />;
+function Toy({ lang, onDone }: ToyProps) {
+  return <TradeBoard lang={lang} mode="toy" onBread={onDone} />;
 }
 
 function GetBreadWidget({ lang, onAnswer }: WidgetProps) {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CAST } from "../components/cast";
 import { Coin, InlineIcon, Person, Piggy } from "../components/icons";
 import { CheckButton, Slider, Stage, ToyButton } from "../lesson/toolkit";
@@ -98,11 +98,17 @@ function Swatch({ cls, children }: { cls: string; children: string }) {
   );
 }
 
-export function Garden({ lang }: ToyProps) {
+export function Garden({ lang, onDone }: ToyProps) {
   const [mode, setMode] = useState<Mode>("save");
   const [start, setStart] = useState(100);
   const [rate, setRate] = useState(5);
   const [years, setYears] = useState(10);
+
+  useEffect(() => {
+    if (start !== 100 || rate !== 5 || years !== 10 || mode !== "save") {
+      onDone?.();
+    }
+  }, [start, rate, years, mode, onDone]);
 
   const en = lang === "en";
   const values = grow(start, rate, years);

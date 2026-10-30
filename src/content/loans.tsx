@@ -18,8 +18,8 @@ export type { Plan } from "./loans.toy";
 
 const T = (en: string, de: string): Text => ({ en, de });
 
-function Toy({ lang }: ToyProps) {
-  return <LoanToy lang={lang} />;
+function Toy({ lang, onDone }: ToyProps) {
+  return <LoanToy lang={lang} onDone={onDone} />;
 }
 
 function PayWeeklyWidget({ lang, onAnswer }: WidgetProps) {

@@ -180,9 +180,18 @@ function Thermostat({ lang, sim, setSim }: { lang: Lang; sim: Sim; setSim: (s: S
   );
 }
 
-function Toy({ lang }: ToyProps) {
+function Toy({ lang, onDone }: ToyProps) {
   const [sim, setSim] = useSim();
-  return <Thermostat lang={lang} sim={sim} setSim={setSim} />;
+  return (
+    <Thermostat
+      lang={lang}
+      sim={sim}
+      setSim={(next) => {
+        setSim(next);
+        onDone?.();
+      }}
+    />
+  );
 }
 
 /** Start with a hot town. The child sets the rate, waits, and presses Check when the town is just right. */

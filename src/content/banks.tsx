@@ -16,12 +16,19 @@ import type { Board } from "./banks.toy";
 
 const T = (en: string, de: string): Text => ({ en, de });
 
-function Toy({ lang }: ToyProps) {
+function Toy({ lang, onDone }: ToyProps) {
   const [s, set] = useState<Board>(START);
   return (
     <>
       <BankBoard lang={lang} s={s} />
-      <Controls lang={lang} s={s} set={set} />
+      <Controls
+        lang={lang}
+        s={s}
+        set={(newBoard) => {
+          set(newBoard);
+          onDone?.();
+        }}
+      />
     </>
   );
 }

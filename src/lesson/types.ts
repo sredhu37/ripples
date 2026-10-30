@@ -29,6 +29,7 @@ export interface Beat {
 /** The free-play toy. No score, the child just tries things. */
 export interface ToyProps {
   lang: Lang;
+  onDone?: () => void;
 }
 
 /**

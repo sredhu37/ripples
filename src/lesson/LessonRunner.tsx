@@ -28,6 +28,7 @@ type Phase =
 
 export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit }: Props) {
   const [phase, setPhase] = useState<Phase>({ k: "story", i: 0 });
+  const [toyCompleted, setToyCompleted] = useState(false);
   const wasDone = useRef(alreadyDone);
   const total = lesson.story.length + 1 + lesson.questions.length;
 
@@ -108,10 +109,15 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit 
             <SpeechBubble text={lesson.toyIntro[lang]} lang={lang} />
           </div>
           <div className="stage-wrap">
-            <lesson.Toy lang={lang} />
+            <lesson.Toy lang={lang} onDone={() => setToyCompleted(true)} />
           </div>
           <div className="row nav">
-            <button type="button" className="btn" onClick={() => setPhase({ k: "quiz", i: 0 })}>
+            <button
+              type="button"
+              className="btn"
+              disabled={!toyCompleted}
+              onClick={() => setPhase({ k: "quiz", i: 0 })}
+            >
               {t(lang, "ready")}
             </button>
           </div>
