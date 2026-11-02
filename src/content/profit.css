@@ -1,0 +1,12 @@
+.profit-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.profit-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

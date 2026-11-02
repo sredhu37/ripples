@@ -1,0 +1,19 @@
+.hiring-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.hiring-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hiring-widget-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
