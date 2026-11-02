@@ -1,0 +1,141 @@
+.rebuilding-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.egks-bar {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.egks-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid #cbd5e1;
+  background: var(--card, #ffffff);
+  cursor: pointer;
+}
+
+.egks-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0369a1;
+}
+
+.egks-btn.active.warning {
+  background: #ea580c;
+  color: #ffffff;
+  border-color: #c2410c;
+}
+
+.bridge-stage {
+  background: var(--card, #ffffff);
+  border: 2px solid var(--border, #e2e8f0);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bridge-stage.united {
+  border-color: #86efac;
+  background: #f0fdf4;
+}
+
+.bridge-stage.rivalry {
+  border-color: #fca5a5;
+  background: #fef2f2;
+}
+
+.stage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.river-name {
+  color: #0284c7;
+}
+
+.girders-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.girder-segment {
+  height: 48px;
+  border-radius: 6px;
+  border: 2px dashed #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted-foreground, #64748b);
+  background: #f8fafc;
+}
+
+.girder-segment.placed {
+  border-style: solid;
+  border-color: #059669;
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.construction-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.peace-meter-card {
+  background: var(--card, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pm-label {
+  font-size: 12px;
+}
+
+.pm-bar {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.pm-fill {
+  height: 100%;
+  background: #10b981;
+  transition: width 0.3s ease;
+}
+
+.train-celebration {
+  font-size: 12px;
+  font-weight: 800;
+  color: #15803d;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.rebuilding-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}

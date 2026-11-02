@@ -1,0 +1,101 @@
+.colonial-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.policy-bar {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.pol-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid #cbd5e1;
+  background: var(--card, #ffffff);
+  cursor: pointer;
+}
+
+.pol-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0369a1;
+}
+
+.pol-btn.active.warning {
+  background: #ea580c;
+  color: #ffffff;
+  border-color: #c2410c;
+}
+
+.trade-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.producer-box {
+  background: var(--card, #ffffff);
+  border: 2px solid var(--border, #e2e8f0);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.producer-box.thriving {
+  border-color: #86efac;
+  background: #f0fdf4;
+}
+
+.producer-box.struggling {
+  border-color: #fca5a5;
+  background: #fef2f2;
+}
+
+.producer-box.factory {
+  border-color: #cbd5e1;
+}
+
+.prod-title {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.tariff-tag {
+  font-size: 11px;
+  color: var(--muted-foreground, #64748b);
+}
+
+.income-badge {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.prod-state {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.status-note {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--muted-foreground, #64748b);
+}
+
+.colonial-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}

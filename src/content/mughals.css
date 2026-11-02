@@ -1,0 +1,228 @@
+.mughals-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.mughals-mode-bar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.mughals-toggle-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 2px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mughals-toggle-btn.active {
+  border-color: #059669;
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.mughals-toggle-btn.active.warning {
+  border-color: #d97706;
+  background: #fffbeb;
+  color: #92400e;
+}
+
+.mughals-council-chamber {
+  border-radius: 12px;
+  padding: 14px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.mughals-council-chamber.harmony {
+  background: #f0fdf4;
+  border-color: #86efac;
+}
+
+.mughals-council-chamber.conflict {
+  background: #fff1f2;
+  border-color: #fca5a5;
+}
+
+.mughals-chamber-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.mughals-scholars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.mughals-seat-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #cbd5e1;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mughals-seat-btn.seated {
+  border-color: #0284c7;
+  background: #f0f9ff;
+  color: #0369a1;
+}
+
+.mughals-seat-btn.empty {
+  opacity: 0.8;
+  border-style: dashed;
+}
+
+.mughals-scholar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0284c7;
+}
+
+.mughals-scholar-name {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.mughals-seat-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.mughals-seat-btn.seated .mughals-seat-badge {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+.mughals-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.mughals-metric-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+}
+
+.mughals-metric-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.mughals-metric-bar {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.mughals-metric-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.mughals-metric-fill.harmony {
+  background: #10b981;
+}
+
+.mughals-metric-fill.prosperity {
+  background: #f59e0b;
+}
+
+.mughals-metric-fill.arts {
+  background: #8b5cf6;
+}
+
+.mughals-metric-val {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.mughals-message-box {
+  min-height: 48px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.mughals-warning-text {
+  color: #b91c1c;
+  margin: 0;
+  font-weight: 500;
+}
+
+.mughals-success-text {
+  color: #047857;
+  margin: 0;
+  font-weight: 600;
+}
+
+.mughals-hint-text {
+  color: #475569;
+  margin: 0;
+}
+
+.mughals-quiz-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.mughals-feedback {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.mughals-feedback.correct {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.mughals-feedback.retry {
+  background: #fef3c7;
+  color: #b45309;
+}

@@ -9,6 +9,7 @@ import {
   loadProgress,
   nextLessonId,
   saveProgress,
+  type Progress,
 } from "./progress";
 
 const order = ["money", "work", "savings", "loans"];
@@ -74,6 +75,17 @@ describe("save and restore code", () => {
   it("round-trips name, language and badges, including umlauts", () => {
     const p = earnBadge(earnBadge({ ...emptyProgress(), name: "Jörg", lang: "de" }, "money"), "savings");
     const restored = importCode(exportCode(p, order), order);
+    expect(restored).toEqual({ ...p, muted: false });
+  });
+
+  it("round-trips when badges include lessons beyond index 31", () => {
+    const longOrder = Array.from({ length: 45 }, (_, i) => `lesson_${i}`);
+    let p: Progress = { ...emptyProgress(), name: "Akbar", lang: "en" };
+    p = earnBadge(p, "lesson_0");
+    p = earnBadge(p, "lesson_32");
+    p = earnBadge(p, "lesson_41");
+    const code = exportCode(p, longOrder);
+    const restored = importCode(code, longOrder);
     expect(restored).toEqual({ ...p, muted: false });
   });
 

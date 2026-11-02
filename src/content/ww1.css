@@ -1,0 +1,136 @@
+.ww1-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.diplomacy-bar {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.dip-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid #cbd5e1;
+  background: var(--card, #ffffff);
+  cursor: pointer;
+}
+
+.dip-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0369a1;
+}
+
+.dip-btn.active.warning {
+  background: #ea580c;
+  color: #ffffff;
+  border-color: #c2410c;
+}
+
+.domino-stage {
+  background: var(--card, #ffffff);
+  border: 2px solid var(--border, #e2e8f0);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.domino-stage.cascade {
+  border-color: #fca5a5;
+  background: #fef2f2;
+}
+
+.domino-stage.defused {
+  border-color: #86efac;
+  background: #f0fdf4;
+}
+
+.stage-title {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.domino-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.domino-tile {
+  width: 44px;
+  height: 70px;
+  border-radius: 6px;
+  border: 2px solid #cbd5e1;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: transform 0.3s ease;
+}
+
+.domino-tile.fallen {
+  transform: rotate(45deg) translateY(10px);
+  background: #fee2e2;
+  border-color: #ef4444;
+}
+
+.tile-flag {
+  font-size: 18px;
+}
+
+.tile-name {
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.incident-row {
+  margin-top: 4px;
+}
+
+.incident-btn {
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.status-readout {
+  font-size: 12px;
+  text-align: center;
+  min-height: 24px;
+}
+
+.danger-text {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.peace-text {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+.calm-text {
+  color: var(--muted-foreground, #64748b);
+}
+
+.ww1-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
