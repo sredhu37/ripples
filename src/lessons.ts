@@ -59,6 +59,16 @@ export const LESSONS: LessonMeta[] = [
   { id: "ww2", title: { en: "World War 2 and Human Rights", de: "Der Zweite Weltkrieg und Menschenrechte" } },
   { id: "rebuilding", title: { en: "Rebuilding Europe", de: "Europas Wiederaufbau" } },
   { id: "whyhistory", title: { en: "Why History Matters", de: "Warum Geschichte wichtig ist" } },
+
+  // Group 6: Technology (43-50)
+  { id: "tools", title: { en: "Tools to Steam", de: "Von Werkzeugen zum Dampf" } },
+  { id: "massproduction", title: { en: "Mass Production", de: "Die Massenfertigung" } },
+  { id: "computers", title: { en: "Computers", de: "Computer und Rechenmaschinen" } },
+  { id: "internet", title: { en: "The Internet", de: "Das weltweite Netz" } },
+  { id: "automation", title: { en: "Robots and Automation", de: "Roboter und Automation" } },
+  { id: "ai", title: { en: "Artificial Intelligence", de: "Kuenstliche Intelligenz" } },
+  { id: "jobs", title: { en: "Changing Jobs", de: "Wandel der Berufe" } },
+  { id: "humanedge", title: { en: "The Human Edge", de: "Der menschliche Vorteil" } },
 ];
 
 export const LESSON_ORDER = LESSONS.map((l) => l.id);
