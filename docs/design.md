@@ -32,6 +32,19 @@ Lessons unlock in order: the next one opens after the badge. Finished lessons ca
 
 See docs/adr/0001-group-2-business-curriculum.md for the full curriculum and toy mechanics specification.
 
+## Group 3 lessons (Markets), in order
+
+19. Supply and demand (supplydemand)
+20. Raw goods and commodities (commodities)
+21. Gold and safe harbors (gold)
+22. Owning a piece of a company (stocks)
+23. Lending with bonds (bonds)
+24. Stocks or bonds? (stocksvsbonds)
+25. Price locks and protection (derivatives)
+26. Giving back forever (philanthropy)
+
+See [docs/adr/0003-group-3-markets-curriculum-and-toy-mechanics.md](adr/0003-group-3-markets-curriculum-and-toy-mechanics.md) for the full curriculum, pedagogical metaphors, and toy mechanics specification.
+
 ## Group 4 lessons (Governments), in order
 
 27. Why Government? 28. How Leaders are Chosen (Elections) 29. Democracy 30. Monarchy 31. Dictatorship 32. Capitalism 33. Communism 34. The Power Triangle

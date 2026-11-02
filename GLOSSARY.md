@@ -29,3 +29,12 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Capitalism | An economic system where individuals and private businesses own tools and shops | free-for-all, greed |
 | Communism | An economic system where tools and factories are owned collectively or by the state | commune, state rule |
 | Power Triangle | The dynamic balance between citizens, businesses, and government | power web, system |
+| Stock share | A certificate representing fractional ownership of a company | gambling, casino chip |
+| Dividend | The share of company profits paid out to shareholders | free money, bonus |
+| Bond | A formal loan certificate that pays regular interest and repays principal at maturity | bank deposit, share |
+| Coupon | The regular fixed interest payment collected by a bondholder | discount voucher, ticket |
+| Commodity | A standard raw material from nature that is uniform and traded on central exchanges | handmade craft, luxury item |
+| Derivative | A contract whose value comes from an underlying asset, used for risk hedging | bet, wager |
+| Hedging | Locking in prices or taking protections against unexpected financial risks | gambling, speculating |
+| Foundation | An organization whose endowment capital is permanently preserved to fund public goods | spending club, charity pot |
+| Exchange | An organized marketplace where standardized goods, stocks, and bonds are traded | corner shop, flea market |
