@@ -1,0 +1,107 @@
+.internet-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 8px 0;
+}
+
+.internet-routers-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.internet-router-btn {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 2px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.internet-router-btn.active {
+  border-color: #0284c7;
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.internet-network-card {
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.internet-network-card.complete {
+  border-color: #38bdf8;
+  background: #f0f9ff;
+}
+
+.internet-network-card .network-stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #475569;
+}
+
+.internet-network-card .packet-count {
+  font-size: 15px;
+  color: #0284c7;
+}
+
+.internet-network-card .network-message-box {
+  margin-top: 6px;
+  padding: 10px;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.internet-network-card .msg-label {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.internet-network-card .msg-content {
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: bold;
+  color: #0f172a;
+}
+
+.internet-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.internet-feedback {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.internet-feedback.success {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.internet-feedback.warning {
+  background: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}

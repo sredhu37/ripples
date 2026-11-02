@@ -40,6 +40,14 @@ import { lesson as ww1 } from "./ww1";
 import { lesson as ww2 } from "./ww2";
 import { lesson as rebuilding } from "./rebuilding";
 import { lesson as whyhistory } from "./whyhistory";
+import { lesson as tools } from "./tools";
+import { lesson as massproduction } from "./massproduction";
+import { lesson as computers } from "./computers";
+import { lesson as internet } from "./internet";
+import { lesson as automation } from "./automation";
+import { lesson as ai } from "./ai";
+import { lesson as jobs } from "./jobs";
+import { lesson as humanedge } from "./humanedge";
 import type { Lesson } from "../lesson/types";
 
 const ALL: Record<string, Lesson | undefined> = {
@@ -85,6 +93,14 @@ const ALL: Record<string, Lesson | undefined> = {
   ww2,
   rebuilding,
   whyhistory,
+  tools,
+  massproduction,
+  computers,
+  internet,
+  automation,
+  ai,
+  jobs,
+  humanedge,
 };
 
 export function getLesson(id: string): Lesson | undefined {

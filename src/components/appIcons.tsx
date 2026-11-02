@@ -176,6 +176,87 @@ const LESSON_ART: Record<string, ReactNode> = {
       <circle cx="78" cy="10" r="3" fill="#a9b6bd" />
     </g>
   ),
+  tools: (
+    <g>
+      <rect x="25" y="55" width="50" height="30" rx="4" fill="#64748b" />
+      <polygon points="25,55 15,70 25,85" fill="#475569" />
+      <rect x="42" y="25" width="16" height="35" rx="3" fill="#cbd5e1" />
+      <circle cx="50" cy="25" r="10" fill="#f59e0b" />
+    </g>
+  ),
+  massproduction: (
+    <g>
+      <rect x="15" y="60" width="70" height="15" rx="3" fill="#334155" />
+      <circle cx="28" cy="67" r="5" fill="#94a3b8" />
+      <circle cx="50" cy="67" r="5" fill="#94a3b8" />
+      <circle cx="72" cy="67" r="5" fill="#94a3b8" />
+      <rect x="22" y="38" width="16" height="18" rx="2" fill="#3b82f6" />
+      <rect x="44" y="38" width="16" height="18" rx="2" fill="#3b82f6" />
+      <rect x="66" y="38" width="16" height="18" rx="2" fill="#3b82f6" />
+    </g>
+  ),
+  computers: (
+    <g>
+      <rect x="25" y="25" width="50" height="50" rx="8" fill="#0f172a" stroke="#0284c7" strokeWidth="4" />
+      <rect x="36" y="36" width="28" height="28" rx="3" fill="#0284c7" />
+      <line x1="25" y1="40" x2="15" y2="40" stroke="#0284c7" strokeWidth="3" />
+      <line x1="25" y1="60" x2="15" y2="60" stroke="#0284c7" strokeWidth="3" />
+      <line x1="75" y1="40" x2="85" y2="40" stroke="#0284c7" strokeWidth="3" />
+      <line x1="75" y1="60" x2="85" y2="60" stroke="#0284c7" strokeWidth="3" />
+      <circle cx="50" cy="50" r="6" fill="#f8fafc" />
+    </g>
+  ),
+  internet: (
+    <g>
+      <circle cx="50" cy="50" r="30" fill="none" stroke="#0284c7" strokeWidth="4" />
+      <ellipse cx="50" cy="50" rx="14" ry="30" fill="none" stroke="#38bdf8" strokeWidth="3" />
+      <line x1="20" y1="50" x2="80" y2="50" stroke="#0284c7" strokeWidth="3" />
+      <circle cx="50" cy="20" r="5" fill="#10b981" />
+      <circle cx="50" cy="80" r="5" fill="#10b981" />
+      <circle cx="20" cy="50" r="5" fill="#10b981" />
+      <circle cx="80" cy="50" r="5" fill="#10b981" />
+    </g>
+  ),
+  automation: (
+    <g>
+      <rect x="30" y="75" width="40" height="15" rx="3" fill="#334155" />
+      <circle cx="40" cy="75" r="8" fill="#0284c7" />
+      <line x1="40" y1="75" x2="60" y2="45" stroke="#0284c7" strokeWidth="7" strokeLinecap="round" />
+      <circle cx="60" cy="45" r="7" fill="#0369a1" />
+      <line x1="60" y1="45" x2="75" y2="25" stroke="#0284c7" strokeWidth="5" strokeLinecap="round" />
+      <circle cx="75" cy="25" r="4" fill="#38bdf8" />
+    </g>
+  ),
+  ai: (
+    <g>
+      <circle cx="35" cy="35" r="8" fill="#8b5cf6" />
+      <circle cx="65" cy="35" r="8" fill="#8b5cf6" />
+      <circle cx="50" cy="65" r="8" fill="#ec4899" />
+      <line x1="35" y1="35" x2="65" y2="35" stroke="#c084fc" strokeWidth="3" />
+      <line x1="35" y1="35" x2="50" y2="65" stroke="#c084fc" strokeWidth="3" />
+      <line x1="65" y1="35" x2="50" y2="65" stroke="#c084fc" strokeWidth="3" />
+      <circle cx="50" cy="45" r="4" fill="#fef08a" />
+    </g>
+  ),
+  jobs: (
+    <g>
+      <line x1="50" y1="40" x2="50" y2="85" stroke="#64748b" strokeWidth="4" />
+      <circle cx="50" cy="40" r="7" fill="#334155" />
+      <line x1="50" y1="40" x2="50" y2="15" stroke="#10b981" strokeWidth="3" />
+      <line x1="50" y1="40" x2="72" y2="52" stroke="#10b981" strokeWidth="3" />
+      <line x1="50" y1="40" x2="28" y2="52" stroke="#10b981" strokeWidth="3" />
+    </g>
+  ),
+  humanedge: (
+    <g>
+      <path
+        d="M50 35 C40 22 25 30 35 45 L50 62 L65 45 C75 30 60 22 50 35 Z"
+        fill="#e11d48"
+      />
+      <circle cx="50" cy="72" r="14" fill="#38bdf8" opacity="0.7" />
+      <path d="M30 80 C35 70 45 68 50 74 C55 68 65 70 70 80" stroke="#f59e0b" strokeWidth="3" fill="none" />
+    </g>
+  ),
 };
 
 /** Picture for a lesson on the trail, on its badge and in headings. */
