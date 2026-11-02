@@ -38,3 +38,18 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Hedging | Locking in prices or taking protections against unexpected financial risks | gambling, speculating |
 | Foundation | An organization whose endowment capital is permanently preserved to fund public goods | spending club, charity pot |
 | Exchange | An organized marketplace where standardized goods, stocks, and bonds are traded | corner shop, flea market |
+| Empire | A large political entity ruling over diverse regions and peoples | country, club |
+| Synthesis | Blending ideas, art, and traditions from different cultures into something new | copying, theft |
+| Tolerance | Respecting and allowing differing beliefs, practices, and viewpoints | indifference, weakness |
+| Spice Trade | Historical trade in spices across ocean and overland routes connecting continents | food market, cooking show |
+| Monsoon | Seasonal wind pattern in South Asia that enabled early trans-oceanic sailing | storm, hurricane |
+| Chartered company | A private trading corporation granted royal monopoly privileges and rights | small business, government office |
+| Extraction | Taking raw materials out of a region for distant manufacturing | fair trade, local processing |
+| Raj | The period of direct British imperial governance in India (1858-1947) | peaceful alliance, kingdom |
+| Ahimsa | The principle of non-injury and non-violence in thought, word, and deed | weakness, passivity |
+| Satyagraha | Insistence on truth through peaceful civil resistance | protest riot, rebellion |
+| Alliance | A formal mutual defense pact between nations | friendship club, business contract |
+| Civil courage | The bravery to stand up peacefully for human dignity and justice under pressure | rebellion, aggression |
+| Reconciliation | Restoring friendship and cooperation between former adversaries | surrender, forgetting |
+| Primary source | An original historical record created during the time under study | rumor, blog post |
+| Memory culture | The collective practice of remembering historical events to protect democracy | ancient trivia, nostalgia |
