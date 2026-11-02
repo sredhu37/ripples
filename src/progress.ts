@@ -89,7 +89,7 @@ function checksum(s: string): string {
 }
 
 export function exportCode(p: Progress, order: string[]): string {
-  const mask = order.reduce((m, id, i) => (p.badges.includes(id) ? m | (1 << i) : m), 0);
+  const mask = order.reduce((m, id, i) => (p.badges.includes(id) ? m + Math.pow(2, i) : m), 0);
   const body = toB64Url(JSON.stringify({ n: p.name, l: p.lang, b: mask }));
   return `${PREFIX}.${body}.${checksum(body)}`;
 }
@@ -105,7 +105,7 @@ export function importCode(code: string, order: string[]): Progress | null {
       name: cleanName(d.n),
       lang: d.l === "de" ? "de" : "en",
       muted: false,
-      badges: order.filter((_, i) => (d.b as number) & (1 << i)),
+      badges: order.filter((_, i) => Math.floor((d.b as number) / Math.pow(2, i)) % 2 === 1),
     };
   } catch {
     return null;

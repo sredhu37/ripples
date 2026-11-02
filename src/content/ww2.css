@@ -1,0 +1,82 @@
+.ww2-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.dignity-monument {
+  background: var(--card, #ffffff);
+  border: 2px solid var(--border, #e2e8f0);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.dignity-monument.illuminated {
+  border-color: #facc15;
+  background: #fefce8;
+}
+
+.flame-icon {
+  font-size: 32px;
+}
+
+.monument-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.liberty-meter {
+  font-size: 13px;
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.pillar-btn {
+  background: var(--card, #ffffff);
+  border: 1px solid var(--border, #cbd5e1);
+  border-radius: 8px;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.pillar-btn.active {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.p-icon {
+  font-size: 20px;
+}
+
+.p-name {
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.p-badge {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.ww2-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}

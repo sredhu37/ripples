@@ -6,7 +6,7 @@ export interface LessonMeta {
   title: Record<Lang, string>;
 }
 
-/** Complete Curriculum: Group 1, Group 2, Group 3, and Group 4. */
+/** Complete Curriculum: Group 1, Group 2, Group 3, Group 4, and Group 5. */
 export const LESSONS: LessonMeta[] = [
   // Group 1: Money & Work (1-10)
   { id: "money", title: { en: "What is money?", de: "Was ist Geld?" } },
@@ -49,6 +49,16 @@ export const LESSONS: LessonMeta[] = [
   { id: "capitalism", title: { en: "Capitalism", de: "Kapitalismus" } },
   { id: "communism", title: { en: "Communism", de: "Planwirtschaft" } },
   { id: "powertriangle", title: { en: "The Power Triangle", de: "Das Macht-Dreieck" } },
+
+  // Group 5: History (35-42)
+  { id: "mughals", title: { en: "The Mughals", de: "Das Mogulreich" } },
+  { id: "spicetrade", title: { en: "The Spice Trade", de: "Der Gewuerzhandel" } },
+  { id: "britishinindia", title: { en: "The British in India", de: "Die Briten in Indien" } },
+  { id: "independence", title: { en: "The Independence Movement", de: "Die Unabhaengigkeitsbewegung" } },
+  { id: "ww1", title: { en: "World War 1", de: "Der Erste Weltkrieg" } },
+  { id: "ww2", title: { en: "World War 2 and Human Rights", de: "Der Zweite Weltkrieg und Menschenrechte" } },
+  { id: "rebuilding", title: { en: "Rebuilding Europe", de: "Europas Wiederaufbau" } },
+  { id: "whyhistory", title: { en: "Why History Matters", de: "Warum Geschichte wichtig ist" } },
 ];
 
 export const LESSON_ORDER = LESSONS.map((l) => l.id);

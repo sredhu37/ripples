@@ -1,0 +1,77 @@
+.whyhistory-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.archive-beacon {
+  background: var(--card, #ffffff);
+  border: 2px solid var(--border, #e2e8f0);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.archive-beacon.shining {
+  border-color: #facc15;
+  background: #fefce8;
+}
+
+.beacon-icon {
+  font-size: 24px;
+}
+
+.beacon-text {
+  font-size: 13px;
+}
+
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.artifact-card {
+  background: var(--card, #ffffff);
+  border: 1px solid var(--border, #cbd5e1);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.artifact-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.artifact-icon {
+  font-size: 20px;
+}
+
+.artifact-name {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.artifact-select {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-size: 11px;
+  background: var(--card, #ffffff);
+  color: var(--foreground, #0f172a);
+}
+
+.archive-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}

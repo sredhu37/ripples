@@ -1,0 +1,123 @@
+.spicetrade-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.route-bar {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.r-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid #cbd5e1;
+  background: var(--card, #ffffff);
+  cursor: pointer;
+}
+
+.r-btn.active {
+  background: #d97706;
+  color: #ffffff;
+  border-color: #b45309;
+}
+
+.wind-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.wind-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted-foreground, #64748b);
+}
+
+.w-pill {
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 14px;
+  border: 1px solid #cbd5e1;
+  background: var(--card, #ffffff);
+  cursor: pointer;
+}
+
+.w-pill.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0369a1;
+}
+
+.voyage-card {
+  background: var(--card, #ffffff);
+  border: 2px solid var(--border, #e2e8f0);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.voyage-card.favorable {
+  border-color: #86efac;
+  background: #f0fdf4;
+}
+
+.voyage-card.headwind {
+  border-color: #fde047;
+  background: #fefce8;
+}
+
+.voyage-card.slow {
+  border-color: #fed7aa;
+  background: #fff7ed;
+}
+
+.voyage-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  text-align: center;
+}
+
+.s-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.s-lbl {
+  font-size: 11px;
+  color: var(--muted-foreground, #64748b);
+}
+
+.s-val {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.s-item.highlight .s-val {
+  color: #15803d;
+}
+
+.spicetrade-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}

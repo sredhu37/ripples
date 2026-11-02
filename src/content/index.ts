@@ -32,6 +32,14 @@ import { lesson as dictatorship } from "./dictatorship";
 import { lesson as capitalism } from "./capitalism";
 import { lesson as communism } from "./communism";
 import { lesson as powertriangle } from "./powertriangle";
+import { lesson as mughals } from "./mughals";
+import { lesson as spicetrade } from "./spicetrade";
+import { lesson as britishinindia } from "./britishinindia";
+import { lesson as independence } from "./independence";
+import { lesson as ww1 } from "./ww1";
+import { lesson as ww2 } from "./ww2";
+import { lesson as rebuilding } from "./rebuilding";
+import { lesson as whyhistory } from "./whyhistory";
 import type { Lesson } from "../lesson/types";
 
 const ALL: Record<string, Lesson | undefined> = {
@@ -69,6 +77,14 @@ const ALL: Record<string, Lesson | undefined> = {
   capitalism,
   communism,
   powertriangle,
+  mughals,
+  spicetrade,
+  britishinindia,
+  independence,
+  ww1,
+  ww2,
+  rebuilding,
+  whyhistory,
 };
 
 export function getLesson(id: string): Lesson | undefined {
