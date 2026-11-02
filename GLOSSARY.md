@@ -53,3 +53,16 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Reconciliation | Restoring friendship and cooperation between former adversaries | surrender, forgetting |
 | Primary source | An original historical record created during the time under study | rumor, blog post |
 | Memory culture | The collective practice of remembering historical events to protect democracy | ancient trivia, nostalgia |
+| Steam engine | A machine converting fuel heat and boiling water pressure into mechanical motion | magic motor, perpetual motion |
+| Assembly line | A production system where workers or machines assemble interchangeable parts in sequence | craft bench, chaos line |
+| Interchangeable parts | Standardized components manufactured so any unit fits into any assembly | custom one-offs, mismatched pieces |
+| Transistor | A microscopic electronic switch on a microchip representing 0 or 1 | thinking brain cell, light bulb |
+| Binary code | A representation using only 0 and 1 to encode computational data and instructions | secret code, magic spell |
+| Data packet | A small numbered unit of information routed across the internet | envelope letter, radio broadcast |
+| Protocol | A standardized set of rules enabling different computers to talk to each other | computer law, private secret |
+| Automation | Using machines and controllers to perform tasks with minimal human intervention | replacement, robot takeover |
+| Sensor | An electronic device detecting physical inputs such as light, heat, or distance | human eyeball, camera lens |
+| Machine learning | Algorithms finding statistical patterns across data examples without explicit rule coding | sentient thought, conscious mind |
+| Artificial intelligence | Software systems performing tasks like translation or pattern recognition | mechanical human, terminator |
+| Dual training | Combining classroom vocational education with practical workplace apprenticeship | trade school only, unpaid job |
+| Human edge | The uniquely human gifts of empathy, kindness, ethical choice, and imaginative creativity | biological flaw, weak computation |
