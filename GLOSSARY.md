@@ -18,3 +18,6 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Animated beat | A story beat that builds up tap by tap: one Otto line and one new diagram part per tap | slideshow, animation |
 | Term | A new word the lesson teaches by name (barter, money, price, save). Written between *stars* in lesson text, shown highlighted | keyword, vocabulary |
 | Save code | Parent-only text code that restores name, language and badges | backup, password |
+| Ticket size | The average price or coin value of one sale | receipt, basket |
+| Market share | The fraction or slice of total customers buying from one business | monopoly |
+| Mittelstand | German small and medium enterprises featured in the scale lesson | big business |
