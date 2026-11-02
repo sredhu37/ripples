@@ -17,6 +17,13 @@ import { lesson as marketing } from "./marketing";
 import { lesson as hiring } from "./hiring";
 import { lesson as scale } from "./scale";
 import { lesson as whygovernment } from "./whygovernment";
+import { lesson as elections } from "./elections";
+import { lesson as democracy } from "./democracy";
+import { lesson as monarchy } from "./monarchy";
+import { lesson as dictatorship } from "./dictatorship";
+import { lesson as capitalism } from "./capitalism";
+import { lesson as communism } from "./communism";
+import { lesson as powertriangle } from "./powertriangle";
 import type { Lesson } from "../lesson/types";
 
 const ALL: Record<string, Lesson | undefined> = {
@@ -39,6 +46,13 @@ const ALL: Record<string, Lesson | undefined> = {
   hiring,
   scale,
   whygovernment,
+  elections,
+  democracy,
+  monarchy,
+  dictatorship,
+  capitalism,
+  communism,
+  powertriangle,
 };
 
 export function getLesson(id: string): Lesson | undefined {
