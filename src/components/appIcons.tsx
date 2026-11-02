@@ -104,6 +104,78 @@ const LESSON_ART: Record<string, ReactNode> = {
       ))}
     </g>
   ),
+  profit: (
+    <g>
+      <path d="M16 64 C12 44 30 30 50 30 C70 30 88 44 84 64 C84 74 77 78 70 78 H30 C23 78 16 74 16 64 Z" fill="#d9953e" />
+      <path d="M24 56 C26 44 36 38 50 38 C64 38 74 44 76 56 Z" fill="#ecb766" />
+      <circle cx="68" cy="32" r="18" fill="#e3a91a" />
+      <circle cx="68" cy="32" r="13" fill="none" stroke="#c98d0e" strokeWidth="2.5" />
+      <path d="M68 24 V40 M60 32 H76" stroke="#fff" strokeWidth="3.5" strokeLinecap="round" />
+    </g>
+  ),
+  sales: (
+    <g>
+      <rect x="12" y="56" width="76" height="34" rx="3" fill="#2f7fb8" />
+      <path d="M8 56 L50 20 L92 56 Z" fill="#d6403a" />
+      <rect x="22" y="66" width="24" height="16" rx="2" fill="#fff" />
+      <circle cx="66" cy="74" r="12" fill="#e3a91a" />
+      <circle cx="66" cy="74" r="8" fill="none" stroke="#c98d0e" strokeWidth="2" />
+    </g>
+  ),
+  ticketsize: (
+    <g>
+      <path d="M50 16 V82 M20 82 H80" stroke="#23383f" strokeWidth="5" strokeLinecap="round" />
+      <path d="M18 36 L82 36" stroke="#23383f" strokeWidth="5" strokeLinecap="round" />
+      <path d="M18 36 L10 60 H26 Z" fill="#e0a860" />
+      <path d="M82 36 L70 60 H94 Z" fill="#e0a860" />
+      <circle cx="18" cy="52" r="5" fill="#d9953e" />
+      <rect x="76" y="46" width="12" height="10" rx="2" fill="#5aa05f" />
+    </g>
+  ),
+  marketshare: (
+    <g>
+      <circle cx="50" cy="50" r="38" fill="#df4a3f" />
+      <path d="M50 50 L50 12 A38 38 0 1 1 14 62 Z" fill="#4fa75a" />
+      <circle cx="50" cy="50" r="14" fill="#fff" stroke="#23383f" strokeWidth="3" />
+    </g>
+  ),
+  competition: (
+    <g>
+      <rect x="10" y="38" width="34" height="48" rx="2" fill="#e68aa0" />
+      <path d="M8 38 L27 18 L46 38 Z" fill="#d6403a" />
+      <rect x="18" y="56" width="18" height="30" fill="#fff" />
+      <rect x="56" y="38" width="34" height="48" rx="2" fill="#4a90e2" />
+      <path d="M54 38 L73 18 L92 38 Z" fill="#2f7fb8" />
+      <rect x="64" y="56" width="18" height="30" fill="#fff" />
+    </g>
+  ),
+  marketing: (
+    <g>
+      <path d="M16 42 H32 L60 22 V78 L32 58 H16 Z" fill="#1b8a9a" />
+      <path d="M26 58 L22 80 H34 L38 58" fill="#156470" />
+      <path d="M68 36 C76 42 76 58 68 64 M78 26 C90 38 90 62 78 74" stroke="#e3a91a" strokeWidth="6" strokeLinecap="round" fill="none" />
+    </g>
+  ),
+  hiring: (
+    <g>
+      <path d="M8 94 C8 70 24 60 40 60 C56 60 72 70 72 94 Z" fill="#e68aa0" />
+      <circle cx="40" cy="40" r="18" fill="#f3cfa6" />
+      <rect x="26" y="22" width="28" height="12" rx="3" fill="#fff" stroke="#cfc6ad" strokeWidth="2" />
+      <path d="M48 94 C48 76 60 68 74 68 C88 68 100 76 100 94 Z" fill="#f5a623" />
+      <circle cx="74" cy="50" r="14" fill="#e8b98c" />
+      <rect x="62" y="36" width="24" height="10" rx="3" fill="#fff" stroke="#cfc6ad" strokeWidth="2" />
+    </g>
+  ),
+  scale: (
+    <g>
+      <path d="M12 52 H34 V68 C34 74 42 76 50 78 C58 80 58 88 52 90 H12 Z" fill="#c0603a" />
+      <path d="M52 32 L64 32 L64 48 L76 36 L88 36 L88 88 H52 Z" fill="#587684" />
+      <rect x="58" y="16" width="10" height="16" fill="#3b5b7a" />
+      <rect x="76" y="20" width="10" height="16" fill="#3b5b7a" />
+      <circle cx="68" cy="8" r="4" fill="#a9b6bd" />
+      <circle cx="78" cy="10" r="3" fill="#a9b6bd" />
+    </g>
+  ),
 };
 
 /** Picture for a lesson on the trail, on its badge and in headings. */

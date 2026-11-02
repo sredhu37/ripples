@@ -11,6 +11,10 @@ export const CAST = {
   Pim: { hat: "beanie", shirt: "#8e6bbf" },
   Moss: { hat: "mayor", shirt: "#3b5b7a" },
   Pip: { hat: "none", shirt: "#e8863a" },
+  Clara: { hat: "none", shirt: "#e06343" },
+  Luca: { hat: "baker", shirt: "#4a90e2" },
+  Leo: { hat: "baker", shirt: "#f5a623" },
+  Maya: { hat: "cap", shirt: "#8b572a" },
 } as const satisfies Record<string, { hat: Hat; shirt: string }>;
 
 export type CastName = keyof typeof CAST;

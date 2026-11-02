@@ -8,10 +8,18 @@ import { lesson as taxes } from "./taxes";
 import { lesson as inflation } from "./inflation";
 import { lesson as printing } from "./printing";
 import { lesson as rates } from "./rates";
+import { lesson as profit } from "./profit";
+import { lesson as sales } from "./sales";
+import { lesson as ticketsize } from "./ticketsize";
+import { lesson as marketshare } from "./marketshare";
+import { lesson as competition } from "./competition";
+import { lesson as marketing } from "./marketing";
+import { lesson as hiring } from "./hiring";
+import { lesson as scale } from "./scale";
 import type { Lesson } from "../lesson/types";
 
 const ALL: Record<string, Lesson | undefined> = {
-  money, work, savings, loans, banks, interest, taxes, inflation, printing, rates,
+  money, work, savings, loans, banks, interest, taxes, inflation, printing, rates, profit, sales, ticketsize, marketshare, competition, marketing, hiring, scale,
 };
 
 export function getLesson(id: string): Lesson | undefined {

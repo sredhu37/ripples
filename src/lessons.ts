@@ -18,6 +18,14 @@ export const LESSONS: LessonMeta[] = [
   { id: "inflation", title: { en: "Prices and inflation", de: "Preise und Inflation" } },
   { id: "printing", title: { en: "Why not print money?", de: "Warum nicht einfach Geld drucken?" } },
   { id: "rates", title: { en: "Interest rates up and down", de: "Zinsen rauf und runter" } },
+  { id: "profit", title: { en: "Costs and profit", de: "Kosten und Gewinn" } },
+  { id: "sales", title: { en: "Making sales", de: "Verkauf und Kundschaft" } },
+  { id: "ticketsize", title: { en: "Small and big prices", de: "Kleine und grosse Preise" } },
+  { id: "marketshare", title: { en: "Market share", de: "Der Marktanteil" } },
+  { id: "competition", title: { en: "Friendly competition", de: "Wettbewerb" } },
+  { id: "marketing", title: { en: "Spreading the word", de: "Bekanntheit" } },
+  { id: "hiring", title: { en: "Hiring and risk", de: "Mitarbeiter einstellen" } },
+  { id: "scale", title: { en: "Big and small business", de: "Wachsen und Grosswerden" } },
 ];
 
 export const LESSON_ORDER = LESSONS.map((l) => l.id);
