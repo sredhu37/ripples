@@ -1,0 +1,138 @@
+.bonds-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.bonds-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.bonds-panel {
+  background: var(--card, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.principal-badge {
+  font-size: 13px;
+  font-weight: 700;
+  background: #fef3c7;
+  color: #92400e;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.coupons-stack {
+  display: flex;
+  gap: 6px;
+  margin: 6px 0;
+}
+
+.coupon-ticket {
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px dashed #f59e0b;
+}
+
+.coupon-ticket.active {
+  background: #fffbeb;
+  color: #b45309;
+}
+
+.coupon-ticket.torn {
+  background: #f1f5f9;
+  color: #94a3b8;
+  border-color: #cbd5e1;
+}
+
+.collected-badge {
+  font-size: 12px;
+}
+
+.seesaw-graphic {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.seesaw-beam {
+  width: 85%;
+  height: 28px;
+  background: #e2e8f0;
+  border: 2px solid #64748b;
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  transition: transform 0.3s ease;
+}
+
+.beam-left, .beam-right {
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+  line-height: 1.1;
+}
+
+.beam-val {
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.beam-center {
+  font-size: 10px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.seesaw-fulcrum {
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 18px solid #475569;
+  margin-top: -2px;
+}
+
+.seesaw-slider-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.slider-label {
+  font-size: 11px;
+  color: var(--muted-foreground, #64748b);
+}
+
+.rate-slider {
+  width: 85%;
+  cursor: pointer;
+}
+
+.bonds-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}

@@ -1,0 +1,112 @@
+.philanthropy-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.tree-container {
+  background: var(--card, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.endowment-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.tree-apples {
+  font-size: 14px;
+  font-weight: 700;
+  color: #15803d;
+  background: #dcfce7;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+.tree-trunk {
+  font-size: 12px;
+  font-weight: 700;
+  color: #78350f;
+  background: #fef3c7;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid #f59e0b;
+}
+
+.tree-stump {
+  background: #fee2e2;
+  border: 2px dashed #ef4444;
+  border-radius: 6px;
+  padding: 10px;
+  text-align: center;
+}
+
+.stump-warning {
+  font-size: 12px;
+  font-weight: 700;
+  color: #991b1b;
+}
+
+.tree-toggle-bar {
+  margin-top: 4px;
+}
+
+.toggle-stump-btn {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  cursor: pointer;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.project-card {
+  background: var(--card, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.p-title {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.p-coins {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0284c7;
+}
+
+.philanthropy-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-row {
+  display: flex;
+  gap: 8px;
+}

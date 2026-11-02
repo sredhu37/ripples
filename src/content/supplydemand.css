@@ -1,0 +1,140 @@
+.supplydemand-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.supplydemand-market {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.supplydemand-box {
+  background: var(--card, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 140px;
+}
+
+.supplydemand-box-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted-foreground, #64748b);
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.supplydemand-count-badge {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.supplydemand-fish-icons,
+.supplydemand-buyer-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+}
+
+.supplydemand-token {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.supplydemand-buyer-more {
+  font-size: 11px;
+  font-weight: bold;
+  align-self: center;
+  color: #64748b;
+}
+
+.supplydemand-scale {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: var(--card, #ffffff);
+  border: 2px solid var(--border, #cbd5e1);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.supplydemand-scale-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.supplydemand-price-tag {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0284c7;
+}
+
+.supplydemand-price-slider {
+  width: 90%;
+  cursor: pointer;
+}
+
+.supplydemand-status-label {
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.supplydemand-status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.supplydemand-status-badge.shortage {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.supplydemand-status-badge.surplus {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.supplydemand-status-badge.balanced {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.supplydemand-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.supplydemand-feedback-msg {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.supplydemand-feedback-msg.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.supplydemand-feedback-msg.warning {
+  background: #fee2e2;
+  color: #991b1b;
+}
