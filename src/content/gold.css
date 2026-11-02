@@ -1,0 +1,141 @@
+.gold-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.gold-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1.2fr;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.gold-panel {
+  background: var(--card, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.gold-panel-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted-foreground, #64748b);
+}
+
+.gold-climate-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.gold-climate-btn {
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid var(--border, #cbd5e1);
+  background: var(--card, #ffffff);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+}
+
+.gold-climate-btn.active {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+.gold-climate-status {
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.gold-climate-status.calm {
+  color: #166534;
+}
+
+.gold-climate-status.storm {
+  color: #b91c1c;
+}
+
+.gold-profit-badge {
+  font-size: 15px;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.gold-profit-badge.profit {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.gold-profit-badge.loss {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.gold-business-desc {
+  font-size: 11px;
+  color: var(--muted-foreground, #64748b);
+}
+
+.gold-vault-bar-icon {
+  margin: 4px 0;
+}
+
+.gold-vault-balance {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.gold-price-badge {
+  background: #fef08a;
+  color: #854d0e;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.gold-vault-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.gold-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.gold-feedback-msg {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.gold-feedback-msg.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.gold-feedback-msg.warning {
+  background: #fee2e2;
+  color: #991b1b;
+}

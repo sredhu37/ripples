@@ -1,0 +1,149 @@
+.commodities-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.commodities-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.commodities-weather-panel,
+.commodities-silo-panel,
+.commodities-bakery-panel {
+  background: var(--card, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.commodities-panel-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted-foreground, #64748b);
+  text-align: center;
+}
+
+.commodities-weather-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.commodities-weather-btn {
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid var(--border, #cbd5e1);
+  background: var(--card, #ffffff);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+}
+
+.commodities-weather-btn.active {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+.commodities-silo-meter {
+  width: 50px;
+  height: 100px;
+  border: 2px solid #64748b;
+  border-radius: 6px;
+  background: #f1f5f9;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.commodities-silo-fill {
+  width: 100%;
+  background: #facc15;
+  transition: height 0.4s ease;
+}
+
+.commodities-silo-fill.scarce {
+  background: #f87171;
+}
+
+.commodities-silo-fill.plentiful {
+  background: #4ade80;
+}
+
+.commodities-silo-count {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.commodities-price-callout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f8fafc;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.commodities-price-label {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.commodities-price-val {
+  font-size: 14px;
+  font-weight: 800;
+  color: #b45309;
+}
+
+.commodities-bakery-demand-badge {
+  font-size: 12px;
+  padding: 4px 8px;
+  background: #fef3c7;
+  color: #92400e;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.commodities-bakery-cost {
+  font-size: 13px;
+}
+
+.commodities-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.commodities-feedback-msg {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.commodities-feedback-msg.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.commodities-feedback-msg.warning {
+  background: #fee2e2;
+  color: #991b1b;
+}

@@ -1,0 +1,129 @@
+.stocksvsbonds-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.stocksvsbonds-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.svb-panel {
+  background: var(--card, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.outcome-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.outcome-btn {
+  padding: 6px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid var(--border, #cbd5e1);
+  background: var(--card, #ffffff);
+  cursor: pointer;
+  text-align: left;
+}
+
+.outcome-btn.active {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+.revenue-badge {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.role-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.role-tag.equity {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+.role-tag.debt {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.payout-num {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.payout-num.stock {
+  color: #ea580c;
+}
+
+.payout-num.bond {
+  color: #0284c7;
+}
+
+.payout-desc {
+  font-size: 11px;
+  color: var(--muted-foreground, #64748b);
+}
+
+.quiz-priority-box {
+  background: var(--card, #ffffff);
+  border: 2px dashed #0284c7;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.quiz-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.quiz-allocator {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.alloc-btn {
+  padding: 8px 14px;
+  background: #0284c7;
+  color: #ffffff;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.stocksvsbonds-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}

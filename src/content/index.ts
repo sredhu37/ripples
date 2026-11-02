@@ -16,6 +16,14 @@ import { lesson as competition } from "./competition";
 import { lesson as marketing } from "./marketing";
 import { lesson as hiring } from "./hiring";
 import { lesson as scale } from "./scale";
+import { lesson as supplydemand } from "./supplydemand";
+import { lesson as commodities } from "./commodities";
+import { lesson as gold } from "./gold";
+import { lesson as stocks } from "./stocks";
+import { lesson as bonds } from "./bonds";
+import { lesson as stocksvsbonds } from "./stocksvsbonds";
+import { lesson as derivatives } from "./derivatives";
+import { lesson as philanthropy } from "./philanthropy";
 import { lesson as whygovernment } from "./whygovernment";
 import { lesson as elections } from "./elections";
 import { lesson as democracy } from "./democracy";
@@ -45,6 +53,14 @@ const ALL: Record<string, Lesson | undefined> = {
   marketing,
   hiring,
   scale,
+  supplydemand,
+  commodities,
+  gold,
+  stocks,
+  bonds,
+  stocksvsbonds,
+  derivatives,
+  philanthropy,
   whygovernment,
   elections,
   democracy,
