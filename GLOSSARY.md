@@ -21,3 +21,11 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Ticket size | The average price or coin value of one sale | receipt, basket |
 | Market share | The fraction or slice of total customers buying from one business | monopoly |
 | Mittelstand | German small and medium enterprises featured in the scale lesson | big business |
+| Government | The group of people chosen to make shared rules and look after public services | rulers, bosses |
+| Election | A peaceful process where citizens cast secret ballots to choose leaders | contest, fight |
+| Democracy | A system where citizens choose lawmakers and laws protect rights | regime, state |
+| Monarchy | A system where leadership passes down within a ruling family | dynasty, reign |
+| Dictatorship | Rule by one leader or group who holds total power without free elections | strongman, regime |
+| Capitalism | An economic system where individuals and private businesses own tools and shops | free-for-all, greed |
+| Communism | An economic system where tools and factories are owned collectively or by the state | commune, state rule |
+| Power Triangle | The dynamic balance between citizens, businesses, and government | power web, system |

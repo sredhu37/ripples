@@ -32,6 +32,12 @@ Lessons unlock in order: the next one opens after the badge. Finished lessons ca
 
 See docs/adr/0001-group-2-business-curriculum.md for the full curriculum and toy mechanics specification.
 
+## Group 4 lessons (Governments), in order
+
+27. Why Government? 28. How Leaders are Chosen (Elections) 29. Democracy 30. Monarchy 31. Dictatorship 32. Capitalism 33. Communism 34. The Power Triangle
+
+Political neutrality and framing decisions: see [docs/adr/0002-group-4-governments-neutrality-framing.md](adr/0002-group-4-governments-neutrality-framing.md).
+
 ## Experience
 
 - **Map and badges.** A trail on a map with one stop per lesson, and a shelf of badges. No coins, no streaks, no timers.
