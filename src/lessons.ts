@@ -13,10 +13,12 @@ export function getLessonTitle(meta: LessonMeta, lang: Lang): string {
 
 /** Complete Curriculum: Group 1, Group 2, Group 3, Group 4, and Group 5. */
 export const LESSONS: LessonMeta[] = [
-  // Group 1: Money & Work (1-10)
+  // Group 1: Money & Work (1-12)
   { id: "money", title: { en: "What is money?", de: "Was ist Geld?", pl: "Czym są pieniądze?" } },
   { id: "work", title: { en: "Work and pay", de: "Arbeit und Lohn", pl: "Praca i zarobek" } },
   { id: "savings", title: { en: "Savings", de: "Sparen", pl: "Oszczędzanie" } },
+  { id: "business", title: { en: "Starting a business", de: "Ein eigenes Geschäft", pl: "Własna firma" } },
+  { id: "equity", title: { en: "Assets and equity", de: "Vermögen und Anteile", pl: "Majątek i udziały" } },
   { id: "loans", title: { en: "Loans", de: "Geld leihen", pl: "Pożyczanie pieniędzy" } },
   { id: "banks", title: { en: "Banks", de: "Banken", pl: "Banki" } },
   { id: "interest", title: { en: "Interest", de: "Zinsen", pl: "Odsetki" } },

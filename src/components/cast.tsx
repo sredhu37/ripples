@@ -15,6 +15,7 @@ export const CAST = {
   Luca: { hat: "baker", shirt: "#4a90e2" },
   Leo: { hat: "baker", shirt: "#f5a623" },
   Maya: { hat: "cap", shirt: "#8b572a" },
+  Mira: { hat: "none", shirt: "#ec4899" },
 } as const satisfies Record<string, { hat: Hat; shirt: string }>;
 
 export type CastName = keyof typeof CAST;

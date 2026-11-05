@@ -1,6 +1,8 @@
 import { lesson as money } from "./money";
 import { lesson as work } from "./work";
 import { lesson as savings } from "./savings";
+import { lesson as business } from "./business";
+import { lesson as equity } from "./equity";
 import { lesson as loans } from "./loans";
 import { lesson as banks } from "./banks";
 import { lesson as interest } from "./interest";
@@ -54,6 +56,8 @@ const ALL: Record<string, Lesson | undefined> = {
   money,
   work,
   savings,
+  business,
+  equity,
   loans,
   banks,
   interest,

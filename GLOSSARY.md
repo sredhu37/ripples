@@ -67,3 +67,11 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Artificial intelligence | Software systems performing tasks like translation or pattern recognition | mechanical human, terminator |
 | Dual training | Combining classroom vocational education with practical workplace apprenticeship | trade school only, unpaid job |
 | Human edge | The uniquely human gifts of empathy, kindness, ethical choice, and imaginative creativity | biological flaw, weak computation |
+| Owner | A person who invests savings to start a business, owns its tools, takes the risk of loss, and keeps the profit | boss, manager |
+| Employee | A worker who agrees to perform tasks in exchange for guaranteed hourly pay or fixed wages | servant, helper |
+| Profit | The coins left over from sales after paying all business costs, ingredients, and employee wages | revenue, cash |
+| Loss | The money lost when business costs and wages exceed what was earned from sales | fine, debt |
+| Asset | A valuable tool or property that produces income or utility over time | gadget, trinket |
+| Passive income | Money earned from an asset without trading your personal hours hands-on | free money, bonus |
+| Equity | An ownership share or percentage in a business or asset | loan, token |
+| Co-owner | A partner who owns an equity share in a business and splits profits and risks | lender, customer |

@@ -30,8 +30,8 @@ describe("registry", () => {
     expect(hasLesson("money")).toBe(true);
   });
 
-  it("has non-empty trilingual titles for all 50 lessons", () => {
-    expect(LESSONS).toHaveLength(50);
+  it("has non-empty trilingual titles for all 52 lessons", () => {
+    expect(LESSONS).toHaveLength(52);
     for (const meta of LESSONS) {
       expect(meta.title.en.trim(), `${meta.id} title en`).not.toBe("");
       expect(meta.title.de.trim(), `${meta.id} title de`).not.toBe("");
