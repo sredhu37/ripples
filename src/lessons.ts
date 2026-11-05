@@ -55,14 +55,14 @@ export const LESSONS: LessonMeta[] = [
   { id: "powertriangle", title: { en: "The Power Triangle", de: "Das Macht-Dreieck", pl: "Trójpodział władzy" } },
 
   // Group 5: History (35-42)
-  { id: "mughals", title: { en: "The Mughals", de: "Das Mogulreich" } },
-  { id: "spicetrade", title: { en: "The Spice Trade", de: "Der Gewuerzhandel" } },
-  { id: "britishinindia", title: { en: "The British in India", de: "Die Briten in Indien" } },
-  { id: "independence", title: { en: "The Independence Movement", de: "Die Unabhaengigkeitsbewegung" } },
-  { id: "ww1", title: { en: "World War 1", de: "Der Erste Weltkrieg" } },
-  { id: "ww2", title: { en: "World War 2 and Human Rights", de: "Der Zweite Weltkrieg und Menschenrechte" } },
-  { id: "rebuilding", title: { en: "Rebuilding Europe", de: "Europas Wiederaufbau" } },
-  { id: "whyhistory", title: { en: "Why History Matters", de: "Warum Geschichte wichtig ist" } },
+  { id: "mughals", title: { en: "The Mughals", de: "Das Mogulreich", pl: "Imperium Mogołów" } },
+  { id: "spicetrade", title: { en: "The Spice Trade", de: "Der Gewuerzhandel", pl: "Handel przyprawami" } },
+  { id: "britishinindia", title: { en: "The British in India", de: "Die Briten in Indien", pl: "Brytyjczycy w Indiach" } },
+  { id: "independence", title: { en: "The Independence Movement", de: "Die Unabhaengigkeitsbewegung", pl: "Ruch niepodległościowy" } },
+  { id: "ww1", title: { en: "World War 1", de: "Der Erste Weltkrieg", pl: "Pierwsza wojna światowa" } },
+  { id: "ww2", title: { en: "World War 2 and Human Rights", de: "Der Zweite Weltkrieg und Menschenrechte", pl: "Druga wojna światowa i prawa człowieka" } },
+  { id: "rebuilding", title: { en: "Rebuilding Europe", de: "Europas Wiederaufbau", pl: "Odbudowa powojenna" } },
+  { id: "whyhistory", title: { en: "Why History Matters", de: "Warum Geschichte wichtig ist", pl: "Dlaczego historia ma znaczenie" } },
 
   // Group 6: Technology (43-50)
   { id: "tools", title: { en: "Tools to Steam", de: "Von Werkzeugen zum Dampf" } },

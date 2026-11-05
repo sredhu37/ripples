@@ -1,11 +1,25 @@
 import type { DiagramProps } from "../lesson/types";
 
-export function RadioPropagandaDiagram({ step }: DiagramProps) {
+export function RadioPropagandaDiagram({ lang, step }: DiagramProps) {
+  const title =
+    lang === "pl"
+      ? "Narodziny dyktatury autorytarnej"
+      : lang === "de"
+      ? "Der Aufstieg der Diktatur"
+      : "The Rise of Authoritarian Dictatorship";
+
+  const sub =
+    lang === "pl"
+      ? "Cenzura wolnej prasy i nadawanie wyłącznie propagandy państwowej"
+      : lang === "de"
+      ? "Zensur freier Zeitungen und Verbreitung staatlicher Propaganda"
+      : "Censoring free newspapers and broadcasting only state propaganda";
+
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Loudspeaker and Propaganda">
       <rect x="30" y="30" width="340" height="180" rx="12" fill="#fff7ed" stroke="#fed7aa" strokeWidth="2" />
       <text x="200" y="60" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#9a3412">
-        The Rise of Authoritarian Dictatorship
+        {title}
       </text>
       {/* Loudspeaker */}
       <polygon points="120,110 180,80 180,140" fill="#475569" />
@@ -15,19 +29,33 @@ export function RadioPropagandaDiagram({ step }: DiagramProps) {
       <path d="M85 75 Q45 110 85 145" stroke="#ea580c" strokeWidth="3" fill="none" />
       {step >= 2 && (
         <text x="200" y="195" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#7c2d12">
-          Censoring free newspapers and broadcasting only state propaganda
+          {sub}
         </text>
       )}
     </svg>
   );
 }
 
-export function TotalDevastationRubbleDiagram({ step }: DiagramProps) {
+export function TotalDevastationRubbleDiagram({ lang, step }: DiagramProps) {
+  const title =
+    lang === "pl"
+      ? "Całkowite zniszczenie: 1939 do 1945"
+      : lang === "de"
+      ? "Totale Zerstoerung: 1939 bis 1945"
+      : "Total Devastation: 1939 to 1945";
+
+  const sub =
+    lang === "pl"
+      ? "Wojny napastnicze zrujnowały całe miasta i ludzkie życia"
+      : lang === "de"
+      ? "Angriffskriege legten Staedte in Truemmer und zerstoerten Leben"
+      : "Wars of aggression left entire cities and lives shattered";
+
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Devastation of World War 2">
       <rect x="40" y="30" width="320" height="180" rx="12" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="2" />
       <text x="200" y="60" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#1e293b">
-        Total Devastation: 1939 to 1945
+        {title}
       </text>
       {/* Broken brick silhouette */}
       <polygon points="80,160 110,110 130,130 150,90 180,160" fill="#64748b" />
@@ -35,19 +63,33 @@ export function TotalDevastationRubbleDiagram({ step }: DiagramProps) {
       <rect x="50" y="160" width="300" height="20" fill="#475569" />
       {step >= 2 && (
         <text x="200" y="200" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#0f172a">
-          Wars of aggression left entire cities and lives shattered
+          {sub}
         </text>
       )}
     </svg>
   );
 }
 
-export function WhiteRoseLeafletDiagram({ step }: DiagramProps) {
+export function WhiteRoseLeafletDiagram({ lang, step }: DiagramProps) {
+  const title =
+    lang === "pl"
+      ? "Odwaga cywilna: Biała Róża (Die Weisse Rose)"
+      : lang === "de"
+      ? "Zivilcourage: Die Weisse Rose"
+      : "Civil Courage: The White Rose (Die Weisse Rose)";
+
+  const sub =
+    lang === "pl"
+      ? "Hans i Sophie Scholl pokojowo stanęli w obronie prawdy i godności"
+      : lang === "de"
+      ? "Hans und Sophie Scholl standen friedlich fuer die Wahrheit ein"
+      : "Hans and Sophie Scholl stood up peacefully for truth";
+
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="The White Rose and Civil Courage">
       <rect x="40" y="30" width="320" height="180" rx="12" fill="#fafaf9" stroke="#e7e5e4" strokeWidth="2" />
       <text x="200" y="55" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#1c1917">
-        Civil Courage: The White Rose (Die Weisse Rose)
+        {title}
       </text>
       {/* Paper leaflet */}
       <rect x="140" y="75" width="120" height="80" rx="4" fill="#ffffff" stroke="#a8a29e" strokeWidth="2" />
@@ -59,19 +101,33 @@ export function WhiteRoseLeafletDiagram({ step }: DiagramProps) {
       <text x="120" y="121" textAnchor="middle" fontSize="16">🌹</text>
       {step >= 2 && (
         <text x="200" y="195" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#44403c">
-          Hans and Sophie Scholl stood up peacefully for truth
+          {sub}
         </text>
       )}
     </svg>
   );
 }
 
-export function UnitedNationsGlobeDiagram({ step }: DiagramProps) {
+export function UnitedNationsGlobeDiagram({ lang, step }: DiagramProps) {
+  const title =
+    lang === "pl"
+      ? "San Francisco 1945: Narody Zjednoczone"
+      : lang === "de"
+      ? "San Francisco 1945: Die Vereinten Nationen"
+      : "San Francisco 1945: The United Nations";
+
+  const sub =
+    lang === "pl"
+      ? "„Nigdy więcej” zjednoczyło narody na całym świecie"
+      : lang === "de"
+      ? "\"Nie wieder\" vereinte Nationen auf der ganzen Welt"
+      : "\"Never again\" united nations across the globe";
+
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="The United Nations Founding">
       <rect x="30" y="30" width="340" height="180" rx="12" fill="#eff6ff" stroke="#bfdbfe" strokeWidth="2" />
       <text x="200" y="60" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#1e40af">
-        San Francisco 1945: The United Nations
+        {title}
       </text>
       {/* Globe */}
       <circle cx="200" cy="120" r="40" fill="#38bdf8" stroke="#0284c7" strokeWidth="3" />
@@ -81,29 +137,50 @@ export function UnitedNationsGlobeDiagram({ step }: DiagramProps) {
       <path d="M140 120 Q160 165 200 165 Q240 165 260 120" stroke="#16a34a" strokeWidth="4" fill="none" />
       {step >= 2 && (
         <text x="200" y="200" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#1d4ed8">
-          "Never again" united nations across the globe
+          {sub}
         </text>
       )}
     </svg>
   );
 }
 
-export function GrundgesetzArticle1Diagram({ step }: DiagramProps) {
+export function GrundgesetzArticle1Diagram({ lang, step }: DiagramProps) {
+  const title =
+    lang === "pl"
+      ? "Konstytucja: Godność człowieka jako fundament"
+      : lang === "de"
+      ? "Deutsches Grundgesetz: Artikel 1"
+      : "German Basic Law: Article 1 (Grundgesetz)";
+
+  const quote =
+    lang === "pl"
+      ? "„Godność człowieka jest nienaruszalna”"
+      : lang === "de"
+      ? "\"Die Wuerde des Menschen ist unantastbar\""
+      : "\"Human dignity shall be inviolable\"";
+
+  const sub =
+    lang === "pl"
+      ? "Art. 30 Konstytucji RP oraz Art. 1 Grundgesetz: Źródło wolności i praw"
+      : lang === "de"
+      ? "Die Menschenwuerde ist oberstes Verfassungsprinzip"
+      : "Human dignity shall be inviolable";
+
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Grundgesetz Article 1: Human Dignity">
       <rect x="30" y="30" width="340" height="180" rx="12" fill="#f8fafc" stroke="#cbd5e1" strokeWidth="2" />
       <text x="200" y="60" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#0f172a">
-        German Basic Law: Article 1 (Grundgesetz)
+        {title}
       </text>
       {/* Gold shield */}
       <path d="M160 80 L240 80 L240 130 Q200 160 160 130 Z" fill="#fef08a" stroke="#ca8a04" strokeWidth="2" />
       <text x="200" y="115" textAnchor="middle" fontSize="18">⚖️</text>
       <text x="200" y="180" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#1e293b">
-        "Die Wuerde des Menschen ist unantastbar"
+        {quote}
       </text>
       {step >= 2 && (
         <text x="200" y="200" textAnchor="middle" fontSize="11" fill="#475569">
-          Human dignity shall be inviolable
+          {sub}
         </text>
       )}
     </svg>
