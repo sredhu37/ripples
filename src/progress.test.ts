@@ -60,6 +60,13 @@ describe("storage", () => {
     expect(loadProgress(s)).toEqual(p);
   });
 
+  it("saves and loads Polish progress", () => {
+    const s = memoryStorage();
+    const p = earnBadge({ ...emptyProgress(), name: "Stanisław", lang: "pl" }, "money");
+    saveProgress(s, p);
+    expect(loadProgress(s)).toEqual(p);
+  });
+
   it("falls back to empty progress for corrupt data", () => {
     const s = { getItem: () => "{not json" };
     expect(loadProgress(s)).toEqual(emptyProgress());
@@ -74,6 +81,12 @@ describe("storage", () => {
 describe("save and restore code", () => {
   it("round-trips name, language and badges, including umlauts", () => {
     const p = earnBadge(earnBadge({ ...emptyProgress(), name: "Jörg", lang: "de" }, "money"), "savings");
+    const restored = importCode(exportCode(p, order), order);
+    expect(restored).toEqual({ ...p, muted: false });
+  });
+
+  it("round-trips Polish progress with diacritics", () => {
+    const p = earnBadge(earnBadge({ ...emptyProgress(), name: "Zosia Ł.", lang: "pl" }, "money"), "work");
     const restored = importCode(exportCode(p, order), order);
     expect(restored).toEqual({ ...p, muted: false });
   });

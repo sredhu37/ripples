@@ -14,7 +14,15 @@ export function speak(text: string, lang: Lang): void {
   const u = new SpeechSynthesisUtterance(text);
   const code = SPEECH_LANG[lang];
   u.lang = code;
-  const voice = synth.getVoices().find((v) => v.lang.replace("_", "-").startsWith(code.slice(0, 2)));
+  const voices = synth.getVoices();
+  const normalized = (vCode: string) => vCode.replace("_", "-").toLowerCase();
+  const targetCode = normalized(code);
+  const langPrefix = targetCode.slice(0, 2);
+
+  let voice =
+    voices.find((v) => normalized(v.lang) === targetCode) ??
+    voices.find((v) => normalized(v.lang).startsWith(langPrefix));
+
   if (voice) u.voice = voice;
   u.rate = 0.92;
   synth.speak(u);
@@ -27,8 +35,8 @@ export function stopSpeaking(): void {
 /** true when the browser has a voice for this language */
 export function hasVoice(lang: Lang): boolean {
   if (!canSpeak()) return false;
-  const code = SPEECH_LANG[lang].slice(0, 2);
-  return window.speechSynthesis.getVoices().some((v) => v.lang.toLowerCase().startsWith(code));
+  const langPrefix = SPEECH_LANG[lang].slice(0, 2).toLowerCase();
+  return window.speechSynthesis.getVoices().some((v) => v.lang.replace("_", "-").toLowerCase().startsWith(langPrefix));
 }
 
 /** Voices load late in Chrome, so listen for the change. */

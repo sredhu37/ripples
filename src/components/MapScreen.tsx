@@ -1,11 +1,10 @@
 import { hasLesson } from "../content";
-import { LESSONS } from "../lessons";
+import { LESSONS, getLessonTitle, LESSON_ORDER } from "../lessons";
 import { t } from "../i18n";
-import { LESSON_ORDER } from "../lessons";
 import { lessonState, nextLessonId, type Lang, type Progress } from "../progress";
 import { sfx } from "../sound";
 import { LessonIcon, UiIcon } from "./appIcons";
-import { LangSwitch } from "./NameScreen";
+import { LangSwitch } from "./LangSwitch";
 import { Otto } from "./Otto";
 import { SpeechBubble } from "./SpeechBubble";
 
@@ -22,6 +21,7 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
   const { lang, name, muted } = progress;
   const next = nextLessonId(progress, LESSON_ORDER);
   const greeting = next === null ? t(lang, "allDone") : t(lang, returning ? "welcomeBack" : "welcome", { name });
+  const nextLesson = LESSONS.find((l) => l.id === next);
 
   return (
     <main className="screen">
@@ -58,7 +58,7 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
             onOpenLesson(next);
           }}
         >
-          {t(lang, "continue")}: {LESSONS.find((l) => l.id === next)?.title[lang]}
+          {t(lang, "continue")}: {nextLesson ? getLessonTitle(nextLesson, lang) : ""}
         </button>
       )}
 
@@ -67,11 +67,12 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
         <ul className="shelf-row">
           {LESSONS.map((l) => {
             const earned = progress.badges.includes(l.id);
+            const title = getLessonTitle(l, lang);
             return (
-              <li key={l.id} className={earned ? "medal medal-on" : "medal"} title={l.title[lang]}>
+              <li key={l.id} className={earned ? "medal medal-on" : "medal"} title={title}>
                 <span aria-hidden="true">{earned ? <LessonIcon id={l.id} size={34} /> : null}</span>
                 <span className="sr-only">
-                  {l.title[lang]}: {earned ? (lang === "en" ? "done" : "fertig") : "-"}
+                  {title}: {earned ? (lang === "en" ? "done" : lang === "de" ? "fertig" : "zrobione") : "-"}
                 </span>
               </li>
             );
@@ -83,13 +84,14 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
         {LESSONS.map((l, i) => {
           const state = lessonState(progress, LESSON_ORDER, l.id);
           const open = state !== "locked";
+          const title = getLessonTitle(l, lang);
           return (
             <li key={l.id} className={`stop stop-${state} ${i % 2 ? "right" : "left"}`}>
               <button
                 type="button"
                 className="place"
                 disabled={!open}
-                aria-label={`${i + 1}. ${l.title[lang]}`}
+                aria-label={`${i + 1}. ${title}`}
                 onClick={() => {
                   sfx.tap();
                   onOpenLesson(l.id);
@@ -100,7 +102,7 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
                 </span>
                 <span className="place-text">
                   <span className="place-title">
-                    {i + 1}. {l.title[lang]}
+                    {i + 1}. {title}
                   </span>
                   <span className="place-tag">
                     {state === "done" ? <UiIcon name="medal" size={22} label={t(lang, "badges")} /> : state === "next" ? t(lang, "nextUp") : t(lang, "locked")}

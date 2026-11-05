@@ -1,8 +1,16 @@
 import type { ComponentType } from "react";
 import type { Lang } from "../progress";
 
-/** A text in both languages. Every field must be filled in both. */
-export type Text = Record<Lang, string>;
+/** A text in all languages. English and German required; Polish optional during phased rollout. */
+export type Text = {
+  en: string;
+  de: string;
+  pl?: string;
+};
+
+export function resolveText(t: Text, lang: Lang): string {
+  return t[lang] ?? t.en;
+}
 
 /** What an animated diagram receives: how many lines have been tapped so far. */
 export interface DiagramProps {
@@ -58,12 +66,19 @@ export type Question =
       hint: Text;
     };
 
-/** English only. Sunny reads it in the parent area before the lesson counts as approved. */
+export type MultilingualText = string | Text;
+
+export function resolveFactText(t: MultilingualText, lang: Lang): string {
+  if (typeof t === "string") return t;
+  return t[lang] ?? t.en;
+}
+
+/** Parent area fact cards: claims, sources, and simplifications in EN, DE, and PL. */
 export interface FactCard {
   /** At least 5. Each claim the lesson makes, with a primary or authoritative source URL. */
-  claims: { text: string; source: string }[];
+  claims: { text: MultilingualText; source: string }[];
   /** What was simplified for an 8-year-old, and why that is fair. */
-  simplified: string[];
+  simplified: MultilingualText[];
 }
 
 export interface Lesson {
@@ -78,7 +93,7 @@ export interface Lesson {
   questions: Question[];
   /** One conversation question for the parent */
   askDad: Text;
-  /** The Germany and euros card shown after the badge */
+  /** The Germany/India/Poland card shown after the badge */
   realLife: { title: Text; body: Text };
   factCard: FactCard;
 }

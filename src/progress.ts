@@ -1,4 +1,4 @@
-export type Lang = "en" | "de";
+export type Lang = "en" | "de" | "pl";
 
 export interface Progress {
   name: string;
@@ -26,9 +26,11 @@ function sanitize(d: unknown): Progress {
   const base = emptyProgress();
   if (typeof d !== "object" || d === null) return base;
   const o = d as Record<string, unknown>;
+  const rawLang = o.lang;
+  const lang: Lang = rawLang === "de" ? "de" : rawLang === "pl" ? "pl" : "en";
   return {
     name: typeof o.name === "string" ? cleanName(o.name) : base.name,
-    lang: o.lang === "de" ? "de" : "en",
+    lang,
     muted: o.muted === true,
     badges: Array.isArray(o.badges)
       ? [...new Set(o.badges.filter((b): b is string => typeof b === "string"))]
@@ -101,9 +103,11 @@ export function importCode(code: string, order: string[]): Progress | null {
     if (checksum(body) !== sum) return null;
     const d = JSON.parse(fromB64Url(body)) as { n?: unknown; l?: unknown; b?: unknown };
     if (typeof d.n !== "string" || typeof d.b !== "number") return null;
+    const rawLang = d.l;
+    const lang: Lang = rawLang === "de" ? "de" : rawLang === "pl" ? "pl" : "en";
     return {
       name: cleanName(d.n),
-      lang: d.l === "de" ? "de" : "en",
+      lang,
       muted: false,
       badges: order.filter((_, i) => Math.floor((d.b as number) / Math.pow(2, i)) % 2 === 1),
     };

@@ -3,7 +3,11 @@ import type { Lang } from "./progress";
 export interface LessonMeta {
   /** Stable id, saved in progress and in the save code. Only ever append new ids at the end of a group. */
   id: string;
-  title: Record<Lang, string>;
+  title: { en: string; de: string; pl?: string };
+}
+
+export function getLessonTitle(meta: LessonMeta, lang: Lang): string {
+  return meta.title[lang] ?? meta.title.en;
 }
 
 /** Complete Curriculum: Group 1, Group 2, Group 3, Group 4, and Group 5. */

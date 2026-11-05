@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import type { Lang } from "../progress";
 import { CheckButton } from "../lesson/toolkit";
+import { resolveText, type Text } from "../lesson/types";
 import "./mughals.css";
 
 export function calcImperialHarmony(scholarCount: number, listensToAll: boolean) {
@@ -35,7 +36,7 @@ export function MughalsToy({ lang, mode = "toy", onDone }: MughalsToyProps) {
   const allScholars = [
     {
       id: "philosophy",
-      name: { en: "Philosophy and Ethics", de: "Philosophie und Ethik" },
+      name: { en: "Philosophy and Ethics", de: "Philosophie und Ethik", pl: "Filozofia i etyka" } as Text,
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z" />
@@ -45,7 +46,7 @@ export function MughalsToy({ lang, mode = "toy", onDone }: MughalsToyProps) {
     },
     {
       id: "astronomy",
-      name: { en: "Astronomy and Math", de: "Astronomie und Mathe" },
+      name: { en: "Astronomy and Math", de: "Astronomie und Mathe", pl: "Astronomia i matematyka" } as Text,
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -54,7 +55,7 @@ export function MughalsToy({ lang, mode = "toy", onDone }: MughalsToyProps) {
     },
     {
       id: "agriculture",
-      name: { en: "Farming and Food", de: "Landwirtschaft und Ernte" },
+      name: { en: "Farming and Food", de: "Landwirtschaft und Ernte", pl: "Rolnictwo i żywność" } as Text,
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M12 22v-8M7 10c0 5 5 5 5 5s5 0 5-5c0-4-5-8-5-8s-5 4-5 8z" />
@@ -63,7 +64,7 @@ export function MughalsToy({ lang, mode = "toy", onDone }: MughalsToyProps) {
     },
     {
       id: "trade",
-      name: { en: "Textiles and Trade", de: "Handel und Webkunst" },
+      name: { en: "Textiles and Trade", de: "Handel und Webkunst", pl: "Tkactwo i handel" } as Text,
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M12 3v18M5 8l7-4 7 4M2 13l3-5 3 5a3 3 0 0 1-6 0zM16 13l3-5 3 5a3 3 0 0 1-6 0z" />
@@ -102,7 +103,7 @@ export function MughalsToy({ lang, mode = "toy", onDone }: MughalsToyProps) {
   return (
     <div className="mughals-wrap">
       {/* Listening Mode Selection */}
-      <div className="mughals-mode-bar" role="group" aria-label={lang === "en" ? "Council Rule Style" : "Herrschaftsstil"}>
+      <div className="mughals-mode-bar" role="group" aria-label={lang === "en" ? "Council Rule Style" : lang === "de" ? "Herrschaftsstil" : "Styl rządzenia"}>
         <button
           type="button"
           className={`mughals-toggle-btn ${listensToAll ? "active" : ""}`}
@@ -111,7 +112,7 @@ export function MughalsToy({ lang, mode = "toy", onDone }: MughalsToyProps) {
             setShowFeedback(false);
           }}
         >
-          {lang === "en" ? "Listen and Learn Together" : "Zuhören und Miteinander lernen"}
+          {lang === "en" ? "Listen and Learn Together" : lang === "de" ? "Zuhören und Miteinander lernen" : "Słuchaj i ucz się wspólnie"}
         </button>
         <button
           type="button"
@@ -121,14 +122,14 @@ export function MughalsToy({ lang, mode = "toy", onDone }: MughalsToyProps) {
             setShowFeedback(false);
           }}
         >
-          {lang === "en" ? "Rule by Command Only" : "Befehle ohne Zuhören"}
+          {lang === "en" ? "Rule by Command Only" : lang === "de" ? "Befehle ohne Zuhören" : "Rządź tylko rozkazami"}
         </button>
       </div>
 
       {/* Council Chamber */}
       <div className={`mughals-council-chamber ${status}`}>
         <div className="mughals-chamber-title">
-          {lang === "en" ? "The Ibadat Khana Council Table" : "Der Ratstisch des Ibadat Khana"}
+          {lang === "en" ? "The Ibadat Khana Council Table" : lang === "de" ? "Der Ratstisch des Ibadat Khana" : "Okrągły stół Ibadat Chana"}
         </div>
         <div className="mughals-scholars-grid">
           {allScholars.map((s) => {
@@ -141,11 +142,11 @@ export function MughalsToy({ lang, mode = "toy", onDone }: MughalsToyProps) {
                 onClick={() => toggleScholar(s.id)}
               >
                 <span className="mughals-scholar-icon">{s.icon}</span>
-                <span className="mughals-scholar-name">{s.name[lang]}</span>
+                <span className="mughals-scholar-name">{resolveText(s.name, lang)}</span>
                 <span className="mughals-seat-badge">
                   {isSeated
-                    ? lang === "en" ? "At Table" : "Am Tisch"
-                    : lang === "en" ? "+ Invite" : "+ Einladen"}
+                    ? lang === "en" ? "At Table" : lang === "de" ? "Am Tisch" : "Przy stole"
+                    : lang === "en" ? "+ Invite" : lang === "de" ? "+ Einladen" : "+ Zaproś"}
                 </span>
               </button>
             );
@@ -157,7 +158,7 @@ export function MughalsToy({ lang, mode = "toy", onDone }: MughalsToyProps) {
       <div className="mughals-metrics-row">
         <div className="mughals-metric-card">
           <div className="mughals-metric-label">
-            {lang === "en" ? "Harmony" : "Eintracht"}
+            {lang === "en" ? "Harmony" : lang === "de" ? "Eintracht" : "Harmonia"}
           </div>
           <div className="mughals-metric-bar">
             <div className="mughals-metric-fill harmony" style={{ width: `${harmony}%` }} />
@@ -167,7 +168,7 @@ export function MughalsToy({ lang, mode = "toy", onDone }: MughalsToyProps) {
 
         <div className="mughals-metric-card">
           <div className="mughals-metric-label">
-            {lang === "en" ? "Prosperity" : "Wohlstand"}
+            {lang === "en" ? "Prosperity" : lang === "de" ? "Wohlstand" : "Dobrobyt"}
           </div>
           <div className="mughals-metric-bar">
             <div className="mughals-metric-fill prosperity" style={{ width: `${prosperity}%` }} />
@@ -177,7 +178,7 @@ export function MughalsToy({ lang, mode = "toy", onDone }: MughalsToyProps) {
 
         <div className="mughals-metric-card">
           <div className="mughals-metric-label">
-            {lang === "en" ? "Arts & Science" : "Kultur & Wissen"}
+            {lang === "en" ? "Arts & Science" : lang === "de" ? "Kultur & Wissen" : "Sztuka i nauka"}
           </div>
           <div className="mughals-metric-bar">
             <div className="mughals-metric-fill arts" style={{ width: `${arts}%` }} />
@@ -192,19 +193,25 @@ export function MughalsToy({ lang, mode = "toy", onDone }: MughalsToyProps) {
           <p className="mughals-warning-text">
             {lang === "en"
               ? "When a ruler commands without listening, scholars fall silent, distrust spreads, and trade slows down."
-              : "Wenn ein Herrscher befiehlt ohne zuzuhören, schweigen die Gelehrten, Misstrauen wächst und der Handel stockt."}
+              : lang === "de"
+              ? "Wenn ein Herrscher befiehlt ohne zuzuhören, schweigen die Gelehrten, Misstrauen wächst und der Handel stockt."
+              : "Kiedy władca rozkazuje bez słuchania, uczeni milkną, nieufność rośnie, a handel zamiera."}
           </p>
         ) : seatedScholars.length === 4 ? (
           <p className="mughals-success-text">
             {lang === "en"
               ? "All voices share wisdom at the table. Peaceful dialogue brings lasting harmony and great discoveries!"
-              : "Alle Stimmen teilen Weisheit am Tisch. Friedlicher Dialog bringt dauerhafte Eintracht und große Entdeckungen!"}
+              : lang === "de"
+              ? "Alle Stimmen teilen Weisheit am Tisch. Friedlicher Dialog bringt dauerhafte Eintracht und große Entdeckungen!"
+              : "Wszystkie głosy dzielą się mądrością przy stole. Pokojowy dialog przynosi trwałą harmonię i wielkie odkrycia!"}
           </p>
         ) : (
           <p className="mughals-hint-text">
             {lang === "en"
               ? `Invite all 4 scholars to sit together. (${seatedScholars.length}/4 seated)`
-              : `Lade alle 4 Gelehrten ein, sich an den Tisch zu setzen. (${seatedScholars.length}/4 am Tisch)`}
+              : lang === "de"
+              ? `Lade alle 4 Gelehrten ein, sich an den Tisch zu setzen. (${seatedScholars.length}/4 am Tisch)`
+              : `Zaproś wszystkich 4 uczonych do wspólnego stołu. (${seatedScholars.length}/4 przy stole)`}
           </p>
         )}
       </div>
@@ -217,10 +224,14 @@ export function MughalsToy({ lang, mode = "toy", onDone }: MughalsToyProps) {
               {isCorrect
                 ? lang === "en"
                   ? "Perfect! All four scholars sit together in shared dialogue."
-                  : "Perfekt! Alle vier Gelehrten sitzen im gemeinsamen Dialog zusammen."
+                  : lang === "de"
+                  ? "Perfekt! Alle vier Gelehrten sitzen im gemeinsamen Dialog zusammen."
+                  : "Doskonale! Wszyscy czterej uczeni zasiadają razem do wspólnego dialogu."
                 : lang === "en"
                   ? "Invite all 4 scholars and choose Listen and Learn Together."
-                  : "Lade alle 4 Gelehrten ein und wähle Zuhören und Miteinander lernen."}
+                  : lang === "de"
+                  ? "Lade alle 4 Gelehrten ein und wähle Zuhören und Miteinander lernen."
+                  : "Zaproś wszystkich 4 uczonych i wybierz Słuchaj i ucz się wspólnie."}
             </div>
           )}
         </div>
