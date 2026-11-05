@@ -6,7 +6,8 @@ import { ArrowIcon, Boat, Calendar, FIXER, GradCap } from "./work.icons";
 
 /** Animated diagrams for the Work and pay lesson, one per story beat. `step` is how many taps so far. */
 
-const alt = (en: string, de: string, lang: DiagramProps["lang"]) => (lang === "en" ? en : de);
+const alt = (en: string, de: string, pl: string, lang: DiagramProps["lang"]) =>
+  lang === "pl" ? pl : lang === "de" ? de : en;
 
 /** Coins stacked downwards from (x, y). Each coin pops in. */
 function CoinStack({ x, y, n, size = 38, gap = 36 }: { x: number; y: number; n: number; size?: number; gap?: number }) {
@@ -48,6 +49,7 @@ export function JobsDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Finn catches fish, Bea bakes bread, Sam makes shoes. The work a person does is called a job.",
         "Finn fängt Fische, Bea backt Brot, Sam macht Schuhe. Die Arbeit eines Menschen heißt Beruf.",
+        "Finn łowi ryby, Bea piecze chleb, Sam robi buty. Praca wykonywana przez człowieka nazywa się zawodem.",
         lang,
       )}
     >
@@ -69,7 +71,7 @@ export function JobsDiagram({ lang, step }: DiagramProps) {
           <Pop><Shoe x={572} y={150} size={62} /></Pop>
         </>
       )}
-      {step >= 4 && <TermChip x={200} y={8} w={240}>{alt("job", "Beruf", lang)}</TermChip>}
+      {step >= 4 && <TermChip x={200} y={8} w={240}>{alt("job", "Beruf", "zawód", lang)}</TermChip>}
     </DiagramCanvas>
   );
 }
@@ -81,6 +83,7 @@ export function PayDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Pip gives Bea 3 coins and gets bread. The coins Bea earns for her work are called pay.",
         "Pip gibt Bea 3 Münzen und bekommt Brot. Die Münzen, die Bea für ihre Arbeit bekommt, heißen Lohn.",
+        "Pip daje Bei 3 monety i dostaje chleb. Monety, które Bea zarabia za swoją pracę, to wynagrodzenie.",
         lang,
       )}
     >
@@ -104,7 +107,7 @@ export function PayDiagram({ lang, step }: DiagramProps) {
           <Arrow from={[170, 128]} to={[420, 128]} />
         </>
       )}
-      {step >= 3 && <TermChip x={200} y={4} w={240}>{alt("pay", "Lohn", lang)}</TermChip>}
+      {step >= 3 && <TermChip x={200} y={4} w={240}>{alt("pay", "Lohn", "wynagrodzenie", lang)}</TermChip>}
       {step >= 4 && (
         <>
           <Pop><Bread x={290} y={156} size={58} /></Pop>
@@ -123,6 +126,7 @@ export function HoursDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Bea works 4 hours and gets 3 coins for each hour. That makes 12 coins.",
         "Bea arbeitet 4 Stunden und bekommt 3 Münzen pro Stunde. Das sind 12 Münzen.",
+        "Bea pracuje 4 godziny i dostaje 3 monety za każdą godzinę. To razem 12 monet.",
         lang,
       )}
     >
@@ -155,6 +159,7 @@ export function WhyDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Bea gets 3 coins for each hour, Sam gets 5. Why does one job pay more than another?",
         "Bea bekommt 3 Münzen pro Stunde, Sam 5. Warum zahlt ein Beruf mehr als ein anderer?",
+        "Bea dostaje 3 monety za godzinę, a Sam 5. Dlaczego za jeden zawód płaci się więcej niż za inny?",
         lang,
       )}
     >
@@ -188,6 +193,7 @@ export function LearnDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Sam practiced for three years to make good shoes. The longer a job takes to learn, the more it usually pays.",
         "Sam hat drei Jahre geübt, um gute Schuhe zu machen. Je länger man einen Beruf lernt, desto mehr zahlt er meistens.",
+        "Sam uczył się przez trzy lata, by robić dobre buty. Im dłużej trzeba się uczyć zawodu, tym więcej zazwyczaj się zarabia.",
         lang,
       )}
     >
@@ -222,6 +228,7 @@ export function FewManyDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "One boat fixer can earn a lot of coins. When many people fix boats, each one gets fewer coins.",
         "Ein Bootsreparierer kann viele Münzen verdienen. Wenn viele Leute Boote reparieren, bekommt jeder weniger Münzen.",
+        "Jeden naprawiacz łodzi może zarobić dużo monet. Gdy wielu ludzi naprawia łodzie, każdy dostaje mniej monet.",
         lang,
       )}
     >
@@ -262,6 +269,7 @@ export function DemandDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "When lots of boats need fixing, the demand is high and the boat fixer earns more coins.",
         "Wenn viele Boote repariert werden müssen, ist die Nachfrage hoch und der Bootsreparierer verdient mehr Münzen.",
+        "Gdy wiele łodzi wymaga naprawy, popyt jest wysoki i naprawiacz łodzi zarabia więcej monet.",
         lang,
       )}
     >
@@ -271,7 +279,7 @@ export function DemandDiagram({ lang, step }: DiagramProps) {
           <Pop><Boat x={150} y={150} size={80} /></Pop>
         </>
       )}
-      {step >= 2 && <TermChip x={200} y={4} w={240}>{alt("demand", "Nachfrage", lang)}</TermChip>}
+      {step >= 2 && <TermChip x={200} y={4} w={240}>{alt("demand", "Nachfrage", "popyt", lang)}</TermChip>}
       {step >= 3 &&
         [1, 2, 3].map((i) => (
           <Pop key={i}><Boat x={150 + i * 85} y={150} size={80} /></Pop>
@@ -293,6 +301,7 @@ export function KeepDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "The coins you earn are yours. You can spend them on bread or keep some in a piggy bank.",
         "Die Münzen, die du verdienst, gehören dir. Du kannst Brot davon kaufen oder etwas im Sparschwein aufheben.",
+        "Monety, które zarabiasz, należą do ciebie. Możesz je wydać na chleb albo odłożyć do skarbonki.",
         lang,
       )}
     >

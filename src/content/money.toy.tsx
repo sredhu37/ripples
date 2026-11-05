@@ -5,11 +5,11 @@ import { Arrow, Bubble, DiagramCanvas } from "../components/diagram";
 import { Apple, Bread, Coin, Fish, NoSign, Person, Shoe } from "../components/icons";
 import type { Mood } from "../components/icons";
 import { ActionPrompt, Stage, ToyButton } from "../lesson/toolkit";
-import type { Text } from "../lesson/types";
+import { resolveText, type Text } from "../lesson/types";
 import type { Lang } from "../progress";
 import { sfx } from "../sound";
 
-const T = (en: string, de: string): Text => ({ en, de });
+const T = (en: string, de: string, pl: string): Text => ({ en, de, pl });
 
 type Who = "Bea" | "Sam";
 type Phase = "barter" | "coins" | "sell" | "bread" | "done";
@@ -29,7 +29,11 @@ const START: Board = {
   fish: true,
   coins: 0,
   bread: false,
-  say: T("Finn has a fish. He wants bread.", "Finn hat einen Fisch. Er will Brot."),
+  say: T(
+    "Finn has a fish. He wants bread.",
+    "Finn hat einen Fisch. Er will Brot.",
+    "Finn ma rybę. Chce chleba.",
+  ),
   talk: null,
 };
 
@@ -119,10 +123,10 @@ function MiniHasWants({
       <Arrow from={[42, 22]} to={[54, 22]} width={2.5} head={6} />
       <g transform="translate(56 6)">{wants}</g>
       <text className="diagram-tiny" x={21} y={44} textAnchor="middle">
-        {lang === "en" ? "has" : "hat"}
+        {lang === "pl" ? "ma" : lang === "en" ? "has" : "hat"}
       </text>
       <text className="diagram-tiny" x={71} y={44} textAnchor="middle">
-        {lang === "en" ? "wants" : "will"}
+        {lang === "pl" ? "chce" : lang === "en" ? "wants" : "will"}
       </text>
     </g>
   );
@@ -132,25 +136,29 @@ function nextAction(phase: Phase): Text | null {
   if (phase === "barter") {
     return T(
       "Drag Finn's fish to Bea to offer a barter trade.",
-      "Ziehe Finns Fisch zu Bea, um zu tauschen."
+      "Ziehe Finns Fisch zu Bea, um zu tauschen.",
+      "Przeciągnij rybę Finna do Bei, aby zaproponować handel wymienny.",
     );
   }
   if (phase === "coins") {
     return T(
       "Barter did not work! Bring coins to Ripple Town.",
-      "Tauschhandel hat nicht geklappt! Bring Münzen nach Ripple Town."
+      "Tauschhandel hat nicht geklappt! Bring Münzen nach Ripple Town.",
+      "Handel wymienny nie zadziałał! Wprowadź monety do Ripple Town.",
     );
   }
   if (phase === "sell") {
     return T(
       "Drag Finn's fish to Sam to sell it for coins.",
-      "Ziehe Finns Fisch zu Sam, um ihn für Münzen zu verkaufen."
+      "Ziehe Finns Fisch zu Sam, um ihn für Münzen zu verkaufen.",
+      "Przeciągnij rybę Finna do Sama, aby sprzedać ją za monety.",
     );
   }
   if (phase === "bread") {
     return T(
       "Drag Finn's coins to Bea to buy fresh bread.",
-      "Ziehe Finns Münzen zu Bea, um Brot zu kaufen."
+      "Ziehe Finns Münzen zu Bea, um Brot zu kaufen.",
+      "Przeciągnij monety Finna do Bei, aby kupić świeży chleb.",
     );
   }
   return null;
@@ -182,7 +190,8 @@ export function TradeBoard({
       talk: { n, who: "Bea", kind: "no" },
       say: T(
         "Bea needs shoes, not fish. Finn cannot get bread by swapping today.",
-        "Bea braucht Schuhe, keinen Fisch. Finn bekommt heute durch Tauschen kein Brot."
+        "Bea braucht Schuhe, keinen Fisch. Finn bekommt heute durch Tauschen kein Brot.",
+        "Bea potrzebuje butów, a nie ryb. Finn nie dostanie dziś chleba z wymiany.",
       ),
     });
   };
@@ -194,7 +203,8 @@ export function TradeBoard({
       phase: "sell",
       say: T(
         "Coins are now in Ripple Town! Sam wants to buy fish with his coins.",
-        "Münzen sind jetzt in Ripple Town! Sam möchte Fisch mit seinen Münzen kaufen."
+        "Münzen sind jetzt in Ripple Town! Sam möchte Fisch mit seinen Münzen kaufen.",
+        "Monety są już w Ripple Town! Sam chce kupić rybę za swoje monety.",
       ),
     });
   };
@@ -210,7 +220,8 @@ export function TradeBoard({
       talk: { n, who: "Sam", kind: "coins" },
       say: T(
         "Sam buys the fish! He gives Finn 2 shiny coins.",
-        "Sam kauft den Fisch! Er gibt Finn 2 glänzende Münzen."
+        "Sam kauft den Fisch! Er gibt Finn 2 glänzende Münzen.",
+        "Sam kupuje rybę! Daje Finnowi 2 błyszczące monety.",
       ),
     });
   };
@@ -226,7 +237,8 @@ export function TradeBoard({
       talk: { n, who: "Bea", kind: "bread" },
       say: T(
         "Bea takes the 2 coins and gives Finn bread. He did it!",
-        "Bea nimmt die 2 Münzen und gibt Finn Brot. Geschafft!"
+        "Bea nimmt die 2 Münzen und gibt Finn Brot. Geschafft!",
+        "Bea bierze 2 monety i daje Finnowi chleb. Udało się!",
       ),
     });
     onBread?.();
@@ -275,7 +287,8 @@ export function TradeBoard({
           talk: { n, who: "Sam", kind: "no" },
           say: T(
             "Sam wants apples. He cannot trade shoes for fish without coins.",
-            "Sam will Äpfel. Er kann ohne Münzen keine Schuhe gegen Fisch tauschen."
+            "Sam will Äpfel. Er kann ohne Münzen keine Schuhe gegen Fisch tauschen.",
+            "Sam chce jabłek. Nie może wymienić butów na rybę bez monet.",
           ),
         });
       }
@@ -291,7 +304,15 @@ export function TradeBoard({
   const targetSam = b.phase === "sell" && b.fish;
 
   return (
-    <Stage label={lang === "en" ? "Finn, Bea and Sam in Ripple Town" : "Finn, Bea und Sam in Ripple Town"}>
+    <Stage
+      label={
+        lang === "pl"
+          ? "Finn, Bea i Sam w Ripple Town"
+          : lang === "de"
+          ? "Finn, Bea und Sam in Ripple Town"
+          : "Finn, Bea and Sam in Ripple Town"
+      }
+    >
       <div
         className="trade trade-interactive"
         ref={containerRef}
@@ -304,9 +325,11 @@ export function TradeBoard({
       >
         <DiagramCanvas
           label={
-            lang === "en"
-              ? "Finn at bottom left has fish. Bea at top center has bread and wants shoes. Sam at bottom right has shoes and wants apples."
-              : "Finn unten links hat Fisch. Bea oben in der Mitte hat Brot und will Schuhe. Sam unten rechts hat Schuhe und will Äpfel."
+            lang === "pl"
+              ? "Finn na dole po lewej ma rybę. Bea u góry na środku ma chleb i chce butów. Sam na dole po prawej ma buty i chce jabłek."
+              : lang === "de"
+              ? "Finn unten links hat Fisch. Bea oben in der Mitte hat Brot und will Schuhe. Sam unten rechts hat Schuhe und will Äpfel."
+              : "Finn at bottom left has fish. Bea at top center has bread and wants shoes. Sam at bottom right has shoes and wants apples."
           }
         >
           {/* Subtle triangle guide path in background */}
@@ -328,7 +351,7 @@ export function TradeBoard({
             {...CAST.Bea}
             name="Bea"
             isTarget={targetBea}
-            targetLabel={lang === "en" ? "Drop here" : "Hier ablegen"}
+            targetLabel={lang === "pl" ? "Upuść tutaj" : lang === "de" ? "Hier ablegen" : "Drop here"}
           />
 
           <Villager
@@ -338,7 +361,7 @@ export function TradeBoard({
             {...CAST.Sam}
             name="Sam"
             isTarget={targetSam}
-            targetLabel={lang === "en" ? "Drop here" : "Hier ablegen"}
+            targetLabel={lang === "pl" ? "Upuść tutaj" : lang === "de" ? "Hier ablegen" : "Drop here"}
           />
 
           {/* Has / Wants Cards for Bea and Sam */}
@@ -371,7 +394,7 @@ export function TradeBoard({
                 <Fish size={38} />
               </g>
               <text className="diagram-tiny-bold" x={54} y={26} textAnchor="middle">
-                {lang === "en" ? "Fish" : "Fisch"}
+                {lang === "pl" ? "Ryba" : lang === "en" ? "Fish" : "Fisch"}
               </text>
             </g>
           )}
@@ -403,7 +426,7 @@ export function TradeBoard({
                 <Bread size={38} />
               </g>
               <text className="diagram-tiny-bold" x={52} y={26} textAnchor="middle">
-                {lang === "en" ? "Bread" : "Brot"}
+                {lang === "pl" ? "Chleb" : lang === "en" ? "Bread" : "Brot"}
               </text>
             </g>
           )}
@@ -454,22 +477,22 @@ export function TradeBoard({
         )}
 
         <p className="trade-say" role="status">
-          {b.say[lang]}
+          {resolveText(b.say, lang)}
         </p>
 
         {b.phase !== "done" && prompt ? (
           <div className="guided-action">
-            <ActionPrompt lang={lang}>{prompt[lang]}</ActionPrompt>
+            <ActionPrompt lang={lang}>{resolveText(prompt, lang)}</ActionPrompt>
             {b.phase === "coins" && (
               <ToyButton onClick={doBringCoins}>
-                {lang === "en" ? "Bring coins to town" : "Münzen in die Stadt bringen"}
+                {lang === "pl" ? "Wprowadź monety do miasta" : lang === "de" ? "Münzen in die Stadt bringen" : "Bring coins to town"}
               </ToyButton>
             )}
           </div>
         ) : (
           <div className="guided-done">
             <span>
-              {lang === "en" ? "Finn has bread!" : "Finn hat Brot!"}
+              {lang === "pl" ? "Finn ma chleb!" : lang === "de" ? "Finn hat Brot!" : "Finn has bread!"}
             </span>
             {mode === "toy" && (
               <button
@@ -477,7 +500,7 @@ export function TradeBoard({
                 className="restart-link"
                 onClick={() => setB(START)}
               >
-                {lang === "en" ? "Try again" : "Noch einmal"}
+                {lang === "pl" ? "Jeszcze raz" : lang === "de" ? "Noch einmal" : "Try again"}
               </button>
             )}
           </div>

@@ -7,7 +7,7 @@ import type { Lang } from "../progress";
 import { CoinPress, CoinStack } from "./printing.icons";
 import "./printing.css";
 
-const T = (en: string, de: string): Text => ({ en, de });
+const T = (en: string, de: string, pl: string): Text => ({ en, de, pl });
 
 /** Ripple Town starts with 20 coins and 10 loaves a day, so one loaf costs 2 coins. */
 export const START_COINS = 20;
@@ -18,7 +18,7 @@ export const MAX_LOAVES = 40;
 
 export function fmt(n: number, lang: Lang): string {
   const s = Number.isInteger(n) ? String(n) : n.toFixed(1);
-  return lang === "de" ? s.replace(".", ",") : s;
+  return lang === "de" || lang === "pl" ? s.replace(".", ",") : s;
 }
 
 /** The price of one loaf is simply: coins in town divided by loaves baked. */
@@ -35,21 +35,28 @@ export function say(printed: number, loaves: number): Text {
   const total = START_COINS + printed;
   if (total === START_PRICE * loaves) {
     return printed === 0
-      ? T("Nothing printed yet. A loaf costs 2 coins.", "Noch nichts gedruckt. Ein Brot kostet 2 Münzen.")
+      ? T(
+          "Nothing printed yet. A loaf costs 2 coins.",
+          "Noch nichts gedruckt. Ein Brot kostet 2 Münzen.",
+          "Jeszcze nic nie wydrukowano. Bochenek kosztuje 2 monety.",
+        )
       : T(
           "More coins AND more bread. The price stays at 2 coins!",
           "Mehr Münzen UND mehr Brot. Der Preis bleibt bei 2 Münzen!",
+          "Więcej monet I więcej chleba. Cena pozostaje na poziomie 2 monet!",
         );
   }
   if (total > START_PRICE * loaves) {
     return T(
       "More coins want the same bread, so each coin buys less. Prices go up!",
       "Mehr Münzen wollen das gleiche Brot, also kauft jede Münze weniger. Die Preise steigen!",
+      "Więcej monet ubiega się o ten sam chleb, więc każda moneta kupuje mniej. Ceny rosną!",
     );
   }
   return T(
     "Lots of bread and not so many coins. Bread gets cheaper.",
     "Viel Brot und nicht so viele Münzen. Das Brot wird billiger.",
+    "Dużo chleba i mało monet. Chleb staje się tańszy.",
   );
 }
 
@@ -58,16 +65,20 @@ function Picture({ lang, printed, loaves }: { lang: Lang; printed: number; loave
   const total = START_COINS + printed;
   const stacks = total / 10;
   const newFrom = START_COINS / 10;
+  const ariaLabel =
+    lang === "pl"
+      ? `Ripple Town ma ${total} monet i ${loaves} bochenków chleba.`
+      : lang === "de"
+      ? `Ripple Town hat ${total} Münzen und ${loaves} Brote.`
+      : `Ripple Town has ${total} coins and ${loaves} loaves of bread.`;
+  const tenCoins = lang === "pl" ? "10 monet" : lang === "de" ? "10 Münzen" : "10 coins";
+
   return (
     <svg
       className="diagram pr-canvas"
       viewBox="0 0 640 188"
       role="img"
-      aria-label={
-        lang === "en"
-          ? `Ripple Town has ${total} coins and ${loaves} loaves of bread.`
-          : `Ripple Town hat ${total} Münzen und ${loaves} Brote.`
-      }
+      aria-label={ariaLabel}
     >
       <g>
         <Coin x={10} y={2} size={44} />
@@ -78,7 +89,7 @@ function Picture({ lang, printed, loaves }: { lang: Lang; printed: number; loave
       <g transform="translate(150 6)">
         <CoinStack size={36} />
         <text className="diagram-small" x={40} y={24}>
-          = {lang === "en" ? "10 coins" : "10 Münzen"}
+          = {tenCoins}
         </text>
       </g>
       <g>
@@ -104,6 +115,13 @@ function PriceTag({ lang, printed, loaves }: { lang: Lang; printed: number; loav
   const total = START_COINS + printed;
   const price = loafPrice(printed, loaves);
   const cls = priceUnchanged(printed, loaves) ? "same" : total > START_PRICE * loaves ? "up" : "down";
+  const srSummary =
+    lang === "pl"
+      ? `1 bochenek = ${fmt(price, lang)} monet`
+      : lang === "de"
+      ? `1 Brot = ${fmt(price, lang)} ${price === 1 ? "Münze" : "Münzen"}`
+      : `1 loaf = ${fmt(price, lang)} ${price === 1 ? "coin" : "coins"}`;
+
   return (
     <div className={`pr-tag ${cls}`} role="status">
       <InlineIcon size={34}>
@@ -113,9 +131,7 @@ function PriceTag({ lang, printed, loaves }: { lang: Lang; printed: number; loav
       <InlineIcon size={34}>
         <Coin />
       </InlineIcon>
-      <span className="sr-only">{lang === "en"
-          ? `1 loaf = ${fmt(price, lang)} ${price === 1 ? "coin" : "coins"}`
-          : `1 Brot = ${fmt(price, lang)} ${price === 1 ? "Münze" : "Münzen"}`}</span>
+      <span className="sr-only">{srSummary}</span>
     </div>
   );
 }
@@ -135,14 +151,21 @@ export function PrintToy({
 }) {
   const [printed, setPrinted] = useState(0);
   const [loaves, setLoaves] = useState(START_LOAVES);
-  const t = (en: string, de: string) => (lang === "en" ? en : de);
+  const t = (en: string, de: string, pl: string) => (lang === "pl" ? pl : lang === "de" ? de : en);
+
+  const stageLabel = t(
+    "Ripple Town coins and bread",
+    "Münzen und Brot in Ripple Town",
+    "Monety i chleb w Ripple Town",
+  );
+
   return (
     <div className="stage-wrap">
-      <Stage label={t("Ripple Town coins and bread", "Münzen und Brot in Ripple Town")}>
+      <Stage label={stageLabel}>
         <div className="pr">
           <Picture lang={lang} printed={printed} loaves={loaves} />
           <PriceTag lang={lang} printed={printed} loaves={loaves} />
-          <p className="pr-say">{say(printed, loaves)[lang]}</p>
+          <p className="pr-say">{(say(printed, loaves)[lang] || say(printed, loaves).en)}</p>
         </div>
       </Stage>
       <div className="row wrap pr-btns">
@@ -162,7 +185,7 @@ export function PrintToy({
               <CoinStack />
             </InlineIcon>
             <span aria-hidden="true">+10</span>
-            <span className="sr-only">{t("Print 10 new coins", "10 neue Münzen drucken")}</span>
+            <span className="sr-only">{t("Print 10 new coins", "10 neue Münzen drucken", "Wydrukuj 10 nowych monet")}</span>
           </span>
         </ToyButton>
         <ToyButton
@@ -177,7 +200,9 @@ export function PrintToy({
               <CoinStack />
             </InlineIcon>
             <span aria-hidden="true">-10</span>
-            <span className="sr-only">{t("Take 10 printed coins away", "10 gedruckte Münzen wegnehmen")}</span>
+            <span className="sr-only">
+              {t("Take 10 printed coins away", "10 gedruckte Münzen wegnehmen", "Zabierz 10 wydrukowanych monet")}
+            </span>
           </span>
         </ToyButton>
         <ToyButton
@@ -196,7 +221,7 @@ export function PrintToy({
               <Bread />
             </InlineIcon>
             <span aria-hidden="true">+5</span>
-            <span className="sr-only">{t("Bea bakes 5 more loaves", "Bea backt 5 Brote mehr")}</span>
+            <span className="sr-only">{t("Bea bakes 5 more loaves", "Bea backt 5 Brote mehr", "Bea piecze 5 bochenków więcej")}</span>
           </span>
         </ToyButton>
         <ToyButton
@@ -211,7 +236,7 @@ export function PrintToy({
               <Bread />
             </InlineIcon>
             <span aria-hidden="true">-5</span>
-            <span className="sr-only">{t("Bea bakes 5 fewer loaves", "Bea backt 5 Brote weniger")}</span>
+            <span className="sr-only">{t("Bea bakes 5 fewer loaves", "Bea backt 5 Brote weniger", "Bea piecze 5 bochenków mniej")}</span>
           </span>
         </ToyButton>
         <ToyButton
@@ -220,7 +245,7 @@ export function PrintToy({
             setLoaves(START_LOAVES);
           }}
         >
-          <span className="sr-only">{t("Start again", "Von vorn")}</span>
+          <span className="sr-only">{t("Start again", "Von vorn", "Od nowa")}</span>
           <span aria-hidden="true">↺</span>
         </ToyButton>
         {onCheck && <CheckButton lang={lang} onClick={() => onCheck(printed > 0 && priceUnchanged(printed, loaves))} />}

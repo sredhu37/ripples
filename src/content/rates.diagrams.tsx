@@ -21,7 +21,8 @@ import {
 
 /** Animated diagrams for the Interest rates lesson, one per story beat. `step` is how many taps so far. */
 
-const alt = (en: string, de: string, lang: DiagramProps["lang"]) => (lang === "en" ? en : de);
+const alt = (en: string, de: string, pl: string, lang: DiagramProps["lang"]) =>
+  lang === "pl" ? pl : lang === "de" ? de : en;
 
 const SAVE_COLOR = "#5aa05f";
 
@@ -33,6 +34,7 @@ export function BusyTownDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "A busy town where everybody shops and bread and shoes cost more. The town is too hot.",
         "Eine belebte Stadt, in der alle einkaufen und Brot und Schuhe mehr kosten. Die Stadt ist zu heiß.",
+        "Tętniące życiem miasto, w którym wszyscy kupują, a chleb i buty kosztują więcej. Miasto jest zbyt rozgrzane.",
         lang,
       )}
     >
@@ -89,6 +91,7 @@ export function CentralBankDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "People use banks. Banks use the central bank, which also looks after the notes.",
         "Menschen nutzen Banken. Banken nutzen die Zentralbank, die sich auch um die Scheine kümmert.",
+        "Ludzie korzystają z banków. Banki korzystają z banku centralnego, który dba również o banknoty.",
         lang,
       )}
     >
@@ -116,7 +119,11 @@ export function CentralBankDiagram({ lang, step }: DiagramProps) {
           <Arrow from={[284, 60]} to={[386, 100]} />
         </>
       )}
-      {step >= 3 && <TermChip x={350} y={224} w={240}>{alt("central bank", "Zentralbank", lang)}</TermChip>}
+      {step >= 3 && (
+        <TermChip x={350} y={224} w={240}>
+          {alt("central bank", "Zentralbank", "bank centralny", lang)}
+        </TermChip>
+      )}
       {step >= 4 && (
         <>
           <Pop x={552} y={40}>
@@ -139,6 +146,7 @@ export function KeyRateDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "The central bank sets the key rate. Other banks watch it and their rates move the same way.",
         "Die Zentralbank legt den Leitzins fest. Andere Banken schauen darauf und ihre Zinsen ziehen mit.",
+        "Bank centralny ustala główną stopę procentową. Inne banki ją obserwują i ich oprocentowanie podąża w tym samym kierunku.",
         lang,
       )}
     >
@@ -152,7 +160,11 @@ export function KeyRateDiagram({ lang, step }: DiagramProps) {
           </Pop>
         </>
       )}
-      {step >= 2 && <TermChip x={120} y={218} w={250}>{alt("key rate", "Leitzins", lang)}</TermChip>}
+      {step >= 2 && (
+        <TermChip x={120} y={218} w={250}>
+          {alt("key rate", "Leitzins", "główna stopa procentowa", lang)}
+        </TermChip>
+      )}
       {step >= 3 &&
         bankY.map((y) => (
           <g key={y}>
@@ -182,6 +194,7 @@ export function RaiseDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "The central bank raises the key rate. Loans cost more, people spend less, saving pays more, and the town cools down.",
         "Die Zentralbank erhöht den Leitzins. Kredite kosten mehr, die Leute kaufen weniger, Sparen bringt mehr und die Stadt kühlt ab.",
+        "Bank centralny podnosi stopę procentową. Kredyty kosztują więcej, ludzie wydają mniej, oszczędzanie przynosi więcej i miasto stygnie.",
         lang,
       )}
     >
@@ -254,6 +267,7 @@ export function LowerDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "A cold town with empty shops and no jobs. The central bank lowers the key rate, loans get cheaper, and the town warms up.",
         "Eine kalte Stadt mit leeren Läden und ohne Arbeit. Die Zentralbank senkt den Leitzins, Kredite werden billiger und die Stadt wird wärmer.",
+        "Zimne miasteczko z pustymi sklepami i brakiem pracy. Bank centralny obniża stopę procentową, kredyty tanieją, a miasto się rozgrzewka.",
         lang,
       )}
     >
@@ -308,6 +322,7 @@ export function SlowDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "The key rate works slowly. It takes many months to reach the town. The town is never exactly just right.",
         "Der Leitzins wirkt langsam. Es dauert viele Monate, bis er in der Stadt ankommt. Die Stadt ist nie ganz genau richtig.",
+        "Stopa procentowa działa powoli. Mija wiele miesięcy, zanim dotrze do miasteczka. W mieście nigdy nie jest idealnie w punkt.",
         lang,
       )}
     >
@@ -371,6 +386,7 @@ export function FamilyDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "A family wants a loan for a house. With a high key rate the loan costs more and saving pays more. With a low one the loan costs less.",
         "Eine Familie will einen Kredit für ein Haus. Bei hohem Leitzins kostet der Kredit mehr und Sparen bringt mehr. Bei niedrigem kostet er weniger.",
+        "Rodzina chce kredytu na dom. Przy wysokiej stopie kredyt kosztuje więcej, a oszczędzanie przynosi więcej. Przy niskiej kredyt kosztuje mniej.",
         lang,
       )}
     >

@@ -13,16 +13,16 @@ export function getLessonTitle(meta: LessonMeta, lang: Lang): string {
 /** Complete Curriculum: Group 1, Group 2, Group 3, Group 4, and Group 5. */
 export const LESSONS: LessonMeta[] = [
   // Group 1: Money & Work (1-10)
-  { id: "money", title: { en: "What is money?", de: "Was ist Geld?" } },
-  { id: "work", title: { en: "Work and pay", de: "Arbeit und Lohn" } },
-  { id: "savings", title: { en: "Savings", de: "Sparen" } },
-  { id: "loans", title: { en: "Loans", de: "Geld leihen" } },
-  { id: "banks", title: { en: "Banks", de: "Banken" } },
-  { id: "interest", title: { en: "Interest", de: "Zinsen" } },
-  { id: "taxes", title: { en: "Taxes", de: "Steuern" } },
-  { id: "inflation", title: { en: "Prices and inflation", de: "Preise und Inflation" } },
-  { id: "printing", title: { en: "Why not print money?", de: "Warum nicht einfach Geld drucken?" } },
-  { id: "rates", title: { en: "Interest rates up and down", de: "Zinsen rauf und runter" } },
+  { id: "money", title: { en: "What is money?", de: "Was ist Geld?", pl: "Czym są pieniądze?" } },
+  { id: "work", title: { en: "Work and pay", de: "Arbeit und Lohn", pl: "Praca i zarobek" } },
+  { id: "savings", title: { en: "Savings", de: "Sparen", pl: "Oszczędzanie" } },
+  { id: "loans", title: { en: "Loans", de: "Geld leihen", pl: "Pożyczanie pieniędzy" } },
+  { id: "banks", title: { en: "Banks", de: "Banken", pl: "Banki" } },
+  { id: "interest", title: { en: "Interest", de: "Zinsen", pl: "Odsetki" } },
+  { id: "taxes", title: { en: "Taxes", de: "Steuern", pl: "Podatki" } },
+  { id: "inflation", title: { en: "Prices and inflation", de: "Preise und Inflation", pl: "Ceny i inflacja" } },
+  { id: "printing", title: { en: "Why not print money?", de: "Warum nicht einfach Geld drucken?", pl: "Dlaczego nie dodrukować pieniędzy?" } },
+  { id: "rates", title: { en: "Interest rates up and down", de: "Zinsen rauf und runter", pl: "Stopy procentowe w górę i w dół" } },
 
   // Group 2: Business (11-18)
   { id: "profit", title: { en: "Costs and profit", de: "Kosten und Gewinn" } },

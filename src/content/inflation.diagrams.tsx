@@ -3,11 +3,13 @@ import { Counter, Villager } from "../components/cast";
 import { Arrow, Bubble, DiagramCanvas, Pop, TermChip } from "../components/diagram";
 import { Bread, Clock, Coin, Shoe, Tag } from "../components/icons";
 import type { DiagramProps } from "../lesson/types";
+import type { Lang } from "../progress";
 import { Door, IceCream, Jar, Milk, Seller, Sugar, Trend, FALL, RISE } from "./inflation.icons";
 
 /** Animated diagrams for the Inflation lesson, one per story beat. `step` is how many taps so far. */
 
-const alt = (en: string, de: string, lang: DiagramProps["lang"]) => (lang === "en" ? en : de);
+const alt = (en: string, de: string, pl: string, lang: Lang) =>
+  lang === "pl" ? pl : lang === "de" ? de : en;
 
 /** A price tag with 1 or 2 coins on it, or an arrow (a price that rises or falls). */
 function PriceTag({ x, y, size = 100, coins, trend }: { x: number; y: number; size?: number; coins?: 1 | 2; trend?: ReactNode }) {
@@ -32,7 +34,14 @@ const upInTag = <Trend x={44} y={30} size={40} />;
 /** Beat 1: Finn, the ice cream seller, last summer's price. */
 export function LastSummerDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("Finn loves ice cream. Last summer one scoop cost 1 coin.", "Finn liebt Eis. Letzten Sommer kostete eine Kugel 1 Münze.", lang)}>
+    <DiagramCanvas
+      label={alt(
+        "Finn loves ice cream. Last summer one scoop cost 1 coin.",
+        "Finn liebt Eis. Letzten Sommer kostete eine Kugel 1 Münze.",
+        "Finn uwielbia lody. Zeszłego lata jedna gałka kosztowała 1 monetę.",
+        lang,
+      )}
+    >
       {step >= 1 && <Villager who="Finn" x={20} />}
       {step === 1 && (
         <Bubble x={60} y={8} w={110} h={66} thought tail="bottom-left">
@@ -61,7 +70,14 @@ export function LastSummerDiagram({ lang, step }: DiagramProps) {
 /** Beat 2: this summer a scoop costs 2 coins, so Finn's 1 coin buys half a scoop. */
 export function TwoCoinsDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("A scoop now costs 2 coins. Finn's 1 coin buys only half a scoop.", "Eine Kugel kostet jetzt 2 Münzen. Finns 1 Münze reicht nur für eine halbe Kugel.", lang)}>
+    <DiagramCanvas
+      label={alt(
+        "A scoop now costs 2 coins. Finn's 1 coin buys only half a scoop.",
+        "Eine Kugel kostet jetzt 2 Münzen. Finns 1 Münze reicht nur für eine halbe Kugel.",
+        "Gałka kosztuje teraz 2 monety. 1 moneta Finna wystarcza tylko na pół gałki.",
+        lang,
+      )}
+    >
       {step >= 1 && (
         <>
           <Seller x={490} />
@@ -88,7 +104,14 @@ export function TwoCoinsDiagram({ lang, step }: DiagramProps) {
 /** Beat 3: reason one, lots of people want ice cream but there is only so much. */
 export function ManyWantDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("Everybody wants ice cream, but the seller can only make so much, so the price rises.", "Alle wollen Eis, aber der Verkäufer kann nur so viel machen, also steigt der Preis.", lang)}>
+    <DiagramCanvas
+      label={alt(
+        "Everybody wants ice cream, but the seller can only make so much, so the price rises.",
+        "Alle wollen Eis, aber der Verkäufer kann nur so viel machen, also steigt der Preis.",
+        "Wszyscy chcą lodów, ale sprzedawca może zrobić tylko ograniczoną ilość, więc cena rośnie.",
+        lang,
+      )}
+    >
       {step >= 1 && (
         <>
           <Bubble x={20} y={8} w={250} h={68} thought tail="bottom-left">
@@ -118,7 +141,14 @@ export function ManyWantDiagram({ lang, step }: DiagramProps) {
 /** Beat 4: reason two, milk and sugar cost the seller more. */
 export function CostsDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("Milk and sugar cost the seller more, so a scoop costs more too.", "Milch und Zucker kosten den Verkäufer mehr, also kostet auch eine Kugel mehr.", lang)}>
+    <DiagramCanvas
+      label={alt(
+        "Milk and sugar cost the seller more, so a scoop costs more too.",
+        "Milch und Zucker kosten den Verkäufer mehr, also kostet auch eine Kugel mehr.",
+        "Mleko i cukier kosztują sprzedawcę więcej, więc gałka lodów również kosztuje więcej.",
+        lang,
+      )}
+    >
       {step >= 1 && (
         <>
           <Pop><Milk x={50} y={30} size={100} /></Pop>
@@ -145,9 +175,16 @@ export function CostsDiagram({ lang, step }: DiagramProps) {
 
 /** Beat 5: more prices rise, this is inflation. */
 export function InflationDiagram({ lang, step }: DiagramProps) {
-  const word = alt("inflation", "Inflation", lang);
+  const word = alt("inflation", "Inflation", "inflacja", lang);
   return (
-    <DiagramCanvas label={alt("Ice cream, bread and shoes all cost more. This is called inflation: the same coin buys less.", "Eis, Brot und Schuhe kosten alle mehr. Das heißt Inflation: Dieselbe Münze kauft weniger.", lang)}>
+    <DiagramCanvas
+      label={alt(
+        "Ice cream, bread and shoes all cost more. This is called inflation: the same coin buys less.",
+        "Eis, Brot und Schuhe kosten alle mehr. Das heißt Inflation: Dieselbe Münze kauft weniger.",
+        "Lody, chleb i buty kosztują więcej. To nazywa się inflacja: ta sama moneta kupuje mniej.",
+        lang,
+      )}
+    >
       {step >= 1 && (
         <>
           <Pop><IceCream x={100} y={26} size={96} /></Pop>
@@ -178,7 +215,14 @@ const fading = (list: number[], x0: number, y: number, size: number, gap: number
 /** Beat 6: Sam still gets 10 coins; a little inflation is normal, a lot is hard. */
 export function SamDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("Sam gets 10 coins a day. With a little inflation they buy a bit less, with a lot they buy much less.", "Sam bekommt 10 Münzen am Tag. Bei ein bisschen Inflation kaufen sie etwas weniger, bei viel deutlich weniger.", lang)}>
+    <DiagramCanvas
+      label={alt(
+        "Sam gets 10 coins a day. With a little inflation they buy a bit less, with a lot they buy much less.",
+        "Sam bekommt 10 Münzen am Tag. Bei ein bisschen Inflation kaufen sie etwas weniger, bei viel deutlich weniger.",
+        "Sam dostaje 10 monet dziennie. Przy małej inflacji kupują one nieco mniej, przy dużej znacznie mniej.",
+        lang,
+      )}
+    >
       {step >= 1 && (
         <>
           <Villager who="Sam" x={10} y={70} size={110} />
@@ -212,7 +256,14 @@ export function SamDiagram({ lang, step }: DiagramProps) {
 /** Beat 7: coins in a jar buy fewer scoops next year; interest must keep up with prices. */
 export function JarDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("Finn keeps 10 coins in a jar. If prices rise, next year they buy fewer scoops. Interest only helps if it is as big as the price rise.", "Finn hebt 10 Münzen in einem Glas auf. Steigen die Preise, kaufen sie nächstes Jahr weniger Kugeln. Zinsen helfen nur, wenn sie so groß sind wie der Preisanstieg.", lang)}>
+    <DiagramCanvas
+      label={alt(
+        "Finn keeps 10 coins in a jar. If prices rise, next year they buy fewer scoops. Interest only helps if it is as big as the price rise.",
+        "Finn hebt 10 Münzen in einem Glas auf. Steigen die Preise, kaufen sie nächstes Jahr weniger Kugeln. Zinsen helfen nur, wenn sie so groß sind wie der Preisanstieg.",
+        "Finn trzyma 10 monet w słoiku. Gdy ceny rosną, w przyszłym roku kupią one mniej gałek. Odsetki pomagają tylko wtedy, gdy dorównują wzrostowi cen.",
+        lang,
+      )}
+    >
       {step >= 1 && (
         <>
           <Villager who="Finn" x={10} y={100} size={110} />
@@ -250,9 +301,16 @@ export function JarDiagram({ lang, step }: DiagramProps) {
 
 /** Beat 8: deflation, prices fall, shops earn less, workers may be let go. */
 export function DeflationDiagram({ lang, step }: DiagramProps) {
-  const word = alt("deflation", "Deflation", lang);
+  const word = alt("deflation", "Deflation", "deflacja", lang);
   return (
-    <DiagramCanvas label={alt("Deflation: prices fall. Shops earn less and may let workers go.", "Deflation: Die Preise sinken. Läden verdienen weniger und müssen vielleicht Leute entlassen.", lang)}>
+    <DiagramCanvas
+      label={alt(
+        "Deflation: prices fall. Shops earn less and may let workers go.",
+        "Deflation: Die Preise sinken. Läden verdienen weniger und müssen vielleicht Leute entlassen.",
+        "Deflacja: ceny spadają. Sklepy zarabiają mniej i mogą zwalniać pracowników.",
+        lang,
+      )}
+    >
       {step >= 1 && (
         <>
           <TermChip x={200} y={4} w={240}>{word}</TermChip>

@@ -47,35 +47,43 @@ function sayFor(p: Plan, lang: Lang): { text: string; ok: boolean } {
     return {
       ok: false,
       text:
-        lang === "en"
-          ? `Not enough for the oven yet. It costs ${OVEN_COST} coins.`
-          : `Das reicht noch nicht für den Ofen. Er kostet ${OVEN_COST} Münzen.`,
+        lang === "pl"
+          ? `To jeszcze za mało na piec. Kosztuje ${OVEN_COST} monet.`
+          : lang === "de"
+          ? `Das reicht noch nicht für den Ofen. Er kostet ${OVEN_COST} Münzen.`
+          : `Not enough for the oven yet. It costs ${OVEN_COST} coins.`,
     };
   }
   if (!p.covered) {
     return {
       ok: false,
       text:
-        lang === "en"
-          ? `Too much each week! Bea's bread money is ${p.shortBy} coin${p.shortBy === 1 ? "" : "s"} short every week.`
-          : `Pro Woche zu viel! Beas Brotgeld fehlt jede Woche ${p.shortBy} ${p.shortBy === 1 ? "Münze" : "Münzen"}.`,
+        lang === "pl"
+          ? `Za dużo w każdym tygodniu! Bei brakuje ${p.shortBy} ${p.shortBy === 1 ? "monety" : "monet"} tygodniowo.`
+          : lang === "de"
+          ? `Pro Woche zu viel! Beas Brotgeld fehlt jede Woche ${p.shortBy} ${p.shortBy === 1 ? "Münze" : "Münzen"}.`
+          : `Too much each week! Bea's bread money is ${p.shortBy} coin${p.shortBy === 1 ? "" : "s"} short every week.`,
     };
   }
   if (p.leftOver > 0) {
     return {
       ok: true,
       text:
-        lang === "en"
-          ? `Bea can pay each week. But ${p.leftOver} borrowed coins are left over, and she pays them back too!`
-          : `Bea kann jede Woche zahlen. Aber ${p.leftOver} geliehene Münzen bleiben übrig, und die zahlt sie auch zurück!`,
+        lang === "pl"
+          ? `Bea może płacić co tydzień. Zostało jednak ${p.leftOver} pożyczonych monet i je również musi spłacić!`
+          : lang === "de"
+          ? `Bea kann jede Woche zahlen. Aber ${p.leftOver} geliehene Münzen bleiben übrig, und die zahlt sie auch zurück!`
+          : `Bea can pay each week. But ${p.leftOver} borrowed coins are left over, and she pays them back too!`,
     };
   }
   return {
     ok: true,
     text:
-      lang === "en"
-        ? "Bea buys the oven and her bread money pays each week. It works!"
-        : "Bea kauft den Ofen und ihr Brotgeld zahlt jede Woche. Es klappt!",
+      lang === "pl"
+        ? "Bea kupuje piec, a zyski ze sprzedaży chleba pokrywają raty. To działa!"
+        : lang === "de"
+        ? "Bea kauft den Ofen und ihr Brotgeld zahlt jede Woche. Es klappt!"
+        : "Bea buys the oven and her bread money pays each week. It works!",
   };
 }
 
@@ -107,17 +115,22 @@ interface LoanBoardProps {
 export function LoanBoard({ lang, coins, weeks, onCoins, onWeeks }: LoanBoardProps) {
   const p = plan(coins, weeks);
   const say = sayFor(p, lang);
-  const en = lang === "en";
   const mood: Mood = !p.ovenBought ? "think" : p.covered ? "happy" : "sad";
   const barW = (n: number) => Math.min(BAR_MAX, n) * UNIT;
   const limitX = X0 + SALES_PER_WEEK * UNIT;
 
   return (
-    <Stage label={en ? "Bea's loan" : "Beas Darlehen"}>
+    <Stage label={lang === "pl" ? "Pożyczka Bei" : lang === "de" ? "Beas Darlehen" : "Bea's loan"}>
       <div className="loan">
         <div className="loan-sliders">
           <Slider
-            label={en ? "Coins Bea borrows" : "Münzen, die Bea leiht"}
+            label={
+              lang === "pl"
+                ? "Monety pożyczane przez Beę"
+                : lang === "de"
+                ? "Münzen, die Bea leiht"
+                : "Coins Bea borrows"
+            }
             value={coins}
             min={10}
             max={80}
@@ -125,7 +138,13 @@ export function LoanBoard({ lang, coins, weeks, onCoins, onWeeks }: LoanBoardPro
             onChange={onCoins}
           />
           <Slider
-            label={en ? "Weeks to pay back" : "Wochen zum Zurückzahlen"}
+            label={
+              lang === "pl"
+                ? "Liczba tygodni na spłatę"
+                : lang === "de"
+                ? "Wochen zum Zurückzahlen"
+                : "Weeks to pay back"
+            }
             value={weeks}
             min={4}
             max={20}
@@ -138,9 +157,11 @@ export function LoanBoard({ lang, coins, weeks, onCoins, onWeeks }: LoanBoardPro
           viewBox="0 0 640 238"
           role="img"
           aria-label={
-            en
-              ? `Pim lends Bea ${coins} coins. The extra is ${p.extra} coins, so Bea pays back ${p.total} coins in total, ${p.weekly} coins each week for ${weeks} weeks. Her bread sales are ${SALES_PER_WEEK} coins each week.`
-              : `Pim leiht Bea ${coins} Münzen. Das Extra sind ${p.extra} Münzen, also zahlt Bea insgesamt ${p.total} Münzen zurück, jede Woche ${p.weekly} Münzen, ${weeks} Wochen lang. Ihr Brotverkauf bringt ${SALES_PER_WEEK} Münzen pro Woche.`
+            lang === "pl"
+              ? `Pim pożycza Bei ${coins} monet. Dodatek to ${p.extra} monet, więc Bea oddaje łącznie ${p.total} monet, po ${p.weekly} monet tygodniowo przez ${weeks} tygodni. Jej sprzedaż chleba przynosi ${SALES_PER_WEEK} monet tygodniowo.`
+              : lang === "de"
+              ? `Pim leiht Bea ${coins} Münzen. Das Extra sind ${p.extra} Münzen, also zahlt Bea insgesamt ${p.total} Münzen zurück, jede Woche ${p.weekly} Münzen, ${weeks} Wochen lang. Ihr Brotverkauf bringt ${SALES_PER_WEEK} Münzen pro Woche.`
+              : `Pim lends Bea ${coins} coins. The extra is ${p.extra} coins, so Bea pays back ${p.total} coins in total, ${p.weekly} coins each week for ${weeks} weeks. Her bread sales are ${SALES_PER_WEEK} coins each week.`
           }
         >
           {/* Pim lends coins to Bea, Bea has the oven */}

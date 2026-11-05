@@ -8,7 +8,8 @@ import { Bank, Boat } from "./interest.icons";
 
 /** Animated diagrams for the Interest lesson, one per story beat. `step` is how many taps so far. */
 
-const alt = (en: string, de: string, lang: Lang) => (lang === "en" ? en : de);
+const alt = (en: string, de: string, pl: string, lang: Lang) =>
+  lang === "pl" ? pl : lang === "de" ? de : en;
 const pct = (n: number, lang: Lang) => (lang === "en" ? `${n}%` : `${n} %`);
 
 /** Bea on the left, the bank in the middle, Finn on the right: the same places in every beat. */
@@ -74,6 +75,7 @@ export function BankLoanDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Bea keeps 100 coins in the bank. Finn wants a boat. The bank lends Bea's coins to Finn.",
         "Bea hat 100 Münzen in der Bank. Finn will ein Boot. Die Bank leiht Beas Münzen an Finn.",
+        "Bea trzyma 100 monet w banku. Finn chce łódź. Bank pożycza monety Bei Finnowi.",
         lang,
       )}
     >
@@ -112,6 +114,7 @@ export function InterestDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Finn pays the bank 105 coins for a loan of 100. The 5 extra coins are called interest.",
         "Finn zahlt der Bank 105 Münzen für ein Darlehen von 100. Die 5 Extra-Münzen heißen Zinsen.",
+        "Finn oddaje bankowi 105 monet za pożyczkę 100 monet. 5 dodatkowych monet to odsetki.",
         lang,
       )}
     >
@@ -136,7 +139,7 @@ export function InterestDiagram({ lang, step }: DiagramProps) {
           </text>
         </Pop>
       )}
-      {step >= 3 && <TermChip x={310} y={190} w={190}>{alt("interest", "Zinsen", lang)}</TermChip>}
+      {step >= 3 && <TermChip x={310} y={190} w={190}>{alt("interest", "Zinsen", "odsetki", lang)}</TermChip>}
     </DiagramCanvas>
   );
 }
@@ -150,6 +153,7 @@ export function PercentDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Out of 100 coins, 5 are extra. That is 5 percent.",
         "Von 100 Münzen sind 5 extra. Das sind 5 Prozent.",
+        "Na 100 monet, 5 jest dodatkowych. To jest 5 procent.",
         lang,
       )}
     >
@@ -173,7 +177,7 @@ export function PercentDiagram({ lang, step }: DiagramProps) {
               <rect key={c} x={c * cell} y={0} width={cell - 3} height={cell - 3} rx="4" fill="#f08a2e" />
             ))}
           </Pop>
-          <TermChip x={350} y={8} w={240}>{alt("percent", "Prozent", lang)}</TermChip>
+          <TermChip x={350} y={8} w={240}>{alt("percent", "Prozent", "procent", lang)}</TermChip>
         </>
       )}
       {step >= 3 && <Num x={470} y={254} size={64} fill="#146a77">{pct(5, lang)}</Num>}
@@ -188,6 +192,7 @@ export function SaverDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "The bank pays Bea 3 extra coins for her 100, which is 3 percent. Finn pays 5 percent.",
         "Die Bank zahlt Bea 3 Extra-Münzen für ihre 100, das sind 3 Prozent. Finn zahlt 5 Prozent.",
+        "Bank płaci Bei 3 dodatkowe monety za jej 100 monet, czyli 3 procent. Finn płaci 5 procent.",
         lang,
       )}
     >
@@ -223,6 +228,7 @@ export function SplitDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Finn pays 5 coins. The bank gives 3 to Bea and keeps 2 for its work and for loans that are not paid back.",
         "Finn zahlt 5 Münzen. Die Bank gibt 3 an Bea und behält 2 für ihre Arbeit und für Geld, das nicht zurückkommt.",
+        "Finn płaci 5 monet. Bank daje 3 Bei, a 2 zatrzymuje na swoje koszty oraz na pożyczki, które nie zostaną spłacone.",
         lang,
       )}
     >
@@ -296,7 +302,7 @@ export function CompoundDiagram({ lang, step }: DiagramProps) {
   const year = (x: number, n: number) => (
     <Pop>
       <text x={x + 65} y={266} textAnchor="middle" className="diagram-small">
-        {alt(`Year ${n}`, `Jahr ${n}`, lang)}
+        {alt(`Year ${n}`, `Jahr ${n}`, `Rok ${n}`, lang)}
       </text>
     </Pop>
   );
@@ -305,6 +311,7 @@ export function CompoundDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "With 10 percent, Bea has 100 coins, then 110, then 121. The second year's interest is 11 coins, because it is paid on 110.",
         "Bei 10 Prozent hat Bea 100 Münzen, dann 110, dann 121. Die Zinsen im zweiten Jahr sind 11 Münzen, weil sie auf 110 gezahlt werden.",
+        "Przy 10 procentach Bea ma 100 monet, potem 110, a potem 121. W drugim roku odsetki wynoszą 11 monet, bo naliczono je od 110.",
         lang,
       )}
     >
@@ -326,7 +333,7 @@ export function CompoundDiagram({ lang, step }: DiagramProps) {
           {year(470, 2)}
         </>
       )}
-      {step >= 4 && <TermChip x={140} y={4} w={360}>{alt("compound interest", "Zinseszins", lang)}</TermChip>}
+      {step >= 4 && <TermChip x={140} y={4} w={360}>{alt("compound interest", "Zinseszins", "procent składany", lang)}</TermChip>}
     </DiagramCanvas>
   );
 }
@@ -348,6 +355,7 @@ export function LoanCostDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "A loan of 100 coins costs 105 at 5 percent and 110 at 10 percent. After 10 years at 10 percent it costs 259.",
         "Ein Darlehen von 100 Münzen kostet bei 5 Prozent 105 und bei 10 Prozent 110. Nach 10 Jahren bei 10 Prozent sind es 259.",
+        "Pożyczka 100 monet kosztuje 105 przy 5 procentach i 110 przy 10 procentach. Po 10 latach przy 10 procentach kosztuje 259.",
         lang,
       )}
     >
@@ -374,7 +382,7 @@ export function LoanCostDiagram({ lang, step }: DiagramProps) {
               <Clock size={40} />
             </Pop>
             <text x={306} y={261} className="diagram-small" style={{ fontSize: 20 }}>
-              {alt("10 years", "10 Jahre", lang)}
+              {alt("10 years", "10 Jahre", "10 lat", lang)}
             </text>
           </>,
           "259",

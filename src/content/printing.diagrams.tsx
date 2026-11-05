@@ -8,7 +8,8 @@ import { BankBuilding, Chest, CoinPress, CoinStack, MetalDisc, River, Tick, UpAr
 
 /** Animated diagrams for the printing lesson, one per story beat. `step` is how many taps so far. */
 
-const alt = (en: string, de: string, lang: DiagramProps["lang"]) => (lang === "en" ? en : de);
+const alt = (en: string, de: string, pl: string, lang: DiagramProps["lang"]) =>
+  lang === "pl" ? pl : lang === "de" ? de : en;
 
 const INK = "#23383f";
 const ORANGE = "#d9701b";
@@ -38,72 +39,144 @@ function Num({
 }
 
 /** A coin icon with a number next to it. */
-function CoinNum({ x, y, n, size = 44, fill = INK }: { x: number; y: number; n: number | string; size?: number; fill?: string }) {
+function CoinNum({
+  x,
+  y,
+  n,
+  size = 36,
+  fill = INK,
+}: {
+  x: number;
+  y: number;
+  n: number;
+  size?: number;
+  fill?: string;
+}) {
   return (
-    <>
+    <g>
       <Coin x={x} y={y} size={size} />
-      <Num x={x + size + 6} y={y + size * 0.74} size={size * 0.7} fill={fill}>
+      <Num x={x + size + 8} y={y + size * 0.78} size={size * 0.75} fill={fill}>
         {n}
       </Num>
-    </>
+    </g>
   );
 }
 
-/** A loaf icon with a number next to it. */
-function BreadNum({ x, y, n, size = 44, fill = INK }: { x: number; y: number; n: number | string; size?: number; fill?: string }) {
+/** A bread icon with a number next to it. */
+function BreadNum({
+  x,
+  y,
+  n,
+  size = 36,
+  fill = INK,
+}: {
+  x: number;
+  y: number;
+  n: number;
+  size?: number;
+  fill?: string;
+}) {
   return (
-    <>
+    <g>
       <Bread x={x} y={y} size={size} />
-      <Num x={x + size + 6} y={y + size * 0.74} size={size * 0.7} fill={fill}>
+      <Num x={x + size + 8} y={y + size * 0.78} size={size * 0.75} fill={fill}>
         {n}
       </Num>
-    </>
+    </g>
   );
 }
 
-/** "1 loaf = n coins": a loaf, an equals sign, a coin and the number. */
-function PriceRow({ x, y, n, size = 44, fill = INK }: { x: number; y: number; n: number | string; size?: number; fill?: string }) {
+/** A neat shelf of bread: `n` loaves laid out in rows. */
+function Shelf({
+  x,
+  y,
+  n,
+  cols = 5,
+  size = 36,
+  gap = 40,
+}: {
+  x: number;
+  y: number;
+  n: number;
+  cols?: number;
+  size?: number;
+  gap?: number;
+}) {
   return (
-    <Pop x={x} y={y}>
-      <Bread x={0} y={0} size={size} />
-      <Num x={size + 20} y={size * 0.74} size={size * 0.7} anchor="middle">
+    <g>
+      {Array.from({ length: n }, (_, i) => (
+        <Bread key={i} x={x + (i % cols) * gap} y={y + Math.floor(i / cols) * (gap - 2)} size={size} />
+      ))}
+    </g>
+  );
+}
+
+/** A grid of loose coins: `n` coins in rows. */
+function CoinGrid({
+  x,
+  y,
+  n,
+  cols = 5,
+  size = 32,
+  gap = 34,
+}: {
+  x: number;
+  y: number;
+  n: number;
+  cols?: number;
+  size?: number;
+  gap?: number;
+}) {
+  return (
+    <g>
+      {Array.from({ length: n }, (_, i) => (
+        <Coin key={i} x={x + (i % cols) * gap} y={y + Math.floor(i / cols) * gap} size={size} />
+      ))}
+    </g>
+  );
+}
+
+/** Bread equals some coins: the price formula shown visually. */
+function PriceRow({
+  x,
+  y,
+  n,
+  size = 44,
+  fill = INK,
+}: {
+  x: number;
+  y: number;
+  n: number;
+  size?: number;
+  fill?: string;
+}) {
+  return (
+    <g>
+      <Bread x={x} y={y} size={size} />
+      <Num x={x + size + 8} y={y + size * 0.75} size={size * 0.65} fill={fill}>
         =
       </Num>
-      <Coin x={size + 40} y={0} size={size} />
-      <Num x={size * 2 + 48} y={size * 0.74} size={size * 0.75} fill={fill}>
-        {n}
-      </Num>
-    </Pop>
-  );
-}
-
-/** A block of coins in rows. */
-function CoinGrid({ x, y, n, cols, size, gap }: { x: number; y: number; n: number; cols: number; size: number; gap: number }) {
-  return (
-    <Pop x={x} y={y}>
       {Array.from({ length: n }, (_, i) => (
-        <Coin key={i} x={(i % cols) * gap} y={Math.floor(i / cols) * gap} size={size} />
+        <Coin key={i} x={x + size + 36 + i * (size - 6)} y={y} size={size} />
       ))}
-    </Pop>
+    </g>
   );
 }
 
-/** Loaves on a shelf, `cols` per row. */
-function Shelf({ x, y, n, cols, size, gap }: { x: number; y: number; n: number; cols: number; size: number; gap: number }) {
-  const rows = Math.ceil(n / cols);
-  const w = (cols - 1) * gap + size + 16;
-  return (
-    <Pop x={x} y={y}>
-      <rect x="-8" y={(rows - 1) * gap + size - 6} width={w} height="12" rx="6" fill="#a86f3c" />
-      {Array.from({ length: n }, (_, i) => (
-        <Bread key={i} x={(i % cols) * gap} y={Math.floor(i / cols) * gap} size={size} />
-      ))}
-    </Pop>
-  );
-}
-
-/** A person with no name label (for crowds). */
-function Crowd({ who, x, y, size, mood = "happy" }: { who: keyof typeof CAST; x: number; y: number; size: number; mood?: Mood }) {
+/** A small villager in a crowd. */
+function Crowd({
+  who,
+  x,
+  y,
+  size,
+  mood = "happy",
+}: {
+  who: keyof typeof CAST;
+  x: number;
+  y: number;
+  size: number;
+  mood?: Mood;
+}) {
   return (
     <Pop x={x} y={y}>
       <Person {...CAST[who]} mood={mood} size={size} />
@@ -111,13 +184,14 @@ function Crowd({ who, x, y, size, mood = "happy" }: { who: keyof typeof CAST; x:
   );
 }
 
-/** Beat 1: Moss, the new bridge, and the empty town chest. */
+/** Beat 1: Moss, the river, and the empty town chest with 0 coins. */
 export function ProblemDiagram({ lang, step }: DiagramProps) {
   return (
     <DiagramCanvas
       label={alt(
         "Mayor Moss wants a new bridge over the river, but the town chest is empty.",
         "Bürgermeister Moss will eine neue Brücke über den Fluss, aber die Stadtkasse ist leer.",
+        "Burmistrz Moss chce nowego mostu na rzece, ale miejska skrzynia jest pusta.",
         lang,
       )}
     >
@@ -152,6 +226,7 @@ export function IdeaDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Moss has a coin press. He thinks lots of new coins will make the town rich. This is called printing money.",
         "Moss hat eine Münzpresse. Er denkt, dass viele neue Münzen die Stadt reich machen. Das heißt Geld drucken.",
+        "Moss ma prasę do monet. Myśli, że mnóstwo nowych monet uczyni miasto bogatym. To się nazywa drukowanie pieniędzy.",
         lang,
       )}
     >
@@ -178,7 +253,7 @@ export function IdeaDiagram({ lang, step }: DiagramProps) {
             <Coin x={570} y={186} size={56} />
           </Pop>
           <TermChip x={330} y={34} w={290}>
-            {alt("printing money", "Geld drucken", lang)}
+            {alt("printing money", "Geld drucken", "drukowanie pieniędzy", lang)}
           </TermChip>
         </>
       )}
@@ -193,6 +268,7 @@ export function BreadPriceDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Bea bakes 10 loaves a day. The town has 20 coins. So one loaf costs 2 coins.",
         "Bea backt am Tag 10 Brote. Die Stadt hat 20 Münzen. Also kostet ein Brot 2 Münzen.",
+        "Bea piecze 10 bochenków dziennie. Miasto ma 20 monet. Zatem jeden bochenek kosztuje 2 monety.",
         lang,
       )}
     >
@@ -225,6 +301,7 @@ export function PrintDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Moss prints 20 new coins. The town now has 40 coins. Everybody runs to Bea to buy bread.",
         "Moss druckt 20 neue Münzen. Die Stadt hat jetzt 40 Münzen. Alle rennen zu Bea, um Brot zu kaufen.",
+        "Moss drukuje 20 nowych monet. Miasto ma teraz 40 monet. Wszyscy biegną do Bei kupić chleb.",
         lang,
       )}
     >
@@ -276,6 +353,7 @@ export function PriceUpDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Bea still bakes only 10 loaves. 40 coins want the same bread, so one loaf now costs 4 coins.",
         "Bea backt immer noch nur 10 Brote. 40 Münzen wollen das gleiche Brot, also kostet ein Brot jetzt 4 Münzen.",
+        "Bea wciąż piecze tylko 10 bochenków. 40 monet chce tego samego chleba, więc bochenek kosztuje teraz 4 monety.",
         lang,
       )}
     >
@@ -323,6 +401,7 @@ export function InflationDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Prices went up: this is inflation. The town has more coins but the same bread, so nobody got richer.",
         "Die Preise sind gestiegen: das ist Inflation. Die Stadt hat mehr Münzen, aber gleich viel Brot, also ist niemand reicher geworden.",
+        "Ceny wzrosły: to jest inflacja. Miasto ma więcej monet, lecz tyle samo chleba, więc nikt się nie wzbogacił.",
         lang,
       )}
     >
@@ -334,7 +413,7 @@ export function InflationDiagram({ lang, step }: DiagramProps) {
           </Pop>
           <PriceRow x={60} y={116} n={4} size={44} fill={ORANGE} />
           <TermChip x={330} y={56} w={280}>
-            {alt("inflation", "Inflation", lang)}
+            {alt("inflation", "Inflation", "inflacja", lang)}
           </TermChip>
         </>
       )}
@@ -368,6 +447,7 @@ export function HyperDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "If Moss keeps printing, a loaf costs 10 coins, then 100. Prices rising this fast is called hyperinflation. People stop trusting the coins.",
         "Wenn Moss weiter druckt, kostet ein Brot 10 Münzen, dann 100. Preise, die so schnell steigen, heißen Hyperinflation. Die Leute vertrauen den Münzen nicht mehr.",
+        "Jeśli Moss nadal drukuje, bochenek kosztuje 10 monet, a potem 100. Tak szybki wzrost cen nazywa się hiperinflacją. Ludzie przestają ufać monetom.",
         lang,
       )}
     >
@@ -390,7 +470,7 @@ export function HyperDiagram({ lang, step }: DiagramProps) {
       )}
       {step >= 2 && (
         <TermChip x={4} y={14} w={236}>
-          {alt("hyperinflation", "Hyperinflation", lang)}
+          {alt("hyperinflation", "Hyperinflation", "hiperinflacja", lang)}
         </TermChip>
       )}
       {step >= 3 && (
@@ -414,6 +494,7 @@ export function FineDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "A few new coins are fine when the town also makes more bread. A loaf still costs 2 coins. The central bank looks after the money.",
         "Ein paar neue Münzen sind in Ordnung, wenn die Stadt auch mehr Brot herstellt. Ein Brot kostet weiter 2 Münzen. Die Zentralbank kümmert sich um das Geld.",
+        "Kilka nowych monet jest w porządku, gdy miasto wytwarza także więcej chleba. Bochenek nadal kosztuje 2 monety. Bank centralny dba o pieniądze.",
         lang,
       )}
     >
@@ -455,7 +536,7 @@ export function FineDiagram({ lang, step }: DiagramProps) {
             <BankBuilding x={150} y={206} size={68} />
           </Pop>
           <TermChip x={240} y={216} w={330}>
-            {alt("central bank", "Zentralbank", lang)}
+            {alt("central bank", "Zentralbank", "bank centralny", lang)}
           </TermChip>
         </>
       )}

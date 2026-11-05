@@ -3,11 +3,13 @@ import { CAST, Villager } from "../components/cast";
 import { Arrow, Bubble, DiagramCanvas, Label, Pop, TermChip } from "../components/diagram";
 import { Bread, Coin, NoSign, Person, Shoe } from "../components/icons";
 import type { DiagramProps } from "../lesson/types";
+import type { Lang } from "../progress";
 import { BallotBox, Cart, FireTruck, Hammer, Park, Pot, Road, Scale, School } from "./taxes.icons";
 
 /** Animated diagrams for the Taxes lesson, one per story beat. `step` is how many taps so far. */
 
-const alt = (en: string, de: string, lang: DiagramProps["lang"]) => (lang === "en" ? en : de);
+const alt = (en: string, de: string, pl: string, lang: Lang) =>
+  lang === "pl" ? pl : lang === "de" ? de : en;
 
 const BIG: CSSProperties = { fontSize: 34 };
 
@@ -34,6 +36,7 @@ export function RoadDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "The road is full of holes and a cart is stuck. Finn cannot fix it alone. Bea and Sam use the road too.",
         "Die Straße ist voller Löcher und ein Karren steckt fest. Finn kann sie nicht allein reparieren. Bea und Sam benutzen die Straße auch.",
+        "Droga jest pełna dziur i wóz ugrzązł. Finn nie może naprawić jej sam. Bea i Sam także korzystają z drogi.",
         lang,
       )}
     >
@@ -73,25 +76,26 @@ export function NeedsDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "A town needs a school, a fire brigade and a park. The whole town needs them.",
         "Eine Stadt braucht eine Schule, eine Feuerwehr und einen Park. Die ganze Stadt braucht sie.",
+        "Miasto potrzebuje szkoły, straży pożarnej i parku. Całe miasteczko ich potrzebuje.",
         lang,
       )}
     >
       {step >= 1 && (
         <>
           <Pop><School x={50} y={6} size={120} /></Pop>
-          <Label x={110} y={150}>{alt("School", "Schule", lang)}</Label>
+          <Label x={110} y={150}>{alt("School", "Schule", "Szkoła", lang)}</Label>
         </>
       )}
       {step >= 2 && (
         <>
           <Pop><FireTruck x={260} y={6} size={120} /></Pop>
-          <Label x={320} y={150}>{alt("Fire brigade", "Feuerwehr", lang)}</Label>
+          <Label x={320} y={150}>{alt("Fire brigade", "Feuerwehr", "Straż pożarna", lang)}</Label>
         </>
       )}
       {step >= 3 && (
         <>
           <Pop><Park x={470} y={6} size={120} /></Pop>
-          <Label x={530} y={150}>{alt("Park", "Park", lang)}</Label>
+          <Label x={530} y={150}>{alt("Park", "Park", "Park", lang)}</Label>
         </>
       )}
       {step >= 4 &&
@@ -109,13 +113,14 @@ export function PotDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Mayor Moss. Everybody puts coins into one pot. These coins are called taxes. Moss pays for the road, the school, the fire brigade and the park.",
         "Bürgermeister Moss. Alle legen Münzen in einen Topf. Diese Münzen heißen Steuern. Moss bezahlt die Straße, die Schule, die Feuerwehr und den Park.",
+        "Burmistrz Moss. Wszyscy wrzucają monety do jednego garnka. Te monety nazywają się podatkami. Moss opłaca drogę, szkołę, straż pożarną i park.",
         lang,
       )}
     >
       {step >= 1 && (
         <>
           <Villager who="Moss" x={20} y={14} size={110} />
-          <TermChip x={152} y={34} w={210}>{alt("mayor", "Bürgermeister", lang)}</TermChip>
+          <TermChip x={152} y={34} w={210}>{alt("mayor", "Bürgermeister", "burmistrz", lang)}</TermChip>
         </>
       )}
       {step >= 2 && (
@@ -138,7 +143,7 @@ export function PotDiagram({ lang, step }: DiagramProps) {
           })}
         </>
       )}
-      {step >= 3 && <TermChip x={196} y={112} w={190}>{alt("taxes", "Steuern", lang)}</TermChip>}
+      {step >= 3 && <TermChip x={196} y={112} w={190}>{alt("taxes", "Steuern", "podatki", lang)}</TermChip>}
       {step >= 4 && (
         <>
           <Arrow from={[460, 232]} to={[366, 232]} width={5} head={13} />
@@ -158,6 +163,7 @@ export function ShareDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Nobody pays coins each time they use the road. Everybody shares the cost through the pot.",
         "Niemand zahlt jedes Mal Münzen für die Straße. Alle teilen sich die Kosten durch den Topf.",
+        "Nikt nie płaci monet za każdym razem, gdy korzysta z drogi. Wszyscy dzielą się kosztem poprzez wspólny garnek.",
         lang,
       )}
     >
@@ -205,6 +211,7 @@ export function EarnDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Finn earns 10 coins and puts in 2. Bea earns 20 coins and puts in 4. Whoever earns more puts in more.",
         "Finn verdient 10 Münzen und zahlt 2 ein. Bea verdient 20 Münzen und zahlt 4 ein. Wer mehr verdient, zahlt mehr.",
+        "Finn zarabia 10 monet i wpłaca 2. Bea zarabia 20 monet i wpłaca 4. Kto zarabia więcej, ten wpłaca więcej.",
         lang,
       )}
     >
@@ -244,6 +251,7 @@ export function BalanceDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Too small a pot cannot pay for the road and the school. Too big a pot leaves people too few coins for bread and shoes. Moss looks for the right amount.",
         "Ein zu kleiner Topf reicht nicht für Straße und Schule. Ein zu großer Topf lässt den Leuten zu wenige Münzen für Brot und Schuhe. Moss sucht die richtige Menge.",
+        "Zbyt mały garnek nie opłaci drogi i szkoły. Zbyt duży garnek zostawia ludziom za mało monet na chleb i buty. Moss szuka właściwej równowagi.",
         lang,
       )}
     >
@@ -281,6 +289,7 @@ export function VoteDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "The people of the town vote for the mayor and the council. Now it is your turn to try the tax board.",
         "Die Leute der Stadt wählen den Bürgermeister und den Rat. Jetzt bist du dran, die Steuer-Tafel auszuprobieren.",
+        "Mieszkańcy miasteczka głosują na burmistrza i radę. Teraz twoja kolej na wypróbowanie tablicy podatkowej.",
         lang,
       )}
     >
@@ -296,7 +305,7 @@ export function VoteDiagram({ lang, step }: DiagramProps) {
           )}
           {step >= 2 && (
             <>
-              <TermChip x={8} y={4} w={176}>{alt("vote", "wählen", lang)}</TermChip>
+              <TermChip x={8} y={4} w={176}>{alt("vote", "wählen", "głosować", lang)}</TermChip>
               <Pop><BallotBox x={40} y={60} size={110} /></Pop>
               <Arrow from={[87, 188]} to={[87, 152]} width={5} head={12} />
             </>
@@ -306,7 +315,7 @@ export function VoteDiagram({ lang, step }: DiagramProps) {
               <Arrow from={[158, 108]} to={[250, 80]} width={5} head={13} />
               <Villager who="Pim" x={404} y={16} size={100} name="" />
               <Villager who="Pip" x={504} y={16} size={100} name="" />
-              <Label x={504} y={148}>{alt("council", "Rat", lang)}</Label>
+              <Label x={504} y={148}>{alt("council", "Rat", "rada", lang)}</Label>
             </>
           )}
         </>
