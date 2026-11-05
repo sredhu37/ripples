@@ -63,10 +63,8 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit,
         <h2 className="lesson-title">
           <LessonIcon id={meta.id} size={34} /> {getLessonTitle(meta, lang)}
         </h2>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          {onLang && <LangSwitch lang={lang} onLang={onLang} />}
-          <Dots total={total} position={position} lang={lang} />
-        </div>
+        {onLang && <LangSwitch lang={lang} onLang={onLang} />}
+        <Dots total={total} position={position} lang={lang} />
       </header>
 
       {phase.k === "story" && (

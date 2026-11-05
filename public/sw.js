@@ -1,6 +1,6 @@
 // Offline support. App files are cached on first load and refreshed in the
 // background, so the app opens without internet after one visit.
-const CACHE = "ripples-v1";
+const CACHE = "ripples-v2";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((c) => c.addAll(["./", "./manifest.webmanifest", "./icon.svg"])));
