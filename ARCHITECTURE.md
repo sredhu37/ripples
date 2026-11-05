@@ -21,7 +21,7 @@ flowchart LR
 - **UI text** (`src/i18n.ts`): all interface strings in EN, DE, and PL.
 - **Lesson engine** (`src/lesson/`): `types.ts` (the `Lesson` shape), `LessonRunner.tsx` (story, toy, quiz, badge, real life, Ask Dad), `toolkit.tsx` (Stage, Slider, ToyButton, CheckButton, `animatedBeat`). A story beat is either an old emoji `scene` or an animated beat: one Otto line per tap and a diagram that shows one more part per tap.
 - **Lesson content** (`src/content/<id>.tsx`, registry in `src/content/index.ts`): one file per lesson, checked by `src/content/content.test.ts`. How to write one: [docs/writing-lessons.md](docs/writing-lessons.md). Parents read each lesson's fact card in the app (gear icon, maths gate, Fact cards).
-- **Screens and pieces** (`src/components/`): `Otto`, `SpeechBubble` (highlights *term* words), `icons.tsx` (flat SVG icons and villagers, drawn in code), `diagram.tsx` (canvas, pop-in, arrows, bubbles, term chip), `NameScreen`, `MapScreen`, `ParentPanel`, `FactCards`, `LessonPlaceholder`.
+- **Screens and pieces** (`src/components/`): `Otto`, `SpeechBubble` (highlights *term* words), `icons.tsx` (flat SVG icons and villagers, drawn in code), `diagram.tsx` (canvas, pop-in, arrows, bubbles, term chip), `LangSwitch` (global 3-way language toggle), `NameScreen`, `MapScreen`, `ParentPanel`, `FactCards`, `LessonPlaceholder`.
 - **Sound and speech** (`src/sound.ts`, `src/speech.ts`): synthesized effects and read-aloud.
 - **Offline** (`public/sw.js`): caches app files after the first visit.
 
