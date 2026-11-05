@@ -25,14 +25,14 @@ export const LESSONS: LessonMeta[] = [
   { id: "rates", title: { en: "Interest rates up and down", de: "Zinsen rauf und runter", pl: "Stopy procentowe w górę i w dół" } },
 
   // Group 2: Business (11-18)
-  { id: "profit", title: { en: "Costs and profit", de: "Kosten und Gewinn" } },
-  { id: "sales", title: { en: "Making sales", de: "Verkauf und Kundschaft" } },
-  { id: "ticketsize", title: { en: "Small and big prices", de: "Kleine und grosse Preise" } },
-  { id: "marketshare", title: { en: "Market share", de: "Der Marktanteil" } },
-  { id: "competition", title: { en: "Friendly competition", de: "Wettbewerb" } },
-  { id: "marketing", title: { en: "Spreading the word", de: "Bekanntheit" } },
-  { id: "hiring", title: { en: "Hiring and risk", de: "Mitarbeiter einstellen" } },
-  { id: "scale", title: { en: "Big and small business", de: "Wachsen und Grosswerden" } },
+  { id: "profit", title: { en: "Costs and profit", de: "Kosten und Gewinn", pl: "Koszty i zysk" } },
+  { id: "sales", title: { en: "Making sales", de: "Verkauf und Kundschaft", pl: "Sprzedaż i klienci" } },
+  { id: "ticketsize", title: { en: "Small and big prices", de: "Kleine und grosse Preise", pl: "Małe i duże ceny" } },
+  { id: "marketshare", title: { en: "Market share", de: "Der Marktanteil", pl: "Udział w rynku" } },
+  { id: "competition", title: { en: "Friendly competition", de: "Wettbewerb", pl: "Uczciwa konkurencja" } },
+  { id: "marketing", title: { en: "Spreading the word", de: "Bekanntheit", pl: "Reklama i rozgłos" } },
+  { id: "hiring", title: { en: "Hiring and risk", de: "Mitarbeiter einstellen", pl: "Zatrudnianie i ryzyko" } },
+  { id: "scale", title: { en: "Big and small business", de: "Wachsen und Grosswerden", pl: "Mały i duży biznes" } },
 
   // Group 3: Markets (19-26)
   { id: "supplydemand", title: { en: "Supply and demand", de: "Angebot und Nachfrage" } },
