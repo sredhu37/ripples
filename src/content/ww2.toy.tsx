@@ -45,16 +45,35 @@ export function Ww2Toy({ lang, mode = "toy", onDone }: Ww2ToyProps) {
     }
   };
 
+  const dignityTitle =
+    lang === "pl"
+      ? "Godność człowieka jest nienaruszalna"
+      : lang === "de"
+      ? "Die Wuerde des Menschen ist unantastbar"
+      : "Human Dignity is Inviolable";
+
+  const protectionLevel =
+    lang === "pl" ? "Poziom ochrony:" : lang === "de" ? "Schutzgrad:" : "Protection Level:";
+
+  const speechLabel =
+    lang === "pl" ? "Wolna prasa i słowo" : lang === "de" ? "Freie Presse" : "Free Speech & Press";
+
+  const equalRightsLabel =
+    lang === "pl" ? "Równe prawa dla wszystkich" : lang === "de" ? "Gleiche Rechte" : "Equal Rights for All";
+
+  const courageLabel =
+    lang === "pl" ? "Odwaga cywilna" : lang === "de" ? "Zivilcourage" : "Civil Courage";
+
   return (
     <div className="ww2-wrap">
       {/* Central Flame of Human Dignity */}
       <div className={`dignity-monument ${isFullyDefended ? "illuminated" : ""}`}>
         <div className="flame-icon">🕯️</div>
         <div className="monument-title">
-          {lang === "en" ? "Human Dignity is Inviolable" : "Die Wuerde des Menschen ist unantastbar"}
+          {dignityTitle}
         </div>
         <div className="liberty-meter">
-          {lang === "en" ? "Protection Level:" : "Schutzgrad:"} <strong>{libertyScore}%</strong>
+          {protectionLevel} <strong>{libertyScore}%</strong>
         </div>
       </div>
 
@@ -69,7 +88,7 @@ export function Ww2Toy({ lang, mode = "toy", onDone }: Ww2ToyProps) {
           }}
         >
           <span className="p-icon">📰</span>
-          <span className="p-name">{lang === "en" ? "Free Speech & Press" : "Freie Presse"}</span>
+          <span className="p-name">{speechLabel}</span>
           <span className="p-badge">{speech ? "✅" : "+"}</span>
         </button>
 
@@ -82,7 +101,7 @@ export function Ww2Toy({ lang, mode = "toy", onDone }: Ww2ToyProps) {
           }}
         >
           <span className="p-icon">⚖️</span>
-          <span className="p-name">{lang === "en" ? "Equal Rights for All" : "Gleiche Rechte"}</span>
+          <span className="p-name">{equalRightsLabel}</span>
           <span className="p-badge">{equalRights ? "✅" : "+"}</span>
         </button>
 
@@ -95,7 +114,7 @@ export function Ww2Toy({ lang, mode = "toy", onDone }: Ww2ToyProps) {
           }}
         >
           <span className="p-icon">🌹</span>
-          <span className="p-name">{lang === "en" ? "Civil Courage" : "Zivilcourage"}</span>
+          <span className="p-name">{courageLabel}</span>
           <span className="p-badge">{courage ? "✅" : "+"}</span>
         </button>
       </div>
@@ -105,12 +124,16 @@ export function Ww2Toy({ lang, mode = "toy", onDone }: Ww2ToyProps) {
         {showFeedback && (
           <div className={`feedback-msg ${isFullyDefended ? "success" : "warning"}`}>
             {isFullyDefended
-              ? lang === "en"
-                ? "Brilliant! Raising all three pillars protects society against tyranny and prejudice."
-                : "Grossartig! Alle drei Pfeiler schuetzen die Gesellschaft vor Willkuer und Unrecht."
-              : lang === "en"
-              ? "Activate all three pillars to achieve complete 100% protection."
-              : "Aktiviere alle drei Pfeiler fuer vollstaendigen Schutz."}
+              ? lang === "pl"
+                ? "Wspaniale! Wzniesienie wszystkich trzech filarów chroni społeczeństwo przed tyranią i bezprawiem."
+                : lang === "de"
+                ? "Grossartig! Alle drei Pfeiler schuetzen die Gesellschaft vor Willkuer und Unrecht."
+                : "Brilliant! Raising all three pillars protects society against tyranny and prejudice."
+              : lang === "pl"
+              ? "Aktywuj wszystkie trzy filary, aby zapewnić pełną 100% ochronę godności ludzkiej."
+              : lang === "de"
+              ? "Aktiviere alle drei Pfeiler fuer vollstaendigen Schutz."
+              : "Activate all three pillars to achieve complete 100% protection."}
           </div>
         )}
       </div>

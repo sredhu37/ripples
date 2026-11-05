@@ -4,17 +4,17 @@ import { CheckButton } from "../lesson/toolkit";
 import "./whyhistory.css";
 
 export const ARTIFACTS = [
-  { id: "astrolabe", nameEn: "Astrolabe", nameDe: "Astrolabium", icon: "🧭", target: "dialogue" },
-  { id: "yarn", nameEn: "Spinning Wheel Yarn", nameDe: "Charkha-Garn", icon: "🧵", target: "selfreliance" },
-  { id: "treaty", nameEn: "Peace Treaty Scroll", nameDe: "Friedensvertrag", icon: "📜", target: "diplomacy" },
-  { id: "steel", nameEn: "1951 Steel Beam", nameDe: "EGKS-Stahlträger", icon: "🔩", target: "reconciliation" },
+  { id: "astrolabe", nameEn: "Astrolabe", nameDe: "Astrolabium", namePl: "Astrolabium", icon: "🧭", target: "dialogue" },
+  { id: "yarn", nameEn: "Spinning Wheel Yarn", nameDe: "Charkha-Garn", namePl: "Przędza z kołowrotka Charkha", icon: "🧵", target: "selfreliance" },
+  { id: "treaty", nameEn: "Peace Treaty Scroll", nameDe: "Friedensvertrag", namePl: "Zwój traktatu pokojowego", icon: "📜", target: "diplomacy" },
+  { id: "steel", nameEn: "1951 Steel Beam", nameDe: "EGKS-Stahlträger", namePl: "Dźwigar stalowy EWWiS (1951)", icon: "🔩", target: "reconciliation" },
 ];
 
-export const TARGET_LABELS: Record<string, { en: string; de: string }> = {
-  dialogue: { en: "Cultural Dialogue & Science", de: "Kulturaustausch & Wissen" },
-  selfreliance: { en: "Non-violent Self-Reliance", de: "Gewaltfreie Selbstbestimmung" },
-  diplomacy: { en: "International Diplomacy", de: "Internationale Diplomatie" },
-  reconciliation: { en: "European Reconciliation", de: "Europäische Versöhnung" },
+export const TARGET_LABELS: Record<string, { en: string; de: string; pl: string }> = {
+  dialogue: { en: "Cultural Dialogue & Science", de: "Kulturaustausch & Wissen", pl: "Dialog kulturowy i nauka" },
+  selfreliance: { en: "Non-violent Self-Reliance", de: "Gewaltfreie Selbstbestimmung", pl: "Pokojowa samowystarczalność" },
+  diplomacy: { en: "International Diplomacy", de: "Internationale Diplomatie", pl: "Międzynarodowa dyplomacja" },
+  reconciliation: { en: "European Reconciliation", de: "Europäische Versöhnung", pl: "Pojednanie europejskie" },
 };
 
 export function calcHistoryInsights(matches: Record<string, string>) {
@@ -67,13 +67,39 @@ export function WhyHistoryToy({ lang, mode = "toy", onDone }: WhyHistoryToyProps
     }
   };
 
+  const insightsLabel =
+    lang === "pl"
+      ? "Wgląd historyczny i pamięć:"
+      : lang === "de"
+      ? "Historische Erkenntnis & Erinnerung:"
+      : "Historical Insights & Memory:";
+
+  const choosePrompt =
+    lang === "pl"
+      ? "-- Wybierz znaczenie --"
+      : lang === "de"
+      ? "-- Bedeutung wählen --"
+      : "-- Choose Meaning --";
+
+  const getItemName = (item: (typeof ARTIFACTS)[0]) => {
+    if (lang === "pl") return item.namePl;
+    if (lang === "de") return item.nameDe;
+    return item.nameEn;
+  };
+
+  const getTargetLabel = (label: { en: string; de: string; pl: string }) => {
+    if (lang === "pl") return label.pl;
+    if (lang === "de") return label.de;
+    return label.en;
+  };
+
   return (
     <div className="whyhistory-wrap">
       {/* Archive Header */}
       <div className={`archive-beacon ${isFullyDecoded ? "shining" : ""}`}>
         <span className="beacon-icon">💡</span>
         <span className="beacon-text">
-          {lang === "en" ? "Historical Insights & Memory:" : "Historische Erkenntnis & Erinnerung:"}{" "}
+          {insightsLabel}{" "}
           <strong>{insightsScore}%</strong>
         </span>
       </div>
@@ -84,17 +110,17 @@ export function WhyHistoryToy({ lang, mode = "toy", onDone }: WhyHistoryToyProps
           <div key={item.id} className="artifact-card">
             <div className="artifact-header">
               <span className="artifact-icon">{item.icon}</span>
-              <span className="artifact-name">{lang === "en" ? item.nameEn : item.nameDe}</span>
+              <span className="artifact-name">{getItemName(item)}</span>
             </div>
             <select
               className="artifact-select"
               value={matches[item.id] || ""}
               onChange={(e) => handleSelect(item.id, e.target.value)}
             >
-              <option value="">{lang === "en" ? "-- Choose Meaning --" : "-- Bedeutung wählen --"}</option>
+              <option value="">{choosePrompt}</option>
               {Object.entries(TARGET_LABELS).map(([key, label]) => (
                 <option key={key} value={key}>
-                  {lang === "en" ? label.en : label.de}
+                  {getTargetLabel(label)}
                 </option>
               ))}
             </select>
@@ -107,12 +133,16 @@ export function WhyHistoryToy({ lang, mode = "toy", onDone }: WhyHistoryToyProps
         {showFeedback && (
           <div className={`feedback-msg ${isFullyDecoded ? "success" : "warning"}`}>
             {isFullyDecoded
-              ? lang === "en"
-                ? "Wonderful! You connected the primary evidence to the lessons of human history."
-                : "Wunderbar! Du hast alle historischen Quellen mit den Lehren der Geschichte verknüpft."
-              : lang === "en"
-              ? `You have matched ${correctCount} of 4 correctly. Keep investigating!`
-              : `Du hast ${correctCount} von 4 richtig zugeordnet. Forscht weiter!`}
+              ? lang === "pl"
+                ? "Wspaniale! Połączyłeś dowody ze źródeł pierwotnych z najważniejszymi lekcjami historii ludzkości."
+                : lang === "de"
+                ? "Wunderbar! Du hast alle historischen Quellen mit den Lehren der Geschichte verknüpft."
+                : "Wonderful! You connected the primary evidence to the lessons of human history."
+              : lang === "pl"
+              ? `Dopasowałeś poprawnie ${correctCount} z 4. Badaj dalej!`
+              : lang === "de"
+              ? `Du hast ${correctCount} von 4 richtig zugeordnet. Forscht weiter!`
+              : `You have matched ${correctCount} of 4 correctly. Keep investigating!`}
           </div>
         )}
       </div>

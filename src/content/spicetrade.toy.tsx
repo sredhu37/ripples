@@ -67,6 +67,67 @@ export function SpiceTradeToy({ lang, mode = "toy", onDone }: SpiceTradeToyProps
     }
   };
 
+  const landRouteLabel =
+    lang === "pl" ? "Lądowy Jedwabny Szlak" : lang === "de" ? "Seidenstrasse ueber Land" : "Overland Silk Road";
+  const oceanRouteLabel =
+    lang === "pl" ? "Morski szlak oceaniczny" : lang === "de" ? "Seeweg ueber den Ozean" : "Maritime Ocean Route";
+
+  const windLabel =
+    lang === "pl" ? "Wiatr monsunowy:" : lang === "de" ? "Monsunwind:" : "Monsoon Wind:";
+
+  const summerWindLabel =
+    lang === "pl"
+      ? "Letni południowo-zachodni (z wiatrem)"
+      : lang === "de"
+      ? "Sommer-Suedwest (Rueckenwind)"
+      : "Summer South-West (Tailwind)";
+
+  const winterWindLabel =
+    lang === "pl"
+      ? "Zimowy północno-wschodni (pod wiatr)"
+      : lang === "de"
+      ? "Winter-Nordost (Gegenwind)"
+      : "Winter North-East (Headwind)";
+
+  const voyageTitle =
+    route === "land"
+      ? lang === "pl"
+        ? "Wyprawa karawaną przez góry i pustynie"
+        : lang === "de"
+        ? "Karawane durch Wueste und Berge"
+        : "Silk Road Mountain Trek"
+      : wind === "summer"
+      ? lang === "pl"
+        ? "Błyskawiczny rejs z letnim monsunem!"
+        : lang === "de"
+        ? "Schnelle Monsun-Fahrt!"
+        : "High-Speed Monsoon Voyage!"
+      : lang === "pl"
+      ? "Żegluga pod wiatr z trudem"
+      : lang === "de"
+      ? "Fahrt gegen den Gegenwind"
+      : "Sailing against Headwinds";
+
+  const durationLabel =
+    lang === "pl" ? "Czas podróży" : lang === "de" ? "Reisezeit" : "Duration";
+  const monthsUnit =
+    lang === "pl" ? "Miesięcy" : lang === "de" ? "Monate" : "Months";
+
+  const cargoLabel =
+    lang === "pl" ? "Ładunek" : lang === "de" ? "Ladung" : "Cargo";
+  const sacksUnit =
+    lang === "pl" ? "Worków" : lang === "de" ? "Saecke" : "Sacks";
+
+  const tollsLabel =
+    lang === "pl" ? "Rogatki i cła" : lang === "de" ? "Wegzoelle" : "Road Tolls";
+  const coinsUnit =
+    lang === "pl" ? "Monet" : lang === "de" ? "Muenzen" : "Coins";
+
+  const profitLabel =
+    lang === "pl" ? "Zysk" : lang === "de" ? "Gewinn" : "Profit";
+  const silverUnit =
+    lang === "pl" ? "Srebra" : lang === "de" ? "Silber" : "Silver";
+
   return (
     <div className="spicetrade-wrap">
       {/* Route Selector */}
@@ -79,7 +140,7 @@ export function SpiceTradeToy({ lang, mode = "toy", onDone }: SpiceTradeToyProps
             setShowFeedback(false);
           }}
         >
-          {lang === "en" ? "Overland Silk Road" : "Seidenstrasse ueber Land"}
+          {landRouteLabel}
         </button>
         <button
           type="button"
@@ -89,14 +150,14 @@ export function SpiceTradeToy({ lang, mode = "toy", onDone }: SpiceTradeToyProps
             setShowFeedback(false);
           }}
         >
-          {lang === "en" ? "Maritime Ocean Route" : "Seeweg ueber den Ozean"}
+          {oceanRouteLabel}
         </button>
       </div>
 
       {/* Wind Selector (for ocean) */}
       {route === "ocean" && (
         <div className="wind-bar">
-          <span className="wind-label">{lang === "en" ? "Monsoon Wind:" : "Monsunwind:"}</span>
+          <span className="wind-label">{windLabel}</span>
           <button
             type="button"
             className={`w-pill ${wind === "summer" ? "active" : ""}`}
@@ -105,7 +166,7 @@ export function SpiceTradeToy({ lang, mode = "toy", onDone }: SpiceTradeToyProps
               setShowFeedback(false);
             }}
           >
-            {lang === "en" ? "Summer South-West (Tailwind)" : "Sommer-Suedwest (Rueckenwind)"}
+            {summerWindLabel}
           </button>
           <button
             type="button"
@@ -115,7 +176,7 @@ export function SpiceTradeToy({ lang, mode = "toy", onDone }: SpiceTradeToyProps
               setShowFeedback(false);
             }}
           >
-            {lang === "en" ? "Winter North-East (Headwind)" : "Winter-Nordost (Gegenwind)"}
+            {winterWindLabel}
           </button>
         </div>
       )}
@@ -123,28 +184,24 @@ export function SpiceTradeToy({ lang, mode = "toy", onDone }: SpiceTradeToyProps
       {/* Voyage Overview Card */}
       <div className={`voyage-card ${status}`}>
         <div className="voyage-title">
-          {route === "land"
-            ? lang === "en" ? "Silk Road Mountain Trek" : "Karawane durch Wueste und Berge"
-            : wind === "summer"
-            ? lang === "en" ? "High-Speed Monsoon Voyage!" : "Schnelle Monsun-Fahrt!"
-            : lang === "en" ? "Sailing against Headwinds" : "Fahrt gegen den Gegenwind"}
+          {voyageTitle}
         </div>
         <div className="stats-row">
           <div className="s-item">
-            <span className="s-lbl">{lang === "en" ? "Duration" : "Reisezeit"}</span>
-            <span className="s-val">{months} {lang === "en" ? "Months" : "Monate"}</span>
+            <span className="s-lbl">{durationLabel}</span>
+            <span className="s-val">{months} {monthsUnit}</span>
           </div>
           <div className="s-item">
-            <span className="s-lbl">{lang === "en" ? "Cargo" : "Ladung"}</span>
-            <span className="s-val">{capacity} {lang === "en" ? "Sacks" : "Saecke"}</span>
+            <span className="s-lbl">{cargoLabel}</span>
+            <span className="s-val">{capacity} {sacksUnit}</span>
           </div>
           <div className="s-item">
-            <span className="s-lbl">{lang === "en" ? "Road Tolls" : "Wegzoelle"}</span>
-            <span className="s-val">{tolls} {lang === "en" ? "Coins" : "Muenzen"}</span>
+            <span className="s-lbl">{tollsLabel}</span>
+            <span className="s-val">{tolls} {coinsUnit}</span>
           </div>
           <div className="s-item highlight">
-            <span className="s-lbl">{lang === "en" ? "Profit" : "Gewinn"}</span>
-            <span className="s-val">+{profit} {lang === "en" ? "Silver" : "Silber"}</span>
+            <span className="s-lbl">{profitLabel}</span>
+            <span className="s-val">+{profit} {silverUnit}</span>
           </div>
         </div>
       </div>
@@ -154,12 +211,16 @@ export function SpiceTradeToy({ lang, mode = "toy", onDone }: SpiceTradeToyProps
         {showFeedback && (
           <div className={`feedback-msg ${route === "ocean" && wind === "summer" ? "success" : "warning"}`}>
             {route === "ocean" && wind === "summer"
-              ? lang === "en"
-                ? "Excellent navigation! The summer monsoon carried 50 sacks of pepper safely to harbor."
-                : "Ausgezeichnete Navigation! Der Sommermonsun trug 50 Saecke Pfeffer sicher in den Hafen."
-              : lang === "en"
-              ? "Select the Ocean Route with Summer Monsoon wind to maximize speed and cargo."
-              : "Waehle den Seeweg mit Sommermonsun, um Geschwindigkeit und Ladung zu maximieren."}
+              ? lang === "pl"
+                ? "Wspaniała nawigacja! Letni monsun bezpiecznie przywiódł 50 worków pieprzu prosto do portu."
+                : lang === "de"
+                ? "Ausgezeichnete Navigation! Der Sommermonsun trug 50 Saecke Pfeffer sicher in den Hafen."
+                : "Excellent navigation! The summer monsoon carried 50 sacks of pepper safely to harbor."
+              : lang === "pl"
+              ? "Wybierz szlak oceaniczny z letnim monsunem, aby zmaksymalizować prędkość i zysk."
+              : lang === "de"
+              ? "Waehle den Seeweg mit Sommermonsun, um Geschwindigkeit und Ladung zu maximieren."
+              : "Select the Ocean Route with Summer Monsoon wind to maximize speed and cargo."}
           </div>
         )}
       </div>

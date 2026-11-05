@@ -58,6 +58,52 @@ export function RebuildingToy({ lang, mode = "toy", onDone }: RebuildingToyProps
     }
   };
 
+  const rivalBordersLabel =
+    lang === "pl"
+      ? "Osobne, rywalizujące granice"
+      : lang === "de"
+      ? "Getrennte Grenzen"
+      : "Separate Rival Borders";
+
+  const egksLabel =
+    lang === "pl"
+      ? "Wspólnota Węgla i Stali (EWWiS)"
+      : lang === "de"
+      ? "Montanunion (EGKS)"
+      : "Pooled Coal & Steel (EGKS)";
+
+  const franceLabel =
+    lang === "pl" ? "🇫🇷 Francja" : lang === "de" ? "Frankreich 🇫🇷" : "🇫🇷 France";
+
+  const riverLabel =
+    lang === "pl" ? "🌊 Rzeka Ren - dawna granica" : lang === "de" ? "🌊 Rhein-Grenze" : "🌊 Rhine River Border";
+
+  const germanyLabel =
+    lang === "pl" ? "Niemcy 🇩🇪" : lang === "de" ? "Deutschland 🇩🇪" : "Germany 🇩🇪";
+
+  const girderLabel =
+    lang === "pl" ? "🔩 Stalowy dźwigar" : lang === "de" ? "🔩 Stahlträger" : "🔩 Steel Girder";
+
+  const connectBeamBtn =
+    lang === "pl" ? "+ Zamontuj stalowy dźwigar" : lang === "de" ? "+ Stahlträger einbauen" : "+ Connect Steel Beam";
+
+  const resetBtn =
+    lang === "pl" ? "Reset" : lang === "de" ? "Zurücksetzen" : "Reset";
+
+  const peaceMeterLabel =
+    lang === "pl"
+      ? "Pokój i integracja europejska:"
+      : lang === "de"
+      ? "Frieden & Europäische Einigung:"
+      : "European Peace & Integration:";
+
+  const trainCelebration =
+    lang === "pl"
+      ? "🚅 Most jest otwarty! Szybkie pociągi łączą europejskie stolice w pokoju."
+      : lang === "de"
+      ? "🚅 Die Brücke steht! Züge verbinden Paris und Berlin in Frieden."
+      : "🚅 The bridge is open! Fast trains connect Paris and Berlin in peace.";
+
   return (
     <div className="rebuilding-wrap">
       {/* Pool Policy Bar */}
@@ -70,7 +116,7 @@ export function RebuildingToy({ lang, mode = "toy", onDone }: RebuildingToyProps
             setShowFeedback(false);
           }}
         >
-          🏰 {lang === "en" ? "Separate Rival Borders" : "Getrennte Grenzen"}
+          🏰 {rivalBordersLabel}
         </button>
         <button
           type="button"
@@ -80,16 +126,16 @@ export function RebuildingToy({ lang, mode = "toy", onDone }: RebuildingToyProps
             setShowFeedback(false);
           }}
         >
-          🤝 {lang === "en" ? "Pooled Coal & Steel (EGKS)" : "Montanunion (EGKS)"}
+          🤝 {egksLabel}
         </button>
       </div>
 
       {/* The River Bridge Construction */}
       <div className={`bridge-stage ${status}`}>
         <div className="stage-header">
-          <span className="country-label">🇫🇷 France</span>
-          <span className="river-name">🌊 Rhine River Border</span>
-          <span className="country-label">Germany 🇩🇪</span>
+          <span className="country-label">{franceLabel}</span>
+          <span className="river-name">{riverLabel}</span>
+          <span className="country-label">{germanyLabel}</span>
         </div>
 
         {/* Girder slots */}
@@ -99,17 +145,17 @@ export function RebuildingToy({ lang, mode = "toy", onDone }: RebuildingToyProps
               key={num}
               className={`girder-segment ${beamsPlaced >= num && isEGKS ? "placed" : "empty"}`}
             >
-              {beamsPlaced >= num && isEGKS ? "🔩 Steel Girder" : "..."}
+              {beamsPlaced >= num && isEGKS ? girderLabel : "..."}
             </div>
           ))}
         </div>
 
         <div className="construction-controls">
           <ToyButton onClick={handlePlaceBeam} disabled={!isEGKS || beamsPlaced >= 4}>
-            {lang === "en" ? "+ Connect Steel Beam" : "+ Stahlträger einbauen"}
+            {connectBeamBtn}
           </ToyButton>
           <ToyButton onClick={handleReset} disabled={beamsPlaced === 0}>
-            {lang === "en" ? "Reset" : "Zurücksetzen"}
+            {resetBtn}
           </ToyButton>
         </div>
       </div>
@@ -117,7 +163,7 @@ export function RebuildingToy({ lang, mode = "toy", onDone }: RebuildingToyProps
       {/* Peace & Integration Meter */}
       <div className="peace-meter-card">
         <div className="pm-label">
-          {lang === "en" ? "European Peace & Integration:" : "Frieden & Europäische Einigung:"}{" "}
+          {peaceMeterLabel}{" "}
           <strong>{peaceScore}%</strong>
         </div>
         <div className="pm-bar">
@@ -125,7 +171,7 @@ export function RebuildingToy({ lang, mode = "toy", onDone }: RebuildingToyProps
         </div>
         {bridgeComplete && (
           <div className="train-celebration">
-            🚅 {lang === "en" ? "The bridge is open! Fast trains connect Paris and Berlin in peace." : "Die Brücke steht! Züge verbinden Paris und Berlin in Frieden."}
+            {trainCelebration}
           </div>
         )}
       </div>
@@ -135,12 +181,16 @@ export function RebuildingToy({ lang, mode = "toy", onDone }: RebuildingToyProps
         {showFeedback && (
           <div className={`feedback-msg ${isEGKS && bridgeComplete ? "success" : "warning"}`}>
             {isEGKS && bridgeComplete
-              ? lang === "en"
-                ? "Outstanding! Pooling coal and steel made future war impossible and united former rivals."
-                : "Hervorragend! Das Teilen von Kohle und Stahl machte Krieg unmöglich und schuf Einigung."
-              : lang === "en"
-              ? "Select 'Pooled Coal & Steel (EGKS)' and place all 4 steel beams."
-              : "Wähle Montanunion (EGKS) und baue alle 4 Stahlträger ein."}
+              ? lang === "pl"
+                ? "Znakomicie! Wspólne zarządzanie węglem i stalą uczyniło przyszłą wojnę niemożliwą i zjednoczyło dawnych rywali."
+                : lang === "de"
+                ? "Hervorragend! Das Teilen von Kohle und Stahl machte Krieg unmöglich und schuf Einigung."
+                : "Outstanding! Pooling coal and steel made future war impossible and united former rivals."
+              : lang === "pl"
+              ? "Wybierz 'Wspólnotę Węgla i Stali (EWWiS)' i zamontuj wszystkie 4 stalowe dźwigary."
+              : lang === "de"
+              ? "Wähle Montanunion (EGKS) und baue alle 4 Stahlträger ein."
+              : "Select 'Pooled Coal & Steel (EGKS)' and place all 4 steel beams."}
           </div>
         )}
       </div>

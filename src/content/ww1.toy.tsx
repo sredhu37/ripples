@@ -46,6 +46,39 @@ export function Ww1Toy({ lang, mode = "toy", onDone }: Ww1ToyProps) {
     }
   };
 
+  const secretAlliancesLabel =
+    lang === "pl"
+      ? "Sztywne tajne sojusze"
+      : lang === "de"
+      ? "Geheime Buendnisfallen"
+      : "Rigid Secret Alliances";
+
+  const mediationTableLabel =
+    lang === "pl"
+      ? "Genewski stół mediacji pokojowej"
+      : lang === "de"
+      ? "Genfer Vermittlungstisch"
+      : "Geneva Peace Mediation Table";
+
+  const stageTitle = hasMediationTable
+    ? lang === "pl"
+      ? "Genewska rada otwartego dialogu"
+      : lang === "de"
+      ? "Genfer Gespraechsrat"
+      : "Geneva Open Dialogue Council"
+    : lang === "pl"
+    ? "Sześć państw spętanych tajnymi paktami"
+    : lang === "de"
+    ? "Sechs Staaten in Buendnisketten"
+    : "Six Nations Bound by Secret Treaties";
+
+  const triggerIncidentLabel =
+    lang === "pl"
+      ? "Wywołaj spór graniczny"
+      : lang === "de"
+      ? "Grenzstreit ausloesen"
+      : "Trigger Border Dispute";
+
   return (
     <div className="ww1-wrap">
       {/* Diplomacy Switch */}
@@ -58,7 +91,7 @@ export function Ww1Toy({ lang, mode = "toy", onDone }: Ww1ToyProps) {
             setShowFeedback(false);
           }}
         >
-          ⛓️ {lang === "en" ? "Rigid Secret Alliances" : "Geheime Buendnisfallen"}
+          ⛓️ {secretAlliancesLabel}
         </button>
         <button
           type="button"
@@ -68,16 +101,14 @@ export function Ww1Toy({ lang, mode = "toy", onDone }: Ww1ToyProps) {
             setShowFeedback(false);
           }}
         >
-          🕊️ {lang === "en" ? "Geneva Peace Mediation Table" : "Genfer Vermittlungstisch"}
+          🕊️ {mediationTableLabel}
         </button>
       </div>
 
       {/* Domino Visualizer */}
       <div className={`domino-stage ${status}`}>
         <div className="stage-title">
-          {hasMediationTable
-            ? lang === "en" ? "Geneva Open Dialogue Council" : "Genfer Gespraechsrat"
-            : lang === "en" ? "Six Nations Bound by Secret Treaties" : "Sechs Staaten in Buendnisketten"}
+          {stageTitle}
         </div>
 
         <div className="domino-row">
@@ -101,7 +132,7 @@ export function Ww1Toy({ lang, mode = "toy", onDone }: Ww1ToyProps) {
               setShowFeedback(false);
             }}
           >
-            ⚡ {lang === "en" ? "Trigger Border Dispute" : "Grenzstreit ausloesen"}
+            ⚡ {triggerIncidentLabel}
           </button>
         </div>
       </div>
@@ -110,17 +141,29 @@ export function Ww1Toy({ lang, mode = "toy", onDone }: Ww1ToyProps) {
       <div className="status-readout">
         {status === "calm" && (
           <span className="calm-text">
-            {lang === "en" ? "Europe is at peace. Trigger a dispute to test the system." : "Europa hat Frieden. Loese einen Streit aus, um das System zu testen."}
+            {lang === "pl"
+              ? "W Europie panuje pokój. Wywołaj spór, aby przetestować system."
+              : lang === "de"
+              ? "Europa hat Frieden. Loese einen Streit aus, um das System zu testen."
+              : "Europe is at peace. Trigger a dispute to test the system."}
           </span>
         )}
         {status === "cascade" && (
           <span className="danger-text">
-            ⚠️ {lang === "en" ? "All 6 nations were dragged in by mutual defense dominoes! (Conflict: 100%)" : "Alle 6 Staaten wurden durch den Dominoeffekt in den Krieg gezogen! (Konflikt: 100%)"}
+            ⚠️ {lang === "pl"
+              ? "Wszystkie 6 państw zostało wciągniętych do wojny przez efekt domina! (Konflikt: 100%)"
+              : lang === "de"
+              ? "Alle 6 Staaten wurden durch den Dominoeffekt in den Krieg gezogen! (Konflikt: 100%)"
+              : "All 6 nations were dragged in by mutual defense dominoes! (Conflict: 100%)"}
           </span>
         )}
         {status === "defused" && (
           <span className="peace-text">
-            ✅ {lang === "en" ? "The dispute was brought to the mediation table and defused peacefully! (Conflict: 0%)" : "Der Streit wurde am Vermittlungstisch friedlich geloest! (Konflikt: 0%)"}
+            ✅ {lang === "pl"
+              ? "Spór został skierowany do stołu mediacji i rozwiązany pokojowo! (Konflikt: 0%)"
+              : lang === "de"
+              ? "Der Streit wurde am Vermittlungstisch friedlich geloest! (Konflikt: 0%)"
+              : "The dispute was brought to the mediation table and defused peacefully! (Conflict: 0%)"}
           </span>
         )}
       </div>
@@ -130,12 +173,16 @@ export function Ww1Toy({ lang, mode = "toy", onDone }: Ww1ToyProps) {
         {showFeedback && (
           <div className={`feedback-msg ${hasMediationTable ? "success" : "warning"}`}>
             {hasMediationTable
-              ? lang === "en"
-                ? "Perfect! The Geneva Peace Mediation Table prevented the alliance domino trap."
-                : "Perfekt! Der Vermittlungstisch verhinderte die Buendnis-Kettenreaktion."
-              : lang === "en"
-              ? "Switch to the Geneva Peace Mediation Table to prevent the domino cascade."
-              : "Waehle den Genfer Vermittlungstisch, um die Kettenreaktion zu stoppen."}
+              ? lang === "pl"
+                ? "Doskonale! Genewski stół mediacji pokojowej zapobiegł pułapce domina sojuszy."
+                : lang === "de"
+                ? "Perfekt! Der Vermittlungstisch verhinderte die Buendnis-Kettenreaktion."
+                : "Perfect! The Geneva Peace Mediation Table prevented the alliance domino trap."
+              : lang === "pl"
+              ? "Przełącz na Genewski stół mediacji pokojowej, aby zatrzymać kaskadę domina."
+              : lang === "de"
+              ? "Waehle den Genfer Vermittlungstisch, um die Kettenreaktion zu stoppen."
+              : "Switch to the Geneva Peace Mediation Table to prevent the domino cascade."}
           </div>
         )}
       </div>
