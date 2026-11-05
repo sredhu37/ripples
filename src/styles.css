@@ -88,6 +88,7 @@ p {
 
 .seg {
   display: inline-flex;
+  flex-shrink: 0;
   background: var(--white);
   border: 2px solid var(--teal);
   border-radius: 999px;
