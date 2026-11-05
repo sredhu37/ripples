@@ -1,11 +1,25 @@
 import type { DiagramProps } from "../lesson/types";
 
-export function ArtisanWorkshopDiagram({ step }: DiagramProps) {
+export function ArtisanWorkshopDiagram({ lang, step }: DiagramProps) {
+  const title =
+    lang === "pl"
+      ? "Tradycyjny warsztat rzemieślniczy"
+      : lang === "de"
+      ? "Traditionelle Handwerksarbeit"
+      : "Traditional Artisan Handcrafting";
+
+  const sub =
+    lang === "pl"
+      ? "Każda część była ręcznie wycinana i piłowana, by pasować tylko do jednego przedmiotu"
+      : lang === "de"
+      ? "Jedes Teil wurde einzeln von Hand gefeilt und passte nur in dieses eine Stueck"
+      : "Each piece was cut and filed by hand to fit only that single item";
+
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Artisan Workshop">
       <rect x="30" y="30" width="340" height="180" rx="12" fill="#fffbeb" stroke="#fef3c7" strokeWidth="2" />
       <text x="200" y="60" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#92400e">
-        Traditional Artisan Handcrafting
+        {title}
       </text>
 
       {/* Workbench */}
@@ -26,19 +40,36 @@ export function ArtisanWorkshopDiagram({ step }: DiagramProps) {
 
       {step >= 2 && (
         <text x="200" y="210" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#78350f">
-          Each piece was cut and filed by hand to fit only that single item
+          {sub}
         </text>
       )}
     </svg>
   );
 }
 
-export function LuxuryPriceTagDiagram({ step }: DiagramProps) {
+export function LuxuryPriceTagDiagram({ lang, step }: DiagramProps) {
+  const title =
+    lang === "pl"
+      ? "Wyroby rzemieślnicze były towarem luksusowym"
+      : lang === "de"
+      ? "Handgefertigte Waren waren seltene Luxusgueter"
+      : "Handmade Goods Were Rare Luxuries";
+
+  const coinsLabel = lang === "pl" ? "500 monet" : lang === "de" ? "500 Muenzen" : "500 Coins";
+  const wageLabel = lang === "pl" ? "1 miesiąc pensji" : lang === "de" ? "1 Monatslohn" : "1 Month of Wages";
+
+  const sub =
+    lang === "pl"
+      ? "Ponieważ praca trwała tygodniami, zwykłe rodziny nie mogły sobie pozwolić na podstawowe urządzenia"
+      : lang === "de"
+      ? "Weil Handarbeit Wochen dauerte, konnten sich Familien solche Waren nicht leisten"
+      : "Because craft took weeks, ordinary families could not afford basic machines";
+
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="High Costs of Handmade Goods">
       <rect x="30" y="30" width="340" height="180" rx="12" fill="#fff1f2" stroke="#fecdd3" strokeWidth="2" />
       <text x="200" y="60" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#9f1239">
-        Handmade Goods Were Rare Luxuries
+        {title}
       </text>
 
       {/* Golden pocket watch */}
@@ -51,27 +82,43 @@ export function LuxuryPriceTagDiagram({ step }: DiagramProps) {
       {/* Big price tag */}
       <rect x="220" y="95" width="110" height="60" rx="8" fill="#e11d48" />
       <text x="275" y="122" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#ffffff">
-        500 Coins
+        {coinsLabel}
       </text>
       <text x="275" y="142" textAnchor="middle" fontSize="10" fill="#fecdd3">
-        1 Month of Wages
+        {wageLabel}
       </text>
 
       {step >= 2 && (
         <text x="200" y="200" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#881337">
-          Because craft took weeks, ordinary families could not afford basic machines
+          {sub}
         </text>
       )}
     </svg>
   );
 }
 
-export function InterchangeableGearsDiagram({ step }: DiagramProps) {
+export function InterchangeableGearsDiagram({ lang, step }: DiagramProps) {
+  const title =
+    lang === "pl"
+      ? "Wymienne części standardowe"
+      : lang === "de"
+      ? "Austauschbare Standardbauteile"
+      : "Interchangeable Standard Parts";
+
+  const identicalLabel = lang === "pl" ? "Identyczne" : lang === "de" ? "Gleich" : "Identical";
+
+  const sub =
+    lang === "pl"
+      ? "Każda część wykonana w identycznym wymiarze: każde koło zębate pasuje do każdego zegara czy roweru"
+      : lang === "de"
+      ? "Jedes Teil exakt genormt: Jedes Zahnrad passt in jedes Fahrrad oder jede Uhr"
+      : "Every part made to the exact same size: any gear fits any clock or bicycle";
+
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Interchangeable Parts">
       <rect x="30" y="30" width="340" height="180" rx="12" fill="#f0fdf4" stroke="#bbf7d0" strokeWidth="2" />
       <text x="200" y="58" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#166534">
-        Interchangeable Standard Parts
+        {title}
       </text>
 
       {/* 3 identical gears side by side */}
@@ -81,25 +128,43 @@ export function InterchangeableGearsDiagram({ step }: DiagramProps) {
           <circle cx={cx} cy="120" r="8" fill="#ffffff" stroke="#15803d" strokeWidth="2" />
           <line x1={cx} y1="88" x2={cx} y2="152" stroke="#15803d" strokeWidth="3" />
           <line x1={cx - 32} y1="120" x2={cx + 32} y2="120" stroke="#15803d" strokeWidth="3" />
-          <text x={cx} y="165" textAnchor="middle" fontSize="10" fill="#166534">Identical</text>
+          <text x={cx} y="165" textAnchor="middle" fontSize="10" fill="#166534">{identicalLabel}</text>
         </g>
       ))}
 
       {step >= 2 && (
         <text x="200" y="198" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#14532d">
-          Every part made to the exact same size: any gear fits any clock or bicycle
+          {sub}
         </text>
       )}
     </svg>
   );
 }
 
-export function MovingConveyorAssemblyDiagram({ step }: DiagramProps) {
+export function MovingConveyorAssemblyDiagram({ lang, step }: DiagramProps) {
+  const title =
+    lang === "pl"
+      ? "Ruchoma linia montażowa (taśma produkcyjna)"
+      : lang === "de"
+      ? "Das bewegliche Fliessband"
+      : "The Moving Assembly Line";
+
+  const station1 = lang === "pl" ? "1. Rama" : lang === "de" ? "1. Rahmen" : "1. Frame";
+  const station2 = lang === "pl" ? "2. Koła" : lang === "de" ? "2. Raeder" : "2. Wheels";
+  const station3 = lang === "pl" ? "3. Kontrola" : lang === "de" ? "3. Pruefung" : "3. Inspect";
+
+  const sub =
+    lang === "pl"
+      ? "Taśma dostarczała części bezpośrednio do rąk robotników, dziesięciokrotnie przyspieszając produkcję"
+      : lang === "de"
+      ? "Das Band brachte Bauteile direkt zum Arbeiter und verzehnfachte die Ausbeute"
+      : "Conveyor belts brought parts directly to workers, multiplying production tenfold";
+
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Moving Assembly Line">
       <rect x="30" y="30" width="340" height="180" rx="12" fill="#f8fafc" stroke="#cbd5e1" strokeWidth="2" />
       <text x="200" y="55" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#0f172a">
-        The Moving Assembly Line
+        {title}
       </text>
 
       {/* Conveyor belt */}
@@ -110,29 +175,46 @@ export function MovingConveyorAssemblyDiagram({ step }: DiagramProps) {
 
       {/* 3 Workstations */}
       <rect x="80" y="80" width="50" height="40" rx="6" fill="#e0f2fe" stroke="#0284c7" strokeWidth="2" />
-      <text x="105" y="104" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#0369a1">1. Frame</text>
+      <text x="105" y="104" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#0369a1">{station1}</text>
 
       <rect x="175" y="80" width="50" height="40" rx="6" fill="#e0f2fe" stroke="#0284c7" strokeWidth="2" />
-      <text x="200" y="104" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#0369a1">2. Wheels</text>
+      <text x="200" y="104" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#0369a1">{station2}</text>
 
       <rect x="270" y="80" width="50" height="40" rx="6" fill="#e0f2fe" stroke="#0284c7" strokeWidth="2" />
-      <text x="295" y="104" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#0369a1">3. Inspect</text>
+      <text x="295" y="104" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#0369a1">{station3}</text>
 
       {step >= 2 && (
         <text x="200" y="195" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1e293b">
-          Conveyor belts brought parts directly to workers, multiplying production tenfold
+          {sub}
         </text>
       )}
     </svg>
   );
 }
 
-export function BicyclesForEveryoneDiagram({ step }: DiagramProps) {
+export function BicyclesForEveryoneDiagram({ lang, step }: DiagramProps) {
+  const title =
+    lang === "pl"
+      ? "Przystępne cenowo rowery dla każdej rodziny"
+      : lang === "de"
+      ? "Erschwingliche Fahrraeder fuer jede Familie"
+      : "Affordable Bicycles for Every Family";
+
+  const priceLabel = lang === "pl" ? "50 monet" : lang === "de" ? "50 Muenzen" : "50 Coins";
+  const badgeLabel = lang === "pl" ? "Dostępne dla każdego!" : lang === "de" ? "Bezahlbar!" : "Affordable!";
+
+  const sub =
+    lang === "pl"
+      ? "Niższe koszty zamieniły dobra luksusowe w codzienne narzędzia zwykłych domów"
+      : lang === "de"
+      ? "Guenstige Preise machten Luxusgueter zu alltaeglichen Helfern fuer normale Haushalte"
+      : "Lower costs turned luxury goods into everyday tools for ordinary households";
+
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Affordable Goods for All">
       <rect x="30" y="30" width="340" height="180" rx="12" fill="#f0fdfa" stroke="#99f6e4" strokeWidth="2" />
       <text x="200" y="55" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#115e59">
-        Affordable Bicycles for Every Family
+        {title}
       </text>
 
       {/* Bicycle outline */}
@@ -146,15 +228,15 @@ export function BicyclesForEveryoneDiagram({ step }: DiagramProps) {
       {/* Reduced price badge */}
       <rect x="270" y="90" width="85" height="50" rx="8" fill="#0d9488" />
       <text x="312" y="112" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#ffffff">
-        50 Coins
+        {priceLabel}
       </text>
       <text x="312" y="130" textAnchor="middle" fontSize="9" fill="#ccfbf1">
-        Affordable!
+        {badgeLabel}
       </text>
 
       {step >= 2 && (
         <text x="200" y="195" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#134e4a">
-          Lower costs turned luxury goods into everyday tools for ordinary households
+          {sub}
         </text>
       )}
     </svg>

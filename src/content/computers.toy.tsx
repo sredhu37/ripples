@@ -63,12 +63,40 @@ export function ComputersToy({ lang, mode = "toy", onDone }: ComputersToyProps) 
     }
   };
 
+  const targetLabel =
+    lang === "pl"
+      ? "Szukana liczba dziesiętna:"
+      : lang === "de"
+      ? "Gesuchte Dezimalzahl:"
+      : "Target Decimal Number:";
+
+  const getBitAction = (bit: boolean) => {
+    if (bit) {
+      return lang === "pl" ? "Wyłącz" : lang === "de" ? "Ausschalten" : "Turn Off";
+    }
+    return lang === "pl" ? "Włącz" : lang === "de" ? "Einschalten" : "Turn On";
+  };
+
+  const binaryCodeLabel =
+    lang === "pl"
+      ? "Kod binarny:"
+      : lang === "de"
+      ? "Binaerer Code:"
+      : "Binary Code:";
+
+  const calcValueLabel =
+    lang === "pl"
+      ? "Obliczona wartość:"
+      : lang === "de"
+      ? "Berechneter Wert:"
+      : "Calculated Value:";
+
   return (
     <div className="computers-wrap">
       {/* Target indicator */}
       <div className="computers-target-card">
         <span className="computers-target-label">
-          {lang === "en" ? "Target Decimal Number:" : "Gesuchte Dezimalzahl:"}
+          {targetLabel}
         </span>
         <strong className="computers-target-num">{target}</strong>
       </div>
@@ -86,7 +114,7 @@ export function ComputersToy({ lang, mode = "toy", onDone }: ComputersToyProps) 
         >
           <span className="bit-val-label">+8</span>
           <span className="bit-state">{b3 ? "1" : "0"}</span>
-          <span className="bit-action">{b3 ? (lang === "en" ? "Turn Off" : "Ausschalten") : (lang === "en" ? "Turn On" : "Einschalten")}</span>
+          <span className="bit-action">{getBitAction(b3)}</span>
         </button>
 
         {/* Bit 4 */}
@@ -100,7 +128,7 @@ export function ComputersToy({ lang, mode = "toy", onDone }: ComputersToyProps) 
         >
           <span className="bit-val-label">+4</span>
           <span className="bit-state">{b2 ? "1" : "0"}</span>
-          <span className="bit-action">{b2 ? (lang === "en" ? "Turn Off" : "Ausschalten") : (lang === "en" ? "Turn On" : "Einschalten")}</span>
+          <span className="bit-action">{getBitAction(b2)}</span>
         </button>
 
         {/* Bit 2 */}
@@ -114,7 +142,7 @@ export function ComputersToy({ lang, mode = "toy", onDone }: ComputersToyProps) 
         >
           <span className="bit-val-label">+2</span>
           <span className="bit-state">{b1 ? "1" : "0"}</span>
-          <span className="bit-action">{b1 ? (lang === "en" ? "Turn Off" : "Ausschalten") : (lang === "en" ? "Turn On" : "Einschalten")}</span>
+          <span className="bit-action">{getBitAction(b1)}</span>
         </button>
 
         {/* Bit 1 */}
@@ -128,18 +156,18 @@ export function ComputersToy({ lang, mode = "toy", onDone }: ComputersToyProps) 
         >
           <span className="bit-val-label">+1</span>
           <span className="bit-state">{b0 ? "1" : "0"}</span>
-          <span className="bit-action">{b0 ? (lang === "en" ? "Turn Off" : "Ausschalten") : (lang === "en" ? "Turn On" : "Einschalten")}</span>
+          <span className="bit-action">{getBitAction(b0)}</span>
         </button>
       </div>
 
       {/* Output calculation card */}
       <div className="computers-output-card">
         <div className="computers-math-line">
-          <span>{lang === "en" ? "Binary Code:" : "Binaerer Code:"}</span>
+          <span>{binaryCodeLabel}</span>
           <code className="binary-string">{binary}</code>
         </div>
         <div className="computers-math-line">
-          <span>{lang === "en" ? "Calculated Value:" : "Berechneter Wert:"}</span>
+          <span>{calcValueLabel}</span>
           <strong className={`calc-decimal ${isMatch ? "match" : ""}`}>{decimal}</strong>
         </div>
       </div>
@@ -149,12 +177,16 @@ export function ComputersToy({ lang, mode = "toy", onDone }: ComputersToyProps) 
         {showFeedback && (
           <div className={`computers-feedback ${isMatch ? "success" : "warning"}`}>
             {isMatch
-              ? lang === "en"
-                ? `Success! Binary ${binary} equals decimal ${target} perfectly!`
-                : `Richtig! Binaer ${binary} entspricht genau der Dezimalzahl ${target}!`
-              : lang === "en"
-              ? `Current value is ${decimal}. Adjust switches to reach ${target}.`
-              : `Aktueller Wert ist ${decimal}. Passe die Schalter an, um ${target} zu erreichen.`}
+              ? lang === "pl"
+                ? `Brawo! Binarny ${binary} odpowiada dokładnie liczbie dziesiętnej ${target}!`
+                : lang === "de"
+                ? `Richtig! Binaer ${binary} entspricht genau der Dezimalzahl ${target}!`
+                : `Success! Binary ${binary} equals decimal ${target} perfectly!`
+              : lang === "pl"
+              ? `Bieżąca wartość to ${decimal}. Przestaw bity, aby uzyskać ${target}.`
+              : lang === "de"
+              ? `Aktueller Wert ist ${decimal}. Passe die Schalter an, um ${target} zu erreichen.`
+              : `Current value is ${decimal}. Adjust switches to reach ${target}.`}
           </div>
         )}
       </div>
