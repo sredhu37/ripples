@@ -27,7 +27,6 @@ export function MarketShareToy({
   isWidget?: boolean;
   onWidgetAnswer?: (correct: boolean) => void;
 }) {
-  const en = lang === "en";
   const [finnCount, setFinnCount] = useState(isWidget ? 5 : 5);
   const [seenFinnHigh, setSeenFinnHigh] = useState(false);
   const [seenClaraHigh, setSeenClaraHigh] = useState(false);
@@ -58,10 +57,45 @@ export function MarketShareToy({
     }
   }, [seenFinnHigh, seenClaraHigh, onDone, isWidget]);
 
+  const stageLabel =
+    lang === "pl"
+      ? "Symulator udziału w rynku owoców"
+      : lang === "de"
+      ? "Obst-Marktanteil Simulator"
+      : "Fruit market share simulator";
+
+  const canvasLabel =
+    lang === "pl"
+      ? "Podział udziału w rynku między Finna i Clarę"
+      : lang === "de"
+      ? "Marktanteile zwischen Finn und Clara"
+      : "Market share split between Finn and Clara";
+
+  const shoppersLabel =
+    lang === "pl" ? "10 Kupujących" : lang === "de" ? "10 Kundinnen" : "10 Shoppers";
+
+  const promptText = !seenFinnHigh
+    ? lang === "pl"
+      ? "Najpierw przesuń suwak tak, aby Finn miał co najmniej 70% kupujących (7 z 10)!"
+      : lang === "de"
+      ? "Schiebe zuerst so, dass Finn mindestens 70% der Käufer hat (7 von 10)!"
+      : "First, adjust the slider so Finn holds at least 70% of the shoppers (7 out of 10)!"
+    : !seenClaraHigh
+    ? lang === "pl"
+      ? "Świetnie! Teraz ustaw suwak tak, aby Clara osiągnęła co najmniej 50% udziału w rynku (5 lub więcej kupujących)!"
+      : lang === "de"
+      ? "Super! Schiebe nun so, dass Clara mindestens 50% Marktanteil erreicht (5 oder mehr)!"
+      : "Great! Now adjust so Clara reaches at least 50% market share (5 or more shoppers)!"
+    : lang === "pl"
+    ? "Zobacz, jak każdy przechodzący klient natychmiast zmienia udział w rynku obu sprzedawców!"
+    : lang === "de"
+    ? "Siehst du, wie jeder wechselnde Kunde den Marktanteil beider Händler verändert!"
+    : "Notice how every customer who switches changes both sellers' market shares!";
+
   return (
     <div className="marketshare-wrap">
-      <Stage label={en ? "Fruit market share simulator" : "Obst-Marktanteil Simulator"}>
-        <DiagramCanvas label={en ? "Market share split between Finn and Clara" : "Marktanteile zwischen Finn und Clara"}>
+      <Stage label={stageLabel}>
+        <DiagramCanvas label={canvasLabel}>
           {/* Left: Finn's Green Apples */}
           <Pop x={30} y={40}>
             <rect x="0" y="0" width="160" height="180" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
@@ -71,7 +105,7 @@ export function MarketShareToy({
             </text>
             <GreenApple x={25} y={120} size={40} />
             <rect x="75" y="125" width="70" height="30" rx="6" fill="#dcfce7" />
-            <text x="110" y="145" textAnchor="middle" fill="#15803d" fontSize="14" fontWeight="bold">
+            <text x="110" y="145" textAnchor="middle" fill="#15803d" fontSize={14} fontWeight="bold">
               {stats.finnPercent}%
             </text>
           </Pop>
@@ -79,8 +113,8 @@ export function MarketShareToy({
           {/* Center: Dynamic Pie Chart */}
           <Pop x={245} y={40}>
             <rect x="0" y="0" width="150" height="180" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
-            <text x="75" y="24" textAnchor="middle" fill="#23383f" fontSize="13" fontWeight="bold">
-              {en ? "10 Shoppers" : "10 Kundinnen"}
+            <text x="75" y="24" textAnchor="middle" fill="#23383f" fontSize={13} fontWeight="bold">
+              {shoppersLabel}
             </text>
             <g transform="translate(0, 20)">
               {/* Clara's full base circle in red */}
@@ -97,7 +131,7 @@ export function MarketShareToy({
               {/* Donut hole for clean badge */}
               <circle cx={cx} cy={cy} r={22} fill="#ffffff" stroke="#23383f" strokeWidth="2.5" />
             </g>
-            <text x="75" y="170" textAnchor="middle" fill="#64748b" fontSize="11" fontWeight="bold">
+            <text x="75" y="170" textAnchor="middle" fill="#64748b" fontSize={11} fontWeight="bold">
               {stats.finnCount} : {stats.claraCount}
             </text>
           </Pop>
@@ -111,7 +145,7 @@ export function MarketShareToy({
             </text>
             <Apple x={25} y={120} size={40} />
             <rect x="75" y="125" width="70" height="30" rx="6" fill="#fee2e2" />
-            <text x="110" y="145" textAnchor="middle" fill="#991b1b" fontSize="14" fontWeight="bold">
+            <text x="110" y="145" textAnchor="middle" fill="#991b1b" fontSize={14} fontWeight="bold">
               {stats.claraPercent}%
             </text>
           </Pop>
@@ -120,11 +154,7 @@ export function MarketShareToy({
 
       <div className="marketshare-controls">
         <Slider
-          label={
-            en
-              ? `Finn: ${stats.finnCount} (${stats.finnPercent}%) | Clara: ${stats.claraCount} (${stats.claraPercent}%)`
-              : `Finn: ${stats.finnCount} (${stats.finnPercent}%) | Clara: ${stats.claraCount} (${stats.claraPercent}%)`
-          }
+          label={`Finn: ${stats.finnCount} (${stats.finnPercent}%) | Clara: ${stats.claraCount} (${stats.claraPercent}%)`}
           min={0}
           max={10}
           step={1}
@@ -133,19 +163,7 @@ export function MarketShareToy({
         />
 
         {!isWidget && (
-          <ActionPrompt lang={lang}>
-            {!seenFinnHigh
-              ? en
-                ? "First, adjust the slider so Finn holds at least 70% of the shoppers (7 out of 10)!"
-                : "Schiebe zuerst so, dass Finn mindestens 70% der Käufer hat (7 von 10)!"
-              : !seenClaraHigh
-              ? en
-                ? "Great! Now adjust so Clara reaches at least 50% market share (5 or more shoppers)!"
-                : "Super! Schiebe nun so, dass Clara mindestens 50% Marktanteil erreicht (5 oder mehr)!"
-              : en
-              ? "Notice how every customer who switches changes both sellers' market shares!"
-              : "Siehst du, wie jeder wechselnde Kunde den Marktanteil beider Händler verändert!"}
-          </ActionPrompt>
+          <ActionPrompt lang={lang}>{promptText}</ActionPrompt>
         )}
 
         {isWidget && onWidgetAnswer && (

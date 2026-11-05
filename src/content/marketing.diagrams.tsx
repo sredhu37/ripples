@@ -20,9 +20,29 @@ export function BootsIcon({ x = 0, y = 0, size = 60 }: { x?: number; y?: number;
 }
 
 export function HiddenBootsDiagram({ lang, step }: DiagramProps) {
-  const en = lang === "en";
+  const label =
+    lang === "pl"
+      ? "Sam robi nieprzemakalne skórzane buty"
+      : lang === "de"
+      ? "Sam macht wasserfeste Stiefel"
+      : "Sam makes waterproof boots";
+  const bootsText =
+    lang === "pl"
+      ? "Nieprzemakalne buty"
+      : lang === "de"
+      ? "Wasserfeste Stiefel"
+      : "Waterproof boots";
+  const puddleText =
+    lang === "pl"
+      ? "Suche stopy w kałużach!"
+      : lang === "de"
+      ? "Trockene Füße im Regen!"
+      : "Dry feet in puddles!";
+  const sturdyText =
+    lang === "pl" ? "Solidne i ciepłe" : lang === "de" ? "Warm und reißfest" : "Sturdy and warm";
+
   return (
-    <DiagramCanvas label={en ? "Sam makes waterproof boots" : "Sam macht wasserfeste Stiefel"}>
+    <DiagramCanvas label={label}>
       <Pop x={60} y={60}>
         <Person {...CAST.Sam} size={110} />
         <text className="diagram-name" x={55} y={140} textAnchor="middle">
@@ -32,17 +52,17 @@ export function HiddenBootsDiagram({ lang, step }: DiagramProps) {
       <Pop x={200} y={65}>
         <BootsIcon x={0} y={0} size={70} />
         <text x="35" y="85" textAnchor="middle" fill="#854d0e" fontSize="13" fontWeight="bold">
-          {en ? "Waterproof boots" : "Wasserfeste Stiefel"}
+          {bootsText}
         </text>
       </Pop>
       {step >= 2 && (
         <Pop x={330} y={70}>
           <rect x="0" y="0" width="220" height="90" rx="10" fill="#e0f2fe" stroke="#0284c7" strokeWidth="2" />
-          <text x="110" y="35" textAnchor="middle" fill="#0369a1" fontSize="14" fontWeight="bold">
-            {en ? "Dry feet in puddles!" : "Trockene Füße im Regen!"}
+          <text x="110" y="35" textAnchor="middle" fill="#0369a1" fontSize={14} fontWeight="bold">
+            {puddleText}
           </text>
-          <text x="110" y="65" textAnchor="middle" fill="#0284c7" fontSize="12">
-            {en ? "Sturdy and warm" : "Warm und reißfest"}
+          <text x="110" y="65" textAnchor="middle" fill="#0284c7" fontSize={12}>
+            {sturdyText}
           </text>
         </Pop>
       )}
@@ -51,9 +71,29 @@ export function HiddenBootsDiagram({ lang, step }: DiagramProps) {
 }
 
 export function EmptyShopDiagram({ lang, step }: DiagramProps) {
-  const en = lang === "en";
+  const label =
+    lang === "pl"
+      ? "Buty stoją na tylnej półce"
+      : lang === "de"
+      ? "Stiefel stehen im Regal"
+      : "Boots sit on a back shelf";
+  const workshopTitle =
+    lang === "pl" ? "Cichy warsztat" : lang === "de" ? "Stille Werkstatt" : "Quiet Workshop";
+  const noShoppers =
+    lang === "pl"
+      ? "Żaden klient nie zagląda"
+      : lang === "de"
+      ? "Keine Kunden kommen"
+      : "Zero shoppers visit";
+  const nobodyKnows =
+    lang === "pl"
+      ? "Nikt nie wie o ich istnieniu!"
+      : lang === "de"
+      ? "Niemand weiß davon!"
+      : "Nobody knows they exist!";
+
   return (
-    <DiagramCanvas label={en ? "Boots sit on a back shelf" : "Stiefel stehen im Regal"}>
+    <DiagramCanvas label={label}>
       <Pop x={60} y={60}>
         <Person {...CAST.Sam} mood="think" size={110} />
         <text className="diagram-name" x={55} y={140} textAnchor="middle">
@@ -62,20 +102,20 @@ export function EmptyShopDiagram({ lang, step }: DiagramProps) {
       </Pop>
       <Pop x={220} y={60}>
         <rect x="0" y="0" width="220" height="120" rx="12" fill="#f8fafc" stroke="#94a3b8" strokeWidth="2" />
-        <text x="110" y="35" textAnchor="middle" fill="#475569" fontSize="14" fontWeight="bold">
-          {en ? "Quiet Workshop" : "Stille Werkstatt"}
+        <text x="110" y="35" textAnchor="middle" fill="#475569" fontSize={14} fontWeight="bold">
+          {workshopTitle}
         </text>
-        <text x="110" y="70" textAnchor="middle" fill="#64748b" fontSize="13">
-          {en ? "Zero shoppers visit" : "Keine Kunden kommen"}
+        <text x="110" y="70" textAnchor="middle" fill="#64748b" fontSize={13}>
+          {noShoppers}
         </text>
-        <text x="110" y="95" textAnchor="middle" fill="#dc2626" fontSize="12" fontWeight="bold">
-          {en ? "Nobody knows they exist!" : "Niemand weiß davon!"}
+        <text x="110" y="95" textAnchor="middle" fill="#dc2626" fontSize={12} fontWeight="bold">
+          {nobodyKnows}
         </text>
       </Pop>
       {step >= 2 && (
         <Pop x={470} y={70}>
           <circle cx="45" cy="45" r="40" fill="#fee2e2" stroke="#ef4444" strokeWidth="2" />
-          <text x="45" y="52" textAnchor="middle" fill="#b91c1c" fontSize="28" fontWeight="bold">
+          <text x="45" y="52" textAnchor="middle" fill="#b91c1c" fontSize={28} fontWeight="bold">
             ?
           </text>
         </Pop>
@@ -85,9 +125,27 @@ export function EmptyShopDiagram({ lang, step }: DiagramProps) {
 }
 
 export function HarborSignDiagram({ lang, step }: DiagramProps) {
-  const en = lang === "en";
+  const label =
+    lang === "pl"
+      ? "Sam maluje szyld w porcie"
+      : lang === "de"
+      ? "Sam malt ein Hafenschild"
+      : "Sam paints a harbor sign";
+  const signTitle =
+    lang === "pl" ? "Szyld w porcie" : lang === "de" ? "Hafenschild" : "Harbor Sign";
+  const keepDry =
+    lang === "pl"
+      ? "Suche stopy na morzu!"
+      : lang === "de"
+      ? "Trockene Füße auf See!"
+      : "Keep feet dry at sea!";
+  const line1 =
+    lang === "pl" ? "Mówienie ludziom" : lang === "de" ? "Weitersagen" : "Telling people";
+  const line2 =
+    lang === "pl" ? "to marketing!" : lang === "de" ? "ist Marketing!" : "is marketing!";
+
   return (
-    <DiagramCanvas label={en ? "Sam paints a harbor sign" : "Sam malt ein Hafenschild"}>
+    <DiagramCanvas label={label}>
       <Pop x={60} y={60}>
         <Person {...CAST.Sam} mood="happy" size={110} />
         <text className="diagram-name" x={55} y={140} textAnchor="middle">
@@ -96,22 +154,22 @@ export function HarborSignDiagram({ lang, step }: DiagramProps) {
       </Pop>
       <Pop x={200} y={50}>
         <rect x="0" y="0" width="220" height="140" rx="12" fill="#fef3c7" stroke="#f59e0b" strokeWidth="3" />
-        <text x="110" y="35" textAnchor="middle" fill="#b45309" fontSize="14" fontWeight="bold">
-          {en ? "Harbor Sign" : "Hafenschild"}
+        <text x="110" y="35" textAnchor="middle" fill="#b45309" fontSize={14} fontWeight="bold">
+          {signTitle}
         </text>
         <BootsIcon x={75} y={45} size={50} />
-        <text x="110" y="115" textAnchor="middle" fill="#78350f" fontSize="12" fontWeight="bold">
-          {en ? "Keep feet dry at sea!" : "Trockene Füße auf See!"}
+        <text x="110" y="115" textAnchor="middle" fill="#78350f" fontSize={12} fontWeight="bold">
+          {keepDry}
         </text>
       </Pop>
       {step >= 2 && (
         <Pop x={450} y={70}>
           <rect x="0" y="0" width="160" height="90" rx="10" fill="#dcfce7" stroke="#16a34a" strokeWidth="2" />
-          <text x="80" y="35" textAnchor="middle" fill="#15803d" fontSize="13" fontWeight="bold">
-            {en ? "Telling people" : "Weitersagen"}
+          <text x="80" y="35" textAnchor="middle" fill="#15803d" fontSize={13} fontWeight="bold">
+            {line1}
           </text>
-          <text x="80" y="65" textAnchor="middle" fill="#166534" fontSize="15" fontWeight="bold">
-            {en ? "is marketing!" : "ist Marketing!"}
+          <text x="80" y="65" textAnchor="middle" fill="#166534" fontSize={15} fontWeight="bold">
+            {line2}
           </text>
         </Pop>
       )}
@@ -120,9 +178,33 @@ export function HarborSignDiagram({ lang, step }: DiagramProps) {
 }
 
 export function CoralWearingBootsDiagram({ lang, step }: DiagramProps) {
-  const en = lang === "en";
+  const label =
+    lang === "pl"
+      ? "Kapitan Coral testuje buty"
+      : lang === "de"
+      ? "Kapitän Coral testet die Stiefel"
+      : "Captain Coral tests the boots";
+  const deckTitle =
+    lang === "pl" ? "Na mokrym pokładzie" : lang === "de" ? "Auf nassem Schiffsdeck" : "On the Wet Deck";
+  const warmDry =
+    lang === "pl"
+      ? "Całkowicie ciepło i sucho!"
+      : lang === "de"
+      ? "Völlig warm und trocken!"
+      : "Completely warm and dry!";
+  const sailorsNotice =
+    lang === "pl"
+      ? "Marynarze widzą działanie"
+      : lang === "de"
+      ? "Seeleute sehen es"
+      : "Sailors see it work";
+  const showLine1 =
+    lang === "pl" ? "Pokazywanie efektów" : lang === "de" ? "Zeigen im Alltag" : "Showing results";
+  const showLine2 =
+    lang === "pl" ? "to reklama!" : lang === "de" ? "ist Werbung!" : "is advertising!";
+
   return (
-    <DiagramCanvas label={en ? "Captain Coral tests the boots" : "Kapitän Coral testet die Stiefel"}>
+    <DiagramCanvas label={label}>
       <Pop x={60} y={60}>
         <Person {...CAST.Moss} mood="happy" size={110} />
         <text className="diagram-name" x={55} y={140} textAnchor="middle">
@@ -131,24 +213,24 @@ export function CoralWearingBootsDiagram({ lang, step }: DiagramProps) {
       </Pop>
       <Pop x={220} y={60}>
         <rect x="0" y="0" width="200" height="110" rx="12" fill="#dbeafe" stroke="#3b82f6" strokeWidth="2" />
-        <text x="100" y="35" textAnchor="middle" fill="#1d4ed8" fontSize="14" fontWeight="bold">
-          {en ? "On the Wet Deck" : "Auf nassem Schiffsdeck"}
+        <text x="100" y="35" textAnchor="middle" fill="#1d4ed8" fontSize={14} fontWeight="bold">
+          {deckTitle}
         </text>
-        <text x="100" y="65" textAnchor="middle" fill="#2563eb" fontSize="12">
-          {en ? "Completely warm and dry!" : "Völlig warm und trocken!"}
+        <text x="100" y="65" textAnchor="middle" fill="#2563eb" fontSize={12}>
+          {warmDry}
         </text>
-        <text x="100" y="90" textAnchor="middle" fill="#1e40af" fontSize="11" fontWeight="bold">
-          {en ? "Sailors see it work" : "Seeleute sehen es"}
+        <text x="100" y="90" textAnchor="middle" fill="#1e40af" fontSize={11} fontWeight="bold">
+          {sailorsNotice}
         </text>
       </Pop>
       {step >= 2 && (
         <Pop x={450} y={70}>
           <rect x="0" y="0" width="160" height="90" rx="10" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2" />
-          <text x="80" y="35" textAnchor="middle" fill="#b45309" fontSize="13" fontWeight="bold">
-            {en ? "Showing results" : "Zeigen im Alltag"}
+          <text x="80" y="35" textAnchor="middle" fill="#b45309" fontSize={13} fontWeight="bold">
+            {showLine1}
           </text>
-          <text x="80" y="65" textAnchor="middle" fill="#b45309" fontSize="14" fontWeight="bold">
-            {en ? "is advertising!" : "ist Werbung!"}
+          <text x="80" y="65" textAnchor="middle" fill="#b45309" fontSize={14} fontWeight="bold">
+            {showLine2}
           </text>
         </Pop>
       )}
@@ -157,9 +239,39 @@ export function CoralWearingBootsDiagram({ lang, step }: DiagramProps) {
 }
 
 export function BusyWorkshopDiagram({ lang, step }: DiagramProps) {
-  const en = lang === "en";
+  const label =
+    lang === "pl"
+      ? "Marynarze przychodzą kupić buty"
+      : lang === "de"
+      ? "Seeleute kaufen Stiefel"
+      : "Sailors arrive to buy boots";
+  const busyCrafting =
+    lang === "pl"
+      ? "Praca wre przy szyciu"
+      : lang === "de"
+      ? "Stiefel fleißig genäht"
+      : "Busy crafting boots";
+  const sailorsTitle =
+    lang === "pl"
+      ? "8 zachwyconych marynarzy"
+      : lang === "de"
+      ? "8 begeisterte Seeleute"
+      : "8 Excited Sailors";
+  const wordSpread =
+    lang === "pl"
+      ? "Wiadomość obiegła całe miasto!"
+      : lang === "de"
+      ? "Die Botschaft hat sich verbreitet!"
+      : "Word spread across town!";
+  const goodFoundBuyers =
+    lang === "pl"
+      ? "Dobre buty znalazły nabywców!"
+      : lang === "de"
+      ? "Gute Stiefel finden Käufer!"
+      : "Good boots found buyers!";
+
   return (
-    <DiagramCanvas label={en ? "Sailors arrive to buy boots" : "Seeleute kaufen Stiefel"}>
+    <DiagramCanvas label={label}>
       <Pop x={50} y={50}>
         <rect x="0" y="0" width="220" height="160" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
         <Person {...CAST.Sam} mood="happy" x={65} y={10} size={90} />
@@ -167,29 +279,29 @@ export function BusyWorkshopDiagram({ lang, step }: DiagramProps) {
           Sam
         </text>
         <rect x="30" y="125" width="160" height="25" rx="5" fill="#dcfce7" />
-        <text x="110" y="142" textAnchor="middle" fill="#15803d" fontSize="11" fontWeight="bold">
-          {en ? "Busy crafting boots" : "Stiefel fleißig genäht"}
+        <text x="110" y="142" textAnchor="middle" fill="#15803d" fontSize={11} fontWeight="bold">
+          {busyCrafting}
         </text>
       </Pop>
       <Pop x={320} y={50}>
         <rect x="0" y="0" width="270" height="160" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
-        <text x="135" y="35" textAnchor="middle" fill="#23383f" fontSize="15" fontWeight="bold">
-          {en ? "8 Excited Sailors" : "8 begeisterte Seeleute"}
+        <text x="135" y="35" textAnchor="middle" fill="#23383f" fontSize={15} fontWeight="bold">
+          {sailorsTitle}
         </text>
         <g transform="translate(25, 55)">
           <Person {...CAST.Pip} x={0} y={0} size={70} />
           <Person {...CAST.Luca} x={75} y={0} size={70} />
           <Person {...CAST.Finn} x={150} y={0} size={70} />
         </g>
-        <text x="135" y="145" textAnchor="middle" fill="#16a34a" fontSize="12" fontWeight="bold">
-          {en ? "Word spread across town!" : "Die Botschaft hat sich verbreitet!"}
+        <text x="135" y="145" textAnchor="middle" fill="#16a34a" fontSize={12} fontWeight="bold">
+          {wordSpread}
         </text>
       </Pop>
       {step >= 2 && (
         <Pop x={220} y={180}>
           <rect x="0" y="0" width="200" height="40" rx="8" fill="#e0f2fe" stroke="#0284c7" strokeWidth="2" />
-          <text x="100" y="25" textAnchor="middle" fill="#0369a1" fontSize="13" fontWeight="bold">
-            {en ? "Good boots found buyers!" : "Gute Stiefel finden Käufer!"}
+          <text x="100" y="25" textAnchor="middle" fill="#0369a1" fontSize={13} fontWeight="bold">
+            {goodFoundBuyers}
           </text>
         </Pop>
       )}
@@ -198,26 +310,56 @@ export function BusyWorkshopDiagram({ lang, step }: DiagramProps) {
 }
 
 export function TruthfulMarketingDiagram({ lang, step }: DiagramProps) {
-  const en = lang === "en";
+  const label =
+    lang === "pl"
+      ? "Rzetelny marketing pomaga każdemu"
+      : lang === "de"
+      ? "Ehrliches Marketing hilft allen"
+      : "Truthful marketing helps everyone";
+  const ruleTitle =
+    lang === "pl"
+      ? "Złota zasada marketingu"
+      : lang === "de"
+      ? "Die goldene Regel des Marketings"
+      : "The Golden Rule of Marketing";
+  const rule1 =
+    lang === "pl"
+      ? "Uczciwa reklama mówi klientom, co produkt naprawdę potrafi"
+      : lang === "de"
+      ? "Ehrliche Werbung sagt Kunden, was ein Produkt wirklich kann"
+      : "Truthful ads tell customers what a product really does";
+  const rule2 =
+    lang === "pl"
+      ? "Fałszywe obietnice niszczą zaufanie i są zakazane przez prawo"
+      : lang === "de"
+      ? "Falsche Versprechen zerstören Vertrauen und sind verboten"
+      : "False promises destroy trust and are forbidden by law";
+  const badge =
+    lang === "pl"
+      ? "Uczciwość buduje trwałe zaufanie!"
+      : lang === "de"
+      ? "Ehrlichkeit schafft Vertrauen!"
+      : "Honesty builds lasting trust!";
+
   return (
-    <DiagramCanvas label={en ? "Truthful marketing helps everyone" : "Ehrliches Marketing hilft allen"}>
+    <DiagramCanvas label={label}>
       <Pop x={80} y={50}>
         <rect x="0" y="0" width="480" height="160" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
-        <text x="240" y="40" textAnchor="middle" fill="#23383f" fontSize="16" fontWeight="bold">
-          {en ? "The Golden Rule of Marketing" : "Die goldene Regel des Marketings"}
+        <text x="240" y="40" textAnchor="middle" fill="#23383f" fontSize={16} fontWeight="bold">
+          {ruleTitle}
         </text>
-        <text x="240" y="80" textAnchor="middle" fill="#475569" fontSize="14">
-          {en ? "Truthful ads tell customers what a product really does" : "Ehrliche Werbung sagt Kunden, was ein Produkt wirklich kann"}
+        <text x="240" y="80" textAnchor="middle" fill="#475569" fontSize={14}>
+          {rule1}
         </text>
-        <text x="240" y="120" textAnchor="middle" fill="#475569" fontSize="14">
-          {en ? "False promises destroy trust and are forbidden by law" : "Falsche Versprechen zerstören Vertrauen und sind verboten"}
+        <text x="240" y="120" textAnchor="middle" fill="#475569" fontSize={14}>
+          {rule2}
         </text>
       </Pop>
       {step >= 2 && (
         <Pop x={200} y={180}>
           <rect x="0" y="0" width="240" height="40" rx="8" fill="#dcfce7" stroke="#16a34a" strokeWidth="2" />
-          <text x="120" y="25" textAnchor="middle" fill="#15803d" fontSize="13" fontWeight="bold">
-            {en ? "Honesty builds lasting trust!" : "Ehrlichkeit schafft Vertrauen!"}
+          <text x="120" y="25" textAnchor="middle" fill="#15803d" fontSize={13} fontWeight="bold">
+            {badge}
           </text>
         </Pop>
       )}
