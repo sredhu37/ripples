@@ -5,7 +5,7 @@ import type { Lang } from "../progress";
 export type Text = {
   en: string;
   de: string;
-  pl?: string;
+  pl: string;
 };
 
 export function resolveText(t: Text, lang: Lang): string {
@@ -66,19 +66,16 @@ export type Question =
       hint: Text;
     };
 
-export type MultilingualText = string | Text;
-
-export function resolveFactText(t: MultilingualText, lang: Lang): string {
-  if (typeof t === "string") return t;
-  return t[lang] ?? t.en;
+export function resolveFactText(t: Text, lang: Lang): string {
+  return t[lang];
 }
 
 /** Parent area fact cards: claims, sources, and simplifications in EN, DE, and PL. */
 export interface FactCard {
   /** At least 5. Each claim the lesson makes, with a primary or authoritative source URL. */
-  claims: { text: MultilingualText; source: string }[];
+  claims: { text: Text; source: string }[];
   /** What was simplified for an 8-year-old, and why that is fair. */
-  simplified: MultilingualText[];
+  simplified: Text[];
 }
 
 export interface Lesson {

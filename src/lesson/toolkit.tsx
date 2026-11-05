@@ -13,7 +13,11 @@ export function animatedBeat(lines: Text[], Diagram: ComponentType<DiagramProps>
     lines,
     Diagram,
     mood,
-    text: { en: lines.map((l) => l.en).join(" "), de: lines.map((l) => l.de).join(" ") },
+    text: {
+      en: lines.map((l) => l.en).join(" "),
+      de: lines.map((l) => l.de).join(" "),
+      pl: lines.map((l) => l.pl).join(" "),
+    },
   };
 }
 
