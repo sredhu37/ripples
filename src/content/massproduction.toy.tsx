@@ -72,6 +72,90 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
     }
   };
 
+  const craftLabel =
+    lang === "pl"
+      ? "Warsztat rzemieślniczy"
+      : lang === "de"
+      ? "Handwerksbetrieb"
+      : "Artisan Workshop";
+
+  const assemblyLabel =
+    lang === "pl"
+      ? "Taśma montażowa"
+      : lang === "de"
+      ? "Fliessband-Fertigung"
+      : "Moving Assembly Line";
+
+  const station1Name =
+    lang === "pl"
+      ? "Spawanie ramy"
+      : lang === "de"
+      ? "Rahmen schweißen"
+      : "Weld Frame";
+
+  const station2Name =
+    lang === "pl"
+      ? "Montaż kół"
+      : lang === "de"
+      ? "Raeder montieren"
+      : "Attach Wheels";
+
+  const station3Name =
+    lang === "pl"
+      ? "Kontrola jakości"
+      : lang === "de"
+      ? "Qualitaetspruefung"
+      : "Final Quality Check";
+
+  const advanceLabel =
+    lang === "pl"
+      ? "Przesuń taśmę montażową"
+      : lang === "de"
+      ? "Fliessband weiterruecken"
+      : "Advance Assembly Line";
+
+  const resetLabel =
+    lang === "pl"
+      ? "Resetuj taśmę"
+      : lang === "de"
+      ? "Zuruecksetzen"
+      : "Reset Line";
+
+  const timeSpentLabel =
+    lang === "pl"
+      ? "Czas pracy:"
+      : lang === "de"
+      ? "Benoetigte Arbeitszeit:"
+      : "Time spent:";
+
+  const hoursLabel =
+    lang === "pl"
+      ? "godzin"
+      : lang === "de"
+      ? "Stunden"
+      : "hours";
+
+  const bikesCompletedLabel =
+    lang === "pl"
+      ? "Gotowe rowery:"
+      : lang === "de"
+      ? "Fertige Fahrraeder:"
+      : "Bicycles completed:";
+
+  const costPerBikeLabel =
+    lang === "pl"
+      ? "Koszt jednego roweru:"
+      : lang === "de"
+      ? "Kosten pro Fahrrad:"
+      : "Cost per bicycle:";
+
+  const coinsLabel =
+    lang === "pl"
+      ? "złotych monet"
+      : lang === "de"
+      ? "Goldmuenzen"
+      : "gold coins";
+
   return (
     <div className="massproduction-wrap">
       {/* Mode selection buttons */}
@@ -84,7 +168,7 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
             setShowFeedback(false);
           }}
         >
-          {lang === "en" ? "Artisan Workshop" : "Handwerksbetrieb"}
+          {craftLabel}
         </button>
         <button
           type="button"
@@ -94,7 +178,7 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
             setShowFeedback(false);
           }}
         >
-          {lang === "en" ? "Moving Assembly Line" : "Fliessband-Fertigung"}
+          {assemblyLabel}
         </button>
       </div>
 
@@ -103,15 +187,15 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
         <div className="massproduction-conveyor-stations">
           <div className={`massproduction-station ${prodMode === "assembly" && stage >= 1 ? "done" : ""}`}>
             <span className="station-num">1</span>
-            <span className="station-name">{lang === "en" ? "Weld Frame" : "Rahmen schweißen"}</span>
+            <span className="station-name">{station1Name}</span>
           </div>
           <div className={`massproduction-station ${prodMode === "assembly" && stage >= 2 ? "done" : ""}`}>
             <span className="station-num">2</span>
-            <span className="station-name">{lang === "en" ? "Attach Wheels" : "Raeder montieren"}</span>
+            <span className="station-name">{station2Name}</span>
           </div>
           <div className={`massproduction-station ${prodMode === "assembly" && stage >= 3 ? "done" : ""}`}>
             <span className="station-num">3</span>
-            <span className="station-name">{lang === "en" ? "Final Quality Check" : "Qualitaetspruefung"}</span>
+            <span className="station-name">{station3Name}</span>
           </div>
         </div>
 
@@ -123,7 +207,7 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
               onClick={handleAdvance}
               disabled={stage >= 3}
             >
-              {lang === "en" ? "Advance Assembly Line" : "Fliessband weiterruecken"}
+              {advanceLabel}
             </button>
             <button
               type="button"
@@ -131,7 +215,7 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
               onClick={handleReset}
               disabled={stage === 0}
             >
-              {lang === "en" ? "Reset Line" : "Zuruecksetzen"}
+              {resetLabel}
             </button>
           </div>
         )}
@@ -140,17 +224,17 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
       {/* Production metrics dashboard */}
       <div className="massproduction-metrics-card">
         <div className="metric-row">
-          <span>{lang === "en" ? "Time spent:" : "Benoetigte Arbeitszeit:"}</span>
-          <strong>{hoursSpent} {lang === "en" ? "hours" : "Stunden"}</strong>
+          <span>{timeSpentLabel}</span>
+          <strong>{hoursSpent} {hoursLabel}</strong>
         </div>
         <div className="metric-row">
-          <span>{lang === "en" ? "Bicycles completed:" : "Fertige Fahrraeder:"}</span>
+          <span>{bikesCompletedLabel}</span>
           <strong className="metric-highlight">{bikesProduced}</strong>
         </div>
         <div className="metric-row">
-          <span>{lang === "en" ? "Cost per bicycle:" : "Kosten pro Fahrrad:"}</span>
+          <span>{costPerBikeLabel}</span>
           <strong className={isAffordable ? "price-cheap" : "price-expensive"}>
-            {costPerBike} {lang === "en" ? "gold coins" : "Goldmuenzen"}
+            {costPerBike} {coinsLabel}
           </strong>
         </div>
       </div>
@@ -160,12 +244,16 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
         {showFeedback && (
           <div className={`massproduction-feedback ${isAffordable ? "success" : "warning"}`}>
             {isAffordable
-              ? lang === "en"
-                ? "Terrific! Standardized assembly lowered unit costs from 500 down to 50 coins!"
-                : "Grossartig! Die getaktete Montage senkte die Stueckkosten von 500 auf 50 Muenzen!"
-              : lang === "en"
-              ? "Select Moving Assembly Line and advance all 3 stations."
-              : "Waehle Fliessband-Fertigung und ruecke alle 3 Stationen vor."}
+              ? lang === "pl"
+                ? "Wspaniale! Standardowy montaż na taśmie obniżył koszt jednostkowy z 500 do 50 monet!"
+                : lang === "de"
+                ? "Grossartig! Die getaktete Montage senkte die Stueckkosten von 500 auf 50 Muenzen!"
+                : "Terrific! Standardized assembly lowered unit costs from 500 down to 50 coins!"
+              : lang === "pl"
+              ? "Wybierz Taśmę montażową i przesuń wszystkie 3 stanowiska."
+              : lang === "de"
+              ? "Waehle Fliessband-Fertigung und ruecke alle 3 Stationen vor."
+              : "Select Moving Assembly Line and advance all 3 stations."}
           </div>
         )}
       </div>

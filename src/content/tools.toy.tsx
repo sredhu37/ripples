@@ -53,6 +53,62 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
     }
   };
 
+  const muscleLabel =
+    lang === "pl"
+      ? "Siła mięśni (10 kW)"
+      : lang === "de"
+      ? "Muskelkraft (10 kW)"
+      : "Muscle Power (10 kW)";
+
+  const waterwheelLabel =
+    lang === "pl"
+      ? "Koło wodne (30 kW)"
+      : lang === "de"
+      ? "Wasserrad (30 kW)"
+      : "Waterwheel (30 kW)";
+
+  const steamLabel =
+    lang === "pl"
+      ? "Maszyna parowa (100 kW)"
+      : lang === "de"
+      ? "Dampfmaschine (100 kW)"
+      : "Steam Engine (100 kW)";
+
+  const coalBurningText =
+    lang === "pl"
+      ? "Piec: Węgiel płonie"
+      : lang === "de"
+      ? "Ofen: Kohle brennt"
+      : "Furnace: Coal Burning";
+
+  const addCoalText =
+    lang === "pl"
+      ? "Dodaj węgiel do pieca"
+      : lang === "de"
+      ? "Kohle in den Ofen geben"
+      : "Add Coal to Furnace";
+
+  const waterFullText =
+    lang === "pl"
+      ? "Kocioł: Woda napełniona"
+      : lang === "de"
+      ? "Kessel: Wasser gefuellt"
+      : "Boiler: Water Full";
+
+  const fillWaterText =
+    lang === "pl"
+      ? "Napełnij kocioł wodą"
+      : lang === "de"
+      ? "Kessel mit Wasser fuellen"
+      : "Fill Boiler with Water";
+
+  const powerOutputHeader =
+    lang === "pl"
+      ? "Mechaniczna moc wyjściowa:"
+      : lang === "de"
+      ? "Mechanische Leistung:"
+      : "Mechanical Output Power:";
+
   return (
     <div className="tools-wrap">
       {/* Source selector buttons */}
@@ -65,7 +121,7 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
             setShowFeedback(false);
           }}
         >
-          {lang === "en" ? "Muscle Power (10 kW)" : "Muskelkraft (10 kW)"}
+          {muscleLabel}
         </button>
         <button
           type="button"
@@ -75,7 +131,7 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
             setShowFeedback(false);
           }}
         >
-          {lang === "en" ? "Waterwheel (30 kW)" : "Wasserrad (30 kW)"}
+          {waterwheelLabel}
         </button>
         <button
           type="button"
@@ -85,7 +141,7 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
             setShowFeedback(false);
           }}
         >
-          {lang === "en" ? "Steam Engine (100 kW)" : "Dampfmaschine (100 kW)"}
+          {steamLabel}
         </button>
       </div>
 
@@ -100,13 +156,7 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
               setShowFeedback(false);
             }}
           >
-            {hasCoal
-              ? lang === "en"
-                ? "Furnace: Coal Burning"
-                : "Ofen: Kohle brennt"
-              : lang === "en"
-              ? "Add Coal to Furnace"
-              : "Kohle in den Ofen geben"}
+            {hasCoal ? coalBurningText : addCoalText}
           </button>
           <button
             type="button"
@@ -116,13 +166,7 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
               setShowFeedback(false);
             }}
           >
-            {hasWater
-              ? lang === "en"
-                ? "Boiler: Water Full"
-                : "Kessel: Wasser gefuellt"
-              : lang === "en"
-              ? "Fill Boiler with Water"
-              : "Kessel mit Wasser fuellen"}
+            {hasWater ? waterFullText : fillWaterText}
           </button>
         </div>
       )}
@@ -130,7 +174,7 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
       {/* Power dashboard display */}
       <div className={`tools-power-display ${status}`}>
         <div className="tools-pd-header">
-          <span>{lang === "en" ? "Mechanical Output Power:" : "Mechanische Leistung:"}</span>
+          <span>{powerOutputHeader}</span>
           <strong>{power} kW</strong>
         </div>
         <div className="tools-pd-bar">
@@ -138,16 +182,40 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
         </div>
         <div className="tools-pd-status">
           {source === "muscle" && (
-            <span>{lang === "en" ? "Limited by human and animal fatigue." : "Begrenzt durch Ermuedung von Mensch und Tier."}</span>
+            <span>
+              {lang === "pl"
+                ? "Ograniczona szybkim zmęczeniem ludzi i zwierząt roboczych."
+                : lang === "de"
+                ? "Begrenzt durch Ermuedung von Mensch und Tier."
+                : "Limited by human and animal fatigue."}
+            </span>
           )}
           {source === "waterwheel" && (
-            <span>{lang === "en" ? "Clean, but ceases during dry summers and icy winters." : "Sauber, aber abhaengig von Flusspegel und Jahreszeiten."}</span>
+            <span>
+              {lang === "pl"
+                ? "Czysta energia, lecz zamiera w czasie letnich susz i mroźnych zim."
+                : lang === "de"
+                ? "Sauber, aber abhaengig von Flusspegel und Jahreszeiten."
+                : "Clean, but ceases during dry summers and icy winters."}
+            </span>
           )}
           {source === "steam" && isContinuous && (
-            <span>{lang === "en" ? "Continuous day and night power drives heavy factory machines!" : "Dauerhafte Kraft treibt Fabriken und Zuege Tag und Nacht an!"}</span>
+            <span>
+              {lang === "pl"
+                ? "Ciągła praca w dzień i w nocy napędza potężne maszyny fabryczne i pociągi!"
+                : lang === "de"
+                ? "Dauerhafte Kraft treibt Fabriken und Zuege Tag und Nacht an!"
+                : "Continuous day and night power drives heavy factory machines!"}
+            </span>
           )}
           {source === "steam" && !isContinuous && (
-            <span>{lang === "en" ? "Needs both coal heat and water to create steam pressure." : "Benoetigt Kohle und Wasser, um Dampfdruck aufzubauen."}</span>
+            <span>
+              {lang === "pl"
+                ? "Wymaga zarówno węgla w palenisku, jak i wody w kotle, by wytworzyć parę."
+                : lang === "de"
+                ? "Benoetigt Kohle und Wasser, um Dampfdruck aufzubauen."
+                : "Needs both coal heat and water to create steam pressure."}
+            </span>
           )}
         </div>
       </div>
@@ -157,12 +225,16 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
         {showFeedback && (
           <div className={`tools-feedback-msg ${isContinuous ? "success" : "warning"}`}>
             {isContinuous
-              ? lang === "en"
-                ? "Excellent! The steam engine provides tireless continuous power regardless of season."
-                : "Hervorragend! Die Dampfmaschine liefert unermuedliche Kraft unabhaengig vom Wetter."
-              : lang === "en"
-              ? "Select Steam Engine and add both coal and water."
-              : "Waehle Dampfmaschine und fuege Kohle und Wasser hinzu."}
+              ? lang === "pl"
+                ? "Znakomicie! Maszyna parowa dostarcza niezmordowaną, ciągłą moc niezależnie od pory roku i pogody."
+                : lang === "de"
+                ? "Hervorragend! Die Dampfmaschine liefert unermuedliche Kraft unabhaengig vom Wetter."
+                : "Excellent! The steam engine provides tireless continuous power regardless of season."
+              : lang === "pl"
+              ? "Wybierz Maszynę parową i dodaj do niej zarówno węgiel, jak i wodę."
+              : lang === "de"
+              ? "Waehle Dampfmaschine und fuege Kohle und Wasser hinzu."
+              : "Select Steam Engine and add both coal and water."}
           </div>
         )}
       </div>

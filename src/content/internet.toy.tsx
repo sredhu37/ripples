@@ -60,6 +60,63 @@ export function InternetToy({ lang, mode = "toy", onDone }: InternetToyProps) {
     }
   };
 
+  const northLabel = north
+    ? lang === "pl"
+      ? "Kabel Północny: Aktywny (Pakiet 1)"
+      : lang === "de"
+      ? "Nord-Kabel: Aktiv (Paket 1)"
+      : "North Cable: Active (Packet 1)"
+    : lang === "pl"
+    ? "Podłącz Kabel Północny"
+    : lang === "de"
+    ? "Nord-Kabel verbinden"
+    : "Connect North Cable";
+
+  const centralLabel = central
+    ? lang === "pl"
+      ? "Kabel Środkowy: Aktywny (Pakiet 2)"
+      : lang === "de"
+      ? "Zentral-Kabel: Aktiv (Paket 2)"
+      : "Central Cable: Active (Packet 2)"
+    : lang === "pl"
+    ? "Podłącz Kabel Środkowy"
+    : lang === "de"
+    ? "Zentral-Kabel verbinden"
+    : "Connect Central Cable";
+
+  const southLabel = south
+    ? lang === "pl"
+      ? "Kabel Południowy: Aktywny (Pakiet 3)"
+      : lang === "de"
+      ? "Sued-Kabel: Aktiv (Paket 3)"
+      : "South Cable: Active (Packet 3)"
+    : lang === "pl"
+    ? "Podłącz Kabel Południowy"
+    : lang === "de"
+    ? "Sued-Kabel verbinden"
+    : "Connect South Cable";
+
+  const deliveredLabel =
+    lang === "pl"
+      ? "Dostarczone pakiety danych:"
+      : lang === "de"
+      ? "Zugestellte Datenpakete:"
+      : "Data Packets Delivered:";
+
+  const latencyLabel =
+    lang === "pl"
+      ? "Czas przesyłu przez ocean:"
+      : lang === "de"
+      ? "Untersee-Laufzeit:"
+      : "Undersea Transit Time:";
+
+  const reassembledLabel =
+    lang === "pl"
+      ? "Złożona wiadomość:"
+      : lang === "de"
+      ? "Zusammengesetzte Nachricht:"
+      : "Reassembled Message:";
+
   return (
     <div className="internet-wrap">
       {/* 3 Router Selection Bar */}
@@ -72,13 +129,7 @@ export function InternetToy({ lang, mode = "toy", onDone }: InternetToyProps) {
             setShowFeedback(false);
           }}
         >
-          {north
-            ? lang === "en"
-              ? "North Cable: Active (Packet 1)"
-              : "Nord-Kabel: Aktiv (Paket 1)"
-            : lang === "en"
-            ? "Connect North Cable"
-            : "Nord-Kabel verbinden"}
+          {northLabel}
         </button>
 
         <button
@@ -89,13 +140,7 @@ export function InternetToy({ lang, mode = "toy", onDone }: InternetToyProps) {
             setShowFeedback(false);
           }}
         >
-          {central
-            ? lang === "en"
-              ? "Central Cable: Active (Packet 2)"
-              : "Zentral-Kabel: Aktiv (Paket 2)"
-            : lang === "en"
-            ? "Connect Central Cable"
-            : "Zentral-Kabel verbinden"}
+          {centralLabel}
         </button>
 
         <button
@@ -106,30 +151,24 @@ export function InternetToy({ lang, mode = "toy", onDone }: InternetToyProps) {
             setShowFeedback(false);
           }}
         >
-          {south
-            ? lang === "en"
-              ? "South Cable: Active (Packet 3)"
-              : "Sued-Kabel: Aktiv (Paket 3)"
-            : lang === "en"
-            ? "Connect South Cable"
-            : "Sued-Kabel verbinden"}
+          {southLabel}
         </button>
       </div>
 
       {/* Network transmission status card */}
       <div className={`internet-network-card ${isComplete ? "complete" : ""}`}>
         <div className="network-stat-row">
-          <span>{lang === "en" ? "Data Packets Delivered:" : "Zugestellte Datenpakete:"}</span>
+          <span>{deliveredLabel}</span>
           <strong className="packet-count">{deliveredCount} / 3</strong>
         </div>
 
         <div className="network-stat-row">
-          <span>{lang === "en" ? "Undersea Transit Time:" : "Untersee-Laufzeit:"}</span>
+          <span>{latencyLabel}</span>
           <strong>{latencyMs > 0 ? `${latencyMs} ms` : "-"}</strong>
         </div>
 
         <div className="network-message-box">
-          <span className="msg-label">{lang === "en" ? "Reassembled Message:" : "Zusammengesetzte Nachricht:"}</span>
+          <span className="msg-label">{reassembledLabel}</span>
           <code className="msg-content">{assembledMessage}</code>
         </div>
       </div>
@@ -139,12 +178,16 @@ export function InternetToy({ lang, mode = "toy", onDone }: InternetToyProps) {
         {showFeedback && (
           <div className={`internet-feedback ${isComplete ? "success" : "warning"}`}>
             {isComplete
-              ? lang === "en"
-                ? "Brilliant! All 3 packets arrived intact and assembled into the original message!"
-                : "Hervorragend! Alle 3 Pakete kamen an und wurden zur vollstaendigen Nachricht zusammengesetzt!"
-              : lang === "en"
-              ? "Connect all three network cables to deliver every packet."
-              : "Verbinde alle drei Netzwerkkabel, um jedes Datenpaket zu uebertragen."}
+              ? lang === "pl"
+                ? "Wspaniale! Wszystkie 3 pakiety dotarły bez uszkodzeń i złożyły się w kompletną wiadomość!"
+                : lang === "de"
+                ? "Hervorragend! Alle 3 Pakete kamen an und wurden zur vollstaendigen Nachricht zusammengesetzt!"
+                : "Brilliant! All 3 packets arrived intact and assembled into the original message!"
+              : lang === "pl"
+              ? "Podłącz wszystkie trzy kable sieciowe, aby przesłać każdy pakiet danych."
+              : lang === "de"
+              ? "Verbinde alle drei Netzwerkkabel, um jedes Datenpaket zu uebertragen."
+              : "Connect all three network cables to deliver every packet."}
           </div>
         )}
       </div>
