@@ -26,6 +26,35 @@ const LESSON_ART: Record<string, ReactNode> = {
   money: <Coin />,
   work: <Person hat="baker" shirt="#e68aa0" />,
   savings: <Piggy />,
+  business: (
+    <g>
+      {/* Wooden ice cream cart body */}
+      <rect x="20" y="44" width="60" height="30" rx="3" fill="#6baed6" stroke={INK} strokeWidth="2.5" />
+      {/* Striped canopy awning */}
+      <path d="M16 28 L84 28 L82 42 L72 38 L62 42 L52 38 L42 42 L32 38 L22 42 L16 38 Z" fill="#e65c5c" stroke={INK} strokeWidth="2" />
+      <path d="M26 28 L24 40 M46 28 L44 40 M66 28 L64 40" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
+      {/* Handle and pole */}
+      <path d="M20 30 V44 M80 30 V44 M12 50 H20" stroke={INK} strokeWidth="3" strokeLinecap="round" fill="none" />
+      {/* Big wheel */}
+      <circle cx="48" cy="74" r="14" fill="#e0a860" stroke={INK} strokeWidth="3" />
+      <circle cx="48" cy="74" r="4" fill="#fff" stroke={INK} strokeWidth="2" />
+      {/* Ice cream cone emblem */}
+      <path d="M72 16 L67 26 H77 Z" fill="#d9953e" />
+      <circle cx="72" cy="13" r="6" fill="#f472b6" />
+    </g>
+  ),
+  equity: (
+    <g>
+      {/* Shared ownership pie: 50% Finn (blue) and 50% Mira (pink) */}
+      <circle cx="50" cy="50" r="36" fill="#f8fafc" stroke={INK} strokeWidth="3" />
+      <path d="M50 50 L50 14 A36 36 0 0 0 50 86 Z" fill="#38bdf8" stroke={INK} strokeWidth="2" />
+      <path d="M50 50 L50 14 A36 36 0 0 1 50 86 Z" fill="#ec4899" stroke={INK} strokeWidth="2" />
+      {/* Golden coin center hub */}
+      <circle cx="50" cy="50" r="16" fill="#e3a91a" stroke={INK} strokeWidth="2.5" />
+      <circle cx="50" cy="50" r="10" fill="none" stroke="#c98d0e" strokeWidth="2" />
+      <text x="50" y="55" textAnchor="middle" fontSize="14" fontWeight="bold" fill={INK}>%</text>
+    </g>
+  ),
   loans: (
     <g>
       <path d="M2 40 H22 V74 H2 Z" fill="#2f7fb8" />
