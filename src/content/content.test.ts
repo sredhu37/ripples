@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { getLesson, hasLesson } from "./index";
 import { LESSONS } from "../lessons";
-import { resolveFactText, type Lesson, type Text } from "../lesson/types";
+import type { Lesson, Text } from "../lesson/types";
 
 function texts(l: Lesson): { where: string; text: Text }[] {
   const out: { where: string; text: Text }[] = [];
@@ -28,6 +28,18 @@ describe("registry", () => {
 
   it("builds lesson 1", () => {
     expect(hasLesson("money")).toBe(true);
+  });
+
+  it("has non-empty trilingual titles for all 50 lessons", () => {
+    expect(LESSONS).toHaveLength(50);
+    for (const meta of LESSONS) {
+      expect(meta.title.en.trim(), `${meta.id} title en`).not.toBe("");
+      expect(meta.title.de.trim(), `${meta.id} title de`).not.toBe("");
+      expect(meta.title.pl.trim(), `${meta.id} title pl`).not.toBe("");
+      expect(meta.title.de, `${meta.id} de differs from en`).not.toBe(meta.title.en);
+      expect(meta.title.pl, `${meta.id} pl differs from en`).not.toBe(meta.title.en);
+      expect(meta.title.pl, `${meta.id} pl differs from de`).not.toBe(meta.title.de);
+    }
   });
 });
 
@@ -57,15 +69,14 @@ describe.each(LESSONS.filter((m) => hasLesson(m.id)))("lesson $id", (meta) => {
     }
   });
 
-  it("has English and German for every text, and German is not a copy", () => {
+  it("has English, German, and Polish for every text, and each language differs", () => {
     for (const { where, text } of texts(lesson)) {
       expect(text.en.trim(), `${where} en`).not.toBe("");
       expect(text.de.trim(), `${where} de`).not.toBe("");
-      expect(text.de, `${where} de differs`).not.toBe(text.en);
-      if (text.pl !== undefined) {
-        expect(text.pl.trim(), `${where} pl`).not.toBe("");
-        expect(text.pl, `${where} pl differs`).not.toBe(text.en);
-      }
+      expect(text.pl.trim(), `${where} pl`).not.toBe("");
+      expect(text.de, `${where} de differs from en`).not.toBe(text.en);
+      expect(text.pl, `${where} pl differs from en`).not.toBe(text.en);
+      expect(text.pl, `${where} pl differs from de`).not.toBe(text.de);
     }
   });
 
@@ -75,9 +86,7 @@ describe.each(LESSONS.filter((m) => hasLesson(m.id)))("lesson $id", (meta) => {
       for (const line of b.lines ?? [b.text]) {
         expect(line.en.length).toBeLessThanOrEqual(190);
         expect(line.de.length).toBeLessThanOrEqual(230);
-        if (line.pl !== undefined) {
-          expect(line.pl.length).toBeLessThanOrEqual(230);
-        }
+        expect(line.pl.length).toBeLessThanOrEqual(230);
       }
     }
   });
@@ -91,15 +100,12 @@ describe.each(LESSONS.filter((m) => hasLesson(m.id)))("lesson $id", (meta) => {
     }
   });
 
-  it("marks new terms with balanced stars in both languages", () => {
+  it("marks new terms with balanced stars in all three languages", () => {
     for (const { where, text } of texts(lesson)) {
-      for (const lang of ["en", "de"] as const) {
+      for (const lang of ["en", "de", "pl"] as const) {
         expect((text[lang].match(/\*/g) ?? []).length % 2, `${where} ${lang} stars`).toBe(0);
       }
-      expect((text.en.match(/\*/g) ?? []).length, `${where} same terms`).toBe((text.de.match(/\*/g) ?? []).length);
-      if (text.pl !== undefined) {
-        expect((text.pl.match(/\*/g) ?? []).length % 2, `${where} pl stars`).toBe(0);
-      }
+      expect((text.en.match(/\*/g) ?? []).length, `${where} same terms en/de`).toBe((text.de.match(/\*/g) ?? []).length);
     }
   });
 
@@ -108,12 +114,21 @@ describe.each(LESSONS.filter((m) => hasLesson(m.id)))("lesson $id", (meta) => {
     expect(all).not.toMatch(/[\u2013\u2014]/);
   });
 
-  it("has a fact card with 5 or more sourced claims", () => {
+  it("has a fact card with 5 or more sourced claims in all three languages", () => {
     expect(lesson.factCard.claims.length).toBeGreaterThanOrEqual(5);
     for (const c of lesson.factCard.claims) {
-      expect(resolveFactText(c.text, "en").trim()).not.toBe("");
+      expect(c.text.en.trim()).not.toBe("");
+      expect(c.text.de.trim()).not.toBe("");
+      expect(c.text.pl.trim()).not.toBe("");
+      expect(c.text.de).not.toBe(c.text.en);
+      expect(c.text.pl).not.toBe(c.text.en);
       expect(c.source).toMatch(/^https:\/\//);
     }
     expect(lesson.factCard.simplified.length).toBeGreaterThanOrEqual(1);
+    for (const s of lesson.factCard.simplified) {
+      expect(s.en.trim()).not.toBe("");
+      expect(s.de.trim()).not.toBe("");
+      expect(s.pl.trim()).not.toBe("");
+    }
   });
 });

@@ -1,13 +1,14 @@
 import type { Lang } from "./progress";
+import type { Text } from "./lesson/types";
 
 export interface LessonMeta {
   /** Stable id, saved in progress and in the save code. Only ever append new ids at the end of a group. */
   id: string;
-  title: { en: string; de: string; pl?: string };
+  title: Text;
 }
 
 export function getLessonTitle(meta: LessonMeta, lang: Lang): string {
-  return meta.title[lang] ?? meta.title.en;
+  return meta.title[lang];
 }
 
 /** Complete Curriculum: Group 1, Group 2, Group 3, Group 4, and Group 5. */

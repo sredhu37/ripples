@@ -16,25 +16,30 @@ describe("i18n core", () => {
     expect(CURRENCY_SYMBOL.pl).toBe("zł");
   });
 
-  it("translates key UI labels in Polish, German, and English", () => {
-    for (const lang of languages) {
-      expect(t(lang, "appName")).not.toBe("");
-      expect(t(lang, "parents")).not.toBe("");
-      expect(t(lang, "factCards")).not.toBe("");
-      expect(t(lang, "back")).not.toBe("");
-      expect(t(lang, "next")).not.toBe("");
-      expect(t(lang, "ready")).not.toBe("");
-      expect(t(lang, "badges")).not.toBe("");
-      expect(t(lang, "continue")).not.toBe("");
-      expect(t(lang, "restartLesson")).not.toBe("");
-    }
+  it("translates every single UI key in English, German, and Polish with non-empty values", () => {
+    const keys = [
+      "appName", "tagline", "askName", "namePlaceholder", "nameGo", "welcome",
+      "welcomeBack", "continue", "nextUp", "comingSoon", "locked", "badges",
+      "back", "readAloud", "mute", "unmute", "language", "parents",
+      "lessonBuilding", "allDone", "gateQuestion", "gateWrong", "gateGo",
+      "saveTitle", "saveHelp", "copy", "copied", "restoreTitle", "restoreHelp",
+      "restoreGo", "restoreBad", "restoreOk", "resetTitle", "resetHelp",
+      "resetGo", "resetSure", "close", "next", "prev", "ready", "check",
+      "tryAgain", "rightLine", "getBadge", "badgeEarned", "badgeAgain",
+      "askDad", "toTrail", "allLessons", "restartLesson", "factCards",
+      "factCardsHelp", "claims", "simplified", "noLessons",
+    ] as const;
 
-    expect(t("pl", "appName")).toBe("Ripples");
-    expect(t("pl", "language")).toBe("Język");
-    expect(t("pl", "parents")).toBe("Strefa rodzica");
-    expect(t("pl", "factCards")).toBe("Karty faktów");
-    expect(t("pl", "back")).toBe("Wstecz");
-    expect(t("pl", "next")).toBe("Dalej");
+    for (const key of keys) {
+      for (const lang of languages) {
+        const val = t(lang, key);
+        expect(val.trim(), `key ${key} in ${lang}`).not.toBe("");
+      }
+      if (key !== "appName") {
+        expect(t("de", key), `key ${key} de differs`).not.toBe(t("en", key));
+        expect(t("pl", key), `key ${key} pl differs`).not.toBe(t("en", key));
+      }
+    }
   });
 
   it("interpolates parameters in Polish strings", () => {
