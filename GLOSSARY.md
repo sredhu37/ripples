@@ -14,7 +14,8 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Fact card | One screen per lesson: 5 claims, a source for each, what was simplified | review sheet |
 | Ripple Town | The made-up town where all lesson stories happen | island |
 | Ask Dad | The closing conversation question for the parent | homework |
-| In real life card | The Germany and euros example at the end of a lesson | case study |
+| In real life card | The localized real-world example at the end of a lesson (Germany for DE, India for EN, Poland for PL) | case study |
+| Language switcher | Header control allowing instant switching between EN, DE, and PL on any screen | settings menu |
 | Animated beat | A story beat that builds up tap by tap: one Otto line and one new diagram part per tap | slideshow, animation |
 | Term | A new word the lesson teaches by name (barter, money, price, save). Written between *stars* in lesson text, shown highlighted | keyword, vocabulary |
 | Save code | Parent-only text code that restores name, language and badges | backup, password |
