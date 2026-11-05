@@ -1,33 +1,34 @@
 import { DiagramCanvas } from "../components/diagram";
 import type { DiagramProps } from "../lesson/types";
 
-const alt = (en: string, de: string, lang: DiagramProps["lang"]) => (lang === "en" ? en : de);
+const alt = (en: string, de: string, pl: string, lang: DiagramProps["lang"]) =>
+  lang === "pl" ? pl : lang === "de" ? de : en;
 
 export function WellDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("Town drinking well and carts", "Dorfbrunnen und Kutschen", lang)}>
+    <DiagramCanvas label={alt("Town drinking well and carts", "Dorfbrunnen und Kutschen", "Dorfbrunnen i wozy w miasteczku", lang)}>
       <rect x="50" y="50" width="540" height="180" fill="#f0f8ff" rx="10" />
       <text x="70" y="90" fontSize="16" fill="#333">
-        {lang === "en" ? "Ripple Town Well" : "Ripple Town Brunnen"}
+        {lang === "pl" ? "Studnia w Ripple Town" : lang === "en" ? "Ripple Town Well" : "Ripple Town Brunnen"}
       </text>
       {step >= 1 && (
         <text x="70" y="120" fontSize="14" fill="#666">
-          {lang === "en" ? "Huts by the river" : "Hütten am Fluss"}
+          {lang === "pl" ? "Chaty nad rzeką" : lang === "en" ? "Huts by the river" : "Hütten am Fluss"}
         </text>
       )}
       {step >= 2 && (
         <text x="70" y="150" fontSize="14" fill="#666">
-          {lang === "en" ? "Village grew bigger" : "Dorf wurde größer"}
+          {lang === "pl" ? "Wioska rośnie i przybywa mieszkańców" : lang === "en" ? "Village grew bigger" : "Dorf wurde größer"}
         </text>
       )}
       {step >= 3 && (
         <text x="70" y="180" fontSize="14" fill="#e74c3c">
-          {lang === "en" ? "Carts bump into each other" : "Kutschen stoßen zusammen"}
+          {lang === "pl" ? "Wozy zderzają się na wąskich drogach" : lang === "en" ? "Carts bump into each other" : "Kutschen stoßen zusammen"}
         </text>
       )}
       {step >= 4 && (
         <text x="70" y="210" fontSize="14" fill="#e74c3c">
-          {lang === "en" ? "Well water turns brown" : "Brunnenwasser wird braun"}
+          {lang === "pl" ? "Woda w studni mętnieje i brakuje opieki" : lang === "en" ? "Well water turns brown" : "Brunnenwasser wird braun"}
         </text>
       )}
     </DiagramCanvas>
@@ -36,24 +37,24 @@ export function WellDiagram({ lang, step }: DiagramProps) {
 
 export function ProblemDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("Shared problems in town", "Gemeinsame Probleme im Dorf", lang)}>
+    <DiagramCanvas label={alt("Shared problems in town", "Gemeinsame Probleme im Dorf", "Wspólne problemy w miasteczku", lang)}>
       <rect x="50" y="50" width="540" height="180" fill="#fff5f5" rx="10" />
       <text x="70" y="90" fontSize="16" fill="#c0392b">
-        {lang === "en" ? "Shared Spaces Falling Apart" : "Gemeinsame Räume verfallen"}
+        {lang === "pl" ? "Wspólna przestrzeń popada w ruinę" : lang === "en" ? "Shared Spaces Falling Apart" : "Gemeinsame Räume verfallen"}
       </text>
       {step >= 1 && (
         <text x="70" y="120" fontSize="14" fill="#666">
-          {lang === "en" ? "Everyone cares for own doorstep" : "Jeder sorgt für die eigene Haustür"}
+          {lang === "pl" ? "Każdy dba tylko o własny próg" : lang === "en" ? "Everyone cares for own doorstep" : "Jeder sorgt für die eigene Haustür"}
         </text>
       )}
       {step >= 2 && (
         <text x="70" y="150" fontSize="14" fill="#e74c3c">
-          {lang === "en" ? "Nobody fixes the shared road" : "Niemand repariert die gemeinsame Straße"}
+          {lang === "pl" ? "Nikt nie naprawia wspólnej drogi" : lang === "en" ? "Nobody fixes the shared road" : "Niemand repariert die gemeinsame Straße"}
         </text>
       )}
       {step >= 3 && (
         <text x="70" y="180" fontSize="14" fill="#e74c3c">
-          {lang === "en" ? "Cracked stones at the well" : "Rissige Steine am Brunnen"}
+          {lang === "pl" ? "Pęknięte kamienie wspólnej studni" : lang === "en" ? "Cracked stones at the well" : "Rissige Steine am Brunnen"}
         </text>
       )}
     </DiagramCanvas>
@@ -62,24 +63,24 @@ export function ProblemDiagram({ lang, step }: DiagramProps) {
 
 export function CouncilDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("Town council meeting", "Gemeinderatssitzung", lang)}>
+    <DiagramCanvas label={alt("Town council meeting", "Gemeinderatssitzung", "Spotkanie rady miasteczka", lang)}>
       <rect x="50" y="50" width="540" height="180" fill="#f5f5f5" rx="10" />
       <text x="70" y="90" fontSize="16" fill="#333">
-        {lang === "en" ? "Town Council Meeting" : "Gemeinderatssitzung"}
+        {lang === "pl" ? "Rada Mieszkańców na Rynku" : lang === "en" ? "Town Council Meeting" : "Gemeinderatssitzung"}
       </text>
       {step >= 1 && (
         <text x="70" y="120" fontSize="14" fill="#2ecc71">
-          {lang === "en" ? "Otto gathers the villagers" : "Otto versammelt die Dorfbewohner"}
+          {lang === "pl" ? "Otto zwołuje wszystkich mieszkańców" : lang === "en" ? "Otto gathers the villagers" : "Otto versammelt die Dorfbewohner"}
         </text>
       )}
       {step >= 2 && (
         <text x="70" y="150" fontSize="14" fill="#2ecc71">
-          {lang === "en" ? "Need a plan for shared spaces" : "Brauchen einen Plan für gemeinsame Räume"}
+          {lang === "pl" ? "Potrzebujemy planu dla wspólnych dóbr" : lang === "en" ? "Need a plan for shared spaces" : "Brauchen einen Plan für gemeinsame Räume"}
         </text>
       )}
       {step >= 3 && (
         <text x="70" y="180" fontSize="14" fill="#2ecc71">
-          {lang === "en" ? "Agree on traffic rules" : "Verkehrsregeln vereinbaren"}
+          {lang === "pl" ? "Wspólne zasady ruchu na drogach" : lang === "en" ? "Agree on traffic rules" : "Verkehrsregeln vereinbaren"}
         </text>
       )}
     </DiagramCanvas>
@@ -88,24 +89,24 @@ export function CouncilDiagram({ lang, step }: DiagramProps) {
 
 export function PotDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("Shared town pot", "Gemeinsamer Dorftopf", lang)}>
+    <DiagramCanvas label={alt("Shared town pot", "Gemeinsamer Dorftopf", "Wspólna kasa miasteczka", lang)}>
       <rect x="50" y="50" width="540" height="180" fill="#fef9e7" rx="10" />
       <text x="70" y="90" fontSize="16" fill="#d35400">
-        {lang === "en" ? "The Shared Pot" : "Der gemeinsame Topf"}
+        {lang === "pl" ? "Wspólna Kasa Miasteczka" : lang === "en" ? "The Shared Pot" : "Der gemeinsame Topf"}
       </text>
       {step >= 1 && (
         <text x="70" y="120" fontSize="14" fill="#666">
-          {lang === "en" ? "Every family contributes coins" : "Jede Familie steuert Münzen bei"}
+          {lang === "pl" ? "Każda rodzina dorzuca monety do kasy" : lang === "en" ? "Every family contributes coins" : "Jede Familie steuert Münzen bei"}
         </text>
       )}
       {step >= 2 && (
         <text x="70" y="150" fontSize="14" fill="#27ae60">
-          {lang === "en" ? "Pay a town mason" : "Einen Dorfmaurer bezahlen"}
+          {lang === "pl" ? "Opłacenie mularza do remontu studni" : lang === "en" ? "Pay a town mason" : "Einen Dorfmaurer bezahlen"}
         </text>
       )}
       {step >= 3 && (
         <text x="70" y="180" fontSize="14" fill="#27ae60">
-          {lang === "en" ? "Clean well and safe bridges" : "Sauberer Brunnen und sichere Brücken"}
+          {lang === "pl" ? "Czysta woda i bezpieczne mosty dla wszystkich" : lang === "en" ? "Clean well and safe bridges" : "Sauberer Brunnen und sichere Brücken"}
         </text>
       )}
     </DiagramCanvas>
@@ -114,24 +115,24 @@ export function PotDiagram({ lang, step }: DiagramProps) {
 
 export function RulesDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("Public goods and government rules", "Öffentliche Güter und staatliche Regeln", lang)}>
+    <DiagramCanvas label={alt("Public goods and government rules", "Öffentliche Güter und staatliche Regeln", "Dobra publiczne i reguły rządowe", lang)}>
       <rect x="50" y="50" width="540" height="180" fill="#e8f8f5" rx="10" />
       <text x="70" y="90" fontSize="16" fill="#333">
-        {lang === "en" ? "Government and Public Goods" : "Regierung und öffentliche Güter"}
+        {lang === "pl" ? "Rząd i Dobra Publiczne" : lang === "en" ? "Government and Public Goods" : "Regierung und öffentliche Güter"}
       </text>
       {step >= 1 && (
         <text x="70" y="120" fontSize="14" fill="#666">
-          {lang === "en" ? "Coordination solves problems" : "Koordination löst Probleme"}
+          {lang === "pl" ? "Koordynacja rozwiązuje wspólne problemy" : lang === "en" ? "Coordination solves problems" : "Koordination löst Probleme"}
         </text>
       )}
       {step >= 2 && (
         <text x="70" y="150" fontSize="14" fill="#e67e22">
-          {lang === "en" ? "Tragedy of the commons avoided" : "Tragik der Allmende vermieden"}
+          {lang === "pl" ? "Uniknięcie tragedii wspólnego pastwiska" : lang === "en" ? "Tragedy of the commons avoided" : "Tragik der Allmende vermieden"}
         </text>
       )}
       {step >= 3 && (
         <text x="70" y="180" fontSize="14" fill="#27ae60">
-          {lang === "en" ? "Government organizes public goods" : "Regierung organisiert öffentliche Güter"}
+          {lang === "pl" ? "Władza dba o dobra, których nikt sam nie zbuduje" : lang === "en" ? "Government organizes public goods" : "Regierung organisiert öffentliche Güter"}
         </text>
       )}
     </DiagramCanvas>
