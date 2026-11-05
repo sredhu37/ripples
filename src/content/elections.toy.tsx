@@ -14,7 +14,7 @@ export function ElectionsToy({ lang, mode = "toy", onDone }: ElectionsToyProps) 
     Bea: "pavilion",
     Luca: "pier",
     Maya: "pier",
-    Sam: "pavilion"
+    Sam: "pavilion",
   });
   const [castVotes, setCastVotes] = useState<string[]>([]);
   const [counted, setCounted] = useState(false);
@@ -51,47 +51,116 @@ export function ElectionsToy({ lang, mode = "toy", onDone }: ElectionsToyProps) 
     }
   };
 
+  const titleText =
+    lang === "pl" ? "Lokal wyborczy w Ripple Town" : lang === "de" ? "Wahllokal Ripple Town" : "Ripple Town Voting Hall";
+  const subtitleText =
+    lang === "pl"
+      ? "Wrzuć karty do tajnej urny i policz głosy mieszkańców"
+      : lang === "de"
+      ? "Wirf die Stimmzettel in die geheime Wahlurne und zähle die Stimmen"
+      : "Cast ballots into the secret box and count results";
+
+  const pierTitle =
+    lang === "pl" ? "Pomost rybacki (Moss)" : lang === "de" ? "Hafenanleger (Moss)" : "Harbor Pier (Moss)";
+  const pavilionTitle =
+    lang === "pl" ? "Pawilon targowy (Pip)" : lang === "de" ? "Marktpavillon (Pip)" : "Market Pavilion (Pip)";
+
+  const votesUnit =
+    lang === "pl" ? "głosy" : lang === "de" ? "Stimmen" : "votes";
+
+  const lineTitle =
+    lang === "pl"
+      ? "Mieszkańcy w kolejce (Kliknij, aby zagłosować):"
+      : lang === "de"
+      ? "Wartende Bürger (Tippe zum Wählen):"
+      : "Villagers in Line (Tap to vote):";
+
+  const quizInstruction =
+    lang === "pl"
+      ? "Wybierz zwycięski projekt na tablicę ogłoszeń:"
+      : lang === "de"
+      ? "Wähle das Gewinnerprojekt für die Dorftafel:"
+      : "Select the winning project to put on the town board:";
+
+  const pierOptionText =
+    lang === "pl"
+      ? "Pomost rybacki (3 głosy)"
+      : lang === "de"
+      ? "Hafenanleger (3 Stimmen)"
+      : "Harbor Pier (3 votes)";
+
+  const pavilionOptionText =
+    lang === "pl"
+      ? "Pawilon targowy (2 głosy)"
+      : lang === "de"
+      ? "Marktpavillon (2 Stimmen)"
+      : "Market Pavilion (2 votes)";
+
+  const ballotsStatus =
+    castVotes.length < 5
+      ? lang === "pl"
+        ? `${castVotes.length}/5 kart wrzuconych do urny`
+        : lang === "de"
+        ? `${castVotes.length}/5 Stimmzettel in der Wahlurne`
+        : `${castVotes.length}/5 ballots cast into secret box`
+      : lang === "pl"
+      ? "Wybory zakończone: Pomost wygrywa 3 do 2!"
+      : lang === "de"
+      ? "Wahl beendet: Anleger gewinnt 3 zu 2!"
+      : "Election Complete: Pier wins 3 to 2!";
+
+  const quizSuccess =
+    lang === "pl"
+      ? "✓ Brawo! Pomost zdobył większość głosów."
+      : lang === "de"
+      ? "✓ Richtig! Der Hafenanleger hat die Mehrheit."
+      : "✓ Correct! The Pier won the majority.";
+
+  const quizRetry =
+    lang === "pl"
+      ? "Sprawdź wynik: 3 osoby głosowały na Pomost, 2 na Pawilon."
+      : lang === "de"
+      ? "Prüfe die Stimmen: 3 für den Anleger, 2 für den Pavillon."
+      : "Review the vote counts: 3 voted for Pier, 2 for Pavilion.";
+
   return (
     <div className="elections-toy p-4 bg-slate-50 rounded-xl max-w-md mx-auto">
       <div className="text-center mb-4">
-        <h4 className="font-bold text-slate-800">
-          {lang === "en" ? "Ripple Town Voting Hall" : "Wahllokal Ripple Town"}
-        </h4>
-        <p className="text-xs text-slate-500">
-          {lang === "en"
-            ? "Cast ballots into the secret box and count results"
-            : "Wirf die Stimmzettel in die geheime Wahlurne und zähle die Stimmen"}
-        </p>
+        <h4 className="font-bold text-slate-800">{titleText}</h4>
+        <p className="text-xs text-slate-500">{subtitleText}</p>
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div className="border border-blue-200 bg-blue-50 p-2 rounded-lg text-center">
           <div className="text-2xl mb-1">⚓</div>
-          <div className="font-semibold text-xs text-blue-900">
-            {lang === "en" ? "Harbor Pier (Moss)" : "Hafenanleger (Moss)"}
-          </div>
-          {counted && <div className="text-lg font-bold text-blue-700 mt-1">{pierCount} {lang === "en" ? "votes" : "Stimmen"}</div>}
+          <div className="font-semibold text-xs text-blue-900">{pierTitle}</div>
+          {counted && (
+            <div className="text-lg font-bold text-blue-700 mt-1">
+              {pierCount} {votesUnit}
+            </div>
+          )}
         </div>
         <div className="border border-orange-200 bg-orange-50 p-2 rounded-lg text-center">
           <div className="text-2xl mb-1">🎪</div>
-          <div className="font-semibold text-xs text-orange-900">
-            {lang === "en" ? "Market Pavilion (Pip)" : "Marktpavillon (Pip)"}
-          </div>
-          {counted && <div className="text-lg font-bold text-orange-700 mt-1">{pavilionCount} {lang === "en" ? "votes" : "Stimmen"}</div>}
+          <div className="font-semibold text-xs text-orange-900">{pavilionTitle}</div>
+          {counted && (
+            <div className="text-lg font-bold text-orange-700 mt-1">
+              {pavilionCount} {votesUnit}
+            </div>
+          )}
         </div>
       </div>
 
       {mode === "toy" && (
         <div className="mb-4">
-          <div className="text-xs font-semibold text-slate-700 mb-2">
-            {lang === "en" ? "Villagers in Line (Tap to vote):" : "Wartende Bürger (Tippe zum Wählen):"}
-          </div>
+          <div className="text-xs font-semibold text-slate-700 mb-2">{lineTitle}</div>
           <div className="flex flex-wrap gap-2">
             {villagers.map((v) => {
               const isCast = castVotes.includes(v);
               return (
                 <button
                   key={v}
+                  type="button"
                   disabled={isCast}
                   onClick={() => handleCastVote(v)}
                   className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
@@ -111,13 +180,10 @@ export function ElectionsToy({ lang, mode = "toy", onDone }: ElectionsToyProps) 
 
       {mode === "quiz" && (
         <div className="mb-4">
-          <div className="text-xs font-semibold text-slate-700 mb-2">
-            {lang === "en"
-              ? "Select the winning project to put on the town board:"
-              : "Wähle das Gewinnerprojekt für die Dorftafel:"}
-          </div>
+          <div className="text-xs font-semibold text-slate-700 mb-2">{quizInstruction}</div>
           <div className="flex gap-2">
             <button
+              type="button"
               onClick={() => setSelectedWinner("pier")}
               className={`flex-1 p-2 rounded border text-xs font-bold ${
                 selectedWinner === "pier"
@@ -125,9 +191,10 @@ export function ElectionsToy({ lang, mode = "toy", onDone }: ElectionsToyProps) 
                   : "bg-white text-slate-700 border-slate-300"
               }`}
             >
-              ⚓ {lang === "en" ? "Harbor Pier (3 votes)" : "Hafenanleger (3 Stimmen)"}
+              ⚓ {pierOptionText}
             </button>
             <button
+              type="button"
               onClick={() => setSelectedWinner("pavilion")}
               className={`flex-1 p-2 rounded border text-xs font-bold ${
                 selectedWinner === "pavilion"
@@ -135,22 +202,14 @@ export function ElectionsToy({ lang, mode = "toy", onDone }: ElectionsToyProps) 
                   : "bg-white text-slate-700 border-slate-300"
               }`}
             >
-              🎪 {lang === "en" ? "Market Pavilion (2 votes)" : "Marktpavillon (2 Stimmen)"}
+              🎪 {pavilionOptionText}
             </button>
           </div>
         </div>
       )}
 
       <div className="bg-white p-3 rounded border border-slate-200 text-center mb-3">
-        <div className="text-xs text-slate-600">
-          {castVotes.length < 5
-            ? (lang === "en"
-                ? `${castVotes.length}/5 ballots cast into secret box`
-                : `${castVotes.length}/5 Stimmzettel in der Wahlurne`)
-            : (lang === "en"
-                ? "Election Complete: Pier wins 3 to 2!"
-                : "Wahl beendet: Anleger gewinnt 3 zu 2!")}
-        </div>
+        <div className="text-xs text-slate-600">{ballotsStatus}</div>
       </div>
 
       {mode === "quiz" && (
@@ -158,9 +217,7 @@ export function ElectionsToy({ lang, mode = "toy", onDone }: ElectionsToyProps) 
           <CheckButton lang={lang} onClick={handleCheck} />
           {showQuizResult && (
             <div className={`mt-2 text-xs font-bold ${quizCorrect ? "text-green-600" : "text-amber-600"}`}>
-              {quizCorrect
-                ? (lang === "en" ? "✓ Correct! The Pier won the majority." : "✓ Richtig! Der Hafenanleger hat die Mehrheit.")
-                : (lang === "en" ? "Review the vote counts: 3 voted for Pier, 2 for Pavilion." : "Prüfe die Stimmen: 3 für den Anleger, 2 für den Pavillon.")}
+              {quizCorrect ? quizSuccess : quizRetry}
             </div>
           )}
         </div>

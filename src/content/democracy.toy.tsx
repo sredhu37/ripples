@@ -37,24 +37,54 @@ export function DemocracyToy({ lang, mode = "toy", onDone }: DemocracyToyProps) 
     }
   };
 
+  const chamberTitle =
+    lang === "pl" ? "Sala obrad rady: sztuka kompromisu" : lang === "de" ? "Gemeinderat Kompromiss-Kammer" : "Town Council Compromise Chamber";
+  const chamberSub =
+    lang === "pl"
+      ? "Podziel 10 żetonów budżetu sprawiedliwie, by wszystkie 3 grupy doszły do zgody!"
+      : lang === "de"
+      ? "Teile 10 Budget-Münzen fair auf, damit alle 3 Gruppen zustimmen!"
+      : "Divide 10 budget tokens fairly so all 3 groups agree!";
+
+  const budgetUsedLabel =
+    lang === "pl" ? "Wykorzystany budżet:" : lang === "de" ? "Verwendetes Budget:" : "Total Budget Used:";
+
+  const sailorsTitle =
+    lang === "pl" ? "Żeglarze (Latarnia morska)" : lang === "de" ? "Seeleute (Leuchtturm)" : "Sailors (Lighthouse)";
+  const bakersTitle =
+    lang === "pl" ? "Piekarze (Spichlerz zbożowy)" : lang === "de" ? "Bäcker (Kornspeicher)" : "Bakers (Grain Store)";
+  const familiesTitle =
+    lang === "pl" ? "Rodziny (Park miejski)" : lang === "de" ? "Familien (Dorf-Park)" : "Families (Town Park)";
+
+  const satisfiedLabel =
+    lang === "pl" ? "✓ Zadowoleni" : lang === "de" ? "✓ Zufrieden" : "✓ Satisfied";
+  const needTokensLabel =
+    lang === "pl" ? "✗ Potrzeba ≥2 żetonów" : lang === "de" ? "✗ Braucht ≥2" : "✗ Need ≥2 tokens";
+
+  const quizSuccess =
+    lang === "pl"
+      ? "✓ Demokratyczny kompromis osiągnięty! Podstawowe potrzeby wszystkich zostały spełnione."
+      : lang === "de"
+      ? "✓ Demokratischer Kompromiss erzielt! Alle wichtigen Bedürfnisse erfüllt."
+      : "✓ Democratic compromise achieved! Everyone's core needs are met.";
+
+  const quizRetry =
+    lang === "pl"
+      ? "Upewnij się, że suma wynosi dokładnie 10 i każda grupa ma co najmniej 2 żetony."
+      : lang === "de"
+      ? "Stelle sicher, dass die Gesamtsumme 10 ist und jede Gruppe mindestens 2 erhält."
+      : "Ensure total budget is 10 and each group gets at least 2 tokens.";
+
   return (
     <div className="democracy-toy p-4 bg-slate-50 rounded-xl max-w-md mx-auto">
       <div className="text-center mb-3">
-        <h4 className="font-bold text-slate-800">
-          {lang === "en" ? "Town Council Compromise Chamber" : "Gemeinderat Kompromiss-Kammer"}
-        </h4>
-        <p className="text-xs text-slate-500">
-          {lang === "en"
-            ? "Divide 10 budget tokens fairly so all 3 groups agree!"
-            : "Teile 10 Budget-Münzen fair auf, damit alle 3 Gruppen zustimmen!"}
-        </p>
+        <h4 className="font-bold text-slate-800">{chamberTitle}</h4>
+        <p className="text-xs text-slate-500">{chamberSub}</p>
       </div>
 
       <div className="bg-white p-3 rounded-lg border border-slate-200 mb-4 shadow-sm">
         <div className="flex justify-between items-center mb-1">
-          <span className="text-xs font-semibold text-slate-600">
-            {lang === "en" ? "Total Budget Used:" : "Verwendetes Budget:"}
-          </span>
+          <span className="text-xs font-semibold text-slate-600">{budgetUsedLabel}</span>
           <span className={`text-sm font-bold ${totalTokens === 10 ? "text-green-600" : "text-amber-600"}`}>
             {totalTokens} / 10
           </span>
@@ -73,16 +103,15 @@ export function DemocracyToy({ lang, mode = "toy", onDone }: DemocracyToyProps) 
           <div className="flex items-center gap-2">
             <span className="text-xl">⛵</span>
             <div>
-              <div className="text-xs font-bold text-blue-900">
-                {lang === "en" ? "Sailors (Lighthouse)" : "Seeleute (Leuchtturm)"}
-              </div>
+              <div className="text-xs font-bold text-blue-900">{sailorsTitle}</div>
               <div className="text-[10px] text-blue-600">
-                {lighthouseTokens >= 2 ? (lang === "en" ? "✓ Satisfied" : "✓ Zufrieden") : (lang === "en" ? "✗ Need ≥2 tokens" : "✗ Braucht ≥2")}
+                {lighthouseTokens >= 2 ? satisfiedLabel : needTokensLabel}
               </div>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <button
+              type="button"
               onClick={() => setLighthouseTokens(Math.max(0, lighthouseTokens - 1))}
               className="w-6 h-6 rounded bg-white border border-blue-300 font-bold text-blue-800"
             >
@@ -90,6 +119,7 @@ export function DemocracyToy({ lang, mode = "toy", onDone }: DemocracyToyProps) 
             </button>
             <span className="w-4 text-center text-sm font-bold text-blue-900">{lighthouseTokens}</span>
             <button
+              type="button"
               onClick={() => setLighthouseTokens(Math.min(10, lighthouseTokens + 1))}
               className="w-6 h-6 rounded bg-white border border-blue-300 font-bold text-blue-800"
             >
@@ -103,16 +133,15 @@ export function DemocracyToy({ lang, mode = "toy", onDone }: DemocracyToyProps) 
           <div className="flex items-center gap-2">
             <span className="text-xl">🌾</span>
             <div>
-              <div className="text-xs font-bold text-amber-900">
-                {lang === "en" ? "Bakers (Grain Store)" : "Bäcker (Kornspeicher)"}
-              </div>
+              <div className="text-xs font-bold text-amber-900">{bakersTitle}</div>
               <div className="text-[10px] text-amber-600">
-                {grainTokens >= 2 ? (lang === "en" ? "✓ Satisfied" : "✓ Zufrieden") : (lang === "en" ? "✗ Need ≥2 tokens" : "✗ Braucht ≥2")}
+                {grainTokens >= 2 ? satisfiedLabel : needTokensLabel}
               </div>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <button
+              type="button"
               onClick={() => setGrainTokens(Math.max(0, grainTokens - 1))}
               className="w-6 h-6 rounded bg-white border border-amber-300 font-bold text-amber-800"
             >
@@ -120,6 +149,7 @@ export function DemocracyToy({ lang, mode = "toy", onDone }: DemocracyToyProps) 
             </button>
             <span className="w-4 text-center text-sm font-bold text-amber-900">{grainTokens}</span>
             <button
+              type="button"
               onClick={() => setGrainTokens(Math.min(10, grainTokens + 1))}
               className="w-6 h-6 rounded bg-white border border-amber-300 font-bold text-amber-800"
             >
@@ -133,16 +163,15 @@ export function DemocracyToy({ lang, mode = "toy", onDone }: DemocracyToyProps) 
           <div className="flex items-center gap-2">
             <span className="text-xl">🌳</span>
             <div>
-              <div className="text-xs font-bold text-emerald-900">
-                {lang === "en" ? "Families (Town Park)" : "Familien (Dorf-Park)"}
-              </div>
+              <div className="text-xs font-bold text-emerald-900">{familiesTitle}</div>
               <div className="text-[10px] text-emerald-600">
-                {parkTokens >= 2 ? (lang === "en" ? "✓ Satisfied" : "✓ Zufrieden") : (lang === "en" ? "✗ Need ≥2 tokens" : "✗ Braucht ≥2")}
+                {parkTokens >= 2 ? satisfiedLabel : needTokensLabel}
               </div>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <button
+              type="button"
               onClick={() => setParkTokens(Math.max(0, parkTokens - 1))}
               className="w-6 h-6 rounded bg-white border border-emerald-300 font-bold text-emerald-800"
             >
@@ -150,6 +179,7 @@ export function DemocracyToy({ lang, mode = "toy", onDone }: DemocracyToyProps) 
             </button>
             <span className="w-4 text-center text-sm font-bold text-emerald-900">{parkTokens}</span>
             <button
+              type="button"
               onClick={() => setParkTokens(Math.min(10, parkTokens + 1))}
               className="w-6 h-6 rounded bg-white border border-emerald-300 font-bold text-emerald-800"
             >
@@ -163,9 +193,7 @@ export function DemocracyToy({ lang, mode = "toy", onDone }: DemocracyToyProps) 
         <CheckButton lang={lang} onClick={handleCheck} />
         {showQuizResult && (
           <div className={`mt-2 text-xs font-bold ${quizCorrect ? "text-green-600" : "text-amber-600"}`}>
-            {quizCorrect
-              ? (lang === "en" ? "✓ Democratic compromise achieved! Everyone's core needs are met." : "✓ Demokratischer Kompromiss erzielt! Alle wichtigen Bedürfnisse erfüllt.")
-              : (lang === "en" ? "Ensure total budget is 10 and each group gets at least 2 tokens." : "Stelle sicher, dass die Gesamtsumme 10 ist und jede Gruppe mindestens 2 erhält.")}
+            {quizCorrect ? quizSuccess : quizRetry}
           </div>
         )}
       </div>

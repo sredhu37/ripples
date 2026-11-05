@@ -45,14 +45,14 @@ export const LESSONS: LessonMeta[] = [
   { id: "philanthropy", title: { en: "Giving back forever", de: "Gemeinwohl und Stiftungen", pl: "Filantropia i fundacje" } },
 
   // Group 4: Governments (27-34)
-  { id: "whygovernment", title: { en: "Why Government?", de: "Warum gibt es eine Regierung?" } },
-  { id: "elections", title: { en: "How Leaders are Chosen", de: "Wie Anfuehrer gewaehlt werden" } },
-  { id: "democracy", title: { en: "Democracy", de: "Demokratie" } },
-  { id: "monarchy", title: { en: "Monarchy", de: "Monarchie" } },
-  { id: "dictatorship", title: { en: "Dictatorship", de: "Diktatur" } },
-  { id: "capitalism", title: { en: "Capitalism", de: "Kapitalismus" } },
-  { id: "communism", title: { en: "Communism", de: "Planwirtschaft" } },
-  { id: "powertriangle", title: { en: "The Power Triangle", de: "Das Macht-Dreieck" } },
+  { id: "whygovernment", title: { en: "Why Government?", de: "Warum gibt es eine Regierung?", pl: "Dlaczego potrzebujemy rządu?" } },
+  { id: "elections", title: { en: "How Leaders are Chosen", de: "Wie Anfuehrer gewaehlt werden", pl: "Jak wybieramy przywódców" } },
+  { id: "democracy", title: { en: "Democracy", de: "Demokratie", pl: "Demokracja" } },
+  { id: "monarchy", title: { en: "Monarchy", de: "Monarchie", pl: "Monarchia" } },
+  { id: "dictatorship", title: { en: "Dictatorship", de: "Diktatur", pl: "Dyktatura" } },
+  { id: "capitalism", title: { en: "Capitalism", de: "Kapitalismus", pl: "Kapitalizm" } },
+  { id: "communism", title: { en: "Communism", de: "Planwirtschaft", pl: "Gospodarka centralnie planowana" } },
+  { id: "powertriangle", title: { en: "The Power Triangle", de: "Das Macht-Dreieck", pl: "Trójpodział władzy" } },
 
   // Group 5: History (35-42)
   { id: "mughals", title: { en: "The Mughals", de: "Das Mogulreich" } },

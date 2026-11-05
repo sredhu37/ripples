@@ -23,36 +23,61 @@ export function PowerTriangleToy({ lang, mode = "toy", onDone }: PowerTriangleTo
   const getSystemStatus = () => {
     if (govPower > 80) {
       return {
-        label: lang === "en" ? "Authoritarian: Liberties Suppressed" : "Autoritär: Freiheiten unterdrückt",
+        label:
+          lang === "pl"
+            ? "Autorytaryzm: Wolności obywatelskie stłumione"
+            : lang === "de"
+            ? "Autoritär: Freiheiten unterdrückt"
+            : "Authoritarian: Liberties Suppressed",
         color: "text-red-600",
-        bg: "bg-red-50 border-red-200"
+        bg: "bg-red-50 border-red-200",
       };
     }
     if (businessPower > 80) {
       return {
-        label: lang === "en" ? "Monopoly Rule: High Pollution, Weak Safety Net" : "Monopolherrschaft: Hohe Umweltbelastung, schwaches Netz",
+        label:
+          lang === "pl"
+            ? "Władza monopoli: Zatrucie środowiska, brak ochrony"
+            : lang === "de"
+            ? "Monopolherrschaft: Hohe Umweltbelastung, schwaches Netz"
+            : "Monopoly Rule: High Pollution, Weak Safety Net",
         color: "text-amber-600",
-        bg: "bg-amber-50 border-amber-200"
+        bg: "bg-amber-50 border-amber-200",
       };
     }
     if (citizenPower > 80 && govPower < 30) {
       return {
-        label: lang === "en" ? "Infrastructure Collapse: Roads & Wells Crumble" : "Infrastrukturzerfall: Straßen & Brunnen verfallen",
+        label:
+          lang === "pl"
+            ? "Zapaść infrastruktury: Drogi i studnie niszczeją"
+            : lang === "de"
+            ? "Infrastrukturzerfall: Straßen & Brunnen verfallen"
+            : "Infrastructure Collapse: Roads & Wells Crumble",
         color: "text-orange-600",
-        bg: "bg-orange-50 border-orange-200"
+        bg: "bg-orange-50 border-orange-200",
       };
     }
     if (isBalanced) {
       return {
-        label: lang === "en" ? "Thriving Society: Equilibrium & Freedom" : "Blühende Gesellschaft: Gleichgewicht & Freiheit",
+        label:
+          lang === "pl"
+            ? "Kwitnące społeczeństwo: Równowaga i wolność"
+            : lang === "de"
+            ? "Blühende Gesellschaft: Gleichgewicht & Freiheit"
+            : "Thriving Society: Equilibrium & Freedom",
         color: "text-emerald-700",
-        bg: "bg-emerald-50 border-emerald-300"
+        bg: "bg-emerald-50 border-emerald-300",
       };
     }
     return {
-      label: lang === "en" ? "Uneven Balance: Adjust knobs toward middle" : "Ungleichgewicht: Regler zur Mitte anpassen",
+      label:
+        lang === "pl"
+          ? "Brak równowagi: Przesuń suwaki w stronę środka"
+          : lang === "de"
+          ? "Ungleichgewicht: Regler zur Mitte anpassen"
+          : "Uneven Balance: Adjust knobs toward middle",
       color: "text-slate-600",
-      bg: "bg-slate-50 border-slate-200"
+      bg: "bg-slate-50 border-slate-200",
     };
   };
 
@@ -73,16 +98,28 @@ export function PowerTriangleToy({ lang, mode = "toy", onDone }: PowerTriangleTo
     }
   };
 
+  const titleText =
+    lang === "pl"
+      ? "Symulator Trójkąta Władzy"
+      : lang === "de"
+      ? "Das Macht-Dreieck Simulator"
+      : "The Power Triangle Simulator";
+
+  const subText =
+    lang === "pl"
+      ? "Zadbaj o harmonijną równowagę między Państwem, Przedsiębiorcami i Obywatelami"
+      : lang === "de"
+      ? "Bringe Regierung, Wirtschaft und Bürger ins Gleichgewicht"
+      : "Balance Government, Businesses, and Citizens in harmony";
+
   return (
     <div className="powertriangle-toy p-4 bg-slate-50 rounded-xl max-w-md mx-auto">
       <div className="text-center mb-3">
         <h4 className="font-bold text-slate-800">
-          {lang === "en" ? "The Power Triangle Simulator" : "Das Macht-Dreieck Simulator"}
+          {titleText}
         </h4>
         <p className="text-xs text-slate-500">
-          {lang === "en"
-            ? "Balance Government, Businesses, and Citizens in harmony"
-            : "Bringe Regierung, Wirtschaft und Bürger ins Gleichgewicht"}
+          {subText}
         </p>
       </div>
 
@@ -105,23 +142,29 @@ export function PowerTriangleToy({ lang, mode = "toy", onDone }: PowerTriangleTo
 
           {/* Government Node */}
           <circle cx="150" cy="25" r={10 + (govPower / 10)} fill="#6366f1" />
-          <text x="150" y="29" textAnchor="middle" fontSize="10" fill="#ffffff" fontWeight="bold">G</text>
+          <text x="150" y="29" textAnchor="middle" fontSize="10" fill="#ffffff" fontWeight="bold">
+            {lang === "pl" ? "P" : "G"}
+          </text>
           <text x="150" y="10" textAnchor="middle" fontSize="9" fill="#4338ca" fontWeight="bold">
-            {lang === "en" ? "Gov" : "Staat"} ({govPower})
+            {lang === "pl" ? "Państwo" : lang === "de" ? "Staat" : "Gov"} ({govPower})
           </text>
 
           {/* Citizens Node */}
           <circle cx="50" cy="135" r={10 + (citizenPower / 10)} fill="#16a34a" />
-          <text x="50" y="139" textAnchor="middle" fontSize="10" fill="#ffffff" fontWeight="bold">C</text>
+          <text x="50" y="139" textAnchor="middle" fontSize="10" fill="#ffffff" fontWeight="bold">
+            {lang === "pl" ? "O" : "C"}
+          </text>
           <text x="50" y="153" textAnchor="middle" fontSize="9" fill="#15803d" fontWeight="bold">
-            {lang === "en" ? "Citizens" : "Bürger"} ({citizenPower})
+            {lang === "pl" ? "Obywatele" : lang === "de" ? "Bürger" : "Citizens"} ({citizenPower})
           </text>
 
           {/* Businesses Node */}
           <circle cx="250" cy="135" r={10 + (businessPower / 10)} fill="#d97706" />
-          <text x="250" y="139" textAnchor="middle" fontSize="10" fill="#ffffff" fontWeight="bold">B</text>
+          <text x="250" y="139" textAnchor="middle" fontSize="10" fill="#ffffff" fontWeight="bold">
+            {lang === "pl" ? "B" : "B"}
+          </text>
           <text x="250" y="153" textAnchor="middle" fontSize="9" fill="#b45309" fontWeight="bold">
-            {lang === "en" ? "Business" : "Wirtschaft"} ({businessPower})
+            {lang === "pl" ? "Biznes" : lang === "de" ? "Wirtschaft" : "Business"} ({businessPower})
           </text>
         </svg>
       </div>
@@ -130,7 +173,7 @@ export function PowerTriangleToy({ lang, mode = "toy", onDone }: PowerTriangleTo
       <div className="space-y-2 mb-4 bg-white p-3 rounded-lg border border-slate-200">
         <div>
           <div className="flex justify-between text-[11px] font-semibold text-indigo-900 mb-0.5">
-            <span>🏛️ {lang === "en" ? "Government Power:" : "Staatliche Macht:"}</span>
+            <span>🏛️ {lang === "pl" ? "Władza państwa:" : lang === "de" ? "Staatliche Macht:" : "Government Power:"}</span>
             <span>{govPower}%</span>
           </div>
           <input
@@ -145,7 +188,7 @@ export function PowerTriangleToy({ lang, mode = "toy", onDone }: PowerTriangleTo
 
         <div>
           <div className="flex justify-between text-[11px] font-semibold text-emerald-900 mb-0.5">
-            <span>👥 {lang === "en" ? "Citizen Rights & Demands:" : "Bürgerrechte & Forderungen:"}</span>
+            <span>👥 {lang === "pl" ? "Prawa i roszczenia obywateli:" : lang === "de" ? "Bürgerrechte & Forderungen:" : "Citizen Rights & Demands:"}</span>
             <span>{citizenPower}%</span>
           </div>
           <input
@@ -160,7 +203,7 @@ export function PowerTriangleToy({ lang, mode = "toy", onDone }: PowerTriangleTo
 
         <div>
           <div className="flex justify-between text-[11px] font-semibold text-amber-900 mb-0.5">
-            <span>🏪 {lang === "en" ? "Business Freedom:" : "Wirtschaftliche Freiheit:"}</span>
+            <span>🏪 {lang === "pl" ? "Swoboda przedsiębiorców:" : lang === "de" ? "Wirtschaftliche Freiheit:" : "Business Freedom:"}</span>
             <span>{businessPower}%</span>
           </div>
           <input
@@ -179,8 +222,16 @@ export function PowerTriangleToy({ lang, mode = "toy", onDone }: PowerTriangleTo
         {showQuizResult && (
           <div className={`mt-2 text-xs font-bold ${quizCorrect ? "text-green-600" : "text-amber-600"}`}>
             {quizCorrect
-              ? (lang === "en" ? "✓ Perfect harmony! All three corners are balanced." : "✓ Perfekte Harmonie! Alle drei Ecken sind ausgewogen.")
-              : (lang === "en" ? "Adjust the three sliders to the balanced middle zone (approx 50 each)." : "Stelle alle drei Schieberegler in die ausgewogene Mitte (ca. 50 jeweils).")}
+              ? (lang === "pl"
+                  ? "✓ Idealna harmonia! Wszystkie trzy bieguny są zrównoważone."
+                  : lang === "de"
+                  ? "✓ Perfekte Harmonie! Alle drei Ecken sind ausgewogen."
+                  : "✓ Perfect harmony! All three corners are balanced.")
+              : (lang === "pl"
+                  ? "Wskazówka: Ustaw wszystkie trzy suwaki w strefie środkowej (około 50 każdy)."
+                  : lang === "de"
+                  ? "Hinweis: Stelle alle drei Schieberegler in die ausgewogene Mitte (ca. 50 jeweils)."
+                  : "Adjust the three sliders to the balanced middle zone (approx 50 each).")}
           </div>
         )}
       </div>
