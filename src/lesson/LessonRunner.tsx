@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { LessonIcon, UiIcon } from "../components/appIcons";
+import { LangSwitch } from "../components/LangSwitch";
 import { Otto } from "../components/Otto";
 import { SpeechBubble } from "../components/SpeechBubble";
 import { t } from "../i18n";
-import type { LessonMeta } from "../lessons";
+import { getLessonTitle, type LessonMeta } from "../lessons";
 import type { Lang } from "../progress";
 import { sfx } from "../sound";
-import type { Lesson, Question } from "./types";
+import { resolveText, type Lesson, type Question } from "./types";
 
 interface Props {
   lesson: Lesson;
@@ -16,6 +17,7 @@ interface Props {
   alreadyDone: boolean;
   onBadge: () => void;
   onExit: () => void;
+  onLang?: (l: Lang) => void;
 }
 
 type Phase =
@@ -26,7 +28,7 @@ type Phase =
   | { k: "real" }
   | { k: "dad" };
 
-export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit }: Props) {
+export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit, onLang }: Props) {
   const [phase, setPhase] = useState<Phase>({ k: "story", i: 0 });
   const [toyCompleted, setToyCompleted] = useState(false);
   const wasDone = useRef(alreadyDone);
@@ -59,9 +61,12 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit 
           )}
         </div>
         <h2 className="lesson-title">
-          <LessonIcon id={meta.id} size={34} /> {meta.title[lang]}
+          <LessonIcon id={meta.id} size={34} /> {getLessonTitle(meta, lang)}
         </h2>
-        <Dots total={total} position={position} lang={lang} />
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          {onLang && <LangSwitch lang={lang} onLang={onLang} />}
+          <Dots total={total} position={position} lang={lang} />
+        </div>
       </header>
 
       {phase.k === "story" && (
@@ -82,7 +87,7 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit 
         <section className="lesson-body">
           <div className="hello">
             <Otto size={96} />
-            <SpeechBubble text={lesson.toyIntro[lang]} lang={lang} />
+            <SpeechBubble text={resolveText(lesson.toyIntro, lang)} lang={lang} />
           </div>
           <div className="stage-wrap">
             <lesson.Toy lang={lang} onDone={() => setToyCompleted(true)} />
@@ -124,9 +129,9 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit 
         <section className="lesson-body">
           <div className="card real">
             <h3>
-              <UiIcon name="globe" size={30} /> {lesson.realLife.title[lang]}
+              <UiIcon name="globe" size={30} /> {resolveText(lesson.realLife.title, lang)}
             </h3>
-            <p>{lesson.realLife.body[lang]}</p>
+            <p>{resolveText(lesson.realLife.body, lang)}</p>
           </div>
           <div className="row nav">
             <button type="button" className="btn" onClick={() => setPhase({ k: "dad" })}>
@@ -142,7 +147,7 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit 
             <h3>
               <UiIcon name="chat" size={30} /> {t(lang, "askDad")}
             </h3>
-            <p>{lesson.askDad[lang]}</p>
+            <p>{resolveText(lesson.askDad, lang)}</p>
           </div>
           <div className="row nav">
             <button type="button" className="btn" onClick={onExit}>
@@ -220,7 +225,7 @@ function StoryView({
       </div>
       <div className="hello">
         <Otto size={96} mood={beat.mood ?? "happy"} />
-        <SpeechBubble key={step} text={line[lang]} lang={lang} />
+        <SpeechBubble key={step} text={resolveText(line, lang)} lang={lang} />
       </div>
       <div className="row nav">
         {(index > 0 || step > 1) && (
@@ -253,7 +258,7 @@ function QuestionView({
   const [tried, setTried] = useState<number[]>([]);
 
   const say =
-    state === "right" ? t(lang, "rightLine") : state === "wrong" ? q.hint[lang] : q.prompt[lang];
+    state === "right" ? t(lang, "rightLine") : state === "wrong" ? resolveText(q.hint, lang) : resolveText(q.prompt, lang);
 
   const answer = (ok: boolean) => {
     if (ok) {
@@ -293,7 +298,7 @@ function QuestionView({
                     }
                   }}
                 >
-                  {o.text[lang]}
+                  {resolveText(o.text, lang)}
                 </button>
               </li>
             );
@@ -343,7 +348,7 @@ function BadgeView({
         <LessonIcon id={meta.id} size={96} />
       </div>
       <h3>{again ? t(lang, "badgeAgain") : t(lang, "badgeEarned")}</h3>
-      <p>{meta.title[lang]}</p>
+      <p>{getLessonTitle(meta, lang)}</p>
       <div className="row nav">
         <button type="button" className="btn" onClick={onNext}>
           {t(lang, "next")}

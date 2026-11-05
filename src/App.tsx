@@ -62,12 +62,19 @@ export function App() {
           setScreen({ kind: "map" });
         }}
         onClose={() => setScreen({ kind: "map" })}
+        onLang={setLang}
       />
     );
   }
 
   if (screen.kind === "facts") {
-    return <FactCards lang={progress.lang} onClose={() => setScreen({ kind: "parents" })} />;
+    return (
+      <FactCards
+        lang={progress.lang}
+        onLang={setLang}
+        onClose={() => setScreen({ kind: "parents" })}
+      />
+    );
   }
 
   if (screen.kind === "lesson") {
@@ -83,11 +90,17 @@ export function App() {
           alreadyDone={progress.badges.includes(screen.id)}
           onBadge={() => awardBadge(screen.id)}
           onExit={() => setScreen({ kind: "map" })}
+          onLang={setLang}
         />
       );
     }
     return (
-      <LessonPlaceholder lessonId={screen.id} progress={progress} onBack={() => setScreen({ kind: "map" })} />
+      <LessonPlaceholder
+        lessonId={screen.id}
+        progress={progress}
+        onBack={() => setScreen({ kind: "map" })}
+        onLang={setLang}
+      />
     );
   }
 

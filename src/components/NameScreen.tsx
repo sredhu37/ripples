@@ -2,8 +2,11 @@ import { useState } from "react";
 import { t } from "../i18n";
 import { cleanName, type Lang } from "../progress";
 import { sfx } from "../sound";
+import { LangSwitch } from "./LangSwitch";
 import { Otto } from "./Otto";
 import { SpeechBubble } from "./SpeechBubble";
+
+export { LangSwitch };
 
 interface Props {
   lang: Lang;
@@ -46,26 +49,5 @@ export function NameScreen({ lang, onLang, onDone }: Props) {
         </button>
       </form>
     </main>
-  );
-}
-
-export function LangSwitch({ lang, onLang }: { lang: Lang; onLang: (l: Lang) => void }) {
-  return (
-    <div className="seg" role="group" aria-label={t(lang, "language")}>
-      {(["en", "de"] as const).map((l) => (
-        <button
-          key={l}
-          type="button"
-          className={l === lang ? "seg-on" : ""}
-          aria-pressed={l === lang}
-          onClick={() => {
-            sfx.tap();
-            onLang(l);
-          }}
-        >
-          {l === "en" ? "EN" : "DE"}
-        </button>
-      ))}
-    </div>
   );
 }

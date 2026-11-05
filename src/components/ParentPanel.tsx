@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { LESSON_ORDER } from "../lessons";
 import { t } from "../i18n";
-import { exportCode, importCode, type Progress } from "../progress";
+import { exportCode, importCode, type Progress, type Lang } from "../progress";
+import { LangSwitch } from "./LangSwitch";
 
 interface Props {
   progress: Progress;
@@ -9,6 +10,7 @@ interface Props {
   onReset: () => void;
   onFacts: () => void;
   onClose: () => void;
+  onLang?: (l: Lang) => void;
 }
 
 function makeGate() {
@@ -16,7 +18,7 @@ function makeGate() {
 }
 
 /** Parent area. A small multiplication gate keeps a young child out of it. */
-export function ParentPanel({ progress, onRestore, onReset, onFacts, onClose }: Props) {
+export function ParentPanel({ progress, onRestore, onReset, onFacts, onClose, onLang }: Props) {
   const lang = progress.lang;
   const [gate] = useState(makeGate);
   const [open, setOpen] = useState(false);
@@ -39,7 +41,10 @@ export function ParentPanel({ progress, onRestore, onReset, onFacts, onClose }: 
             else setGateWrong(true);
           }}
         >
-          <h2>{t(lang, "parents")}</h2>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <h2>{t(lang, "parents")}</h2>
+            {onLang && <LangSwitch lang={lang} onLang={onLang} />}
+          </div>
           <p>{t(lang, "gateQuestion", gate)}</p>
           <input
             className="text-input"
@@ -65,6 +70,11 @@ export function ParentPanel({ progress, onRestore, onReset, onFacts, onClose }: 
   return (
     <main className="screen center">
       <div className="panel">
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <h2>{t(lang, "parents")}</h2>
+          {onLang && <LangSwitch lang={lang} onLang={onLang} />}
+        </div>
+
         <h2>{t(lang, "factCards")}</h2>
         <p>{t(lang, "factCardsHelp")}</p>
         <button className="btn" type="button" onClick={onFacts}>

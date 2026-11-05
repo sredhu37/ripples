@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { getLesson, hasLesson } from "./index";
 import { LESSONS } from "../lessons";
-import type { Lesson, Text } from "../lesson/types";
+import { resolveFactText, type Lesson, type Text } from "../lesson/types";
 
 function texts(l: Lesson): { where: string; text: Text }[] {
   const out: { where: string; text: Text }[] = [];
@@ -62,6 +62,10 @@ describe.each(LESSONS.filter((m) => hasLesson(m.id)))("lesson $id", (meta) => {
       expect(text.en.trim(), `${where} en`).not.toBe("");
       expect(text.de.trim(), `${where} de`).not.toBe("");
       expect(text.de, `${where} de differs`).not.toBe(text.en);
+      if (text.pl !== undefined) {
+        expect(text.pl.trim(), `${where} pl`).not.toBe("");
+        expect(text.pl, `${where} pl differs`).not.toBe(text.en);
+      }
     }
   });
 
@@ -71,6 +75,9 @@ describe.each(LESSONS.filter((m) => hasLesson(m.id)))("lesson $id", (meta) => {
       for (const line of b.lines ?? [b.text]) {
         expect(line.en.length).toBeLessThanOrEqual(190);
         expect(line.de.length).toBeLessThanOrEqual(230);
+        if (line.pl !== undefined) {
+          expect(line.pl.length).toBeLessThanOrEqual(230);
+        }
       }
     }
   });
@@ -90,6 +97,9 @@ describe.each(LESSONS.filter((m) => hasLesson(m.id)))("lesson $id", (meta) => {
         expect((text[lang].match(/\*/g) ?? []).length % 2, `${where} ${lang} stars`).toBe(0);
       }
       expect((text.en.match(/\*/g) ?? []).length, `${where} same terms`).toBe((text.de.match(/\*/g) ?? []).length);
+      if (text.pl !== undefined) {
+        expect((text.pl.match(/\*/g) ?? []).length % 2, `${where} pl stars`).toBe(0);
+      }
     }
   });
 
@@ -101,7 +111,7 @@ describe.each(LESSONS.filter((m) => hasLesson(m.id)))("lesson $id", (meta) => {
   it("has a fact card with 5 or more sourced claims", () => {
     expect(lesson.factCard.claims.length).toBeGreaterThanOrEqual(5);
     for (const c of lesson.factCard.claims) {
-      expect(c.text.trim()).not.toBe("");
+      expect(resolveFactText(c.text, "en").trim()).not.toBe("");
       expect(c.source).toMatch(/^https:\/\//);
     }
     expect(lesson.factCard.simplified.length).toBeGreaterThanOrEqual(1);
