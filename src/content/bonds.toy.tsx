@@ -53,14 +53,71 @@ export function BondsToy({ lang, mode = "toy", onDone }: BondsToyProps) {
     }
   };
 
+  const scrollTitle =
+    lang === "pl" ? "Obligacja ratusza" : lang === "de" ? "Rathaus-Anleihe" : "Town Hall Bond Scroll";
+  const principalBadge =
+    lang === "pl"
+      ? "Wartość nominalna: 100 monet"
+      : lang === "de"
+      ? "Nennwert: 100 Münzen"
+      : "Principal: 100 Coins";
+
+  const couponActive =
+    lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "Coins";
+  const couponTorn =
+    lang === "pl" ? "Odebrany" : lang === "de" ? "Eingelöst" : "Collected";
+
+  const tearBtn =
+    lang === "pl"
+      ? "Oderwij kupon (Święto Plonów)"
+      : lang === "de"
+      ? "Kupon abreißen (Erntetag)"
+      : "Tear Off Coupon (Harvest Day)";
+
+  const interestLabel =
+    lang === "pl" ? "Łączne odsetki:" : lang === "de" ? "Gesamtzinsen:" : "Total Interest:";
+
+  const seesawTitle =
+    lang === "pl"
+      ? "Huśtawka cenowa obligacji (Zins-Wippe)"
+      : lang === "de"
+      ? "Die Zins-Wippe (Interest Seesaw)"
+      : "Die Zins-Wippe (Interest Seesaw)";
+
+  const beamRateLabel =
+    lang === "pl" ? "Stopa bankowa" : lang === "de" ? "Bankzins" : "Bank Rate";
+  const beamPriceLabel =
+    lang === "pl" ? "Cena obligacji" : lang === "de" ? "Anleihepreis" : "Bond Price";
+
+  const sliderLabel =
+    lang === "pl"
+      ? "Stopa procentowa w Banku Miejskim:"
+      : lang === "de"
+      ? "Bankzinssatz im Dorf:"
+      : "Town Bank Interest Rate:";
+
+  const successMsg =
+    lang === "pl"
+      ? "Prawidłowo! Gdy nowe stopy rosną do 7%, starsze obligacje 5% tanieją do 90 monet."
+      : lang === "de"
+      ? "Richtig! Steigen die Bankzinsen auf 7%, sinkt der Preis älterer 5%-Anleihen auf 90 Münzen."
+      : "Correct! When new bank rates rise to 7%, older 5% bonds discount down to 90 coins.";
+
+  const promptMsg =
+    lang === "pl"
+      ? "Ustaw stopę w Banku Miejskim na 7% lub wyższą, aby zobaczyć spadek ceny obligacji."
+      : lang === "de"
+      ? "Stelle den Bankzins auf 7% oder höher, um den Kursabschlag zu sehen."
+      : "Set the Town Bank rate to 7% or higher to show the price discount.";
+
   return (
     <div className="bonds-wrap">
       <div className="bonds-grid">
         {/* Loan Scroll & Coupons */}
         <div className="bonds-panel scroll-panel">
-          <div className="panel-title">{lang === "en" ? "Town Hall Bond Scroll" : "Rathaus-Anleihe"}</div>
+          <div className="panel-title">{scrollTitle}</div>
           <div className="principal-badge">
-            📜 {lang === "en" ? "Principal: 100 Coins" : "Nennwert: 100 Münzen"}
+            📜 {principalBadge}
           </div>
           <div className="coupons-stack">
             {Array.from({ length: 3 }).map((_, i) => (
@@ -69,23 +126,23 @@ export function BondsToy({ lang, mode = "toy", onDone }: BondsToyProps) {
                 className={`coupon-ticket ${i < couponsLeft ? "active" : "torn"}`}
               >
                 {i < couponsLeft
-                  ? `🎟️ 5 ${lang === "en" ? "Coins" : "Münzen"}`
-                  : `✓ ${lang === "en" ? "Collected" : "Eingelöst"}`}
+                  ? `🎟️ 5 ${couponActive}`
+                  : `✓ ${couponTorn}`}
               </div>
             ))}
           </div>
           <ToyButton onClick={handleTearCoupon} disabled={couponsLeft <= 0}>
-            {lang === "en" ? "Tear Off Coupon (Harvest Day)" : "Kupon abreißen (Erntetag)"}
+            {tearBtn}
           </ToyButton>
           <div className="collected-badge">
-            {lang === "en" ? "Total Interest:" : "Gesamtzinsen:"}{" "}
-            <strong>{collectedCoins} {lang === "en" ? "Coins" : "Münzen"}</strong>
+            {interestLabel}{" "}
+            <strong>{collectedCoins} {couponActive}</strong>
           </div>
         </div>
 
         {/* Die Zins-Wippe (The Interest Seesaw) */}
         <div className="bonds-panel seesaw-panel">
-          <div className="panel-title">{lang === "en" ? "Die Zins-Wippe (Interest Seesaw)" : "Die Zins-Wippe"}</div>
+          <div className="panel-title">{seesawTitle}</div>
           <div className="seesaw-graphic">
             <div
               className="seesaw-beam"
@@ -94,12 +151,12 @@ export function BondsToy({ lang, mode = "toy", onDone }: BondsToyProps) {
               }}
             >
               <div className="beam-left">
-                <span className="beam-label">{lang === "en" ? "Bank Rate" : "Bankzins"}</span>
+                <span className="beam-label">{beamRateLabel}</span>
                 <span className="beam-val">{bankRate}%</span>
               </div>
               <div className="beam-center">⚖️ 5c</div>
               <div className="beam-right">
-                <span className="beam-label">{lang === "en" ? "Bond Price" : "Anleihepreis"}</span>
+                <span className="beam-label">{beamPriceLabel}</span>
                 <span className="beam-val">{price}c</span>
               </div>
             </div>
@@ -108,7 +165,7 @@ export function BondsToy({ lang, mode = "toy", onDone }: BondsToyProps) {
 
           <div className="seesaw-slider-wrap">
             <label className="slider-label">
-              {lang === "en" ? "Town Bank Interest Rate:" : "Bankzinssatz im Dorf:"}
+              {sliderLabel}
             </label>
             <input
               type="range"
@@ -129,13 +186,7 @@ export function BondsToy({ lang, mode = "toy", onDone }: BondsToyProps) {
         <CheckButton lang={lang} onClick={handleCheck} />
         {showFeedback && (
           <div className={`feedback-msg ${bankRate >= 7 ? "success" : "warning"}`}>
-            {bankRate >= 7
-              ? lang === "en"
-                ? "Correct! When new bank rates rise to 7%, older 5% bonds discount down to 90 coins."
-                : "Richtig! Steigen die Bankzinsen auf 7%, sinkt der Preis älterer 5%-Anleihen auf 90 Münzen."
-              : lang === "en"
-              ? "Set the Town Bank rate to 7% or higher to show the price discount."
-              : "Stelle den Bankzins auf 7% oder höher, um den Kursabschlag zu sehen."}
+            {bankRate >= 7 ? successMsg : promptMsg}
           </div>
         )}
       </div>

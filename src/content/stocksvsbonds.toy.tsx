@@ -53,74 +53,132 @@ export function StocksVsBondsToy({ lang, mode = "toy", onDone }: StocksVsBondsTo
     }
   };
 
+  const outcomeTitle =
+    lang === "pl" ? "Wynik ekspedycji" : lang === "de" ? "Expeditionsergebnis" : "Expedition Result";
+  const treasureBtn =
+    lang === "pl" ? "Wielki skarb (100 monet)" : lang === "de" ? "Großer Schatz (100c)" : "Grand Treasure (100c)";
+  const modestBtn =
+    lang === "pl" ? "Zwykły rejs (15 monet)" : lang === "de" ? "Mäßige Fahrt (15c)" : "Modest Voyage (15c)";
+  const shipwreckBtn =
+    lang === "pl" ? "Katastrofa (4 monety uratowane)" : lang === "de" ? "Schiffbruch (4c gerettet)" : "Shipwreck (4c Salvaged)";
+
+  const earningsLabel =
+    lang === "pl" ? "Przychód z wyprawy:" : lang === "de" ? "Fahrterlös:" : "Voyage Earnings:";
+
+  const finnTitle =
+    lang === "pl" ? "Finn (Akcjonariusz)" : lang === "de" ? "Finn (Aktionär)" : "Finn (Stockholder)";
+  const finnRole =
+    lang === "pl" ? "Współwłaściciel (Kapitał własny)" : lang === "de" ? "Miteigentümer (Eigenkapital)" : "Co-Owner (Equity)";
+
+  const finnDesc =
+    outcome === "treasure"
+      ? lang === "pl" ? "Olbrzymi zysk!" : lang === "de" ? "Riesiger Gewinn!" : "Huge profit windfall!"
+      : outcome === "shipwreck"
+      ? lang === "pl" ? "Brak monet dla właściciela" : lang === "de" ? "Nichts übrig für Eigentümer" : "No coins left for owners"
+      : lang === "pl" ? "Otrzymuje resztę zysku" : lang === "de" ? "Erhält den Restgewinn" : "Earns leftover profit";
+
+  const beaTitle =
+    lang === "pl" ? "Bea (Obligatariuszka)" : lang === "de" ? "Bea (Anleihehalterin)" : "Bea (Bondholder)";
+  const beaRole =
+    lang === "pl" ? "Pożyczkodawczyni (Dług)" : lang === "de" ? "Geldgeberin (Fremdkapital)" : "Lender (Debt)";
+
+  const beaDesc =
+    outcome === "shipwreck"
+      ? lang === "pl" ? "Pierwszeństwo spłaty: dostaje wszystko!" : lang === "de" ? "Vorrang: Zuerst bedient!" : "Legal priority: paid first!"
+      : lang === "pl" ? "Stały kupon: 5 monet" : lang === "de" ? "Fester 5-Münzen-Kupon" : "Steady 5-coin coupon";
+
+  const quizTitle =
+    lang === "pl"
+      ? "Statek przywiózł tylko 6 monet. Przydziel najpierw 5 monet Bei (Pierwszeństwo wierzyciela)!"
+      : lang === "de"
+      ? "Das Schiff brachte nur 6 Münzen. Gib Bea zuerst 5 Münzen (Gläubiger-Vorrang)!"
+      : "The ship brought back only 6 coins. Allocate 5 coins to Bea first (Creditor Priority)!";
+
+  const payBeaBtn =
+    lang === "pl" ? "Wypłać 1 monetę Bei" : lang === "de" ? "1 Münze an Bea zahlen" : "Pay 1 Coin to Bea";
+
+  const paidToBeaLabel =
+    lang === "pl" ? "Wypłacono Bei:" : lang === "de" ? "An Bea gezahlt:" : "Paid to Bea:";
+  const coinsUnit =
+    lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "Coins";
+
+  const quizSuccess =
+    lang === "pl"
+      ? "Prawidłowo! W prawie upadłościowym posiadacze obligacji muszą zostać spłaceni, zanim akcjonariusze otrzymają choć grosz."
+      : lang === "de"
+      ? "Richtig! Gläubiger werden immer vor den Miteigentümern bedient."
+      : "Correct! Under insolvency law, bondholders must be paid before stockholders receive anything.";
+
+  const quizWarning =
+    lang === "pl"
+      ? "Przydziel najpierw pełen 5-monetowy kupon Bei."
+      : lang === "de"
+      ? "Zahle den vollen 5-Münzen-Kupon zuerst an Bea."
+      : "Allocate the full 5-coin coupon to Bea first.";
+
+  const toySuccess =
+    lang === "pl"
+      ? "Świetnie! Rozumiesz już różnicę między akcjami a obligacjami."
+      : lang === "de"
+      ? "Toll erkundet! Du verstehst Aktien und Anleihen."
+      : "Great exploration! You understand stocks vs bonds.";
+
   return (
     <div className="stocksvsbonds-wrap">
       {mode === "toy" ? (
         <div className="stocksvsbonds-grid">
           {/* Outcome Selector */}
           <div className="svb-panel selector-panel">
-            <div className="panel-title">{lang === "en" ? "Expedition Result" : "Expeditionsergebnis"}</div>
+            <div className="panel-title">{outcomeTitle}</div>
             <div className="outcome-buttons">
               <button
                 type="button"
                 className={`outcome-btn ${outcome === "treasure" ? "active" : ""}`}
                 onClick={() => setOutcome("treasure")}
               >
-                💎 {lang === "en" ? "Grand Treasure (100c)" : "Großer Schatz (100c)"}
+                💎 {treasureBtn}
               </button>
               <button
                 type="button"
                 className={`outcome-btn ${outcome === "modest" ? "active" : ""}`}
                 onClick={() => setOutcome("modest")}
               >
-                ⛵ {lang === "en" ? "Modest Voyage (15c)" : "Mäßige Fahrt (15c)"}
+                ⛵ {modestBtn}
               </button>
               <button
                 type="button"
                 className={`outcome-btn ${outcome === "shipwreck" ? "active" : ""}`}
                 onClick={() => setOutcome("shipwreck")}
               >
-                🌊 {lang === "en" ? "Shipwreck (4c Salvaged)" : "Schiffbruch (4c gerettet)"}
+                🌊 {shipwreckBtn}
               </button>
             </div>
             <div className="revenue-badge">
-              {lang === "en" ? "Voyage Earnings:" : "Fahrterlös:"} <strong>{totalRevenue}c</strong>
+              {earningsLabel} <strong>{totalRevenue}c</strong>
             </div>
           </div>
 
           {/* Stockholder Finn */}
           <div className="svb-panel stock-panel">
-            <div className="panel-title">{lang === "en" ? "Finn (Stockholder)" : "Finn (Aktionär)"}</div>
-            <div className="role-tag equity">{lang === "en" ? "Co-Owner (Equity)" : "Miteigentümer"}</div>
+            <div className="panel-title">{finnTitle}</div>
+            <div className="role-tag equity">{finnRole}</div>
             <div className="payout-num stock">{stockPayout}c</div>
-            <div className="payout-desc">
-              {outcome === "treasure"
-                ? lang === "en" ? "Huge profit windfall!" : "Riesiger Gewinn!"
-                : outcome === "shipwreck"
-                ? lang === "en" ? "No coins left for owners" : "Nichts übrig für Eigentümer"
-                : lang === "en" ? "Earns leftover profit" : "Erhält den Restgewinn"}
-            </div>
+            <div className="payout-desc">{finnDesc}</div>
           </div>
 
           {/* Bondholder Bea */}
           <div className="svb-panel bond-panel">
-            <div className="panel-title">{lang === "en" ? "Bea (Bondholder)" : "Bea (Anleihehalterin)"}</div>
-            <div className="role-tag debt">{lang === "en" ? "Lender (Debt)" : "Geldgeberin"}</div>
+            <div className="panel-title">{beaTitle}</div>
+            <div className="role-tag debt">{beaRole}</div>
             <div className="payout-num bond">{bondPayout}c</div>
-            <div className="payout-desc">
-              {outcome === "shipwreck"
-                ? lang === "en" ? "Legal priority: paid first!" : "Vorrang: Zuerst bedient!"
-                : lang === "en" ? "Steady 5-coin coupon" : "Fester 5-Münzen-Kupon"}
-            </div>
+            <div className="payout-desc">{beaDesc}</div>
           </div>
         </div>
       ) : (
         /* Quiz Mode */
         <div className="quiz-priority-box">
           <div className="quiz-title">
-            {lang === "en"
-              ? "The ship brought back only 6 coins. Allocate 5 coins to Bea first (Creditor Priority)!"
-              : "Das Schiff brachte nur 6 Münzen. Gib Bea zuerst 5 Münzen (Gläubiger-Vorrang)!"}
+            {quizTitle}
           </div>
           <div className="quiz-allocator">
             <button
@@ -128,10 +186,10 @@ export function StocksVsBondsToy({ lang, mode = "toy", onDone }: StocksVsBondsTo
               className="alloc-btn"
               onClick={() => setAllocatedToBond((prev) => Math.min(5, prev + 1))}
             >
-              + {lang === "en" ? "Pay 1 Coin to Bea" : "1 Münze an Bea zahlen"}
+              + {payBeaBtn}
             </button>
             <div className="alloc-count">
-              {lang === "en" ? "Paid to Bea:" : "An Bea gezahlt:"} <strong>{allocatedToBond} / 5 Coins</strong>
+              {paidToBeaLabel} <strong>{allocatedToBond} / 5 {coinsUnit}</strong>
             </div>
           </div>
         </div>
@@ -143,15 +201,9 @@ export function StocksVsBondsToy({ lang, mode = "toy", onDone }: StocksVsBondsTo
           <div className={`feedback-msg ${mode === "quiz" ? (allocatedToBond === 5 ? "success" : "warning") : "success"}`}>
             {mode === "quiz"
               ? allocatedToBond === 5
-                ? lang === "en"
-                  ? "Correct! Under insolvency law, bondholders must be paid before stockholders receive anything."
-                  : "Richtig! Gläubiger werden immer vor den Miteigentümern bedient."
-                : lang === "en"
-                ? "Allocate the full 5-coin coupon to Bea first."
-                : "Zahle den vollen 5-Münzen-Kupon zuerst an Bea."
-              : lang === "en"
-              ? "Great exploration! You understand stocks vs bonds."
-              : "Toll erkundet! Du verstehst Aktien und Anleihen."}
+                ? quizSuccess
+                : quizWarning
+              : toySuccess}
           </div>
         )}
       </div>

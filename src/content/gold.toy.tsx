@@ -58,12 +58,83 @@ export function GoldToy({ lang, mode = "toy", onDone }: GoldToyProps) {
     }
   };
 
+  const climateTitle =
+    lang === "pl" ? "Klimat gospodarczy" : lang === "de" ? "Wirtschaftsklima" : "Economic Climate";
+
+  const calmBtn =
+    lang === "pl" ? "Słoneczny spokój" : lang === "de" ? "Sonnige Ruhe" : "Sunny Calm";
+  const stormBtn =
+    lang === "pl" ? "Burzliwy kryzys" : lang === "de" ? "Stürmische Krise" : "Stormy Crisis";
+
+  const calmStatus =
+    lang === "pl"
+      ? "Spokojna gospodarka: firmy przynoszą stałe zyski"
+      : lang === "de"
+      ? "Ruhige Wirtschaft: Betriebe machen stetige Gewinne"
+      : "Calm economy: businesses earn steady profits";
+
+  const stormStatus =
+    lang === "pl"
+      ? "Duża niepewność: firmy ponoszą straty przez wahania rynkowe"
+      : lang === "de"
+      ? "Hohe Unsicherheit: Betriebe drohen Verluste"
+      : "High uncertainty: businesses face volatile losses";
+
+  const bakeryTitle =
+    lang === "pl" ? "Działająca piekarnia" : lang === "de" ? "Produktive Bäckerei" : "Productive Bakery";
+
+  const coinsPerYear =
+    lang === "pl" ? "monet/rok" : lang === "de" ? "Münzen/Jahr" : "Coins/Year";
+
+  const businessDesc =
+    lang === "pl"
+      ? "Zarabia w dobrych czasach, ale jest narażona na kryzysy."
+      : lang === "de"
+      ? "Verdient gut in guten Zeiten, ist aber anfällig für Stürme."
+      : "Earns coins when times are good, but vulnerable to storms.";
+
+  const vaultTitle =
+    lang === "pl" ? "Skarbiec ze złotem w porcie" : lang === "de" ? "Hafen-Goldtresor" : "Harbor Gold Vault";
+
+  const vaultedCoinsText =
+    lang === "pl"
+      ? `${vaultedCoins} monet w skarbcu`
+      : lang === "de"
+      ? `${vaultedCoins} Münzen im Tresor`
+      : `${vaultedCoins} Coins Vaulted`;
+
+  const goldPriceLabel =
+    lang === "pl" ? "Cena złota:" : lang === "de" ? "Goldpreis:" : "Gold Price:";
+
+  const priceUnit =
+    lang === "pl" ? `${price} monet/uncję` : lang === "de" ? `${price} Münzen/oz` : `${price} Coins/oz`;
+
+  const depositBtn =
+    lang === "pl" ? "+ Schowaj 1 monetę" : lang === "de" ? "+ 1 Münze sichern" : "+ Store 1 Coin";
+
+  const withdrawBtn =
+    lang === "pl" ? "Wypłać" : lang === "de" ? "Entnehmen" : "Take Out";
+
+  const successMsg =
+    lang === "pl"
+      ? "Świetnie! Twoje oszczędności są bezpieczne w skarbcu przystani."
+      : lang === "de"
+      ? "Super! Deine Ersparnisse sind im sicheren Hafen geschützt."
+      : "Great! Your savings are protected in the safe harbor vault.";
+
+  const warningMsg =
+    lang === "pl"
+      ? "Zabezpiecz co najmniej 3 monety w skarbcu złota podczas burzy."
+      : lang === "de"
+      ? "Sichere mindestens 3 Münzen im Goldtresor während eines Sturms."
+      : "Store at least 3 coins in the Gold Vault during a storm.";
+
   return (
     <div className="gold-wrap">
       <div className="gold-grid">
         {/* Economic Climate */}
         <div className="gold-panel climate-panel">
-          <div className="gold-panel-title">{lang === "en" ? "Economic Climate" : "Wirtschaftsklima"}</div>
+          <div className="gold-panel-title">{climateTitle}</div>
           <div className="gold-climate-buttons">
             <button
               type="button"
@@ -77,7 +148,7 @@ export function GoldToy({ lang, mode = "toy", onDone }: GoldToyProps) {
                 <circle cx="10" cy="10" r="5" fill="#f59e0b" />
                 <path d="M10 2 V4 M10 16 V18 M2 10 H4 M16 10 H18" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" />
               </svg>
-              <span>{lang === "en" ? "Sunny Calm" : "Sonnige Ruhe"}</span>
+              <span>{calmBtn}</span>
             </button>
             <button
               type="button"
@@ -91,36 +162,28 @@ export function GoldToy({ lang, mode = "toy", onDone }: GoldToyProps) {
                 <path d="M5 9 A4 4 0 0 1 13 8 A3 3 0 0 1 17 12 H4 A3 3 0 0 1 5 9 Z" fill="#64748b" />
                 <polygon points="10,13 8,16 11,16 9,19 13,15 10,15" fill="#facc15" />
               </svg>
-              <span>{lang === "en" ? "Stormy Crisis" : "Stürmische Krise"}</span>
+              <span>{stormBtn}</span>
             </button>
           </div>
           <div className={`gold-climate-status ${climate}`}>
-            {climate === "calm"
-              ? lang === "en"
-                ? "Calm economy: businesses earn steady profits"
-                : "Ruhige Wirtschaft: Betriebe machen stetige Gewinne"
-              : lang === "en"
-              ? "High uncertainty: businesses face volatile losses"
-              : "Hohe Unsicherheit: Betriebe drohen Verluste"}
+            {climate === "calm" ? calmStatus : stormStatus}
           </div>
         </div>
 
         {/* Business Stall */}
         <div className="gold-panel business-panel">
-          <div className="gold-panel-title">{lang === "en" ? "Productive Bakery" : "Produktive Bäckerei"}</div>
+          <div className="gold-panel-title">{bakeryTitle}</div>
           <div className={`gold-profit-badge ${businessProfit >= 0 ? "profit" : "loss"}`}>
-            {businessProfit >= 0 ? `+${businessProfit}` : businessProfit} {lang === "en" ? "Coins/Year" : "Münzen/Jahr"}
+            {businessProfit >= 0 ? `+${businessProfit}` : businessProfit} {coinsPerYear}
           </div>
           <div className="gold-business-desc">
-            {lang === "en"
-              ? "Earns coins when times are good, but vulnerable to storms."
-              : "Verdient gut in guten Zeiten, ist aber anfällig für Stürme."}
+            {businessDesc}
           </div>
         </div>
 
         {/* Stone Gold Vault */}
         <div className="gold-panel vault-panel">
-          <div className="gold-panel-title">{lang === "en" ? "Harbor Gold Vault" : "Hafen-Goldtresor"}</div>
+          <div className="gold-panel-title">{vaultTitle}</div>
           <div className="gold-vault-bar-icon">
             <svg viewBox="0 0 40 24" width="40" height="24" aria-hidden="true">
               <polygon points="6,4 34,4 38,16 2,16" fill="#facc15" stroke="#ca8a04" strokeWidth="1.5" />
@@ -128,18 +191,18 @@ export function GoldToy({ lang, mode = "toy", onDone }: GoldToyProps) {
             </svg>
           </div>
           <div className="gold-vault-balance">
-            {vaultedCoins} {lang === "en" ? "Coins Vaulted" : "Münzen im Tresor"}
+            {vaultedCoinsText}
           </div>
           <div className="gold-price-badge">
-            {lang === "en" ? "Gold Price:" : "Goldpreis:"}{" "}
-            <strong>{price} {lang === "en" ? "Coins/oz" : "Münzen/oz"}</strong>
+            {goldPriceLabel}{" "}
+            <strong>{priceUnit}</strong>
           </div>
           <div className="gold-vault-actions">
             <ToyButton onClick={handleDeposit} disabled={vaultedCoins >= 5}>
-              {lang === "en" ? "+ Store 1 Coin" : "+ 1 Münze sichern"}
+              {depositBtn}
             </ToyButton>
             <ToyButton onClick={handleWithdraw} disabled={vaultedCoins <= 0}>
-              {lang === "en" ? "Take Out" : "Entnehmen"}
+              {withdrawBtn}
             </ToyButton>
           </div>
         </div>
@@ -149,13 +212,7 @@ export function GoldToy({ lang, mode = "toy", onDone }: GoldToyProps) {
         <CheckButton lang={lang} onClick={handleCheck} />
         {showFeedback && (
           <div className={`gold-feedback-msg ${climate === "storm" && vaultedCoins >= 3 ? "success" : "warning"}`}>
-            {climate === "storm" && vaultedCoins >= 3
-              ? lang === "en"
-                ? "Great! Your savings are protected in the safe harbor vault."
-                : "Super! Deine Ersparnisse sind im sicheren Hafen geschützt."
-              : lang === "en"
-              ? "Store at least 3 coins in the Gold Vault during a storm."
-              : "Sichere mindestens 3 Münzen im Goldtresor während eines Sturms."}
+            {climate === "storm" && vaultedCoins >= 3 ? successMsg : warningMsg}
           </div>
         )}
       </div>
