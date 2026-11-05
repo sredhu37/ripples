@@ -78,7 +78,6 @@ function Reason({
 
 export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market; onChange?: (pay: number) => void }) {
   const [m, setM] = useState<Market>(start);
-  const en = lang === "en";
   const pay = payPerHour(m);
   const p = pushes(m);
 
@@ -88,12 +87,47 @@ export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market
     onChange?.(payPerHour(next));
   };
 
-  const dirWord = (d: Arrow) =>
-    en ? (d === "up" ? "pushes pay up" : d === "down" ? "pushes pay down" : "pay stays the same") : d === "up" ? "Lohn steigt" : d === "down" ? "Lohn sinkt" : "Lohn bleibt gleich";
+  const dirWord = (d: Arrow) => {
+    if (lang === "pl") {
+      return d === "up" ? "płaca rośnie" : d === "down" ? "płaca spada" : "płaca bez zmian";
+    }
+    if (lang === "de") {
+      return d === "up" ? "Lohn steigt" : d === "down" ? "Lohn sinkt" : "Lohn bleibt gleich";
+    }
+    return d === "up" ? "pushes pay up" : d === "down" ? "pushes pay down" : "pay stays the same";
+  };
+
+  const payUnit = () => {
+    if (lang === "pl") {
+      return pay === 1 ? "moneta za godzinę" : pay >= 2 && pay <= 4 ? "monety za godzinę" : "monet za godzinę";
+    }
+    if (lang === "de") {
+      return pay === 1 ? "Münze pro Stunde" : "Münzen pro Stunde";
+    }
+    return pay === 1 ? "coin per hour" : "coins per hour";
+  };
+
+  const hoursText = () => {
+    if (lang === "pl") {
+      return `4 godziny pracy: ${pay * 4} monet`;
+    }
+    if (lang === "de") {
+      return `4 Stunden Arbeit: ${pay * 4} Münzen`;
+    }
+    return `4 hours of work: ${pay * 4} coins`;
+  };
 
   return (
     <>
-      <Stage label={en ? "Boat fixing job" : "Beruf: Boote reparieren"}>
+      <Stage
+        label={
+          lang === "pl"
+            ? "Zawód: naprawa łodzi"
+            : lang === "de"
+            ? "Beruf: Boote reparieren"
+            : "Boat fixing job"
+        }
+      >
         <div className="job">
           <div className="job-title">
             <InlineIcon size={34}>
@@ -102,7 +136,13 @@ export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market
             <InlineIcon size={30}>
               <Wrench />
             </InlineIcon>
-            <span>{en ? "Job: fix boats" : "Beruf: Boote reparieren"}</span>
+            <span>
+              {lang === "pl"
+                ? "Zawód: naprawa łodzi"
+                : lang === "de"
+                ? "Beruf: Boote reparieren"
+                : "Job: fix boats"}
+            </span>
           </div>
           <div className="job-pay" role="status">
             <span className="job-coins" aria-hidden="true">
@@ -113,14 +153,20 @@ export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market
               ))}
             </span>
             <strong>
-              {pay} {en ? (pay === 1 ? "coin per hour" : "coins per hour") : pay === 1 ? "Münze pro Stunde" : "Münzen pro Stunde"}
+              {pay} {payUnit()}
             </strong>
-            <span>{en ? `4 hours of work: ${pay * 4} coins` : `4 Stunden Arbeit: ${pay * 4} Münzen`}</span>
+            <span>{hoursText()}</span>
           </div>
           <div className="job-reasons">
             <Reason
               lead={dirWord(p.years)}
-              label={en ? "Long to learn" : "Lange lernen"}
+              label={
+                lang === "pl"
+                  ? "Długo się uczy"
+                  : lang === "de"
+                  ? "Lange lernen"
+                  : "Long to learn"
+              }
               arrow={p.years}
               count={m.years}
               head={<GradCap />}
@@ -128,7 +174,13 @@ export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market
             />
             <Reason
               lead={dirWord(p.people)}
-              label={en ? "Few can do it" : "Wenige können es"}
+              label={
+                lang === "pl"
+                  ? "Niewielu to potrafi"
+                  : lang === "de"
+                  ? "Wenige können es"
+                  : "Few can do it"
+              }
               arrow={p.people}
               count={m.people}
               head={<Person {...FIXER} />}
@@ -136,7 +188,13 @@ export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market
             />
             <Reason
               lead={dirWord(p.need)}
-              label={en ? "Town needs it" : "Wird gebraucht"}
+              label={
+                lang === "pl"
+                  ? "Miasto tego potrzebuje"
+                  : lang === "de"
+                  ? "Wird gebraucht"
+                  : "Town needs it"
+              }
               arrow={p.need}
               count={m.need}
               head={<Boat />}
@@ -147,31 +205,49 @@ export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market
       </Stage>
       <div className="job-sliders">
         <Slider
-          label={en ? "Years to learn the job" : "Jahre zum Lernen"}
+          label={
+            lang === "pl"
+              ? "Lata nauki zawodu"
+              : lang === "de"
+              ? "Jahre zum Lernen"
+              : "Years to learn the job"
+          }
           value={m.years}
           min={1}
           max={4}
           onChange={(years) => set({ years })}
-          left={en ? "quick" : "schnell"}
-          right={en ? "long" : "lange"}
+          left={lang === "pl" ? "krótko" : lang === "de" ? "schnell" : "quick"}
+          right={lang === "pl" ? "długo" : lang === "de" ? "lange" : "long"}
         />
         <Slider
-          label={en ? "People who fix boats" : "Leute, die Boote reparieren"}
+          label={
+            lang === "pl"
+              ? "Liczba naprawiaczy łodzi"
+              : lang === "de"
+              ? "Leute, die Boote reparieren"
+              : "People who fix boats"
+          }
           value={m.people}
           min={1}
           max={7}
           onChange={(people) => set({ people })}
-          left={en ? "few" : "wenige"}
-          right={en ? "many" : "viele"}
+          left={lang === "pl" ? "mało" : lang === "de" ? "wenige" : "few"}
+          right={lang === "pl" ? "dużo" : lang === "de" ? "viele" : "many"}
         />
         <Slider
-          label={en ? "How much it is needed" : "Wie sehr man es braucht"}
+          label={
+            lang === "pl"
+              ? "Zapotrzebowanie na pracę"
+              : lang === "de"
+              ? "Wie sehr man es braucht"
+              : "How much it is needed"
+          }
           value={m.need}
           min={1}
           max={3}
           onChange={(need) => set({ need })}
-          left={en ? "a little" : "ein wenig"}
-          right={en ? "a lot" : "sehr"}
+          left={lang === "pl" ? "małe" : lang === "de" ? "ein wenig" : "a little"}
+          right={lang === "pl" ? "duże" : lang === "de" ? "sehr" : "a lot"}
         />
       </div>
     </>

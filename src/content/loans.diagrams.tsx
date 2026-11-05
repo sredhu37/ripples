@@ -6,7 +6,8 @@ import { Coat, DownTrend, Jar, Oven, Plus, Tick, Warning } from "./loans.icons";
 
 /** Animated diagrams for the Loans lesson, one per story beat. `step` is how many taps so far. */
 
-const alt = (en: string, de: string, lang: DiagramProps["lang"]) => (lang === "en" ? en : de);
+const alt = (en: string, de: string, pl: string, lang: DiagramProps["lang"]) =>
+  lang === "pl" ? pl : lang === "de" ? de : en;
 
 /** A number written next to an icon. */
 function Num({ x, y, children, anchor = "start" }: { x: number; y: number; children: string | number; anchor?: "start" | "middle" | "end" }) {
@@ -24,6 +25,7 @@ export function TinyOvenDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Bea the baker has a tiny oven that bakes only a few loaves. Finn and Sam want more bread.",
         "Bäckerin Bea hat einen winzigen Ofen, der nur ein paar Brote backt. Finn und Sam wollen mehr Brot.",
+        "Piekarz Bea ma malutki piec, który piecze tylko kilka bochenków. Finn i Sam chcą więcej chleba.",
         lang,
       )}
     >
@@ -62,6 +64,7 @@ export function BigOvenDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Bea dreams of a big oven that bakes lots of bread. It costs 40 coins, but Bea has only 5.",
         "Bea träumt von einem großen Ofen, der viel Brot backt. Er kostet 40 Münzen, aber Bea hat nur 5.",
+        "Bea marzy o wielkim piecu, który piecze mnóstwo chleba. Kosztuje 40 monet, lecz Bea ma tylko 5.",
         lang,
       )}
     >
@@ -109,6 +112,7 @@ export function LoanDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Pim has a jar of coins and lends 40 coins to Bea. This is called borrowing, and what Bea gets is a loan.",
         "Pim hat ein Glas mit Münzen und leiht Bea 40 Münzen. Das nennt man leihen, und was Bea bekommt, ist ein Darlehen.",
+        "Pim ma słoik monet i pożycza Bea 40 monet. To nazywa się pożyczaniem, a to co dostaje Bea, to pożyczka.",
         lang,
       )}
     >
@@ -133,10 +137,10 @@ export function LoanDiagram({ lang, step }: DiagramProps) {
           {[0, 1, 2].map((i) => (
             <Pop key={i}><Coin x={254 + i * 52} y={66} size={46} /></Pop>
           ))}
-          <TermChip x={230} y={8} w={190}>{alt("borrow", "leihen", lang)}</TermChip>
+          <TermChip x={230} y={8} w={190}>{alt("borrow", "leihen", "pożyczać", lang)}</TermChip>
         </>
       )}
-      {step >= 4 && <TermChip x={265} y={200} w={200}>{alt("loan", "Darlehen", lang)}</TermChip>}
+      {step >= 4 && <TermChip x={265} y={200} w={200}>{alt("loan", "Darlehen", "pożyczka", lang)}</TermChip>}
     </DiagramCanvas>
   );
 }
@@ -148,6 +152,7 @@ export function BuyOvenDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Bea pays 40 coins for the big oven, bakes lots of bread and sells it for coins.",
         "Bea bezahlt 40 Münzen für den großen Ofen, backt viel Brot und verkauft es für Münzen.",
+        "Bea płaci 40 monet za duży piec, piecze mnóstwo chleba i sprzedaje go za monety.",
         lang,
       )}
     >
@@ -190,6 +195,7 @@ export function PayBackDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Every week Bea pays some coins from her bread money back to Pim, little by little.",
         "Jede Woche zahlt Bea ein paar Münzen von ihrem Brotgeld an Pim zurück, nach und nach.",
+        "Co tydzień Bea oddaje Pim część monet zarobionych na chlebie, krok po kroku.",
         lang,
       )}
     >
@@ -218,8 +224,7 @@ export function PayBackDiagram({ lang, step }: DiagramProps) {
               <rect width="50" height="16" rx="8" fill="#1b8a9a" />
               <Coin x={7} y={20} size={36} />
             </Pop>
-          ))}
-        </>
+          ))}\n        </>
       )}
     </DiagramCanvas>
   );
@@ -239,6 +244,7 @@ export function ReasonsDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Three reasons for the extra: Pim has to wait, Bea might not be able to pay, and Pim could have used the coins herself.",
         "Drei Gründe für das Extra: Pim muss warten, Bea kann vielleicht nicht zahlen, und Pim hätte die Münzen selbst nutzen können.",
+        "Trzy powody dodatkowej kwoty: Pim musi czekać, Bea może nie zdołać zapłacić, a Pim mogła wydać monety na własne potrzeby.",
         lang,
       )}
     >
@@ -267,7 +273,7 @@ export function ReasonsDiagram({ lang, step }: DiagramProps) {
           <Person {...CAST.Bea} mood="sad" x={336} y={84} size={70} />
           <Coin x={412} y={104} size={44} />
           <NoSign x={406} y={98} size={56} />
-          <TermChip x={335} y={196} w={120}>{alt("risk", "Risiko", lang)}</TermChip>
+          <TermChip x={335} y={196} w={120}>{alt("risk", "Risiko", "ryzyko", lang)}</TermChip>
         </Pop>
       )}
       {step >= 4 && (
@@ -289,6 +295,7 @@ export function ExtraDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Bea pays back the 40 coins she borrowed plus a few extra coins. The extra is the price of the loan.",
         "Bea zahlt die 40 geliehenen Münzen plus ein paar Extra-Münzen zurück. Das Extra ist der Preis für das Darlehen.",
+        "Bea oddaje 40 pożyczonych monet plus kilka dodatkowych monet. Dodatek to cena pożyczki.",
         lang,
       )}
     >
@@ -338,6 +345,7 @@ export function CarefulDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Careful: when bread sells badly Bea still has to pay. Big weekly payments are too much for small bread sales. Borrow only what you can pay back.",
         "Vorsicht: Wenn sich das Brot schlecht verkauft, muss Bea trotzdem zahlen. Große Zahlungen pro Woche sind zu viel für kleinen Brotverkauf. Leih dir nur, was du zurückzahlen kannst.",
+        "Ostrożnie: gdy chleb sprzedaje się słabo, Bea i tak musi płacić. Duże cotygodniowe raty to za dużo przy małej sprzedaży chleba. Pożyczaj tylko tyle, ile możesz spłacić.",
         lang,
       )}
     >
@@ -352,7 +360,7 @@ export function CarefulDiagram({ lang, step }: DiagramProps) {
       {step >= 2 && (
         <Pop>
           <Coin x={290} y={6} size={50} />
-          <rect x="290" y="62" width="60" height="170" rx="10" fill="#f08a2e" />
+          <rect x="290" y={62} width="60" height="170" rx="10" fill="#f08a2e" />
           <Bread x={360} y={116} size={50} />
           <rect x="360" y="172" width="60" height="60" rx="10" fill="#4fa75a" />
         </Pop>
@@ -361,9 +369,9 @@ export function CarefulDiagram({ lang, step }: DiagramProps) {
         <Pop>
           <Tick x={494} y={40} size={64} />
           <Coin x={470} y={134} size={50} />
-          <rect x="470" y="190" width="60" height="42" rx="10" fill="#f08a2e" />
+          <rect x={470} y={190} width="60" height="42" rx="10" fill="#f08a2e" />
           <Bread x={540} y={116} size={50} />
-          <rect x="540" y="172" width="60" height="60" rx="10" fill="#4fa75a" />
+          <rect x={540} y={172} width="60" height="60" rx="10" fill="#4fa75a" />
         </Pop>
       )}
     </DiagramCanvas>

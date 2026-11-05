@@ -84,9 +84,9 @@ function Chart({ values, start, rate, mode, scaleMax, band, label }: ChartProps)
 }
 
 function ratePhrase(lang: Lang, rate: number): string {
-  return lang === "en"
-    ? `${rate}% = ${rate} extra coins for every 100 coins, each year`
-    : `${rate} % = ${rate} Extra-Münzen für je 100 Münzen, jedes Jahr`;
+  if (lang === "pl") return `${rate}% = ${rate} dodatkowych monet na każde 100 monet rocznie`;
+  if (lang === "de") return `${rate} % = ${rate} Extra-Münzen für je 100 Münzen, jedes Jahr`;
+  return `${rate}% = ${rate} extra coins for every 100 coins, each year`;
 }
 
 function Swatch({ cls, children }: { cls: string; children: string }) {
@@ -110,7 +110,6 @@ export function Garden({ lang, onDone }: ToyProps) {
     }
   }, [start, rate, years, mode, onDone]);
 
-  const en = lang === "en";
   const values = grow(start, rate, years);
   const total = Math.round(values[years]);
   const extra = total - start;
@@ -118,12 +117,15 @@ export function Garden({ lang, onDone }: ToyProps) {
   const onExtra = Math.max(0, extra - simple);
   const save = mode === "save";
 
-  const chartLabel = en
-    ? `Bars for each year from 0 to ${years}. After ${years} years: ${total} coins.`
-    : `Balken für jedes Jahr von 0 bis ${years}. Nach ${years} Jahren: ${total} Münzen.`;
+  const chartLabel =
+    lang === "pl"
+      ? `Słupki dla każdego roku od 0 do ${years}. Po ${years} latach: ${total} monet.`
+      : lang === "de"
+      ? `Balken für jedes Jahr von 0 bis ${years}. Nach ${years} Jahren: ${total} Münzen.`
+      : `Bars for each year from 0 to ${years}. After ${years} years: ${total} coins.`;
 
   return (
-    <Stage label={en ? "The money garden" : "Der Geldgarten"}>
+    <Stage label={lang === "pl" ? "Ogród pieniędzy" : lang === "de" ? "Der Geldgarten" : "The money garden"}>
       <div className="ig-wrap">
         <div className="ig-modes">
           <ToyButton pressed={save} onClick={() => setMode("save")}>
@@ -131,7 +133,9 @@ export function Garden({ lang, onDone }: ToyProps) {
               <InlineIcon size={30}>
                 <Piggy />
               </InlineIcon>
-              <span className="sr-only">{en ? "Saving" : "Sparen"}</span>
+              <span className="sr-only">
+                {lang === "pl" ? "Oszczędzanie" : lang === "de" ? "Sparen" : "Saving"}
+              </span>
             </span>
           </ToyButton>
           <ToyButton pressed={!save} onClick={() => setMode("loan")}>
@@ -139,7 +143,9 @@ export function Garden({ lang, onDone }: ToyProps) {
               <InlineIcon size={30}>
                 <Boat />
               </InlineIcon>
-              <span className="sr-only">{en ? "Loan" : "Geld leihen"}</span>
+              <span className="sr-only">
+                {lang === "pl" ? "Pożyczka" : lang === "de" ? "Geld leihen" : "Loan"}
+              </span>
             </span>
           </ToyButton>
         </div>
@@ -148,35 +154,79 @@ export function Garden({ lang, onDone }: ToyProps) {
           <span className="ig-big">
             <InlineIcon size={30}>{save ? <Person {...CAST.Bea} /> : <Person {...CAST.Finn} />}</InlineIcon>
             {save
-              ? en
-                ? `After ${years} years: ${total} coins`
-                : `Nach ${years} Jahren: ${total} Münzen`
-              : en
-                ? `After ${years} years Finn pays back: ${total} coins`
-                : `Nach ${years} Jahren zahlt Finn zurück: ${total} Münzen`}
+              ? lang === "pl"
+                ? `Po ${years} latach: ${total} monet`
+                : lang === "de"
+                ? `Nach ${years} Jahren: ${total} Münzen`
+                : `After ${years} years: ${total} coins`
+              : lang === "pl"
+              ? `Po ${years} latach Finn spłaca: ${total} monet`
+              : lang === "de"
+              ? `Nach ${years} Jahren zahlt Finn zurück: ${total} Münzen`
+              : `After ${years} years Finn pays back: ${total} coins`}
           </span>
           <span className="ig-legend">
             <Swatch cls="ig-bar-start">
-              {save ? (en ? `${start} put in` : `${start} eingezahlt`) : en ? `${start} borrowed` : `${start} geliehen`}
+              {save
+                ? lang === "pl"
+                  ? `${start} wpłacono`
+                  : lang === "de"
+                  ? `${start} eingezahlt`
+                  : `${start} put in`
+                : lang === "pl"
+                ? `${start} pożyczono`
+                : lang === "de"
+                ? `${start} geliehen`
+                : `${start} borrowed`}
             </Swatch>
-            <Swatch cls={`ig-bar-simple-${mode}`}>{en ? `${simple} interest` : `${simple} Zinsen`}</Swatch>
+            <Swatch cls={`ig-bar-simple-${mode}`}>
+              {lang === "pl" ? `${simple} odsetek` : lang === "de" ? `${simple} Zinsen` : `${simple} interest`}
+            </Swatch>
             <Swatch cls={`ig-bar-comp-${mode}`}>
-              {en ? `${onExtra} interest on interest` : `${onExtra} Zinsen auf Zinsen`}
+              {lang === "pl"
+                ? `${onExtra} odsetek od odsetek`
+                : lang === "de"
+                ? `${onExtra} Zinsen auf Zinsen`
+                : `${onExtra} interest on interest`}
             </Swatch>
           </span>
           <span className="ig-small">{ratePhrase(lang, rate)}</span>
         </div>
         <div className="ig-sliders">
           <Slider
-            label={save ? (en ? "Coins put in" : "Eingezahlte Münzen") : en ? "Coins borrowed" : "Geliehene Münzen"}
+            label={
+              save
+                ? lang === "pl"
+                  ? "Wpłacone monety"
+                  : lang === "de"
+                  ? "Eingezahlte Münzen"
+                  : "Coins put in"
+                : lang === "pl"
+                ? "Pożyczone monety"
+                : lang === "de"
+                ? "Geliehene Münzen"
+                : "Coins borrowed"
+            }
             value={start}
             min={10}
             max={200}
             step={10}
             onChange={setStart}
           />
-          <Slider label={en ? "Interest (%)" : "Zinsen (%)"} value={rate} min={0} max={10} onChange={setRate} />
-          <Slider label={en ? "Years" : "Jahre"} value={years} min={1} max={20} onChange={setYears} />
+          <Slider
+            label={lang === "pl" ? "Odsetki (%)" : lang === "de" ? "Zinsen (%)" : "Interest (%)"}
+            value={rate}
+            min={0}
+            max={10}
+            onChange={setRate}
+          />
+          <Slider
+            label={lang === "pl" ? "Lata" : lang === "de" ? "Jahre" : "Years"}
+            value={years}
+            min={1}
+            max={20}
+            onChange={setYears}
+          />
         </div>
       </div>
     </Stage>
@@ -186,13 +236,12 @@ export function Garden({ lang, onDone }: ToyProps) {
 export function GardenWidget({ lang, onAnswer }: WidgetProps) {
   const [rate, setRate] = useState(2);
   const [years, setYears] = useState(3);
-  const en = lang === "en";
   const values = grow(100, rate, years);
   const total = Math.round(values[years]);
 
   return (
     <>
-      <Stage label={en ? "Bea's money garden" : "Beas Geldgarten"}>
+      <Stage label={lang === "pl" ? "Ogród pieniędzy Bei" : lang === "de" ? "Beas Geldgarten" : "Bea's money garden"}>
         <div className="ig-wrap">
           <Chart
             values={values}
@@ -202,9 +251,11 @@ export function GardenWidget({ lang, onAnswer }: WidgetProps) {
             scaleMax={270}
             band={[TARGET_LOW, TARGET_HIGH]}
             label={
-              en
-                ? `Bea's coins after ${years} years: ${total}. The goal is between ${TARGET_LOW} and ${TARGET_HIGH}.`
-                : `Beas Münzen nach ${years} Jahren: ${total}. Das Ziel liegt zwischen ${TARGET_LOW} und ${TARGET_HIGH}.`
+              lang === "pl"
+                ? `Monety Bei po ${years} latach: ${total}. Cel to między ${TARGET_LOW} a ${TARGET_HIGH}.`
+                : lang === "de"
+                ? `Beas Münzen nach ${years} Jahren: ${total}. Das Ziel liegt zwischen ${TARGET_LOW} und ${TARGET_HIGH}.`
+                : `Bea's coins after ${years} years: ${total}. The goal is between ${TARGET_LOW} and ${TARGET_HIGH}.`
             }
           />
           <div className="ig-readout" role="status">
@@ -215,17 +266,35 @@ export function GardenWidget({ lang, onAnswer }: WidgetProps) {
               <InlineIcon size={30}>
                 <Coin />
               </InlineIcon>
-              {en ? `Bea has ${total} coins after ${years} years` : `Bea hat nach ${years} Jahren ${total} Münzen`}
+              {lang === "pl"
+                ? `Bea ma ${total} monet po ${years} latach`
+                : lang === "de"
+                ? `Bea hat nach ${years} Jahren ${total} Münzen`
+                : `Bea has ${total} coins after ${years} years`}
             </span>
             <span className="ig-small">
-              {en
-                ? `Goal: the green stripe, ${TARGET_LOW} to ${TARGET_HIGH} coins. ${ratePhrase(lang, rate)}`
-                : `Ziel: der grüne Streifen, ${TARGET_LOW} bis ${TARGET_HIGH} Münzen. ${ratePhrase(lang, rate)}`}
+              {lang === "pl"
+                ? `Cel: zielony pasek, ${TARGET_LOW} do ${TARGET_HIGH} monet. ${ratePhrase(lang, rate)}`
+                : lang === "de"
+                ? `Ziel: der grüne Streifen, ${TARGET_LOW} bis ${TARGET_HIGH} Münzen. ${ratePhrase(lang, rate)}`
+                : `Goal: the green stripe, ${TARGET_LOW} to ${TARGET_HIGH} coins. ${ratePhrase(lang, rate)}`}
             </span>
           </div>
           <div className="ig-sliders two">
-            <Slider label={en ? "Interest (%)" : "Zinsen (%)"} value={rate} min={0} max={10} onChange={setRate} />
-            <Slider label={en ? "Years" : "Jahre"} value={years} min={1} max={10} onChange={setYears} />
+            <Slider
+              label={lang === "pl" ? "Odsetki (%)" : lang === "de" ? "Zinsen (%)" : "Interest (%)"}
+              value={rate}
+              min={0}
+              max={10}
+              onChange={setRate}
+            />
+            <Slider
+              label={lang === "pl" ? "Lata" : lang === "de" ? "Jahre" : "Years"}
+              value={years}
+              min={1}
+              max={10}
+              onChange={setYears}
+            />
           </div>
         </div>
       </Stage>

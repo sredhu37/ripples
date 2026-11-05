@@ -6,7 +6,8 @@ import { Bike, BikePiggy, BrokenBoot, Calendar, Candy, CheckMark, RainCloud, Rai
 
 /** Animated diagrams for the Savings lesson, one per story beat. `step` is how many taps so far. */
 
-const alt = (en: string, de: string, lang: DiagramProps["lang"]) => (lang === "en" ? en : de);
+const alt = (en: string, de: string, pl: string, lang: DiagramProps["lang"]) =>
+  lang === "pl" ? pl : lang === "de" ? de : en;
 
 const NUM_STYLE = { font: '800 34px ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif', fill: "#23383f" } as const;
 const SMALL_STYLE = { font: '700 17px ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif', fill: "#ffffff" } as const;
@@ -17,7 +18,7 @@ function Dad({ x, lang }: { x: number; lang: DiagramProps["lang"] }) {
     <Pop x={x} y={90}>
       <Person hat="none" shirt="#4a6fa5" skin="#d9a679" size={130} />
       <text className="diagram-name" x={65} y={160} textAnchor="middle">
-        {alt("Dad", "Papa", lang)}
+        {alt("Dad", "Papa", "Tata", lang)}
       </text>
     </Pop>
   );
@@ -39,6 +40,7 @@ export function PocketMoneyDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Pip gets 4 coins from Dad every week. This is called pocket money.",
         "Pip bekommt jede Woche 4 Münzen von Papa. Das heißt Taschengeld.",
+        "Pip dostaje co tydzień 4 monety od Taty. To jest kieszonkowe.",
         lang,
       )}
     >
@@ -53,7 +55,7 @@ export function PocketMoneyDiagram({ lang, step }: DiagramProps) {
           ))}
         </>
       )}
-      {step >= 3 && <TermChip x={200} y={222} w={240}>{alt("pocket money", "Taschengeld", lang)}</TermChip>}
+      {step >= 3 && <TermChip x={200} y={222} w={240}>{alt("pocket money", "Taschengeld", "kieszonkowe", lang)}</TermChip>}
       {step >= 4 && (
         <Bubble x={44} y={8} w={180} h={66} thought tail="bottom-left">
           <Candy x={8} y={10} size={46} />
@@ -72,6 +74,7 @@ export function BikeGoalDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "A red bike costs 12 coins. Pip has 4. The bike is Pip's savings goal.",
         "Ein rotes Fahrrad kostet 12 Münzen. Pip hat 4. Das Fahrrad ist Pips Sparziel.",
+        "Czerwony rower kosztuje 12 monet. Pip ma 4. Rower to cel oszczędnościowy Pipa.",
         lang,
       )}
     >
@@ -117,7 +120,7 @@ export function BikeGoalDiagram({ lang, step }: DiagramProps) {
           <Pop>
             <rect x="322" y="2" width="296" height="240" rx="18" fill="none" stroke="#f08a2e" strokeWidth="5" strokeDasharray="12 9" />
           </Pop>
-          <TermChip x={60} y={4} w={250}>{alt("savings goal", "Sparziel", lang)}</TermChip>
+          <TermChip x={60} y={4} w={250}>{alt("savings goal", "Sparziel", "cel oszczędnościowy", lang)}</TermChip>
         </>
       )}
     </DiagramCanvas>
@@ -131,6 +134,7 @@ export function SweetsDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "If Pip spends all 4 coins on sweets, the coins are gone and the bike is no closer.",
         "Wenn Pip alle 4 Münzen für Süßes ausgibt, sind sie weg und das Fahrrad ist nicht näher.",
+        "Jeśli Pip wyda wszystkie 4 monety na słodycze, monety przepadną, a rower wcale się nie przybliży.",
         lang,
       )}
     >
@@ -168,7 +172,7 @@ export function SweetsDiagram({ lang, step }: DiagramProps) {
       )}
       {step >= 4 && (
         <>
-          <Pop x={200} y={20} ><g opacity="0.7"><Bike size={110} /></g></Pop>
+          <Pop x={200} y={20}><g opacity="0.7"><Bike size={110} /></g></Pop>
           <Pop><NoSign x={200} y={20} size={110} /></Pop>
         </>
       )}
@@ -183,6 +187,7 @@ export function SaveDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Pip puts 3 coins a week into the piggy bank and spends 1 coin on a sweet.",
         "Pip legt jede Woche 3 Münzen ins Sparschwein und gibt 1 Münze für Süßes aus.",
+        "Pip odkłada co tydzień 3 monety do skarbonki i wydaje 1 monetę na słodycze.",
         lang,
       )}
     >
@@ -221,12 +226,13 @@ export function SaveDiagram({ lang, step }: DiagramProps) {
 /** Beat 5: week by week the piggy bank fills up to 12 coins, and Pip buys the bike. */
 export function WeeksDiagram({ lang, step }: DiagramProps) {
   const total = Math.min(step, 4) * 3;
-  const week = alt("Week", "Woche", lang);
+  const week = alt("Week", "Woche", "Tydzień", lang);
   return (
     <DiagramCanvas
       label={alt(
         "Week by week the piggy bank grows: 3, 6, 9, 12 coins. Then Pip can buy the bike.",
         "Woche für Woche wächst das Sparschwein: 3, 6, 9, 12 Münzen. Dann kann Pip das Fahrrad kaufen.",
+        "Z tygodnia na tydzień skarbonka rośnie: 3, 6, 9, 12 monet. Wtedy Pip może kupić rower.",
         lang,
       )}
     >
@@ -270,6 +276,7 @@ export function BootDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "It rains and Pip's boot breaks. Fixing it costs 3 coins. If they come from the bike savings, the bike comes later.",
         "Es regnet und Pips Stiefel geht kaputt. Die Reparatur kostet 3 Münzen. Kommen sie aus dem Fahrrad-Sparschwein, kommt das Fahrrad später.",
+        "Pada deszcz i kalosz Pipa pęka. Naprawa kosztuje 3 monety. Jeśli pochodzą z oszczędności na rower, rower zostanie kupiony później.",
         lang,
       )}
     >
@@ -308,12 +315,13 @@ export function RainyJarDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Pip has two jars: a piggy bank for the bike and a rainy-day jar for surprises.",
         "Pip hat zwei Gläser: ein Sparschwein fürs Fahrrad und ein Regentag-Glas für Überraschungen.",
+        "Pip ma dwa słoiki: skarbonkę na rower oraz słoik na czarną godzinę na niespodzianki.",
         lang,
       )}
     >
       {step >= 1 && <Pop><BikePiggy x={70} y={46} size={170} /></Pop>}
       {step >= 2 && <Pop><RainyJar x={400} y={46} size={170} /></Pop>}
-      {step >= 3 && <TermChip x={350} y={226} w={270}>{alt("rainy-day jar", "Regentag-Glas", lang)}</TermChip>}
+      {step >= 3 && <TermChip x={350} y={226} w={270}>{alt("rainy-day jar", "Regentag-Glas", "słoik na czarną godzinę", lang)}</TermChip>}
       {step >= 4 && (
         <>
           <Pop><Coin x={462} y={0} size={44} /></Pop>

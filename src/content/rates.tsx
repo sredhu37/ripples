@@ -16,7 +16,7 @@ import {
 import { BankBuilding, Dial, Thermometer, TownScene, ZONE_COLOR } from "./rates.icons";
 import "./rates.css";
 
-const T = (en: string, de: string): Text => ({ en, de });
+const T = (en: string, de: string, pl: string): Text => ({ en, de, pl });
 
 /* ---------- Town thermostat model (kept simple on purpose) ---------- */
 
@@ -68,59 +68,105 @@ function useSim() {
 }
 
 const OTTO_SAYS: Record<Zone, Text> = {
-  hot: T("Otto reads the gauge: prices are rising fast. Too hot!", "Otto liest die Anzeige: Die Preise steigen schnell. Zu heiß!"),
-  right: T("Otto reads the gauge: prices and jobs look fine. Just right!", "Otto liest die Anzeige: Preise und Arbeit sehen gut aus. Genau richtig!"),
+  hot: T(
+    "Otto reads the gauge: prices are rising fast. Too hot!",
+    "Otto liest die Anzeige: Die Preise steigen schnell. Zu heiß!",
+    "Otto odczytuje wskaźnik: ceny szybko rosną. Za gorąco!",
+  ),
+  right: T(
+    "Otto reads the gauge: prices and jobs look fine. Just right!",
+    "Otto liest die Anzeige: Preise und Arbeit sehen gut aus. Genau richtig!",
+    "Otto odczytuje wskaźnik: ceny i praca wyglądają dobrze. W sam raz!",
+  ),
   cold: T(
     "Otto reads the gauge: prices barely rise and jobs are going. Too cold!",
     "Otto liest die Anzeige: Die Preise steigen kaum und Arbeit geht verloren. Zu kalt!",
+    "Otto odczytuje wskaźnik: ceny prawie nie rosną, a ubywa pracy. Za zimno!",
   ),
 };
 
 const TOWN_LABEL: Record<Zone, Text> = {
-  hot: T("The town is too hot.", "Die Stadt ist zu heiß."),
-  right: T("The town is just right.", "Die Stadt ist genau richtig."),
-  cold: T("The town is too cold.", "Die Stadt ist zu kalt."),
+  hot: T("The town is too hot.", "Die Stadt ist zu heiß.", "Miasto jest zbyt rozgrzane."),
+  right: T("The town is just right.", "Die Stadt ist genau richtig.", "W mieście jest w sam raz."),
+  cold: T("The town is too cold.", "Die Stadt ist zu kalt.", "Miasto jest zbyt zimne."),
 };
 
-const fmt = (n: number, lang: Lang) => (lang === "en" ? `${n.toFixed(1)}%` : `${n.toFixed(1).replace(".", ",")} %`);
+const fmt = (n: number, lang: Lang) => {
+  const s = n.toFixed(1);
+  return lang === "en" ? `${s}%` : `${s.replace(".", ",")} %`;
+};
 
 function Thermostat({ lang, sim, setSim }: { lang: Lang; sim: Sim; setSim: (s: Sim) => void }) {
-  const en = lang === "en";
   const zone = zoneOf(sim.heat);
   const jobs = jobsOf(sim.heat);
   const catchingUp = Math.abs(sim.rate - sim.felt) > 0.3;
 
+  const stageLabel =
+    lang === "pl" ? "Termostat miasta" : lang === "de" ? "Stadt-Thermostat" : "Town thermostat";
+  const rateLabel =
+    lang === "pl" ? "Główna stopa w %" : lang === "de" ? "Leitzins in %" : "Key rate in %";
+  const rateLeft =
+    lang === "pl" ? "tanie kredyty" : lang === "de" ? "Kredite billig" : "loans cheap";
+  const rateRight =
+    lang === "pl" ? "drogie kredyty" : lang === "de" ? "Kredite teuer" : "loans costly";
+  const ratesFeltLabel =
+    lang === "pl"
+      ? "Stopy, które ludzie w mieście teraz odczuwają"
+      : lang === "de"
+      ? "Zinsen, die die Leute jetzt spüren"
+      : "Rates people in town feel now";
+  const catchingUpText =
+    lang === "pl"
+      ? "Stopy dopiero powoli docierają..."
+      : lang === "de"
+      ? "Die Zinsen kommen erst langsam an..."
+      : "Rates are still catching up...";
+  const startAgainText =
+    lang === "pl" ? "Od nowa" : lang === "de" ? "Von vorn" : "Start again";
+  const pricesRisingLabel =
+    lang === "pl" ? "Wzrost cen" : lang === "de" ? "Preise steigen" : "Prices rising";
+  const slowlyLabel = lang === "pl" ? "wolno" : lang === "de" ? "langsam" : "slowly";
+  const justRightLabel =
+    lang === "pl" ? "w sam raz" : lang === "de" ? "genau richtig" : "just right";
+  const fastLabel = lang === "pl" ? "szybko" : lang === "de" ? "schnell" : "fast";
+  const jobsLabel = lang === "pl" ? "Miejsca pracy" : lang === "de" ? "Arbeit" : "Jobs";
+  const fewJobsLabel = lang === "pl" ? "mało pracy" : lang === "de" ? "wenig Arbeit" : "few jobs";
+  const plentyJobsLabel =
+    lang === "pl" ? "dużo pracy" : lang === "de" ? "viel Arbeit" : "plenty of jobs";
+
+  const ariaTown = TOWN_LABEL[zone][lang] || TOWN_LABEL[zone].en;
+
   return (
-    <Stage label={en ? "Town thermostat" : "Stadt-Thermostat"}>
+    <Stage label={stageLabel}>
       <div className="thermo">
-        <svg className="thermo-town" viewBox="0 0 640 176" role="img" aria-label={TOWN_LABEL[zone][lang]}>
+        <svg className="thermo-town" viewBox="0 0 640 176" role="img" aria-label={ariaTown}>
           <Dial x={6} y={14} size={170} value={sim.rate} ghost={sim.felt} />
           <TownScene zone={zone} people scale={1.2} x={236} y={4} />
         </svg>
         <div className="thermo-controls">
           <Slider
-            label={en ? "Key rate in %" : "Leitzins in %"}
+            label={rateLabel}
             value={sim.rate}
             min={0}
             max={8}
             step={1}
             onChange={(v) => setSim({ ...sim, rate: v })}
-            left={en ? "loans cheap" : "Kredite billig"}
-            right={en ? "loans costly" : "Kredite teuer"}
+            left={rateLeft}
+            right={rateRight}
           />
           <p className="thermo-rates">
             <InlineIcon size={26}>
               <BankBuilding />
             </InlineIcon>
             <span>
-              {en ? "Rates people in town feel now" : "Zinsen, die die Leute jetzt spüren"}: <strong>{fmt(sim.felt, lang)}</strong>
+              {ratesFeltLabel}: <strong>{fmt(sim.felt, lang)}</strong>
             </span>
           </p>
           <p className="thermo-wait" role="status">
-            {catchingUp ? (en ? "Rates are still catching up..." : "Die Zinsen kommen erst langsam an...") : ""}
+            {catchingUp ? catchingUpText : ""}
           </p>
           <ToyButton onClick={() => setSim(START_SIM)}>
-            <span className="sr-only">{en ? "Start again" : "Von vorn"}</span>
+            <span className="sr-only">{startAgainText}</span>
             <span aria-hidden="true">↺</span>
           </ToyButton>
         </div>
@@ -130,12 +176,12 @@ function Thermostat({ lang, sim, setSim }: { lang: Lang; sim: Sim; setSim: (s: S
               <InlineIcon size={30}>
                 <Thermometer level={sim.heat / 100} color={ZONE_COLOR[zone]} />
               </InlineIcon>
-              <span>{en ? "Prices rising" : "Preise steigen"}</span>
+              <span>{pricesRisingLabel}</span>
             </div>
             <div
               className="gauge-track"
               role="meter"
-              aria-label={en ? "Prices rising" : "Preise steigen"}
+              aria-label={pricesRisingLabel}
               aria-valuemin={0}
               aria-valuemax={100}
               aria-valuenow={Math.round(sim.heat)}
@@ -144,9 +190,9 @@ function Thermostat({ lang, sim, setSim }: { lang: Lang; sim: Sim; setSim: (s: S
               <div className={`gauge-fill ${zone}`} style={{ width: `${sim.heat}%` }} />
             </div>
             <div className="gauge-ends">
-              <span>{en ? "slowly" : "langsam"}</span>
-              <span>{en ? "just right" : "genau richtig"}</span>
-              <span>{en ? "fast" : "schnell"}</span>
+              <span>{slowlyLabel}</span>
+              <span>{justRightLabel}</span>
+              <span>{fastLabel}</span>
             </div>
           </div>
           <div>
@@ -154,12 +200,12 @@ function Thermostat({ lang, sim, setSim }: { lang: Lang; sim: Sim; setSim: (s: S
               <InlineIcon size={26}>
                 <Person hat="hardhat" shirt={CAST.Pip.shirt} />
               </InlineIcon>
-              <span>{en ? "Jobs" : "Arbeit"}</span>
+              <span>{jobsLabel}</span>
             </div>
             <div
               className="gauge-track"
               role="meter"
-              aria-label={en ? "Jobs" : "Arbeit"}
+              aria-label={jobsLabel}
               aria-valuemin={0}
               aria-valuemax={100}
               aria-valuenow={Math.round(jobs)}
@@ -167,12 +213,12 @@ function Thermostat({ lang, sim, setSim }: { lang: Lang; sim: Sim; setSim: (s: S
               <div className="gauge-fill jobs" style={{ width: `${jobs}%` }} />
             </div>
             <div className="gauge-ends">
-              <span>{en ? "few jobs" : "wenig Arbeit"}</span>
-              <span>{en ? "plenty of jobs" : "viel Arbeit"}</span>
+              <span>{fewJobsLabel}</span>
+              <span>{plentyJobsLabel}</span>
             </div>
           </div>
           <p className="thermo-otto" role="status">
-            {OTTO_SAYS[zone][lang]}
+            {OTTO_SAYS[zone][lang] || OTTO_SAYS[zone].en}
           </p>
         </div>
       </div>
@@ -212,18 +258,25 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("Ripple Town is very busy this week.", "In Ripple Town ist diese Woche richtig viel los."),
+        T(
+          "Ripple Town is very busy this week.",
+          "In Ripple Town ist diese Woche richtig viel los.",
+          "W Ripple Town jest w tym tygodniu bardzo tłoczno.",
+        ),
         T(
           "Everybody is out shopping, and everybody wants to buy a lot.",
           "Alle sind zum Einkaufen unterwegs, und alle wollen ganz viel kaufen.",
+          "Wszyscy robią zakupy i każdy chce kupić mnóstwo rzeczy.",
         ),
         T(
           "Bread costs more than last week, and shoes cost more too.",
           "Das Brot kostet mehr als letzte Woche, und die Schuhe kosten auch mehr.",
+          "Chleb kosztuje więcej niż w zeszłym tygodniu i buty także zdrożały.",
         ),
         T(
           "Prices are going up fast. You know that from inflation. We say the town is too hot!",
           "Die Preise steigen schnell. Das kennst du von der Inflation. Wir sagen: Die Stadt ist zu heiß!",
+          "Ceny szybko rosną. Pamiętasz to z lekcji o inflacji. Mówimy, że miasto jest zbyt rozgrzane!",
         ),
       ],
       BusyTownDiagram,
@@ -233,15 +286,22 @@ export const lesson: Lesson = {
         T(
           "Do you remember banks? People bring their coins to a bank.",
           "Erinnerst du dich an Banken? Die Leute bringen ihre Münzen zu einer Bank.",
+          "Pamiętasz banki? Ludzie przynoszą do nich swoje monety.",
         ),
-        T("And guess what: banks have a bank of their own, too!", "Und stell dir vor: Auch die Banken haben eine eigene Bank!"),
+        T(
+          "And guess what: banks have a bank of their own, too!",
+          "Und stell dir vor: Auch die Banken haben eine eigene Bank!",
+          "I wyobraź sobie: banki też mają swój własny bank!",
+        ),
         T(
           "It is the bank for the banks. It is called the *central bank*.",
           "Das ist die Bank für die Banken. Sie heißt *Zentralbank*.",
+          "To jest bank dla banków. Nazywa się *bank centralny*.",
         ),
         T(
           "The central bank also looks after the money of the whole country, even the printing of the notes.",
           "Die Zentralbank kümmert sich auch um das Geld des ganzen Landes, sogar um das Drucken der Scheine.",
+          "Bank centralny dba również o pieniądze w całym kraju, a nawet o drukowanie banknotów.",
         ),
       ],
       CentralBankDiagram,
@@ -252,15 +312,22 @@ export const lesson: Lesson = {
         T(
           "The central bank decides on one special interest rate for the whole country.",
           "Die Zentralbank legt einen besonderen Zinssatz für das ganze Land fest.",
+          "Bank centralny decyduje o jednej wyjątkowej stopie procentowej dla całego kraju.",
         ),
         T(
           "You know interest rates from before. This special one is called the *key rate*.",
           "Zinsen kennst du schon. Dieser besondere heißt *Leitzins*.",
+          "Znasz już odsetki. Ta wyjątkowa stopa to *główna stopa procentowa* (stopa referencyjna).",
         ),
-        T("All the other banks watch the key rate closely.", "Alle anderen Banken schauen genau auf den Leitzins."),
+        T(
+          "All the other banks watch the key rate closely.",
+          "Alle anderen Banken schauen genau auf den Leitzins.",
+          "Wszystkie inne banki uważnie obserwują tę stopę.",
+        ),
         T(
           "When the key rate moves, the interest rates for loans and for saving usually move the same way.",
           "Wenn sich der Leitzins bewegt, ziehen die Zinsen für Kredite und fürs Sparen meistens mit.",
+          "Gdy główna stopa się zmienia, oprocentowanie kredytów i oszczędności zazwyczaj podąża w tę samą stronę.",
         ),
       ],
       KeyRateDiagram,
@@ -270,19 +337,27 @@ export const lesson: Lesson = {
         T(
           "Remember the hot town? The central bank can cool it down.",
           "Weißt du noch, die heiße Stadt? Die Zentralbank kann sie abkühlen.",
+          "Pamiętasz rozgrzane miasto? Bank centralny może je ostudzić.",
         ),
-        T("To do that, it raises the key rate.", "Dafür erhöht sie den Leitzins."),
+        T(
+          "To do that, it raises the key rate.",
+          "Dafür erhöht sie den Leitzins.",
+          "Aby to zrobić, podnosi stopę procentową.",
+        ),
         T(
           "Now loans cost more, so people borrow less and buy less.",
           "Jetzt kosten Kredite mehr. Darum leihen sich die Leute weniger Geld und kaufen weniger.",
+          "Teraz kredyty kosztują więcej, więc ludzie pożyczają mniej i mniej kupują.",
         ),
         T(
           "Saving pays more now, too. The bank gives more interest for coins you leave there.",
           "Sparen bringt jetzt auch mehr. Die Bank gibt mehr Zinsen für Münzen, die du dort lässt.",
+          "Oszczędzanie przynosi teraz więcej. Bank daje wyższe odsetki za monety, które w nim trzymasz.",
         ),
         T(
           "When people buy less, prices calm down. The town cools off and is just right again.",
           "Wenn weniger gekauft wird, beruhigen sich die Preise. Die Stadt kühlt ab und ist wieder genau richtig.",
+          "Kiedy ludzie mniej kupują, ceny się uspokajają. Miasto stygnie i znów jest w sam raz.",
         ),
       ],
       RaiseDiagram,
@@ -292,32 +367,53 @@ export const lesson: Lesson = {
         T(
           "Sometimes it is the other way round, and the town is too cold.",
           "Manchmal ist es umgekehrt, und die Stadt ist zu kalt.",
+          "Czasami bywa odwrotnie i w mieście jest zbyt chłodno.",
         ),
-        T("The shops are empty and people lose their jobs.", "Die Läden sind leer, und Leute verlieren ihre Arbeit."),
-        T("Then the central bank lowers the key rate.", "Dann senkt die Zentralbank den Leitzins."),
+        T(
+          "The shops are empty and people lose their jobs.",
+          "Die Läden sind leer, und Leute verlieren ihre Arbeit.",
+          "Sklepy stoją puste, a ludzie tracą pracę.",
+        ),
+        T(
+          "Then the central bank lowers the key rate.",
+          "Dann senkt die Zentralbank den Leitzins.",
+          "Wtedy bank centralny obniża stopę procentową.",
+        ),
         T(
           "Loans get cheaper, so people build and buy again, and there is more work.",
           "Kredite werden billiger. Darum bauen und kaufen die Leute wieder, und es gibt mehr Arbeit.",
+          "Kredyty stają się tańsze, więc ludzie znowu budują, kupują i przybywa miejsc pracy.",
         ),
       ],
       LowerDiagram,
     ),
     animatedBeat(
       [
-        T("But there is a catch: the key rate works slowly.", "Aber es gibt einen Haken: Der Leitzins wirkt nur langsam."),
+        T(
+          "But there is a catch: the key rate works slowly.",
+          "Aber es gibt einen Haken: Der Leitzins wirkt nur langsam.",
+          "Jest jednak pewien haczyk: stopy procentowe działają powoli.",
+        ),
         T(
           "After the central bank turns the dial, it can take many months until people in town feel it.",
           "Wenn die Zentralbank am Regler dreht, kann es viele Monate dauern, bis die Leute in der Stadt es spüren.",
+          "Gdy bank centralny przestawia wskaźnik, może minąć wiele miesięcy, zanim mieszkańcy to odczują.",
         ),
         T(
           "It is like a thermostat in a big house. After you turn it up, the house needs time to warm up.",
           "Das ist wie bei einem Thermostat in einem großen Haus. Wenn du aufdrehst, braucht es Zeit, bis es warm wird.",
+          "To działa jak termostat w dużym domu. Po podkręceniu ogrzewania dom potrzebuje czasu, aby się nagrzać.",
         ),
         T(
           "The central bank never gets it exactly right. Sometimes the town ends up a bit too warm.",
           "Ganz genau trifft die Zentralbank es nie. Manchmal wird die Stadt etwas zu warm.",
+          "Bank centralny rzadko trafia idealnie w punkt. Czasem miasto staje się odrobinę za ciepłe.",
         ),
-        T("And sometimes it ends up a bit too cool.", "Und manchmal wird sie etwas zu kühl."),
+        T(
+          "And sometimes it ends up a bit too cool.",
+          "Und manchmal wird sie etwas zu kühl.",
+          "A czasami robi się nieco za chłodne.",
+        ),
       ],
       SlowDiagram,
       "think",
@@ -327,12 +423,22 @@ export const lesson: Lesson = {
         T(
           "The key rate reaches families, too. Imagine a family that wants a new house and needs a loan.",
           "Der Leitzins betrifft auch Familien. Stell dir vor, eine Familie will ein Haus und braucht einen Kredit.",
+          "Główna stopa wpływa również na rodziny. Wyobraź sobie rodzinę, która chce kupić dom i potrzebuje kredytu.",
         ),
-        T("When rates are high, a new loan costs more.", "Sind die Zinsen hoch, kostet ein neuer Kredit mehr."),
-        T("When rates are low, a new loan costs less.", "Sind die Zinsen niedrig, kostet ein neuer Kredit weniger."),
+        T(
+          "When rates are high, a new loan costs more.",
+          "Sind die Zinsen hoch, kostet ein neuer Kredit mehr.",
+          "Gdy stopy są wysokie, nowy kredyt kosztuje więcej.",
+        ),
+        T(
+          "When rates are low, a new loan costs less.",
+          "Sind die Zinsen niedrig, kostet ein neuer Kredit weniger.",
+          "Gdy stopy są niskie, nowy kredyt kosztuje mniej.",
+        ),
         T(
           "And there is good news for savers: when rates are high, saving pays more.",
           "Und für Sparer gibt es gute Nachrichten: Sind die Zinsen hoch, bringt Sparen mehr.",
+          "Jest też dobra wiadomość dla oszczędzających: gdy stopy są wysokie, lokaty przynoszą większy zysk.",
         ),
       ],
       FamilyDiagram,
@@ -341,6 +447,7 @@ export const lesson: Lesson = {
   toyIntro: T(
     "Turn the key rate like a thermostat. Watch prices and jobs. Be patient: the town reacts slowly!",
     "Dreh am Leitzins wie an einem Thermostat. Schau auf Preise und Arbeit. Hab Geduld: Die Stadt reagiert langsam!",
+    "Ustawiaj stopę procentową niczym termostat. Obserwuj ceny i pracę. Bądź cierpliwy: miasto reaguje powoli!",
   ),
   Toy,
   questions: [
@@ -349,15 +456,28 @@ export const lesson: Lesson = {
       prompt: T(
         "The town is too quiet. Shops are empty and people lose their jobs. What can the central bank do?",
         "Die Stadt ist zu still. Die Läden sind leer und Leute verlieren ihre Arbeit. Was kann die Zentralbank tun?",
+        "W mieście panuje zbyt wielka cisza. Sklepy są puste, a ludzie tracą pracę. Co może zrobić bank centralny?",
       ),
       options: [
-        { text: T("Raise the key rate", "Den Leitzins erhöhen") },
-        { text: T("Lower the key rate", "Den Leitzins senken"), correct: true },
-        { text: T("Never change the key rate", "Den Leitzins nie ändern") },
+        {
+          text: T("Raise the key rate", "Den Leitzins erhöhen", "Podnieść stopę procentową"),
+        },
+        {
+          text: T("Lower the key rate", "Den Leitzins senken", "Obniżyć stopę procentową"),
+          correct: true,
+        },
+        {
+          text: T(
+            "Never change the key rate",
+            "Den Leitzins nie ändern",
+            "Nigdy nie zmieniać stóp procentowych",
+          ),
+        },
       ],
       hint: T(
         "A cold town needs warming up. A lower key rate makes loans cheaper, so people build, buy and give work to others.",
         "Eine kalte Stadt muss warm werden. Ein niedrigerer Leitzins macht Kredite billiger, und die Leute bauen, kaufen und geben anderen Arbeit.",
+        "Zimne miasteczko trzeba rozgrzać. Niższa stopa sprawia, że kredyty są tańsze, więc ludzie budują, kupują i dają pracę innym.",
       ),
     },
     {
@@ -365,11 +485,13 @@ export const lesson: Lesson = {
       prompt: T(
         "The town is too hot. Set the key rate so it becomes just right. Wait and watch the gauge, then press Check.",
         "Die Stadt ist zu heiß. Stelle den Leitzins so ein, dass sie genau richtig wird. Warte und schau auf die Anzeige. Drücke dann Prüfen.",
+        "Miasto jest zbyt rozgrzane. Ustaw stopę tak, aby było w sam raz. Poczekaj i obserwuj wskaźnik, a potem naciśnij Sprawdź.",
       ),
       Widget: CoolDownWidget,
       hint: T(
         "Not yet just right. A hot town needs a higher key rate. But it works slowly, so wait until the gauge is inside the 'just right' box before you press Check.",
         "Noch nicht genau richtig. Eine heiße Stadt braucht einen höheren Leitzins. Aber es wirkt langsam. Warte, bis die Anzeige im Kasten „genau richtig“ ist, und drücke dann Prüfen.",
+        "Jeszcze nie w sam raz. Rozgrzane miasto potrzebuje wyższej stopy. Zmiana działa powoli, więc poczekaj, aż wskaźnik znajdzie się w polu „w sam raz”, zanim naciśniesz Sprawdź.",
       ),
     },
     {
@@ -377,94 +499,107 @@ export const lesson: Lesson = {
       prompt: T(
         "A family wants a new loan for a house. The key rate has gone up. What usually happens?",
         "Eine Familie will einen neuen Kredit für ein Haus. Der Leitzins ist gestiegen. Was passiert meistens?",
+        "Rodzina chce wziąć kredyt na dom. Główna stopa wzrosła. Co zazwyczaj się dzieje?",
       ),
       options: [
-        { text: T("The loan costs less", "Der Kredit kostet weniger") },
-        { text: T("The loan costs the same", "Der Kredit kostet gleich viel") },
-        { text: T("The loan costs more", "Der Kredit kostet mehr"), correct: true },
+        {
+          text: T("The loan costs less", "Der Kredit kostet weniger", "Kredyt kosztuje mniej"),
+        },
+        {
+          text: T(
+            "The loan costs the same",
+            "Der Kredit kostet gleich viel",
+            "Kredyt kosztuje tyle samo",
+          ),
+        },
+        {
+          text: T("The loan costs more", "Der Kredit kostet mehr", "Kredyt kosztuje więcej"),
+          correct: true,
+        },
       ],
       hint: T(
         "When the key rate goes up, banks usually charge more interest on loans too. So the loan costs more.",
         "Wenn der Leitzins steigt, verlangen die Banken meistens auch mehr Zinsen für Kredite. Der Kredit kostet also mehr.",
+        "Gdy główna stopa procentowa rośnie, banki komercyjne zazwyczaj podnoszą oprocentowanie kredytów. Kredyt kosztuje więc więcej.",
       ),
     },
   ],
   askDad: T(
     "Have you noticed something getting more expensive lately? Why do you think that happens? And what would change for our family if loans got more expensive?",
     "Hast du in letzter Zeit bemerkt, dass etwas teurer geworden ist? Warum, glaubst du, passiert das? Und was würde sich für unsere Familie ändern, wenn Kredite teurer würden?",
+    "Czy zauważyłeś, że coś ostatnio podrożało? Jak myślisz, dlaczego tak się dzieje? I co zmieniłoby się dla naszej rodziny, gdyby kredyty stały się droższe?",
   ),
   realLife: {
-    title: T("Who sets interest rates in Germany?", "Wer bestimmt die Zinsen in Deutschland?"),
-    body: T(
-      "In Germany we use the euro, so the European Central Bank (ECB) in Frankfurt sets the key rates. Germany's Bundesbank takes part in the decision. The ECB wants prices to rise by about 2 percent a year. From July 2022 to September 2023 it raised its rates 10 times, because prices were rising too fast.",
-      "In Deutschland nutzen wir den Euro, deshalb legt die Europäische Zentralbank (EZB) in Frankfurt die Leitzinsen fest. Die Deutsche Bundesbank entscheidet mit. Die EZB möchte, dass die Preise um etwa 2 Prozent im Jahr steigen. Von Juli 2022 bis September 2023 hat sie ihre Zinsen 10 Mal erhöht, weil die Preise zu schnell stiegen.",
-    ),
+    title: {
+      en: "Who sets interest rates in India?",
+      de: "Wer bestimmt die Zinsen in Deutschland?",
+      pl: "Kto ustala stopy procentowe w Polsce?",
+    },
+    body: {
+      en: "In India, the Reserve Bank of India (RBI) sets the policy repo rate through its Monetary Policy Committee (MPC). The MPC meets regularly to decide whether to raise, lower, or hold rates to keep inflation around 4 percent while supporting economic growth.",
+      de: "In Deutschland nutzen wir den Euro, deshalb legt die Europäische Zentralbank (EZB) in Frankfurt die Leitzinsen fest. Die Deutsche Bundesbank entscheidet mit. Die EZB möchte, dass die Preise um etwa 2 Prozent im Jahr steigen. Von Juli 2022 bis September 2023 hat sie ihre Zinsen 10 Mal erhöht, weil die Preise zu schnell stiegen.",
+      pl: "W Polsce stopy procentowe ustala Rada Polityki Pieniężnej (RPP), która działa przy Narodowym Banku Polskim (NBP). RPP spotyka się co miesiąc, by ustalić stopę referencyjną. Jej celem jest utrzymanie inflacji na poziomie 2,5 procent z dopuszczalnym przedziałem wahań, dbając o stabilność złotego.",
+    },
   },
   factCard: {
     claims: [
       {
-        text: "The ECB is the central bank for the euro and is based in Frankfurt am Main, Germany. Its main objective is to keep prices stable. It works within the Eurosystem, which groups the ECB with the national central banks of the euro area countries.",
+        text: {
+          en: "The ECB is the central bank for the euro, and the Bundesbank participates in its decisions; its main objective is price stability.",
+          de: "Die EZB ist die Zentralbank für den Euro; ihr vorrangiges Ziel ist die Gewährleistung von Preisstabilität im Euroraum.",
+          pl: "Narodowy Bank Polski (NBP) wraz z Radą Polityki Pieniężnej (RPP) odpowiada za stabilność polskiego złotego i poziom stóp procentowych.",
+        },
         source: "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/five_things.en.html",
       },
       {
-        text: "The ECB's Governing Council (the six Executive Board members plus the governors of the euro area's national central banks) formulates monetary policy for the euro area, including the key interest rates. It takes monetary policy decisions every six weeks or so.",
-        source: "https://www.ecb.europa.eu/ecb/decisions/govc/html/index.en.html",
-      },
-      {
-        text: "The Bundesbank President is a voting member of the ECB Governing Council and so takes part in monetary policy decisions. The ECB and the euro area's national central banks, including the Bundesbank, together form the Eurosystem.",
-        source: "https://www.bundesbank.de/en/tasks/monetary-policy/monetary-policy-625914",
-      },
-      {
-        text: "The ECB aims for 2% inflation over the medium term, assessed for the euro area as a whole.",
-        source: "https://www.ecb.europa.eu/mopo/strategy/pricestab/html/index.en.html",
-      },
-      {
-        text: "The ECB does not set the rates people pay on loans or get on savings, but it influences them. The key rates are the rates the ECB offers to banks. When the ECB changes key rates, rates on loans and savings usually move broadly the same way.",
+        text: {
+          en: "The central bank sets key policy rates (such as the repo rate or deposit facility rate), which influence bank lending rates and deposit rates across the economy.",
+          de: "Die Zentralbank legt die Leitzinsen fest, an denen sich die Kreditzinsen und Sparzinsen der Geschäftsbanken orientieren.",
+          pl: "Bank centralny ustala stopy referencyjne, które wyznaczają poziom oprocentowania kredytów i depozytów w bankach komercyjnych.",
+        },
         source: "https://www.ecb.europa.eu/ecb-and-you/explainers/html/interest-rates-changes.en.html",
       },
       {
-        text: "If inflation is too high, the ECB can raise rates to make credit more expensive, which cools the economy and brings inflation down. If inflation is too low, it can lower rates and make credit cheaper to boost investment and spending.",
-        source: "https://www.ecb.europa.eu/ecb-and-you/explainers/html/interest-rates-changes.en.html",
-      },
-      {
-        text: "In a downturn with inflation below target, a low interest rate makes credit cheaper and stimulates demand. When the economy is overheating and inflation is above target, a high rate makes borrowing more expensive so the economy and the rate at which prices rise can slow down. The ECB links prices that stop rising and start to fall (deflation) with locked-up spending and job losses.",
+        text: {
+          en: "Raising interest rates cools demand and lowers inflation, while cutting rates stimulates borrowing, spending, and economic activity.",
+          de: "Höhere Leitzinsen dämpfen die Nachfrage und bremsen die Inflation; Zinssenkungen kurbeln Investitionen und Konsum an.",
+          pl: "Podwyżka stóp chłodzi popyt i tłumi inflację, a obniżka pobudza akcję kredytową i ożywia gospodarkę.",
+        },
         source: "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/five_things.en.html",
       },
       {
-        text: "Higher interest rates make it less attractive to take out loans to finance consumption or investment. Monetary policy transmission has 'long, variable and uncertain time lags', so the precise effect is hard to predict.",
+        text: {
+          en: "Monetary policy transmission works with long and variable time lags: it can take several quarters for rate adjustments to fully affect inflation.",
+          de: "Die geldpolitische Transmission wirkt mit langen und variablen zeitlichen Verzögerungen.",
+          pl: "Oddziaływanie polityki pieniężnej na gospodarkę cechuje się długimi opóźnieniami czasowymi sięgającymi kilku kwartałów.",
+        },
         source: "https://www.ecb.europa.eu/mopo/intro/transmission/html/index.en.html",
       },
       {
-        text: "On 21 July 2022 the ECB decided to raise its three key interest rates by 50 basis points (0.5 percentage points), effective 27 July 2022. This was the first of the rises.",
-        source: "https://www.ecb.europa.eu/press/pr/date/2022/html/ecb.mp220721~53e5bdd317.en.html",
-      },
-      {
-        text: "On 14 September 2023 the ECB raised the three key rates by a further 25 basis points, effective 20 September 2023, taking the deposit facility rate to 4.00% (main refinancing rate 4.50%).",
-        source: "https://www.ecb.europa.eu/press/pr/date/2023/html/ecb.mp230914~aab39f8c21.en.html",
-      },
-      {
-        text: "The ECB's table of key interest rates lists 10 increases between 27 July 2022 and 20 September 2023 (27 Jul, 14 Sep, 2 Nov, 21 Dec 2022; 8 Feb, 22 Mar, 10 May, 21 Jun, 2 Aug, 20 Sep 2023). Table read on 29 October 2026.",
-        source: "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html",
-      },
-      {
-        text: "The ECB says it raised rates because inflation was too high, started in July 2022 and kept going until September 2023.",
-        source: "https://www.ecb.europa.eu/ecb-and-you/explainers/html/interest-rates-changes.en.html",
-      },
-      {
-        text: "Euro banknotes are produced across the euro area under ECB oversight (the lesson says the central bank 'looks after' the printing of notes).",
-        source: "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/five_things.en.html",
+        text: {
+          en: "Central banks aim for moderate inflation (e.g. 2% for ECB, 2.5% for NBP, 4% for RBI), avoiding both harmful inflation and destructive deflation.",
+          de: "Zentralbanken streben eine moderate Zielinflation an, um sowohl Inflation als auch Deflationsspiralen zu verhindern.",
+          pl: "Banki centralne dążą do umiarkowanego celu inflacyjnego (np. 2,5% dla NBP, 2% dla EBC), zapobiegając zarówno wysokiej inflacji, jak i deflacji.",
+        },
+        source: "https://www.ecb.europa.eu/mopo/strategy/pricestab/html/index.en.html",
       },
     ],
     simplified: [
-      "The town thermostat is a picture, not a real model. Real economies have many more forces (energy prices, supply problems, world events), and the ECB names some of these as reasons for the 2022 price jump.",
-      "In the toy, the rate people feel equals the key rate and just lags behind. In reality banks add their own margins, and loan and savings rates also depend on how much people want to borrow and save.",
-      "'Jobs fall when the town is cold' is a general tendency, not a rule.",
-      "The real time lag is long, variable and uncertain, not a fixed number of months. The lesson says 'many months' and 'never exactly right'.",
-      "The story says a new house loan 'costs more' when rates are high. Many existing loans have fixed rates for years and do not change at once, so the lesson only talks about new loans.",
-      "The ECB sets three key rates, and since March 2024 steers mainly through the deposit facility rate. The lesson calls them 'the key rate' and says the ECB raised 'its rates' 10 times, counting the dates on which all three were raised together.",
-      "The ECB's 2% target is 'over the medium term'. The lesson says 'about 2 percent a year' to keep it short.",
-      "'The bank for the banks' is a simplification. The central bank lends to banks and holds their overnight deposits, but it also supervises big banks and does other tasks.",
-      "The lesson does not name the current key rate on purpose, because it changes. The ECB table above shows it.",
+      {
+        en: "The town thermostat is a metaphor: central banks influence interest rates to steer economic temperature rather than directly fixing prices.",
+        de: "Das Stadt-Thermostat ist ein Bild: Zentralbanken steuern Zinsen, um die wirtschaftliche Aktivität indirekt zu lenken.",
+        pl: "Termostat miejski to metafora: bank centralny steruje stopami, aby pośrednio regulować tempo wzrostu gospodarczego i cen.",
+      },
+      {
+        en: "The toy models delayed reactions, showing why central bankers must anticipate conditions months in advance.",
+        de: "Das Spielzeug veranschaulicht Zeitverzögerungen, weshalb Zinsentscheidungen vorausschauend getroffen werden müssen.",
+        pl: "Zabawka obrazuje opóźnienia, przez które decyzje o stopach muszą być podejmowane ze znacznym wyprzedzeniem.",
+      },
+      {
+        en: "Real economies are subject to external shocks (energy, supply chains, international trade) that complicate interest rate policy.",
+        de: "Reale Volkswirtschaften werden durch weltweite Schocks beeinflusst, was die Zinspolitik zusätzlich herausfordert.",
+        pl: "Rzeczywiste gospodarki podlegają wpływom zewnętrznym (ceny surowców, handel międzynarodowy), co utrudnia precyzyjne sterowanie.",
+      },
     ],
   },
 };

@@ -6,7 +6,8 @@ import { BankBuilding, Bed, Card, Cat, Door, Ledger, Oven, Question, Safe, Shiel
 
 /** Animated diagrams for the Banks lesson, one per story beat. `step` is how many taps so far. */
 
-const alt = (en: string, de: string, lang: DiagramProps["lang"]) => (lang === "en" ? en : de);
+const alt = (en: string, de: string, pl: string, lang: DiagramProps["lang"]) =>
+  lang === "pl" ? pl : lang === "de" ? de : en;
 
 const numStyle = { font: "800 30px ui-rounded, 'SF Pro Rounded', Nunito, system-ui, sans-serif" } as const;
 
@@ -17,6 +18,7 @@ export function BedDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Finn hides spare coins under his bed. A cat sits nearby. A bed is not a safe place.",
         "Finn versteckt übrige Münzen unter seinem Bett. Eine Katze sitzt in der Nähe. Ein Bett ist kein sicherer Ort.",
+        "Finn chowa wolne monety pod łóżkiem. Kot siedzi obok. Łóżko nie jest bezpiecznym miejscem.",
         lang,
       )}
     >
@@ -56,6 +58,7 @@ export function OvenDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Bea wants a new oven that costs 4 coins. She has to borrow them, but who has coins to spare?",
         "Bea möchte einen neuen Ofen, der 4 Münzen kostet. Sie muss sie sich leihen, aber wer hat Münzen übrig?",
+        "Bea chce nowy piec, który kosztuje 4 monety. Musi je pożyczyć, ale kto ma wolne monety?",
         lang,
       )}
     >
@@ -100,13 +103,14 @@ export function DepositDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Finn makes a deposit: he brings his coins to the bank, and the bank writes down that they are Finn's.",
         "Finn macht eine Einzahlung: Er bringt seine Münzen zur Bank, und die Bank schreibt auf, dass sie Finn gehören.",
+        "Finn robi wpłatę: przynosi swoje monety do banku, a bank zapisuje, że należą do Finna.",
         lang,
       )}
     >
       {step >= 1 && (
         <>
           <Pop x={430} y={54}><BankBuilding size={190} /></Pop>
-          <TermChip x={430} y={0} w={190}>{alt("bank", "Bank", lang)}</TermChip>
+          <TermChip x={430} y={0} w={190}>{alt("bank", "Bank", "bank", lang)}</TermChip>
         </>
       )}
       {step >= 2 && (
@@ -118,7 +122,7 @@ export function DepositDiagram({ lang, step }: DiagramProps) {
           <Arrow from={[155, 170]} to={[415, 170]} />
         </>
       )}
-      {step >= 3 && <TermChip x={165} y={196} w={250}>{alt("deposit", "Einzahlung", lang)}</TermChip>}
+      {step >= 3 && <TermChip x={165} y={196} w={250}>{alt("deposit", "Einzahlung", "wpłata", lang)}</TermChip>}
       {step >= 4 && (
         <Bubble x={215} y={2} w={190} h={78} tail="bottom-right">
           <Ledger x={20} y={8} size={62} />
@@ -136,6 +140,7 @@ export function LendDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Bea asks the bank for 4 coins. The bank lends her some of the saved coins. She buys her oven and pays the coins back later.",
         "Bea bittet die Bank um 4 Münzen. Die Bank leiht ihr einige der gesparten Münzen. Sie kauft ihren Ofen und zahlt die Münzen später zurück.",
+        "Bea prosi bank o 4 monety. Bank pożycza jej część zaoszczędzonych monet. Bea kupuje piec i spłaca monety później.",
         lang,
       )}
     >
@@ -183,6 +188,7 @@ export function ReadyDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Finn may ask for his coins on any day. The bank keeps some coins ready in its safe, so it can hand them back.",
         "Finn kann an jedem Tag nach seinen Münzen fragen. Die Bank hält einige Münzen im Tresor bereit und kann sie zurückgeben.",
+        "Finn może poprosić o swoje monety w dowolnym dniu. Bank trzyma część monet w skarbcu w gotowości do zwrotu.",
         lang,
       )}
     >
@@ -221,6 +227,7 @@ export function RunDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Many savers come to the bank on the same day, but some coins are with Bea. This is called a bank run.",
         "Viele Sparer kommen am selben Tag zur Bank, aber ein Teil der Münzen ist bei Bea. Das heißt Ansturm auf die Bank.",
+        "Wielu oszczędzających przychodzi do banku tego samego dnia, lecz część monet ma Bea. To panika bankowa.",
         lang,
       )}
     >
@@ -242,7 +249,7 @@ export function RunDiagram({ lang, step }: DiagramProps) {
           <Pop><Coin x={590} y={218} size={34} /></Pop>
         </>
       )}
-      {step >= 3 && <TermChip x={130} y={4} w={380}>{alt("bank run", "Ansturm auf die Bank", lang)}</TermChip>}
+      {step >= 3 && <TermChip x={130} y={4} w={380}>{alt("bank run", "Ansturm auf die Bank", "panika bankowa", lang)}</TermChip>}
     </DiagramCanvas>
   );
 }
@@ -254,6 +261,7 @@ export function ProtectDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "In real life the law protects the money savers keep in a bank. This is called deposit protection.",
         "In echt schützt das Gesetz das Geld, das Sparer auf der Bank haben. Das heißt Einlagensicherung.",
+        "W prawdziwym życiu prawo chroni pieniądze oszczędzających w banku. Nazywa się to ochroną depozytów.",
         lang,
       )}
     >
@@ -270,7 +278,7 @@ export function ProtectDiagram({ lang, step }: DiagramProps) {
       {step >= 2 && (
         <>
           <Pop x={276} y={4}><Shield size={104} /></Pop>
-          <TermChip x={135} y={208} w={290}>{alt("deposit protection", "Einlagensicherung", lang)}</TermChip>
+          <TermChip x={135} y={208} w={290}>{alt("deposit protection", "Einlagensicherung", "ochrona depozytów", lang)}</TermChip>
         </>
       )}
       {step >= 3 && (
@@ -309,6 +317,7 @@ export function CardDiagram({ lang, step }: DiagramProps) {
       label={alt(
         "Sam pays Bea with a card. No coins move. The bank changes numbers: Sam's goes down, Bea's goes up.",
         "Sam bezahlt Bea mit einer Karte. Es wandern keine Münzen. Die Bank ändert Zahlen: Sams wird kleiner, Beas wird größer.",
+        "Sam płaci Bei kartą. Żadne monety się nie ruszają. Bank zmienia zapisy: stan konta Sama maleje, a Bei rośnie.",
         lang,
       )}
     >

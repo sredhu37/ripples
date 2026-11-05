@@ -5,12 +5,20 @@ import type { DiagramProps } from "../lesson/types";
 
 /** Animated diagrams for the Money lesson, one per story beat. `step` is how many taps so far. */
 
-const alt = (en: string, de: string, lang: DiagramProps["lang"]) => (lang === "en" ? en : de);
+const alt = (en: string, de: string, pl: string, lang: DiagramProps["lang"]) =>
+  lang === "pl" ? pl : lang === "de" ? de : en;
 
 /** Beat 1: meet Finn, his fish, Bea and her bread. */
 export function MeetDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("Finn has three fish and wants bread. Bea the baker has bread.", "Finn hat drei Fische und will Brot. Bäckerin Bea hat Brot.", lang)}>
+    <DiagramCanvas
+      label={alt(
+        "Finn has three fish and wants bread. Bea the baker has bread.",
+        "Finn hat drei Fische und will Brot. Bäckerin Bea hat Brot.",
+        "Finn ma trzy ryby i chce chleba. Piekarka Bea ma chleb.",
+        lang
+      )}
+    >
       {step >= 1 && <Villager who="Finn" x={20} />}
       {step >= 2 && (
         <Pop>
@@ -48,7 +56,14 @@ export function MeetDiagram({ lang, step }: DiagramProps) {
 /** Beat 2: Finn wants to swap fish for bread. This is barter. Bea says no. */
 export function BarterDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("Finn offers a fish for bread. This is called barter. Bea wants shoes.", "Finn bietet einen Fisch für Brot an. Das heißt Tauschhandel. Bea will Schuhe.", lang)}>
+    <DiagramCanvas
+      label={alt(
+        "Finn offers a fish for bread. This is called barter. Bea wants shoes.",
+        "Finn bietet einen Fisch für Brot an. Das heißt Tauschhandel. Bea will Schuhe.",
+        "Finn proponuje rybę za chleb. To jest handel wymienny. Bea chce buty.",
+        lang
+      )}
+    >
       <Villager who="Finn" x={20} mood={step >= 3 ? "sad" : "happy"} />
       <Villager who="Bea" x={490} />
       {step >= 1 && (
@@ -59,7 +74,11 @@ export function BarterDiagram({ lang, step }: DiagramProps) {
           <Arrow from={[400, 200]} to={[160, 200]} />
         </>
       )}
-      {step >= 2 && <TermChip x={200} y={222} w={240}>{alt("barter", "Tauschhandel", lang)}</TermChip>}
+      {step >= 2 && (
+        <TermChip x={200} y={222} w={240}>
+          {alt("barter", "Tauschhandel", "handel wymienny", lang)}
+        </TermChip>
+      )}
       {step >= 3 && (
         <Bubble x={380} y={8} w={200} h={72} tail="bottom-right">
           <Fish x={22} y={12} size={56} />
@@ -74,7 +93,14 @@ export function BarterDiagram({ lang, step }: DiagramProps) {
 /** Beat 3: nobody wants fish, so Finn has to search. */
 export function SearchDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("Sam has shoes but wants apples, not fish. Finn could search all day.", "Sam hat Schuhe, will aber Äpfel und keinen Fisch. Finn könnte den ganzen Tag suchen.", lang)}>
+    <DiagramCanvas
+      label={alt(
+        "Sam has shoes but wants apples, not fish. Finn could search all day.",
+        "Sam hat Schuhe, will aber Äpfel und keinen Fisch. Finn könnte den ganzen Tag suchen.",
+        "Sam ma buty, ale chce jabłek, a nie ryb. Finn mógłby szukać cały dzień.",
+        lang
+      )}
+    >
       <Villager who="Finn" x={20} mood={step >= 3 ? "sad" : "think"} />
       <Pop><Fish x={150} y={170} size={60} /></Pop>
       {step === 1 && (
@@ -113,10 +139,19 @@ export function SearchDiagram({ lang, step }: DiagramProps) {
 /** Beat 4: people invented money. */
 export function MoneyDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("Money is something everybody accepts. In Ripple Town it is coins.", "Geld nimmt jeder an. In Ripple Town sind es Münzen.", lang)}>
+    <DiagramCanvas
+      label={alt(
+        "Money is something everybody accepts. In Ripple Town it is coins.",
+        "Geld nimmt jeder an. In Ripple Town sind es Münzen.",
+        "Pieniądze to coś, co każdy przyjmuje. W Ripple Town są to monety.",
+        lang
+      )}
+    >
       {step >= 1 && (
         <>
-          <TermChip x={200} y={4} w={240}>{alt("money", "Geld", lang)}</TermChip>
+          <TermChip x={200} y={4} w={240}>
+            {alt("money", "Geld", "pieniądze", lang)}
+          </TermChip>
           {[0, 1, 2].map((i) => (
             <Pop key={i}><Coin x={196 + i * 82} y={60} size={76} /></Pop>
           ))}
@@ -136,7 +171,14 @@ export function MoneyDiagram({ lang, step }: DiagramProps) {
 /** Beat 5: sell the fish for coins, buy the bread with the coins. */
 export function SwapWithCoinsDiagram({ lang, step }: DiagramProps) {
   return (
-    <DiagramCanvas label={alt("Finn sells a fish to Sam for 2 coins, then buys bread from Bea.", "Finn verkauft Sam einen Fisch für 2 Münzen und kauft dann bei Bea Brot.", lang)}>
+    <DiagramCanvas
+      label={alt(
+        "Finn sells a fish to Sam for 2 coins, then buys bread from Bea.",
+        "Finn verkauft Sam einen Fisch für 2 Münzen und kauft dann bei Bea Brot.",
+        "Finn sprzedaje rybę Samowi za 2 monety, a potem kupuje chleb od Bei.",
+        lang
+      )}
+    >
       <Villager who="Finn" x={20} />
       {step === 1 && (
         <>
@@ -184,7 +226,14 @@ export function JobsDiagram({ lang, step }: DiagramProps) {
     </Pop>
   );
   return (
-    <DiagramCanvas label={alt("Money does three jobs: helps us swap, shows the price, lets us save.", "Geld hat drei Aufgaben: Tauschen helfen, den Preis zeigen, Sparen möglich machen.", lang)}>
+    <DiagramCanvas
+      label={alt(
+        "Money does three jobs: helps us swap, shows the price, lets us save.",
+        "Geld hat drei Aufgaben: Tauschen helfen, den Preis zeigen, Sparen möglich machen.",
+        "Pieniądze pełnią trzy zadania: pomagają wymieniać, pokazują cenę, pozwalają oszczędzać.",
+        lang
+      )}
+    >
       {step >= 1 && (
         <>
           {badge(107, 1)}
