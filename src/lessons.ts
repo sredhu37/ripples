@@ -35,14 +35,14 @@ export const LESSONS: LessonMeta[] = [
   { id: "scale", title: { en: "Big and small business", de: "Wachsen und Grosswerden", pl: "Mały i duży biznes" } },
 
   // Group 3: Markets (19-26)
-  { id: "supplydemand", title: { en: "Supply and demand", de: "Angebot und Nachfrage" } },
-  { id: "commodities", title: { en: "Raw commodities", de: "Rohstoffe und Ernte" } },
-  { id: "gold", title: { en: "Gold and safe harbors", de: "Gold und sichere Haefen" } },
-  { id: "stocks", title: { en: "Shares and dividends", de: "Aktien und Dividenden" } },
-  { id: "bonds", title: { en: "Bonds and debt", de: "Anleihen und Schulden" } },
-  { id: "stocksvsbonds", title: { en: "Stocks vs bonds", de: "Aktien gegen Anleihen" } },
-  { id: "derivatives", title: { en: "Contracts and risk hedging", de: "Vertraege und Risikoabsicherung" } },
-  { id: "philanthropy", title: { en: "Giving back forever", de: "Gemeinwohl und Stiftungen" } },
+  { id: "supplydemand", title: { en: "Supply and demand", de: "Angebot und Nachfrage", pl: "Podaż i popyt" } },
+  { id: "commodities", title: { en: "Raw commodities", de: "Rohstoffe und Ernte", pl: "Surowce naturalne" } },
+  { id: "gold", title: { en: "Gold and safe harbors", de: "Gold und sichere Haefen", pl: "Złoto i bezpieczne przystanie" } },
+  { id: "stocks", title: { en: "Shares and dividends", de: "Aktien und Dividenden", pl: "Akcje i dywidendy" } },
+  { id: "bonds", title: { en: "Bonds and debt", de: "Anleihen und Schulden", pl: "Obligacje i dług" } },
+  { id: "stocksvsbonds", title: { en: "Stocks vs bonds", de: "Aktien gegen Anleihen", pl: "Akcje a obligacje" } },
+  { id: "derivatives", title: { en: "Contracts and risk hedging", de: "Vertraege und Risikoabsicherung", pl: "Kontrakty i zabezpieczanie ryzyka" } },
+  { id: "philanthropy", title: { en: "Giving back forever", de: "Gemeinwohl und Stiftungen", pl: "Filantropia i fundacje" } },
 
   // Group 4: Governments (27-34)
   { id: "whygovernment", title: { en: "Why Government?", de: "Warum gibt es eine Regierung?" } },

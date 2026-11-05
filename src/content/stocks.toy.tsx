@@ -65,12 +65,76 @@ export function StocksToy({ lang, mode = "toy", onDone }: StocksToyProps) {
     }
   };
 
+  const harvestTitle =
+    lang === "pl" ? "Zbiory jabłek" : lang === "de" ? "Apfelernte" : "Cider Harvest";
+  const frostBtn =
+    lang === "pl" ? "Mrozy (0 zysku)" : lang === "de" ? "Frost (0 Gewinn)" : "Frost (0 Profit)";
+  const normalBtn =
+    lang === "pl" ? "Zwykłe (20 zysku)" : lang === "de" ? "Normal (20 Gewinn)" : "Normal (20 Profit)";
+  const bumperBtn =
+    lang === "pl" ? "Urodzaj (50 zysku)" : lang === "de" ? "Rekord (50 Gewinn)" : "Bumper (50 Profit)";
+
+  const millProfitLabel =
+    lang === "pl" ? "Zysk tłoczni:" : lang === "de" ? "Mühlengewinn:" : "Mill Profit:";
+  const coinsLabel =
+    lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "Coins";
+
+  const dividendLabel =
+    lang === "pl" ? "Dywidenda:" : lang === "de" ? "Dividende:" : "Dividend:";
+  const coinsPerShare =
+    lang === "pl" ? "monet/akcję" : lang === "de" ? "Münzen/Aktie" : "Coins/Share";
+
+  const collectBtn =
+    lang === "pl" ? "Odbierz dywidendę" : lang === "de" ? "Dividende abholen" : "Collect Dividend";
+
+  const portfolioTitle =
+    lang === "pl" ? "Twoje certyfikaty akcji" : lang === "de" ? "Deine Anteilssteine" : "Your Share Tiles";
+
+  const sharesOwnedText =
+    lang === "pl"
+      ? `${sharesOwned} / 10 posiadanych akcji`
+      : lang === "de"
+      ? `${sharesOwned} / 10 Aktien im Besitz`
+      : `${sharesOwned} / 10 Shares Owned`;
+
+  const walletLabel =
+    lang === "pl" ? "Portfel:" : lang === "de" ? "Geldbeutel:" : "Wallet:";
+
+  const tradingTitle =
+    lang === "pl" ? "Tablica giełdowa" : lang === "de" ? "Handelstafel" : "Trading Board";
+  const buyerBidLabel =
+    lang === "pl" ? "Oferta kupna:" : lang === "de" ? "Kaufangebot:" : "Buyer Bid:";
+
+  const tradingDesc =
+    lang === "pl"
+      ? "Sprzedaj akcję, by zdobyć monety, lub trzymaj dla przyszłych dywidend."
+      : lang === "de"
+      ? "Verkaufe eine Aktie oder behalte sie für künftige Dividenden."
+      : "Sell a share to cash out, or hold for future dividends.";
+
+  const sellShareBtn =
+    lang === "pl" ? "Sprzedaj 1 akcję" : lang === "de" ? "1 Aktie verkaufen" : "Sell 1 Share";
+
+  const successMsg =
+    lang === "pl"
+      ? "Dywidendy odebrane! Zarabiasz bezpośrednio na zyskach firmy."
+      : lang === "de"
+      ? "Dividenden eingesammelt! Du verdienst direkt an den Unternehmensgewinnen."
+      : "Dividends collected! You earn income directly from company profits.";
+
+  const promptMsg =
+    lang === "pl"
+      ? "Naciśnij Odbierz dywidendę, aby otrzymać swoją wypłatę."
+      : lang === "de"
+      ? "Tippe auf Dividende abholen, um deine Auszahlung zu erhalten."
+      : "Tap Collect Dividend to receive your payout.";
+
   return (
     <div className="stocks-wrap">
       <div className="stocks-grid">
         {/* Harvest Controller */}
         <div className="stocks-panel harvest-panel">
-          <div className="panel-title">{lang === "en" ? "Cider Harvest" : "Apfelernte"}</div>
+          <div className="panel-title">{harvestTitle}</div>
           {mode !== "quiz" && (
             <div className="harvest-buttons">
               <button
@@ -78,38 +142,38 @@ export function StocksToy({ lang, mode = "toy", onDone }: StocksToyProps) {
                 className={`harvest-btn ${harvest === "frost" ? "active" : ""}`}
                 onClick={() => setHarvest("frost")}
               >
-                ❄️ {lang === "en" ? "Frost (0 Profit)" : "Frost (0 Gewinn)"}
+                ❄️ {frostBtn}
               </button>
               <button
                 type="button"
                 className={`harvest-btn ${harvest === "normal" ? "active" : ""}`}
                 onClick={() => setHarvest("normal")}
               >
-                🍏 {lang === "en" ? "Normal (20 Profit)" : "Normal (20 Gewinn)"}
+                🍏 {normalBtn}
               </button>
               <button
                 type="button"
                 className={`harvest-btn ${harvest === "bumper" ? "active" : ""}`}
                 onClick={() => setHarvest("bumper")}
               >
-                🍎 {lang === "en" ? "Bumper (50 Profit)" : "Rekord (50 Gewinn)"}
+                🍎 {bumperBtn}
               </button>
             </div>
           )}
           <div className="profit-display">
-            {lang === "en" ? "Mill Profit:" : "Mühlengewinn:"} <strong>{totalProfit} {lang === "en" ? "Coins" : "Münzen"}</strong>
+            {millProfitLabel} <strong>{totalProfit} {coinsLabel}</strong>
           </div>
           <div className="dividend-tag">
-            {lang === "en" ? "Dividend:" : "Dividende:"} <strong>{dividendPerShare} {lang === "en" ? "Coins/Share" : "Münzen/Aktie"}</strong>
+            {dividendLabel} <strong>{dividendPerShare} {coinsPerShare}</strong>
           </div>
           <ToyButton onClick={handleCollectDividend}>
-            {lang === "en" ? "Collect Dividend" : "Dividende abholen"}
+            {collectBtn}
           </ToyButton>
         </div>
 
         {/* Share Portfolio */}
         <div className="stocks-panel portfolio-panel">
-          <div className="panel-title">{lang === "en" ? "Your Share Tiles" : "Deine Anteilssteine"}</div>
+          <div className="panel-title">{portfolioTitle}</div>
           <div className="tiles-holder">
             {Array.from({ length: 10 }).map((_, i) => (
               <div
@@ -121,27 +185,25 @@ export function StocksToy({ lang, mode = "toy", onDone }: StocksToyProps) {
             ))}
           </div>
           <div className="shares-count">
-            {sharesOwned} / 10 {lang === "en" ? "Shares Owned" : "Aktien im Besitz"}
+            {sharesOwnedText}
           </div>
           <div className="wallet-badge">
-            🪙 {lang === "en" ? "Wallet:" : "Geldbeutel:"} <strong>{walletCoins} {lang === "en" ? "Coins" : "Münzen"}</strong>
+            🪙 {walletLabel} <strong>{walletCoins} {coinsLabel}</strong>
           </div>
         </div>
 
         {/* Town Trading Board */}
         <div className="stocks-panel trading-panel">
-          <div className="panel-title">{lang === "en" ? "Trading Board" : "Handelstafel"}</div>
+          <div className="panel-title">{tradingTitle}</div>
           <div className="board-price">
-            {lang === "en" ? "Buyer Bid:" : "Kaufangebot:"}
-            <span className="price-num">{sharePrice} {lang === "en" ? "Coins" : "Münzen"}</span>
+            {buyerBidLabel}{" "}
+            <span className="price-num">{sharePrice} {coinsLabel}</span>
           </div>
           <div className="trading-desc">
-            {lang === "en"
-              ? "Sell a share to cash out, or hold for future dividends."
-              : "Verkaufe eine Aktie oder behalte sie für künftige Dividenden."}
+            {tradingDesc}
           </div>
           <ToyButton onClick={handleSellShare} disabled={sharesOwned <= 0}>
-            {lang === "en" ? "Sell 1 Share" : "1 Aktie verkaufen"}
+            {sellShareBtn}
           </ToyButton>
         </div>
       </div>
@@ -150,13 +212,7 @@ export function StocksToy({ lang, mode = "toy", onDone }: StocksToyProps) {
         <CheckButton lang={lang} onClick={handleCheck} />
         {showFeedback && (
           <div className={`feedback-msg ${walletCoins >= (mode === "quiz" ? 8 : 1) ? "success" : "warning"}`}>
-            {walletCoins >= (mode === "quiz" ? 8 : 1)
-              ? lang === "en"
-                ? "Dividends collected! You earn income directly from company profits."
-                : "Dividenden eingesammelt! Du verdienst direkt an den Unternehmensgewinnen."
-              : lang === "en"
-              ? "Tap Collect Dividend to receive your payout."
-              : "Tippe auf Dividende abholen, um deine Auszahlung zu erhalten."}
+            {walletCoins >= (mode === "quiz" ? 8 : 1) ? successMsg : promptMsg}
           </div>
         )}
       </div>
