@@ -310,11 +310,11 @@ describe("Age Groups integration", () => {
   });
 
   it("falls back to junior lesson when senior lesson is not registered", () => {
-    const junior = getLesson("money", "junior");
+    const junior = getLesson("profit", "junior");
     expect(junior).toBeDefined();
 
-    // money does not yet have a custom senior fork in ticket 69, so it cleanly falls back
-    const senior = getLesson("money", "senior");
+    // profit belongs to Group 2 and has not yet been forked for seniors, so it cleanly falls back
+    const senior = getLesson("profit", "senior");
     expect(senior).toBe(junior);
   });
 
