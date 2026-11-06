@@ -191,6 +191,38 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("The Berlin Wall falls", "Die Berliner Mauer faellt", "Pada mur berliński"),
     T("Families in Germany can cross between East and West again.", "Familien in Deutschland koennen wieder zwischen Ost und West wechseln.", "Rodziny w Niemczech znów mogą przechodzić między wschodem a zachodem."),
     T("The fall on 9 November 1989 led to German reunification in 1990 and the end of the Cold War order.", "Der Fall am 9. November 1989 fuehrte 1990 zur deutschen Einheit und zum Ende der Kalten-Kriegs-Ordnung.", "Upadek 9 listopada 1989 roku doprowadził do zjednoczenia Niemiec w 1990 roku i końca porządku zimnej wojny.")),
+  ev("ww1", "twentieth", "europe", T("1914 to 1918", "1914 bis 1918", "1914 do 1918"),
+    T("The First World War", "Der Erste Weltkrieg", "I wojna światowa"),
+    T("Countries that had promised to help each other are pulled into a huge war.", "Laender, die sich Hilfe versprochen hatten, werden in einen riesigen Krieg gezogen.", "Kraje, które obiecały sobie pomoc, zostają wciągnięte w ogromną wojnę."),
+    T("A web of alliances turned one assassination in Sarajevo into a war involving most of Europe and many colonies.", "Ein Netz aus Buendnissen machte aus einem Attentat in Sarajevo einen Krieg, der fast ganz Europa und viele Kolonien erfasste.", "Sieć sojuszy zamieniła jeden zamach w Sarajewie w wojnę obejmującą większość Europy i wiele kolonii."), "ww1"),
+  ev("gandhi1915", "twentieth", "india", T("1915", "1915", "1915"),
+    T("Gandhi returns to India", "Gandhi kehrt nach Indien zurueck", "Gandhi wraca do Indii"),
+    T("A lawyer comes home from South Africa with a plan to protest peacefully.", "Ein Anwalt kehrt aus Suedafrika mit dem Plan zurueck, friedlich zu protestieren.", "Prawnik wraca z Afryki Południowej z planem pokojowego protestu."),
+    T("Gandhi brought his method of nonviolent resistance, tested in South Africa, into India's freedom movement.", "Gandhi brachte seine in Suedafrika erprobte Methode des gewaltlosen Widerstands in Indiens Freiheitsbewegung ein.", "Gandhi wniósł do indyjskiego ruchu wolnościowego metodę biernego oporu wypróbowaną w Afryce Południowej."), "independence"),
+  ev("revolution1917", "twentieth", "europe", T("1917", "1917", "1917"),
+    T("The Russian Revolution", "Die Russische Revolution", "Rewolucja rosyjska"),
+    T("The Tsar loses his throne and a new kind of government begins.", "Der Zar verliert den Thron und eine neue Art von Regierung beginnt.", "Car traci tron i zaczyna się nowy rodzaj rządów."),
+    T("Revolutions in 1917 ended the Tsarist empire and led to the Soviet Union, a communist state.", "Die Revolutionen von 1917 beendeten das Zarenreich und fuehrten zur Sowjetunion, einem kommunistischen Staat.", "Rewolucje 1917 roku zakończyły imperium carskie i doprowadziły do powstania Związku Radzieckiego, państwa komunistycznego."), "communism"),
+  ev("ottoman1922", "twentieth", "mideast_africa", T("1922", "1922", "1922"),
+    T("The Ottoman sultanate ends", "Das osmanische Sultanat endet", "Koniec sułtanatu osmańskiego"),
+    T("A very old empire is replaced by a new country, Turkey.", "Ein sehr altes Reich wird durch ein neues Land ersetzt, die Tuerkei.", "Bardzo stare imperium zostaje zastąpione nowym krajem, Turcją."),
+    T("The sultanate was abolished in 1922 and Turkey became a republic in 1923, reshaping the Middle East map.", "Das Sultanat wurde 1922 abgeschafft und die Tuerkei 1923 Republik, was die Landkarte des Nahen Ostens veraenderte.", "Sułtanat zniesiono w 1922 roku, a Turcja została republiką w 1923, co zmieniło mapę Bliskiego Wschodu.")),
+  ev("holocaust", "twentieth", "europe", T("1941 to 1945", "1941 bis 1945", "1941 do 1945"),
+    T("The Holocaust", "Der Holocaust", "Holokaust"),
+    T("During the war, the Nazi government hurt and killed millions of people, especially Jewish families. We remember so it never happens again.", "Im Krieg verletzte und toetete die Nazi-Regierung Millionen Menschen, vor allem juedische Familien. Wir erinnern uns, damit es nie wieder geschieht.", "W czasie wojny rząd nazistowski krzywdził i zabijał miliony ludzi, zwłaszcza żydowskie rodziny. Pamiętamy, by to się nigdy nie powtórzyło."),
+    T("The Nazi regime systematically murdered about six million Jews and millions of others, a genocide that shaped modern human rights law.", "Das NS-Regime ermordete systematisch rund sechs Millionen Juden und Millionen weitere Menschen, ein Voelkermord, der das moderne Menschenrecht praegte.", "Reżim nazistowski systematycznie zamordował około sześciu milionów Żydów i miliony innych osób, ludobójstwo, które ukształtowało współczesne prawa człowieka."), "ww2"),
+  ev("quitindia", "twentieth", "india", T("1942", "1942", "1942"),
+    T("The Quit India Movement", "Die Quit-India-Bewegung", "Ruch Quit India"),
+    T("While Europe is at war, Gandhi asks the British to leave India.", "Waehrend Europa im Krieg ist, bittet Gandhi die Briten, Indien zu verlassen.", "Gdy Europa jest w stanie wojny, Gandhi prosi Brytyjczyków o opuszczenie Indii."),
+    T("In August 1942 Congress called for immediate British withdrawal, leading to mass arrests, while Subhas Chandra Bose sought foreign allies for independence.", "Im August 1942 forderte der Kongress den sofortigen Abzug der Briten, es folgten Massenverhaftungen, waehrend Subhas Chandra Bose im Ausland Verbuendete suchte.", "W sierpniu 1942 Kongres wezwał do natychmiastowego wycofania Brytyjczyków, co skutkowało masowymi aresztowaniami, a Subhas Chandra Bose szukał sojuszników za granicą."), "independence"),
+  ev("bengal1943", "twentieth", "india", T("1943", "1943", "1943"),
+    T("The Bengal famine", "Die Hungersnot in Bengalen", "Głód w Bengalu"),
+    T("Many families in Bengal cannot get enough food during the war.", "Viele Familien in Bengalen bekommen waehrend des Krieges nicht genug zu essen.", "Wiele rodzin w Bengalu nie ma dość jedzenia w czasie wojny."),
+    T("An estimated 2 to 3 million people died, as war disruption, high prices and poor policy choices cut food supplies.", "Schaetzungsweise 2 bis 3 Millionen Menschen starben, weil Kriegsfolgen, hohe Preise und politische Fehlentscheidungen die Versorgung kappten.", "Szacuje się, że zmarło 2 do 3 milionów ludzi, gdy zakłócenia wojenne, wysokie ceny i błędne decyzje polityczne ograniczyły dostawy żywności."), "britishinindia"),
+  ev("marshall1948", "twentieth", "europe", T("1948", "1948", "1948"),
+    T("The Marshall Plan rebuilds Europe", "Der Marshallplan baut Europa wieder auf", "Plan Marshalla odbudowuje Europę"),
+    T("America sends money, food and machines to help broken cities in Europe.", "Amerika schickt Geld, Essen und Maschinen, um zerstoerte Staedte in Europa zu unterstuetzen.", "Ameryka wysyła pieniądze, żywność i maszyny, by pomóc zniszczonym miastom Europy."),
+    T("The US sent roughly 13 billion dollars of aid to Western Europe from 1948, helping West Germany and others recover.", "Die USA schickten ab 1948 rund 13 Milliarden Dollar Hilfe nach Westeuropa und halfen Westdeutschland und anderen beim Wiederaufbau.", "USA wysłały od 1948 roku około 13 miliardów dolarów pomocy do Europy Zachodniej, wspierając odbudowę Niemiec Zachodnich i innych krajów."), "rebuilding"),
   // Digital
   ev("web", "digital", "science", T("1989 to 1991", "1989 bis 1991", "1989 do 1991"),
     T("The World Wide Web is invented", "Das World Wide Web wird erfunden", "Powstaje World Wide Web"),
@@ -226,4 +258,10 @@ export const TIMELINE_REGIONS: TimelineRegion[] = ["india", "europe", "americas"
 
 export function eventsFor(era: TimelineEraId, region: TimelineRegion | "all"): TimelineEvent[] {
   return TIMELINE_EVENTS.filter((e) => e.era === era && (region === "all" || e.region === region));
+}
+
+/** Sort key in years. BCE is negative. "1500s" counts as 1500. */
+export function eventYear(e: TimelineEvent): number {
+  const n = Number(/\d+/.exec(e.year.en)?.[0] ?? "0");
+  return /BCE/.test(e.year.en) ? -n : n;
 }

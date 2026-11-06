@@ -112,7 +112,20 @@ const ALL: Record<string, Lesson | undefined> = {
 };
 
 import type { AgeGroup } from "../progress";
+import { EVENT_SOURCES, MEANWHILE, meanwhileEvents } from "../timeline/meanwhile";
 import { SENIOR_LESSONS } from "./senior";
+
+// Every concurrent event a history lesson shows also appears on its fact card, with a source.
+for (const [lessonId, m] of Object.entries(MEANWHILE)) {
+  const lesson = ALL[lessonId];
+  if (!lesson) continue;
+  for (const e of meanwhileEvents(m)) {
+    const source = EVENT_SOURCES[e.id];
+    if (!source) continue;
+    const line = (l: "en" | "de" | "pl") => `${e.year[l]}: ${e.title[l]}. ${e.summary.senior[l]}`;
+    lesson.factCard.claims.push({ text: { en: line("en"), de: line("de"), pl: line("pl") }, source });
+  }
+}
 
 const SENIOR: Record<string, Lesson> = { ...SENIOR_LESSONS };
 
