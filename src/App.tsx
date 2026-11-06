@@ -105,6 +105,7 @@ export function App() {
           onBadge={() => awardBadge(screen.id)}
           onExit={() => setScreen({ kind: "map" })}
           onLang={setLang}
+          ageGroup={progress.ageGroup ?? "junior"}
         />
       );
     }

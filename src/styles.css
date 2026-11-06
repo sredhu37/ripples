@@ -1180,3 +1180,9 @@ mark.term {
   .timeline-lane ul { flex-direction: row; flex-wrap: wrap; }
   .timeline-card { flex: 1 1 260px; }
 }
+
+/* Meanwhile around the world */
+.meanwhile h3 { margin-top: 0; }
+.meanwhile-slider { display: flex; flex-direction: column; gap: 4px; margin: 10px 0; }
+.meanwhile-slider input { width: 100%; }
+.meanwhile-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }

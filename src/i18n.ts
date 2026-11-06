@@ -5,6 +5,9 @@ export type { Lang };
 type Dict = Record<string, string>;
 
 const en: Dict = {
+  meanwhileTitle: "Meanwhile around the world",
+  meanwhileYear: "Year",
+  meanwhileNone: "Nothing has happened yet in this window. Move the slider.",
   worldTimeline: "World Timeline",
   timelineHelp: "See what happened around the world at the same time.",
   timelineAll: "All tracks",
@@ -84,6 +87,9 @@ const en: Dict = {
 };
 
 const de: Dict = {
+  meanwhileTitle: "Waehrenddessen in der Welt",
+  meanwhileYear: "Jahr",
+  meanwhileNone: "In diesem Zeitraum ist noch nichts passiert. Schiebe den Regler.",
   worldTimeline: "Weltzeitleiste",
   timelineHelp: "Sieh, was gleichzeitig auf der Welt geschah.",
   timelineAll: "Alle Spuren",
@@ -163,6 +169,9 @@ const de: Dict = {
 };
 
 const pl: Dict = {
+  meanwhileTitle: "W tym czasie na świecie",
+  meanwhileYear: "Rok",
+  meanwhileNone: "W tym okresie jeszcze nic się nie wydarzyło. Przesuń suwak.",
   worldTimeline: "Oś czasu świata",
   timelineHelp: "Zobacz, co działo się na świecie w tym samym czasie.",
   timelineAll: "Wszystkie ścieżki",

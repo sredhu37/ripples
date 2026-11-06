@@ -80,3 +80,4 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Senior age group | The 10-14 age bracket with deeper mechanics, real-world balance sheets, and advanced challenges | older tier, pro mode |
 | World timeline | The screen showing events from different regions and science side by side, by era | history lesson, calendar |
 | Track | One lane of the world timeline for a region or for science | channel, row |
+| Meanwhile card | The step after a Group 5 lesson's real life card that shows what else happened around the world in the same years | side story, extra |
