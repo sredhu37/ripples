@@ -5,6 +5,17 @@ export type { Lang };
 type Dict = Record<string, string>;
 
 const en: Dict = {
+  worldTimeline: "World Timeline",
+  timelineHelp: "See what happened around the world at the same time.",
+  timelineAll: "All tracks",
+  regionIndia: "India",
+  regionEurope: "Europe",
+  regionAmericas: "Americas",
+  regionEastAsia: "East Asia",
+  regionMideastAfrica: "Africa and Middle East",
+  regionScience: "Science",
+  timelineEmpty: "Nothing here for this track.",
+  timelineEra: "Era",
   appName: "Ripples",
   tagline: "Everything makes a ripple.",
   askName: "Hi! I'm Otto. What's your name?",
@@ -73,6 +84,17 @@ const en: Dict = {
 };
 
 const de: Dict = {
+  worldTimeline: "Weltzeitleiste",
+  timelineHelp: "Sieh, was gleichzeitig auf der Welt geschah.",
+  timelineAll: "Alle Spuren",
+  regionIndia: "Indien",
+  regionEurope: "Europa",
+  regionAmericas: "Amerika",
+  regionEastAsia: "Ostasien",
+  regionMideastAfrica: "Afrika und Naher Osten",
+  regionScience: "Wissenschaft",
+  timelineEmpty: "Hier gibt es nichts fuer diese Spur.",
+  timelineEra: "Epoche",
   appName: "Ripples",
   tagline: "Alles zieht Kreise.",
   askName: "Hallo! Ich bin Otto. Wie heisst du?",
@@ -141,6 +163,17 @@ const de: Dict = {
 };
 
 const pl: Dict = {
+  worldTimeline: "Oś czasu świata",
+  timelineHelp: "Zobacz, co działo się na świecie w tym samym czasie.",
+  timelineAll: "Wszystkie ścieżki",
+  regionIndia: "Indie",
+  regionEurope: "Europa",
+  regionAmericas: "Ameryki",
+  regionEastAsia: "Azja Wschodnia",
+  regionMideastAfrica: "Afryka i Bliski Wschód",
+  regionScience: "Nauka",
+  timelineEmpty: "Brak wydarzeń na tej ścieżce.",
+  timelineEra: "Epoka",
   appName: "Ripples",
   tagline: "Każdy czyn wywołuje fale.",
   askName: "Cześć! Jestem Otto. Jak masz na imię?",
