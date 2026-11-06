@@ -11,6 +11,7 @@ import { lesson as inflationSenior } from "./group1/inflation.senior";
 import { lesson as printingSenior } from "./group1/printing.senior";
 import { lesson as ratesSenior } from "./group1/rates.senior";
 import { lesson as supplyDemandSenior } from "./group3/supply_demand.senior";
+import { lesson as scarcityPricesSenior } from "./group3/scarcity_prices.senior";
 import type { Lesson } from "../../lesson/types";
 
 export const GROUP_1_SENIOR_LESSONS: Lesson[] = [
@@ -30,6 +31,7 @@ export const GROUP_1_SENIOR_LESSONS: Lesson[] = [
 
 export const OTHER_SENIOR_LESSONS: Lesson[] = [
   supplyDemandSenior,
+  scarcityPricesSenior,
 ];
 
 export const ALL_SENIOR_LESSONS: Lesson[] = [

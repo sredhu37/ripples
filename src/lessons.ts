@@ -87,6 +87,7 @@ export const LESSONS: LessonMeta[] = [
   { id: "jobs", title: { en: "Changing Jobs", de: "Wandel der Berufe", pl: "Zawody w zmieniającym się świecie" } },
   { id: "humanedge", title: { en: "The Human Edge", de: "Der menschliche Vorteil", pl: "Ludzka przewaga" } },
   { id: "supply_demand", title: { en: "Prices and Scarcity", de: "Preise und Knappheit", pl: "Ceny i rzadkość" } },
+  { id: "scarcity_prices", title: { en: "Salaries and Assets", de: "Gehaelter und Vermoegen", pl: "Płace i aktywa" } },
 ];
 
 export const LESSON_ORDER = LESSONS.map((l) => l.id);
@@ -149,6 +150,7 @@ export const CURRICULUM_GROUPS: LessonGroup[] = [
       "derivatives",
       "philanthropy",
       "supply_demand",
+      "scarcity_prices",
     ],
   },
   {

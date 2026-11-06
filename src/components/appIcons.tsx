@@ -295,6 +295,17 @@ const LESSON_ART: Record<string, ReactNode> = {
       <polygon points="58,40 68,40 73,48 58,62 43,48 48,40" fill="#38bdf8" stroke={INK} strokeWidth="2" />
     </g>
   ),
+  scarcity_prices: (
+    <g>
+      {/* Golden bar base */}
+      <polygon points="20,68 35,50 75,50 90,68 80,78 30,78" fill="#eab308" stroke={INK} strokeWidth="2.5" />
+      <polygon points="35,50 75,50 70,68 28,68" fill="#facc15" stroke={INK} strokeWidth="2" />
+      {/* Skill graduation cap / star */}
+      <polygon points="50,14 74,24 50,34 26,24" fill="#3b82f6" stroke={INK} strokeWidth="2" />
+      <path d="M74 24 V38" stroke={INK} strokeWidth="2.5" strokeLinecap="round" />
+      <polygon points="50,22 53,28 60,29 55,34 56,40 50,37 44,40 45,34 40,29 47,28" fill="#fbbf24" stroke={INK} strokeWidth="1" />
+    </g>
+  ),
 };
 
 /** Picture for a lesson on the trail, on its badge and in headings. */
