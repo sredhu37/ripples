@@ -108,8 +108,9 @@ const ALL: Record<string, Lesson | undefined> = {
 };
 
 import type { AgeGroup } from "../progress";
+import { SENIOR_LESSONS } from "./senior";
 
-const SENIOR: Record<string, Lesson> = {};
+const SENIOR: Record<string, Lesson> = { ...SENIOR_LESSONS };
 
 export function registerSeniorLesson(id: string, lesson: Lesson): void {
   SENIOR[id] = lesson;
