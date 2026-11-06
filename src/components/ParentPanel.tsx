@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LESSON_ORDER } from "../lessons";
+import { CURRICULUM_GROUPS, LESSONS, LESSON_ORDER, getGroupTitle, getLessonTitle } from "../lessons";
 import { t } from "../i18n";
 import { exportCode, importCode, type Progress, type Lang } from "../progress";
 import { LangSwitch } from "./LangSwitch";
@@ -11,6 +11,7 @@ interface Props {
   onFacts: () => void;
   onClose: () => void;
   onLang?: (l: Lang) => void;
+  onToggleLesson: (lessonId: string, enabled: boolean) => void;
 }
 
 function makeGate() {
@@ -18,7 +19,7 @@ function makeGate() {
 }
 
 /** Parent area. A small multiplication gate keeps a young child out of it. */
-export function ParentPanel({ progress, onRestore, onReset, onFacts, onClose, onLang }: Props) {
+export function ParentPanel({ progress, onRestore, onReset, onFacts, onClose, onLang, onToggleLesson }: Props) {
   const lang = progress.lang;
   const [gate] = useState(makeGate);
   const [open, setOpen] = useState(false);
@@ -68,11 +69,56 @@ export function ParentPanel({ progress, onRestore, onReset, onFacts, onClose, on
   }
 
   return (
-    <main className="screen center">
-      <div className="panel">
+    <main className="screen parent-screen">
+      <div className="panel parent-panel">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <h2>{t(lang, "parents")}</h2>
           {onLang && <LangSwitch lang={lang} onLang={onLang} />}
+        </div>
+
+        <h2>{t(lang, "lessonSelectionTitle")}</h2>
+        <p>{t(lang, "lessonSelectionHelp")}</p>
+        <div className="curriculum-groups">
+          {CURRICULUM_GROUPS.map((group) => {
+            const groupLessons = LESSONS.filter((l) => group.lessonIds.includes(l.id));
+            const disabledCount = groupLessons.filter((l) => progress.disabledLessons?.includes(l.id)).length;
+            return (
+              <details key={group.id} className="lesson-group-accordion">
+                <summary className="lesson-group-summary">
+                  <span className="lesson-group-title">{getGroupTitle(group, lang)}</span>
+                  <span className="lesson-group-count">
+                    {groupLessons.length - disabledCount} / {groupLessons.length}
+                  </span>
+                </summary>
+                <div className="lesson-toggle-list">
+                  {groupLessons.map((l) => {
+                    const isOff = progress.disabledLessons?.includes(l.id) ?? false;
+                    const title = getLessonTitle(l, lang);
+                    return (
+                      <label key={l.id} className={`lesson-toggle-row ${isOff ? "lesson-toggle-row-off" : ""}`}>
+                        <span className="lesson-toggle-info">
+                          <span className="lesson-toggle-title">{title}</span>
+                          <span className="lesson-toggle-status">
+                            {t(lang, isOff ? "lessonDisabled" : "lessonEnabled")}
+                          </span>
+                        </span>
+                        <span className="toggle-switch">
+                          <input
+                            type="checkbox"
+                            className="toggle-input"
+                            checked={!isOff}
+                            onChange={(e) => onToggleLesson(l.id, e.target.checked)}
+                            aria-label={`${title}: ${t(lang, isOff ? "lessonDisabled" : "lessonEnabled")}`}
+                          />
+                          <span className="toggle-slider" aria-hidden="true" />
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </details>
+            );
+          })}
         </div>
 
         <h2>{t(lang, "factCards")}</h2>

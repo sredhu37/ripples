@@ -75,3 +75,4 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Passive income | Money earned from an asset without trading your personal hours hands-on | free money, bonus |
 | Equity | An ownership share or percentage in a business or asset | loan, token |
 | Co-owner | A partner who owns an equity share in a business and splits profits and risks | lender, customer |
+| Disabled lesson | A lesson explicitly turned off by parents in the parent panel, hidden from the child's trail, badges shelf, and progression | hidden lesson, locked lesson |

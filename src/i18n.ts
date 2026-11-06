@@ -60,6 +60,10 @@ const en: Dict = {
   claims: "Claims",
   simplified: "Simplified for an 8-year-old",
   noLessons: "No lessons built yet.",
+  lessonSelectionTitle: "Lesson selection",
+  lessonSelectionHelp: "Turn lessons on or off to choose what appears on the trail.",
+  lessonEnabled: "Enabled",
+  lessonDisabled: "Disabled",
 };
 
 const de: Dict = {
@@ -118,6 +122,10 @@ const de: Dict = {
   claims: "Behauptungen",
   simplified: "Fuer ein 8-jaehriges Kind vereinfacht",
   noLessons: "Noch keine Lektionen gebaut.",
+  lessonSelectionTitle: "Lektionenauswahl",
+  lessonSelectionHelp: "Schalte Lektionen ein oder aus, um festzulegen, was auf dem Pfad erscheint.",
+  lessonEnabled: "Aktiviert",
+  lessonDisabled: "Deaktiviert",
 };
 
 const pl: Dict = {
@@ -176,6 +184,10 @@ const pl: Dict = {
   claims: "Tezy",
   simplified: "Uproszczone dla 8-latka",
   noLessons: "Brak gotowych lekcji.",
+  lessonSelectionTitle: "Wybór lekcji",
+  lessonSelectionHelp: "Włączaj lub wyłączaj lekcje, aby wybrać, co pojawia się na ścieżce.",
+  lessonEnabled: "Włączona",
+  lessonDisabled: "Wyłączona",
 };
 
 const dicts: Record<Lang, Dict> = { en, de, pl };

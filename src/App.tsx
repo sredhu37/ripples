@@ -7,7 +7,7 @@ import { LessonPlaceholder } from "./components/LessonPlaceholder";
 import { MapScreen } from "./components/MapScreen";
 import { NameScreen } from "./components/NameScreen";
 import { ParentPanel } from "./components/ParentPanel";
-import { cleanName, earnBadge, emptyProgress, loadProgress, saveProgress, type Lang, type Progress } from "./progress";
+import { cleanName, earnBadge, emptyProgress, loadProgress, saveProgress, toggleLesson, type Lang, type Progress } from "./progress";
 import { setMuted } from "./sound";
 import { stopSpeaking } from "./speech";
 
@@ -63,6 +63,7 @@ export function App() {
         }}
         onClose={() => setScreen({ kind: "map" })}
         onLang={setLang}
+        onToggleLesson={(id, enabled) => setProgress((p) => toggleLesson(p, id, enabled))}
       />
     );
   }

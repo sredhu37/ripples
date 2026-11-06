@@ -9,6 +9,7 @@ import {
   loadProgress,
   nextLessonId,
   saveProgress,
+  toggleLesson,
   type Progress,
 } from "./progress";
 
@@ -74,7 +75,7 @@ describe("storage", () => {
 
   it("ignores wrong types in stored data", () => {
     const s = { getItem: () => JSON.stringify({ name: 5, lang: "fr", badges: ["a", 3, "a"] }) };
-    expect(loadProgress(s)).toEqual({ name: "", lang: "en", muted: false, badges: ["a"] });
+    expect(loadProgress(s)).toEqual({ name: "", lang: "en", muted: false, badges: ["a"], disabledLessons: [] });
   });
 });
 
@@ -118,5 +119,101 @@ describe("names", () => {
   it("trims and limits length", () => {
     expect(cleanName("  Mia   Lou  ")).toBe("Mia Lou");
     expect(cleanName("x".repeat(50))).toHaveLength(20);
+  });
+});
+
+describe("disabled lessons", () => {
+  it("defaults to empty disabled lessons list", () => {
+    expect(emptyProgress().disabledLessons).toEqual([]);
+  });
+
+  it("toggles lesson disabled and enabled states cleanly", () => {
+    let p = emptyProgress();
+    p = toggleLesson(p, "work", false);
+    expect(p.disabledLessons).toEqual(["work"]);
+
+    // Disabling again is idempotent
+    p = toggleLesson(p, "work", false);
+    expect(p.disabledLessons).toEqual(["work"]);
+
+    // Disabling another lesson appends
+    p = toggleLesson(p, "loans", false);
+    expect(p.disabledLessons).toEqual(["work", "loans"]);
+
+    // Enabling removes it
+    p = toggleLesson(p, "work", true);
+    expect(p.disabledLessons).toEqual(["loans"]);
+
+    // Enabling a lesson not disabled is a no-op
+    p = toggleLesson(p, "money", true);
+    expect(p.disabledLessons).toEqual(["loans"]);
+  });
+
+  it("skips disabled lessons when finding nextLessonId", () => {
+    let p = emptyProgress();
+    // Initially first lesson is money
+    expect(nextLessonId(p, order)).toBe("money");
+
+    // Parent disables money -> next lesson jumps to work
+    p = toggleLesson(p, "money", false);
+    expect(nextLessonId(p, order)).toBe("work");
+
+    // Child completes work -> next lesson jumps to savings
+    p = earnBadge(p, "work");
+    expect(nextLessonId(p, order)).toBe("savings");
+
+    // Parent also disables savings -> next lesson jumps to loans
+    p = toggleLesson(p, "savings", false);
+    expect(nextLessonId(p, order)).toBe("loans");
+  });
+
+  it("marks disabled lessons as locked and does not assign them next status", () => {
+    let p = emptyProgress();
+    p = toggleLesson(p, "money", false);
+    expect(lessonState(p, order, "money")).toBe("locked");
+    expect(lessonState(p, order, "work")).toBe("next");
+    expect(lessonState(p, order, "savings")).toBe("locked");
+  });
+
+  it("preserves earned badge in progress even when lesson is disabled", () => {
+    let p = emptyProgress();
+    p = earnBadge(p, "money");
+    expect(p.badges).toContain("money");
+
+    // Disable money
+    p = toggleLesson(p, "money", false);
+    expect(p.badges).toContain("money");
+
+    // Re-enable money -> badge remains intact
+    p = toggleLesson(p, "money", true);
+    expect(p.badges).toContain("money");
+    expect(lessonState(p, order, "money")).toBe("done");
+  });
+
+  it("saves and loads disabled lessons in storage", () => {
+    const s = memoryStorage();
+    const p = toggleLesson(emptyProgress(), "savings", false);
+    saveProgress(s, p);
+    expect(loadProgress(s).disabledLessons).toEqual(["savings"]);
+  });
+
+  it("round-trips disabled lessons in exportCode and importCode", () => {
+    let p: Progress = { ...emptyProgress(), name: "Lukas", lang: "de" };
+    p = toggleLesson(p, "work", false);
+    p = toggleLesson(p, "loans", false);
+    p = earnBadge(p, "money");
+
+    const code = exportCode(p, order);
+    const restored = importCode(code, order);
+    expect(restored).toEqual({ ...p, muted: false });
+    expect(restored?.disabledLessons).toEqual(["work", "loans"]);
+  });
+
+  it("imports legacy save codes without disabledLessons field as empty array", () => {
+    // Generate code from progress without disabled lessons
+    const p: Progress = { ...emptyProgress(), name: "Maya", lang: "en", badges: ["money"] };
+    const code = exportCode(p, order);
+    const restored = importCode(code, order);
+    expect(restored?.disabledLessons).toEqual([]);
   });
 });
