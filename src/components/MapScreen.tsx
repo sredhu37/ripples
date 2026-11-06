@@ -15,9 +15,10 @@ interface Props {
   onToggleMute: () => void;
   onOpenLesson: (id: string) => void;
   onParents: () => void;
+  onTimeline: () => void;
 }
 
-export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLesson, onParents }: Props) {
+export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLesson, onParents, onTimeline }: Props) {
   const { lang, name, muted } = progress;
   const visibleLessons = LESSONS.filter((l) => !progress.disabledLessons?.includes(l.id));
   const next = nextLessonId(progress, LESSON_ORDER);
@@ -38,6 +39,9 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
             onClick={onToggleMute}
           >
             <UiIcon name={muted ? "speakerOff" : "speakerOn"} />
+          </button>
+          <button type="button" className="icon-btn" aria-label={t(lang, "worldTimeline")} onClick={onTimeline}>
+            <UiIcon name="globe" />
           </button>
           <button type="button" className="icon-btn" aria-label={t(lang, "parents")} onClick={onParents}>
             <UiIcon name="gear" />

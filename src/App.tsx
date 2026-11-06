@@ -6,12 +6,13 @@ import { LESSONS } from "./lessons";
 import { LessonPlaceholder } from "./components/LessonPlaceholder";
 import { MapScreen } from "./components/MapScreen";
 import { NameScreen } from "./components/NameScreen";
+import { TimelineScreen } from "./components/TimelineScreen";
 import { ParentPanel } from "./components/ParentPanel";
 import { cleanName, earnBadge, emptyProgress, loadProgress, saveProgress, setAgeGroup, toggleLesson, type Lang, type Progress } from "./progress";
 import { setMuted } from "./sound";
 import { stopSpeaking } from "./speech";
 
-type Screen = { kind: "map" } | { kind: "lesson"; id: string } | { kind: "parents" } | { kind: "facts" };
+type Screen = { kind: "map" } | { kind: "lesson"; id: string } | { kind: "parents" } | { kind: "facts" } | { kind: "timeline" };
 
 export function App() {
   const [progress, setProgress] = useState<Progress>(() => loadProgress(window.localStorage));
@@ -69,6 +70,17 @@ export function App() {
     );
   }
 
+  if (screen.kind === "timeline") {
+    return (
+      <TimelineScreen
+        lang={progress.lang}
+        ageGroup={progress.ageGroup ?? "junior"}
+        onLang={setLang}
+        onClose={() => setScreen({ kind: "map" })}
+      />
+    );
+  }
+
   if (screen.kind === "facts") {
     return (
       <FactCards
@@ -114,6 +126,7 @@ export function App() {
       onToggleMute={() => setProgress((p) => ({ ...p, muted: !p.muted }))}
       onOpenLesson={(id) => setScreen({ kind: "lesson", id })}
       onParents={() => setScreen({ kind: "parents" })}
+      onTimeline={() => setScreen({ kind: "timeline" })}
     />
   );
 }

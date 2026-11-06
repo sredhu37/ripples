@@ -167,6 +167,7 @@ describe("MapScreen with disabled lessons", () => {
           onToggleMute={() => {}}
           onOpenLesson={() => {}}
           onParents={() => {}}
+          onTimeline={() => {}}
         />
       );
     });
@@ -212,6 +213,7 @@ describe("MapScreen with disabled lessons", () => {
           onToggleMute={() => {}}
           onOpenLesson={() => {}}
           onParents={() => {}}
+          onTimeline={() => {}}
         />
       );
     });

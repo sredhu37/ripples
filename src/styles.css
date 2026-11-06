@@ -1158,3 +1158,25 @@ mark.term {
 .trade .row.wrap {
   gap: 8px;
 }
+
+/* World timeline */
+.timeline-screen { padding-bottom: 32px; }
+.timeline-help { margin: 4px 0 8px; }
+.timeline-scrubber { width: 100%; max-width: 700px; height: auto; margin: 4px auto; display: block; }
+.timeline-eras, .timeline-regions { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+.timeline-era-head h2 { margin: 8px 0 2px; }
+.timeline-era-head p { margin: 0 0 8px; }
+.timeline-lane { margin: 12px 0; }
+.timeline-lane h3 { margin: 0 0 6px; padding-bottom: 2px; border-bottom: 4px solid; display: inline-block; }
+.timeline-lane ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.timeline-card { background: #fff; border: 2px solid #d9e4e6; border-left-width: 8px; border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; }
+.timeline-card p { margin: 2px 0 0; }
+.timeline-year { font-size: 0.8rem; font-weight: 700; color: #4b6b72; }
+.timeline-empty { font-style: italic; }
+.chip { border: 2px solid #1d3f47; background: #fff; border-radius: 999px; padding: 6px 12px; font: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.chip-on { background: #f08a2e; color: #fff; border-color: #f08a2e; }
+.chip .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+@media (min-width: 720px) {
+  .timeline-lane ul { flex-direction: row; flex-wrap: wrap; }
+  .timeline-card { flex: 1 1 260px; }
+}

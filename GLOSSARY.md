@@ -78,3 +78,5 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Disabled lesson | A lesson explicitly turned off by parents in the parent panel, hidden from the child's trail, badges shelf, and progression | hidden lesson, locked lesson |
 | Junior age group | The 7-10 age bracket with concrete stories, visual guidance, and foundational concepts | younger tier, easy mode |
 | Senior age group | The 10-14 age bracket with deeper mechanics, real-world balance sheets, and advanced challenges | older tier, pro mode |
+| World timeline | The screen showing events from different regions and science side by side, by era | history lesson, calendar |
+| Track | One lane of the world timeline for a region or for science | channel, row |
