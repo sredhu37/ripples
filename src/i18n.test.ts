@@ -29,6 +29,7 @@ describe("i18n core", () => {
       "askDad", "toTrail", "allLessons", "restartLesson", "factCards",
       "factCardsHelp", "claims", "simplified", "noLessons",
       "lessonSelectionTitle", "lessonSelectionHelp", "lessonEnabled", "lessonDisabled",
+      "ageGroupTitle", "ageGroupHelp", "ageJunior", "ageSenior", "ageJuniorDesc", "ageSeniorDesc",
     ] as const;
 
     for (const key of keys) {

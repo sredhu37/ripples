@@ -107,10 +107,24 @@ const ALL: Record<string, Lesson | undefined> = {
   humanedge,
 };
 
-export function getLesson(id: string): Lesson | undefined {
+import type { AgeGroup } from "../progress";
+
+const SENIOR: Record<string, Lesson> = {};
+
+export function registerSeniorLesson(id: string, lesson: Lesson): void {
+  SENIOR[id] = lesson;
+}
+
+export function getLesson(id: string, ageGroup?: AgeGroup): Lesson | undefined {
+  if (ageGroup === "senior" && SENIOR[id]) {
+    return SENIOR[id];
+  }
   return ALL[id];
 }
 
-export function hasLesson(id: string): boolean {
+export function hasLesson(id: string, ageGroup?: AgeGroup): boolean {
+  if (ageGroup === "senior" && SENIOR[id]) {
+    return true;
+  }
   return ALL[id] !== undefined;
 }

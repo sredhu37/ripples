@@ -76,3 +76,5 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Equity | An ownership share or percentage in a business or asset | loan, token |
 | Co-owner | A partner who owns an equity share in a business and splits profits and risks | lender, customer |
 | Disabled lesson | A lesson explicitly turned off by parents in the parent panel, hidden from the child's trail, badges shelf, and progression | hidden lesson, locked lesson |
+| Junior age group | The 7-10 age bracket with concrete stories, visual guidance, and foundational concepts | younger tier, easy mode |
+| Senior age group | The 10-14 age bracket with deeper mechanics, real-world balance sheets, and advanced challenges | older tier, pro mode |
