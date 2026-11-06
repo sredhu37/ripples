@@ -86,6 +86,7 @@ export const LESSONS: LessonMeta[] = [
   { id: "ai", title: { en: "Artificial Intelligence", de: "Kuenstliche Intelligenz", pl: "Sztuczna inteligencja" } },
   { id: "jobs", title: { en: "Changing Jobs", de: "Wandel der Berufe", pl: "Zawody w zmieniającym się świecie" } },
   { id: "humanedge", title: { en: "The Human Edge", de: "Der menschliche Vorteil", pl: "Ludzka przewaga" } },
+  { id: "supply_demand", title: { en: "Prices and Scarcity", de: "Preise und Knappheit", pl: "Ceny i rzadkość" } },
 ];
 
 export const LESSON_ORDER = LESSONS.map((l) => l.id);
@@ -147,6 +148,7 @@ export const CURRICULUM_GROUPS: LessonGroup[] = [
       "stocksvsbonds",
       "derivatives",
       "philanthropy",
+      "supply_demand",
     ],
   },
   {

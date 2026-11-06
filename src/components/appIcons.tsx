@@ -286,6 +286,15 @@ const LESSON_ART: Record<string, ReactNode> = {
       <path d="M30 80 C35 70 45 68 50 74 C55 68 65 70 70 80" stroke="#f59e0b" strokeWidth="3" fill="none" />
     </g>
   ),
+  supply_demand: (
+    <g>
+      {/* Price tag */}
+      <path d="M25 30 L55 15 L85 45 L55 75 Z" fill="#f59e0b" stroke={INK} strokeWidth="2.5" />
+      <circle cx="45" cy="30" r="4" fill="#fff" stroke={INK} strokeWidth="1.5" />
+      {/* Sparkling diamond */}
+      <polygon points="58,40 68,40 73,48 58,62 43,48 48,40" fill="#38bdf8" stroke={INK} strokeWidth="2" />
+    </g>
+  ),
 };
 
 /** Picture for a lesson on the trail, on its badge and in headings. */
