@@ -7,7 +7,7 @@ import { LessonPlaceholder } from "./components/LessonPlaceholder";
 import { MapScreen } from "./components/MapScreen";
 import { NameScreen } from "./components/NameScreen";
 import { ParentPanel } from "./components/ParentPanel";
-import { cleanName, earnBadge, emptyProgress, loadProgress, saveProgress, toggleLesson, type Lang, type Progress } from "./progress";
+import { cleanName, earnBadge, emptyProgress, loadProgress, saveProgress, setAgeGroup, toggleLesson, type Lang, type Progress } from "./progress";
 import { setMuted } from "./sound";
 import { stopSpeaking } from "./speech";
 
@@ -46,7 +46,7 @@ export function App() {
       <NameScreen
         lang={progress.lang}
         onLang={setLang}
-        onDone={(name) => setProgress((p) => ({ ...p, name: cleanName(name) }))}
+        onDone={(name, ageGroup) => setProgress((p) => ({ ...p, name: cleanName(name), ageGroup }))}
       />
     );
   }
@@ -64,6 +64,7 @@ export function App() {
         onClose={() => setScreen({ kind: "map" })}
         onLang={setLang}
         onToggleLesson={(id, enabled) => setProgress((p) => toggleLesson(p, id, enabled))}
+        onAgeGroup={(age) => setProgress((p) => setAgeGroup(p, age))}
       />
     );
   }
@@ -79,7 +80,7 @@ export function App() {
   }
 
   if (screen.kind === "lesson") {
-    const lesson = getLesson(screen.id);
+    const lesson = getLesson(screen.id, progress.ageGroup);
     const meta = LESSONS.find((l) => l.id === screen.id);
     if (lesson && meta) {
       return (

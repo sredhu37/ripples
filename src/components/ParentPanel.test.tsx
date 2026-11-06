@@ -3,8 +3,10 @@ import { createRoot } from "react-dom/client";
 import { describe, expect, it, vi } from "vitest";
 import { ParentPanel } from "./ParentPanel";
 import { MapScreen } from "./MapScreen";
+import { NameScreen } from "./NameScreen";
 import { emptyProgress, type Progress } from "../progress";
 import { LESSONS, CURRICULUM_GROUPS } from "../lessons";
+import { getLesson, registerSeniorLesson } from "../content";
 
 // Tell React it is in a test environment so act(...) warnings are suppressed
 // @ts-expect-error test flag
@@ -219,5 +221,108 @@ describe("MapScreen with disabled lessons", () => {
 
     root.unmount();
     container.remove();
+  });
+});
+
+describe("Age Groups integration", () => {
+  it("renders age group selector in ParentPanel and calls onAgeGroup", async () => {
+    const container = document.createElement("div");
+    document.body.appendChild(container);
+    const root = createRoot(container);
+
+    const onAgeGroup = vi.fn();
+    const progress: Progress = { ...emptyProgress(), name: "Child", lang: "en", ageGroup: "junior" };
+
+    await act(async () => {
+      root.render(
+        <ParentPanel
+          progress={progress}
+          onRestore={() => {}}
+          onReset={() => {}}
+          onFacts={() => {}}
+          onClose={() => {}}
+          onToggleLesson={() => {}}
+          onAgeGroup={onAgeGroup}
+        />
+      );
+    });
+
+    // Solve gate
+    const form = container.querySelector("form")!;
+    const match = form.querySelector("p")!.textContent!.match(/(\d+)\s*×\s*(\d+)/)!;
+    const product = String(Number(match[1]) * Number(match[2]));
+    const input = container.querySelector("input")!;
+
+    await act(async () => {
+      changeInput(input, product);
+      form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+    });
+
+    expect(container.textContent).toContain("Age group");
+    const pills = container.querySelectorAll(".age-pill-btn");
+    expect(pills.length).toBe(2);
+    expect(pills[0].classList.contains("active")).toBe(true);
+    expect(pills[1].classList.contains("active")).toBe(false);
+
+    await act(async () => {
+      (pills[1] as HTMLButtonElement).click();
+    });
+
+    expect(onAgeGroup).toHaveBeenCalledWith("senior");
+
+    root.unmount();
+    container.remove();
+  });
+
+  it("selects senior age group in NameScreen and submits", async () => {
+    const container = document.createElement("div");
+    document.body.appendChild(container);
+    const root = createRoot(container);
+
+    const onDone = vi.fn();
+
+    await act(async () => {
+      root.render(
+        <NameScreen
+          lang="en"
+          onLang={() => {}}
+          onDone={onDone}
+        />
+      );
+    });
+
+    const input = container.querySelector("input")!;
+    const pills = container.querySelectorAll(".age-pill-btn");
+    expect(pills.length).toBe(2);
+
+    // Select Senior
+    await act(async () => {
+      (pills[1] as HTMLButtonElement).click();
+      changeInput(input, "Alex");
+      const form = container.querySelector("form")!;
+      form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+    });
+
+    expect(onDone).toHaveBeenCalledWith("Alex", "senior");
+
+    root.unmount();
+    container.remove();
+  });
+
+  it("falls back to junior lesson when senior lesson is not registered", () => {
+    const junior = getLesson("money", "junior");
+    expect(junior).toBeDefined();
+
+    // money does not yet have a custom senior fork in ticket 69, so it cleanly falls back
+    const senior = getLesson("money", "senior");
+    expect(senior).toBe(junior);
+  });
+
+  it("returns registered senior lesson when present", () => {
+    const dummySenior = { ...getLesson("money")!, id: "money", askDad: { en: "Senior prompt", de: "Senior prompt", pl: "Senior prompt" } };
+    registerSeniorLesson("money", dummySenior);
+
+    expect(getLesson("money", "senior")).toBe(dummySenior);
+    expect(getLesson("money", "junior")).not.toBe(dummySenior);
   });
 });

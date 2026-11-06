@@ -9,6 +9,7 @@ import {
   loadProgress,
   nextLessonId,
   saveProgress,
+  setAgeGroup,
   toggleLesson,
   type Progress,
 } from "./progress";
@@ -75,7 +76,7 @@ describe("storage", () => {
 
   it("ignores wrong types in stored data", () => {
     const s = { getItem: () => JSON.stringify({ name: 5, lang: "fr", badges: ["a", 3, "a"] }) };
-    expect(loadProgress(s)).toEqual({ name: "", lang: "en", muted: false, badges: ["a"], disabledLessons: [] });
+    expect(loadProgress(s)).toEqual({ name: "", lang: "en", muted: false, badges: ["a"], disabledLessons: [], ageGroup: "junior" });
   });
 });
 
@@ -215,5 +216,17 @@ describe("disabled lessons", () => {
     const code = exportCode(p, order);
     const restored = importCode(code, order);
     expect(restored?.disabledLessons).toEqual([]);
+    expect(restored?.ageGroup).toBe("junior");
+  });
+
+  it("updates and round-trips senior ageGroup in progress and save code", () => {
+    let p = emptyProgress();
+    expect(p.ageGroup).toBe("junior");
+    p = setAgeGroup(p, "senior");
+    expect(p.ageGroup).toBe("senior");
+
+    const code = exportCode(p, order);
+    const restored = importCode(code, order);
+    expect(restored?.ageGroup).toBe("senior");
   });
 });

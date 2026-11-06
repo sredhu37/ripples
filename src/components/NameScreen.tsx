@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { t } from "../i18n";
-import { cleanName, type Lang } from "../progress";
+import { cleanName, type AgeGroup, type Lang } from "../progress";
 import { sfx } from "../sound";
 import { LangSwitch } from "./LangSwitch";
 import { Otto } from "./Otto";
@@ -11,11 +11,12 @@ export { LangSwitch };
 interface Props {
   lang: Lang;
   onLang: (l: Lang) => void;
-  onDone: (name: string) => void;
+  onDone: (name: string, ageGroup: AgeGroup) => void;
 }
 
 export function NameScreen({ lang, onLang, onDone }: Props) {
   const [value, setValue] = useState("");
+  const [ageGroup, setAgeGroup] = useState<AgeGroup>("junior");
   const name = cleanName(value);
 
   return (
@@ -31,7 +32,7 @@ export function NameScreen({ lang, onLang, onDone }: Props) {
           e.preventDefault();
           if (!name) return;
           sfx.pop();
-          onDone(name);
+          onDone(name, ageGroup);
         }}
       >
         <input
@@ -44,6 +45,36 @@ export function NameScreen({ lang, onLang, onDone }: Props) {
           autoCapitalize="words"
           aria-label={t(lang, "namePlaceholder")}
         />
+
+        <div className="age-group-field" role="group" aria-label={t(lang, "ageGroupTitle")}>
+          <div className="age-pill-row">
+            <button
+              type="button"
+              className={`age-pill-btn ${ageGroup === "junior" ? "active" : ""}`}
+              onClick={() => {
+                sfx.tap();
+                setAgeGroup("junior");
+              }}
+              aria-pressed={ageGroup === "junior"}
+            >
+              <span className="age-pill-label">{t(lang, "ageJunior")}</span>
+              <span className="age-pill-desc">{t(lang, "ageJuniorDesc")}</span>
+            </button>
+            <button
+              type="button"
+              className={`age-pill-btn ${ageGroup === "senior" ? "active" : ""}`}
+              onClick={() => {
+                sfx.tap();
+                setAgeGroup("senior");
+              }}
+              aria-pressed={ageGroup === "senior"}
+            >
+              <span className="age-pill-label">{t(lang, "ageSenior")}</span>
+              <span className="age-pill-desc">{t(lang, "ageSeniorDesc")}</span>
+            </button>
+          </div>
+        </div>
+
         <button className="btn" type="submit" disabled={!name}>
           {t(lang, "nameGo")}
         </button>

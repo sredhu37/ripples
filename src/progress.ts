@@ -1,4 +1,5 @@
 export type Lang = "en" | "de" | "pl";
+export type AgeGroup = "junior" | "senior";
 
 export interface Progress {
   name: string;
@@ -8,6 +9,8 @@ export interface Progress {
   badges: string[];
   /** ids of lessons disabled by parents */
   disabledLessons?: string[];
+  /** Age group: 'junior' (7-10) or 'senior' (10-14). Defaults to 'junior' */
+  ageGroup?: AgeGroup;
 }
 
 export type LessonState = "done" | "next" | "locked";
@@ -17,7 +20,7 @@ const PREFIX = "RIP1";
 const MAX_NAME = 20;
 
 export function emptyProgress(): Progress {
-  return { name: "", lang: "en", muted: false, badges: [], disabledLessons: [] };
+  return { name: "", lang: "en", muted: false, badges: [], disabledLessons: [], ageGroup: "junior" };
 }
 
 export function cleanName(raw: string): string {
@@ -30,6 +33,8 @@ function sanitize(d: unknown): Progress {
   const o = d as Record<string, unknown>;
   const rawLang = o.lang;
   const lang: Lang = rawLang === "de" ? "de" : rawLang === "pl" ? "pl" : "en";
+  const rawAge = o.ageGroup;
+  const ageGroup: AgeGroup = rawAge === "senior" ? "senior" : "junior";
   return {
     name: typeof o.name === "string" ? cleanName(o.name) : base.name,
     lang,
@@ -40,6 +45,7 @@ function sanitize(d: unknown): Progress {
     disabledLessons: Array.isArray(o.disabledLessons)
       ? [...new Set(o.disabledLessons.filter((b): b is string => typeof b === "string"))]
       : [],
+    ageGroup,
   };
 }
 
@@ -71,6 +77,10 @@ export function toggleLesson(p: Progress, lessonId: string, enabled: boolean): P
   } else {
     return current.includes(lessonId) ? p : { ...p, disabledLessons: [...current, lessonId] };
   }
+}
+
+export function setAgeGroup(p: Progress, ageGroup: AgeGroup): Progress {
+  return p.ageGroup === ageGroup ? p : { ...p, ageGroup };
 }
 
 /** First lesson in order without a badge that is not disabled, or null when all are done. */
@@ -108,13 +118,16 @@ function checksum(s: string): string {
 
 export function exportCode(p: Progress, order: string[]): string {
   const mask = order.reduce((m, id, i) => (p.badges.includes(id) ? m + Math.pow(2, i) : m), 0);
-  const payload: { n: string; l: Lang; b: number; d?: string[] } = {
+  const payload: { n: string; l: Lang; b: number; d?: string[]; a?: "j" | "s" } = {
     n: p.name,
     l: p.lang,
     b: mask,
   };
   if (p.disabledLessons && p.disabledLessons.length > 0) {
     payload.d = p.disabledLessons;
+  }
+  if (p.ageGroup === "senior") {
+    payload.a = "s";
   }
   const body = toB64Url(JSON.stringify(payload));
   return `${PREFIX}.${body}.${checksum(body)}`;
@@ -130,6 +143,7 @@ export function importCode(code: string, order: string[]): Progress | null {
       l?: unknown;
       b?: unknown;
       d?: unknown;
+      a?: unknown;
     };
     if (typeof d.n !== "string" || typeof d.b !== "number") return null;
     const rawLang = d.l;
@@ -137,12 +151,14 @@ export function importCode(code: string, order: string[]): Progress | null {
     const disabledLessons = Array.isArray(d.d)
       ? [...new Set(d.d.filter((id): id is string => typeof id === "string"))]
       : [];
+    const ageGroup: AgeGroup = d.a === "s" ? "senior" : "junior";
     return {
       name: cleanName(d.n),
       lang,
       muted: false,
       badges: order.filter((_, i) => Math.floor((d.b as number) / Math.pow(2, i)) % 2 === 1),
       disabledLessons,
+      ageGroup,
     };
   } catch {
     return null;
