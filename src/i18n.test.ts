@@ -28,6 +28,7 @@ describe("i18n core", () => {
       "tryAgain", "rightLine", "getBadge", "badgeEarned", "badgeAgain",
       "askDad", "toTrail", "allLessons", "restartLesson", "factCards",
       "factCardsHelp", "claims", "simplified", "noLessons",
+      "lessonSelectionTitle", "lessonSelectionHelp", "lessonEnabled", "lessonDisabled",
     ] as const;
 
     for (const key of keys) {

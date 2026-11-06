@@ -19,6 +19,7 @@ interface Props {
 
 export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLesson, onParents }: Props) {
   const { lang, name, muted } = progress;
+  const visibleLessons = LESSONS.filter((l) => !progress.disabledLessons?.includes(l.id));
   const next = nextLessonId(progress, LESSON_ORDER);
   const greeting = next === null ? t(lang, "allDone") : t(lang, returning ? "welcomeBack" : "welcome", { name });
   const nextLesson = LESSONS.find((l) => l.id === next);
@@ -65,7 +66,7 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
       <section aria-label={t(lang, "badges")} className="shelf">
         <h2>{t(lang, "badges")}</h2>
         <ul className="shelf-row">
-          {LESSONS.map((l) => {
+          {visibleLessons.map((l) => {
             const earned = progress.badges.includes(l.id);
             const title = getLessonTitle(l, lang);
             return (
@@ -81,7 +82,7 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
       </section>
 
       <ol className="trail">
-        {LESSONS.map((l, i) => {
+        {visibleLessons.map((l, i) => {
           const state = lessonState(progress, LESSON_ORDER, l.id);
           const open = state !== "locked";
           const title = getLessonTitle(l, lang);

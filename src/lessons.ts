@@ -7,8 +7,18 @@ export interface LessonMeta {
   title: Text;
 }
 
+export interface LessonGroup {
+  id: string;
+  title: Text;
+  lessonIds: string[];
+}
+
 export function getLessonTitle(meta: LessonMeta, lang: Lang): string {
   return meta.title[lang];
+}
+
+export function getGroupTitle(group: LessonGroup, lang: Lang): string {
+  return group.title[lang];
 }
 
 /** Complete Curriculum: Group 1, Group 2, Group 3, Group 4, and Group 5. */
@@ -79,3 +89,118 @@ export const LESSONS: LessonMeta[] = [
 ];
 
 export const LESSON_ORDER = LESSONS.map((l) => l.id);
+
+export const CURRICULUM_GROUPS: LessonGroup[] = [
+  {
+    id: "group1",
+    title: {
+      en: "Group 1: Money and Work",
+      de: "Gruppe 1: Geld und Arbeit",
+      pl: "Grupa 1: Pieniądze i praca",
+    },
+    lessonIds: [
+      "money",
+      "work",
+      "savings",
+      "business",
+      "equity",
+      "loans",
+      "banks",
+      "interest",
+      "taxes",
+      "inflation",
+      "printing",
+      "rates",
+    ],
+  },
+  {
+    id: "group2",
+    title: {
+      en: "Group 2: Business",
+      de: "Gruppe 2: Wirtschaft",
+      pl: "Grupa 2: Biznes",
+    },
+    lessonIds: [
+      "profit",
+      "sales",
+      "ticketsize",
+      "marketshare",
+      "competition",
+      "marketing",
+      "hiring",
+      "scale",
+    ],
+  },
+  {
+    id: "group3",
+    title: {
+      en: "Group 3: Markets",
+      de: "Gruppe 3: Märkte",
+      pl: "Grupa 3: Rynki",
+    },
+    lessonIds: [
+      "supplydemand",
+      "commodities",
+      "gold",
+      "stocks",
+      "bonds",
+      "stocksvsbonds",
+      "derivatives",
+      "philanthropy",
+    ],
+  },
+  {
+    id: "group4",
+    title: {
+      en: "Group 4: Governments",
+      de: "Gruppe 4: Staaten und Systeme",
+      pl: "Grupa 4: Rządy i systemy",
+    },
+    lessonIds: [
+      "whygovernment",
+      "elections",
+      "democracy",
+      "monarchy",
+      "dictatorship",
+      "capitalism",
+      "communism",
+      "powertriangle",
+    ],
+  },
+  {
+    id: "group5",
+    title: {
+      en: "Group 5: History",
+      de: "Gruppe 5: Geschichte",
+      pl: "Grupa 5: Historia",
+    },
+    lessonIds: [
+      "mughals",
+      "spicetrade",
+      "britishinindia",
+      "independence",
+      "ww1",
+      "ww2",
+      "rebuilding",
+      "whyhistory",
+    ],
+  },
+  {
+    id: "group6",
+    title: {
+      en: "Group 6: Technology",
+      de: "Gruppe 6: Technologie",
+      pl: "Grupa 6: Technologia",
+    },
+    lessonIds: [
+      "tools",
+      "massproduction",
+      "computers",
+      "internet",
+      "automation",
+      "ai",
+      "jobs",
+      "humanedge",
+    ],
+  },
+];

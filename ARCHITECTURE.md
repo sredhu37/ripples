@@ -16,8 +16,8 @@ flowchart LR
 ## Components
 
 - **App** (`src/App.tsx`): holds progress state and the current screen (name, map, lesson, parents).
-- **Progress** (`src/progress.ts`): pure functions for badges, next lesson, storage and the save code. Tested in `src/progress.test.ts`.
-- **Lessons registry** (`src/lessons.ts`): the ordered lesson list with ids and titles in EN, DE, and PL. Ids are saved in progress and in the save code, so only append new ids, never reorder or rename.
+- **Progress** (`src/progress.ts`): pure functions for badges, next lesson, disabled lessons, storage and the save code. Tested in `src/progress.test.ts`.
+- **Lessons registry** (`src/lessons.ts`): the ordered lesson list and curriculum groups with ids and titles in EN, DE, and PL. Ids are saved in progress and in the save code, so only append new ids, never reorder or rename.
 - **UI text** (`src/i18n.ts`): all interface strings in EN, DE, and PL.
 - **Lesson engine** (`src/lesson/`): `types.ts` (the `Lesson` shape), `LessonRunner.tsx` (story, toy, quiz, badge, real life, Ask Dad), `toolkit.tsx` (Stage, Slider, ToyButton, CheckButton, `animatedBeat`). A story beat is either an old emoji `scene` or an animated beat: one Otto line per tap and a diagram that shows one more part per tap.
 - **Lesson content** (`src/content/<id>.tsx`, registry in `src/content/index.ts`): one file per lesson, checked by `src/content/content.test.ts`. How to write one: [docs/writing-lessons.md](docs/writing-lessons.md). Parents read each lesson's fact card in the app (gear icon, maths gate, Fact cards).
