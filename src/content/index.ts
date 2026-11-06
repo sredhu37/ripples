@@ -51,6 +51,7 @@ import { lesson as ai } from "./ai";
 import { lesson as jobs } from "./jobs";
 import { lesson as humanedge } from "./humanedge";
 import { lesson as supply_demand } from "./supply_demand";
+import { lesson as scarcity_prices } from "./scarcity_prices";
 import type { Lesson } from "../lesson/types";
 
 const ALL: Record<string, Lesson | undefined> = {
@@ -107,6 +108,7 @@ const ALL: Record<string, Lesson | undefined> = {
   jobs,
   humanedge,
   supply_demand,
+  scarcity_prices,
 };
 
 import type { AgeGroup } from "../progress";
