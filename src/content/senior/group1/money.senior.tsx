@@ -4,28 +4,35 @@ import type { Lesson, Text, ToyProps, WidgetProps } from "../../../lesson/types"
 
 const T = (en: string, de: string, pl: string): Text => ({ en, de, pl });
 
-function LiquidityDiagram({ step }: { step: number }) {
+function TradeDiagram({ step }: { step: number }) {
   return (
-    <svg viewBox="0 0 400 240" className="diagram-svg" role="img" aria-label="Liquidity and exchange diagram">
+    <svg viewBox="0 0 400 240" className="diagram-svg" role="img" aria-label="Trading and money diagram">
       <rect x="10" y="10" width="380" height="220" rx="14" fill="#f8fbfc" stroke="#1d3f47" strokeWidth="2" />
+      
+      {/* Left: Aish */}
       <circle cx="90" cy="80" r="35" fill="#fef3d6" stroke="#d4920b" strokeWidth="2.5" />
-      <text x="90" y="85" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#784e03">Illiquid Good</text>
+      <text x="90" y="76" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#784e03">Aish</text>
+      <text x="90" y="94" textAnchor="middle" fontSize="11" fill="#784e03">Custom Code</text>
 
+      {/* Right: Music Teacher */}
       <circle cx="310" cy="80" r="35" fill="#e3f3ff" stroke="#1971c2" strokeWidth="2.5" />
-      <text x="310" y="85" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#0c4a7e">Specialist</text>
+      <text x="310" y="76" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#0c4a7e">Teacher</text>
+      <text x="310" y="94" textAnchor="middle" fontSize="11" fill="#0c4a7e">Guitar Lessons</text>
 
+      {/* Step 1: Direct Trade Fails */}
       {step >= 1 && (
         <g>
           <path d="M 130 80 L 270 80" stroke="#d4503f" strokeWidth="3" strokeDasharray="5,5" />
-          <text x="200" y="65" textAnchor="middle" fontSize="11" fill="#d4503f" fontWeight="bold">Barter Fails</text>
+          <text x="200" y="65" textAnchor="middle" fontSize="11" fill="#d4503f" fontWeight="bold">Trade Fails: Needs Bike!</text>
         </g>
       )}
 
+      {/* Step 2: Cash Solves It */}
       {step >= 2 && (
         <g>
           <circle cx="200" cy="170" r="38" fill="#d3f9d8" stroke="#2b8a3e" strokeWidth="3" />
-          <text x="200" y="168" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#2b8a3e">Universal</text>
-          <text x="200" y="184" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#2b8a3e">Money</text>
+          <text x="200" y="165" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#2b8a3e">Cash ($)</text>
+          <text x="200" y="182" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#2b8a3e">Works Everywhere</text>
           <path d="M 115 105 L 175 145" stroke="#2b8a3e" strokeWidth="2.5" markerEnd="url(#arrow)" />
           <path d="M 225 145 L 285 105" stroke="#2b8a3e" strokeWidth="2.5" markerEnd="url(#arrow)" />
         </g>
@@ -41,7 +48,7 @@ function Toy({ onDone }: ToyProps) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "14px", alignItems: "center" }}>
       <p style={{ margin: 0, fontWeight: 700, fontSize: "1rem" }}>
-        {hasCoin ? "Liquid exchange: Money trades instantly with everyone!" : "Friction: Barter requires matching needs."}
+        {hasCoin ? "Success: Everyone accepts cash happily!" : "Stuck: Direct trade only works if needs match."}
       </p>
       <div style={{ display: "flex", gap: "10px" }}>
         <button
@@ -53,7 +60,7 @@ function Toy({ onDone }: ToyProps) {
             if (swaps >= 1) onDone?.();
           }}
         >
-          Use Liquid Currency
+          Pay with Cash ($)
         </button>
         <button
           type="button"
@@ -63,11 +70,11 @@ function Toy({ onDone }: ToyProps) {
             setSwaps((s) => s + 1);
           }}
         >
-          Try Direct Barter
+          Try Direct Trade
         </button>
       </div>
       <div style={{ padding: "12px", background: hasCoin ? "#eef8ef" : "#fdf2e9", borderRadius: "10px", width: "100%", textAlign: "center" }}>
-        {hasCoin ? "Trade completed with 0 search cost." : "Swap rejected: Double coincidence of wants not met."}
+        {hasCoin ? "Lesson booked: The teacher takes the cash to buy a bike." : "Trade declined: The guitar teacher doesn't need computer code!"}
       </div>
     </div>
   );
@@ -76,10 +83,10 @@ function Toy({ onDone }: ToyProps) {
 function MoneyWidget({ onAnswer }: WidgetProps) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
-      <p style={{ margin: 0 }}>Which asset is the most liquid?</p>
-      <button type="button" className="btn btn-quiet" onClick={() => onAnswer(false)}>A rare collectable comic book</button>
-      <button type="button" className="btn btn-quiet" onClick={() => onAnswer(false)}>A commercial warehouse</button>
-      <button type="button" className="btn" onClick={() => onAnswer(true)}>Government currency notes</button>
+      <p style={{ margin: 0 }}>Which item can you spend instantly at any store?</p>
+      <button type="button" className="btn btn-quiet" onClick={() => onAnswer(false)}>A rare collectable trading card</button>
+      <button type="button" className="btn btn-quiet" onClick={() => onAnswer(false)}>An electric scooter</button>
+      <button type="button" className="btn" onClick={() => onAnswer(true)}>Paper cash or bank card</button>
     </div>
   );
 }
@@ -89,118 +96,119 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("Meet Aish. Aish builds custom website scripts after school.", "Das ist Mia. Mia programmiert nach der Schule Website-Skripte.", "Poznaj Zofię. Zofia po szkole tworzy skrypty na strony internetowe."),
-        T("She wants guitar lessons from a local music teacher.", "Sie moechte Gitarrenunterricht bei einem Musiklehrer nehmen.", "Chce brać lekcje gry na gitarze u lokalnego nauczyciela muzyki."),
-        T("Aish offers to trade two website scripts for guitar lessons.", "Mia bietet an, zwei Skripte gegen Gitarrenunterricht zu tauschen.", "Zofia proponuje wymianę dwóch skryptów na lekcje gitary."),
+        T("Let's meet Aish. Aish loves working with computers.", "Das ist Mia. Mia beschaeftigt sich leidenschaftlich gern mit Computern.", "Poznaj Zofię. Zofia uwielbia pracować przy komputerze."),
+        T("Her hobby is writing custom website code and apps for local shops after school.", "Ihr Hobby ist es, nach der Schule Websites und kleine Apps fuer Geschaefte zu programmieren.", "Jej pasją jest tworzenie stron internetowych i aplikacji dla lokalnych sklepów po lekcjach."),
+        T("She is really good at it, and shops love the tools she builds.", "Sie kann das richtig gut und die Geschaefte freuen sich ueber ihre Hilfe.", "Robi to świetnie, a właściciele sklepów bardzo cenią jej narzędzia."),
       ],
-      LiquidityDiagram,
+      TradeDiagram,
     ),
     animatedBeat(
       [
-        T("The music teacher says no. He does not own a website and needs a bicycle instead.", "Der Musiklehrer lehnt ab. Er hat keine Website und braucht ein Fahrrad.", "Nauczyciel muzyki odmawia. Nie ma strony internetowej i potrzebuje roweru."),
-        T("Trading goods directly is called *barter*.", "Der direkte Tausch von Waren heisst *Tauschhandel*.", "Bezpośrednia wymiana towarów to *handel wymienny*."),
-        T("Barter requires a *double coincidence of wants*: both people must want what the other has.", "Tauschhandel erfordert *doppelte Beduerfnisuebereinstimmung*: Beide muessen wollen, was der andere hat.", "Taki handel wymaga *podwójnej zbieżności potrzeb*: obie strony muszą chcieć tego, co ma druga."),
+        T("Now Aish wants to learn how to play the electric guitar.", "Jetzt moechte Mia lernen, wie man E-Gitarre spielt.", "Teraz Zofia bardzo chce nauczyć się grać na gitarze elektrycznej."),
+        T("She visits a local music teacher to ask for weekly guitar lessons.", "Sie fragt einen Musiklehrer im Viertel nach regelmaessigem Gitarrenunterricht.", "Idzie do lokalnego nauczyciela muzyki, by poprosić o cotygodniowe lekcje."),
+        T("Aish offers to build a new website for him in exchange for guitar lessons.", "Mia bietet an, ihm eine moderne Website zu bauen, wenn er ihr dafuer Unterricht gibt.", "Zofia proponuje, że stworzy dla niego stronę internetową w zamian za lekcje muzyki."),
       ],
-      LiquidityDiagram,
+      TradeDiagram,
     ),
     animatedBeat(
       [
-        T("Aish would have to find a bicycle owner who happens to need website code.", "Mia muesste jemanden mit Fahrrad finden, der Website-Code sucht.", "Zofia musiałaby znaleźć kogoś z rowerem, kto potrzebuje kodu do strony."),
-        T("This creates immense search costs and trade friction.", "Das verursacht enorme Suchkosten und Handelshemmnisse.", "To tworzy ogromne koszty poszukiwań i utrudnienia w handlu."),
-        T("Economies overcome this by adopting a universal medium of exchange: *money*.", "Wirtschaften loesen dies mit einem universellen Tauschmittel: *Geld*.", "Gospodarki rozwiązują to, przyjmując uniwersalny środek wymiany: *pieniądz*."),
+        T("Trading things directly without any money is called *barter*.", "Dinge direkt ohne Geld gegeneinander zu tauschen heisst *Tauschhandel*.", "Bezpośrednia wymiana rzeczy bez użycia pieniędzy to *handel wymienny*."),
+        T("But the guitar teacher says: No thanks! I do not need a website. I need a new bicycle.", "Doch der Lehrer sagt: Nein danke! Ich brauche keine Website. Ich brauche ein Fahrrad.", "Lecz nauczyciel odpowiada: Dziękuję, ale nie potrzebuję strony. Potrzebuję nowego roweru."),
+        T("Direct trade only works when both people happen to want what the other person has.", "Direkter Tausch klappt nur, wenn beide zufaellig genau das wollen, was der andere hat.", "Taka wymiana działa tylko wtedy, gdy obie osoby przypadkiem potrzebują dokładnie tego, co ma ta druga."),
       ],
-      LiquidityDiagram,
+      TradeDiagram,
+      "think",
     ),
     animatedBeat(
       [
-        T("Money has three primary functions: medium of exchange, unit of account, and store of value.", "Geld hat drei Funktionen: Tauschmittel, Recheneinheit und Wertspeicher.", "Pieniądz ma trzy funkcje: środek wymiany, jednostka rozliczeniowa i miernik wartości."),
-        T("Its defining economic property is *liquidity*: how fast it can be traded without losing value.", "Seine Schluesseleigenschaft ist *Liquiditaet*: Wie schnell es ohne Wertverlust tauschbar ist.", "Jego kluczową cechą jest *płynność*: jak szybko można go wymienić bez utraty wartości."),
-        T("Cash is fully liquid, while real estate or code scripts are illiquid.", "Bargeld ist vollkommen liquide, waehrend Immobilien oder Code illiquide sind.", "Gotówka jest w pełni płynna, podczas gdy nieruchomości czy skrypty są niepłynne."),
+        T("Aish would have to hunt all week to find someone with a bicycle who also needs website code.", "Mia muesste ewig suchen, um jemanden mit Fahrrad zu finden, der auch Website-Code sucht.", "Zofia musiałaby szukać całymi dniami kogoś z rowerem, kto akurat potrzebuje strony w sieci."),
+        T("Searching and asking person after person takes forever and gets frustrating.", "Jeden einzeln zu fragen kostet unendlich viel Zeit und nervt gewaltig.", "Pytanie każdego po kolei zajmuje mnóstwo czasu i bywa bardzo męczące."),
+        T("That is why societies invented *money*. Money is something that *everyone* agrees to accept.", "Deshalb haben Menschen *Geld* erfunden. Geld ist etwas, das *alle* gerne annehmen.", "Dlatego ludzie wymyślili *pieniądze*. Pieniądz to coś, co *wszyscy* chętnie przyjmują."),
       ],
-      LiquidityDiagram,
+      TradeDiagram,
     ),
     animatedBeat(
       [
-        T("Aish sells her script for cash to a dentist who needs an appointment tool.", "Mia verkauft ihr Skript fuer Geld an einen Zahnarzt fuer Terminbuchungen.", "Zofia sprzedaje swój skrypt za gotówkę dentyście na system rezerwacji."),
-        T("She uses the cash to pay the guitar teacher, who buys his bicycle.", "Mit dem Geld bezahlt sie den Gitarrenlehrer, der sich sein Fahrrad kauft.", "Za gotówkę opłaca nauczyciela gitary, a ten kupuje swój rower."),
-        T("Money eliminates friction and lets people specialize in what they do best.", "Geld beseitigt Reibung und erlaubt Menschen, sich zu spezialisieren.", "Pieniądz usuwa bariery i pozwala ludziom specjalizować się w tym, co robią najlepiej."),
+        T("Now Aish builds an appointment tool for a dentist who pays her fifty dollars in cash.", "Nun programmiert Mia ein Termintool fuer einen Zahnarzt, der sie bar mit 50 Euro bezahlt.", "Teraz Zofia tworzy system rezerwacji dla dentysty, który płaci jej dwieście złotych w gotówce."),
+        T("Aish hands the cash to the guitar teacher for her lessons. The teacher uses that cash to buy his bicycle.", "Mia gibt das Geld dem Lehrer fuer den Unterricht. Der Lehrer kauft sich davon sein Fahrrad.", "Zofia przekazuje gotówkę nauczycielowi za lekcje. Nauczyciel kupuje za te pieniądze swój rower."),
+        T("Everyone gets exactly what they need, and nobody had to trade directly!", "Jeder bekommt genau das, was er braucht, ganz ohne muehsamen Tauschhandel!", "Każdy dostaje dokładnie to, czego potrzebował, bez żadnego uciążliwego handlu wymiennego!"),
       ],
-      LiquidityDiagram,
+      TradeDiagram,
     ),
   ],
   toyIntro: T(
-    "Test how liquidity and universal currency eliminate barter friction.",
-    "Teste, wie Liquiditaet und universelles Geld Tauschhindernisse beseitigen.",
-    "Sprawdź, jak płynność i uniwersalny pieniądz usuwają bariery wymiany.",
+    "See how money lets you trade with anyone, while direct swapping gets stuck.",
+    "Sieh selbst, wie Geld das Handeln einfach macht, waehrend direkter Tausch oft scheitert.",
+    "Zobacz, jak pieniądze ułatwiają wymianę, podczas gdy bezpośredni handel często staje w miejscu.",
   ),
   Toy,
   questions: [
     {
       kind: "choice",
       prompt: T(
-        "What is the term for when two traders must simultaneously desire each other's goods?",
-        "Wie nennt man es, wenn zwei Haendler gleichzeitig die Gueter des anderen wollen muessen?",
-        "Jak nazywa się sytuacja, w której dwaj handlowcy muszą jednocześnie chcieć swoich towarów?",
+        "Why did trading code for guitar lessons fail between Aish and the teacher?",
+        "Warum scheiterte der direkte Tausch zwischen Mia und dem Musiklehrer?",
+        "Dlaczego bezpośrednia wymiana nie udała się między Zofią a nauczycielem?",
       ),
       options: [
-        { text: T("Double coincidence of wants", "Doppelte Beduerfnisuebereinstimmung", "Podwójna zbieżność potrzeb"), correct: true },
-        { text: T("Equilibrium pricing", "Gleichgewichtspreis", "Cena równowagi") },
-        { text: T("Monetary inflation", "Monetaere Inflation", "Inflacja monetarna") },
+        { text: T("The music teacher did not need a website, he needed a bicycle", "Der Musiklehrer brauchte keine Website, sondern ein Fahrrad", "Nauczyciel muzyki nie potrzebował strony internetowej, lecz roweru"), correct: true },
+        { text: T("Guitar lessons can only be taught on weekends", "Gitarrenunterricht darf nur am Wochenende stattfinden", "Lekcje gry na gitarze mogą odbywać się wyłącznie w weekendy") },
+        { text: T("The computer broke down before the trade", "Der Computer ging vor dem Tausch kaputt", "Komputer popsuł się przed dokonaniem wymiany") },
       ],
       hint: T(
-        "Both parties must have matching needs at the same moment.",
-        "Beide Seiten muessen im selben Moment passende Beduerfnisse haben.",
-        "Obie strony muszą mieć dopasowane potrzeby w tym samym momencie.",
+        "Remember what the guitar teacher said when Aish offered her code.",
+        "Erinnere dich daran, was der Lehrer zu Mias Angebot gesagt hat.",
+        "Przypomnij sobie, co nauczyciel odpowiedział na propozycję Zofii.",
       ),
     },
     {
       kind: "choice",
       prompt: T(
-        "What does liquidity measure in economics?",
-        "Was misst Liquiditaet in der Wirtschaft?",
-        "Co mierzy płynność w ekonomii?",
+        "What makes money so useful compared to trading items directly?",
+        "Was macht Geld so viel praktischer als das direkte Tauschen von Gegenstaenden?",
+        "Co sprawia, że pieniądze są o wiele wygodniejsze niż bezpośrednia wymiana przedmiotów?",
       ),
       options: [
-        { text: T("How fast an asset can be converted into cash without losing value", "Wie schnell ein Gut ohne Wertverlust in Geld getauscht werden kann", "Jak szybko aktywo można zamienić na gotówkę bez utraty wartości"), correct: true },
-        { text: T("The physical weight of minted gold coins", "Das physische Gewicht gepraegter Goldmuenzen", "Fizyczną wagę wybitych monet ze złota") },
-        { text: T("The amount of tax owed on capital gains", "Die Hoehe der faelligen Kapitalertragsteuer", "Wysokość podatku od zysków kapitałowych") },
+        { text: T("Everyone agrees to accept it, so you can buy whatever you need", "Alle nehmen es an, sodass man jederzeit kaufen kann, was man braucht", "Wszyscy chętnie je przyjmują, więc możesz kupić to, czego akurat potrzebujesz"), correct: true },
+        { text: T("It is heavier to carry around in your backpack", "Es ist schwerer im Rucksack zu tragen", "Są cięższe do noszenia w plecaku") },
+        { text: T("It only works inside a single classroom", "Es funktioniert nur in einem einzigen Klassenzimmer", "Działają tylko w jednej sali lekcyjnej") },
       ],
       hint: T(
-        "Think of how easily and quickly you can spend it right away.",
-        "Denke daran, wie leicht und schnell du es sofort ausgeben kannst.",
-        "Pomyśl o tym, jak łatwo i szybko możesz go od razu wydać.",
+        "Think about why stores and teachers are happy to take cash from anyone.",
+        "Denke darueber nach, warum Geschaefte und Lehrer gerne Geld annehmen.",
+        "Pomyśl o tym, dlaczego sklepy i nauczyciele chętnie przyjmują gotówkę od każdego.",
       ),
     },
     {
       kind: "widget",
       prompt: T(
-        "Identify the most liquid asset among the choices.",
-        "Bestimme den fluessigsten Vermoegenswert unter den Auswahlmoeglichkeiten.",
-        "Wskaż najbardziej płynne aktywo spośród dostępnych wyborów.",
+        "Choose the item that can be spent instantly anywhere.",
+        "Waehle den Gegenstand, den du ueberall sofort ausgeben kannst.",
+        "Wybierz rzecz, którą możesz od razu zapłacić w dowolnym sklepie.",
       ),
       Widget: MoneyWidget,
       hint: T(
-        "Government money is accepted everywhere immediately.",
-        "Staatliches Geld wird ueberall sofort akzeptiert.",
-        "Państwowy pieniądz jest akceptowany wszędzie od ręki.",
+        "Stores do not take trading cards at the checkout, but they always take cash.",
+        "Supermaerkte nehmen an der Kasse keine Sammelkarten, aber immer Geld.",
+        "Sklepy nie przyjmują kart kolekcjonerskich przy kasie, ale zawsze przyjmują gotówkę.",
       ),
     },
   ],
   askDad: T(
-    "Ask your parent: Why do new digital currencies or assets sometimes struggle to act as a stable unit of account?",
-    "Frage deine Eltern: Warum tun sich neue digitale Waehrungen oft schwer, als stabile Recheneinheit zu dienen?",
-    "Zapytaj rodziców: Dlaczego nowym walutom cyfrowym trudno służyć jako stabilna jednostka rozliczeniowa?",
+    "Ask your parent: Have you ever tried to trade something directly with a friend, and did it work?",
+    "Frage deine Eltern: Habt ihr schon mal etwas direkt mit Freunden getauscht und hat das geklappt?",
+    "Zapytaj rodziców: Czy próbowaliście kiedyś wymienić się czymś ze znajomym i czy to się udało?",
   ),
   realLife: {
     title: T(
-      "Real world: High liquidity vs illiquid capital",
-      "Echte Welt: Hohe Liquiditaet im Vergleich zu illiquidem Kapital",
-      "Prawdziwy świat: Wysoka płynność a niepłynny kapitał",
+      "Real world: Why cash beats trading stuff",
+      "Echte Welt: Warum Geld praktischer ist als Tauschen",
+      "Prawdziwy świat: Dlaczego pieniądze wygrywają z wymianą rzeczy",
     ),
     body: T(
-      "Financial markets rank assets on a liquidity spectrum. Central bank reserves and checking accounts sit at the top, while private corporate equity, real estate, and fine art require weeks or months to convert into spendable money.",
-      "Finanzmaerkte ordnen Vermoegen auf einer Liquiditaetsskala ein. Zentralbankguthaben und Girokonten stehen ganz oben, waehrend Unternehmensbeteiligungen, Immobilien und Kunst Wochen oder Monate fuer den Verkauf brauchen.",
-      "Rynki finansowe klasyfikują aktywa na skali płynności. Środki w banku centralnym i na kontach bieżących są na szczycie, podczas gdy udziały w firmach, nieruchomości czy dzieła sztuki wymagają tygodni lub miesięcy na sprzedaż.",
+      "Imagine if you had to pay for your school lunch with a skateboard or a video game. The cafeteria might not want what you have! With money, everybody agrees on the same helper. You can buy lunch, and the cafeteria can use that money to buy fresh vegetables.",
+      "Stell dir vor, du muesstest dein Schulessen mit einem Skateboard oder Computerspiel bezahlen. Die Kantine will das vielleicht gar nicht haben! Mit Geld haben alle denselben Helfer. Du kaufst dein Essen und die Kueche kauft davon frisches Gemuese.",
+      "Wyobraź sobie, że musisz zapłacić za obiad w szkole deskorolką lub grą wideo. Stołówka może wcale tego nie chcieć! Dzięki pieniądzom wszyscy korzystają z tego samego ułatwienia. Ty kupujesz obiad, a stołówka kupuje za te pieniądze świeże warzywa.",
     ),
   },
   factCard: {
@@ -213,9 +221,9 @@ export const lesson: Lesson = {
     ],
     simplified: [
       T(
-        "Advanced financial instruments like derivatives and money market funds are simplified to the core concept of currency liquidity.",
-        "Fortgeschrittene Finanzinstrumente wie Derivate werden auf das Kernkonzept der Geldliquiditaet vereinfacht.",
-        "Zaawansowane instrumenty finansowe uproszczono do kluczowej koncepcji płynności waluty.",
+        "Complex economic terms like double coincidence of wants and liquidity are explained through trading computer code and guitar lessons.",
+        "Komplexe Fachbegriffe wie doppelte Beduerfnisuebereinstimmung werden am Beispiel von Programmieren und Gitarrenunterricht erklaert.",
+        "Złożone pojęcia ekonomiczne, takie jak podwójna zbieżność potrzeb, wyjaśniono na przykładzie programowania i lekcji gitary.",
       ),
     ],
   },
