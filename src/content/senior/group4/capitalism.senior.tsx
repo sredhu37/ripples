@@ -302,7 +302,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T("However, economists recognize that unconstrained, unregulated markets produce severe market failures.", "Allerdings erkennen Oekonomen an, dass voellig unregulierte Maerkte zu schwerwiegendem Marktversagen fuehren.", "Ekonomiści wiedzą jednak, że całkowicie dziki, pozbawiony reguł rynek cierpi na poważne niedoskonałości, zwane zawodnością rynku."),
-        T("Without statutory rules, aggressive monopolies crush smaller competitors, factories dump toxic effluents into rivers, and low-income families lack healthcare.", "Ohne Gesetze zerstoeren Monopole den Wettbewerb, Fabriken vergiften Fluesse und mittellose Familien haben keinen Zugang zu Medizin.", "Bez jasnych praw wielkie korporacje mogą tworzyć kartele, fabryki bezkarnie zatruwają rzeki, a ubodzy ludzie zostają bez opieki medycznej."),
+        T("Without clear referee rules, giant bully companies crush small shops, factories dump toxic waste into rivers, and low-income families lack healthcare.", "Ohne Gesetze zerstoeren Monopole den Wettbewerb, Fabriken vergiften Fluesse und mittellose Familien haben keinen Zugang zu Medizin.", "Bez jasnych praw wielkie korporacje mogą tworzyć kartele, fabryki bezkarnie zatruwają rzeki, a ubodzy ludzie zostają bez opieki medycznej."),
         T("To balance dynamism with fairness, modern European democracies established the *Social Market Economy* (Soziale Marktwirtschaft).", "Um Wohlstand mit Gerechtigkeit zu verbinden, schufen moderne Demokratien die *Soziale Marktwirtschaft*.", "Dlatego nowoczesne kraje europejskie wykształciły model *Społecznej Gospodarki Rynkowej* (Soziale Marktwirtschaft)."),
       ],
       SocialMarketEconomyDiagram,

@@ -291,7 +291,7 @@ export const lesson: Lesson = {
     ),
     animatedBeat(
       [
-        T("Economists term this historical trajectory 'capital deepening': equipping human labor with progressively superior machinery.", "Oekonomen nennen diesen Prozess 'Kapitalintensivierung': Menschliche Arbeit wird mit immer besseren Werkzeugen ausgestattet.", "Ekonomiści określają ten proces mianem 'pogłębiania kapitału': wyposażania ludzkich rąk w coraz doskonalsze maszyny."),
+        T("Economists call this 'capital deepening': giving human workers stronger tools and machines.", "Oekonomen nennen diesen Prozess 'Kapitalintensivierung': Menschliche Arbeit wird mit immer besseren Werkzeugen ausgestattet.", "Ekonomiści określają ten proces mianem 'pogłębiania kapitału': wyposażania ludzkich rąk w coraz doskonalsze maszyny."),
         T("When an operator drives a 40-ton excavator instead of wielding a shovel, their hourly productivity multiplies by a factor of hundreds.", "Ein Baggerfahrer bewegt in einer Stunde mehr Erde als hundert Arbeiter mit Schaufeln, was hoehere Realloehne ermoeglicht.", "Operator 40-tonowej koparki przenosi w godzinę więcej ziemi niż stu robotników z łopatami, co pozwala na wypłatę wyższych pensji."),
         T("By multiplying the leverage of human effort, tools and steam dismantled famine-level poverty and laid the groundwork for modern society.", "Dieser technologische Hebel befreite die Menschheit von bitterer Not und schuf das Fundament unseres heutigen Wohlstands.", "Zwiększając wydajność ludzkich rąk, narzędzia i maszyny parowe wyrwały miliony ludzi ze skrajnej nędzy i stworzyły podwaliny nowoczesności."),
       ],
@@ -307,7 +307,7 @@ export const lesson: Lesson = {
     {
       kind: "choice",
       prompt: T(
-        "Why was the transition from biological power to steam power considered an unprecedented rupture in human economic history?",
+        "Why was the switch from muscle power to steam power such a historic turning point?",
         "Warum war der Uebergang von Muskelkraft zur Dampfkraft ein beispielloser Bruch in der Menschheitsgeschichte?",
         "Dlaczego przejście od energii biologicznej do pary wodnej było bezprecedensowym przełomem w dziejach gospodarki?",
       ),

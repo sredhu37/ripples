@@ -266,7 +266,7 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("Meet Abhi. He is watching news reports about a massive international bank that made reckless speculative bets and is now facing catastrophic collapse.", "Das ist Tim. Er sieht in den Nachrichten, dass eine riesige Bank sich verspekuliert hat und nun vor dem Zusammenbruch steht.", "Poznaj Tymona. Ogląda wiadomości o potężnym banku inwestycyjnym, który podejmował lekkomyślne spekulacje i znalazł się na skraju bankructwa."),
+        T("Meet Abhi. He is watching news reports about a massive bank that took dangerous gambles and is now facing collapse.", "Das ist Tim. Er sieht in den Nachrichten, dass eine riesige Bank sich gefaehrlich verspekuliert hat und nun vor dem Kollaps steht.", "Poznaj Tymona. Ogląda wiadomości o potężnym banku, który podejmował niebezpieczne spekulacje i znalazł się na skraju upadku."),
         T("Citizens are outraged: why should ordinary taxpayers spend billions to save wealthy bankers who pocketed multi-million bonuses during the good years?", "Buerger sind empoert: Warum sollen Steuerzahler Banker retten, die in guten Zeiten Millionenboni kassierten?", "Obywatele są oburzeni: dlaczego zwykli podatnicy mieliby wykładać miliardy na ratowanie bankierów, którzy w latach prosperity zgarniali wielomilionowe premie?"),
         T("Yet if the bank closes its doors tonight, ATMs could shut down and payrolls for hundreds of thousands of ordinary workers could freeze tomorrow morning.", "Doch wenn die Bank schliesst, streiken morgen Geldautomaten und unzaehlige Betriebe koennen keine Loehne zahlen.", "A jednak jeśli bank zbankrutuje dziś wieczorem, jutro staną bankomaty, a setki tysięcy uczciwych firm nie wypłacą pracownikom pensji."),
       ],
@@ -274,7 +274,7 @@ export const lesson: Lesson = {
     ),
     animatedBeat(
       [
-        T("This terrible dilemma is known as *systemic risk* and the problem of institutions that are *Too Big to Fail*.", "Dieses gefaehrliche Dilemma nennt man *Systemrisiko* und das Problem von Banken, die *Too Big to Fail* sind.", "Ten dramatyczny dylemat w ekonomii nazywa się *ryzykiem systemowym* oraz problemem instytucji *zbyt dużych, by upaść* (Too Big to Fail)."),
+        T("This terrible trap is known as *Too Big to Fail*.", "Diese gefaehrliche Zwickmuehle nennt man *Too Big to Fail* (Zu gross zum Scheitern).", "Ta pułapka w gospodarce nosi miano instytucji *zbyt dużych, by upaść* (Too Big to Fail)."),
         T("Modern financial systems resemble a row of standing dominoes: giant banks lend tens of billions to each other every single night.", "Das moderne Finanzsystem gleicht einer Reihe Dominosteinen: Grosse Institute leihen sich taeglich Milliarden untereinander.", "Nowoczesny system finansowy przypomina rząd klocków domina: największe banki pożyczają sobie wzajemnie dziesiątki miliardów każdej nocy."),
         T("If one giant pillar collapses, its unpaid debts drag down sibling banks, paralyzing the commercial credit pipelines that keep supermarkets stocked and factories running.", "Faellt ein Riese um, reisst er Partnerbanken mit und laehmt den Warenverkehr sowie Zulieferketten der Realwirtschaft.", "Jeśli upadnie jeden kolos, pociąga za sobą kolejne instytucje, paraliżując kredyty handlowe dla fabryk i dostawców żywności."),
       ],
@@ -282,15 +282,15 @@ export const lesson: Lesson = {
     ),
     animatedBeat(
       [
-        T("Rescuing failing institutions creates the toxic dilemma of *moral hazard*.", "Gleichzeitig schafft jede staatliche Rettung das toxische Problem des *Moral Hazard* (Fehlanreize).", "Ratowanie upadających banków rodzi jednak niebezpieczne zjawisko zwane *pokusą nadużycia* (moral hazard)."),
-        T("If bank executives believe the government will always bail them out with public money, they face an asymmetric gamble: *Heads I win millions in bonuses, tails the taxpayer absorbs the losses*.", "Wissen Manager, dass der Staat sie immer rettet, zocken sie hemmungslos: *Kopf ich gewinne, Zahl der Steuerzahler verliert*.", "Jeśli zarządy banków wiedzą, że państwo zawsze rzuci im koło ratunkowe, podejmują szaleńcze ryzyko: *orzeł wygrywam premie, reszka płaci podatnik*."),
+        T("Rescuing failing institutions creates the unfair problem of *moral hazard*.", "Gleichzeitig schafft jede staatliche Rettung das unfaire Problem des *Moral Hazard* (Fehlanreize).", "Ratowanie upadających banków rodzi jednak niesprawiedliwe zjawisko zwane *pokusą nadużycia* (moral hazard)."),
+        T("If bank executives believe the government will always rescue them, they take wild risks: winning gives them bonuses, but losing is paid by taxpayers.", "Wissen Manager, dass der Staat sie immer rettet, zocken sie hemmungslos: Gewinne gehoeren ihnen, Verluste zahlen Buerger.", "Gdy bankierzy wiedzą, że państwo zawsze ich uratuje, podejmują szalone ryzyko: zyski biorą dla siebie, a straty zrzucają na podatników."),
         T("Without strict consequences, guaranteed bailouts incentivize ever more reckless, destabilizing financial gambling.", "Ohne harte Konsequenzen verleitet eine Rettungsgarantie zu immer groesseren, gefaehrlichen Spekulationsblasen.", "Brak surowych konsekwencji sprawia, że gwarancja pomocy zachęca do jeszcze bardziej niebezpiecznych spekulacji w przyszłości."),
       ],
       MoralHazardTrapDiagram,
     ),
     animatedBeat(
       [
-        T("To fix this after the 2008 global financial crisis, international regulators invented *statutory resolution and bail-ins*.", "Nach der Finanzkrise 2008 entwickelten internationale Regulierer das Instrument der *Bankenabwicklung (Bail-in)*.", "Aby rozwiązać ten problem po kryzysie 2008 roku, stworzono mechanizm *przymusowej restrukturyzacji* (bail-in)."),
+        T("To fix this after the 2008 global financial crisis, leaders invented *bail-ins*.", "Nach der Finanzkrise 2008 entwickelten internationale Regulierer das Instrument der *Bankenabwicklung (Bail-in)*.", "Aby rozwiązać ten problem po kryzysie 2008 roku, stworzono mechanizm *przymusowej restrukturyzacji* (bail-in)."),
         T("Under modern rules, bank shareholders are completely wiped out first, executive leadership is dismissed without severance, and wealthy bondholders absorb losses before a single public euro is spent.", "Heute werden bei Schieflage zuerst die Eigentuemer enteignet, das Management entlassen und Glaeubiger zur Kasse gebeten.", "Zgodnie z nowymi przepisami w pierwszej kolejności kapitał akcjonariuszy jest zerowany, zarząd zwalniany, a obligatariusze ponoszą straty."),
         T("Banks are also required to maintain massive *capital buffers* under Basel III rules and write legally binding *living wills* mapping out how they can be safely wound down.", "Zudem muessen Banken nach Basel III hohe *Eigenkapitalpuffer* halten und *Abwicklungstestamente* fuer den Notfall vorlegen.", "Banki muszą także utrzymywać grube *poduszki kapitałowe* zgodnie z pakietem Bazylea III i przygotowywać precyzyjne plany upadłościowe."),
       ],

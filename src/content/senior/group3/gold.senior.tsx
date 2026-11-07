@@ -294,7 +294,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T("Modern central banks from Warsaw to Frankfurt continue purchasing hundreds of tons of gold bullion each year.", "Moderne Zentralbanken von Warschau bis Frankfurt kaufen weiterhin jaehrlich hunderte Tonnen physisches Gold.", "Nowoczesne banki centralne od Warszawy po Frankfurt kupują rocznie setki ton fizycznego złota."),
-        T("They hold gold because it represents the ultimate reserve asset: physically tangible with *zero counterparty risk*.", "Sie schaetzen Gold als letzte Reserve: ein physischer Sachwert, der von keiner fremden Regierung fuer ungueltig erklaert werden kann.", "Gromadzą kruszec jako rezerwę strategiczną: aktywo wolne od *ryzyka niewypłacalności partnera handlowego* (counterparty risk)."),
+        T("They hold gold because it represents the ultimate reserve: a real coin in hand with no promises to break.", "Sie schaetzen Gold als letzte Reserve: ein physischer Sachwert, der von keiner fremden Regierung fuer ungueltig erklaert werden kann.", "Gromadzą kruszec jako rezerwę strategiczną: prawdziwe złoto w dłoni, które nie zależy od cudzych obietnic."),
         T("Understanding gold teaches you the critical difference between decaying paper promissory notes and enduring physical scarcity.", "Wer Gold versteht, begreift den Unterschied zwischen schwindenden Papierversprechen und bestaendiger Knappheit.", "Zrozumienie fenomenu złota uczy odróżniać ulotne papierowe obietnice rządowe od trwałej, niezmiennej rzadkości fizycznej."),
       ],
       CentralBankReservesDiagram,
@@ -309,19 +309,20 @@ export const lesson: Lesson = {
     {
       kind: "choice",
       prompt: T(
-        "What does it mean that gold has 'zero counterparty risk'?",
-        "Was bedeutet es, dass Gold 'kein Kontrahentenrisiko' (Counterparty Risk) traegt?",
-        "Co oznacza stwierdzenie, że fizyczne złoto nie obciąża inwestora ryzykiem kontrahenta (counterparty risk)?",
+        "Why is physical gold said to have no risk of broken promises?",
+        "Warum traegt physisches Gold kein Risiko gebrochener Versprechen?",
+        "Dlaczego fizyczne złoto nie niesie ryzyka złamanych obietnic?",
       ),
       options: [
-        { text: T("Its value does not depend on the solvency, promises, or survival of any government, company, or bank", "Sein Wert haengt von keinem Zahlungsversprechen oder Ueberleben einer fremden Bank oder Regierung ab", "Jego wartość nie zależy od obietnic, wypłacalności ani przetrwania jakiegokolwiek rządu, banku czy korporacji"), correct: true },
+        { text: T("Its value lives in the metal itself, not in promises of a bank", "Sein Wert liegt im Metall selbst und haengt von keinem Schuldner ab", "Jego wartość tkwi w samym metalu, a nie w obietnicy banku"), correct: true },
         { text: T("You can legally exchange one gold coin for twenty airline tickets at any airport", "Man kann jede Goldmuenze an jedem Flughafen gesetzlich gegen Flugtickets eintauschen", "Każdą monetę można z mocy prawa wymienić na lotnisku na dwadzieścia biletów"), correct: false },
         { text: T("Gold bars dissolve automatically if not polished every month", "Goldbarren loesen sich auf, wenn sie nicht monatlich poliert werden", "Sztaby złota rozpuszczają się same, jeśli nie są czyszczone co miesiąc"), correct: false },
       ],
       hint: T(
-        "Think about what happens to a bank account balance if the bank fails vs gold in a private vault.",
-        "Ueberlege, was mit einem Kontoguthaben bei einer Bankpleite passiert im Vergleich zu Gold im Tresor.",
-        "Zastanów się, co dzieje się z depozytem w razie upadku banku w porównaniu ze złotem w prywatnym sejfie."),
+        "A gold coin in your hand does not depend on anyone else staying solvent.",
+        "Eine Goldmuenze in deiner Hand haengt von keiner Bank ab.",
+        "Złota moneta w Twojej dłoni nie zależy od wypłacalności żadnego banku.",
+      ),
     },
     {
       kind: "choice",

@@ -281,7 +281,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T("Meet Arjun. He studies photographs from 1914 and notices an unprecedented shift in human warfare.", "Das ist Arno. Er betrachtet Fotos von 1914 und erkennt einen dramatischen Wendepunkt in der Geschichte des Krieges.", "Poznaj Artura. Bada fotografie z 1914 roku i zauważa bezprecedensowy przełom w historii wojen."),
-        T("World War 1 was not fought with chivalric cavalry, but with industrialized mass production: machine guns, chemical artillery, tanks, and barbed wire.", "Der Erste Weltkrieg wurde nicht von Rittern gefuehrt, sondern von der Fabrikindustrie: Maschinengewehre, Giftgas und Panzer.", "I wojna światowa nie była starciem kawalerii, lecz wojną fabryk: ciężkich karabinów maszynowych, artylerii, czołgów i drutu kolczastego."),
+        T("World War 1 was not fought with knights on horses, but with factory machines: heavy artillery, machine guns, and tanks.", "Der Erste Weltkrieg wurde nicht von Rittern zu Pferd gefuehrt, sondern von Fabriken: Maschinengewehre, Giftgas und Panzer.", "I wojna światowa nie była starciem rycerzy na koniach, lecz wojną fabryk: ciężkich karabinów, armat i czołgów."),
         T("Steel mills, chemical laboratories, and coal plants operated around the clock, channeling entire national economies into total war.", "Stahlwerke und Chemiefabriken liefen rund um die Uhr, um die gesamte Volkswirtschaft in den Kriegseinsatz zu zwingen.", "Huty, zakłady chemiczne i kopalnie węgla pracowały dzień i noc, przestawiając całe gospodarki na tory wojny totalnej."),
       ],
       IndustrializedWarfareDiagram,
@@ -313,7 +313,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T("Horrified by the slaughter of twenty million lives, world leaders gathered in Paris in 1919 to construct a new international architecture.", "Erschuettert ueber 20 Millionen Tote trafen sich die Staatschefs 1919 in Paris, um eine neue Friedensordnung zu gruenden.", "Wstrząśnięci śmiercią dwudziestu milionów ludzi przywódcy zebrali się w 1919 r. w Paryżu, by zbudować nową architekturę bezpieczeństwa."),
-        T("They founded the League of Nations, humanity's first global organization dedicated to resolving disputes through international arbitration.", "Sie gruendeten den Voelkerbund als erste globale Organisation fuer Schiedsgerichte und Friedenssicherung.", "Powołali Ligę Narodów, pierwszą w dziejach globalną organizację mającą rozwiązywać spory drogą pokojowego arbitrażu."),
+        T("They founded the League of Nations, humanity's first global organization dedicated to resolving disputes through calm peace talks.", "Sie gruendeten den Voelkerbund als erste globale Organisation fuer Schiedsgerichte und friedliche Gespraeche.", "Powołali Ligę Narodów, pierwszą w dziejach globalną organizację mającą rozwiązywać spory drogą pokojowych rozmów."),
         T("Though the League proved too weak to prevent future aggression, it established the foundational legal concepts that today guide the United Nations.", "Obwohl der Bund zu schwach war, schuf er die rechtlichen Grundlagen, auf denen heute die Vereinten Nationen aufbauen.", "Choć Liga okazała się zbyt słaba, by powstrzymać kolejnych agresorów, stworzyła podwaliny prawa międzynarodowego i dzisiejszego ONZ."),
       ],
       LeagueOfNationsEarlyAttemptDiagram,

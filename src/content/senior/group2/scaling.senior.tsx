@@ -430,7 +430,7 @@ export const lesson: Lesson = {
         "Czym są 'niekorzyści skali' (diseconomies of scale), które mogą osłabić rosnącą firmę?",
       ),
       options: [
-        { text: T("Communication friction, bureaucracy, coordination complexity, and quality control dilution as organizations grow too large", "Kommunikationsprobleme, buerokratischer Mehraufwand und Qualitaetsmaengel bei schnellem Wachstum", "Bariery komunikacyjne, rozrost biurokracji, trudności w koordynacji i spadek kontroli jakości"), correct: true },
+        { text: T("Messy communication, confusing rules, and sloppy quality when a business grows too large", "Kommunikationsprobleme, buerokratischer Mehraufwand und Qualitaetsmaengel bei zu schnellem Wachstum", "Problemy z komunikacją, za dużo przepisów i spadek jakości przy zbyt dużym wzroście"), correct: true },
         { text: T("A mandatory legal requirement to destroy half of all finished goods", "Die gesetzliche Pflicht, die Haelfte aller hergestellten Waren zu vernichten", "Prawny nakaz niszczenia połowy wyprodukowanych towarów") },
         { text: T("Suppliers giving away free machinery to competitor firms", "Lieferanten, die Konkurrenten ploetzlich kostenlose Maschinen schenken", "Dostawcy rozdający darmowe maszyny firmom konkurencyjnym") },
       ],
@@ -448,7 +448,7 @@ export const lesson: Lesson = {
       ),
       Widget: ScalingWidget,
       hint: T(
-        "Think about bulk purchasing discounts and fixed machinery cost amortization.",
+        "Think about buying ingredients in big sacks and sharing one oven for fifty pies.",
         "Denke an Mengenvorteile beim Einkauf und die Verteilung von Maschinenkosten.",
         "Pomyśl o rabatach przy zakupach hurtowych i rozkładaniu kosztu maszyn na dużą liczbę sztuk."),
     },
