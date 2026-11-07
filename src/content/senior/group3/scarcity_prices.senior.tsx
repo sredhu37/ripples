@@ -6,57 +6,55 @@ const T = (en: string, de: string, pl: string): Text => ({ en, de, pl });
 
 function LaborAndAssetScarcityDiagram({ step }: { step: number }) {
   return (
-    <svg viewBox="0 0 400 240" className="diagram-svg" role="img" aria-label="Labor and asset scarcity curve diagram">
+    <svg viewBox="0 0 400 240" className="diagram-svg" role="img" aria-label="Game engine developer skills and rare assets scarcity diagram">
       <rect x="10" y="10" width="380" height="220" rx="14" fill="#0f172a" stroke="#334155" strokeWidth="2" />
 
       {step === 0 && (
         <g>
-          {/* Labor supply curve elasticity */}
+          {/* Labor supply curve */}
           <line x1="50" y1="30" x2="50" y2="190" stroke="#94a3b8" strokeWidth="2" />
           <line x1="50" y1="190" x2="360" y2="190" stroke="#94a3b8" strokeWidth="2" />
-          <text x="30" y="40" fontSize="11" fill="#94a3b8" fontWeight="bold">Wage</text>
-          <text x="350" y="210" textAnchor="end" fontSize="11" fill="#94a3b8" fontWeight="bold">Workers</text>
+          <text x="30" y="40" fontSize="11" fill="#94a3b8" fontWeight="bold">Hourly Rate</text>
+          <text x="350" y="210" textAnchor="end" fontSize="11" fill="#94a3b8" fontWeight="bold">Developers</text>
 
-          {/* Elastic supply (flat line) */}
+          {/* Common skill flat supply line */}
           <line x1="60" y1="150" x2="340" y2="135" stroke="#64748b" strokeWidth="2.5" />
-          <text x="345" y="135" fontSize="10" fill="#94a3b8">Elastic (Generalist)</text>
+          <text x="345" y="135" fontSize="10" fill="#94a3b8">Common Skills (High Supply)</text>
 
-          {/* Inelastic supply (steep line) */}
+          {/* Rare 3D physics skill steep supply line */}
           <line x1="120" y1="180" x2="160" y2="40" stroke="#38bdf8" strokeWidth="3" />
-          <text x="170" y="50" fontSize="11" fill="#38bdf8" fontWeight="bold">Inelastic (Scarce Specialists)</text>
-          <text x="200" y="100" fontSize="11" fill="#facc15">Steep Supply = Bidding Wars!</text>
+          <text x="170" y="50" fontSize="11" fill="#38bdf8" fontWeight="bold">Rare 3D Physics Coder</text>
+          <text x="200" y="100" fontSize="11" fill="#facc15">Bidding Wars for Talent!</text>
         </g>
       )}
 
       {step === 1 && (
         <g>
-          {/* Stock to Flow comparison */}
-          <text x="200" y="45" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#f8fafc">Stock-to-Flow Ratio (Asset Scarcity)</text>
-          {/* Gold: huge stock, tiny flow */}
+          <text x="200" y="45" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#f8fafc">Real Scarcity vs Printed Copies</text>
+          {/* Rare Gold / Rare Item */}
           <rect x="60" y="70" width="120" height="110" rx="8" fill="#eab308" />
-          <text x="120" y="105" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#422006">Gold Stock</text>
-          <text x="120" y="125" textAnchor="middle" fontSize="11" fill="#713f12">212,500 Tons</text>
+          <text x="120" y="105" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#422006">Physical Gold</text>
+          <text x="120" y="125" textAnchor="middle" fontSize="11" fill="#713f12">Hard to Mine</text>
           <rect x="60" y="185" width="120" height="15" rx="3" fill="#fef08a" />
-          <text x="120" y="196" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#713f12">Flow: +1.5% / year</text>
+          <text x="120" y="196" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#713f12">+1.5% flow per year</text>
 
-          {/* Industrial metal: small stock, massive flow */}
+          {/* Cheap paper or unlimited tokens */}
           <rect x="220" y="120" width="120" height="60" rx="8" fill="#64748b" />
-          <text x="280" y="150" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#f8fafc">Copper Stock</text>
+          <text x="280" y="150" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#f8fafc">Printed Paper</text>
           <rect x="220" y="185" width="120" height="15" rx="3" fill="#94a3b8" />
-          <text x="280" y="196" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#0f172a">Flow: +85% / year</text>
+          <text x="280" y="196" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#0f172a">Unlimited Copying</text>
         </g>
       )}
 
       {step >= 2 && (
         <g>
-          {/* Human capital compounding */}
           <rect x="50" y="40" width="300" height="150" rx="12" fill="#1e293b" stroke="#3b82f6" strokeWidth="2" />
-          <text x="200" y="70" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#60a5fa">Compound Human Capital</text>
-          <text x="200" y="100" textAnchor="middle" fontSize="11" fill="#e2e8f0">Rare domain intersection: AI + Medicine + Law</text>
+          <text x="200" y="70" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#60a5fa">Stacking Rare Skills</text>
+          <text x="200" y="100" textAnchor="middle" fontSize="11" fill="#e2e8f0">Coding + 3D Art + Story Writing</text>
           <circle cx="140" cy="140" r="28" fill="#3b82f6" fillOpacity="0.4" stroke="#60a5fa" strokeWidth="1.5" />
           <circle cx="200" cy="140" r="28" fill="#10b981" fillOpacity="0.4" stroke="#34d399" strokeWidth="1.5" />
           <circle cx="260" cy="140" r="28" fill="#f59e0b" fillOpacity="0.4" stroke="#fbbf24" strokeWidth="1.5" />
-          <text x="200" y="145" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#f8fafc">Peak Pricing Power</text>
+          <text x="200" y="145" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#f8fafc">Irreplaceable!</text>
         </g>
       )}
     </svg>
@@ -64,18 +62,16 @@ function LaborAndAssetScarcityDiagram({ step }: { step: number }) {
 }
 
 function Toy({ onDone }: ToyProps) {
-  const [yearsOfStudy, setYearsOfStudy] = useState(3);
-  const [assetClass, setAssetClass] = useState<"fiat" | "gold">("gold");
+  const [yearsPractice, setYearsPractice] = useState(3);
+  const [assetChoice, setAssetChoice] = useState<"game_gold" | "real_gold">("real_gold");
 
-  // Calculations
-  const salary = Math.round(35000 + Math.pow(yearsOfStudy, 1.8) * 6500);
-  const scarcityLevel = yearsOfStudy >= 8 ? "Extreme (Top 0.5%)" : yearsOfStudy >= 5 ? "High (Top 5%)" : "Moderate";
-  const stockToFlow = assetClass === "gold" ? "High (65 years of production in stock)" : "Low (Continuous dilution)";
+  const hourlyWage = Math.round(20 + Math.pow(yearsPractice, 1.7) * 8);
+  const skillTag = yearsPractice >= 8 ? "Legendary Game Architect" : yearsPractice >= 5 ? "Senior 3D Artist" : "Beginner Modder";
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "14px", alignItems: "center" }}>
       <p style={{ margin: 0, fontWeight: 700, fontSize: "1.05rem" }}>
-        Market Compensation: ${salary.toLocaleString()} / year ({scarcityLevel})
+        Market Pay: ${hourlyWage} / hr | Skill Level: {skillTag} ({yearsPractice} yrs practice)
       </p>
 
       <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", justifyContent: "center" }}>
@@ -83,40 +79,42 @@ function Toy({ onDone }: ToyProps) {
           type="button"
           className="btn btn-quiet"
           onClick={() => {
-            const next = yearsOfStudy >= 9 ? 2 : yearsOfStudy + 2;
-            setYearsOfStudy(next);
+            const next = yearsPractice >= 9 ? 2 : yearsPractice + 2;
+            setYearsPractice(next);
             if (next >= 7) onDone?.();
           }}
         >
-          Specialization Barrier: {yearsOfStudy} Years
+          Practice Rare Skills: {yearsPractice} Years
         </button>
 
         <button
           type="button"
           className="btn"
           onClick={() => {
-            setAssetClass((a) => (a === "gold" ? "fiat" : "gold"));
+            setAssetChoice((a) => (a === "real_gold" ? "game_gold" : "real_gold"));
             onDone?.();
           }}
         >
-          Asset Type: {assetClass === "gold" ? "Physical Gold" : "Fiat Paper"}
+          Asset Type: {assetChoice === "real_gold" ? "Physical Rare Gold" : "Unlimited Game Server Gold"}
         </button>
       </div>
 
       <div
         style={{
           padding: "12px",
-          background: yearsOfStudy >= 6 ? "#f0fdf4" : "#f8fafc",
-          border: `1px solid ${yearsOfStudy >= 6 ? "#86efac" : "#cbd5e1"}`,
+          background: yearsPractice >= 6 ? "#f0fdf4" : "#f8fafc",
+          border: `1px solid ${yearsPractice >= 6 ? "#86efac" : "#cbd5e1"}`,
           borderRadius: "10px",
           maxWidth: "380px",
           textAlign: "center",
           fontSize: "0.9rem",
         }}
       >
-        Asset Resilience: {stockToFlow}.
+        {assetChoice === "real_gold"
+          ? "Natural Scarcity: Hard to extract from the earth, so its supply cannot suddenly be doubled."
+          : "Fake Scarcity: A game admin can press a button and create millions of tokens in a split second."}
         <br />
-        Labor Dynamics: High barriers to entry make labor supply inelastic, forcing employers to bid for scarce human capital!
+        Rare Skills: The harder a skill is to learn, the fewer people have it, and the more companies will pay for your talent!
       </div>
     </div>
   );
@@ -125,10 +123,10 @@ function Toy({ onDone }: ToyProps) {
 function SeniorScarcityWidget({ onAnswer }: WidgetProps) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
-      <p style={{ margin: 0 }}>Why does physical gold exhibit superior purchasing power preservation over long horizons?</p>
-      <button type="button" className="btn btn-quiet" onClick={() => onAnswer(false)}>Because governments guarantee free gold storage in every bank</button>
-      <button type="button" className="btn" onClick={() => onAnswer(true)}>Because its high stock-to-flow ratio prevents rapid supply dilution from new mining</button>
-      <button type="button" className="btn btn-quiet" onClick={() => onAnswer(false)}>Because gold bars magically multiply overnight</button>
+      <p style={{ margin: 0 }}>Why do lead 3D game engine programmers earn far higher salaries than beginner level designers?</p>
+      <button type="button" className="btn btn-quiet" onClick={() => onAnswer(false)}>They drink more iced tea during work hours</button>
+      <button type="button" className="btn" onClick={() => onAnswer(true)}>Only a tiny handful of people master complex 3D math and graphics physics, creating scarce supply</button>
+      <button type="button" className="btn btn-quiet" onClick={() => onAnswer(false)}>Keyboards for 3D code cost fifty thousand dollars each</button>
     </div>
   );
 }
@@ -138,115 +136,160 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("In classical economic theory, wages are determined by the *marginal revenue product of labor*.", "In der Wirtschaftstheorie bestimmen Loehne das *Grenzerloesprodukt der Arbeit*.", "W teorii ekonomii płace odzwierciedlają *krańcowy przychód z produktu pracy*."),
-        T("This represents the incremental value a worker creates multiplied by the difficulty of replacing them.", "Es beziffert den Mehrwert eines Mitarbeiters multipliziert mit seiner Ersetzbarkeit.", "Oznacza to wartość dodaną generowaną przez pracownika pomnożoną przez trudność jego zastąpienia."),
-        T("For roles requiring general skills, labor supply is highly *elastic*: higher wages attract floods of candidates.", "Fuer einfache Rollen ist das Angebot *elastisch*: Hoehere Loehne locken sofort Massen an.", "Dla prostych ról podaż pracy jest wysoce *elastyczna*: wyższe płace przyciągają tłumy chętnych."),
+        T("Meet Kriti. She loves video games, but instead of just playing them, she decided to learn 3D computer graphics and physics coding.", "Das ist Sophie. Sie liebt Games, aber statt nur zu zocken, lernt sie 3D-Computergrafik und Spielephysik.", "Poznaj Alicję. Uwielbia gry, ale zamiast tylko grać, postanowiła nauczyć się grafiki 3D i fizyki w silnikach gier."),
+        T("When an indie studio needed someone to put simple grass on a virtual field, three hundred people applied.", "Als ein Studio jemanden suchte, um einfaches Gras in eine Spielewelt zu setzen, bewarben sich dreihundert Leute.", "Gdy studio gier szukało kogoś do rozłożenia trawy na planszy, zgłosiło się trzysta osób."),
+        T("Because that skill is easy to pick up in an afternoon, the pay was only fifteen dollars an hour.", "Weil man das an einem Nachmittag lernen kann, lag der Lohn bei nur 15 Euro die Stunde.", "Ponieważ tego można nauczyć się w jedno popołudnie, stawka wynosiła tylko sześćdziesiąt złotych za godzinę."),
       ],
       LaborAndAssetScarcityDiagram,
     ),
     animatedBeat(
       [
-        T("When an occupation demands a decade of rigorous training, labor supply becomes nearly *inelastic*.", "Erfordert ein Beruf jahrelange Spezialausbildung, wird das Arbeitsangebot *unelastisch*.", "Gdy zawód wymaga dekady trudnej nauki, podaż pracy staje się niemal *nieelastyczna*."),
-        T("Examples include semiconductor lithography engineers, neurosurgeons, and quantitative researchers.", "Beispiele sind Halbleiter-Ingenieure, Neurochirurgen oder quantitative Forscher.", "Przykłady to inżynierowie litografii półprzewodników, neurochirurdzy czy badacze modeli ilościowych."),
-        T("Because qualified personnel are strictly scarce, institutions engage in intense bidding wars to secure talent.", "Da Experten rar sind, liefern sich Unternehmen Bieterwettbewerbe um die besten Koepfe.", "Ponieważ eksperci są ściśle reglamentowani, firmy toczą wojny przetargowe o najlepsze talenty."),
+        T("Later, the studio needed someone who could write custom lighting shaders so the game runs at 120 frames a second on old phones.", "Spaeter brauchte das Studio jemanden fuer Licht-Shader, damit das Spiel auf aelteren Handys fluessig laeuft.", "Później studio potrzebowało kogoś, kto napisze shadery oświetlenia, by gra działała płynnie na starszych telefonach."),
+        T("In the entire city, only Kriti and two other people had spent the years required to master that skill.", "In der ganzen Stadt hatten ausser Sophie nur zwei andere Leute das noetige Wissen dafuer.", "W całym mieście poza Alicją tylko dwie osoby poświęciły lata na opanowanie tej trudnej sztuki."),
+        T("Three different game studios got into a bidding war to hire her, offering seventy-five dollars an hour.", "Drei Studios ueberboten sich gegenseitig und boten ihr 75 Euro die Stunde.", "Trzy studia zaczęły licytować się o jej czas, oferując trzysta złotych za każdą godzinę pracy."),
       ],
       LaborAndAssetScarcityDiagram,
     ),
     animatedBeat(
       [
-        T("The exact same scarcity mechanics determine the enduring value of monetary assets like *gold*.", "Exakt dieselbe Knappheitsmechanik bestimmt den Wert von Geldwerten wie *Gold*.", "Dokładnie ta sama mechanika rzadkości determinuje trwałą wartość aktywów takich jak *złoto*."),
-        T("Gold possesses an extraordinary *stock-to-flow ratio*: annual mined flow is merely 1.5% of total existing stock.", "Gold hat ein extrem hohes *Stock-to-Flow-Verhaeltnis*: Die Jahresfoerderung betraegt nur 1,5 Prozent des Bestands.", "Złoto cechuje niezwykły *wskaźnik stock-to-flow*: roczne wydobycie to zaledwie 1,5 procent istniejących zasobów."),
-        T("Unlike fiat paper currency, no sovereign authority or central bank can arbitrarily inflate the gold supply.", "Anders als Fiatgeld kann keine Notenbank die Goldmenge nach Belieben aufblaehen.", "W przeciwieństwie do walut fiducjarnych, żaden bank centralny nie może z dnia na dzień zwiększyć podaży złota."),
+        T("This is the law of scarcity applied to your own work and talents.", "Das ist das Gesetz der Knappheit, angewendet auf deine eigenen Faehigkeiten.", "To jest prawo rzadkości zastosowane do Twoich własnych umiejętności i talentów."),
+        T("When what you know how to do is common, you compete against thousands of people and wages stay low.", "Kann jeder deinen Job sofort machen, stehst du im Wettbewerb mit Tausenden und Loehne bleiben niedrig.", "Gdy Twoje zadanie potrafi wykonać każdy, konkurujesz z tysiącami osób, a stawki są niskie."),
+        T("When you master rare, difficult skills, employers must compete against each other to win you over.", "Beherrschst du seltene, anspruchsvolle Dinge, muessen sich Arbeitgeber um dich streiten.", "Gdy opanujesz trudne, rzadkie umiejętności, to pracodawcy muszą rywalizować między sobą o Ciebie."),
       ],
       LaborAndAssetScarcityDiagram,
     ),
     animatedBeat(
       [
-        T("In equity markets, scarcity is governed by a corporation's *public free float*.", "An den Aktienmaerkten steuert der *Streubesitz* (Free Float) die Verfuegbarkeit.", "Na rynkach akcji dostępnością zarządza wskaźnik *akcji w wolnym obrocie* (free float)."),
-        T("When a high-growth company lists on an exchange, only a small percentage of total shares circulate freely.", "Geht eine Wachstumsfirma an die Boerse, wird oft nur ein kleiner Bruchteil der Aktien frei gehandelt.", "Gdy spółka wchodzi na giełdę, często tylko niewielki ułamek jej akcji trafia do swobodnego obrotu."),
-        T("Vast institutional capital chasing a restricted share float commands enormous valuation multiples.", "Riesige Pensionsfonds, die wenige Aktien jagen, treiben Bewertungsaufschlaege an.", "Wielkie fundusze emerytalne rywalizujące o wąską pulę akcji windują mnożniki wyceny."),
+        T("The same rule explains why gold has stayed valuable for thousands of years.", "Dasselbe Prinzip erklaert, warum Gold seit Jahrtausenden wertvoll ist.", "Ta sama reguła wyjaśnia, dlaczego złoto zachowuje wartość od tysięcy lat."),
+        T("All the gold ever mined in human history would fit inside a single cube just twenty-two meters wide.", "Alles Gold der Menschheit wuerde in einen einzigen Wuerfel von nur 22 Metern Kantenlaenge passen.", "Całe złoto wydobyte w historii zmieściłoby się w sześcianie o boku zaledwie dwudziestu dwóch metrów."),
+        T("Nobody can magically create gold with a computer mouse or a printing machine; its scarcity is anchored by nature.", "Niemand kann Gold per Mausklick am PC vermehren; seine Knappheit ist durch die Natur fest verankert.", "Nikt nie może wyczarować złota kliknięciem myszki w komputerze; jego rzadkość gwarantuje sama natura."),
       ],
       LaborAndAssetScarcityDiagram,
     ),
     animatedBeat(
       [
-        T("Your greatest economic asset during youth is not financial capital, but your *human capital*.", "Dein wertvollstes wirtschaftliches Gut der Jugend ist dein eigenes *Humankapital*.", "Twoim najcenniejszym aktywem ekonomicznym za młodu nie jest kapitał finansowy, lecz *kapitał ludzki*."),
-        T("Acquiring rare, high-leverage technical capabilities protects you against economic cycles and automation.", "Seltene technische Faehigkeiten schuetzen dich vor Krisen und Automatisierung.", "Zdobycie rzadkich, wysokomarżowych umiejętności technicznych chroni cię przed kryzysami i automatyzacją."),
-        T("Positioning yourself where demand is high and skill supply is scarce guarantees enduring leverage.", "Dich dort zu positionieren, wo Nachfrage hoch und Angebot knapp ist, sichert langfristigen Erfolg.", "Ustawienie się w miejscu, gdzie popyt jest ogromny, a podaż talentu rzadka, zapewnia trwałą przewagę."),
+        T("Your greatest superpower as a student is not how much money you currently have in your wallet.", "Deine groesste Superkraft als Schueler ist nicht das Geld in deiner Brieftasche.", "Twoją największą supermocą w wieku szkolnym nie jest to, ile gotówki masz w portfelu."),
+        T("It is your *human capital*: the curiosity, coding, building, and problem-solving skills you choose to learn.", "Es ist dein *Humankapital*: Neugier, Programmieren und Problemlosungskompetenz, die du dir aneignest.", "To Twój *kapitał ludzki*: ciekawość świata, programowanie i umiejętność rozwiązywania trudnych problemów."),
+        T("If you build rare and useful skills, scarcity will work in your favor for the rest of your life.", "Eignest du dir seltene und nuetzliche Faehigkeiten an, arbeitet die Knappheit dein ganzes Leben fuer dich.", "Jeśli zdobędziesz rzadkie i przydatne umiejętności, prawo rzadkości będzie pracować na Twoją korzyść przez całe życie."),
       ],
       LaborAndAssetScarcityDiagram,
     ),
   ],
   toyIntro: T(
-    "Test how specialization barriers shift labor supply inelasticity and investigate asset stock-to-flow ratios.",
-    "Untersuche, wie Ausbildungsbarrieren das Angebot verknappen und pruefe Stock-to-Flow-Verhaeltnisse.",
-    "Zbadaj, jak bariery wejścia ograniczają podaż pracy i przeanalizuj wskaźniki stock-to-flow dla aktywów.",
+    "Test how mastering rare skills and understanding asset scarcity shifts market compensation.",
+    "Sieh selbst, wie seltene Faehigkeiten und knappe Gueter die Verhandlungsmacht veraendern.",
+    "Zobacz na własne oczy, jak rzadkie umiejętności i ograniczone zasoby zmieniają pozycję na rynku.",
   ),
   Toy,
   questions: [
     {
       kind: "choice",
       prompt: T(
-        "Why do specialized professions with steep educational barriers command significant wage premiums?",
-        "Warum erzielen Berufe mit hohen Ausbildungsbarrieren deutliche Lohnaufschlaege?",
-        "Dlaczego zawody z wysokimi barierami edukacyjnymi osiągają znaczne premie płacowe?",
+        "Why do specialists who master difficult skills earn much higher compensation than generalists?",
+        "Warum verdienen Spezialisten mit schwierigen Faehigkeiten deutlich mehr als andere?",
+        "Dlaczego specjaliści z rzadkimi i trudnymi umiejętnościami zarabiają znacznie więcej niż inni?"
       ),
       options: [
-        { text: T("Labor supply is highly inelastic, forcing employers to bid competitively for scarce talent", "Das Arbeitsangebot ist hochgradig unelastisch, was Arbeitgeber zu Bieterkaempfen zwingt", "Podaż pracy jest wysoce nieelastyczna, co zmusza pracodawców do walki o rzadkie talenty"), correct: true },
-        { text: T("Because they are legally required to accept all salary in frozen strawberries", "Weil sie gesetzlich verpflichtet sind, Gehaelter in Erdbeeren anzunehmen", "Ponieważ prawo nakazuje im przyjmowanie pensji w mrożonych truskawkach") },
-        { text: T("Because their job requires zero hours of mental effort per year", "Weil ihre Taetigkeit keinerlei geistigen Aufwand im Jahr erfordert", "Ponieważ ich praca nie wymaga żadnego wysiłku umysłowego w ciągu roku") },
+        {
+          text: T(
+            "Their supply is scarce and hard to replace, forcing companies to bid competitively to hire them",
+            "Ihr Angebot ist rar und schwer zu ersetzen, sodass Firmen um sie buhlen muessen",
+            "Ich umiejętności są rzadkie i trudne do zastąpienia, więc firmy muszą konkurować ofertami o ich czas"
+          ),
+          correct: true,
+        },
+        {
+          text: T(
+            "They wear silver hats to work every morning",
+            "Sie tragen morgens immer silberne Huete im Buero",
+            "Codziennie rano noszą do biura srebrne kapelusze"
+          ),
+          correct: false,
+        },
+        {
+          text: T(
+            "Their computers are made out of pure cheese",
+            "Ihre Computer bestehen aus purem Kaese",
+            "Ich komputery są zrobione z żółtego sera"
+          ),
+          correct: false,
+        },
       ],
       hint: T(
-        "Inelastic supply means small changes in demand cause large swings in compensation.",
-        "Unelastisches Angebot bedeutet, dass Nachfrageverschiebungen die Gehaelter stark bewegen.",
-        "Nieelastyczna podaż oznacza, że zmiany popytu powodują gwałtowne ruchy płac."),
+        "Think about supply and demand for rare talent.",
+        "Denke an Angebot und Nachfrage bei seltenem Talent.",
+        "Pomyśl o podaży i popycie na rzadki talent."
+      ),
     },
     {
       kind: "choice",
       prompt: T(
-        "How does a high stock-to-flow ratio protect gold against monetary devaluation?",
-        "Wie schuetzt ein hohes Stock-to-Flow-Verhaeltnis Gold vor Entwertung?",
-        "W jaki sposób wysoki wskaźnik stock-to-flow chroni złoto przed dewaluacją?",
+        "Why has physical gold held its purchasing power across thousands of years?",
+        "Warum behaelt physisches Gold seit Jahrtausenden seine Kaufkraft?",
+        "Dlaczego fizyczne złoto utrzymuje swoją siłę nabywczą od tysięcy lat?"
       ),
       options: [
-        { text: T("Annual new production is tiny relative to existing reserves, preventing sudden supply shocks", "Die Jahresfoerderung ist winzig im Vergleich zum Bestand, was Angebotsschocks verhindert", "Roczna produkcja jest znikoma wobec istniejących rezerw, co zapobiega szokom podażowym"), correct: true },
-        { text: T("By allowing anyone to print gold certificates on home paper printers", "Indem jeder Buerger Goldzertifikate zu Hause auf Papier ausdrucken darf", "Pozwalając każdemu drukować certyfikaty złota na domowej drukarce") },
-        { text: T("By turning all gold coins into lightweight helium balloons", "Indem alle Goldmuenzen in schwebende Heliumballons umgewandelt werden", "Przekształcając wszystkie złote monety w balony z helem") },
+        {
+          text: T(
+            "It cannot be printed or manufactured out of thin air, keeping its natural supply strictly limited",
+            "Man kann es nicht drucken oder herbeizaubern; sein Angebot bleibt natuerlich begrenzt",
+            "Nie można go dodrukować ani wyczarować z niczego; jego podaż w przyrodzie jest ściśle ograniczona"
+          ),
+          correct: true,
+        },
+        {
+          text: T(
+            "Gold floats on water like a duck",
+            "Gold schwimmt auf dem Wasser wie eine Ente",
+            "Złoto unosi się na wodzie jak kaczka"
+          ),
+          correct: false,
+        },
+        {
+          text: T(
+            "Every gold coin comes with a lifetime guarantee of free pizza",
+            "Zu jeder Goldmuenze gibt es lebenslang gratis Pizza",
+            "Do każdej złotej monety przysługuje dożywotnia darmowa pizza"
+          ),
+          correct: false,
+        },
       ],
       hint: T(
-        "Low flow relative to stock anchors scarcity over decades.",
-        "Geringe Zufuhr im Verhaeltnis zum Gesamtbestand stabilisiert den Wert.",
-        "Niski dopływ w relacji do całego zasobu stabilizuje rynkową rzadkość."),
+        "Focus on natural geological scarcity versus paper printing.",
+        "Achte auf geologische Knappheit im Vergleich zu bedrucktem Papier.",
+        "Zwróć uwagę na naturalną rzadkość w geologii w porównaniu z papierowym drukiem."
+      ),
     },
     {
       kind: "widget",
       prompt: T(
-        "Identify why physical gold maintains its purchasing power over centuries.",
-        "Waehle aus, warum Gold seine Kaufkraft ueber Jahrhunderte bewahrt.",
-        "Wskaż, dlaczego fizyczne złoto utrzymuje swoją siłę nabywczą przez stulecia.",
+        "Identify why rare technical skills command a high hourly rate.",
+        "Waehle aus, warum seltene technische Faehigkeiten hohe Stundensaetze erzielen.",
+        "Wskaż, dlaczego rzadkie umiejętności techniczne zapewniają wysoką stawkę godzinową."
       ),
       Widget: SeniorScarcityWidget,
       hint: T(
-        "High stock-to-flow anchors gold against supply shocks.",
-        "Das hohe Stock-to-Flow-Verhaeltnis schuetzt Gold vor Angebotsschocks.",
-        "Wysoki wskaźnik stock-to-flow chroni złoto przed nagłym napływem podaży."),
+        "Mastering complex domains creates an irreplaceable talent moat.",
+        "Komplexes Koennen baut einen unersetzlichen Wettbewerbsvorteil auf.",
+        "Trudne umiejętności tworzą trudną do pokonania przewagę na rynku."
+      ),
     },
   ],
   askDad: T(
-    "Ask your parent: How does having deep specialized expertise protect an employee's negotiating power during an economic downturn?",
-    "Frage deine Eltern: Wie schuetzt tiefes Spezialwissen die Verhandlungsposition eines Mitarbeiters in Krisenzeiten?",
-    "Zapytaj rodziców: Jak głęboka wiedza specjalistyczna chroni pozycję przetargową pracownika w czasie kryzysu gospodarczego?",
+    "Ask your parent: What is a skill you learned in your career that made your work much more valuable to employers?",
+    "Frage deine Eltern: Welche Faehigkeit habt ihr im Beruf gelernt, die eure Arbeit besonders wertvoll gemacht hat?",
+    "Zapytaj rodziców: Jakiej umiejętności nauczyliście się w pracy, która najbardziej podniosła Waszą wartość dla pracodawców?"
   ),
   realLife: {
     title: T(
-      "Real world: ASML photolithography and quantitative finance",
-      "Echte Welt: ASML-Lithografie und quantitative Finanzmodelle",
-      "Prawdziwy świat: Litografia ASML i finanse ilościowe",
+      "Real world: Chip Designers and Advanced Graphics Engineers",
+      "Echte Welt: Chip-Designer und Grafik-Ingenieure",
+      "Prawdziwy świat: Projektanci procesorów i inżynierowie zaawansowanej grafiki"
     ),
     body: T(
-      "The Dutch company ASML is the sole manufacturer of Extreme Ultraviolet (EUV) photolithography machines required to manufacture sub-3nm computer chips. Because mastering this optical physics discipline is extraordinarily scarce, ASML commands near-absolute pricing power across the global technology supply chain.",
-      "Das niederlaendische Unternehmen ASML ist weltweiter Alleinhersteller von EUV-Lithografiemaschinen fuer modernste Computerchips. Weil dieses physikalische Spezialwissen extrem rar ist, besitzt ASML nahezu uneingeschraenkte Preissetzungsmacht.",
-      "Holenderska firma ASML jest jedynym na świecie producentem maszyn fotolitograficznych EUV do wytwarzania procesorów poniżej 3 nm. Ponieważ ta wiedza z fizyki optycznej jest niezwykle rzadka, ASML posiada niemal absolutną siłę cenową w globalnym łańcuchu dostaw.",
+      "Only a few thousand engineers on Earth understand how to design microchips that contain billions of transistors or render real-time movie lighting in video games. Companies like NVIDIA, Apple, and Epic Games compete fiercely for their expertise, offering six-figure compensation and equity packages because their rare knowledge cannot simply be hired off the street.",
+      "Nur wenige tausend Ingenieure weltweit verstehen, wie man Computerchips mit Milliarden Transistoren baut oder fotorealistische Lichteffekte in Games berechnet. Firmen wie NVIDIA und Apple kaempfen um diese Fachkraefte mit Spitzengehaeltern, weil man solches Spezialwissen nicht einfach auf der Strasse findet.",
+      "Tylko kilka tysięcy inżynierów na świecie potrafi projektować mikroprocesory z miliardami tranzystorów lub renderować fotorealistyczne oświetlenie w grach w czasie rzeczywistym. Firmy takie jak NVIDIA czy Apple zacięcie rywalizują o ich wiedzę, oferując ogromne pakiety wynagrodzeń i akcji, bo takiego talentu nie da się zatrudnić z ulicy."
     ),
   },
   factCard: {
@@ -259,9 +302,9 @@ export const lesson: Lesson = {
     ],
     simplified: [
       T(
-        "Complex multi-asset portfolio covariance and structural wage bargaining institutions are abstracted into fundamental scarcity principles.",
-        "Mehrdimensionale Portfoliomodelle und Tarifstrukturen wurden auf fundamentale Knappheitsprinzipien vereinfacht.",
-        "Wielowymiarowe modele portfelowe i instytucje układów zbiorowych uproszczono do fundamentalnych zasad rzadkości.",
+        "Complex labor market wage dynamics and asset ratios are modeled around core scarcity mechanics.",
+        "Komplexe Arbeitsmarktmodelle wurden auf grundlegende Knappheitsgesetze vereinfacht.",
+        "Złożone zjawiska rynku pracy i rynków aktywów przedstawiono w oparciu o fundamentalne prawo rzadkości."
       ),
     ],
   },
