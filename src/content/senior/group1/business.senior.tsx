@@ -1,29 +1,292 @@
 import { useState } from "react";
 import { animatedBeat } from "../../../lesson/toolkit";
-import type { Lesson, Text, ToyProps, WidgetProps } from "../../../lesson/types";
+import type { DiagramProps, Lesson, Text, ToyProps, WidgetProps } from "../../../lesson/types";
 
 const T = (en: string, de: string, pl: string): Text => ({ en, de, pl });
 
-function IncomeStatementDiagram({ step }: { step: number }) {
-  return (
-    <svg viewBox="0 0 400 240" className="diagram-svg" role="img" aria-label="Income statement and profit margins diagram">
-      <rect x="10" y="10" width="380" height="220" rx="14" fill="#f8fbfc" stroke="#1d3f47" strokeWidth="2" />
-      <rect x="30" y="40" width="340" height="35" rx="6" fill="#e3f2fd" stroke="#1971c2" strokeWidth="2" />
-      <text x="200" y="62" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#0c4a7e">Total Revenue ($100,000)</text>
+/**
+ * Beat 1: Meet Karan. Sells pizza at soccer field, counts $500 cash in box. But that is revenue, not profit!
+ * Step 1: Karan and his soccer field sourdough pizza stand.
+ * Step 2: Wooden money box fills with $500 cash.
+ * Step 3: Total Revenue card: $500 gross sales != profit.
+ */
+function PizzaStandRevenueDiagram({ lang, step }: DiagramProps) {
+  const karanName = lang === "pl" ? "Aleksander" : lang === "de" ? "Felix" : "Karan";
+  const label = lang === "pl" ? "Stoisko z pizzą Aleksandra i przychód w kasetce" : lang === "de" ? "Felix Pizzastand und Barumsatz in der Kasse" : "Karan pizza stand and total cash revenue";
 
-      {step >= 1 && (
+  return (
+    <svg viewBox="0 0 400 240" className="diagram-svg" role="img" aria-label={label}>
+      <rect x="10" y="10" width="380" height="220" rx="14" fill="#fffbeb" stroke="#b45309" strokeWidth="2" />
+
+      {/* Karan avatar */}
+      <g>
+        <circle cx="80" cy="110" r="28" fill="#f3cfa6" stroke="#23383f" strokeWidth="2" />
+        <path d="M 52 105 C 52 70 108 70 108 105" fill="#451a03" />
+        {/* Chef hat */}
+        <path d="M 60 88 C 50 65 110 65 100 88 Z" fill="#ffffff" stroke="#23383f" strokeWidth="1.5" />
+        <circle cx="72" cy="107" r="2.5" fill="#23383f" />
+        <circle cx="88" cy="107" r="2.5" fill="#23383f" />
+        <path d="M 76 119 Q 80 125 84 119" stroke="#23383f" strokeWidth="2" fill="none" />
+        <path d="M 56 185 L 62 140 Q 80 135 98 140 L 104 185 Z" fill="#dc2626" stroke="#23383f" strokeWidth="2" />
+        <text x="80" y="205" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#991b1b">{karanName}</text>
+      </g>
+
+      {/* Stand badge */}
+      <g>
+        <rect x="135" y="35" width="230" height="32" rx="6" fill="#fef3c7" stroke="#d97706" strokeWidth="1.5" />
+        <text x="250" y="55" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#92400e">
+          🍕 {lang === "pl" ? "Stoisko z pizzą przy boisku" : lang === "de" ? "Sauerteig-Pizzastand am Sportplatz" : "Artisan Pizza Pop-Up Stand"}
+        </text>
+      </g>
+
+      {/* Step 2: Cash in Box */}
+      {step >= 2 && (
         <g>
-          <rect x="30" y="85" width="220" height="35" rx="6" fill="#fff3bf" stroke="#f59f00" strokeWidth="2" />
-          <text x="140" y="107" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#784e03">Gross Profit (-$40k COGS)</text>
-          <text x="310" y="107" textAnchor="middle" fontSize="11" fill="#868e96">60% Gross Margin</text>
+          <rect x="135" y="80" width="230" height="50" rx="8" fill="#ecfdf5" stroke="#059669" strokeWidth="1.5" />
+          <text x="250" y="105" textAnchor="middle" fontSize="16">📦 💵 💵 💵</text>
+          <text x="250" y="122" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#065f46">
+            {lang === "pl" ? "Kasetka pełna gotówki: 2 000 zł" : lang === "de" ? "Volle Kasse: 500 € Bargeld" : "Cash Box Stuffed: $500 Cash"}
+          </text>
         </g>
       )}
 
+      {/* Step 3: Clarifying Revenue vs Profit */}
+      {step >= 3 && (
+        <g>
+          <rect x="135" y="145" width="230" height="60" rx="8" fill="#dbeafe" stroke="#2563eb" strokeWidth="2" />
+          <text x="250" y="170" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#1e40af">
+            {lang === "pl" ? "Przychód (Revenue): 2 000 zł" : lang === "de" ? "Umsatz (Revenue): 500 €" : "Total Revenue: $500"}
+          </text>
+          <text x="250" y="192" textAnchor="middle" fontSize="10.5" fill="#1e3a8a">
+            {lang === "pl" ? "To łączna sprzedaż, jeszcze nie zysk!" : lang === "de" ? "Gesamteinnahme, noch KEIN Gewinn!" : "Total sales money before paying any bills!"}
+          </text>
+        </g>
+      )}
+    </svg>
+  );
+}
+
+/**
+ * Beat 2: Subtracting ingredients (COGS) to find Gross Profit.
+ * Step 1: Revenue $500.
+ * Step 2: Ingredients cost $150 (flour, tomatoes, mozzarella, boxes).
+ * Step 3: Gross profit: $350 (70% gross margin).
+ */
+function GrossProfitDiagram({ lang, step }: DiagramProps) {
+  const label = lang === "pl" ? "Odliczenie kosztów składników i obliczenie zysku brutto" : lang === "de" ? "Abzug der Materialkosten und Rohertrag" : "Cost of goods sold and gross profit";
+
+  return (
+    <svg viewBox="0 0 400 240" className="diagram-svg" role="img" aria-label={label}>
+      <rect x="10" y="10" width="380" height="220" rx="14" fill="#f8fafc" stroke="#334155" strokeWidth="2" />
+
+      {/* Revenue bar */}
+      <g>
+        <rect x="35" y="35" width="330" height="42" rx="6" fill="#dbeafe" stroke="#2563eb" strokeWidth="2" />
+        <text x="55" y="60" fontSize="12" fontWeight="bold" fill="#1e40af">
+          {lang === "pl" ? "Przychód: 2 000 zł" : lang === "de" ? "Umsatz: 500 €" : "Revenue: $500"}
+        </text>
+        <text x="345" y="60" textAnchor="end" fontSize="11" fill="#3b82f6">100%</text>
+      </g>
+
+      {/* Step 2: Raw Ingredients / COGS */}
       {step >= 2 && (
         <g>
-          <rect x="30" y="130" width="120" height="35" rx="6" fill="#d3f9d8" stroke="#2b8a3e" strokeWidth="2" />
-          <text x="90" y="152" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#2b8a3e">Net Profit</text>
-          <text x="260" y="152" textAnchor="middle" fontSize="11" fill="#2b8a3e">-$40k OpEx = $20,000 Net (20% Margin)</text>
+          <rect x="35" y="87" width="330" height="45" rx="6" fill="#fee2e2" stroke="#ef4444" strokeWidth="1.5" />
+          <text x="55" y="108" fontSize="12" fontWeight="bold" fill="#b91c1c">
+            {lang === "pl" ? "- Składniki (Mąka, ser, kartony): 600 zł" : lang === "de" ? "- Zutaten (Mehl, Tomaten, Kartons): 150 €" : "- Raw Ingredients & Boxes (COGS): $150"}
+          </text>
+          <text x="55" y="124" fontSize="10" fill="#991b1b">
+            {lang === "pl" ? "Koszty bezpośrednie wytworzenia pizzy" : lang === "de" ? "Direkte Warenkosten je Pizza" : "Direct cost to make each pizza"}
+          </text>
+          <text x="345" y="112" textAnchor="end" fontSize="11" fill="#dc2626">30%</text>
+        </g>
+      )}
+
+      {/* Step 3: Gross Profit */}
+      {step >= 3 && (
+        <g>
+          <rect x="35" y="145" width="330" height="55" rx="8" fill="#fef3c7" stroke="#d97706" strokeWidth="2" />
+          <text x="55" y="172" fontSize="13" fontWeight="bold" fill="#92400e">
+            {lang === "pl" ? "= Zysk brutto (Gross Profit): 1 400 zł" : lang === "de" ? "= Rohertrag (Gross Profit): 350 €" : "= Gross Profit: $350"}
+          </text>
+          <text x="55" y="190" fontSize="10.5" fill="#b45309">
+            {lang === "pl" ? "Marża brutto: 70% (pieniądze na pokrycie kosztów stałych)" : lang === "de" ? "Rohmarge: 70% (Geld zur Deckung der Betriebskosten)" : "70% Gross Margin to cover oven, fuel, and helpers"}
+          </text>
+          <text x="345" y="176" textAnchor="end" fontSize="16">🧀✨</text>
+        </g>
+      )}
+    </svg>
+  );
+}
+
+/**
+ * Beat 3: Operating expenses: Gas canisters, spot rent, brother's help -> Net Profit!
+ * Step 1: Gross profit $350.
+ * Step 2: OpEx: Gas $40, spot fee $40, brother's wage $30 (-$110 total).
+ * Step 3: Net profit: $240 (48% Net margin). The real bottom line.
+ */
+function NetProfitBreakdownDiagram({ lang, step }: DiagramProps) {
+  const label = lang === "pl" ? "Koszty operacyjne i ostateczny zysk netto" : lang === "de" ? "Betriebskosten und Reingewinn" : "Operating expenses and net profit";
+
+  return (
+    <svg viewBox="0 0 400 240" className="diagram-svg" role="img" aria-label={label}>
+      <rect x="10" y="10" width="380" height="220" rx="14" fill="#f0fdf4" stroke="#15803d" strokeWidth="2" />
+
+      {/* Gross Profit bar */}
+      <g>
+        <rect x="35" y="30" width="330" height="38" rx="6" fill="#fef3c7" stroke="#d97706" strokeWidth="1.5" />
+        <text x="55" y="54" fontSize="12" fontWeight="bold" fill="#92400e">
+          {lang === "pl" ? "Zysk brutto ze sprzedaży: 1 400 zł" : lang === "de" ? "Rohertrag aus Pizza: 350 €" : "Gross Profit: $350"}
+        </text>
+      </g>
+
+      {/* Step 2: OpEx Breakdown */}
+      {step >= 2 && (
+        <g>
+          <rect x="35" y="78" width="330" height="52" rx="6" fill="#ffe4e6" stroke="#f43f5e" strokeWidth="1.5" />
+          <text x="55" y="98" fontSize="11.5" fontWeight="bold" fill="#9f1239">
+            {lang === "pl" ? "- Koszty operacyjne: 400 zł" : lang === "de" ? "- Betriebskosten (OpEx): 110 €" : "- Operating Expenses (OpEx): $110"}
+          </text>
+          <text x="55" y="117" fontSize="10" fill="#be123c">
+            {lang === "pl" ? "🔥 Gaz do pieca (140 zł) • ⚽ Miejsce (160 zł) • 👦 Pomoc brata (100 zł)" : lang === "de" ? "🔥 Gasflaschen (40 €) • ⚽ Standplatz (40 €) • 👦 Hilfe Bruder (30 €)" : "🔥 Oven gas ($40) • ⚽ Pitch rent ($40) • 👦 Brother helper ($30)"}
+          </text>
+        </g>
+      )}
+
+      {/* Step 3: Net Profit */}
+      {step >= 3 && (
+        <g>
+          <rect x="35" y="142" width="330" height="60" rx="8" fill="#dcfce7" stroke="#16a34a" strokeWidth="2.5" />
+          <text x="55" y="170" fontSize="14" fontWeight="bold" fill="#15803d">
+            {lang === "pl" ? "🎉 Zysk netto (Net Profit): 1 000 zł!" : lang === "de" ? "🎉 Reingewinn (Net Profit): 240 €!" : "🎉 Net Profit: $240 Real Take-Home!"}
+          </text>
+          <text x="55" y="189" fontSize="10.5" fill="#166534">
+            {lang === "pl" ? "Prawdziwy wynik na czysto: należy w 100% do Ciebie" : lang === "de" ? "Das echte Endergebnis: Gehoert dem Gruender ganz allein" : "The bottom line: The only money you actually earned as owner"}
+          </text>
+          <text x="345" y="175" textAnchor="end" fontSize="18">💰✅</text>
+        </g>
+      )}
+    </svg>
+  );
+}
+
+/**
+ * Beat 4: Protecting margins: Confusing revenue with profit vs healthy buffers against price hikes.
+ * Step 1: Warning: Spending revenue as profit leads to bankruptcy.
+ * Step 2: Ingredient price spike risk (cheese price jumps).
+ * Step 3: Healthy profit margins absorb cost surges safely.
+ */
+function MarginSafetyDiagram({ lang, step }: DiagramProps) {
+  const label = lang === "pl" ? "Ochrona marży przed wzrostem kosztów" : lang === "de" ? "Margensicherheit gegen steigende Kosten" : "Margin protection against cost shocks";
+
+  return (
+    <svg viewBox="0 0 400 240" className="diagram-svg" role="img" aria-label={label}>
+      <rect x="10" y="10" width="380" height="220" rx="14" fill="#fafafa" stroke="#475569" strokeWidth="2" />
+
+      {/* Step 1: The Trap */}
+      <g>
+        <rect x="35" y="35" width="155" height="150" rx="8" fill="#fff1f2" stroke="#e11d48" strokeWidth="1.5" />
+        <text x="112" y="60" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#be123c">
+          {lang === "pl" ? "Pułapka Przychodu" : lang === "de" ? "Die Umsatzfalle" : "Revenue Trap"}
+        </text>
+        <text x="112" y="90" textAnchor="middle" fontSize="22">💸 ⚠️</text>
+        <text x="112" y="115" textAnchor="middle" fontSize="10" fill="#9f1239">
+          {lang === "pl" ? "Wydajesz utarg" : lang === "de" ? "Geld ausgegeben" : "Spent sales cash"}
+        </text>
+        <text x="112" y="132" textAnchor="middle" fontSize="10" fill="#9f1239">
+          {lang === "pl" ? "Brak kasy na mąkę" : lang === "de" ? "Kein Mehl naechste Woche" : "No flour next week"}
+        </text>
+        <rect x="45" y="145" width="135" height="26" rx="4" fill="#fecdd3" />
+        <text x="112" y="162" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#9f1239">
+          {lang === "pl" ? "Bankructwo stoiska" : lang === "de" ? "Insolvenzgefahr" : "Risk of Failure"}
+        </text>
+      </g>
+
+      {/* Step 2: Ingredient Price Shock */}
+      {step >= 2 && (
+        <g>
+          <rect x="210" y="35" width="155" height="150" rx="8" fill="#f0fdf4" stroke="#16a34a" strokeWidth="2" />
+          <text x="287" y="60" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#15803d">
+            {lang === "pl" ? "Mądra Marża" : lang === "de" ? "Gesunde Marge" : "Protected Margin"}
+          </text>
+          <text x="287" y="90" textAnchor="middle" fontSize="22">🛡️ 📈</text>
+          <text x="287" y="115" textAnchor="middle" fontSize="10" fill="#166534">
+            {lang === "pl" ? "Ser podrożał o 20%" : lang === "de" ? "Kaesepreis steigt 20%" : "Cheese price rises 20%"}
+          </text>
+          <text x="287" y="132" textAnchor="middle" fontSize="10" fill="#166534">
+            {lang === "pl" ? "Marża to amortyzuje" : lang === "de" ? "Marge faengt es auf" : "Buffer absorbs shock"}
+          </text>
+          <rect x="220" y="145" width="135" height="26" rx="4" fill="#bbf7d0" />
+          <text x="287" y="162" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#14532d">
+            {lang === "pl" ? "Firma nadal zyskuje!" : lang === "de" ? "Bleibt profitabel!" : "Always Profitable!"}
+          </text>
+        </g>
+      )}
+
+      {/* Step 3: Rule Banner */}
+      {step >= 3 && (
+        <g>
+          <rect x="50" y="196" width="300" height="24" rx="4" fill="#334155" />
+          <text x="200" y="212" textAnchor="middle" fontSize="10.5" fontWeight="bold" fill="#ffffff">
+            {lang === "pl" ? "Chroń marżę, by nieprzewidziane koszty nie zniszczyły biznesu" : lang === "de" ? "Schuetze deine Marge, damit Preisschoecke dich nicht treffen" : "Healthy profit margins protect your enterprise from inflation"}
+          </text>
+        </g>
+      )}
+    </svg>
+  );
+}
+
+/**
+ * Beat 5: Reinvesting retained earnings into a second pizza stone oven.
+ * Step 1: Half of net profits saved ($120).
+ * Step 2: Buying second fast pizza stone oven.
+ * Step 3: Baking capacity doubles: kitchen project becomes a local legend!
+ */
+function ReinvestmentFlywheelDiagram({ lang, step }: DiagramProps) {
+  const label = lang === "pl" ? "Reinwestycja zysku w drugi piec i podwojenie mocy" : lang === "de" ? "Reinvestition des Gewinns in zweiten Ofen" : "Reinvesting retained earnings into equipment";
+
+  return (
+    <svg viewBox="0 0 400 240" className="diagram-svg" role="img" aria-label={label}>
+      <rect x="10" y="10" width="380" height="220" rx="14" fill="#fdf4ff" stroke="#a21caf" strokeWidth="2" />
+
+      {/* Step 1: Retained Earnings */}
+      <g>
+        <rect x="35" y="45" width="95" height="75" rx="8" fill="#fce7f3" stroke="#db2777" strokeWidth="1.5" />
+        <text x="82" y="70" textAnchor="middle" fontSize="18">💰</text>
+        <text x="82" y="90" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#9d174d">
+          {lang === "pl" ? "Zatrzymany zysk" : lang === "de" ? "Gewinnruecklage" : "Retained"}
+        </text>
+        <text x="82" y="105" textAnchor="middle" fontSize="9.5" fill="#be185d">+$120</text>
+      </g>
+
+      {/* Step 2: New Second Oven */}
+      {step >= 2 && (
+        <g>
+          <path d="M 135 82 L 175 82" stroke="#a21caf" strokeWidth="3" markerEnd="url(#arrow)" />
+          <rect x="180" y="45" width="100" height="75" rx="8" fill="#ede9fe" stroke="#7c3aed" strokeWidth="1.5" />
+          <text x="230" y="72" textAnchor="middle" fontSize="20">🔥 🍕</text>
+          <text x="230" y="92" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#6d28d9">
+            {lang === "pl" ? "Drugi piec" : lang === "de" ? "Zweiter Ofen" : "Second Oven"}
+          </text>
+          <text x="230" y="106" textAnchor="middle" fontSize="9" fill="#5b21b6">2x Capacity</text>
+        </g>
+      )}
+
+      {/* Step 3: Enterprise Scale */}
+      {step >= 3 && (
+        <g>
+          <path d="M 285 82 L 315 82" stroke="#a21caf" strokeWidth="3" markerEnd="url(#arrow)" />
+          <circle cx="345" cy="82" r="28" fill="#dcfce7" stroke="#16a34a" strokeWidth="2" />
+          <text x="345" y="80" textAnchor="middle" fontSize="16">🚀</text>
+          <text x="345" y="96" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#15803d">Scale</text>
+
+          <rect x="40" y="145" width="320" height="60" rx="8" fill="#701a75" />
+          <text x="200" y="170" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#ffffff">
+            {lang === "pl" ? "Reinwestycja zysku tworzy machinę wzrostu" : lang === "de" ? "Reinvestition verwandelt Ideen in Grossunternehmen" : "Reinvesting profits builds long-term economic power"}
+          </text>
+          <text x="200" y="190" textAnchor="middle" fontSize="10" fill="#f5d0fe">
+            {lang === "pl" ? "Lepszy sprzęt = podwojona sprzedaż = trwała niezależność" : lang === "de" ? "Bessere Geraete = doppelte Produktion = nachhaltiges Wachstum" : "Better tools bake twice as many pizzas in the same weekend hours"}
+          </text>
         </g>
       )}
     </svg>
@@ -95,7 +358,7 @@ export const lesson: Lesson = {
         T("After a bustling Saturday match, his wooden money box is stuffed with five hundred dollars in cash.", "Nach einem spannenden Fussballspiel zaehlt er stolze 500 Euro bar in seiner Kasse.", "Po zaciętym meczu jego drewniana kasetka pęka w szwach: zebrał dwa tysiące złotych w gotówce."),
         T("Many beginners think Karan just made five hundred dollars of pure profit. But that is only his *revenue*.", "Viele denken, Felix haette 500 Euro Gewinn gemacht. Aber das ist nur sein *Umsatz*.", "Wielu myśli, że Aleksander zarobił na czysto całą tę sumę. Ale to zaledwie jego *przychód*."),
       ],
-      IncomeStatementDiagram,
+      PizzaStandRevenueDiagram,
     ),
     animatedBeat(
       [
@@ -103,7 +366,7 @@ export const lesson: Lesson = {
         T("These direct ingredients cost one hundred and fifty dollars.", "Diese direkten Zutaten kosten ihn 150 Euro.", "Te bezpośrednie składniki kosztowały go sześćset złotych."),
         T("When he subtracts ingredients from revenue, he gets three hundred and fifty dollars in *gross profit*.", "Zieht er das Mehl vom Umsatz ab, bleiben 350 Euro *Rohertrag* (Gross Profit).", "Gdy odejmie koszt składników od przychodu, zostaje mu tysiąc czterysta złotych *zysku brutto*."),
       ],
-      IncomeStatementDiagram,
+      GrossProfitDiagram,
     ),
     animatedBeat(
       [
@@ -111,7 +374,7 @@ export const lesson: Lesson = {
         T("He also pays his younger brother thirty dollars for washing dough bowls and folding boxes.", "Zudem gibt er seinem Bruder 30 Euro dafuer, Schuesseln zu spuelen und Kartons zu falten.", "Płaci też młodszemu bratu sto złotych za zmywanie misek i składanie kartonów."),
         T("After subtracting these overhead costs, Karan is left with two hundred and forty dollars in *net profit*.", "Zieht er all das ab, bleiben Felix am Ende 240 Euro echter *Reingewinn* (Net Profit).", "Dopiero po odliczeniu wszystkich kosztów stałych zostaje mu tysiąc złotych prawdziwego *zysku netto*."),
       ],
-      IncomeStatementDiagram,
+      NetProfitBreakdownDiagram,
     ),
     animatedBeat(
       [
@@ -119,7 +382,7 @@ export const lesson: Lesson = {
         T("If you confuse revenue with net profit, you might spend money that was meant for next week flour and go broke.", "Verwechselt man Umsatz mit Gewinn, gibt man Geld aus, das fuer Mehl gedacht war, und geht pleite.", "Gdyby pomylić przychód z zyskiem, można wydać pieniądze potrzebne na mąkę na kolejny tydzień i zbankrutować."),
         T("Smart entrepreneurs protect their profit margin so unexpected ingredient price hikes do not crush them.", "Kluge Gruender kalkulieren gesunde Margen, damit steigende Kaesepreise sie nicht ruinieren.", "Mądrzy przedsiębiorcy dbają o bezpieczną marżę, by nagły wzrost cen sera nie zniszczył ich stoiska."),
       ],
-      IncomeStatementDiagram,
+      MarginSafetyDiagram,
     ),
     animatedBeat(
       [
@@ -127,7 +390,7 @@ export const lesson: Lesson = {
         T("This is called *reinvesting retained earnings*: putting your profits back into tools that expand your capacity.", "Das nennt man *Reinvestition*: Gewinne in bessere Werkzeuge stecken, um mehr zu schaffen.", "To nazywa się *reinwestycją zysku*: wkładaniem zarobionych pieniędzy w narzędzia podwajające możliwości."),
         T("That is how small kitchen projects transform into thriving, legendary neighborhood enterprises.", "So verwandeln sich kleine Garagenideen in erfolgreiche, gesunde Unternehmen.", "Właśnie tak małe projekty domowe przekształcają się w prężne, lubiane firmy z perspektywami."),
       ],
-      IncomeStatementDiagram,
+      ReinvestmentFlywheelDiagram,
     ),
   ],
   toyIntro: T(
