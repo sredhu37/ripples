@@ -14,6 +14,7 @@ import { GROUP_2_SENIOR_LESSONS } from "./group2";
 import { GROUP_3_SENIOR_LESSONS } from "./group3";
 import { group4Lessons } from "./group4";
 import { GROUP_5_SENIOR_LESSONS, group5Lessons } from "./group5";
+import { GROUP_6_SENIOR_LESSONS, group6Lessons } from "./group6";
 import type { Lesson } from "../../lesson/types";
 
 export const GROUP_4_SENIOR_LESSONS: Lesson[] = Object.values(group4Lessons);
@@ -33,7 +34,7 @@ export const GROUP_1_SENIOR_LESSONS: Lesson[] = [
   ratesSenior,
 ];
 
-export { GROUP_2_SENIOR_LESSONS, GROUP_3_SENIOR_LESSONS, GROUP_5_SENIOR_LESSONS, group5Lessons };
+export { GROUP_2_SENIOR_LESSONS, GROUP_3_SENIOR_LESSONS, GROUP_5_SENIOR_LESSONS, group5Lessons, GROUP_6_SENIOR_LESSONS, group6Lessons };
 
 export const ALL_SENIOR_LESSONS: Lesson[] = [
   ...GROUP_1_SENIOR_LESSONS,
@@ -41,6 +42,7 @@ export const ALL_SENIOR_LESSONS: Lesson[] = [
   ...GROUP_3_SENIOR_LESSONS,
   ...GROUP_4_SENIOR_LESSONS,
   ...GROUP_5_SENIOR_LESSONS,
+  ...group6Lessons,
 ];
 
 export const SENIOR_LESSONS: Record<string, Lesson> = {};
