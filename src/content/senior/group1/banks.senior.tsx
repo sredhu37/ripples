@@ -86,41 +86,41 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("Most people assume commercial banks simply store paper currency in a secure underground vault.", "Die meisten Menschen glauben, Geschaeftsbanken lagern Bargeld einfach in einem Tresor.", "Większość ludzi zakłada, że banki po prostu przechowują całą gotówkę w bezpiecznym skarbcu."),
-        T("In reality, banks operate under a system called *fractional reserve banking*.", "Tatsaechlich arbeiten Banken nach dem System des *Mindestreservesystems*.", "W rzeczywistości banki działają w systemie *rezerwy cząstkowej*."),
-        T("When you deposit money into a checking account, you are legally lending that money to the bank.", "Zahlst du Geld auf dein Konto ein, leihst du dieses Geld rein rechtlich der Bank.", "Wpłacając pieniądze na konto, z prawnego punktu widzenia pożyczasz te środki bankowi."),
+        T("Meet Abhi. In his favorite online multiplayer game, players mine rare ore and deposit gold coins into the guild vault.", "Das ist Felix. In seinem Lieblings-Onlinespiel lagern Spieler ihr geschuerftes Gold in der Gildenkasse.", "Poznaj Jana. W swojej ulubionej grze sieciowej gracze zbierają cenną rudę i wpłacają złote monety do gildyjnego skarbca."),
+        T("When one hundred players deposit ten coins each, the guild vault holds one thousand gold coins.", "Wenn hundert Spieler je zehn Muenzen einzahlen, liegen tausend Goldmuenzen im Gildentresor.", "Gdy stu graczy wpłaca po dziesięć monet, w skarbcu gildii leży okrągły tysiąc złotych monet."),
+        T("Abhi notices that players almost never withdraw all their gold on the exact same afternoon.", "Felix bemerkt, dass die Spieler ihr Gold fast nie am selben Tag komplett abholen wollen.", "Jan zauważa, że gracze niemal nigdy nie przychodzą wypłacić całego swojego złota tego samego dnia."),
       ],
       FractionalBankingDiagram,
     ),
     animatedBeat(
       [
-        T("The bank keeps only a small percentage (such as ten percent) in liquid reserves.", "Die Bank behaelt nur einen kleinen Bruchteil (etwa zehn Prozent) als Barreserve.", "Bank zatrzymuje w płynnych rezerwach zaledwie niewielki ułamek (np. dziesięć procent)."),
-        T("The remaining ninety percent is lent to families buying homes and entrepreneurs expanding businesses.", "Die restlichen neunzig Prozent werden an Haeuslebauer und Unternehmen verliehen.", "Pozostałe dziewięćdziesiąt procent pożycza rodzinom na domy i przedsiębiorcom na rozwój firm."),
-        T("This lending process acts as financial intermediation, creating credit that powers economic activity.", "Diese Kreditvergabe wirkt als Finanzvermittlung und kurbelt die gesamte Wirtschaft an.", "Ten proces pośrednictwa finansowego tworzy kredyt, który napędza całą gospodarkę."),
+        T("This is the exact principle behind real-world *fractional reserve banking*.", "Genau so funktioniert das echte *Mindestreservesystem* einer modernen Bank.", "To dokładnie ta sama zasada, na której opiera się *bankowość rezerwy cząstkowej* w prawdziwym świecie."),
+        T("The bank only keeps ten percent of total deposits locked in the safe as a cash cushion for daily withdrawals.", "Die Bank behaelt nur zehn Prozent des Geldes im Tresor fuer taegliche Auszahlungen der Kunden.", "Bank zatrzymuje w bezpiecznym sejfie tylko dziesięć procent depozytów na bieżące wypłaty."),
+        T("The remaining ninety percent is lent out to creators, builders, and entrepreneurs to finance new ventures.", "Die restlichen neunzig Prozent leiht sie an Macher und Unternehmer fuer neue Projekte aus.", "Pozostałe dziewięćdziesiąt procent pożycza twórcom, budowniczym i firmom na rozwój nowych projektów."),
       ],
       FractionalBankingDiagram,
     ),
     animatedBeat(
       [
-        T("Because only a fraction is in cash, what happens if every depositor panics and demands cash at once?", "Da nur ein Teil bar vorliegt: Was passiert, wenn alle Sparer gleichzeitig Panik bekommen?", "Skoro w kasie jest tylko ułamek: co się stanie, gdy wszyscy klienci w panice zażądają wypłat naraz?"),
-        T("This event is called a *bank run*.", "Dieses Ereignis nennt man einen *Bankansturm* (Bank Run).", "Takie zjawisko nazywa się *paniką bankową* (bank run)."),
-        T("Even a solvent bank can become illiquid within hours if depositors rush to withdraw simultaneously.", "Selbst eine solide Bank kann in Stunden zahlungsunfaehig werden, wenn alle ihr Geld wollen.", "Nawet wypłacalny bank może utracić płynność w kilka godzin, jeśli wszyscy zażądają gotówki."),
+        T("Now imagine a rumor spreads through the game server that the guild treasurer lost the vault keys.", "Stell dir vor, ein Geruecht macht die Runde, der Gildenschatzmeister haette Gold verloren.", "Wyobraź sobie, że po serwerze rozchodzi się plotka, jakoby skarbnik zgubił klucze do skarbca."),
+        T("Every single player runs to the vault at the exact same moment demanding all their coins back.", "Ploetzlich rennen alle Spieler gleichzeitig zur Kasse und wollen ihr ganzes Gold sofort bar.", "Wszyscy gracze jednocześnie rzucają się do kasy, żądając natychmiastowego zwrotu każdego grosza."),
+        T("Because ninety percent is lent out to builders, the vault runs out of coins. This is a *bank run*.", "Weil das meiste verliehen ist, geht der Tresor leer aus. Das nennt man einen *Bank Run*.", "Ponieważ większość monet została pożyczona budowniczym, skarbiec pustoszeje. To jest właśnie *run na bank*."),
       ],
       FractionalBankingDiagram,
     ),
     animatedBeat(
       [
-        T("To safeguard against bank runs, modern financial systems created two major shields.", "Um Bankenlaeufe zu verhindern, schufen moderne Staaten zwei Schutzschilde.", "Aby zapobiec panice bankowej, nowoczesne systemy stworzyły dwie kluczowe tarcze."),
-        T("First is government *deposit insurance*, protecting individual balances up to set limits (like 100,000 euros).", "Erstens die staatliche *Einlagensicherung*, die Sparguthaben bis zu Grenzbetraegen schuetzt.", "Po pierwsze państwowe *ubezpieczenie depozytów*, chroniące oszczędności do określonych limitów."),
-        T("Second is the central bank serving as the *lender of last resort*, providing emergency liquidity against sound collateral.", "Zweitens die Zentralbank als *Kreditgeber der letzten Instanz* bei akuter Liquiditaetsnot.", "Po drugie bank centralny jako *pożyczkodawca ostatniej instancji*, zapewniający awaryjną płynność."),
+        T("To stop bank runs in real life, central banks guarantee deposits so families know their money is always safe.", "In der realen Welt sichern Zentralbanken Spareinlagen ab, damit Sparer ruhig schlafen koennen.", "W świecie rzeczywistym państwowe fundusze gwarantują depozyty, aby rodziny miały pewność, że ich oszczędności są bezpieczne."),
+        T("Banks also earn a living through the *interest spread*: paying two percent to savers and charging six percent to builders.", "Banken leben von der *Zinsmarge*: 2% fuer Sparer zahlen und 6% von Bauherren verlangen.", "Banki utrzymują się z *marży odsetkowej*: dają dwa procent oszczędzającym, a biorą sześć procent od pożyczkobiorców."),
+        T("That spread covers office computers, cybersecurity engineers, mobile apps, and fraud protection.", "Diese Differenz bezahlt Programmierer, Sicherheitssoftware, Server und den Betrieb.", "Ta różnica opłaca programistów, zaawansowane zabezpieczenia, aplikacje w telefonie i ochronę przed oszustami."),
       ],
       FractionalBankingDiagram,
     ),
     animatedBeat(
       [
-        T("Banks are the nervous system of modern commerce, allocating capital where it is most productive.", "Banken sind das Nervensystem des Handels und lenken Kapital in produktive Bahnen.", "Banki stanowią krwioobieg handlu, kierując kapitał tam, gdzie przynosi największą korzyść."),
-        T("Understanding how fractional banking functions helps you appreciate systemic risk and financial stability.", "Das Reservesystem zu verstehen hilft dir, Systemrisiken und Stabilitaet zu begreifen.", "Zrozumienie rezerwy cząstkowej pomaga ocenić ryzyko systemowe i stabilność finansową."),
-        T("Always check that your savings institution is covered by official deposit guarantee schemes.", "Achte stets darauf, dass deine Bank einer offiziellen Einlagensicherung angehoert.", "Zawsze sprawdzaj, czy Twoja instytucja finansowa podlega urzędowym gwarancjom depozytów."),
+        T("Without banks, millions of small personal savings would just sit asleep inside piggy banks and desk drawers.", "Ohne Banken wuerde Erspartes ungenutzt in Spardosen und Schubladen verstauben.", "Gdyby nie banki, miliony drobnych oszczędności leżałyby bezczynnie w szufladach i skarbonkach."),
+        T("Banks channel that dormant money into fast fiber optic internet, game studios, and solar power plants.", "Banken lenken dieses Geld in Glasfasernetze, Entwicklerstudios und Solaranlagen.", "Banki kierują te uśpione środki na budowę szybkiego internetu, studia gier i farmy słoneczne."),
+        T("They are the coordination engine that powers the modern economy, built entirely on mathematical trust.", "Sie sind der Koordinationsmotor der Wirtschaft, angetrieben von Vertrauen und sauberer Mathematik.", "Są wielkim silnikiem koordynacji nowoczesnej gospodarki, opartym całkowicie na matematycznym zaufaniu."),
       ],
       FractionalBankingDiagram,
     ),

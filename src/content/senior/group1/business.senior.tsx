@@ -91,41 +91,41 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("Starting a business is the process of organizing capital, labor, and tools to solve a problem profitably.", "Ein Unternehmen zu gruenden bedeutet, Kapital, Arbeit und Werkzeuge gewinnbringend zu buendeln.", "Założenie firmy oznacza połączenie kapitału, pracy i narzędzi w celu zyskownego rozwiązywania problemów."),
-        T("Many beginners focus entirely on *revenue*: the total money received from customers.", "Viele Anfaenger schauen nur auf den *Umsatz*: das gesamte von Kunden eingenommene Geld.", "Wielu początkujących skupia się wyłącznie na *przychodach*: łącznej kwocie wpłaconej przez klientów."),
-        T("However, high revenue without profit is an illusion that leads to bankruptcy.", "Doch hoher Umsatz ohne Gewinn ist eine Taeuschung, die in die Insolvenz fuehrt.", "Jednak wysoki przychód bez zysku to złudzenie, które prowadzi wprost do bankructwa."),
+        T("Meet Karan. On weekends, he sets up a fresh sourdough pizza pop-up stand at the neighborhood soccer field.", "Das ist Felix. Am Wochenende betreibt er einen Sauerteig-Pizzastand am oertlichen Sportplatz.", "Poznaj Aleksandra. W weekendy rozstawia stoisko ze świeżą pizzą rzemieślniczą przy boisku osiedlowym."),
+        T("After a bustling Saturday match, his wooden money box is stuffed with five hundred dollars in cash.", "Nach einem spannenden Fussballspiel zaehlt er stolze 500 Euro bar in seiner Kasse.", "Po zaciętym meczu jego drewniana kasetka pęka w szwach: zebrał dwa tysiące złotych w gotówce."),
+        T("Many beginners think Karan just made five hundred dollars of pure profit. But that is only his *revenue*.", "Viele denken, Felix haette 500 Euro Gewinn gemacht. Aber das ist nur sein *Umsatz*.", "Wielu myśli, że Aleksander zarobił na czysto całą tę sumę. Ale to zaledwie jego *przychód*."),
       ],
       IncomeStatementDiagram,
     ),
     animatedBeat(
       [
-        T("To understand a business, we look at its *income statement*.", "Um ein Unternehmen zu verstehen, betrachten wir die *Gewinn- und Verlustrechnung*.", "Aby zrozumieć działanie firmy, analizujemy jej *rachunek zysków i strat*."),
-        T("First comes *cost of goods sold* (COGS): the direct materials and labor needed to produce each unit.", "Zuerst kommen die *direkten Herstellungskosten*: Material und Arbeit je verkaufter Einheit.", "Najpierw pojawia się *koszt własny sprzedaży*: bezpośrednie materiały i praca na każdą sztukę."),
-        T("Subtracting COGS from revenue gives your *gross profit*.", "Zieht man die direkten Kosten vom Umsatz ab, erhaelt man den *Rohertrag*.", "Odjęcie tych bezpośrednich kosztów od przychodu daje *zysk brutto na sprzedaży*."),
+        T("First, Karan has to pay for the raw ingredients: imported flour, crushed tomatoes, mozzarella, and cardboard pizza boxes.", "Zuerst muss Felix die Zutaten bezahlen: Mehl, Tomatensauce, Mozzarella und Kartons.", "Najpierw Aleksander musi opłacić składniki: włoską mąkę, sos pomidorowy, ser mozzarella i kartonowe pudełka."),
+        T("These direct ingredients cost one hundred and fifty dollars.", "Diese direkten Zutaten kosten ihn 150 Euro.", "Te bezpośrednie składniki kosztowały go sześćset złotych."),
+        T("When he subtracts ingredients from revenue, he gets three hundred and fifty dollars in *gross profit*.", "Zieht er das Mehl vom Umsatz ab, bleiben 350 Euro *Rohertrag* (Gross Profit).", "Gdy odejmie koszt składników od przychodu, zostaje mu tysiąc czterysta złotych *zysku brutto*."),
       ],
       IncomeStatementDiagram,
     ),
     animatedBeat(
       [
-        T("Next come *operating expenses* (OpEx): software tools, marketing, office rent, and management salaries.", "Danach folgen die *Betriebskosten*: Software, Marketing, Miete und feste Gehaelter.", "Następnie dochodzą *koszty operacyjne*: oprogramowanie, marketing, biuro i wynagrodzenia."),
-        T("After paying operating expenses, interest, and corporate taxes, what remains is *net profit*.", "Nach Betriebskosten, Zinsen und Steuern bleibt der *Reingewinn* uebrig.", "Po opłaceniu kosztów operacyjnych, odsetek i podatków pozostaje czysty *zysk netto*."),
-        T("Net profit is the actual wealth generated that can be reinvested or paid out to owners.", "Der Reingewinn ist das echte erwirtschaftete Vermoegen zur Reinvestition oder Ausschuettung.", "Zysk netto to rzeczywiste wypracowane bogactwo, które można reinwestować lub wypłacić właścicielom."),
+        T("Next come operating expenses: five gas canisters for his portable oven and renting the field table spot.", "Dazu kommen laufende Kosten: Gasflaschen fuer den Pizzaofen und Standgebuehr am Sportplatz.", "Następnie dochodzą koszty operacyjne: butle z gazem do pieca oraz opłata za miejsce przy boisku."),
+        T("He also pays his younger brother thirty dollars for washing dough bowls and folding boxes.", "Zudem gibt er seinem Bruder 30 Euro dafuer, Schuesseln zu spuelen und Kartons zu falten.", "Płaci też młodszemu bratu sto złotych za zmywanie misek i składanie kartonów."),
+        T("After subtracting these overhead costs, Karan is left with two hundred and forty dollars in *net profit*.", "Zieht er all das ab, bleiben Felix am Ende 240 Euro echter *Reingewinn* (Net Profit).", "Dopiero po odliczeniu wszystkich kosztów stałych zostaje mu tysiąc złotych prawdziwego *zysku netto*."),
       ],
       IncomeStatementDiagram,
     ),
     animatedBeat(
       [
-        T("A software company might have a high gross margin of 80% because copying code costs almost zero.", "Eine Softwarefirma hat oft 80% Rohmarge, weil das Kopieren von Code kaum etwas kostet.", "Firma programistyczna może mieć marżę brutto rzędu 80%, bo powielanie kodu nic nie kosztuje."),
-        T("A grocery store might have a tight net margin of 2% due to perishable goods and real estate costs.", "Ein Supermarkt hat oft nur 2% Reinmarge wegen verderblicher Ware und hoher Mietkosten.", "Supermarket ma często marżę netto na poziomie zaledwie 2% z powodu psucia się towarów i kosztów najmu."),
-        T("Understanding *unit economics* determines whether a business model can scale sustainably.", "Die *Einheitsoekonomie* entscheidet darueber, ob ein Geschaeftsmodell tragfaehig wachsen kann.", "Zrozumienie *ekonomiki jednostkowej* decyduje o tym, czy dany model biznesowy może stabilnie rosnąć."),
+        T("Net profit is the real bottom line: the only money that actually belongs to the business owner.", "Der Reingewinn ist das Endergebnis: das einzige Geld, das dem Gruender wirklich gehoert.", "Zysk netto to prawdziwy wynik na czysto: jedyne pieniądze, które faktycznie należą do twórcy."),
+        T("If you confuse revenue with net profit, you might spend money that was meant for next week flour and go broke.", "Verwechselt man Umsatz mit Gewinn, gibt man Geld aus, das fuer Mehl gedacht war, und geht pleite.", "Gdyby pomylić przychód z zyskiem, można wydać pieniądze potrzebne na mąkę na kolejny tydzień i zbankrutować."),
+        T("Smart entrepreneurs protect their profit margin so unexpected ingredient price hikes do not crush them.", "Kluge Gruender kalkulieren gesunde Margen, damit steigende Kaesepreise sie nicht ruinieren.", "Mądrzy przedsiębiorcy dbają o bezpieczną marżę, by nagły wzrost cen sera nie zniszczył ich stoiska."),
       ],
       IncomeStatementDiagram,
     ),
     animatedBeat(
       [
-        T("Great entrepreneurs focus relentlessly on value creation for customers.", "Erfolgreiche Gruender konzentrieren sich unermuedlich auf den Mehrwert fuer Kunden.", "Wybitni przedsiębiorcy nieustannie koncentrują się na tworzeniu wartości dla klientów."),
-        T("If your product solves a painful problem, customers gladly pay more than your production cost.", "Loest dein Produkt ein echtes Problem, zahlen Kunden gerne mehr als deine Herstellungskosten.", "Jeśli produkt rozwiązuje bolesny problem, klienci chętnie zapłacą więcej niż koszt wytworzenia."),
-        T("Profit is the market's certificate that you created more value than the resources you consumed.", "Gewinn ist das Zertifikat des Marktes, dass du mehr Wert geschaffen als Ressourcen verbraucht hast.", "Zysk to rynkowe potwierdzenie, że stworzyłeś większą wartość niż zużyte na to zasoby."),
+        T("Karan uses half his net profit to buy a second pizza stone oven that bakes pizzas twice as fast.", "Felix nutzt die Haelfte des Gewinns fuer einen zweiten Ofen, der doppelt so schnell backt.", "Aleksander przeznacza połowę zysku netto na zakup drugiego pieca, który piecze dwa razy szybciej."),
+        T("This is called *reinvesting retained earnings*: putting your profits back into tools that expand your capacity.", "Das nennt man *Reinvestition*: Gewinne in bessere Werkzeuge stecken, um mehr zu schaffen.", "To nazywa się *reinwestycją zysku*: wkładaniem zarobionych pieniędzy w narzędzia podwajające możliwości."),
+        T("That is how small kitchen projects transform into thriving, legendary neighborhood enterprises.", "So verwandeln sich kleine Garagenideen in erfolgreiche, gesunde Unternehmen.", "Właśnie tak małe projekty domowe przekształcają się w prężne, lubiane firmy z perspektywami."),
       ],
       IncomeStatementDiagram,
     ),

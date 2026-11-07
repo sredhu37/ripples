@@ -82,41 +82,41 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("Why do economists talk about *time preference*?", "Warum sprechen Oekonomen von *Zeitpraeferenz*?", "Dlaczego ekonomiści mówią o *preferencji czasowej*?"),
-        T("Time preference describes how much someone values present goods compared to future goods.", "Zeitpraeferenz beschreibt, wie sehr jemand Gueter heute gegenueber der Zukunft bewertet.", "Preferencja czasowa określa, jak bardzo cenimy dobra w teraźniejszości względem przyszłości."),
-        T("High time preference means an urge to spend every single dollar right away.", "Hohe Zeitpraeferenz bedeutet den Drang, jeden Dollar sofort auszugeben.", "Wysoka preferencja czasowa oznacza chęć natychmiastowego wydania każdego grosza."),
+        T("Meet Anjali. She earns fifteen dollars a week delivering local weekend neighborhood newsletters.", "Das ist Lena. Sie verdient 15 Euro die Woche mit dem Austragen von Wochenendzeitungen.", "Poznaj Maję. Zarabia sześćdziesiąt złotych tygodniowo na roznoszeniu lokalnych gazetek."),
+        T("Her dream is to save eight hundred dollars to build her own fast custom gaming computer.", "Ihr Traum ist es, 800 Euro fuer einen schnellen Gaming-PC zusammenzusparen.", "Jej marzeniem jest odłożenie trzech tysięcy złotych na szybki komputer do gier."),
+        T("Every single afternoon, friends invite her to get sweet boba tea and snacks costing five dollars a cup.", "Jeden Nachmittag laden Freunde sie zu Bubble Tea und Snacks fuer 5 Euro ein.", "Codziennie znajomi zapraszają ją na modną herbatę boba i przekąski za dwadzieścia złotych."),
       ],
       SavingsDiagram,
     ),
     animatedBeat(
       [
-        T("Low time preference means willing to delay gratification to build capital.", "Niedrige Zeitpraeferenz bedeutet Belohnungsaufschub, um Kapital aufzubauen.", "Niska preferencja czasowa oznacza gotowość do odroczenia nagrody, by budować kapitał."),
-        T("Without saved capital, it is impossible to start a business or purchase productive tools.", "Ohne angespartes Kapital kann man weder ein Unternehmen gruenden noch Werkzeuge kaufen.", "Bez oszczędzonego kapitału nie da się założyć firmy ani kupić produktywnych narzędzi."),
-        T("Savings serve as both a protective shield and an investment springboard.", "Ersparnisse dienen als Schutzschild und als Sprungbrett fuer Investitionen.", "Oszczędności służą zarówno jako tarcza ochronna, jak i trampolina do inwestycji."),
+        T("Economists call this choice *time preference*.", "Oekonomen nennen diesen Konflikt *Zeitpraeferenz*.", "Ekonomiści nazywają ten wybór *preferencją czasową*."),
+        T("High time preference means grabbing quick instant pleasure today, leaving your wallet empty tomorrow.", "Hohe Zeitpraeferenz bedeutet sofortigen Spass heute, aber morgen ein leeres Portemonnaie.", "Wysoka preferencja czasowa to natychmiastowa drobna przyjemność dziś, ale pusty portfel jutro."),
+        T("Low time preference is the superpower of waiting a little bit so you can achieve something truly big.", "Niedrige Zeitpraeferenz ist die Superkraft zu warten, um wirklich grosse Ziele zu erreichen.", "Niska preferencja czasowa to supermoc cierpliwości, by zrealizować wielkie, wspaniałe marzenie."),
       ],
       SavingsDiagram,
     ),
     animatedBeat(
       [
-        T("Financial planners recommend maintaining an *emergency fund*.", "Finanzplaner empfehlen einen *Notfallfonds*.", "Doradcy finansowi zalecają posiadanie *poduszki finansowej*."),
-        T("This is a liquid reserve covering three to six months of vital living expenses.", "Das ist eine liquide Reserve fuer drei bis sechs Monate lebensnotwendiger Ausgaben.", "To płynna rezerwa pokrywająca od trzech do sześciu miesięcy niezbędnych wydatków."),
-        T("If an unexpected job loss or medical emergency occurs, you do not need expensive credit.", "Bei Jobverlust oder Notfaellen muss man keine teuren Kredite aufnehmen.", "W razie utraty pracy lub nagłych wypadków nie trzeba sięgać po drogie pożyczki."),
+        T("When Anjali skips two sugary drinks each week, she banks ten dollars toward her PC build.", "Wenn Lena zwei Drinks die Woche auslaesst, spart sie 10 Euro fuer ihren Gaming-PC.", "Gdy Maja rezygnuje z dwóch drogich napojów w tygodniu, odkłada czterdzieści złotych na swój komputer."),
+        T("She also keeps a fifty-dollar mini *emergency buffer* so a flat bike tire never derails her progress.", "Sie haelt auch 50 Euro als *Notgroschen* bereit, damit ein platter Fahrradreifen sie nicht stoppt.", "Trzyma też dwieście złotych jako *bufor awaryjny*, by pęknięta dętka w rowerze nie zrujnowała jej planu."),
+        T("Savings turn stressful unexpected emergencies into minor, easy inconveniences.", "Ein Ersparnispuffer verwandelt echte Notfaelle in harmlose Kleinigkeiten.", "Oszczędności zamieniają stresujące, nagłe kłopoty w drobne, łatwe do rozwiązania sytuacje."),
       ],
       SavingsDiagram,
     ),
     animatedBeat(
       [
-        T("However, holding too much cash over decades introduces *opportunity cost*.", "Doch zu viel Bargeld ueber Jahrzehnte zu halten birgt *Opportunitaetskosten*.", "Jednak trzymanie zbyt dużej ilości gotówki przez dekady rodzi *koszt alternatywny*."),
-        T("Inflation slowly erodes the real purchasing power of uninvested paper money.", "Inflation nagt langsam an der realen Kaufkraft von unangelegtem Papiergeld.", "Inflacja powoli uszczupla realną siłę nabywczą nieinwestowanych pieniędzy."),
-        T("Once your safety buffer is filled, surplus savings should be deployed into productive assets.", "Ist das Polster voll, sollte ueberschuessiges Sparen in Sachwerte investiert werden.", "Gdy bufor bezpieczeństwa jest gotowy, nadwyżki warto lokować w aktywa produkcyjne."),
+        T("Saving money is not about depriving yourself of joy or never having fun with friends.", "Beim Sparen geht es nicht darum, sich jeden Spass mit Freunden zu verbieten.", "W oszczędzaniu nie chodzi o odmawianie sobie wszelkiej radości czy wyjść z przyjaciółmi."),
+        T("It is about deciding what actually matters to you instead of leaking cash on things you forget by bedtime.", "Es geht darum zu entscheiden, was dir wirklich wichtig ist, statt Geld gedankenlos zu verstreuen.", "Chodzi o świadome wybieranie tego, co naprawdę ma znaczenie, zamiast bezmyślnego rozrzucania drobnych kwot."),
+        T("Every dollar you save is a little mechanical employee working quietly to build your future options.", "Jeder gesparte Euro ist ein kleiner stiller Helfer, der dir spaeter echte Freiheit schenkt.", "Każdy zaoszczędzony grosz to mały pomocnik, który po cichu buduje Twoją przyszłą niezależność."),
       ],
       SavingsDiagram,
     ),
     animatedBeat(
       [
-        T("Mastering savings gives you independence and mental clarity.", "Sparen zu beherrschen schenkt Unabhaengigkeit und Gelassenheit.", "Opanowanie oszczędzania daje niezależność i spokój umysłu."),
-        T("It transforms income into lasting economic security and future opportunity.", "Es verwandelt Einkommen in dauerhafte finanzielle Sicherheit und Zukunftschancen.", "Zamienia bieżący dochód w trwałe bezpieczeństwo finansowe i nowe możliwości."),
-        T("The discipline to live below your means is the foundation of wealth.", "Die Disziplin, unter seinen Verhaeltnissen zu leben, ist das Fundament von Wohlstand.", "Dyscyplina życia poniżej stanu posiadania to fundament budowy majątku."),
+        T("By summer, Anjali orders her graphics card, processor, and monitors in shining original boxes.", "Im Sommer bestellt Lena Grafikkarte, Prozessor und Bildschirm im funkelnden Karton.", "Przed wakacjami Maja z dumą zamawia nową kartę graficzną, procesor i monitor."),
+        T("Her friends wonder how she managed to buy such an incredible gaming setup.", "Ihre Freunde staunen, wie sie sich dieses tolle Setup leisten konnte.", "Jej znajomi nie mogą wyjść z podziwu, jak udało jej się złożyć tak niesamowity sprzęt."),
+        T("The secret was simply directing small everyday streams of money into a reservoir of patient savings.", "Das Geheimnis war simpel: kleine taegliche Ausgaben in geduldiges Sparen umzulenken.", "Tajemnica była prosta: zamiana drobnych, codziennych wydatków w cierpliwie odkładane oszczędności."),
       ],
       SavingsDiagram,
     ),

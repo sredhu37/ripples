@@ -89,41 +89,41 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("When an entrepreneur creates a new company, they initially own one hundred percent of its *equity*.", "Gruendet eine Unternehmerin eine Firma, gehoeren ihr anfaenglich einhundert Prozent der *Anteile*.", "Gdy przedsiębiorca zakłada spółkę, początkowo posiada sto procent jej *kapitału własnego*."),
-        T("Equity represents ownership: rights to future profits and voting control over decisions.", "Anteile repraesentieren Eigentum: Anspruch auf zukuenftige Gewinne und Stimmrechte.", "Udziały oznaczają własność: prawo do przyszłych zysków oraz głos przy podejmowaniu decyzji."),
-        T("To scale rapidly, hiring top engineers and buying servers requires more cash than the founder has.", "Um schnell zu wachsen, braucht man mehr Kapital fuer Entwickler und Server, als man selbst besitzt.", "Aby szybko rosnąć, zatrudnienie inżynierów i zakup serwerów wymaga większych środków, niż ma założyciel."),
+        T("Meet Kriti and Abhi. Together, they start an indie game studio to build a 2D pixel platformer game.", "Das ist Sophie und Leon. Zusammen gruenden sie ein kleines Studio fuer ein neues Pixel-Computerspiel.", "Poznaj Alicję i Antoniego. Razem zakładają niezależne studio gier, by stworzyć platformówkę w stylu pixel art."),
+        T("On day one, Kriti owns fifty percent and Abhi owns fifty percent of their studio *equity*.", "Am ersten Tag gehoeren Sophie 50% und Leon 50% der Firmenanteile (*Equity*).", "Pierwszego dnia Alicja ma pięćdziesiąt procent, a Antoni pięćdziesiąt procent udziałów w studiu (*equity*)."),
+        T("Equity means true ownership: whoever holds equity decides game features and splits all future revenue.", "Anteile bedeuten echtes Eigentum: Wer Anteile haelt, bestimmt mit und teilt spaetere Gewinne.", "Udziały oznaczają prawdziwą własność: decydujesz o losach gry i dzielisz się wszystkimi przyszłymi zyskami."),
       ],
       CapTableDiagram,
     ),
     animatedBeat(
       [
-        T("The founder can raise venture capital by issuing new shares to investors.", "Die Gruenderin kann Risikokapital aufnehmen, indem sie neue Anteile an Investoren ausgibt.", "Założyciel może pozyskać kapitał podwyższając kapitał i emitując nowe udziały dla inwestorów."),
-        T("A *capitalization table* (cap table) tracks who owns which percentage of the company.", "Eine *Gesellschafterliste* (Cap Table) fuehrt auf, wer wie viel Prozent am Unternehmen haelt.", "Tabela struktury udziałów (cap table) rejestruje, kto posiada jaki procent udziałów w firmie."),
-        T("If an investor injects two hundred thousand dollars for twenty percent, the *post-money valuation* is one million dollars.", "Gibt ein Investor 200.000 Dollar fuer zwanzig Prozent, betraegt die *Post-Money-Bewertung* eine Million Dollar.", "Jeśli inwestor wnosi dwieście tysięcy dolarów za dwadzieścia procent, *wycena post-money* wynosi milion dolarów."),
+        T("Their game concept looks fantastic, but neither of them knows how to draw custom character animations.", "Die Spielidee ist genial, aber niemand von beiden kann tolle Charakter-Animationen zeichnen.", "Pomysł na grę jest świetny, ale żadne z nich nie potrafi płynnie rysować i animować postaci."),
+        T("They meet a brilliant digital artist who agrees to animate all thirty levels in exchange for twenty-five percent equity.", "Sie finden eine talentierte Zeichnerin, die alle 30 Level gestaltet, wenn sie dafuer 25% Anteile bekommt.", "Poznają utalentowaną ilustratorkę, która zgadza się stworzyć grafikę do trzydziestu poziomów w zamian za 25% udziałów."),
+        T("To welcome her as a co-owner, Kriti and Abhi each agree to lower their shares from fifty to 37.5 percent.", "Um sie aufzunehmen, reduzieren Sophie und Leon ihre Anteile jeweils von 50 auf 37,5 Prozent.", "Aby przyjąć ją do zespołu, Alicja i Antoni zgadzają się zmniejszyć swoje pakiety z pięćdziesięciu do 37,5 procent."),
       ],
       CapTableDiagram,
     ),
     animatedBeat(
       [
-        T("Issuing new shares creates *dilution*: the founder's percentage of total ownership drops from 100% to 80%.", "Neue Anteile fuehren zur *Verwaesserung*: Der Gruenderanteil sinkt von 100% auf 80%.", "Emisja nowych udziałów powoduje *rozwodnienie*: udział założyciela spada ze 100% do 80%."),
-        T("However, eighty percent of a million-dollar company is worth eight hundred thousand dollars.", "Doch achtzig Prozent von einer Million Dollar sind achthunderttausend Dollar wert.", "Jednak osiemdziesiąt procent z miliona dolarów to aż osiemset tysięcy dolarów wartości."),
-        T("Would you rather own 100% of a grape, or 80% of a giant watermelon?", "Besitzt du lieber 100% einer Weintraube oder 80% einer riesigen Wassermelone?", "Wolisz mieć 100% małego winogrona czy 80% ogromnego arbuza?"),
+        T("This sharing of ownership is called equity *dilution*.", "Diesen Prozess der Aufteilung nennt man *Verwaesserung* (Dilution).", "Ten proces dzielenia własności nazywa się *rozwodnieniem udziałów* (dilution)."),
+        T("Even though Kriti and Abhi own a smaller slice of the pie, the pie itself just became ten times more delicious.", "Obwohl ihre Stuecke vom Kuchen kleiner werden, ist der Kuchen dank der Grafik zehnmal wertvoller.", "Mimo że ich kawałek tortu stał się nieco mniejszy, sam tort dzięki wspaniałej grafice zyskał ogromną wartość."),
+        T("Would you rather own one hundred percent of an empty sketch or thirty-seven percent of a hit game?", "Besitzt du lieber 100% einer leeren Skizze oder 37% eines echten Spiele-Hits?", "Wolisz mieć sto procent pustego szkicu na kartce czy 37 procent gry, w którą grają tysiące graczy?"),
       ],
       CapTableDiagram,
     ),
     animatedBeat(
       [
-        T("Later, early employees may receive stock options to align incentives with company success.", "Spaeter erhalten fruehe Mitarbeiter oft Mitarbeiteraktien, um am Erfolg beteiligt zu sein.", "Później kluczowi pracownicy otrzymują opcje na udziały, aby dzielić sukces przedsiębiorstwa."),
-        T("If the company eventually launches an *Initial Public Offering* (IPO), shares trade on public stock exchanges.", "Geht die Firma spaeter an die Boerse (*IPO*), koennen jedermann die Aktien an der Boerse handeln.", "Jeśli spółka zadebiutuje na giełdzie (*IPO*), jej akcje stają się dostępne do obrotu publicznego."),
-        T("Public equity provides liquidity, allowing founders and investors to sell shares for cash.", "Boersengang schafft Liquiditaet, sodass Gruender und Investoren Anteile in Geld tauschen koennen.", "Publiczny obrót daje płynność, pozwalając założycielom i inwestorom na spieniężenie udziałów."),
+        T("Later, an online publisher offers twenty thousand dollars for cloud servers in exchange for ten percent of the studio.", "Spaeter zahlt ein Spiele-Publisher 20.000 Euro fuer Server im Tausch gegen 10 Prozent der Firma.", "Później wydawca gier oferuje osiemdziesiąt tysięcy złotych na szybkie serwery w zamian za 10 procent studia."),
+        T("All these ownership percentages are recorded in a master list called the *cap table*.", "Alle Eigentuemer und ihre Prozente werden in einer Tabelle erfasst: der *Cap Table*.", "Wszystkie udziały i nazwiska wspólników zapisuje się w oficjalnym wykazie zwanym *cap table*."),
+        T("Smart founders carefully guard their cap table so they never lose creative control of their dream.", "Kluge Gruender hueten ihre Anteile gut, um nie die Kontrolle ueber ihr Herzensprojekt zu verlieren.", "Mądrzy twórcy uważnie pilnują swoich udziałów, by nigdy nie oddać obcym kontroli nad własnym marzeniem."),
       ],
       CapTableDiagram,
     ),
     animatedBeat(
       [
-        T("Owning equity in growing businesses is one of the most powerful mechanisms for building long-term wealth.", "Unternehmensbeteiligungen sind einer der wirksamsten Hebel fuer langfristigen Vermoegensaufbau.", "Posiadanie udziałów w rosnących firmach to jeden z najpotężniejszych mechanizmów budowania majątku."),
-        T("Wages reward you only while working, but equity compounds around the clock.", "Loehne belohnen dich nur bei der Arbeit, aber Unternehmensanteile wachsen rund um die Uhr.", "Pensja wynagradza Cię tylko wtedy, gdy pracujesz, ale kapitał własny pracuje przez całą dobę."),
-        T("Learn to be an owner of productive capital, not merely a consumer of products.", "Lerne, Eigentuemer produktiven Kapitals zu sein und nicht nur reiner Konsument von Guetern.", "Ucz się być właścicielem produktywnego kapitału, a nie tylko konsumentem produktów."),
+        T("When the game launches on app stores and sells one million copies, all four partners celebrate together.", "Als das Spiel im App Store erscheint und eine Million Mal geladen wird, feiern alle vier Partner.", "Gdy gra trafia do sklepów i sprzedaje się w milionie kopii, wszyscy wspólnicy świętują wspólny sukces."),
+        T("Every owner receives their exact mathematical share of the game profits directly in their bank accounts.", "Jeder Eigentuemer bekommt seinen prozentualen Gewinnanteil puenktlich aufs Konto.", "Każdy właściciel otrzymuje swój wyliczony procent zysku bezpośrednio na swoje konto bankowe."),
+        T("Understanding equity teaches you the difference between merely working for an hourly wage and owning the game.", "Anteile zu verstehen zeigt den Unterschied dazwischen, nur fuer Stundenlohn zu jobben oder Miteigentuemer zu sein.", "Zrozumienie equity uczy różnicy między pracą za zwykłą stawkę godzinową a byciem współwłaścicielem sukcesu."),
       ],
       CapTableDiagram,
     ),

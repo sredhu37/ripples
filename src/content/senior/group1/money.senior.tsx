@@ -89,9 +89,9 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("Meet Maya. Maya builds custom website scripts after school.", "Das ist Maya. Maya programmiert nach der Schule Website-Skripte.", "Poznaj Mayę. Maya po szkole tworzy skrypty na strony internetowe."),
+        T("Meet Aish. Aish builds custom website scripts after school.", "Das ist Mia. Mia programmiert nach der Schule Website-Skripte.", "Poznaj Zofię. Zofia po szkole tworzy skrypty na strony internetowe."),
         T("She wants guitar lessons from a local music teacher.", "Sie moechte Gitarrenunterricht bei einem Musiklehrer nehmen.", "Chce brać lekcje gry na gitarze u lokalnego nauczyciela muzyki."),
-        T("Maya offers to trade two website scripts for guitar lessons.", "Maya bietet an, zwei Skripte gegen Gitarrenunterricht zu tauschen.", "Maya proponuje wymianę dwóch skryptów na lekcje gitary."),
+        T("Aish offers to trade two website scripts for guitar lessons.", "Mia bietet an, zwei Skripte gegen Gitarrenunterricht zu tauschen.", "Zofia proponuje wymianę dwóch skryptów na lekcje gitary."),
       ],
       LiquidityDiagram,
     ),
@@ -105,7 +105,7 @@ export const lesson: Lesson = {
     ),
     animatedBeat(
       [
-        T("Maya would have to find a bicycle owner who happens to need website code.", "Maya muesste jemanden mit Fahrrad finden, der Website-Code sucht.", "Maya musiałaby znaleźć kogoś z rowerem, kto potrzebuje kodu do strony."),
+        T("Aish would have to find a bicycle owner who happens to need website code.", "Mia muesste jemanden mit Fahrrad finden, der Website-Code sucht.", "Zofia musiałaby znaleźć kogoś z rowerem, kto potrzebuje kodu do strony."),
         T("This creates immense search costs and trade friction.", "Das verursacht enorme Suchkosten und Handelshemmnisse.", "To tworzy ogromne koszty poszukiwań i utrudnienia w handlu."),
         T("Economies overcome this by adopting a universal medium of exchange: *money*.", "Wirtschaften loesen dies mit einem universellen Tauschmittel: *Geld*.", "Gospodarki rozwiązują to, przyjmując uniwersalny środek wymiany: *pieniądz*."),
       ],
@@ -121,7 +121,7 @@ export const lesson: Lesson = {
     ),
     animatedBeat(
       [
-        T("Maya sells her script for cash to a dentist who needs an appointment tool.", "Maya verkauft ihr Skript fuer Geld an einen Zahnarzt fuer Terminbuchungen.", "Maya sprzedaje swój skrypt za gotówkę dentyście na system rezerwacji."),
+        T("Aish sells her script for cash to a dentist who needs an appointment tool.", "Mia verkauft ihr Skript fuer Geld an einen Zahnarzt fuer Terminbuchungen.", "Zofia sprzedaje swój skrypt za gotówkę dentyście na system rezerwacji."),
         T("She uses the cash to pay the guitar teacher, who buys his bicycle.", "Mit dem Geld bezahlt sie den Gitarrenlehrer, der sich sein Fahrrad kauft.", "Za gotówkę opłaca nauczyciela gitary, a ten kupuje swój rower."),
         T("Money eliminates friction and lets people specialize in what they do best.", "Geld beseitigt Reibung und erlaubt Menschen, sich zu spezialisieren.", "Pieniądz usuwa bariery i pozwala ludziom specjalizować się w tym, co robią najlepiej."),
       ],
