@@ -308,7 +308,7 @@ export const lesson: Lesson = {
         "Dlaczego prognoza Gordona Moore'a z 1965 roku dotycząca gęstości tranzystorów była tak niezwykła z ekonomicznego punktu widzenia?",
       ),
       options: [
-        { text: T("It predicted exponential compounding where computing performance doubled while per-transistor manufacturing costs halved every two years for decades", "Sie beschrieb ein exponentielles Wachstum, bei dem sich Leistung verdoppelte, waehrend die Kosten pro Transistor halbierten", "Przewidziała wykładniczy wzrost, w którym moc obliczeniowa podwajała się, a jednostkowy koszt tranzystora spadał o połowę co dwa lata przez dekady"), correct: true },
+        { text: T("Computing performance doubled while microchip costs fell by half every two years", "Rechenleistung verdoppelte sich, waehrend Chipkosten alle zwei Jahre halbiert wurden", "Wydajność komputerów podwajała się, a koszty chipów spadały o połowę co dwa lata"), correct: true },
         { text: T("It promised that computers would eventually be made of biodegradable cheese wheels", "Sie versprach, dass Rechner bald aus biologisch abbaubaren Kaeselaiben gebaut wuerden", "Obiecywała, że komputery będą w przyszłości budowane z biodegradowalnego sera"), correct: false },
         { text: T("It required all computer programmers to write code using feather quills and squid ink", "Sie verlangte von Programmierern, Software ausschliesslich mit Gansefedern zu schreiben", "Wymagała od programistów pisania kodu gęsim piórem i atramentem z mątwy"), correct: false },
       ],
@@ -325,7 +325,7 @@ export const lesson: Lesson = {
         "Co jest kluczową cechą architektury komputerowej von Neumanna?",
       ),
       options: [
-        { text: T("Storing executable program code and data in the same unified memory space, allowing general-purpose hardware to execute any software program", "Programmcode und Nutzdaten liegen im selben Speicher, wodurch die Hardware fuer beliebige Software universell einsetzbar ist", "Przechowywanie kodu programu i danych w tej samej pamięci operacyjnej, co pozwala jednemu procesorowi wykonywać dowolne oprogramowanie"), correct: true },
+        { text: T("Storing code and data in shared memory so hardware can run any software", "Programmcode und Daten teilen Speicher, sodass Hardware jede Software ausfuehren kann", "Przechowywanie kodu i danych w tej samej pamięci, by uruchamiać dowolne oprogramowanie"), correct: true },
         { text: T("Computers must be submerged in salted warm milk to prevent arithmetic errors", "Rechner muessen in warme Salzmilch getaucht werden, um Rechenfehler zu vermeiden", "Konieczność zanurzania komputera w ciepłym mleku z solą w celu uniknięcia błędów"), correct: false },
         { text: T("Each computer can only ever perform a single calculation before needing to be thrown away", "Jeder Rechner darf nur eine einzige Rechnung durchfuehren und muss dann entsorgt werden", "Komputer może wykonać tylko jedno obliczenie, po czym należy go wyrzucić"), correct: false },
       ],

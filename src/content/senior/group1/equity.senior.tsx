@@ -174,15 +174,15 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "Calculate the post-money valuation when 20% equity is sold for $200,000.",
-        "Berechne die Post-Money-Bewertung, wenn 20% Firmenanteile fuer 200.000 Dollar verkauft werden.",
-        "Oblicz wycenę post-money, gdy 20% udziałów sprzedawane jest za 200 000 dolarów.",
+        "If a digital game studio sells 20% ownership for $2,000, what is the whole studio worth?",
+        "Wenn ein Spielestudio 20% Firmenanteile fuer 2.000 Euro verkauft, wie viel ist das ganze Studio wert?",
+        "Jeśli studio gier sprzedaje 20% udziałów za 2 000 zł, ile warte jest całe studio?",
       ),
       Widget: EquityWidget,
       hint: T(
-        "Divide the investment amount by the fractional ownership purchased.",
-        "Teile die Investitionssumme durch den erworbenen Anteilsbruchteil.",
-        "Podziel kwotę inwestycji przez ułamek nabytego udziału w kapitale.",
+        "Divide $2,000 by 0.20 (or multiply $2,000 by 5).",
+        "Teile 2.000 durch 0,20 (oder nimm 2.000 mal 5).",
+        "Podziel 2 000 przez 0,20 (lub pomnóż 2 000 przez 5).",
       ),
     },
   ],

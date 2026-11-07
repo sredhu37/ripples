@@ -267,9 +267,9 @@ function Toy({ onDone }: ToyProps) {
 function WW1Widget({ onAnswer }: WidgetProps) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
-      <p style={{ margin: 0 }}>What transformed the 1914 Balkan regional crisis into a catastrophic world war within weeks?</p>
+      <p style={{ margin: 0 }}>What turned a regional crisis into a world war within weeks in 1914?</p>
       <button type="button" className="btn btn-quiet" onClick={() => onAnswer(false)}>Pigeons delivered all telegraphs backwards in mirror writing</button>
-      <button type="button" className="btn" onClick={() => onAnswer(true)}>A rigid network of secret interlocking military alliance treaties, combined with inflexible railroad mobilization schedules that left no diplomatic off-ramps</button>
+      <button type="button" className="btn" onClick={() => onAnswer(true)}>Secret alliance pacts and rigid train schedules triggered an automatic domino reaction</button>
       <button type="button" className="btn btn-quiet" onClick={() => onAnswer(false)}>European rulers challenged each other to a game of lawn croquet</button>
     </div>
   );
@@ -333,7 +333,7 @@ export const lesson: Lesson = {
         "Dlaczego regionalny kryzys w Sarajewie latem 1914 roku tak błyskawicznie przerodził się w wojnę światową?",
       ),
       options: [
-        { text: T("Because secret interlocking military alliance treaties and rigid railroad mobilization schedules created automatic escalation that diplomats could not pause", "Weil geheime Beistandspakte und starre Eisenbahnaufmaersche eine automatische Eskalation ausloesten, die Diplomaten nicht stoppen konnten", "Ponieważ siatka tajnych sojuszy wojskowych i sztywne plany mobilizacji kolejowej wywołały automatyczną eskalację, której dyplomaci nie zdołali powstrzymać"), correct: true },
+        { text: T("Secret alliance pacts and rigid train schedules triggered an automatic chain reaction", "Geheime Buendnisse und starre Aufmaersche loesten eine automatische Kettenreaktion aus", "Tajne sojusze i sztywne plany mobilizacji wywołały automatyczną reakcję łańcuchową"), correct: true },
         { text: T("Because European post offices ran out of stamps for peace letters", "Weil den europaeischen Postaemtern die Briefmarken fuer Friedensbriefe ausgingen", "Ponieważ urzędom pocztowym w Europie zabrakło znaczków do listów pokojowych"), correct: false },
         { text: T("Because a mysterious meteor turned all European iron bridges into rubber", "Weil ein Komet alle Eisenbahnbruecken ueber Nacht in Weichgummi verwandelt hatte", "Ponieważ tajemniczy meteor zamienił żelazne mosty kolejowe w elastyczną gumę"), correct: false },
       ],
