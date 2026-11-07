@@ -312,11 +312,11 @@ describe("Age Groups integration", () => {
   });
 
   it("falls back to junior lesson when senior lesson is not registered", () => {
-    const junior = getLesson("profit", "junior");
+    const junior = getLesson("ticketsize", "junior");
     expect(junior).toBeDefined();
 
-    // profit belongs to Group 2 and has not yet been forked for seniors, so it cleanly falls back
-    const senior = getLesson("profit", "senior");
+    // ticketsize has not yet been forked for seniors, so it cleanly falls back
+    const senior = getLesson("ticketsize", "senior");
     expect(senior).toBe(junior);
   });
 
