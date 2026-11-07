@@ -294,13 +294,13 @@ export const lesson: Lesson = {
       [
         T("History demonstrates the terrifying danger that occurs when any single corner expands unchecked to swallow the other two.", "Die Weltgeschichte beweist die toedliche Gefahr, wenn eine einzelne Ecke ungebremst die anderen beiden verschlingt.", "Historia świata dowodzi, jak śmiertelne niebezpieczeństwo powstaje, gdy jeden róg trójkąta rośnie bez kontroli, pożerając pozostałe dwa."),
         T("If Government crushes markets and citizens, totalitarian dictatorship and poverty follow.", "Ueberrollt der Staat Buerger und Maerkte, enden wir in totalitaerer Diktatur und Mangelwirtschaft.", "Gdy Państwo zdławi rynek i obywateli, powstaje totalitarna dyktatura i powszechna nędza."),
-        T("If Enterprises buy off politicians and suppress workers, oligarchic cartels capture society; if civic order collapses into lawlessness, civil chaos erupts.", "Kaufen Grosskonzerne die Politik und beuten Arbeiter aus, herrscht Oligarchie; bricht die Ordnung zusammen, herrscht Chaos.", "Gdy wielki Biznes kupuje polityków i wyzyskuje pracowników, rodzi się oligarchia; gdy upada praworządność, wybucha anarchia."),
+        T("If a single big company bribes politicians and silences workers, greedy bosses capture the town; if law and order breaks down, chaos erupts.", "Kaufen Grosskonzerne die Politik und beuten Arbeiter aus, herrscht Willkuer; bricht die Ordnung zusammen, herrscht Chaos.", "Gdy wielki Biznes kupuje polityków i wyzyskuje pracowników, rodzi się niesprawiedliwość; gdy upada praworządność, wybucha anarchia."),
       ],
       PathologicalImbalancesDiagram,
     ),
     animatedBeat(
       [
-        T("Enduring liberty and human prosperity emerge only from a dynamic tripartite equilibrium.", "Dauerhafte Freiheit und Wohlstand entstehen ausschliesslich aus einem lebendigen Dreiklang der Kraefte.", "Trwała wolność i rozwój rodzą się wyłącznie z dynamicznej równowagi wszystkich trzech sił."),
+        T("Enduring liberty and human prosperity emerge only when all three corners remain in healthy balance.", "Dauerhafte Freiheit und Wohlstand entstehen ausschliesslich aus einem gesunden Gleichgewicht der Kraefte.", "Trwała wolność i rozwój rodzą się wyłącznie ze zdrowej równowagi wszystkich trzech sił."),
         T("Citizens maintain independent unions, free press, and ballot initiatives to keep both corporate monopolies and state bureaucracies honest.", "Buerger nutzen freie Medien, Gerichte und Wahlen, um Monopole und staatliche Buerokratie in Schach zu halten.", "Obywatele korzystają z wolnych mediów, sądów i kart do głosowania, by kontrolować zarówno państwo, jak i kartele biznesowe."),
         T("Enterprises provide the technical vitality and wealth that fund public institutions, while the state ensures competition remains open and fair.", "Firmen liefern den wirtschaftlichen Motor fuer Steuern und Fortschritt, waehrend der Staat faire Spielregeln schuetzt.", "Firmy tworzą bogactwo finansujące szpitale i szkoły, a państwo pilnuje, by konkurencja była uczciwa i chroniła przyrodę."),
       ],
@@ -316,9 +316,9 @@ export const lesson: Lesson = {
     ),
   ],
   toyIntro: T(
-    "Calibrate the Power Triangle: adjust civic engagement, business dynamism, and government oversight to maintain healthy tripartite equilibrium.",
-    "Balanciere das Macht-Dreieck: Justiere Buergerbeteiligung, unternehmerische Dynamik und staatliche Aufsicht fuer ein stabiles Gleichgewicht.",
-    "Zarządzaj Trójkątem Władzy: dostosuj aktywność obywatelską, dynamikę biznesu i kontrolę państwa, by utrzymać harmonijną równowagę sił."),
+    "Calibrate the Power Triangle: adjust civic engagement, business dynamism, and government oversight to keep all three sides in healthy balance.",
+    "Balanciere das Macht-Dreieck: Justiere Buergerbeteiligung, Wirtschaft und Staat fuer ein gesundes Gleichgewicht.",
+    "Zarządzaj Trójkątem Władzy: dostosuj aktywność obywatelską, biznes i państwo, by utrzymać harmonijną równowagę sił."),
   Toy,
   questions: [
     {

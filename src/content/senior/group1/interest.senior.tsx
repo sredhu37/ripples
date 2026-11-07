@@ -116,7 +116,7 @@ export const lesson: Lesson = {
       [
         T("Compound growth is a powerful engine: when working for your investments, it builds generational security.", "Zinseszins ist ein gewaltiger Motor: Fuer deine Anlagen gebaut, schenkt er dir Freiheit.", "Procent składany to potężny silnik: gdy pracuje dla Twoich oszczędności, daje Ci niezależność."),
         T("But on high-interest credit cards, compounding interest works against you, compounding debt into an avalanche.", "Auf teuren Kreditkarten arbeitet er jedoch gegen dich und laesst Schulden lawinenartig wachsen.", "Lecz na drogich kartach kredytowych działa przeciwko Tobie, powiększając dług niczym lawinę."),
-        T("Put the exponential math of compound interest on your side while you are young.", "Bringe diese exponentielle Mathematik so frueh wie moeglich auf deine eigene Seite.", "Zaprzęgnij tę niezwykłą matematykę do pracy na swoją korzyść już w młodości."),
+        T("Put the rolling snowball of compound interest on your side while you are young.", "Bringe diesen wachsenden Schneeball des Zinseszinses so frueh wie moeglich auf deine Seite.", "Zaprzęgnij tę niezwykłą śnieżną kulę procentu składanego na swoją korzyść już w młodości."),
       ],
       CompoundInterestDiagram,
     ),

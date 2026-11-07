@@ -373,7 +373,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T("When an employer or customer hires you, they pay for the scarcity of what you know how to do.", "Wenn dich jemand bezahlt, honoriert er vor allem die Seltenheit deines Koennens.", "Gdy ktoś płaci Ci za pracę, wycenia przede wszystkim rzadkość tego, co potrafisz zrobić."),
-        T("If a task takes fifteen minutes to learn, labor supply is huge and wages face downward pressure.", "Kann man eine Aufgabe in 15 Minuten lernen, ist das Angebot riesig und Loehne sinken.", "Jeśli zadania można nauczyć się w kwadrans, chętnych jest mnóstwo, a stawka spada."),
+        T("If anyone can learn a chore in ten minutes, many people want the job and the pay drops.", "Wenn jeder eine Aufgabe in zehn Minuten lernen kann, gibt es viele Bewerber und der Lohn sinkt.", "Gdy każdy może nauczyć się zadania w dziesięć minut, chętnych jest wielu, a stawka spada."),
         T("When a craft requires years of creative practice, employers must bid aggressively for your talent.", "Erfordert ein Handwerk jahrelange Uebung, muessen Kunden und Firmen um dein Talent bieten.", "Gdy fach wymaga lat ćwiczeń i pasji, zleceniodawcy muszą konkurować o Twoje usługi."),
       ],
       ScarcityAndWagesDiagram,

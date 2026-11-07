@@ -94,7 +94,7 @@ export const lesson: Lesson = {
     ),
     animatedBeat(
       [
-        T("This is the exact principle behind real-world *fractional reserve banking*.", "Genau so funktioniert das echte *Mindestreservesystem* einer modernen Bank.", "To dokładnie ta sama zasada, na której opiera się *bankowość rezerwy cząstkowej* w prawdziwym świecie."),
+        T("This is how real banks work: keeping part of the cash in the vault and lending out the rest.", "Genau so funktionieren echte Banken: Ein Teil bleibt im Tresor, der Rest wird verliehen.", "Dokładnie tak działają prawdziwe banki: część zostaje w skarbcu, a reszta jest pożyczana."),
         T("The bank only keeps ten percent of total deposits locked in the safe as a cash cushion for daily withdrawals.", "Die Bank behaelt nur zehn Prozent des Geldes im Tresor fuer taegliche Auszahlungen der Kunden.", "Bank zatrzymuje w bezpiecznym sejfie tylko dziesięć procent depozytów na bieżące wypłaty."),
         T("The remaining ninety percent is lent out to creators, builders, and entrepreneurs to finance new ventures.", "Die restlichen neunzig Prozent leiht sie an Macher und Unternehmer fuer neue Projekte aus.", "Pozostałe dziewięćdziesiąt procent pożycza twórcom, budowniczym i firmom na rozwój nowych projektów."),
       ],

@@ -269,7 +269,7 @@ export const lesson: Lesson = {
       [
         T("Meet Aish. She visits the United Nations headquarters and gazes at the opening words of the 1948 Universal Declaration of Human Rights.", "Das ist Anna. Sie besucht das UN-Hauptquartier und liest die ersten Zeilen der Allgemeinen Erklaerung der Menschenrechte von 1948.", "Poznaj Anię. Odwiedza siedzibę ONZ i czyta pierwsze słowa Powszechnej Deklaracji Praw Człowieka z 1948 roku."),
         T("World War 2 was the deadliest conflict in human history, claiming an estimated 70 to 85 million lives across every continent.", "Der Zweite Weltkrieg war der toedlichste Konflikt der Geschichte mit geschaetzten 70 bis 85 Millionen Opfern.", "II wojna światowa była najkrwawszym konfliktem w dziejach ludzkości, pochłaniając od 70 do 85 milionów ofiar na wszystkich kontynentach."),
-        T("It unmasked the horrific horrors of industrial totalitarianism, the state-sponsored Holocaust, and the devastating advent of atomic weapons.", "Er zeigte die Schrecken des totalitaeren Wahns, den fabriksmaessigen Holocaust und den Eintritt in das Atomzeitalter.", "Obnażyła potworny koszmar przemysłowego totalitaryzmu, zaplanowany przez państwo Holokaust i nadejście broni atomowej."),
+        T("It unmasked the horrors of brutal dictatorships, the state-sponsored Holocaust, and the devastating advent of atomic weapons.", "Er zeigte die Schrecken brutaler Diktaturen, den fabriksmaessigen Holocaust und den Eintritt in das Atomzeitalter.", "Obnażyła potworny koszmar bezwzględnych dyktatur, zaplanowany przez państwo Holokaust i nadejście broni atomowej."),
       ],
       WW2MobilizationDiagram,
     ),

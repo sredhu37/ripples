@@ -274,7 +274,7 @@ export const lesson: Lesson = {
       [
         T("Derivatives markets bring together two essential market participants: *hedgers* and *speculators*.", "Derivatemaerkte bringen zwei grundlegende Gruppen zusammen: *Hedger* (Absicherer) und *Spekulanten*.", "Rynki derywatów łączą dwie kluczowe grupy uczestników: podmioty zabezpieczające się (*hedgers*) oraz *spekulantów*."),
         T("Arjun is a hedger: he is willing to forgo potential windfall drops in flour prices just to eliminate devastating catastrophic risk.", "Arno sichert Risiken ab: Er verzichtet auf moegliche Preissenkungen, um dafuer vor Existenzbedrohlichen Preisschueben sicher zu sein.", "Artur zabezpiecza ryzyko: woli zrezygnować z ewentualnych spadków cen mąki, byle zyskać stuprocentową pewność i spokój w biznesie."),
-        T("Speculative market traders absorb Arjun price risk, wagering their own capital and providing vital market liquidity.", "Finanzhaendler uebernehmen dieses Preisrisiko freiwillig: Sie setzen eigenes Kapital ein und stellen wertvolle Liquiditaet bereit.", "Spekulanci świadomie przejmują na siebie to ryzyko rynkowe, angażując własny kapitał i dostarczając rynkowi niezbędnej płynności."),
+        T("Traders absorb Arjun price risk, wagering their own capital so bakers can focus on baking bread.", "Finanzhaendler uebernehmen dieses Preisrisiko freiwillig, damit Baecker sich auf das Backen konzentrieren koennen.", "Spekulanci świadomie przejmują na siebie to ryzyko rynkowe, dzięki czemu piekarz może spokojnie piec chleb."),
       ],
       HedgingVsSpeculationDiagram,
     ),
@@ -288,8 +288,8 @@ export const lesson: Lesson = {
     ),
     animatedBeat(
       [
-        T("To prevent systemic collapse and panic defaults, modern derivative exchanges settle contracts through *central clearing houses*.", "Um Kettenreaktionen und Zahlungsausfaelle zu verhindern, wickeln moderne Boersen alle Kontrakte ueber *Clearinghaeuser* ab.", "Aby zapobiec niewypłacalności i panice finansowej, współczesne giełdy rozliczają kontrakty przez *izby rozliczeniowe (CCP)*."),
-        T("Clearing houses enforce daily margin adjustments, ensuring every counterparty satisfies financial obligations without fail.", "Sie verlangen taegliche Sicherheitsleistungen (Margins) und garantieren die Erfuellung jedes einzelnen Kontrakts.", "Izby te wymagają codziennych uzupełnień depozytów zabezpieczających, gwarantując niezawodną realizację każdej transakcji."),
+        T("To stop panic collapses, modern exchanges settle contracts through *central clearing houses*.", "Um Kettenreaktionen und Ausfaelle zu verhindern, wickeln moderne Boersen alle Kontrakte ueber *Clearinghaeuser* ab.", "Aby zapobiec niewypłacalności i panice, współczesne giełdy rozliczają kontrakty przez *izby rozliczeniowe*."),
+        T("Clearing houses act like a trusted referee, making sure both sides keep their promises every day.", "Clearinghaeuser handeln wie ein Schiedsrichter und stellen taeglich sicher, dass jeder seine Pflichten erfuellt.", "Izby te działają jak zaufany sędzia, gwarantując każdego dnia dotrzymanie obietnic przez obie strony."),
         T("When used responsibly, derivatives act as the sophisticated shock absorbers of modern global commerce.", "Verantwortungsvoll eingesetzt, sind Derivate die unersetzlichen Stossdaempfer des weltweiten Handels.", "Używane odpowiedzialnie, instrumenty pochodne stanowią zaawansowane amortyzatory chroniące stabilność globalnej gospodarki."),
       ],
       GlobalRiskClearingDiagram,
