@@ -95,41 +95,41 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("Taxes are mandatory contributions levied by governments on citizens and corporations.", "Steuern sind gesetzlich verpflichtende Abgaben, die Staaten von Buergern und Firmen erheben.", "Podatki to obowiązkowe świadczenia nakładane przez państwo na obywateli i przedsiębiorstwa."),
-        T("They fund public goods that market forces cannot easily coordinate alone.", "Sie finanzieren oeffentliche Gueter, die der freie Markt allein kaum bereitstellt.", "Finansują dobra publiczne, których wolny rynek sam z siebie nie zapewniłby optymalnie."),
-        T("Paved roads, electric grids, public schools, clean tap water, and judicial courts rely on tax revenue.", "Strassen, Stromnetze, Schulen, Trinkwasser und Gerichte basieren auf Steuereinnahmen.", "Drogi, sieci energetyczne, szkoły, czysta woda w kranie i sądy opierają się na wpływach podatkowych."),
+        T("Meet Arjun. He loves skateboarding at the community park, where new LED floodlights let everyone skate safely until dark.", "Das ist Lukas. Er faehrt leidenschaftlich Skateboard im Skatepark, wo helle Flutlichter Abendsicherheit bringen.", "Poznaj Jana. Uwielbia jeździć na deskorolce w skateparku, gdzie nowe reflektory LED pozwalają bezpiecznie jeździć po zmroku."),
+        T("Neither Arjun nor his friends paid for those lights out of their pockets.", "Weder Lukas noch seine Skater-Freunde haben diese Lampen aus eigener Tasche bezahlt.", "Ani Jan, ani jego koledzy nie zapłacili za te lampy z własnej kieszeni."),
+        T("They were funded by the city pool of *taxes*: mandatory contributions from local working citizens and companies.", "Sie wurden aus *Steuern* bezahlt: Beitraege aller arbeitenden Buerger und Firmen fuer die Gemeinschaft.", "Zostały sfinansowane ze wspólnej puli *podatków*: obowiązkowych wpłat mieszkańców i lokalnych firm."),
       ],
       ProgressiveTaxDiagram,
     ),
     animatedBeat(
       [
-        T("Most modern democracies employ a *progressive income tax* system.", "Die meisten modernen Staaten nutzen ein *progressives Einkommensteuersystem*.", "Większość współczesnych państw stosuje *progresywny podatek dochodowy*."),
-        T("Under a progressive tax, people who earn higher incomes contribute a higher percentage of their earnings.", "Hierbei zahlen Personen mit hoeherem Einkommen einen hoeheren prozentualen Anteil.", "W systemie progresywnym osoby o wyższych dochodach płacą wyższą stawkę procentową."),
-        T("This is structured through individual steps called *tax brackets*.", "Dies ist ueber sogenannte *Steuerstufen* (Tarifzonen) geregelt.", "Konstrukcja ta opiera się na kolejnych progach zwanych *przedziałami podatkowymi*."),
+        T("Taxes pay for shared public goods that everyone uses: roads, emergency firefighters, clean drinking water, and public parks.", "Steuern bezahlen oeffentliche Gueter: Strassen, Feuerwehr, sauberes Trinkwasser und Parks.", "Podatki finansują wspólne dobra, z których korzystają wszyscy: równe drogi, straż pożarną, czystą wodę w kranie i parki."),
+        T("Most democratic countries collect income tax using a system called *progressive tax brackets*.", "Die meisten Demokratien nutzen fuer Einkommen ein System namens *Steuerprogression*.", "Większość państw pobiera podatek dochodowy w systemie zwanym *skalą progresywną*."),
+        T("Under progressive taxation, people who earn higher salaries contribute a larger percentage of their top earnings.", "Wer sehr viel Geld verdient, zahlt auf seine obersten Einkommen einen hoeheren Prozentsatz.", "W systemie progresywnym osoby zarabiające duże sumy oddają wyższy procent od swoich najwyższych dochodów."),
       ],
       ProgressiveTaxDiagram,
     ),
     animatedBeat(
       [
-        T("A widespread myth is that moving into a higher bracket reduces your net take-home pay.", "Ein weit verbreiteter Irrglaube ist, dass ein hoeherer Tarif das Nettoeinkommen senkt.", "Powszechnym mitem jest przekonanie, że wejście w wyższy próg zmniejsza wypłatę na rękę."),
-        T("In reality, the higher percentage applies solely to the *marginal* dollars above that threshold.", "Tatsaechlich gilt der hoehere Satz ausschliesslich fuer die *zusaetzlichen* Euro ueber der Schwelle.", "W rzeczywistości wyższa stawka dotyczy wyłącznie *krańcowych* zarobków powyżej progu."),
-        T("Every dollar you earned in the lower brackets is still taxed at the lower rates.", "Jeder Euro in den unteren Zonen wird weiterhin mit dem niedrigen Satz besteuert.", "Każdy grosz zarobiony w niższych przedziałach nadal podlega niższym stawkom podatkowym."),
+        T("Many people worry about entering a higher tax bracket because they misunderstand the math.", "Viele Menschen haben unbegruendete Angst vor der naechsten Steuerstufe, weil sie die Formel falsch verstehen.", "Wielu ludzi obawia się wejścia w wyższy próg podatkowy, ponieważ błędnie liczy procenty."),
+        T("Tax brackets only apply to the *marginal dollars* above that specific milestone line.", "Eine hoehere Steuerstufe gilt immer nur fuer die *zusaetzlichen Euros* ueber dieser Grenze.", "Wyższa stawka dotyczy wyłącznie *dodatkowych pieniędzy* zarobionych ponad granicę danego progu."),
+        T("Getting a pay raise *never* causes you to take home less total net pay than you earned before.", "Eine Gehaltserhoehung fuehrt in einem normalen System *niemals* zu weniger Nettoauszahlung.", "Podwyżka pensji w normalnym systemie *nigdy* nie spowoduje, że na Twoim koncie zostanie mniej pieniędzy niż wcześniej."),
       ],
       ProgressiveTaxDiagram,
     ),
     animatedBeat(
       [
-        T("Economists distinguish between the *marginal tax rate* and the *effective tax rate*.", "Fachleute unterscheiden zwischen *Grenzsteuersatz* und *effektivem Durchschnittssteuersatz*.", "Ekonomiści rozróżniają *krańcową stawkę podatkową* oraz *efektywną stawkę podatkową*."),
-        T("The marginal rate is the tax rate applied to your very next dollar of income.", "Der Grenzsteuersatz ist der Satz, der auf den naechsten verdienten Dollar faellig wird.", "Stawka krańcowa to procent, jaki zapłacisz od kolejnej zarobionej złotówki."),
-        T("The effective tax rate is your total tax paid divided by your total income.", "Der effektive Steuersatz ist die insgesamt gezahlte Steuer geteilt durch das Gesamteinkommen.", "Stawka efektywna to łączny zapłacony podatek podzielony przez cały dochód."),
+        T("When Arjun buys a new skateboard deck at the skate shop, he also pays a small *sales tax* on the receipt.", "Kauft Lukas ein neues Skateboard im Shop, zahlt er auf dem Kassenzettel zusaetzlich *Mehrwertsteuer*.", "Gdy Jan kupuje nową deskę w sklepie, na paragonie doliczony jest także podatek od sprzedaży (*VAT*)."),
+        T("Sales taxes are consumption taxes collected instantly at the store checkout on goods and services.", "Verbrauchssteuern werden direkt beim Einkaufen im Geschaeft fuer Waren und Dienstleistungen faellig.", "Podatek VAT to podatek konsumpcyjny, pobierany automatycznie przy każdej transakcji w kasie."),
+        T("Together, income taxes and consumption taxes provide the funds needed to maintain the entire city.", "Zusammen stellen Einkommensteuer und Mehrwertsteuer das Budget bereit, um eine moderne Stadt zu betreiben.", "Wspólnie podatek dochodowy i VAT tworzą budżet potrzebny do utrzymania i rozwoju całego miasta."),
       ],
       ProgressiveTaxDiagram,
     ),
     animatedBeat(
       [
-        T("Effective fiscal policy balances revenue needs against incentives for productivity and innovation.", "Kluge Steuerpolitik balanciert Staatsfinanzierung und Anreize fuer Leistung aus.", "Rozsądna polityka fiskalna łączy potrzeby budżetu z zachowaniem motywacji do pracy i innowacji."),
-        T("If tax rates become excessively punitive, capital flight and reduced work effort can follow.", "Uebermaessig hohe Steuern koennen zu Kapitalflucht und sinkender Leistungsbereitschaft fuehren.", "Nadmiernie wysokie podatki mogą prowadzić do ucieczki kapitału i zniechęcenia do pracy."),
-        T("Understanding tax structures helps you plan finances intelligently and participate as an informed citizen.", "Steuerstrukturen zu verstehen hilft dir bei der Lebensplanung und als informierter Buerger.", "Zrozumienie systemu podatkowego pozwala świadomie planować finanse i być aktywnym obywatelem."),
+        T("Citizens expect transparent public records showing exactly how their tax money is managed.", "Buerger erwarten Transparenz darueber, wofuer die eingezahlten Steuergelder verwendet werden.", "Obywatele mają prawo do pełnej przejrzystości i wglądu w to, jak wydawane są publiczne pieniądze."),
+        T("When public taxes build great community libraries, high-speed rail, and hospitals, everyone benefits.", "Wenn Steuern gute Schulen, schnelle Zuege und moderne Krankenhaeuser bauen, nuetzt das allen.", "Gdy podatki finansują nowoczesne szkoły, szybkie pociągi i szpitale, zyskuje całe społeczeństwo."),
+        T("Understanding taxes gives you confidence to navigate contracts, paychecks, and real adult finance.", "Steuern zu verstehen gibt dir Sicherheit fuer Vertraege, Gehaltsabrechnungen und eigene Firmen.", "Zrozumienie mechanizmu podatków daje pewność siebie w czytaniu umów, pensji i prowadzeniu biznesu."),
       ],
       ProgressiveTaxDiagram,
     ),

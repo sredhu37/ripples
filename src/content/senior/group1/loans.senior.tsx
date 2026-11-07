@@ -92,41 +92,41 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("A loan is a contractual agreement where a lender provides capital today in exchange for future repayment with interest.", "Ein Darlehen ist ein Vertrag, bei dem ein Kreditgeber heute Kapital gegen spaetere Rueckzahlung mit Zinsen bereitstellt.", "Pożyczka to umowa, w której pożyczkodawca udostępnia kapitał dzisiaj w zamian za późniejszą spłatę wraz z odsetkami."),
-        T("The initial amount borrowed is called the *principal*.", "Der urspruenglich geliehene Betrag heisst *Kreditbetrag* oder Tilgungsstamm.", "Pierwotna kwota długu nazywana jest *kapitałem głównym*."),
-        T("The schedule of periodic repayments is known as *amortization*.", "Der feste Plan zur schrittweisen Abzahlung nennt sich *Amortisation*.", "Harmonogram stopniowej spłaty zadłużenia w ratach to *amortyzacja długu*."),
+        T("Meet Aarav. He has an ambitious plan to print custom gaming phone cases and desk stands for classmates.", "Das ist Jonas. Er will fuer Mitschueler coole Smartphone-Hüllen und Headset-Halter drucken.", "Poznaj Stanisława. Ma ambitny plan: chce drukować etui na telefony i stojaki na słuchawki dla znajomych ze szkoły."),
+        T("A professional 3D printer costs three hundred dollars, but Aarav only has fifty dollars in savings.", "Ein professioneller 3D-Drucker kostet 300 Euro, aber Jonas hat nur 50 Euro gespart.", "Profesjonalna drukarka 3D kosztuje tysiąc dwieście złotych, ale Stanisław ma tylko dwieście złotych oszczędności."),
+        T("His older cousin agrees to lend him the remaining two hundred and fifty dollars as a *loan* with ten percent *interest*.", "Sein aelterer Cousin leiht ihm 250 Euro als *Kredit* mit zehn Prozent *Zinsen*.", "Jego starszy kuzyn zgadza się pożyczyć mu brakujący tysiąc złotych jako *kredyt* na 10 procent *odsetek*."),
       ],
       LoanDiagram,
     ),
     animatedBeat(
       [
-        T("In business, debt is frequently utilized as financial *leverage*.", "In der Wirtschaft wird Fremdkapital haeufig als finanzieller *Hebel* (Leverage) eingesetzt.", "W biznesie dług jest powszechnie stosowany jako *dźwignia finansowa*."),
-        T("Imagine you own ten thousand dollars. You can buy one delivery vehicle.", "Stell dir vor, du hast zehntausend Dollar. Du kannst damit ein Lieferfahrzeug kaufen.", "Wyobraź sobie, że masz dziesięć tysięcy dolarów. Możesz kupić jeden pojazd dostawczy."),
-        T("If you borrow forty thousand dollars at five percent interest, you can acquire five vehicles simultaneously.", "Leihst du dir vierzigtausend Dollar zu fuenf Prozent, kannst du fuenf Fahrzeuge gleichzeitig erwerben.", "Jeśli pożyczysz czterdzieści tysięcy dolarów na pięć procent, możesz kupić od razu pięć pojazdów."),
+        T("Economists divide borrowing into two very different categories: *productive debt* and *consumptive debt*.", "Oekonomen teilen Kredite in zwei Gruppen: *produktive Schulden* und *Konsumschulden*.", "Ekonomiści dzielą pożyczki na dwie zupełnie różne grupy: *dług produktywny* i *dług konsumpcyjny*."),
+        T("Productive debt buys tools or equipment that generate new money to pay back the loan automatically.", "Produktive Schulden kaufen Werkzeuge, die neues Geld verdienen und den Kredit von selbst tilgen.", "Dług produktywny kupuje narzędzia lub sprzęt, które zarabiają na własną spłatę."),
+        T("Consumptive debt buys stuff that immediately loses value: video game loot boxes, takeout food, or clothes.", "Konsumschulden finanzieren Dinge ohne Ertrag: In-Game-Skins, Fast Food oder teure Kleidung.", "Dług konsumpcyjny kupuje rzeczy, które natychmiast tracą wartość: skórki w grach, fast food czy drogie ciuchy."),
       ],
       LoanDiagram,
     ),
     animatedBeat(
       [
-        T("If each vehicle generates strong cash flow that easily covers its loan payment, your return on equity multiplies.", "Erwirtschaftet jedes Fahrzeug Gewinne weit ueber den Kreditraten, vervielfacht sich deine Eigenkapitalrendite.", "Jeśli każdy pojazd generuje zyski przewyższające raty pożyczki, Twoja rentowność kapitału własnego rośnie."),
-        T("This is *productive debt*: borrowing to fund assets that produce economic returns higher than the cost of capital.", "Das ist *produktive Verschuldung*: Kredite fuer Vermoegenswerte, deren Ertrag hoeher ist als die Zinsen.", "To jest *dług produktywny*: pożyczanie na aktywa generujące stopę zwrotu wyższą niż koszt kapitału."),
-        T("Productive debt helps build infrastructure, factories, and technological innovations.", "Produktive Kredite ermoeglichen den Bau von Infrastruktur, Fabriken und Technologien.", "Produktywny dług umożliwia budowę infrastruktury, fabryk i nowoczesnych technologii."),
+        T("Aarav printer turns cheap plastic spools into beautiful phone stands that sell for fifteen dollars each.", "Jonas Drucker verwandelt guenstigen Kunststoff in tolle Halter, die er fuer 15 Euro verkauft.", "Drukarka Stanisława zamienia tani filament w designerskie stojaki, które sprzedaje po sześćdziesiąt złotych."),
+        T("Within two months, he earns enough profit to pay back the entire loan plus the twenty-five dollar interest fee.", "In zwei Monaten verdient er genug Gewinn, um den Kredit samt 25 Euro Zinsen komplett abzuzahlen.", "W dwa miesiące zarabia tyle, że bez trudu spłaca cały dług wraz ze stu złotymi odsetek."),
+        T("Now he owns a valuable, income-producing 3D printer completely free and clear.", "Jetzt gehoert ihm der 3D-Drucker komplett selbst und bringt ihm weiter Geld ein.", "Teraz drukarka 3D należy całkowicie do niego i przynosi mu czysty zysk każdego tygodnia."),
       ],
       LoanDiagram,
     ),
     animatedBeat(
       [
-        T("Conversely, using credit cards to fund expensive holidays or luxury clothing is *unproductive consumer debt*.", "Dahingegen sind Konsumkredite fuer Urlaube oder Kleidung *unproduktive Schulden*.", "Z kolei używanie kart kredytowych na drogie wakacje czy ubrania to *nieproduktywny dług konsumpcyjny*."),
-        T("Consumer purchases generate zero future cash flow to pay back the loan.", "Konsumgueter erzeugen keinen zukuenftigen Geldzufluss zur Tilgung.", "Zakupy konsumpcyjne nie generują w przyszłości żadnych przepływów pieniężnych na spłatę rat."),
-        T("If your revenue drops or you lose your job, inability to service debt leads to *default risk* and bankruptcy.", "Sinken die Einnahmen, fuehrt die Unfaehigkeit zur Zinszahlung zu *Zahlungsausfall* und Insolvenz.", "Gdy dochody spadną, niemożność obsługi długu prowadzi do *niewypłacalności* i bankructwa."),
+        T("Now imagine if Aarav had borrowed two hundred and fifty dollars just to buy rare limited designer sneakers.", "Stell dir vor, Jonas haette das Geld geliehen, nur um sich teure Designer-Sneaker zu kaufen.", "A teraz wyobraź sobie, że Stanisław pożyczył te pieniądze tylko po to, by kupić modne buty z limitowanej edycji."),
+        T("The sneakers produce zero income, get scuffed in the rain, and lose half their value in a month.", "Die Schuhe bringen keinen Cent ein, bekommen Flecken und verlieren sofort ihren Wert.", "Buty nie zarabiają ani grosza, brudzą się na deszczu i po miesiącu nikt ich drogo nie odkupi."),
+        T("He would be stuck working boring chores for months just to pay off shoes that sit in his closet.", "Er muesste monatelang muehsam Rasen maehen, nur um Zinsen fuer alte Schuhe abzubezahlen.", "Musiałby tygodniami wykonywać nudne prace domowe tylko po to, by spłacić odsetki od butów stojących w szafie."),
       ],
       LoanDiagram,
     ),
     animatedBeat(
       [
-        T("Leverage is a double-edged sword: it magnifies profits on the way up, but crushes equity on the way down.", "Hebelwirkung ist zweischneidig: Sie vergroessert Gewinne im Boom, vernichtet aber Kapital im Abschwung.", "Dźwignia to miecz obosieczny: powiększa zyski przy wzroście, ale niszczy kapitał własny przy załamaniu."),
-        T("Lenders often require *collateral*: assets the bank can seize if you fail to repay.", "Kreditgeber fordern oft *Sicherheiten*: Gueter, die die Bank bei Nichtzahlung pfaenden darf.", "Pożyczkodawcy często wymagają *zabezpieczenia*: majątku, który bank może przejąć przy braku spłaty."),
-        T("Respect debt, manage risk prudently, and never borrow for depreciating toys.", "Respektiere Schulden, sichere Risiken ab und leihe niemals Geld fuer wertlosen Konsum.", "Szanuj dług, ostrożnie zarządzaj ryzykiem i nigdy nie pożyczaj na tracące wartość zabawki."),
+        T("Smart creators treat debt like high-voltage electricity: dangerous when used carelessly, but super powerful when engineered with math.", "Kluge Macher nutzen Kredite wie Strom: gefaehrlich bei Unachtsamkeit, genial bei durchdachtem Plan.", "Mądrzy ludzie traktują dług jak prąd wysokiego napięcia: niebezpieczny przy braku wiedzy, lecz potężny w rękach inżyniera."),
+        T("Always ask: will this loan buy a productive tool that pays for itself, or just a temporary thrill?", "Frage dich immer: Kauft dieser Kredit ein Werkzeug, das sich bezahlt, oder nur kurzen Spass?", "Zawsze pytaj siebie: czy ten kredyt kupuje narzędzie, które zarobi na siebie, czy tylko chwilową zachciankę?"),
+        T("Mastering the math of debt is how builders launch great ventures without waiting decades.", "Wer Schulden klug rechnet, kann grossartige Projekte starten, ohne Jahrzehnte zu warten.", "Kto rozumie matematykę długu, potrafi budować wielkie przedsięwzięcia bez czekania całymi latami."),
       ],
       LoanDiagram,
     ),

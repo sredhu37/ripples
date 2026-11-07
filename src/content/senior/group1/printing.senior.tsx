@@ -90,41 +90,41 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("When governments face immense budget deficits, why can they not simply print trillions of banknotes to solve the problem?", "Wenn Staaten Schulden haben: Warum drucken sie nicht einfach Billionen Geldscheine?", "Gdy rządy borykają się z deficytem, dlaczego po prostu nie wydrukują bilionów banknotów?"),
-        T("It is tempting to think of money as synonymous with wealth.", "Es ist verlockend, Geld mit echtem Wohlstand gleichzusetzen.", "Kuszące jest utożsamianie pieniądza z rzeczywistym bogactwem."),
-        T("True economic wealth consists of real goods: food, homes, technology, medical care, and clean energy.", "Echter Wohlstand besteht aus Guetern: Essen, Wohnungen, Medizin und Energie.", "Prawdziwe bogactwo stanowią realne dobra: żywność, mieszkania, technologia, leczenie i energia."),
+        T("Meet Karan. In his favorite online gaming community, players trade rare potion bottles and armor for shiny gold coins.", "Das ist Felix. In seiner Lieblings-Online-Spielewelt handeln Spieler mit Tränken, Rüstungen und Goldmünzen.", "Poznaj Aleksandra. W jego ulubionej grze sieciowej gracze wymieniają magiczne mikstury i zbroje za lśniące złote monety."),
+        T("Normally, rare enchanted armor costs fifty gold coins, taking a player ten days of monster hunting to save.", "Normalerweise kostet eine magische Ruestung 50 Goldmuenzen, wofuer man zehn Tage Quests spielt.", "Zwykle cenna zbroja kosztuje pięćdziesiąt monet, na co gracz musi polować na potwory przez dziesięć dni."),
+        T("One night, a game administrator accidentally types extra zeros and generates ten million new gold coins for everyone.", "Eines Abends tippt ein Spiel-Admin versehentlich zusaetzliche Nullen ein und verteilt zehn Millionen Goldmuenzen.", "Pewnej nocy administrator gry przez pomyłkę dopisuje kilka zer i rozdaje wszystkim graczom dziesięć milionów monet."),
       ],
       PrintingDebasementDiagram,
     ),
     animatedBeat(
       [
-        T("Money is merely the claim check on those real goods and services.", "Geld ist lediglich der Anspruchsschein auf diese realen Gueter.", "Pieniądz to zaledwie żeton roszczeniowy na te realne dobra i usługi."),
-        T("If an economy produces one hundred loaves of bread and the money supply is one hundred dollars, each loaf costs one dollar.", "Gibt es 100 Brote und 100 Dollar Geldmenge, kostet jedes Brot einen Dollar.", "Jeśli gospodarka produkuje 100 bochenków chleba i w obiegu jest 100 dolarów, chleb kosztuje dolara."),
-        T("If the state prints one hundred extra dollars overnight without baking any new bread, nothing real was created.", "Druckt der Staat ueber Nacht 100 Dollar ohne neues Brot, entsteht kein neuer Wert.", "Gdyby państwo dodrukowało 100 dolarów bez upieczenia nowego chleba, nie powstałaby żadna nowa wartość."),
+        T("At first, players cheer because everyone feels like an instant billionaire.", "Zuerst jubeln alle Spieler, weil sich ploetzlich jeder wie ein reicher Koenig fuehlt.", "Początkowo gracze wiwatują z radości, czując się jak milionerzy z pełnymi kieszeniami."),
+        T("But the game world still only has the exact same ten sets of enchanted armor in town.", "Doch in den Shops gibt es immer noch genau dieselben zehn magischen Ruestungen wie vorher.", "Ale w całym świecie gry wciąż jest dokładnie te same dziesięć sztuk rzadkiej zbroi co wcześniej."),
+        T("Within twenty minutes, armor sellers raise their prices from fifty coins to two hundred thousand coins.", "Nach zwanzig Minuten verlangen die Haendler statt 50 Muenzen ploetzlich zweihunderttausend Gold.", "W ciągu dwudziestu minut handlarze podnoszą cenę z pięćdziesięciu monet do dwustu tysięcy złotych monet."),
       ],
       PrintingDebasementDiagram,
     ),
     animatedBeat(
       [
-        T("Now two hundred dollars chase the exact same one hundred loaves.", "Nun jagen zweihundert Dollar exakt dieselben einhundert Brote.", "Wtedy dwieście dolarów ugania się za dokładnie tymi samymi stu bochenkami."),
-        T("The price of bread doubles to two dollars, and the purchasing power of every saved dollar is cut in half.", "Der Brotpreis verdoppelt sich auf zwei Dollar; die Kaufkraft alter Ersparnisse halbiert sich.", "Cena chleba rośnie dwukrotnie do dwóch dolarów, a siła nabywcza starych oszczędności spada o połowę."),
-        T("This phenomenon is known as currency *debasement*.", "Dieses Phaenomen nennt man *Waehrungsentwertung* (Debasement).", "To zjawisko nazywa się *psuciem pieniądza* (debasement)."),
+        T("This catastrophic spiral is called *hyperinflation*.", "Diesen Zerstoerungswirbel nennt man *Hyperinflation*.", "Tę niszczycielską lawinę cenową nazywa się *hiperinflacją*."),
+        T("Real history saw the exact same disaster in Weimar Germany in 1923 and Zimbabwe in 2008.", "Genau dieselbe Katastrophe passierte 1923 in Deutschland und 2008 in Simbabwe.", "Dokładnie taka sama katastrofa wydarzyła się w Niemczech w 1923 roku i w Zimbabwe w roku 2008."),
+        T("When governments printed trillions of paper bills to pay debts, people brought wheelbarrows of cash just to buy one loaf of bread.", "Als Staaten Billionen Scheine druckten, brauchten Buerger Schubkarren voll Geld fuer ein einziges Brot.", "Gdy rządy drukowały biliony banknotów na spłatę długów, ludzie wozili taczki gotówki, by kupić bochenek chleba."),
       ],
       PrintingDebasementDiagram,
     ),
     animatedBeat(
       [
-        T("When governments lose all fiscal discipline and flood the financial system with newly created currency, trust evaporates.", "Verliert ein Staat die Disziplin und druckt hemmungslos, zerfaellt das Vertrauen.", "Gdy rząd traci dyscyplinę fiskalną i zalewa rynek nowym pieniądzem, zaufanie wyparowuje."),
-        T("Citizens realize their money loses value by the hour, rushing to spend cash immediately.", "Buerger merken den stuendlichen Verfall und geben Geld panisch sofort aus.", "Obywatele widzą spadek wartości z godziny na godzinę i w popłochu pozbywają się gotówki."),
-        T("This triggers *hyperinflation*, where prices surge by more than 50% in a single month.", "Das fuehrt zur *Hyperinflation*, bei der Preise um mehr als 50% im Monat explodieren.", "To wywołuje *hiperinflację*, w której ceny rosną o ponad 50% w skali pojedynczego miesiąca."),
+        T("Why does printing currency never make a society wealthy?", "Warum macht das Drucken von Scheinen ein Land niemals reicher?", "Dlaczego dodrukowywanie pustego pieniądza nigdy nie czyni społeczeństwa bogatszym?"),
+        T("Because paper notes and digital numbers do not bake real pizzas, code game graphics, or build fast trains.", "Weil bunte Zettel weder echte Pizza backen, noch Spielgrafiken coden oder Zuege bauen.", "Ponieważ papierki i cyfry na ekranie nie pieką chleba, nie tworzą grafiki do gier ani nie budują pociągów."),
+        T("Real wealth only comes from producing real goods and services that make life better.", "Echter Reichtum kommt nur von nuetzlichen Dingen und Diensten, die das Leben bereichern.", "Prawdziwe bogactwo bierze się wyłącznie z wytwarzania realnych rzeczy i usług ułatwiających życie."),
       ],
       PrintingDebasementDiagram,
     ),
     animatedBeat(
       [
-        T("History shows catastrophic hyperinflations: Weimar Germany in 1923, Hungary in 1946, and Zimbabwe in 2008.", "Die Geschichte zeigt verheerende Hyperinflationen: Weimar 1923, Ungarn 1946 oder Simbabwe 2008.", "Historia zna tragiczne hiperinflacje: Niemcy Weimarskie w 1923, Węgry w 1946 czy Zimbabwe w 2008 roku."),
-        T("During hyperinflation, wheelbarrows of cash were required just to buy a daily meal.", "In der Hyperinflation brauchte man Schubkarren voll Geld fuer ein einziges Mittagessen.", "W warunkach hiperinflacji potrzebne były taczki banknotów, by kupić zwykły obiad."),
-        T("Sound monetary policy requires protecting currency credibility and resisting the temptation to print unbacked money.", "Solide Geldpolitik muss Waehrungsglaubwuerdigkeit schuetzen und dem Gelddrucken widerstehen.", "Zdrowa polityka monetarna wymaga ochrony wiarygodności waluty i opierania się pokusie pustego dodruku."),
+        T("To protect currency, modern central banks are kept legally independent from politicians.", "Um das Geld zu schuetzen, handeln Notenbanken unabhaengig von Politikern und Wahlen.", "Aby chronić walutę, banki centralne są prawnie niezależne od polityków i obietnic wyborczych."),
+        T("Strict limits on money creation ensure that everyone savings retain their hard-earned purchasing power.", "Strenge Regeln sorgen dafuer, dass hart verdientes Erspartes seine Kaufkraft behaelt.", "Ścisłe reguły chronią ciężko zapracowane oszczędności obywateli przed nagłą utratą wartości."),
+        T("Money only works when its scarcity is respected and defended with mathematical discipline.", "Geld funktioniert nur, wenn seine Knappheit mit mathematischer Disziplin verteidigt wird.", "Pieniądz ma wartość tylko wtedy, gdy jego rzadkość jest chroniona z żelazną dyscypliną."),
       ],
       PrintingDebasementDiagram,
     ),

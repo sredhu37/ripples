@@ -87,41 +87,41 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("Every major economy possesses an institution that functions as the monetary thermostat: the *central bank*.", "Jede Volkswirtschaft besitzt eine Institution als monetaeres Thermostat: die *Zentralbank*.", "Każda duża gospodarka ma instytucję działającą niczym monetarny termostat: *bank centralny*."),
-        T("Examples include the European Central Bank, the US Federal Reserve, and the National Bank of Poland.", "Beispiele sind die Europaeische Zentralbank, die US-Notenbank Fed oder die polnische NBP.", "Przykładami są Europejski Bank Centralny, amerykańska Rezerwa Federalna czy Narodowy Bank Polski."),
-        T("Unlike commercial retail banks, central banks do not handle ordinary checking accounts for individual citizens.", "Anders als Geschaeftsbanken fuehren Zentralbanken keine Girokonten fuer Privatkunden.", "W przeciwieństwie do banków komercyjnych, banki centralne nie prowadzą kont dla zwykłych klientów."),
+        T("Meet Anjali. Her family is thinking about getting a loan to expand their home bakery, while Anjali wants to put her lawn-mowing earnings into a savings account.", "Das ist Lena. Ihre Familie moechte einen Kredit fuer die Backstube aufnehmen, waehrend Lena ihr Erspartes gut anlegen will.", "Poznaj Maję. Jej rodzina planuje wziąć kredyt na powiększenie domowej piekarni, a Maja chce wpłacić swoje oszczędności na lokatę."),
+        T("Both of their financial plans depend on one single dial controlled by the central bank: the *interest rate*.", "Beide Plaene haengen von einem einzigen Hebel der Zentralbank ab: dem *Leitzins*.", "Oba te plany zależą od jednego pokrętła regulowanego przez bank centralny: *stopy procentowej*."),
+        T("Think of the central bank interest rate like the master thermostat of the entire economy.", "Stell dir den Zinssatz wie das zentrale Heizungsthermostat der gesamten Wirtschaft vor.", "Pomyśl o stopie procentowej jak o głównym termostacie sterującym temperaturą całej gospodarki."),
       ],
       CentralBankRateDiagram,
     ),
     animatedBeat(
       [
-        T("The primary steering wheel of a central bank is the *benchmark interest rate* (policy rate).", "Der wichtigste Hebel der Zentralbank ist der *Leitzins*.", "Główną dźwignią banku centralnego jest *podstawowa stopa procentowa* (stopa referencyjna)."),
-        T("This rate dictates the cost for commercial banks to borrow reserves from the central bank overnight.", "Er bestimmt, wie teuer es fuer Banken ist, sich ueber Nacht Geld bei der Notenbank zu leihen.", "Ta stopa określa, jak drogie dla banków jest pożyczanie rezerw od banku centralnego."),
-        T("Commercial banks pass this cost directly along to mortgages, auto loans, and corporate credit lines.", "Geschaeftsbanken geben diesen Zins direkt an Bauherren und Unternehmenskredite weiter.", "Banki komercyjne przenoszą ten koszt bezpośrednio na kredyty hipoteczne czy linie firmowe."),
+        T("When stores are quiet and businesses are nervous to hire, the central bank turns the dial down: they *cut interest rates*.", "Wenn Geschaefte leer sind und Firmen zoegern einzustellen, dreht die Bank den Zins nach unten: sie *senkt die Zinsen*.", "Gdy w sklepach panuje cisza, a firmy boją się inwestować, bank centralny przekręca pokrętło: *obniża stopy procentowe*."),
+        T("Suddenly bank loans become cheap and easy to pay back.", "Ploetzlich werden Kredite guenstig und einfach abzuzahlen.", "Kredyty w bankach nagle stają się tanie i łatwe do spłaty."),
+        T("Anjali family takes the cheap loan to buy a bigger commercial oven, hiring two assistant bakers and firing up sales.", "Lenas Familie nimmt den Kredit fuer einen grossen Profi-Ofen, stellt Helfer ein und steigert den Verkauf.", "Rodzina Mai bierze tani kredyt na profesjonalny piec, zatrudnia pomocników i rozwija sprzedaż wypieków."),
       ],
       CentralBankRateDiagram,
     ),
     animatedBeat(
       [
-        T("When an economy overheats and inflation surges, the central bank initiates *rate hikes*.", "Ueberhitzt die Wirtschaft und klettert die Inflation, startet die Zentralbank *Zinserhoehungen*.", "Gdy gospodarka się przegrzewa i inflacja szybuje, bank centralny rozpoczyna *podwyżki stóp*."),
-        T("Higher interest rates make borrowing expensive, discouraging businesses from over-leveraging.", "Hoehere Zinsen verteuern Kredite und bremsen uebermaessige Verschuldung.", "Wyższe stopy podrażają kredyty, zniechęcając firmy do nadmiernego zadłużania się."),
-        T("Consumers buy fewer houses and cars on credit, slowing demand and bringing inflation back toward 2%.", "Konsumenten kaufen weniger auf Pump, was die Nachfrage daempft und Preise stabilisiert.", "Konsumenci kupują mniej domów i aut na kredyt, co studzi popyt i sprowadza inflację do celu 2%."),
+        T("But if interest rates stay super low for too long, the economy starts running too hot.", "Bleiben Zinsen aber zu lange zu niedrig, laeuft der Wirtschaftsmotor heiss.", "Lecz jeśli stopy pozostają zbyt niskie przez zbyt długi czas, silnik gospodarki zaczyna się przegrzewać."),
+        T("Everyone wants to borrow money to buy supplies at the exact same moment, causing prices everywhere to spike.", "Jeder will gleichzeitig Kredite fuer Waren aufnehmen, sodass Preise ueberall in die Hoehe schiessen.", "Wszyscy naraz biorą pożyczki i rzucają się na zakupy, co winduje ceny we wszystkich sklepach."),
+        T("To cool down rising prices, the central bank steps on the brake: they *raise interest rates*.", "Um die Teuerung abzukuehlen, tritt die Zentralbank auf die Bremse: Sie *erhoeht die Zinsen*.", "Aby ostudzić gorączkę cenową, bank centralny wciska hamulec: *podnosi stopy procentowe*."),
       ],
       CentralBankRateDiagram,
     ),
     animatedBeat(
       [
-        T("Conversely, when an economy falls into a recession and unemployment rises, the central bank cuts rates.", "Im Abschwung mit steigender Arbeitslosigkeit senkt die Notenbank dagegen den Leitzins.", "Z kolei gdy gospodarka wpada w recesję i rośnie bezrobocie, bank centralny obniża stopy."),
-        T("Lower borrowing costs encourage entrepreneurs to finance new ventures and hire workers.", "Niedrige Zinsen ermutigen Firmen, neue Projekte zu starten und Arbeitsplaetze zu schaffen.", "Niższy koszt kapitału zachęca przedsiębiorców do inwestycji i tworzenia nowych miejsc pracy."),
-        T("Central banks balance their *dual mandate*: price stability and maximum sustainable employment.", "Zentralbanken balancieren ihr *Doppelmandat*: Preisstabilitaet und Beschaeftigung.", "Banki centralne dbają o swój mandat: stabilność cen oraz wspieranie zatrudnienia."),
+        T("When rates go up, borrowing becomes more expensive, so businesses borrow more cautiously.", "Bei hoeheren Zinsen werden Kredite teurer, sodass Firmen vorsichtiger wirtschaften.", "Gdy stopy rosną, kredyty stają się droższe, więc firmy ostrożniej podejmują decyzje o zadłużeniu."),
+        T("At the same time, high-yield savings accounts start paying awesome returns to patient savers like Anjali.", "Gleichzeitig werfen Sparkonten fuer geduldige Sparer wie Lena ploetzlich tolle Zinsen ab.", "Jednocześnie lokaty bankowe zaczynają wypłacać wspaniałe odsetki cierpliwym oszczędzającym, takim jak Maja."),
+        T("People choose to put money in the bank instead of overbidding on goods, bringing price inflation back under control.", "Die Menschen sparen lieber auf der Bank statt blind einzukaufen, was die Teuerung bremst.", "Ludzie wolą trzymać pieniądze w banku niż przepłacać w sklepach, co skutecznie uspokaja wzrost cen."),
       ],
       CentralBankRateDiagram,
     ),
     animatedBeat(
       [
-        T("Interest rate decisions affect every asset class: stocks, bond yields, real estate, and foreign exchange.", "Zinsentscheide beeinflussen alle Maerkte: Aktien, Anleihen, Immobilien und Waehrungen.", "Decyzje o stopach procentowych rzutują na wszystkie rynki: akcje, obligacje, nieruchomości i waluty."),
-        T("Understanding central bank monetary policy gives you the macro lens to interpret global financial news.", "Die Geldpolitik zu verstehen gibt dir den Weitblick fuer globale Finanznachrichten.", "Zrozumienie polityki banku centralnego daje makroekonomiczny kompas do interpretacji wiadomości ze świata."),
-        T("A stable currency with steady interest rates forms the bedrock of prosperity and predictable commerce.", "Eine stabile Waehrung mit verlaesslichen Zinsen ist das Fundament fuer Wohlstand.", "Stabilna waluta z przewidywalnymi stopami procentowymi tworzy fundament dobrobytu i handlu."),
+        T("This continuous adjustment between heating up growth and cooling down inflation is the central bank balancing act.", "Dieser Balanceakt zwischen Wachstums-Gaspedal und Inflations-Bremse ist die Kernaufgabe.", "To nieustanne balansowanie między pobudzaniem wzrostu a chłodzeniem inflacji jest misją banku centralnego."),
+        T("Understanding interest rates tells you when it is smart to borrow for great tools and when it is prime time to save.", "Zinsen zu verstehen zeigt dir, wann Kredite schlau sind und wann beste Sparzeiten herrschen.", "Zrozumienie stóp procentowych podpowiada, kiedy warto pożyczać na rozwój, a kiedy najlepiej cierpliwie oszczędzać."),
+        T("Knowing how the economic thermostat works gives you an edge in every business decision you make.", "Wer dieses Thermostat versteht, hat bei jeder finanziellen Entscheidung die Nase vorn.", "Znajomość działania tego termostatu daje ogromną przewagę przy każdej życiowej decyzji finansowej."),
       ],
       CentralBankRateDiagram,
     ),

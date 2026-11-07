@@ -82,41 +82,41 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("Interest is the rental fee paid for the use of borrowed capital over time.", "Zinsen sind die Leihgebuehr fuer die zeitweise Nutzung von fremdem Kapital.", "Odsetki to opłata za wypożyczenie kapitału w określonym czasie."),
-        T("When money is left untouched to grow, it follows one of two mathematical paths.", "Bleibt Geld unberuehrt zum Wachsen liegen, folgt es einem von zwei Rechenwegen.", "Gdy pieniądze pracują nienaruszone, podlegają jednej z dwóch ścieżek matematycznych."),
-        T("The first path is *simple interest*, where interest is calculated strictly on the original principal.", "Der erste Pfad sind *einfache Zinsen*: Zinsen fallen rein auf das Anfangskapital an.", "Pierwsza ścieżka to *procent prosty*, gdzie odsetki naliczane są wyłącznie od kwoty początkowej."),
+        T("Meet Anjali. She puts two hundred dollars earned from weekend tutoring into a high-yield savings account earning ten percent interest.", "Das ist Lena. Sie legt 200 Euro aus der Nachhilfe auf ein Sparkonto mit zehn Prozent Zinsen.", "Poznaj Maję. Wpłaca osiemset złotych zarobionych na korepetycjach na konto oszczędnościowe z oprocentowaniem 10 procent w skali roku."),
+        T("Simple interest would give her twenty dollars every year, over and over, always the same.", "Einfache Zinsen wuerden jedes Jahr stur 20 Euro bringen, immer genau denselben Betrag.", "Zwykły procent dawałby jej co roku tę samą kwotę: osiemdziesiąt złotych, bez żadnej zmiany."),
+        T("But her account uses *compound interest*, where you earn interest on your principal *and* on your past interest.", "Doch ihr Konto nutzt den *Zinseszins*: Zinsen auf dein Geld *und* auf fruehere Zinsen.", "Jej konto korzysta jednak z *procentu składanego*: zarabiasz odsetki od kapitału *oraz* od wcześniej naliczonych odsetek."),
       ],
       CompoundInterestDiagram,
     ),
     animatedBeat(
       [
-        T("The second path is *compound interest*, where you earn interest on your principal and on all previous interest.", "Der zweite Pfad sind *Zinseszinsen*: Du erhaeltst Zinsen auf Kapital und alte Zinsen.", "Druga ścieżka to *procent składany*: zarabiasz odsetki od kapitału i od wcześniejszych odsetek."),
-        T("Compound interest creates an exponential mathematical hockey stick curve.", "Der Zinseszins erzeugt eine exponentielle Kurve wie ein Hockeyschlaeger.", "Procent składany tworzy wykres przypominający kij hokejowy: gwałtowny wzrost wykładniczy."),
-        T("In the early years, the growth seems modest and gradual.", "In den ersten Jahren wirkt das Wachstum noch bescheiden und unauffaellig.", "W pierwszych latach wzrost wydaje się skromny i powolny."),
+        T("In year one, Anjali earns twenty dollars. Her balance grows to two hundred and twenty dollars.", "Im ersten Jahr bekommt Lena 20 Euro. Ihr Guthaben steigt auf 220 Euro.", "W pierwszym roku Maja dostaje osiemdziesiąt złotych. Na koncie ma teraz osiemset osiemdziesiąt złotych."),
+        T("In year two, the bank calculates ten percent on the whole 220 dollars, paying her twenty-two dollars.", "Im zweiten Jahr gibt es 10% auf die vollen 220 Euro, also 22 Euro Zinsgewinn.", "W drugim roku bank liczy 10 procent od całej nowej sumy, wypłacając jej osiemdziesiąt osiem złotych."),
+        T("Her extra money is now working as tiny digital employees, earning its own new money around the clock.", "Ihr Gewinn arbeitet jetzt wie kleine digitale Helfer, die rund um die Uhr neues Geld verdienen.", "Jej zarobione wcześniej odsetki pracują teraz jak mali cyfrowi pomocnicy, przynosząc kolejne zyski."),
       ],
       CompoundInterestDiagram,
     ),
     animatedBeat(
       [
-        T("Over two or three decades, the reinvested gains begin to dwarf your initial contribution.", "Nach zwei oder drei Dekaden ueberfluegeln die Ertraege die eigene Einzahlung voellig.", "Po dwóch czy trzech dekadach reinwestowane zyski wielokrotnie przewyższają wkład początkowy."),
-        T("Albert Einstein reportedly praised compounding as a wonder of the mathematical world.", "Albert Einstein ruehmte den Zinseszins angeblich als mathematisches Wunderwerk.", "Albert Einstein miał rzekomo nazwać procent składany cudem świata matematyki."),
-        T("Time is the ultimate engine of compounding: starting ten years earlier can quadruple your final result.", "Zeit ist der Motor: Zehn Jahre frueher anzufangen kann das Endergebnis vervierfachen.", "Czas to kluczowy motor: rozpoczęcie inwestowania dziesięć lat wcześniej może czterokrotnie zwiększyć wynik."),
+        T("Wall Street investors use a quick mental trick called the *Rule of 72*.", "Investoren nutzen fuer Kopfrechnen die geniale *72er-Regel*.", "Inwestorzy używają sprytnego triku matematycznego zwanego *regułą 72*."),
+        T("Divide 72 by the annual interest rate to see how many years it takes your balance to double.", "Teile 72 durch den Zinssatz, um zu sehen, wie viele Jahre dein Geld zum Verdoppeln braucht.", "Podziel liczbę 72 przez stopę procentową, by dowiedzieć się, po ilu latach Twoje pieniądze się podwoją."),
+        T("At eight percent annual return, your savings double every nine years without you lifting a finger.", "Bei acht Prozent Rendite verdoppelt sich dein Spargeld alle neun Jahre wie von selbst.", "Przy ośmiu procentach zysku rocznie Twój kapitał podwaja się co dziewięć lat bez kiwnięcia palcem."),
       ],
       CompoundInterestDiagram,
     ),
     animatedBeat(
       [
-        T("Financiers use a mental shortcut called the *Rule of 72*.", "Finanzprofis nutzen die gedankliche Abkuerzung der *72er-Regel*.", "Inwestorzy stosują szybką regułę pamięciową zwaną *regułą 72*."),
-        T("Divide 72 by your annual percentage return to calculate roughly how many years it takes your money to double.", "Teile 72 durch die Rendite, um zu wissen, in wie vielen Jahren sich das Geld verdoppelt.", "Podziel 72 przez roczną stopę zwrotu, by dowiedzieć się, po ilu latach podwoisz swój kapitał."),
-        T("At eight percent annual return, your capital doubles approximately every nine years.", "Bei acht Prozent Jahresrendite verdoppelt sich dein Kapital etwa alle neun Jahre.", "Przy ośmiu procentach zysku rocznie Twój kapitał podwaja się w przybliżeniu co dziewięć lat."),
+        T("Across decades, the compounding curve bends upward like a steep hockey stick.", "Ueber viele Jahre biegt sich die Wachstumskurve steil nach oben wie ein Hockeyschlaeger.", "Z biegiem lat krzywa wzrostu wystrzeliwuje stromo w górę niczym kij hokejowy."),
+        T("The true superpower in compound growth is not how rich you are today; it is *time*.", "Die echte Superkraft beim Zinseszins ist nicht viel Startgeld, sondern schlicht *Zeit*.", "Prawdziwą supermocą procentu składanego nie jest to, ile masz pieniędzy na starcie, lecz *czas*."),
+        T("Starting to invest at age fourteen produces vastly bigger wealth than starting at age thirty-five with large sums.", "Mit 14 Jahren zu sparen bringt viel mehr Wohlstand als mit 35 Jahren mit viel Geld zu starten.", "Zaczynając oszczędzać w wieku 14 lat, osiągniesz znacznie więcej niż ktoś, kto zacznie w wieku 35 lat z dużym portfelem."),
       ],
       CompoundInterestDiagram,
     ),
     animatedBeat(
       [
-        T("Always compare *nominal return* against inflation to determine your *real return*.", "Vergleiche immer die *Nominalrendite* mit der Inflation fuer die *Realrendite*.", "Zawsze zestawiaj *stopę nominalną* z inflacją, aby obliczyć rzeczywistą *stopę realną*."),
-        T("If an account yields 4% but inflation is 3%, your real purchasing power expands by only 1%.", "Liefert ein Konto 4% bei 3% Inflation, waechst die reale Kaufkraft nur um 1%.", "Gdy konto daje 4%, ale inflacja wynosi 3%, realna siła nabywcza rośnie o zaledwie 1%."),
-        T("Harness compounding early in life, reinvest gains patiently, and avoid negative compounding debt.", "Nutze den Zinseszins frueh, reinvestiere geduldig und meide teure Konsumschulden.", "Korzystaj z procentu składanego od młodości, cierpliwie reinwestuj i unikaj długów konsumpcyjnych."),
+        T("Compound growth is a powerful engine: when working for your investments, it builds generational security.", "Zinseszins ist ein gewaltiger Motor: Fuer deine Anlagen gebaut, schenkt er dir Freiheit.", "Procent składany to potężny silnik: gdy pracuje dla Twoich oszczędności, daje Ci niezależność."),
+        T("But on high-interest credit cards, compounding interest works against you, compounding debt into an avalanche.", "Auf teuren Kreditkarten arbeitet er jedoch gegen dich und laesst Schulden lawinenartig wachsen.", "Lecz na drogich kartach kredytowych działa przeciwko Tobie, powiększając dług niczym lawinę."),
+        T("Put the exponential math of compound interest on your side while you are young.", "Bringe diese exponentielle Mathematik so frueh wie moeglich auf deine eigene Seite.", "Zaprzęgnij tę niezwykłą matematykę do pracy na swoją korzyść już w młodości."),
       ],
       CompoundInterestDiagram,
     ),

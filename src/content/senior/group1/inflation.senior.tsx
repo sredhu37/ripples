@@ -81,41 +81,41 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("Have you ever heard grandparents talk about candy bars or movie tickets costing pennies in their youth?", "Hast du deine Grosseltern schon erzaehlen hoeren, wie billig Kino frueher war?", "Czy słyszałeś kiedyś, jak dziadkowie opowiadali o biletach do kina za kilka groszy?"),
-        T("Prices have not risen because modern popcorn is made of solid gold.", "Preise sind nicht gestiegen, weil Popcorn heute aus purem Gold waere.", "Ceny nie wzrosły dlatego, że dzisiejszy popcorn robi się ze złota."),
-        T("They rose because of *inflation*: a broad, sustained increase in the overall price level of goods and services.", "Sie stiegen wegen *Inflation*: dem dauerhaften Anstieg des allgemeinen Preisniveaus.", "Wzrosły przez *inflację*: trwały i powszechny wzrost ogólnego poziomu cen towarów i usług."),
+        T("Meet Aarav. Two years ago, he saved forty dollars to buy his favorite handheld retro gaming console.", "Das ist Jonas. Vor zwei Jahren hat er 40 Euro gespart, um eine handliche Retro-Spielekonsole zu kaufen.", "Poznaj Stanisława. Dwa lata temu odłożył sto sześćdziesiąt złotych, by kupić swoją wymarzoną konsolę retro."),
+        T("When he opens the game store catalog today with the same forty dollars, the exact same console costs sixty dollars.", "Als er heute denselben Katalog aufschlaegt, kostet genau dieselbe Konsole ploetzlich 60 Euro.", "Gdy dzisiaj otwiera katalog sklepu z tą samą kwotą w dłoni, ta sama konsola kosztuje już dwieście czterdzieści złotych."),
+        T("His forty-dollar bill did not shrink in size, but its *purchasing power* melted away. That is *inflation*.", "Sein Schein ist nicht geschrumpft, aber seine *Kaufkraft* hat spuerbar nachgelassen. Das ist *Inflation*.", "Jego banknot nie zmniejszył się fizycznie, lecz jego *siła nabywcza* po prostu stopniała. To właśnie *inflacja*."),
       ],
       InflationBasketDiagram,
     ),
     animatedBeat(
       [
-        T("When inflation occurs, every unit of currency purchases fewer real goods than before.", "Bei Inflation kauft jeder Geldschein weniger reale Gueter als zuvor.", "Podczas inflacji każda jednostka waluty kupuje mniej realnych dóbr niż wcześniej."),
-        T("This erosion of what your money can buy is called a loss of *purchasing power*.", "Diesen Verlust an Kaufkraft nennt man schwindende *Kaufkraft* des Geldes.", "Ten spadek ilości towarów, jakie możesz kupić, to utrata *siły nabywczej*."),
-        T("Governments measure inflation using the *Consumer Price Index* (CPI).", "Staaten messen die Inflation mit dem *Verbraucherpreisindex* (VPI / CPI).", "Rządy mierzą inflację za pomocą *wskaźnika cen towarów i usług konsumpcyjnych* (CPI)."),
+        T("Governments measure inflation by watching a big shopping cart called the *Consumer Price Index* (CPI) basket.", "Oekonomen messen Inflation mit einem Warenkorb namens *Verbraucherpreisindex* (CPI).", "Ekonomiści mierzą inflację za pomocą wielkiego koszyka zwanego *wskaźnikiem cen towarów i usług* (CPI)."),
+        T("This basket tracks hundreds of everyday items: sneakers, school notebooks, bread, internet plans, and bus passes.", "Darin liegen hunderte Dinge: Sneaker, Schulhefte, Pausenbrot, Handytarif und Schuelerticket.", "Znajdują się w nim setki codziennych rzeczy: buty sportowe, zeszyty, chleb, abonament internetowy i bilety."),
+        T("If buying that exact basket cost one hundred dollars last year and costs one hundred and seven today, inflation is seven percent.", "Kostete dieser Korb letztes Jahr 100 Euro und heute 107 Euro, liegt die Teuerung bei sieben Prozent.", "Jeśli ten sam zestaw kosztował rok temu sto złotych, a dziś sto siedem, inflacja wynosi dokładnie 7 procent."),
       ],
       InflationBasketDiagram,
     ),
     animatedBeat(
       [
-        T("Statistical agencies construct a representative basket of hundreds of goods: bread, electricity, rent, haircuts, and laptops.", "Statistikbehoerden schnueren einen Warenkorb aus Brot, Strom, Miete und Laptops.", "Urzędy statystyczne tworzą koszyk setek dóbr: chleb, prąd, czynsz, fryzjer czy laptopy."),
-        T("They track the total cost of this basket month after month.", "Sie erfassen die Gesamtkosten dieses Korbes Monat fuer Monat.", "Śledzą łączny koszt tego samego koszyka miesiąc po miesiącu."),
-        T("If the basket cost rises from 100 dollars to 104 dollars over a year, the annual inflation rate is 4%.", "Steigt der Preis von 100 auf 104 Dollar in einem Jahr, liegt die Inflation bei 4%.", "Jeśli koszt koszyka rośnie ze 100 do 104 dolarów w rok, roczna stopa inflacji wynosi 4%."),
+        T("Economists find two main culprits for rising prices: *demand-pull* and *cost-push*.", "Fuer steigende Preise gibt es meist zwei Gruende: *Nachfragedruck* und *Kostenschub*.", "Wzrost cen ma zazwyczaj dwa główne źródła: *apetyt kupujących* oraz *wzrost kosztów produkcji*."),
+        T("Demand-pull happens when everyone wants the hot new gaming console at once: too much money chasing too few units.", "Nachfragedruck entsteht, wenn alle dieselbe Konsole wollen: zu viel Geld jagt zu wenige Geraete.", "Apetyt kupujących pojawia się, gdy wszyscy chcą tę samą konsolę: zbyt wiele osób konkuruje o ograniczoną liczbę sztuk."),
+        T("Cost-push happens when factories pay double for microchips, batteries, and ocean shipping containers.", "Kostenschub entsteht, wenn die Fabriken doppelt so viel fuer Computerchips und Frachtschiffe zahlen.", "Wzrost kosztów produkcji następuje, gdy fabryki płacą znacznie więcej za procesory, baterie i transport kontenerowcami."),
       ],
       InflationBasketDiagram,
     ),
     animatedBeat(
       [
-        T("Inflation can be triggered by *demand-pull*: too much money chasing too few available goods.", "Inflation entsteht durch *Nachfrageueberhang*: zu viel Geld jagt zu wenige Gueter.", "Inflacja może wynikać z *presji popytowej*: zbyt dużo pieniędzy ugania się za zbyt małą ilością dóbr."),
-        T("It can also be caused by *cost-push*: supply chain shocks, oil embargoes, or crop failures that spike production costs.", "Oder durch *Kostendruck*: Lieferkettenkrisen oder Ernteausfaelle treiben die Kosten.", "Może też wynikać z *presji kosztowej*: kryzysy surowcowe czy nieurodzaj drastycznie podnoszą koszty."),
-        T("Holding vast cash under a mattress during inflation is a guaranteed slow loss.", "Bargeld waehrend der Inflation unter der Matratze zu horten garantiert Verluste.", "Trzymanie gotówki w materacu w czasie inflacji to gwarancja powolnej, pewnej straty."),
+        T("Inflation acts like a sneaky invisible leak in your piggy bank.", "Inflation wirkt wie ein unsichtbares Loch in deinem Sparschwein.", "Inflacja działa jak niewidzialna nieszczelność w Twojej skarbonce."),
+        T("If your bank account gives you two percent interest, but store prices jump seven percent, your real buying power drops five percent.", "Gibt dir die Bank 2% Zinsen bei 7% Teuerung, verlierst du real fuenf Prozent Kaufkraft im Jahr.", "Gdy bank daje Ci dwa procent zysku, a ceny w sklepach rosną o siedem procent, Twoja realna siła nabywcza spada o pięć procent."),
+        T("Your bank balance looks higher on screen, but you walk out of the store with fewer snacks and games.", "Dein Kontostand waechst zwar auf dem Display, aber an der Kasse traegst du weniger Taschen nach Hause.", "Stan konta na ekranie wygląda na większy, ale wychodzisz ze sklepu z mniejszą liczbą gier i przekąsek."),
       ],
       InflationBasketDiagram,
     ),
     animatedBeat(
       [
-        T("To protect wealth against purchasing power erosion, investors hold *real assets*.", "Um Vermoegen vor Kaufkraftverlust zu schuetzen, halten Anleger *Sachwerte*.", "Aby chronić majątek przed utratą siły nabywczej, inwestorzy lokują kapitał w *aktywa realne*."),
-        T("Real productive companies can raise prices to keep pace with inflation.", "Produzierende Unternehmen koennen ihre Preise an die Inflation anpassen.", "Dobre spółki produkcyjne mogą podnosić ceny swoich produktów wraz z inflacją."),
-        T("A moderate, predictable inflation target around 2% is considered ideal by central banks to encourage investment over hoarding.", "Eine maessige Zielinflation um 2% gilt Zentralbanken als ideal gegen Stillstand.", "Umiarkowany cel inflacyjny na poziomie ok. 2% jest uznawany przez banki centralne za optymalny."),
+        T("To outrun inflation, investors put money into *productive assets* that can adjust their prices over time.", "Um Inflation zu schlagen, investieren clevere Sparer in *produktive Sachwerte* und Unternehmen.", "Aby wyprzedzić inflację, inwestorzy lokują oszczędności w *aktywa produkcyjne*, które podnoszą swoje ceny."),
+        T("A great pizza parlor or software studio simply updates its prices, protecting the real profits of its owners.", "Eine beliebte Pizzeria oder Softwareschmiede passt Preise an und schuetzt so die Gewinne der Besitzer.", "Dobra pizzeria lub studio gier po prostu aktualizuje cennik, chroniąc realne dochody swoich właścicieli."),
+        T("Understanding inflation teaches you why sitting on idle paper cash is like storing ice in warm sunshine.", "Wer Inflation versteht, weiss: Bargeld ungenutzt liegen zu lassen ist wie Eis in der Sommersonne.", "Zrozumienie inflacji uczy, że trzymanie bezczynnej gotówki pod materacem jest jak zostawienie lodów na słońcu."),
       ],
       InflationBasketDiagram,
     ),

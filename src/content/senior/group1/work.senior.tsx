@@ -82,41 +82,41 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("Why do different professions earn vastly different compensation?", "Warum verdienen verschiedene Berufe so unterschiedliche Gehaelter?", "Dlaczego różne zawody otrzymują tak diametralnie różne wynagrodzenia?"),
-        T("Compensation is not simply determined by how hard someone sweats.", "Bezahlung haengt nicht einfach davon ab, wie sehr man schwitzt.", "Wynagrodzenie nie zależy wyłącznie od tego, jak ciężko ktoś fizycznie pracuje."),
-        T("Wages are governed by *marginal productivity* and the scarcity of required skills.", "Geregelte Loehne basieren auf *Grenzproduktivitaet* und der Seltenheit von Faehigkeiten.", "Płace wynikają z *krańcowej produktywności* i rzadkości poszukiwanych umiejętności."),
+        T("Meet Arjun. Over summer break, he wants to earn money to upgrade his gaming desk and chair.", "Das ist Lukas. In den Sommerferien will er Geld verdienen, um seinen Gaming-Schreibtisch aufzuruesten.", "Poznaj Jana. W wakacje chce zarobić na nowy fotel i biurko do gier."),
+        T("At first, Arjun offers basic garden weed pulling for neighbors at ten dollars an hour.", "Zuerst zupft Lukas fuer Nachbarn Unkraut im Garten fuer zehn Euro die Stunde.", "Początkowo Jan plewi chwasty w ogródkach sąsiadów za czterdzieści złotych na godzinę."),
+        T("Because any kid on the block can pull weeds, neighbors have endless choices, so pay stays low.", "Weil jeder Teenager Unkraut zupfen kann, gibt es viele Helfer und der Stundenlohn bleibt niedrig.", "Ponieważ każdy może wyrywać chwasty, sąsiedzi mają duży wybór i stawka nie rośnie."),
       ],
       HumanCapitalDiagram,
     ),
     animatedBeat(
       [
-        T("Economists describe your accumulated knowledge and capabilities as *human capital*.", "Oekonomen bezeichnen erworbenes Wissen und Koennen als *Humankapital*.", "Ekonomiści określają zdobytą wiedzę i umiejętności mianem *kapitału ludzkiego*."),
-        T("When an individual invests time in mastering engineering, surgery, or data systems, they enhance their human capital.", "Wer Zeit investiert, um Ingenieurwesen oder Medizin zu lernen, vermehrt sein Humankapital.", "Kto inwestuje czas w naukę inżynierii, medycyny czy systemów danych, ten pomnaża swój kapitał ludzki."),
-        T("A worker operating advanced technology produces more economic value in one hour than dozens of workers using manual methods.", "Eine Fachkraft mit moderner Technologie schafft in einer Stunde mehr Wert als viele manuelle Helfer.", "Specjalista korzystający z zaawansowanej technologii tworzy w godzinę większą wartość niż wielu pracowników fizycznych."),
+        T("Then Arjun teaches himself how to paint custom waterproof artwork on sneakers using special airbrush tools.", "Dann bringt sich Lukas bei, wie man Sneaker mit einer Airbrush-Pistole wasserfest bemalt.", "Następnie Jan uczy się malowania wodoodpornych grafik na butach za pomocą aerografu."),
+        T("Suddenly people are offering him fifty dollars for every pair he customizes.", "Ploetzlich zahlen ihm Kunden fuenfzig Euro fuer jedes individuell gestaltete Paar.", "Nagle ludzie zaczynają płacić mu dwieście złotych za każdą ozdobioną parę butów."),
+        T("His time became five times more valuable because he built *human capital*: rare and useful skills.", "Seine Zeit wurde fuenfmal wertvoller, weil er *Humankapital* aufgebaut hat: seltene Faehigkeiten.", "Jego czas stał się pięciokrotnie cenniejszy, ponieważ rozwinął *kapitał ludzki*: rzadkie umiejętności."),
       ],
       HumanCapitalDiagram,
     ),
     animatedBeat(
       [
-        T("If a job requires skills that anyone can learn in fifteen minutes, labor supply is abundant.", "Erfordert eine Aufgabe Faehigkeiten, die jeder in 15 Minuten lernt, ist das Angebot gross.", "Jeśli praca wymaga umiejętności, których można nauczyć się w kwadrans, podaż pracy jest ogromna."),
-        T("Abundant labor supply pushes competitive market wages lower.", "Ein hohes Angebot an Arbeitskraeften drueckt die Lohe auf dem Wettbewerbsmarkt.", "Wysoka podaż pracowników powoduje spadek rynkowych stawek płac."),
-        T("When skills take years of discipline to develop, labor supply is scarce, commanding higher wages.", "Faehigkeiten, die jahrelange Disziplin fordern, sind selten und fuehren zu hoeheren Gehaeltern.", "Umiejętności wymagające lat dyscypliny są rzadkie, co pozwala uzyskać wyższe zarobki."),
+        T("When an employer or customer hires you, they pay for the scarcity of what you know how to do.", "Wenn dich jemand bezahlt, honoriert er vor allem die Seltenheit deines Koennens.", "Gdy ktoś płaci Ci za pracę, wycenia przede wszystkim rzadkość tego, co potrafisz zrobić."),
+        T("If a task takes fifteen minutes to learn, labor supply is huge and wages face downward pressure.", "Kann man eine Aufgabe in 15 Minuten lernen, ist das Angebot riesig und Loehne sinken.", "Jeśli zadania można nauczyć się w kwadrans, chętnych jest mnóstwo, a stawka spada."),
+        T("When a craft requires years of creative practice, employers must bid aggressively for your talent.", "Erfordert ein Handwerk jahrelange Uebung, muessen Kunden und Firmen um dein Talent bieten.", "Gdy fach wymaga lat ćwiczeń i pasji, zleceniodawcy muszą konkurować o Twoje usługi."),
       ],
       HumanCapitalDiagram,
     ),
     animatedBeat(
       [
-        T("There is also a crucial distinction between *gross salary* and *net salary*.", "Zudem gibt es einen wichtigen Unterschied zwischen *Bruttogehalt* und *Nettogehalt*.", "Istnieje także kluczowe rozróżnienie między *pensją brutto* a *pensją netto*."),
-        T("Gross salary is your total contracted earnings before mandatory deductions.", "Das Bruttogehalt ist der Gesamtbetrag vor gesetzlichen Abzuegen.", "Pensja brutto to pełna kwota na umowie przed obowiązkowymi potrąceniami."),
-        T("Net pay is what actually lands in your bank account after taxes, pension, and insurance.", "Das Nettogehalt ist das, was nach Steuern, Rente und Krankenversicherung auf dem Konto landet.", "Pensja netto to kwota, która faktycznie trafia na konto po odliczeniu podatków i składek."),
+        T("There is also a key difference between *gross earnings* and *net pay*.", "Ausserdem gibt es einen wichtigen Unterschied zwischen *Brutto* und *Netto*.", "Istnieje także kluczowa różnica między kwotą *brutto* a wynagrodzeniem *netto*."),
+        T("Gross pay is the headline total before taxes and contributions are subtracted.", "Brutto ist der vereinbarte Gesamtbetrag, bevor Steuern und Abgaben abgezogen werden.", "Brutto to całkowita kwota na rachunku, zanim zostaną potrącone podatki i składki."),
+        T("Net pay is the actual cash that lands in your bank account to spend or save.", "Netto ist das Geld, das am Ende wirklich auf deinem Bankkonto landet.", "Netto to realna kwota pieniędzy, która ostatecznie trafia na Twoje konto bankowe."),
       ],
       HumanCapitalDiagram,
     ),
     animatedBeat(
       [
-        T("Your greatest financial asset when you are young is your earning capacity.", "Dein groesster Vermogenswert in jungen Jahren ist deine eigene Erwerbsfaehigkeit.", "Twoim największym aktywem finansowym w młodym wieku jest Twoja zdolność do zarabiania."),
-        T("Continuous learning compounds your human capital faster than simple interest.", "Kontinuierliches Lernen laesst dein Humankapital schneller wachsen als Zinsen.", "Ciągła nauka pomnaża Twój kapitał ludzki szybciej niż jakikolwiek procent w banku."),
-        T("Invest in skills that are rare, valuable, and hard to automate.", "Investiere in Faehigkeiten, die selten, wertvoll und schwer zu automatisieren sind.", "Inwestuj w umiejętności, które są rzadkie, wartościowe i trudne do zautomatyzowania."),
+        T("Your biggest economic lever as a teenager is your ability to learn new things.", "Dein groesster Hebel als Jugendlicher ist deine Faehigkeit, Neues zu lernen.", "Twoją największą siłą za młodu jest łatwość i ciekawość w zdobywaniu nowej wiedzy."),
+        T("Every technical skill, design tool, or language you master adds permanent value to your work.", "Jedes Werkzeug, jeder Code und jede Sprache steigert dauerhaft deinen Marktwert.", "Każde nowe narzędzie, kod czy język, który opanujesz, trwale podnosi wartość Twojej pracy."),
+        T("Invest early in capabilities that are rare, rewarding, and exciting to build.", "Investiere frueh in Faehigkeiten, die selten, gefragt und spannend sind.", "Inwestuj od najmłodszych lat w umiejętności, które są rzadkie, poszukiwane i dają Ci frajdę."),
       ],
       HumanCapitalDiagram,
     ),
