@@ -178,12 +178,27 @@ function BarterFailsDiagram({ lang, step }: DiagramProps) {
         {lang === "pl" ? "Oferuje: Kod" : lang === "de" ? "Bietet: Code" : "Offers: Code"}
       </text>
 
-      {/* Center: Blocked red X */}
-      <g>
-        <line x1="140" y1="120" x2="260" y2="120" stroke="#fa5252" strokeWidth="3" strokeDasharray="5,5" />
-        <circle cx="200" cy="120" r="18" fill="#ffe3e3" stroke="#e03131" strokeWidth="2" />
-        <text x="200" y="127" textAnchor="middle" fontSize="20" fontWeight="bold" fill="#c92a2a">✕</text>
-      </g>
+      {/* Center: Swap attempt or blocked cross */}
+      {step === 1 && (
+        <g>
+          <path d="M 125 110 L 275 110" stroke="#4f46e5" strokeWidth="2" strokeDasharray="4,4" />
+          <polygon points="275,110 265,105 265,115" fill="#4f46e5" />
+          <path d="M 275 130 L 125 130" stroke="#0284c7" strokeWidth="2" strokeDasharray="4,4" />
+          <polygon points="125,130 135,125 135,135" fill="#0284c7" />
+          <rect x="145" y="108" width="110" height="24" rx="6" fill="#f1f3f5" stroke="#ced4da" strokeWidth="1" />
+          <text x="200" y="124" textAnchor="middle" fontSize="10.5" fontWeight="bold" fill="#495057">
+            {lang === "pl" ? "Wymiana towarowa?" : lang === "de" ? "Direkter Tausch?" : "Direct Swap?"}
+          </text>
+        </g>
+      )}
+
+      {step >= 2 && (
+        <g>
+          <line x1="140" y1="120" x2="260" y2="120" stroke="#fa5252" strokeWidth="3" strokeDasharray="5,5" />
+          <circle cx="200" cy="120" r="18" fill="#ffe3e3" stroke="#e03131" strokeWidth="2" />
+          <text x="200" y="127" textAnchor="middle" fontSize="20" fontWeight="bold" fill="#c92a2a">✕</text>
+        </g>
+      )}
 
       {/* Right: Teacher wants bicycle */}
       <circle cx="320" cy="115" r="28" fill="#fed7aa" stroke="#23383f" strokeWidth="2" />
@@ -192,6 +207,11 @@ function BarterFailsDiagram({ lang, step }: DiagramProps) {
       <circle cx="328" cy="112" r="4" fill="none" stroke="#23383f" strokeWidth="1.5" />
       <path d="M 314 126 Q 320 120 326 126" stroke="#23383f" strokeWidth="2" fill="none" />
       <path d="M 296 185 L 302 145 Q 320 140 338 145 L 344 185 Z" fill="#0284c7" stroke="#23383f" strokeWidth="2" />
+      {step === 1 && (
+        <text x="320" y="205" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#495057">
+          {lang === "pl" ? "Oferuje: Lekcje" : lang === "de" ? "Bietet: Unterricht" : "Offers: Lessons"}
+        </text>
+      )}
 
       {/* Step 2: Teacher Speech bubble */}
       {step >= 2 && (
@@ -370,7 +390,7 @@ function MoneySolvesAllDiagram({ lang, step }: DiagramProps) {
       )}
 
       {/* Node 4: Bike Shop */}
-      {step >= 2 && (
+      {step >= 3 && (
         <g>
           <circle cx="340" cy="90" r="24" fill="#fff4e6" stroke="#fd7e14" strokeWidth="1.5" />
           <text x="340" y="94" textAnchor="middle" fontSize="14">🚲</text>
