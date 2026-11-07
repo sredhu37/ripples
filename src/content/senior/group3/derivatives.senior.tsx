@@ -309,7 +309,7 @@ export const lesson: Lesson = {
         "Jaka jest podstawowa różnica między kontraktem futures a opcją?",
       ),
       options: [
-        { text: T("A futures contract legally obligates both parties to trade, whereas an option grants the buyer the choice (right) without the obligation", "Ein Future verpflichtet beide Parteien verbindlich zum Handel, waehrend eine Option dem Kaeufer das Wahlrecht ohne Pflicht einraeumt", "Kontrakt futures prawnie zobowiązuje obie strony do rozliczenia, podczas gdy opcja daje nabywcy prawo wyboru bez obowiązku jej wykonania"), correct: true },
+        { text: T("Futures require trading, while options give the buyer a choice without obligation", "Futures verpflichten verbindlich, waehrend Optionen eine freie Wahl ohne Pflicht bieten", "Futures prawnie zobowiązują, a opcje dają wolny wybór bez przymusu"), correct: true },
         { text: T("Futures are only traded underwater on submarine cables", "Futures duerfen nur auf Schiffen im Meer gehandelt werden", "Kontrakty futures są zawierane wyłącznie na pokładach okrętów podwodnych"), correct: false },
         { text: T("Options can only be purchased by commercial real estate landlords", "Optionen stehen ausschliesslich Vermietern von Buerogebaeuden offen", "Opcje mogą kupować wyłącznie właściciele biurowców komercyjnych"), correct: false },
       ],
@@ -326,7 +326,7 @@ export const lesson: Lesson = {
         "Dlaczego przedsiębiorstwa, rolnicy i linie lotnicze stosują transakcje zabezpieczające (hedging)?",
       ),
       options: [
-        { text: T("To lock in predictable prices for essential input costs and protect their operating business from catastrophic market swings", "Um Planbarkeit fuer wichtige Rohstoffe zu sichern und das operative Geschaeft vor extremen Preisschocks zu schuetzen", "Aby zagwarantować sobie przewidywalne koszty zakupu surowców i uchronić firmę przed gwałtownymi zawirowaniami rynkowymi"), correct: true },
+        { text: T("To lock in predictable ingredient prices and protect against unexpected cost spikes", "Um planbare Rohstoffpreise zu sichern und sich vor extremen Kostenschocks zu schuetzen", "Aby zapewnić przewidywalne ceny surowców i chronić się przed gwałtownymi podwyżkami"), correct: true },
         { text: T("To avoid paying any salaries to their employees", "Um Gehaltszahlungen an Mitarbeiter vollstaendig einzusparen", "Aby uniknąć konieczności wypłacania pensji pracownikom"), correct: false },
         { text: T("Because banks refuse to store fiat currency in checking accounts", "Weil Banken kein normales Guthaben auf Konten mehr akzeptieren", "Ponieważ banki nie przyjmują już tradycyjnych walut na rachunki bieżące"), correct: false },
       ],

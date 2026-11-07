@@ -263,9 +263,9 @@ function Toy({ onDone }: ToyProps) {
 function PowerTriangleWidget({ onAnswer }: WidgetProps) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
-      <p style={{ margin: 0 }}>What happens to a society when one corner of the Power Triangle completely dominates the other two?</p>
+      <p style={{ margin: 0 }}>What happens to a society when one corner of the Power Triangle completely dominates?</p>
       <button type="button" className="btn btn-quiet" onClick={() => onAnswer(false)}>The town clock begins chiming in alphabetical order</button>
-      <button type="button" className="btn" onClick={() => onAnswer(true)}>The institutional balance collapses into tyranny, monopolistic exploitation, or social decay, because no independent counterweight remains to prevent abuses of power</button>
+      <button type="button" className="btn" onClick={() => onAnswer(true)}>Balance collapses into tyranny or unfair rules because nobody can push back</button>
       <button type="button" className="btn btn-quiet" onClick={() => onAnswer(false)}>Potholes in roadways are immediately filled with strawberry jam</button>
     </div>
   );
@@ -329,7 +329,7 @@ export const lesson: Lesson = {
         "Dlaczego skupienie absolutnej władzy w rękach jednego bieguna Trójkąta Władzy jest zgubne dla społeczeństwa?",
       ),
       options: [
-        { text: T("Because without independent counterweights to inspect actions and push back against overreach, unchecked power predictably degenerates into tyranny, exploitation, or social decay", "Weil ohne unabhaengige Kontrollkraefte jede unbegrenzte Macht zwangslaeufig in Willkuer, Ausbeutung oder Zerfall muendet", "Ponieważ bez niezależnych sił równoważących niekontrolowana władza nieuchronnie przekształca się w tyranię, wyzysk lub upadek państwa"), correct: true },
+        { text: T("Without independent balance, unchecked power easily turns into unfair tyranny or abuse", "Ohne Gegenwicht fuehrt unbegrenzte Macht unausweichlich zu Willkuer und Ungerechtigkeit", "Bez niezależnej równowagi niekontrolowana władza łatwo zamienia się w tyranię i wyzysk"), correct: true },
         { text: T("Because triangles with uneven sides are mathematically forbidden by city zoning boards", "Weil ungleichseitige Dreiecke im Baurecht strengstens verboten sind", "Ponieważ trójkąty różnoboczne są surowo zabronione przez miejskie plany zagospodarowania"), correct: false },
         { text: T("Because desk lamps in government offices only shine light at 90-degree angles", "Weil Schreibtischlampen in Amtsstuben nur in rechten Winkeln leuchten", "Ponieważ lampki na biurkach w ministerstwach świecą wyłącznie pod kątem prostym"), correct: false },
       ],
