@@ -32,6 +32,8 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Spec | A Playwright file per screen in `e2e/` that is a test and records the demo at once | e2e test only, script |
 | Evidence comment | The one PR comment, updated in place, that shows step screenshots and a GIF inline and links the full video | demo post, bot comment |
 | Evidence branch | The `evidence` branch that holds `pr-<n>/` images for inline display; cleaned after merge | assets repo, artifacts |
+| Factory label | One of six `factory:` labels (triage, ready, in-progress, in-review, human, done); exactly one per issue, it is the issue's station and the board column follows it | status tag, column |
+| Your turn | The board column for `factory:human`: the factory has stopped and waits for Sunny to answer, implement or review | blocked, on hold |
 | Ticket size | The average price or coin value of one sale | receipt, basket |
 | Market share | The fraction or slice of total customers buying from one business | monopoly |
 | Mittelstand | German small and medium enterprises featured in the scale lesson | big business |
