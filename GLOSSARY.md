@@ -24,6 +24,10 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | FAIL | A finding that breaks a rule the agent can link to; one FAIL sends the PR back to the build agent | blocker, error |
 | SUGGESTION | A finding that would improve the change but breaks no linked rule; never blocks the PR | nit, warning |
 | Suggestions issue | The one issue per PR, filed after review passes, that collects all SUGGESTIONs without duplicates and enters triage | follow-up ticket, backlog dump |
+| Risky list | The file patterns in `.github/gate-paths.txt`; a PR touching any of them always goes to Sunny | protected files, blocklist |
+| Gate agent | The agent that writes a risk analysis for a reviewed PR outside the risky list and answers MERGE or HUMAN with a reason | approver, merge bot |
+| Live check | The Lighthouse run against the live site after every deploy: does it render, any console errors | smoke test, monitoring |
+| live-good | The git tag on the newest commit that passed the live check; a failed live check redeploys it | stable, release tag |
 | Ticket size | The average price or coin value of one sale | receipt, basket |
 | Market share | The fraction or slice of total customers buying from one business | monopoly |
 | Mittelstand | German small and medium enterprises featured in the scale lesson | big business |
