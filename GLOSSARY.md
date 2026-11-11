@@ -34,6 +34,9 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Evidence branch | The `evidence` branch that holds `pr-<n>/` images for inline display; cleaned after merge | assets repo, artifacts |
 | Factory label | One of six `factory:` labels (triage, ready, in-progress, in-review, human, done); exactly one per issue, it is the issue's station and the board column follows it | status tag, column |
 | Your turn | The board column for `factory:human`: the factory has stopped and waits for Sunny to answer, implement or review | blocked, on hold |
+| Machine account | `sredhu37-factory`, the GitHub account the factory acts as for board moves, gate merges and revert PRs; collaborator on ripples only | bot user, service account |
+| Factory bot | The Telegram bot that messages Sunny only for "Your turn" and live-site rollbacks | Hermes bot, notifier |
+| Hourly check | The scheduled workflow that restarts `factory:ready` tickets paused by a usage limit or missed by an event | cron, sweeper |
 | Ticket size | The average price or coin value of one sale | receipt, basket |
 | Market share | The fraction or slice of total customers buying from one business | monopoly |
 | Mittelstand | German small and medium enterprises featured in the scale lesson | big business |
