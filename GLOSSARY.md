@@ -39,6 +39,7 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Hourly check | The scheduled workflow that restarts `factory:ready` tickets paused by a usage limit or missed by an event | cron, sweeper |
 | Agent brief | The comment `/triage` posts when an issue moves to `factory:ready`: what to build and how to check it, read by the build agent | spec, ticket body |
 | Triage reminder | The Monday 09:00 Telegram message from the factory bot with the count of issues waiting in `factory:triage` | digest, nag |
+| Trusted accounts | The accounts whose comments reach factory agents: `sredhu37`, `sredhu37-factory`, `claude[bot]`, `github-actions[bot]` | maintainers, allowlist |
 | Ticket size | The average price or coin value of one sale | receipt, basket |
 | Market share | The fraction or slice of total customers buying from one business | monopoly |
 | Mittelstand | German small and medium enterprises featured in the scale lesson | big business |
