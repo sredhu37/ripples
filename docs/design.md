@@ -60,6 +60,17 @@ Political neutrality and framing decisions: see [docs/adr/0002-group-4-governmen
 - **Sound effects.** Synthesized with Web Audio (tap, correct, hint, badge), with a mute button. The iPad needs a first tap before audio plays.
 - **Name.** The child types a first name once. It lives on the device only.
 
+UX rules (the ux-ui review agent checks these first):
+
+- **One "Back" per screen.** The lesson header shows "← All lessons" (to the trail map) and "Start over" (reset the lesson). "Back" / "Next" live only in the bottom lesson navigation.
+- **Verbs, not toggles.** Buttons say what they do and change with state ("Start a bank run" / "Calm the crowd down"), never "ON / OFF".
+- **One action button per step.** Show only the button for the current step, then the Next button when the step is done.
+- **One way to act.** If the toy asks for drag and drop, do not also offer a button or a tappable character for the same action.
+- **No emoji.** All pictures, icons and badges are flat SVG drawn in code. A plain text arrow on a button is fine.
+- **Instructions never look like buttons.** Instructions sit in the dashed, non-clickable `ActionPrompt` card. Action buttons are solid with a verb phrase.
+- **Say it once.** The same explanatory text never appears in both a card and the mascot's speech bubble.
+- **Language switcher on every screen.** `LangSwitch` sits in the header of every screen. Switching keeps the child's place.
+
 ## Technology and hosting
 
 - React, TypeScript and Vite. Output is static files.
