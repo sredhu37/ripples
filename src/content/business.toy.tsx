@@ -40,15 +40,35 @@ export function BusinessCartToy({ lang, onDone, isWidget, onWidgetAnswer }: Busi
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%", maxWidth: "560px", margin: "0 auto" }}>
-      <Stage label={txt("Finn's Ice Cream Business", "Finns Eisgeschäft", "Lodziarnia Finna", lang)}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "16px",
+        width: "100%",
+        maxWidth: "560px",
+        margin: "0 auto",
+      }}
+    >
+      <Stage
+        label={txt("Finn's Ice Cream Business", "Finns Eisgeschäft", "Lodziarnia Finna", lang)}
+      >
         <svg viewBox="0 0 400 160" width="100%" height="160" style={{ display: "block" }}>
-          {weather === "sunny" ? <SunIcon x={30} y={15} size={50} /> : <RainCloudIcon x={25} y={15} size={65} />}
+          {weather === "sunny" ? (
+            <SunIcon x={30} y={15} size={50} />
+          ) : (
+            <RainCloudIcon x={25} y={15} size={65} />
+          )}
           <IceCreamCart x={150} y={15} size={130} />
           <text x={200} y={145} textAnchor="middle" fontSize="13" fontWeight="bold" fill="#334155">
             {weather === "sunny"
               ? `${actualScoops} ${txt("scoops sold", "Kugeln verkauft", "sprzedanych gałek", lang)}`
-              : txt("Rainy day: 0 scoops sold!", "Regentag: 0 Kugeln verkauft!", "Deszczowy dzień: 0 gałek!", lang)}
+              : txt(
+                  "Rainy day: 0 scoops sold!",
+                  "Regentag: 0 Kugeln verkauft!",
+                  "Deszczowy dzień: 0 gałek!",
+                  lang,
+                )}
           </text>
         </svg>
       </Stage>
@@ -80,7 +100,10 @@ export function BusinessCartToy({ lang, onDone, isWidget, onWidgetAnswer }: Busi
             onDone?.();
           }}
         >
-          👤 {hasHelper ? txt("Helper Leo (4 coins)", "Helfer Leo (4 Münzen)", "Pomocnik Leo (4 monety)", lang) : txt("Solo (No helper)", "Allein (Kein Helfer)", "Sam (Bez pomocnika)", lang)}
+          👤{" "}
+          {hasHelper
+            ? txt("Helper Leo (4 coins)", "Helfer Leo (4 Münzen)", "Pomocnik Leo (4 monety)", lang)
+            : txt("Solo (No helper)", "Allein (Kein Helfer)", "Sam (Bez pomocnika)", lang)}
         </ToyButton>
       </div>
 
@@ -88,7 +111,12 @@ export function BusinessCartToy({ lang, onDone, isWidget, onWidgetAnswer }: Busi
       {weather === "sunny" && (
         <div style={{ padding: "0 10px" }}>
           <Slider
-            label={txt("Ice cream scoops sold", "Verkaufte Eiskugeln", "Sprzedane gałki lodów", lang)}
+            label={txt(
+              "Ice cream scoops sold",
+              "Verkaufte Eiskugeln",
+              "Sprzedane gałki lodów",
+              lang,
+            )}
             min={0}
             max={30}
             step={2}
@@ -132,7 +160,14 @@ export function BusinessCartToy({ lang, onDone, isWidget, onWidgetAnswer }: Busi
           </span>{" "}
           -{helperWage} {txt("coins", "Münzen", "monet", lang)}
         </div>
-        <div style={{ gridColumn: "span 2", borderTop: "1px dashed #cbd5e1", paddingTop: "8px", marginTop: "4px" }}>
+        <div
+          style={{
+            gridColumn: "span 2",
+            borderTop: "1px dashed #cbd5e1",
+            paddingTop: "8px",
+            marginTop: "4px",
+          }}
+        >
           <strong style={{ fontSize: "16px", color: isProfit ? "#15803d" : "#b91c1c" }}>
             {isProfit
               ? `★ ${txt("Owner's Profit", "Finns Gewinn", "Zysk właściciela", lang)}: +${netProfit} ${txt("coins", "Münzen", "monet", lang)}`

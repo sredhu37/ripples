@@ -20,7 +20,13 @@ function context(): AudioContext | null {
   return ctx;
 }
 
-function tone(freq: number, start: number, length: number, type: OscillatorType = "sine", volume = 0.15) {
+function tone(
+  freq: number,
+  start: number,
+  length: number,
+  type: OscillatorType = "sine",
+  volume = 0.15,
+) {
   const c = context();
   if (!c) return;
   const osc = c.createOscillator();

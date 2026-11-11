@@ -39,97 +39,117 @@ export function MonarchyToy({ lang, mode = "toy", onDone }: MonarchyToyProps) {
     lang === "pl"
       ? "Symulator ustroju Wyspy Zamkowej"
       : lang === "de"
-      ? "Schlossinsel Regierungs-Simulator"
-      : "Castle Island Governance Simulator";
+        ? "Schlossinsel Regierungs-Simulator"
+        : "Castle Island Governance Simulator";
 
   const subtitle =
     lang === "pl"
       ? "Porównaj monarchię absolutną z konstytucyjną"
       : lang === "de"
-      ? "Vergleiche absolute und konstitutionelle Monarchie"
-      : "Compare Absolute vs Constitutional Monarchy";
+        ? "Vergleiche absolute und konstitutionelle Monarchie"
+        : "Compare Absolute vs Constitutional Monarchy";
 
   const btnAbsolute =
-    lang === "pl" ? "Monarchia absolutna" : lang === "de" ? "Absolute Monarchie" : "Absolute Monarchy";
+    lang === "pl"
+      ? "Monarchia absolutna"
+      : lang === "de"
+        ? "Absolute Monarchie"
+        : "Absolute Monarchy";
   const btnConstitutional =
-    lang === "pl" ? "Monarchia konstytucyjna" : lang === "de" ? "Konstitutionelle Monarchie" : "Constitutional Monarchy";
+    lang === "pl"
+      ? "Monarchia konstytucyjna"
+      : lang === "de"
+        ? "Konstitutionelle Monarchie"
+        : "Constitutional Monarchy";
 
   const jasperName =
     lang === "pl"
       ? "Król Jasper: Mądry i odpowiedzialny"
       : lang === "de"
-      ? "König Jasper: Weise und fürsorglich"
-      : "King Jasper: Wise and Careful";
+        ? "König Jasper: Weise und fürsorglich"
+        : "King Jasper: Wise and Careful";
 
   const leoName =
     lang === "pl"
       ? "Książę Leo: Beztroski myśliwy pawi"
       : lang === "de"
-      ? "Prinz Leo: Nachlässiger Pfauenjäger"
-      : "Prince Leo: Careless Peacock Hunter";
+        ? "Prinz Leo: Nachlässiger Pfauenjäger"
+        : "Prince Leo: Careless Peacock Hunter";
 
   const jasperDesc =
     lang === "pl"
       ? "Mosty zbudowane, uczciwe podatki, miasto rozkwita"
       : lang === "de"
-      ? "Brücken gebaut, faire Steuern, blühende Stadt"
-      : "Bridges built, fair taxes, flourishing town";
+        ? "Brücken gebaut, faire Steuern, blühende Stadt"
+        : "Bridges built, fair taxes, flourishing town";
 
   const leoDesc =
     lang === "pl"
       ? "Wysokie podatki, zrujnowane drogi, nie można go odwołać w wyborach!"
       : lang === "de"
-      ? "Hohe Steuern, kaputte Straßen, kann nicht abgewählt werden!"
-      : "High taxes, crumbling roads, cannot be voted out!";
+        ? "Hohe Steuern, kaputte Straßen, kann nicht abgewählt werden!"
+        : "High taxes, crumbling roads, cannot be voted out!";
 
   const spinBtn =
     lang === "pl"
       ? "🎲 Następca tronu (Losuj)"
       : lang === "de"
-      ? "🎲 Nächster Thronfolger (Würfeln)"
-      : "🎲 Next Hereditary Ruler (Spin)";
+        ? "🎲 Nächster Thronfolger (Würfeln)"
+        : "🎲 Next Hereditary Ruler (Spin)";
 
   const rosaTitle =
     lang === "pl"
       ? "Królowa Rosa (Symbol) + Wybrana rada miasta"
       : lang === "de"
-      ? "Königin Rosa (Symbol) + Gewählter Stadtrat"
-      : "Queen Rosa (Symbol) + Elected Town Council";
+        ? "Königin Rosa (Symbol) + Gewählter Stadtrat"
+        : "Queen Rosa (Symbol) + Elected Town Council";
 
   const rosaDesc =
     lang === "pl"
       ? "Ustawy i podatki uchwala parlament. Wysoka stabilność bez względu na kaprysy władcy!"
       : lang === "de"
-      ? "Gesetze und Steuern beschließt das Parlament. Hohe Stabilität unabhängig von der Laune des Monarchen!"
-      : "Laws and taxes are decided by parliament. Stability remains high regardless of royal personality!";
+        ? "Gesetze und Steuern beschließt das Parlament. Hohe Stabilität unabhängig von der Laune des Monarchen!"
+        : "Laws and taxes are decided by parliament. Stability remains high regardless of royal personality!";
 
   const quizPrompt =
     lang === "pl"
       ? "Kto uchwala ustawy i podatki w monarchii konstytucyjnej?"
       : lang === "de"
-      ? "Wer beschließt in einer konstitutionellen Monarchie Gesetze und Steuern?"
-      : "In a constitutional monarchy, who makes the laws and taxes?";
+        ? "Wer beschließt in einer konstitutionellen Monarchie Gesetze und Steuern?"
+        : "In a constitutional monarchy, who makes the laws and taxes?";
 
   const optA =
-    lang === "pl" ? "A) Królewski paw domowy" : lang === "de" ? "A) Der königliche Haustier-Pfau" : "A) The royal pet peacock";
+    lang === "pl"
+      ? "A) Królewski paw domowy"
+      : lang === "de"
+        ? "A) Der königliche Haustier-Pfau"
+        : "A) The royal pet peacock";
   const optB =
-    lang === "pl" ? "B) Wolno wybrany parlament" : lang === "de" ? "B) Das frei gewählte Parlament" : "B) The freely elected parliament";
+    lang === "pl"
+      ? "B) Wolno wybrany parlament"
+      : lang === "de"
+        ? "B) Das frei gewählte Parlament"
+        : "B) The freely elected parliament";
   const optC =
-    lang === "pl" ? "C) Nikt w państwie" : lang === "de" ? "C) Überhaupt niemand" : "C) Nobody at all";
+    lang === "pl"
+      ? "C) Nikt w państwie"
+      : lang === "de"
+        ? "C) Überhaupt niemand"
+        : "C) Nobody at all";
 
   const quizSuccess =
     lang === "pl"
       ? "✓ Dokładnie tak! W monarchii konstytucyjnej państwem rządzi wybrany parlament."
       : lang === "de"
-      ? "✓ Genau richtig! In einer konstitutionellen Monarchie regiert das gewählte Parlament."
-      : "✓ Exactly right! In a constitutional monarchy, the elected parliament governs.";
+        ? "✓ Genau richtig! In einer konstitutionellen Monarchie regiert das gewählte Parlament."
+        : "✓ Exactly right! In a constitutional monarchy, the elected parliament governs.";
 
   const quizHint =
     lang === "pl"
       ? "Wskazówka: W monarchii konstytucyjnej władza rządzenia należy do wybranego parlamentu."
       : lang === "de"
-      ? "Hinweis: In einer konstitutionellen Monarchie liegt die Macht beim gewählten Parlament."
-      : "Hint: In a constitutional monarchy, governing power belongs to the elected parliament.";
+        ? "Hinweis: In einer konstitutionellen Monarchie liegt die Macht beim gewählten Parlament."
+        : "Hint: In a constitutional monarchy, governing power belongs to the elected parliament.";
 
   return (
     <div className="monarchy-toy p-4 bg-slate-50 rounded-xl max-w-md mx-auto">
@@ -239,7 +259,9 @@ export function MonarchyToy({ lang, mode = "toy", onDone }: MonarchyToyProps) {
       <div className="flex flex-col items-center">
         <CheckButton lang={lang} onClick={handleCheck} />
         {showQuizResult && (
-          <div className={`mt-2 text-xs font-bold ${quizCorrect ? "text-green-600" : "text-amber-600"}`}>
+          <div
+            className={`mt-2 text-xs font-bold ${quizCorrect ? "text-green-600" : "text-amber-600"}`}
+          >
             {quizCorrect ? quizSuccess : quizHint}
           </div>
         )}

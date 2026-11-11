@@ -33,7 +33,19 @@ function BankPlace({ x = MID, y = PY }: { x?: number; y?: number }) {
 }
 
 /** n coins side by side, popping in together. */
-function CoinRow({ x, y, n, size = 26, gap = 3 }: { x: number; y: number; n: number; size?: number; gap?: number }) {
+function CoinRow({
+  x,
+  y,
+  n,
+  size = 26,
+  gap = 3,
+}: {
+  x: number;
+  y: number;
+  n: number;
+  size?: number;
+  gap?: number;
+}) {
   return (
     <>
       {Array.from({ length: n }, (_, i) => (
@@ -46,10 +58,32 @@ function CoinRow({ x, y, n, size = 26, gap = 3 }: { x: number; y: number; n: num
 }
 
 /** A big readable number. */
-function Num({ x, y, children, size = 30, fill = "#23383f", anchor = "middle" }: { x: number; y: number; children: ReactNode; size?: number; fill?: string; anchor?: "start" | "middle" | "end" }) {
+function Num({
+  x,
+  y,
+  children,
+  size = 30,
+  fill = "#23383f",
+  anchor = "middle",
+}: {
+  x: number;
+  y: number;
+  children: ReactNode;
+  size?: number;
+  fill?: string;
+  anchor?: "start" | "middle" | "end";
+}) {
   return (
     <Pop>
-      <text x={x} y={y} textAnchor={anchor} style={{ font: `800 ${size}px ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif`, fill }}>
+      <text
+        x={x}
+        y={y}
+        textAnchor={anchor}
+        style={{
+          font: `800 ${size}px ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif`,
+          fill,
+        }}
+      >
         {children}
       </text>
     </Pop>
@@ -57,11 +91,31 @@ function Num({ x, y, children, size = 30, fill = "#23383f", anchor = "middle" }:
 }
 
 /** A rounded teal pill that holds a percent value. */
-function PercentPill({ x, y, w = 92, h = 48, children }: { x: number; y: number; w?: number; h?: number; children: ReactNode }) {
+function PercentPill({
+  x,
+  y,
+  w = 92,
+  h = 48,
+  children,
+}: {
+  x: number;
+  y: number;
+  w?: number;
+  h?: number;
+  children: ReactNode;
+}) {
   return (
     <Pop x={x} y={y}>
       <rect width={w} height={h} rx={h / 2} fill="#1b8a9a" />
-      <text x={w / 2} y={h / 2 + 9} textAnchor="middle" style={{ font: '800 26px ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif', fill: "#fff" }}>
+      <text
+        x={w / 2}
+        y={h / 2 + 9}
+        textAnchor="middle"
+        style={{
+          font: '800 26px ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif',
+          fill: "#fff",
+        }}
+      >
         {children}
       </text>
     </Pop>
@@ -85,7 +139,9 @@ export function BankLoanDiagram({ lang, step }: DiagramProps) {
           <BankPlace />
           <Arrow from={[142, 128]} to={[246, 128]} />
           <CoinRow x={170} y={76} n={1} size={50} />
-          <Num x={195} y={176}>100</Num>
+          <Num x={195} y={176}>
+            100
+          </Num>
         </>
       )}
       {step >= 2 && (
@@ -100,7 +156,9 @@ export function BankLoanDiagram({ lang, step }: DiagramProps) {
         <>
           <Arrow from={[392, 128]} to={[496, 128]} />
           <CoinRow x={420} y={76} n={1} size={50} />
-          <Num x={445} y={176}>100</Num>
+          <Num x={445} y={176}>
+            100
+          </Num>
         </>
       )}
     </DiagramCanvas>
@@ -126,20 +184,36 @@ export function InterestDiagram({ lang, step }: DiagramProps) {
           <Pop x={162} y={66}>
             <Coin size={46} />
           </Pop>
-          <Num x={218} y={100} anchor="start">100</Num>
-          <Num x={306} y={100} size={34}>+</Num>
+          <Num x={218} y={100} anchor="start">
+            100
+          </Num>
+          <Num x={306} y={100} size={34}>
+            +
+          </Num>
           <CoinRow x={328} y={70} n={5} size={32} gap={4} />
         </>
       )}
       {step >= 2 && (
         <Pop x={190} y={158}>
           <Tag size={104} />
-          <text x="60" y="63" textAnchor="middle" style={{ font: '800 26px ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif', fill: "#c0392b" }}>
+          <text
+            x="60"
+            y="63"
+            textAnchor="middle"
+            style={{
+              font: '800 26px ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif',
+              fill: "#c0392b",
+            }}
+          >
             +5
           </text>
         </Pop>
       )}
-      {step >= 3 && <TermChip x={310} y={190} w={190}>{alt("interest", "Zinsen", "odsetki", lang)}</TermChip>}
+      {step >= 3 && (
+        <TermChip x={310} y={190} w={190}>
+          {alt("interest", "Zinsen", "odsetki", lang)}
+        </TermChip>
+      )}
     </DiagramCanvas>
   );
 }
@@ -161,26 +235,52 @@ export function PercentDiagram({ lang, step }: DiagramProps) {
         <>
           <Pop x={30} y={14}>
             {cells.map(({ c, r }) => (
-              <rect key={`${c}-${r}`} x={c * cell} y={r * cell} width={cell - 3} height={cell - 3} rx="4" fill="#1b8a9a" />
+              <rect
+                key={`${c}-${r}`}
+                x={c * cell}
+                y={r * cell}
+                width={cell - 3}
+                height={cell - 3}
+                rx="4"
+                fill="#1b8a9a"
+              />
             ))}
           </Pop>
-          <Num x={140} y={266} size={24}>100</Num>
+          <Num x={140} y={266} size={24}>
+            100
+          </Num>
           <Arrow from={[262, 120]} to={[330, 120]} />
           <CoinRow x={346} y={96} n={5} size={44} gap={8} />
-          <Num x={486} y={172} size={30}>+5</Num>
+          <Num x={486} y={172} size={30}>
+            +5
+          </Num>
         </>
       )}
       {step >= 2 && (
         <>
           <Pop x={30} y={14}>
             {[0, 1, 2, 3, 4].map((c) => (
-              <rect key={c} x={c * cell} y={0} width={cell - 3} height={cell - 3} rx="4" fill="#f08a2e" />
+              <rect
+                key={c}
+                x={c * cell}
+                y={0}
+                width={cell - 3}
+                height={cell - 3}
+                rx="4"
+                fill="#f08a2e"
+              />
             ))}
           </Pop>
-          <TermChip x={350} y={8} w={240}>{alt("percent", "Prozent", "procent", lang)}</TermChip>
+          <TermChip x={350} y={8} w={240}>
+            {alt("percent", "Prozent", "procent", lang)}
+          </TermChip>
         </>
       )}
-      {step >= 3 && <Num x={470} y={254} size={64} fill="#146a77">{pct(5, lang)}</Num>}
+      {step >= 3 && (
+        <Num x={470} y={254} size={64} fill="#146a77">
+          {pct(5, lang)}
+        </Num>
+      )}
     </DiagramCanvas>
   );
 }
@@ -206,7 +306,9 @@ export function SaverDiagram({ lang, step }: DiagramProps) {
       {step >= 2 && (
         <>
           <CoinRow x={152} y={90} n={3} size={30} />
-          <PercentPill x={153} y={148} w={92}>{pct(3, lang)}</PercentPill>
+          <PercentPill x={153} y={148} w={92}>
+            {pct(3, lang)}
+          </PercentPill>
         </>
       )}
       {step >= 3 && (
@@ -214,7 +316,9 @@ export function SaverDiagram({ lang, step }: DiagramProps) {
           <Villager who="Finn" x={RIGHT} {...who} />
           <Arrow from={[496, 128]} to={[396, 128]} />
           <CoinRow x={394} y={90} n={5} size={24} gap={2} />
-          <PercentPill x={403} y={148} w={92}>{pct(5, lang)}</PercentPill>
+          <PercentPill x={403} y={148} w={92}>
+            {pct(5, lang)}
+          </PercentPill>
         </>
       )}
     </DiagramCanvas>
@@ -281,9 +385,22 @@ export function CompoundDiagram({ lang, step }: DiagramProps) {
       top -= p.h;
       return (
         <g key={i}>
-          <rect x={x} y={top} width={130} height={p.h} fill={p.fill} stroke="#23383f" strokeWidth="2.5" />
+          <rect
+            x={x}
+            y={top}
+            width={130}
+            height={p.h}
+            fill={p.fill}
+            stroke="#23383f"
+            strokeWidth="2.5"
+          />
           {p.label && (
-            <text x={x + 65} y={top + p.h / 2 + 8} textAnchor="middle" style={{ font: '800 22px ui-rounded, system-ui, sans-serif', fill: "#23383f" }}>
+            <text
+              x={x + 65}
+              y={top + p.h / 2 + 8}
+              textAnchor="middle"
+              style={{ font: "800 22px ui-rounded, system-ui, sans-serif", fill: "#23383f" }}
+            >
               {p.label}
             </text>
           )}
@@ -293,7 +410,12 @@ export function CompoundDiagram({ lang, step }: DiagramProps) {
     return (
       <Pop>
         {rects}
-        <text x={x + 65} y={top - 10} textAnchor="middle" style={{ font: '800 30px ui-rounded, system-ui, sans-serif', fill: "#146a77" }}>
+        <text
+          x={x + 65}
+          y={top - 10}
+          textAnchor="middle"
+          style={{ font: "800 30px ui-rounded, system-ui, sans-serif", fill: "#146a77" }}
+        >
           {total}
         </text>
       </Pop>
@@ -323,17 +445,36 @@ export function CompoundDiagram({ lang, step }: DiagramProps) {
       )}
       {step >= 2 && (
         <>
-          {bar(255, [{ h: base, fill: "#1b8a9a", label: "100" }, { h: 10 * unit, fill: "#4fa75a", label: "+10" }], "110")}
+          {bar(
+            255,
+            [
+              { h: base, fill: "#1b8a9a", label: "100" },
+              { h: 10 * unit, fill: "#4fa75a", label: "+10" },
+            ],
+            "110",
+          )}
           {year(255, 1)}
         </>
       )}
       {step >= 3 && (
         <>
-          {bar(470, [{ h: base, fill: "#1b8a9a", label: "100" }, { h: 10 * unit, fill: "#4fa75a", label: "+10" }, { h: 11 * unit, fill: "#e3a91a", label: "+11" }], "121")}
+          {bar(
+            470,
+            [
+              { h: base, fill: "#1b8a9a", label: "100" },
+              { h: 10 * unit, fill: "#4fa75a", label: "+10" },
+              { h: 11 * unit, fill: "#e3a91a", label: "+11" },
+            ],
+            "121",
+          )}
           {year(470, 2)}
         </>
       )}
-      {step >= 4 && <TermChip x={140} y={4} w={360}>{alt("compound interest", "Zinseszins", "procent składany", lang)}</TermChip>}
+      {step >= 4 && (
+        <TermChip x={140} y={4} w={360}>
+          {alt("compound interest", "Zinseszins", "procent składany", lang)}
+        </TermChip>
+      )}
     </DiagramCanvas>
   );
 }
@@ -347,7 +488,9 @@ export function LoanCostDiagram({ lang, step }: DiagramProps) {
       <Pop x={494} y={y}>
         <Coin size={48} />
       </Pop>
-      <Num x={552} y={y + 36} anchor="start" size={28}>{total}</Num>
+      <Num x={552} y={y + 36} anchor="start" size={28}>
+        {total}
+      </Num>
     </>
   );
   return (
@@ -369,15 +512,29 @@ export function LoanCostDiagram({ lang, step }: DiagramProps) {
       )}
       {step >= 2 && (
         <>
-          {row(40, <PercentPill x={256} y={40} w={110}>{pct(5, lang)}</PercentPill>, "105")}
-          {row(108, <PercentPill x={256} y={108} w={110}>{pct(10, lang)}</PercentPill>, "110")}
+          {row(
+            40,
+            <PercentPill x={256} y={40} w={110}>
+              {pct(5, lang)}
+            </PercentPill>,
+            "105",
+          )}
+          {row(
+            108,
+            <PercentPill x={256} y={108} w={110}>
+              {pct(10, lang)}
+            </PercentPill>,
+            "110",
+          )}
         </>
       )}
       {step >= 3 &&
         row(
           176,
           <>
-            <PercentPill x={256} y={176} w={110}>{pct(10, lang)}</PercentPill>
+            <PercentPill x={256} y={176} w={110}>
+              {pct(10, lang)}
+            </PercentPill>
             <Pop x={260} y={232}>
               <Clock size={40} />
             </Pop>

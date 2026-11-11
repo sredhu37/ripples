@@ -54,74 +54,129 @@ export function StocksVsBondsToy({ lang, mode = "toy", onDone }: StocksVsBondsTo
   };
 
   const outcomeTitle =
-    lang === "pl" ? "Wynik ekspedycji" : lang === "de" ? "Expeditionsergebnis" : "Expedition Result";
+    lang === "pl"
+      ? "Wynik ekspedycji"
+      : lang === "de"
+        ? "Expeditionsergebnis"
+        : "Expedition Result";
   const treasureBtn =
-    lang === "pl" ? "Wielki skarb (100 monet)" : lang === "de" ? "Großer Schatz (100c)" : "Grand Treasure (100c)";
+    lang === "pl"
+      ? "Wielki skarb (100 monet)"
+      : lang === "de"
+        ? "Großer Schatz (100c)"
+        : "Grand Treasure (100c)";
   const modestBtn =
-    lang === "pl" ? "Zwykły rejs (15 monet)" : lang === "de" ? "Mäßige Fahrt (15c)" : "Modest Voyage (15c)";
+    lang === "pl"
+      ? "Zwykły rejs (15 monet)"
+      : lang === "de"
+        ? "Mäßige Fahrt (15c)"
+        : "Modest Voyage (15c)";
   const shipwreckBtn =
-    lang === "pl" ? "Katastrofa (4 monety uratowane)" : lang === "de" ? "Schiffbruch (4c gerettet)" : "Shipwreck (4c Salvaged)";
+    lang === "pl"
+      ? "Katastrofa (4 monety uratowane)"
+      : lang === "de"
+        ? "Schiffbruch (4c gerettet)"
+        : "Shipwreck (4c Salvaged)";
 
   const earningsLabel =
     lang === "pl" ? "Przychód z wyprawy:" : lang === "de" ? "Fahrterlös:" : "Voyage Earnings:";
 
   const finnTitle =
-    lang === "pl" ? "Finn (Akcjonariusz)" : lang === "de" ? "Finn (Aktionär)" : "Finn (Stockholder)";
+    lang === "pl"
+      ? "Finn (Akcjonariusz)"
+      : lang === "de"
+        ? "Finn (Aktionär)"
+        : "Finn (Stockholder)";
   const finnRole =
-    lang === "pl" ? "Współwłaściciel (Kapitał własny)" : lang === "de" ? "Miteigentümer (Eigenkapital)" : "Co-Owner (Equity)";
+    lang === "pl"
+      ? "Współwłaściciel (Kapitał własny)"
+      : lang === "de"
+        ? "Miteigentümer (Eigenkapital)"
+        : "Co-Owner (Equity)";
 
   const finnDesc =
     outcome === "treasure"
-      ? lang === "pl" ? "Olbrzymi zysk!" : lang === "de" ? "Riesiger Gewinn!" : "Huge profit windfall!"
+      ? lang === "pl"
+        ? "Olbrzymi zysk!"
+        : lang === "de"
+          ? "Riesiger Gewinn!"
+          : "Huge profit windfall!"
       : outcome === "shipwreck"
-      ? lang === "pl" ? "Brak monet dla właściciela" : lang === "de" ? "Nichts übrig für Eigentümer" : "No coins left for owners"
-      : lang === "pl" ? "Otrzymuje resztę zysku" : lang === "de" ? "Erhält den Restgewinn" : "Earns leftover profit";
+        ? lang === "pl"
+          ? "Brak monet dla właściciela"
+          : lang === "de"
+            ? "Nichts übrig für Eigentümer"
+            : "No coins left for owners"
+        : lang === "pl"
+          ? "Otrzymuje resztę zysku"
+          : lang === "de"
+            ? "Erhält den Restgewinn"
+            : "Earns leftover profit";
 
   const beaTitle =
-    lang === "pl" ? "Bea (Obligatariuszka)" : lang === "de" ? "Bea (Anleihehalterin)" : "Bea (Bondholder)";
+    lang === "pl"
+      ? "Bea (Obligatariuszka)"
+      : lang === "de"
+        ? "Bea (Anleihehalterin)"
+        : "Bea (Bondholder)";
   const beaRole =
-    lang === "pl" ? "Pożyczkodawczyni (Dług)" : lang === "de" ? "Geldgeberin (Fremdkapital)" : "Lender (Debt)";
+    lang === "pl"
+      ? "Pożyczkodawczyni (Dług)"
+      : lang === "de"
+        ? "Geldgeberin (Fremdkapital)"
+        : "Lender (Debt)";
 
   const beaDesc =
     outcome === "shipwreck"
-      ? lang === "pl" ? "Pierwszeństwo spłaty: dostaje wszystko!" : lang === "de" ? "Vorrang: Zuerst bedient!" : "Legal priority: paid first!"
-      : lang === "pl" ? "Stały kupon: 5 monet" : lang === "de" ? "Fester 5-Münzen-Kupon" : "Steady 5-coin coupon";
+      ? lang === "pl"
+        ? "Pierwszeństwo spłaty: dostaje wszystko!"
+        : lang === "de"
+          ? "Vorrang: Zuerst bedient!"
+          : "Legal priority: paid first!"
+      : lang === "pl"
+        ? "Stały kupon: 5 monet"
+        : lang === "de"
+          ? "Fester 5-Münzen-Kupon"
+          : "Steady 5-coin coupon";
 
   const quizTitle =
     lang === "pl"
       ? "Statek przywiózł tylko 6 monet. Przydziel najpierw 5 monet Bei (Pierwszeństwo wierzyciela)!"
       : lang === "de"
-      ? "Das Schiff brachte nur 6 Münzen. Gib Bea zuerst 5 Münzen (Gläubiger-Vorrang)!"
-      : "The ship brought back only 6 coins. Allocate 5 coins to Bea first (Creditor Priority)!";
+        ? "Das Schiff brachte nur 6 Münzen. Gib Bea zuerst 5 Münzen (Gläubiger-Vorrang)!"
+        : "The ship brought back only 6 coins. Allocate 5 coins to Bea first (Creditor Priority)!";
 
   const payBeaBtn =
-    lang === "pl" ? "Wypłać 1 monetę Bei" : lang === "de" ? "1 Münze an Bea zahlen" : "Pay 1 Coin to Bea";
+    lang === "pl"
+      ? "Wypłać 1 monetę Bei"
+      : lang === "de"
+        ? "1 Münze an Bea zahlen"
+        : "Pay 1 Coin to Bea";
 
   const paidToBeaLabel =
     lang === "pl" ? "Wypłacono Bei:" : lang === "de" ? "An Bea gezahlt:" : "Paid to Bea:";
-  const coinsUnit =
-    lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "Coins";
+  const coinsUnit = lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "Coins";
 
   const quizSuccess =
     lang === "pl"
       ? "Prawidłowo! W prawie upadłościowym posiadacze obligacji muszą zostać spłaceni, zanim akcjonariusze otrzymają choć grosz."
       : lang === "de"
-      ? "Richtig! Gläubiger werden immer vor den Miteigentümern bedient."
-      : "Correct! Under insolvency law, bondholders must be paid before stockholders receive anything.";
+        ? "Richtig! Gläubiger werden immer vor den Miteigentümern bedient."
+        : "Correct! Under insolvency law, bondholders must be paid before stockholders receive anything.";
 
   const quizWarning =
     lang === "pl"
       ? "Przydziel najpierw pełen 5-monetowy kupon Bei."
       : lang === "de"
-      ? "Zahle den vollen 5-Münzen-Kupon zuerst an Bea."
-      : "Allocate the full 5-coin coupon to Bea first.";
+        ? "Zahle den vollen 5-Münzen-Kupon zuerst an Bea."
+        : "Allocate the full 5-coin coupon to Bea first.";
 
   const toySuccess =
     lang === "pl"
       ? "Świetnie! Rozumiesz już różnicę między akcjami a obligacjami."
       : lang === "de"
-      ? "Toll erkundet! Du verstehst Aktien und Anleihen."
-      : "Great exploration! You understand stocks vs bonds.";
+        ? "Toll erkundet! Du verstehst Aktien und Anleihen."
+        : "Great exploration! You understand stocks vs bonds.";
 
   return (
     <div className="stocksvsbonds-wrap">
@@ -177,9 +232,7 @@ export function StocksVsBondsToy({ lang, mode = "toy", onDone }: StocksVsBondsTo
       ) : (
         /* Quiz Mode */
         <div className="quiz-priority-box">
-          <div className="quiz-title">
-            {quizTitle}
-          </div>
+          <div className="quiz-title">{quizTitle}</div>
           <div className="quiz-allocator">
             <button
               type="button"
@@ -189,7 +242,10 @@ export function StocksVsBondsToy({ lang, mode = "toy", onDone }: StocksVsBondsTo
               + {payBeaBtn}
             </button>
             <div className="alloc-count">
-              {paidToBeaLabel} <strong>{allocatedToBond} / 5 {coinsUnit}</strong>
+              {paidToBeaLabel}{" "}
+              <strong>
+                {allocatedToBond} / 5 {coinsUnit}
+              </strong>
             </div>
           </div>
         </div>
@@ -198,12 +254,10 @@ export function StocksVsBondsToy({ lang, mode = "toy", onDone }: StocksVsBondsTo
       <div className="stocksvsbonds-actions">
         <CheckButton lang={lang} onClick={handleCheck} />
         {showFeedback && (
-          <div className={`feedback-msg ${mode === "quiz" ? (allocatedToBond === 5 ? "success" : "warning") : "success"}`}>
-            {mode === "quiz"
-              ? allocatedToBond === 5
-                ? quizSuccess
-                : quizWarning
-              : toySuccess}
+          <div
+            className={`feedback-msg ${mode === "quiz" ? (allocatedToBond === 5 ? "success" : "warning") : "success"}`}
+          >
+            {mode === "quiz" ? (allocatedToBond === 5 ? quizSuccess : quizWarning) : toySuccess}
           </div>
         )}
       </div>

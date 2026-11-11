@@ -57,7 +57,13 @@ function Chart({ values, start, rate, mode, scaleMax, band, label }: ChartProps)
     <svg className="ig-chart" viewBox={`0 0 ${W} ${H + AXIS}`} role="img" aria-label={label}>
       {band && (
         <>
-          <rect className="ig-band" x={0} y={y(band[1])} width={W} height={y(band[0]) - y(band[1])} />
+          <rect
+            className="ig-band"
+            x={0}
+            y={y(band[1])}
+            width={W}
+            height={y(band[0]) - y(band[1])}
+          />
           <line className="ig-mark" x1={0} x2={W} y1={y(band[0])} y2={y(band[0])} />
           <line className="ig-mark" x1={0} x2={W} y1={y(band[1])} y2={y(band[1])} />
         </>
@@ -68,8 +74,20 @@ function Chart({ values, start, rate, mode, scaleMax, band, label }: ChartProps)
         return (
           <g key={i}>
             <rect className="ig-bar-start" x={x} y={y(start)} width={bw} height={h(start)} />
-            <rect className={`ig-bar-simple-${mode}`} x={x} y={y(simple)} width={bw} height={Math.max(0, h(simple) - h(start))} />
-            <rect className={`ig-bar-comp-${mode}`} x={x} y={y(v)} width={bw} height={Math.max(0, h(v) - h(simple))} />
+            <rect
+              className={`ig-bar-simple-${mode}`}
+              x={x}
+              y={y(simple)}
+              width={bw}
+              height={Math.max(0, h(simple) - h(start))}
+            />
+            <rect
+              className={`ig-bar-comp-${mode}`}
+              x={x}
+              y={y(v)}
+              width={bw}
+              height={Math.max(0, h(v) - h(simple))}
+            />
           </g>
         );
       })}
@@ -121,11 +139,15 @@ export function Garden({ lang, onDone }: ToyProps) {
     lang === "pl"
       ? `Słupki dla każdego roku od 0 do ${years}. Po ${years} latach: ${total} monet.`
       : lang === "de"
-      ? `Balken für jedes Jahr von 0 bis ${years}. Nach ${years} Jahren: ${total} Münzen.`
-      : `Bars for each year from 0 to ${years}. After ${years} years: ${total} coins.`;
+        ? `Balken für jedes Jahr von 0 bis ${years}. Nach ${years} Jahren: ${total} Münzen.`
+        : `Bars for each year from 0 to ${years}. After ${years} years: ${total} coins.`;
 
   return (
-    <Stage label={lang === "pl" ? "Ogród pieniędzy" : lang === "de" ? "Der Geldgarten" : "The money garden"}>
+    <Stage
+      label={
+        lang === "pl" ? "Ogród pieniędzy" : lang === "de" ? "Der Geldgarten" : "The money garden"
+      }
+    >
       <div className="ig-wrap">
         <div className="ig-modes">
           <ToyButton pressed={save} onClick={() => setMode("save")}>
@@ -152,18 +174,20 @@ export function Garden({ lang, onDone }: ToyProps) {
         <Chart values={values} start={start} rate={rate} mode={mode} label={chartLabel} />
         <div className="ig-readout" role="status">
           <span className="ig-big">
-            <InlineIcon size={30}>{save ? <Person {...CAST.Bea} /> : <Person {...CAST.Finn} />}</InlineIcon>
+            <InlineIcon size={30}>
+              {save ? <Person {...CAST.Bea} /> : <Person {...CAST.Finn} />}
+            </InlineIcon>
             {save
               ? lang === "pl"
                 ? `Po ${years} latach: ${total} monet`
                 : lang === "de"
-                ? `Nach ${years} Jahren: ${total} Münzen`
-                : `After ${years} years: ${total} coins`
+                  ? `Nach ${years} Jahren: ${total} Münzen`
+                  : `After ${years} years: ${total} coins`
               : lang === "pl"
-              ? `Po ${years} latach Finn spłaca: ${total} monet`
-              : lang === "de"
-              ? `Nach ${years} Jahren zahlt Finn zurück: ${total} Münzen`
-              : `After ${years} years Finn pays back: ${total} coins`}
+                ? `Po ${years} latach Finn spłaca: ${total} monet`
+                : lang === "de"
+                  ? `Nach ${years} Jahren zahlt Finn zurück: ${total} Münzen`
+                  : `After ${years} years Finn pays back: ${total} coins`}
           </span>
           <span className="ig-legend">
             <Swatch cls="ig-bar-start">
@@ -171,23 +195,27 @@ export function Garden({ lang, onDone }: ToyProps) {
                 ? lang === "pl"
                   ? `${start} wpłacono`
                   : lang === "de"
-                  ? `${start} eingezahlt`
-                  : `${start} put in`
+                    ? `${start} eingezahlt`
+                    : `${start} put in`
                 : lang === "pl"
-                ? `${start} pożyczono`
-                : lang === "de"
-                ? `${start} geliehen`
-                : `${start} borrowed`}
+                  ? `${start} pożyczono`
+                  : lang === "de"
+                    ? `${start} geliehen`
+                    : `${start} borrowed`}
             </Swatch>
             <Swatch cls={`ig-bar-simple-${mode}`}>
-              {lang === "pl" ? `${simple} odsetek` : lang === "de" ? `${simple} Zinsen` : `${simple} interest`}
+              {lang === "pl"
+                ? `${simple} odsetek`
+                : lang === "de"
+                  ? `${simple} Zinsen`
+                  : `${simple} interest`}
             </Swatch>
             <Swatch cls={`ig-bar-comp-${mode}`}>
               {lang === "pl"
                 ? `${onExtra} odsetek od odsetek`
                 : lang === "de"
-                ? `${onExtra} Zinsen auf Zinsen`
-                : `${onExtra} interest on interest`}
+                  ? `${onExtra} Zinsen auf Zinsen`
+                  : `${onExtra} interest on interest`}
             </Swatch>
           </span>
           <span className="ig-small">{ratePhrase(lang, rate)}</span>
@@ -199,13 +227,13 @@ export function Garden({ lang, onDone }: ToyProps) {
                 ? lang === "pl"
                   ? "Wpłacone monety"
                   : lang === "de"
-                  ? "Eingezahlte Münzen"
-                  : "Coins put in"
+                    ? "Eingezahlte Münzen"
+                    : "Coins put in"
                 : lang === "pl"
-                ? "Pożyczone monety"
-                : lang === "de"
-                ? "Geliehene Münzen"
-                : "Coins borrowed"
+                  ? "Pożyczone monety"
+                  : lang === "de"
+                    ? "Geliehene Münzen"
+                    : "Coins borrowed"
             }
             value={start}
             min={10}
@@ -241,7 +269,15 @@ export function GardenWidget({ lang, onAnswer }: WidgetProps) {
 
   return (
     <>
-      <Stage label={lang === "pl" ? "Ogród pieniędzy Bei" : lang === "de" ? "Beas Geldgarten" : "Bea's money garden"}>
+      <Stage
+        label={
+          lang === "pl"
+            ? "Ogród pieniędzy Bei"
+            : lang === "de"
+              ? "Beas Geldgarten"
+              : "Bea's money garden"
+        }
+      >
         <div className="ig-wrap">
           <Chart
             values={values}
@@ -254,8 +290,8 @@ export function GardenWidget({ lang, onAnswer }: WidgetProps) {
               lang === "pl"
                 ? `Monety Bei po ${years} latach: ${total}. Cel to między ${TARGET_LOW} a ${TARGET_HIGH}.`
                 : lang === "de"
-                ? `Beas Münzen nach ${years} Jahren: ${total}. Das Ziel liegt zwischen ${TARGET_LOW} und ${TARGET_HIGH}.`
-                : `Bea's coins after ${years} years: ${total}. The goal is between ${TARGET_LOW} and ${TARGET_HIGH}.`
+                  ? `Beas Münzen nach ${years} Jahren: ${total}. Das Ziel liegt zwischen ${TARGET_LOW} und ${TARGET_HIGH}.`
+                  : `Bea's coins after ${years} years: ${total}. The goal is between ${TARGET_LOW} and ${TARGET_HIGH}.`
             }
           />
           <div className="ig-readout" role="status">
@@ -269,15 +305,15 @@ export function GardenWidget({ lang, onAnswer }: WidgetProps) {
               {lang === "pl"
                 ? `Bea ma ${total} monet po ${years} latach`
                 : lang === "de"
-                ? `Bea hat nach ${years} Jahren ${total} Münzen`
-                : `Bea has ${total} coins after ${years} years`}
+                  ? `Bea hat nach ${years} Jahren ${total} Münzen`
+                  : `Bea has ${total} coins after ${years} years`}
             </span>
             <span className="ig-small">
               {lang === "pl"
                 ? `Cel: zielony pasek, ${TARGET_LOW} do ${TARGET_HIGH} monet. ${ratePhrase(lang, rate)}`
                 : lang === "de"
-                ? `Ziel: der grüne Streifen, ${TARGET_LOW} bis ${TARGET_HIGH} Münzen. ${ratePhrase(lang, rate)}`
-                : `Goal: the green stripe, ${TARGET_LOW} to ${TARGET_HIGH} coins. ${ratePhrase(lang, rate)}`}
+                  ? `Ziel: der grüne Streifen, ${TARGET_LOW} bis ${TARGET_HIGH} Münzen. ${ratePhrase(lang, rate)}`
+                  : `Goal: the green stripe, ${TARGET_LOW} to ${TARGET_HIGH} coins. ${ratePhrase(lang, rate)}`}
             </span>
           </div>
           <div className="ig-sliders two">

@@ -102,15 +102,15 @@ export function SalesHarbor({
     lang === "pl"
       ? "Stoisko rybne Finna"
       : lang === "de"
-      ? "Finns Fischstand"
-      : "Finn's fish stand";
+        ? "Finns Fischstand"
+        : "Finn's fish stand";
 
   const canvasLabel =
     lang === "pl"
       ? "Finn sprzedaje ryby klientom"
       : lang === "de"
-      ? "Finn verkauft Fisch an Kundschaft"
-      : "Finn makes sales to customers";
+        ? "Finn verkauft Fisch an Kundschaft"
+        : "Finn makes sales to customers";
 
   const fishCrate =
     lang === "pl" ? "Skrzynka z rybami" : lang === "de" ? "Fischkiste" : "Fish crate";
@@ -123,15 +123,11 @@ export function SalesHarbor({
     lang === "pl"
       ? `Chce rybę (${currentCust.price} monety)`
       : lang === "de"
-      ? `Will Fisch (${currentCust.price} Münzen)`
-      : `Wants fish (${currentCust.price} coins)`;
+        ? `Will Fisch (${currentCust.price} Münzen)`
+        : `Wants fish (${currentCust.price} coins)`;
 
   const paidText =
-    lang === "pl"
-      ? "Zapłacono 3 monety!"
-      : lang === "de"
-      ? "3 Münzen bezahlt!"
-      : "Paid 3 coins!";
+    lang === "pl" ? "Zapłacono 3 monety!" : lang === "de" ? "3 Münzen bezahlt!" : "Paid 3 coins!";
 
   const dropHereText =
     lang === "pl" ? "Upuść rybę tutaj" : lang === "de" ? "Hier ablegen" : "Drop fish here";
@@ -140,32 +136,31 @@ export function SalesHarbor({
     lang === "pl"
       ? "Obsłużeni klienci"
       : lang === "de"
-      ? "Bediente Kundschaft"
-      : "Customers served";
+        ? "Bediente Kundschaft"
+        : "Customers served";
 
   const totalSalesLabel =
     lang === "pl" ? "Łączny przychód" : lang === "de" ? "Gesamtumsatz" : "Total sales";
 
-  const coinsUnit =
-    lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "coins";
+  const coinsUnit = lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "coins";
 
   const promptText = !fishDelivered
     ? lang === "pl"
       ? `Przeciągnij rybę ze skrzynki Finna do klienta ${currentCust.name}, aby dokonać sprzedaży!`
       : lang === "de"
-      ? `Ziehe den Fisch aus Finns Kiste zu ${currentCust.name}, um einen Verkauf zu machen!`
-      : `Drag the fish from Finn's crate to ${currentCust.name} to make a sale!`
+        ? `Ziehe den Fisch aus Finns Kiste zu ${currentCust.name}, um einen Verkauf zu machen!`
+        : `Drag the fish from Finn's crate to ${currentCust.name} to make a sale!`
     : servedCount < 4
-    ? lang === "pl"
-      ? "Sprzedaż udana! Dotknij poniżej, aby przywitać kolejnego klienta."
-      : lang === "de"
-      ? "Verkauf geglückt! Tippe unten für die nächste Kundschaft."
-      : "Sale made! Tap below to welcome the next customer."
-    : lang === "pl"
-    ? "Wspaniale! Obsłużyłeś 4 klientów i uzyskałeś 12 monet przychodu ze sprzedaży!"
-    : lang === "de"
-    ? "Großartig! Du hast 4 Kundinnen und Kunden bedient und 12 Münzen Umsatz erzielt!"
-    : "Excellent! You served 4 customers and reached 12 coins in sales!";
+      ? lang === "pl"
+        ? "Sprzedaż udana! Dotknij poniżej, aby przywitać kolejnego klienta."
+        : lang === "de"
+          ? "Verkauf geglückt! Tippe unten für die nächste Kundschaft."
+          : "Sale made! Tap below to welcome the next customer."
+      : lang === "pl"
+        ? "Wspaniale! Obsłużyłeś 4 klientów i uzyskałeś 12 monet przychodu ze sprzedaży!"
+        : lang === "de"
+          ? "Großartig! Du hast 4 Kundinnen und Kunden bedient und 12 Münzen Umsatz erzielt!"
+          : "Excellent! You served 4 customers and reached 12 coins in sales!";
 
   const nextCustButton =
     lang === "pl" ? "Następny klient" : lang === "de" ? "Nächste Kundschaft" : "Next customer";
@@ -190,7 +185,16 @@ export function SalesHarbor({
 
           {/* Central draggable fish tray */}
           <Pop x={230} y={70}>
-            <rect x="0" y="0" width="160" height="130" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
+            <rect
+              x="0"
+              y="0"
+              width="160"
+              height="130"
+              rx="14"
+              fill="#ffffff"
+              stroke="#cbd5e1"
+              strokeWidth="3"
+            />
             <text x="80" y="26" textAnchor="middle" fill="#23383f" fontSize={13} fontWeight="bold">
               {fishCrate}
             </text>
@@ -200,9 +204,25 @@ export function SalesHarbor({
                 style={{ cursor: "grab", touchAction: "none" }}
                 transform="translate(35, 30)"
               >
-                <rect x="-8" y="-6" width="105" height="65" rx="8" fill="#e0f2fe" stroke="#38bdf8" strokeDasharray="4 4" />
+                <rect
+                  x="-8"
+                  y="-6"
+                  width="105"
+                  height="65"
+                  rx="8"
+                  fill="#e0f2fe"
+                  stroke="#38bdf8"
+                  strokeDasharray="4 4"
+                />
                 <Fish x={10} y={0} size={70} />
-                <text x="45" y="70" textAnchor="middle" fill="#0369a1" fontSize={11} fontWeight="bold">
+                <text
+                  x="45"
+                  y="70"
+                  textAnchor="middle"
+                  fill="#0369a1"
+                  fontSize={11}
+                  fontWeight="bold"
+                >
                   {dragFish}
                 </text>
               </g>
@@ -233,7 +253,14 @@ export function SalesHarbor({
             {/* Request bubble */}
             <g transform="translate(15, 130)">
               <rect x="0" y="0" width="140" height="40" rx="8" fill="#e0f2fe" />
-              <text x="70" y="18" textAnchor="middle" fill="#0369a1" fontSize={11} fontWeight="bold">
+              <text
+                x="70"
+                y="18"
+                textAnchor="middle"
+                fill="#0369a1"
+                fontSize={11}
+                fontWeight="bold"
+              >
                 {wantsText}
               </text>
               <text x="70" y="32" textAnchor="middle" fill="#0284c7" fontSize={10}>
@@ -268,7 +295,9 @@ export function SalesHarbor({
           </div>
           <div className="sales-metric">
             <span className="sales-metric-label">{totalSalesLabel}:</span>
-            <span className="sales-metric-val">{totalSales} {coinsUnit}</span>
+            <span className="sales-metric-val">
+              {totalSales} {coinsUnit}
+            </span>
           </div>
         </div>
 
@@ -278,9 +307,7 @@ export function SalesHarbor({
 
             <div className="row nav">
               {fishDelivered && servedCount < 4 && (
-                <ToyButton onClick={handleNextCustomer}>
-                  {nextCustButton}
-                </ToyButton>
+                <ToyButton onClick={handleNextCustomer}>{nextCustButton}</ToyButton>
               )}
             </div>
           </>

@@ -58,96 +58,79 @@ export function MarketingToy({
     }
   }, [stats.alerted, stats.profit, onDone, isWidget]);
 
-  const togglePoster = () =>
-    setChannels((prev) => ({ ...prev, poster: !prev.poster }));
+  const togglePoster = () => setChannels((prev) => ({ ...prev, poster: !prev.poster }));
 
-  const toggleCoral = () =>
-    setChannels((prev) => ({ ...prev, coral: !prev.coral }));
+  const toggleCoral = () => setChannels((prev) => ({ ...prev, coral: !prev.coral }));
 
-  const toggleCrier = () =>
-    setChannels((prev) => ({ ...prev, crier: !prev.crier }));
+  const toggleCrier = () => setChannels((prev) => ({ ...prev, crier: !prev.crier }));
 
   const stageLabel =
     lang === "pl"
       ? "Przekazywanie wiadomości w Ripple Town"
       : lang === "de"
-      ? "Werbung in Ripple Town"
-      : "Spreading the word in Ripple Town";
+        ? "Werbung in Ripple Town"
+        : "Spreading the word in Ripple Town";
 
   const canvasLabel =
     lang === "pl"
       ? "12 mieszkańców w miasteczku"
       : lang === "de"
-      ? "12 Leute im Ort"
-      : "12 villagers in town";
+        ? "12 Leute im Ort"
+        : "12 villagers in town";
 
   const villagersGridTitle =
     lang === "pl"
       ? "Mieszkańcy (łącznie 12)"
       : lang === "de"
-      ? "Dorfbewohner (12 gesamt)"
-      : "Town Villagers (12 Total)";
+        ? "Dorfbewohner (12 gesamt)"
+        : "Town Villagers (12 Total)";
 
   const ledgerTitle =
-    lang === "pl"
-      ? "Księga rachunkowa Sama"
-      : lang === "de"
-      ? "Sams Kasse"
-      : "Sam's Ledger";
+    lang === "pl" ? "Księga rachunkowa Sama" : lang === "de" ? "Sams Kasse" : "Sam's Ledger";
 
-  const coinsLabel =
-    lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "coins";
+  const coinsLabel = lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "coins";
 
   const adCostLabel =
-    lang === "pl"
-      ? "Koszty reklamy:"
-      : lang === "de"
-      ? "Werbekosten:"
-      : "Ad Cost:";
+    lang === "pl" ? "Koszty reklamy:" : lang === "de" ? "Werbekosten:" : "Ad Cost:";
 
   const salesLabel =
-    lang === "pl"
-      ? "Sprzedaż (buty):"
-      : lang === "de"
-      ? "Umsatz (Stiefel):"
-      : "Sales (Boots):";
+    lang === "pl" ? "Sprzedaż (buty):" : lang === "de" ? "Umsatz (Stiefel):" : "Sales (Boots):";
 
-  const netProfitLabel =
-    lang === "pl" ? "ZYSK NETTO" : lang === "de" ? "REINGEWINN" : "NET PROFIT";
+  const netProfitLabel = lang === "pl" ? "ZYSK NETTO" : lang === "de" ? "REINGEWINN" : "NET PROFIT";
 
   const posterBtnText =
     lang === "pl"
       ? "Szyld w porcie (Koszt 2, dociera do 4)"
       : lang === "de"
-      ? "Hafenschild (Kostet 2, erreicht 4)"
-      : "Harbor Poster (Cost 2, Alerts 4)";
+        ? "Hafenschild (Kostet 2, erreicht 4)"
+        : "Harbor Poster (Cost 2, Alerts 4)";
 
   const coralBtnText =
     lang === "pl"
       ? "Próba dla Kapitana Corala (Koszt 3, dociera do 4)"
       : lang === "de"
-      ? "Probe für Kapitän Coral (Kostet 3, erreicht 4)"
-      : "Captain Coral Sample (Cost 3, Alerts 4)";
+        ? "Probe für Kapitän Coral (Kostet 3, erreicht 4)"
+        : "Captain Coral Sample (Cost 3, Alerts 4)";
 
   const crierBtnText =
     lang === "pl"
       ? "Goniec miejski (Koszt 4, dociera do 4)"
       : lang === "de"
-      ? "Marktausrufer (Kostet 4, erreicht 4)"
-      : "Market Crier (Cost 4, Alerts 4)";
+        ? "Marktausrufer (Kostet 4, erreicht 4)"
+        : "Market Crier (Cost 4, Alerts 4)";
 
   const promptText =
     stats.alerted < 8
       ? lang === "pl"
         ? "Włącz narzędzia marketingowe, aby dotrzeć do co najmniej 8 mieszkańców!"
         : lang === "de"
-        ? "Aktiviere Werbemittel, um mindestens 8 Dorfbewohner zu erreichen!"
-        : "Activate marketing tools to spread the word to at least 8 villagers!"
+          ? "Aktiviere Werbemittel, um mindestens 8 Dorfbewohner zu erreichen!"
+          : "Activate marketing tools to spread the word to at least 8 villagers!"
       : lang === "pl"
-      ? "Świetnie! Więcej ludzi wie o butach Sama i osiąga on zdrowy zysk!"
-      : lang === "de"
-      ? "Klasse! Mehr Leute wissen von Sams Stiefeln und er macht einen guten Gewinn!"
-      : "Great! More people know about Sam's boots and he earns a healthy profit!";
+        ? "Świetnie! Więcej ludzi wie o butach Sama i osiąga on zdrowy zysk!"
+        : lang === "de"
+          ? "Klasse! Mehr Leute wissen von Sams Stiefeln und er macht einen guten Gewinn!"
+          : "Great! More people know about Sam's boots and he earns a healthy profit!";
 
   return (
     <div className="marketing-wrap">
@@ -155,7 +138,16 @@ export function MarketingToy({
         <DiagramCanvas label={canvasLabel}>
           {/* Town Map Grid with 12 Villagers */}
           <Pop x={30} y={30}>
-            <rect x="0" y="0" width="340" height="200" rx="14" fill="#f8fafc" stroke="#cbd5e1" strokeWidth="2" />
+            <rect
+              x="0"
+              y="0"
+              width="340"
+              height="200"
+              rx="14"
+              fill="#f8fafc"
+              stroke="#cbd5e1"
+              strokeWidth="2"
+            />
             <text x="170" y="24" textAnchor="middle" fill="#334155" fontSize="13" fontWeight="bold">
               {villagersGridTitle}
             </text>
@@ -180,7 +172,14 @@ export function MarketingToy({
                     {isAlerted ? (
                       <BootsIcon x={12} y={10} size={25} />
                     ) : (
-                      <text x="25" y="25" textAnchor="middle" fill="#94a3b8" fontSize="14" fontWeight="bold">
+                      <text
+                        x="25"
+                        y="25"
+                        textAnchor="middle"
+                        fill="#94a3b8"
+                        fontSize="14"
+                        fontWeight="bold"
+                      >
                         ?
                       </text>
                     )}
@@ -192,7 +191,16 @@ export function MarketingToy({
 
           {/* Business Balance Card */}
           <Pop x={390} y={30}>
-            <rect x="0" y="0" width="220" height="200" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
+            <rect
+              x="0"
+              y="0"
+              width="220"
+              height="200"
+              rx="14"
+              fill="#ffffff"
+              stroke="#cbd5e1"
+              strokeWidth="3"
+            />
             <text x="110" y="28" textAnchor="middle" fill="#23383f" fontSize={14} fontWeight="bold">
               {ledgerTitle}
             </text>
@@ -213,11 +221,34 @@ export function MarketingToy({
               +{stats.revenue} {coinsLabel}
             </text>
 
-            <rect x="20" y="130" width="180" height="50" rx="8" fill="#dcfce7" stroke="#16a34a" strokeWidth="2" />
-            <text x="110" y="150" textAnchor="middle" fill="#166534" fontSize={11} fontWeight="bold">
+            <rect
+              x="20"
+              y="130"
+              width="180"
+              height="50"
+              rx="8"
+              fill="#dcfce7"
+              stroke="#16a34a"
+              strokeWidth="2"
+            />
+            <text
+              x="110"
+              y="150"
+              textAnchor="middle"
+              fill="#166534"
+              fontSize={11}
+              fontWeight="bold"
+            >
               {netProfitLabel}
             </text>
-            <text x="110" y="172" textAnchor="middle" fill="#15803d" fontSize={18} fontWeight="bold">
+            <text
+              x="110"
+              y="172"
+              textAnchor="middle"
+              fill="#15803d"
+              fontSize={18}
+              fontWeight="bold"
+            >
               {stats.profit >= 0 ? `+${stats.profit}` : stats.profit} {coinsLabel}
             </text>
           </Pop>
@@ -253,9 +284,7 @@ export function MarketingToy({
           )}
         </div>
 
-        {!isWidget && (
-          <ActionPrompt lang={lang}>{promptText}</ActionPrompt>
-        )}
+        {!isWidget && <ActionPrompt lang={lang}>{promptText}</ActionPrompt>}
 
         {isWidget && onWidgetAnswer && (
           <div className="row nav">

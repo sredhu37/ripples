@@ -52,76 +52,87 @@ export function ElectionsToy({ lang, mode = "toy", onDone }: ElectionsToyProps) 
   };
 
   const titleText =
-    lang === "pl" ? "Lokal wyborczy w Ripple Town" : lang === "de" ? "Wahllokal Ripple Town" : "Ripple Town Voting Hall";
+    lang === "pl"
+      ? "Lokal wyborczy w Ripple Town"
+      : lang === "de"
+        ? "Wahllokal Ripple Town"
+        : "Ripple Town Voting Hall";
   const subtitleText =
     lang === "pl"
       ? "Wrzuć karty do tajnej urny i policz głosy mieszkańców"
       : lang === "de"
-      ? "Wirf die Stimmzettel in die geheime Wahlurne und zähle die Stimmen"
-      : "Cast ballots into the secret box and count results";
+        ? "Wirf die Stimmzettel in die geheime Wahlurne und zähle die Stimmen"
+        : "Cast ballots into the secret box and count results";
 
   const pierTitle =
-    lang === "pl" ? "Pomost rybacki (Moss)" : lang === "de" ? "Hafenanleger (Moss)" : "Harbor Pier (Moss)";
+    lang === "pl"
+      ? "Pomost rybacki (Moss)"
+      : lang === "de"
+        ? "Hafenanleger (Moss)"
+        : "Harbor Pier (Moss)";
   const pavilionTitle =
-    lang === "pl" ? "Pawilon targowy (Pip)" : lang === "de" ? "Marktpavillon (Pip)" : "Market Pavilion (Pip)";
+    lang === "pl"
+      ? "Pawilon targowy (Pip)"
+      : lang === "de"
+        ? "Marktpavillon (Pip)"
+        : "Market Pavilion (Pip)";
 
-  const votesUnit =
-    lang === "pl" ? "głosy" : lang === "de" ? "Stimmen" : "votes";
+  const votesUnit = lang === "pl" ? "głosy" : lang === "de" ? "Stimmen" : "votes";
 
   const lineTitle =
     lang === "pl"
       ? "Mieszkańcy w kolejce (Kliknij, aby zagłosować):"
       : lang === "de"
-      ? "Wartende Bürger (Tippe zum Wählen):"
-      : "Villagers in Line (Tap to vote):";
+        ? "Wartende Bürger (Tippe zum Wählen):"
+        : "Villagers in Line (Tap to vote):";
 
   const quizInstruction =
     lang === "pl"
       ? "Wybierz zwycięski projekt na tablicę ogłoszeń:"
       : lang === "de"
-      ? "Wähle das Gewinnerprojekt für die Dorftafel:"
-      : "Select the winning project to put on the town board:";
+        ? "Wähle das Gewinnerprojekt für die Dorftafel:"
+        : "Select the winning project to put on the town board:";
 
   const pierOptionText =
     lang === "pl"
       ? "Pomost rybacki (3 głosy)"
       : lang === "de"
-      ? "Hafenanleger (3 Stimmen)"
-      : "Harbor Pier (3 votes)";
+        ? "Hafenanleger (3 Stimmen)"
+        : "Harbor Pier (3 votes)";
 
   const pavilionOptionText =
     lang === "pl"
       ? "Pawilon targowy (2 głosy)"
       : lang === "de"
-      ? "Marktpavillon (2 Stimmen)"
-      : "Market Pavilion (2 votes)";
+        ? "Marktpavillon (2 Stimmen)"
+        : "Market Pavilion (2 votes)";
 
   const ballotsStatus =
     castVotes.length < 5
       ? lang === "pl"
         ? `${castVotes.length}/5 kart wrzuconych do urny`
         : lang === "de"
-        ? `${castVotes.length}/5 Stimmzettel in der Wahlurne`
-        : `${castVotes.length}/5 ballots cast into secret box`
+          ? `${castVotes.length}/5 Stimmzettel in der Wahlurne`
+          : `${castVotes.length}/5 ballots cast into secret box`
       : lang === "pl"
-      ? "Wybory zakończone: Pomost wygrywa 3 do 2!"
-      : lang === "de"
-      ? "Wahl beendet: Anleger gewinnt 3 zu 2!"
-      : "Election Complete: Pier wins 3 to 2!";
+        ? "Wybory zakończone: Pomost wygrywa 3 do 2!"
+        : lang === "de"
+          ? "Wahl beendet: Anleger gewinnt 3 zu 2!"
+          : "Election Complete: Pier wins 3 to 2!";
 
   const quizSuccess =
     lang === "pl"
       ? "✓ Brawo! Pomost zdobył większość głosów."
       : lang === "de"
-      ? "✓ Richtig! Der Hafenanleger hat die Mehrheit."
-      : "✓ Correct! The Pier won the majority.";
+        ? "✓ Richtig! Der Hafenanleger hat die Mehrheit."
+        : "✓ Correct! The Pier won the majority.";
 
   const quizRetry =
     lang === "pl"
       ? "Sprawdź wynik: 3 osoby głosowały na Pomost, 2 na Pawilon."
       : lang === "de"
-      ? "Prüfe die Stimmen: 3 für den Anleger, 2 für den Pavillon."
-      : "Review the vote counts: 3 voted for Pier, 2 for Pavilion.";
+        ? "Prüfe die Stimmen: 3 für den Anleger, 2 für den Pavillon."
+        : "Review the vote counts: 3 voted for Pier, 2 for Pavilion.";
 
   return (
     <div className="elections-toy p-4 bg-slate-50 rounded-xl max-w-md mx-auto">
@@ -216,7 +227,9 @@ export function ElectionsToy({ lang, mode = "toy", onDone }: ElectionsToyProps) 
         <div className="flex flex-col items-center">
           <CheckButton lang={lang} onClick={handleCheck} />
           {showQuizResult && (
-            <div className={`mt-2 text-xs font-bold ${quizCorrect ? "text-green-600" : "text-amber-600"}`}>
+            <div
+              className={`mt-2 text-xs font-bold ${quizCorrect ? "text-green-600" : "text-amber-600"}`}
+            >
               {quizCorrect ? quizSuccess : quizRetry}
             </div>
           )}

@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <RebuildingToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <RebuildingToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -275,7 +269,8 @@ export const lesson: Lesson = {
           de: "Die Schuman-Erklaerung wurde am 9. Mai 1950 vom franzoesischen Aussenminister Robert Schuman vorgetragen.",
           pl: "Deklaracja Schumana została ogłoszona przez francuskiego ministra spraw zagranicznych Roberta Schumana w dniu 9 maja 1950 roku.",
         },
-        source: "https://european-union.europa.eu/principles-countries-history/history-eu/1945-59/schuman-declaration-may-1950_en",
+        source:
+          "https://european-union.europa.eu/principles-countries-history/history-eu/1945-59/schuman-declaration-may-1950_en",
       },
       {
         text: {
@@ -283,7 +278,8 @@ export const lesson: Lesson = {
           de: "Der Vertrag zur Gruendung der EGKS wurde im April 1951 von sechs Gruendungsstaaten in Paris unterzeichnet.",
           pl: "Traktat paryski powołujący Europejską Wspólnotę Węgla i Stali (EWWiS) został podpisany w kwietniu 1951 roku przez sześć państw założycielskich.",
         },
-        source: "https://eur-lex.europa.eu/EN/legal-content/summary/treaty-establishing-the-european-coal-and-steel-community-ecsc-treaty.html",
+        source:
+          "https://eur-lex.europa.eu/EN/legal-content/summary/treaty-establishing-the-european-coal-and-steel-community-ecsc-treaty.html",
       },
       {
         text: {
@@ -291,7 +287,8 @@ export const lesson: Lesson = {
           de: "Der Elysee-Vertrag wurde am 22. Januar 1963 von Charles de Gaulle und Konrad Adenauer zur deutsch-franzoesischen Freundschaft besiegelt.",
           pl: "Traktat Elizejski został podpisany 22 stycznia 1963 roku przez Charles'a de Gaulle'a i Konrada Adenauera, ustanawiając historyczne pojednanie.",
         },
-        source: "https://www.bundesregierung.de/breg-de/themen/deutsch-franzoesische-zusammenarbeit/der-elysee-vertrag-394246",
+        source:
+          "https://www.bundesregierung.de/breg-de/themen/deutsch-franzoesische-zusammenarbeit/der-elysee-vertrag-394246",
       },
       {
         text: {
@@ -299,7 +296,8 @@ export const lesson: Lesson = {
           de: "Das Schengener Abkommen wurde 1985 in Schengen (Luxemburg) geschlossen, um Binnengrenzkontrollen abzuschaffen.",
           pl: "Układ z Schengen został zawarty w 1985 roku, a Polska dołączyła do strefy Schengen w grudniu 2007 roku, otwierając granice.",
         },
-        source: "https://home-affairs.ec.europa.eu/policies/schengen-borders-and-visa/schengen-area_en",
+        source:
+          "https://home-affairs.ec.europa.eu/policies/schengen-borders-and-visa/schengen-area_en",
       },
       {
         text: {

@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <DictatorshipToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <DictatorshipToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {

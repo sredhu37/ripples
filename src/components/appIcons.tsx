@@ -29,12 +29,37 @@ const LESSON_ART: Record<string, ReactNode> = {
   business: (
     <g>
       {/* Wooden ice cream cart body */}
-      <rect x="20" y="44" width="60" height="30" rx="3" fill="#6baed6" stroke={INK} strokeWidth="2.5" />
+      <rect
+        x="20"
+        y="44"
+        width="60"
+        height="30"
+        rx="3"
+        fill="#6baed6"
+        stroke={INK}
+        strokeWidth="2.5"
+      />
       {/* Striped canopy awning */}
-      <path d="M16 28 L84 28 L82 42 L72 38 L62 42 L52 38 L42 42 L32 38 L22 42 L16 38 Z" fill="#e65c5c" stroke={INK} strokeWidth="2" />
-      <path d="M26 28 L24 40 M46 28 L44 40 M66 28 L64 40" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
+      <path
+        d="M16 28 L84 28 L82 42 L72 38 L62 42 L52 38 L42 42 L32 38 L22 42 L16 38 Z"
+        fill="#e65c5c"
+        stroke={INK}
+        strokeWidth="2"
+      />
+      <path
+        d="M26 28 L24 40 M46 28 L44 40 M66 28 L64 40"
+        stroke="#fff"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
       {/* Handle and pole */}
-      <path d="M20 30 V44 M80 30 V44 M12 50 H20" stroke={INK} strokeWidth="3" strokeLinecap="round" fill="none" />
+      <path
+        d="M20 30 V44 M80 30 V44 M12 50 H20"
+        stroke={INK}
+        strokeWidth="3"
+        strokeLinecap="round"
+        fill="none"
+      />
       {/* Big wheel */}
       <circle cx="48" cy="74" r="14" fill="#e0a860" stroke={INK} strokeWidth="3" />
       <circle cx="48" cy="74" r="4" fill="#fff" stroke={INK} strokeWidth="2" />
@@ -52,15 +77,26 @@ const LESSON_ART: Record<string, ReactNode> = {
       {/* Golden coin center hub */}
       <circle cx="50" cy="50" r="16" fill="#e3a91a" stroke={INK} strokeWidth="2.5" />
       <circle cx="50" cy="50" r="10" fill="none" stroke="#c98d0e" strokeWidth="2" />
-      <text x="50" y="55" textAnchor="middle" fontSize="14" fontWeight="bold" fill={INK}>%</text>
+      <text x="50" y="55" textAnchor="middle" fontSize="14" fontWeight="bold" fill={INK}>
+        %
+      </text>
     </g>
   ),
   loans: (
     <g>
       <path d="M2 40 H22 V74 H2 Z" fill="#2f7fb8" />
       <path d="M98 40 H78 V74 H98 Z" fill="#e68aa0" />
-      <path d="M22 44 C34 40 44 40 54 46 L66 56 C70 60 66 66 60 64 L52 60 L64 70 C68 74 62 80 58 76 L46 66 L54 76 C58 80 52 86 48 82 L36 70 L30 74 L22 72 Z" fill="#f3cfa6" />
-      <path d="M78 44 C68 40 60 40 52 44 L40 52 C36 56 40 62 44 60" fill="none" stroke="#e8b98c" strokeWidth="8" strokeLinecap="round" />
+      <path
+        d="M22 44 C34 40 44 40 54 46 L66 56 C70 60 66 66 60 64 L52 60 L64 70 C68 74 62 80 58 76 L46 66 L54 76 C58 80 52 86 48 82 L36 70 L30 74 L22 72 Z"
+        fill="#f3cfa6"
+      />
+      <path
+        d="M78 44 C68 40 60 40 52 44 L40 52 C36 56 40 62 44 60"
+        fill="none"
+        stroke="#e8b98c"
+        strokeWidth="8"
+        strokeLinecap="round"
+      />
       <circle cx="50" cy="26" r="13" fill="#e3a91a" />
       <circle cx="50" cy="26" r="8" fill="none" stroke="#c98d0e" strokeWidth="3" />
     </g>
@@ -70,7 +106,17 @@ const LESSON_ART: Record<string, ReactNode> = {
       <path d="M50 8 L94 32 H6 Z" fill="#3b5b7a" />
       <rect x="6" y="32" width="88" height="8" fill="#2a435c" />
       {[16, 34, 52, 70].map((x) => (
-        <rect key={x} x={x} y="44" width="14" height="32" rx="2" fill="#f4f1e8" stroke="#cfc6ad" strokeWidth="2" />
+        <rect
+          key={x}
+          x={x}
+          y="44"
+          width="14"
+          height="32"
+          rx="2"
+          fill="#f4f1e8"
+          stroke="#cfc6ad"
+          strokeWidth="2"
+        />
       ))}
       <rect x="4" y="78" width="92" height="8" rx="2" fill="#a9b6bd" />
       <rect x="0" y="86" width="100" height="8" rx="2" fill="#7e8d95" />
@@ -79,7 +125,13 @@ const LESSON_ART: Record<string, ReactNode> = {
   ),
   interest: (
     <g>
-      <path d="M50 90 C50 62 50 48 50 34" stroke="#3f8a47" strokeWidth="7" fill="none" strokeLinecap="round" />
+      <path
+        d="M50 90 C50 62 50 48 50 34"
+        stroke="#3f8a47"
+        strokeWidth="7"
+        fill="none"
+        strokeLinecap="round"
+      />
       <path d="M50 52 C30 54 18 42 16 26 C34 24 48 34 50 52 Z" fill="#4fa75a" />
       <path d="M50 42 C68 44 82 32 84 16 C66 14 52 24 50 42 Z" fill="#6cc274" />
       <circle cx="50" cy="86" r="12" fill="#e3a91a" />
@@ -90,7 +142,16 @@ const LESSON_ART: Record<string, ReactNode> = {
     <g>
       <rect x="46" y="2" width="4" height="16" fill="#6f4627" />
       <path d="M50 3 L68 9 L50 15 Z" fill="#d6403a" />
-      <rect x="34" y="18" width="32" height="26" rx="3" fill="#f4f1e8" stroke="#cfc6ad" strokeWidth="2" />
+      <rect
+        x="34"
+        y="18"
+        width="32"
+        height="26"
+        rx="3"
+        fill="#f4f1e8"
+        stroke="#cfc6ad"
+        strokeWidth="2"
+      />
       <circle cx="50" cy="31" r="9" fill="#fff" stroke={INK} strokeWidth="3" />
       <path d="M50 25 V31 L55 34" stroke={INK} strokeWidth="3" strokeLinecap="round" fill="none" />
       <path d="M8 56 L50 40 L92 56 Z" fill="#b5572f" />
@@ -104,7 +165,12 @@ const LESSON_ART: Record<string, ReactNode> = {
   inflation: (
     <g>
       <path d="M26 52 L50 96 L74 52 Z" fill="#e0a860" />
-      <path d="M34 60 L66 60 M40 72 L60 72" stroke="#c98a3f" strokeWidth="3" strokeLinecap="round" />
+      <path
+        d="M34 60 L66 60 M40 72 L60 72"
+        stroke="#c98a3f"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
       <circle cx="38" cy="44" r="16" fill="#f4a3ba" />
       <circle cx="62" cy="44" r="16" fill="#8fd0e0" />
       <circle cx="50" cy="30" r="17" fill="#fbe6a6" />
@@ -113,11 +179,29 @@ const LESSON_ART: Record<string, ReactNode> = {
   ),
   printing: (
     <g>
-      <rect x="24" y="6" width="52" height="34" rx="3" fill="#fff" stroke="#cfc6ad" strokeWidth="3" />
+      <rect
+        x="24"
+        y="6"
+        width="52"
+        height="34"
+        rx="3"
+        fill="#fff"
+        stroke="#cfc6ad"
+        strokeWidth="3"
+      />
       <rect x="6" y="36" width="88" height="40" rx="10" fill="#6b8896" />
       <rect x="6" y="36" width="88" height="12" rx="6" fill="#587684" />
       <circle cx="82" cy="58" r="4" fill="#4fa75a" />
-      <rect x="22" y="68" width="56" height="28" rx="3" fill="#fff" stroke="#cfc6ad" strokeWidth="3" />
+      <rect
+        x="22"
+        y="68"
+        width="56"
+        height="28"
+        rx="3"
+        fill="#fff"
+        stroke="#cfc6ad"
+        strokeWidth="3"
+      />
       <circle cx="50" cy="82" r="9" fill="#e3a91a" />
       <circle cx="50" cy="82" r="5" fill="none" stroke="#c98d0e" strokeWidth="2.5" />
     </g>
@@ -135,7 +219,10 @@ const LESSON_ART: Record<string, ReactNode> = {
   ),
   profit: (
     <g>
-      <path d="M16 64 C12 44 30 30 50 30 C70 30 88 44 84 64 C84 74 77 78 70 78 H30 C23 78 16 74 16 64 Z" fill="#d9953e" />
+      <path
+        d="M16 64 C12 44 30 30 50 30 C70 30 88 44 84 64 C84 74 77 78 70 78 H30 C23 78 16 74 16 64 Z"
+        fill="#d9953e"
+      />
       <path d="M24 56 C26 44 36 38 50 38 C64 38 74 44 76 56 Z" fill="#ecb766" />
       <circle cx="68" cy="32" r="18" fill="#e3a91a" />
       <circle cx="68" cy="32" r="13" fill="none" stroke="#c98d0e" strokeWidth="2.5" />
@@ -182,17 +269,41 @@ const LESSON_ART: Record<string, ReactNode> = {
     <g>
       <path d="M16 42 H32 L60 22 V78 L32 58 H16 Z" fill="#1b8a9a" />
       <path d="M26 58 L22 80 H34 L38 58" fill="#156470" />
-      <path d="M68 36 C76 42 76 58 68 64 M78 26 C90 38 90 62 78 74" stroke="#e3a91a" strokeWidth="6" strokeLinecap="round" fill="none" />
+      <path
+        d="M68 36 C76 42 76 58 68 64 M78 26 C90 38 90 62 78 74"
+        stroke="#e3a91a"
+        strokeWidth="6"
+        strokeLinecap="round"
+        fill="none"
+      />
     </g>
   ),
   hiring: (
     <g>
       <path d="M8 94 C8 70 24 60 40 60 C56 60 72 70 72 94 Z" fill="#e68aa0" />
       <circle cx="40" cy="40" r="18" fill="#f3cfa6" />
-      <rect x="26" y="22" width="28" height="12" rx="3" fill="#fff" stroke="#cfc6ad" strokeWidth="2" />
+      <rect
+        x="26"
+        y="22"
+        width="28"
+        height="12"
+        rx="3"
+        fill="#fff"
+        stroke="#cfc6ad"
+        strokeWidth="2"
+      />
       <path d="M48 94 C48 76 60 68 74 68 C88 68 100 76 100 94 Z" fill="#f5a623" />
       <circle cx="74" cy="50" r="14" fill="#e8b98c" />
-      <rect x="62" y="36" width="24" height="10" rx="3" fill="#fff" stroke="#cfc6ad" strokeWidth="2" />
+      <rect
+        x="62"
+        y="36"
+        width="24"
+        height="10"
+        rx="3"
+        fill="#fff"
+        stroke="#cfc6ad"
+        strokeWidth="2"
+      />
     </g>
   ),
   scale: (
@@ -226,7 +337,16 @@ const LESSON_ART: Record<string, ReactNode> = {
   ),
   computers: (
     <g>
-      <rect x="25" y="25" width="50" height="50" rx="8" fill="#0f172a" stroke="#0284c7" strokeWidth="4" />
+      <rect
+        x="25"
+        y="25"
+        width="50"
+        height="50"
+        rx="8"
+        fill="#0f172a"
+        stroke="#0284c7"
+        strokeWidth="4"
+      />
       <rect x="36" y="36" width="28" height="28" rx="3" fill="#0284c7" />
       <line x1="25" y1="40" x2="15" y2="40" stroke="#0284c7" strokeWidth="3" />
       <line x1="25" y1="60" x2="15" y2="60" stroke="#0284c7" strokeWidth="3" />
@@ -250,9 +370,25 @@ const LESSON_ART: Record<string, ReactNode> = {
     <g>
       <rect x="30" y="75" width="40" height="15" rx="3" fill="#334155" />
       <circle cx="40" cy="75" r="8" fill="#0284c7" />
-      <line x1="40" y1="75" x2="60" y2="45" stroke="#0284c7" strokeWidth="7" strokeLinecap="round" />
+      <line
+        x1="40"
+        y1="75"
+        x2="60"
+        y2="45"
+        stroke="#0284c7"
+        strokeWidth="7"
+        strokeLinecap="round"
+      />
       <circle cx="60" cy="45" r="7" fill="#0369a1" />
-      <line x1="60" y1="45" x2="75" y2="25" stroke="#0284c7" strokeWidth="5" strokeLinecap="round" />
+      <line
+        x1="60"
+        y1="45"
+        x2="75"
+        y2="25"
+        stroke="#0284c7"
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
       <circle cx="75" cy="25" r="4" fill="#38bdf8" />
     </g>
   ),
@@ -278,12 +414,14 @@ const LESSON_ART: Record<string, ReactNode> = {
   ),
   humanedge: (
     <g>
-      <path
-        d="M50 35 C40 22 25 30 35 45 L50 62 L65 45 C75 30 60 22 50 35 Z"
-        fill="#e11d48"
-      />
+      <path d="M50 35 C40 22 25 30 35 45 L50 62 L65 45 C75 30 60 22 50 35 Z" fill="#e11d48" />
       <circle cx="50" cy="72" r="14" fill="#38bdf8" opacity="0.7" />
-      <path d="M30 80 C35 70 45 68 50 74 C55 68 65 70 70 80" stroke="#f59e0b" strokeWidth="3" fill="none" />
+      <path
+        d="M30 80 C35 70 45 68 50 74 C55 68 65 70 70 80"
+        stroke="#f59e0b"
+        strokeWidth="3"
+        fill="none"
+      />
     </g>
   ),
   supply_demand: (
@@ -292,24 +430,47 @@ const LESSON_ART: Record<string, ReactNode> = {
       <path d="M25 30 L55 15 L85 45 L55 75 Z" fill="#f59e0b" stroke={INK} strokeWidth="2.5" />
       <circle cx="45" cy="30" r="4" fill="#fff" stroke={INK} strokeWidth="1.5" />
       {/* Sparkling diamond */}
-      <polygon points="58,40 68,40 73,48 58,62 43,48 48,40" fill="#38bdf8" stroke={INK} strokeWidth="2" />
+      <polygon
+        points="58,40 68,40 73,48 58,62 43,48 48,40"
+        fill="#38bdf8"
+        stroke={INK}
+        strokeWidth="2"
+      />
     </g>
   ),
   scarcity_prices: (
     <g>
       {/* Golden bar base */}
-      <polygon points="20,68 35,50 75,50 90,68 80,78 30,78" fill="#eab308" stroke={INK} strokeWidth="2.5" />
+      <polygon
+        points="20,68 35,50 75,50 90,68 80,78 30,78"
+        fill="#eab308"
+        stroke={INK}
+        strokeWidth="2.5"
+      />
       <polygon points="35,50 75,50 70,68 28,68" fill="#facc15" stroke={INK} strokeWidth="2" />
       {/* Skill graduation cap / star */}
       <polygon points="50,14 74,24 50,34 26,24" fill="#3b82f6" stroke={INK} strokeWidth="2" />
       <path d="M74 24 V38" stroke={INK} strokeWidth="2.5" strokeLinecap="round" />
-      <polygon points="50,22 53,28 60,29 55,34 56,40 50,37 44,40 45,34 40,29 47,28" fill="#fbbf24" stroke={INK} strokeWidth="1" />
+      <polygon
+        points="50,22 53,28 60,29 55,34 56,40 50,37 44,40 45,34 40,29 47,28"
+        fill="#fbbf24"
+        stroke={INK}
+        strokeWidth="1"
+      />
     </g>
   ),
 };
 
 /** Picture for a lesson on the trail, on its badge and in headings. */
-export function LessonIcon({ id, size = 48, label }: { id: string; size?: number; label?: string }) {
+export function LessonIcon({
+  id,
+  size = 48,
+  label,
+}: {
+  id: string;
+  size?: number;
+  label?: string;
+}) {
   return (
     <Svg size={size} label={label}>
       {LESSON_ART[id] ?? <Coin />}
@@ -323,13 +484,24 @@ const UI_ART: Record<UiIconName, ReactNode> = {
   speakerOn: (
     <g>
       <path d="M10 38 H30 L52 18 V82 L30 62 H10 Z" fill="currentColor" />
-      <path d="M64 34 C72 42 72 58 64 66 M76 22 C90 36 90 64 76 78" stroke="currentColor" strokeWidth="7" fill="none" strokeLinecap="round" />
+      <path
+        d="M64 34 C72 42 72 58 64 66 M76 22 C90 36 90 64 76 78"
+        stroke="currentColor"
+        strokeWidth="7"
+        fill="none"
+        strokeLinecap="round"
+      />
     </g>
   ),
   speakerOff: (
     <g>
       <path d="M8 38 H28 L50 18 V82 L28 62 H8 Z" fill="currentColor" />
-      <path d="M64 38 L90 64 M90 38 L64 64" stroke="currentColor" strokeWidth="7" strokeLinecap="round" />
+      <path
+        d="M64 38 L90 64 M90 38 L64 64"
+        stroke="currentColor"
+        strokeWidth="7"
+        strokeLinecap="round"
+      />
     </g>
   ),
   gear: (
@@ -344,7 +516,13 @@ const UI_ART: Record<UiIconName, ReactNode> = {
   ),
   lock: (
     <g>
-      <path d="M28 44 V30 C28 16 72 16 72 30 V44" stroke="currentColor" strokeWidth="9" fill="none" strokeLinecap="round" />
+      <path
+        d="M28 44 V30 C28 16 72 16 72 30 V44"
+        stroke="currentColor"
+        strokeWidth="9"
+        fill="none"
+        strokeLinecap="round"
+      />
       <rect x="16" y="42" width="68" height="48" rx="10" fill="currentColor" />
       <circle cx="50" cy="62" r="6" fill="#fff" />
       <rect x="47" y="64" width="6" height="14" rx="3" fill="#fff" />
@@ -355,20 +533,32 @@ const UI_ART: Record<UiIconName, ReactNode> = {
       <path d="M26 4 L44 40 L56 40 L74 4 H62 L50 28 L38 4 Z" fill="#d6403a" />
       <circle cx="50" cy="66" r="28" fill="#e3a91a" />
       <circle cx="50" cy="66" r="21" fill="#f7cb44" />
-      <polygon points="50,50 55,61 67,62 58,70 61,82 50,75 39,82 42,70 33,62 45,61" fill="#c98d0e" />
+      <polygon
+        points="50,50 55,61 67,62 58,70 61,82 50,75 39,82 42,70 33,62 45,61"
+        fill="#c98d0e"
+      />
     </g>
   ),
   globe: (
     <g>
       <circle cx="50" cy="50" r="40" fill="#3b9ad9" />
-      <path d="M26 24 C38 22 44 30 40 38 C36 46 24 44 22 54 C20 62 28 68 34 66 C38 76 34 84 30 84 C16 74 10 58 12 44 C14 36 18 30 26 24 Z" fill="#4fa75a" />
-      <path d="M62 16 C74 16 86 28 86 40 C78 40 74 46 78 54 C82 62 74 70 66 66 C60 62 64 54 58 50 C52 46 54 38 60 36 C66 34 58 24 62 16 Z" fill="#4fa75a" />
+      <path
+        d="M26 24 C38 22 44 30 40 38 C36 46 24 44 22 54 C20 62 28 68 34 66 C38 76 34 84 30 84 C16 74 10 58 12 44 C14 36 18 30 26 24 Z"
+        fill="#4fa75a"
+      />
+      <path
+        d="M62 16 C74 16 86 28 86 40 C78 40 74 46 78 54 C82 62 74 70 66 66 C60 62 64 54 58 50 C52 46 54 38 60 36 C66 34 58 24 62 16 Z"
+        fill="#4fa75a"
+      />
       <circle cx="50" cy="50" r="40" fill="none" stroke={INK} strokeWidth="4" />
     </g>
   ),
   chat: (
     <g>
-      <path d="M12 14 H88 C94 14 96 18 96 24 V62 C96 68 92 72 86 72 H52 L30 92 V72 H14 C8 72 4 68 4 62 V24 C4 18 6 14 12 14 Z" fill="#1b8a9a" />
+      <path
+        d="M12 14 H88 C94 14 96 18 96 24 V62 C96 68 92 72 86 72 H52 L30 92 V72 H14 C8 72 4 68 4 62 V24 C4 18 6 14 12 14 Z"
+        fill="#1b8a9a"
+      />
       <circle cx="30" cy="43" r="6" fill="#fff" />
       <circle cx="50" cy="43" r="6" fill="#fff" />
       <circle cx="70" cy="43" r="6" fill="#fff" />
@@ -377,7 +567,15 @@ const UI_ART: Record<UiIconName, ReactNode> = {
 };
 
 /** Small interface icons. They take their colour from the text colour (currentColor) where flat. */
-export function UiIcon({ name, size = 28, label }: { name: UiIconName; size?: number; label?: string }) {
+export function UiIcon({
+  name,
+  size = 28,
+  label,
+}: {
+  name: UiIconName;
+  size?: number;
+  label?: string;
+}) {
   return (
     <Svg size={size} label={label}>
       {UI_ART[name]}

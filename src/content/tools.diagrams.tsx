@@ -5,25 +5,42 @@ export function MusclePlowDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Dawna siła mięśni ludzi i zwierząt"
       : lang === "de"
-      ? "Fruehe Muskelkraft von Mensch und Tier"
-      : "Early Human and Animal Muscle Power";
+        ? "Fruehe Muskelkraft von Mensch und Tier"
+        : "Early Human and Animal Muscle Power";
 
   const sub =
     lang === "pl"
       ? "Każde zaorane pole zależało wyłącznie od siły fizycznej mięśni"
       : lang === "de"
-      ? "Jeder Acker hing vollstaendig von koerperlicher Muskelkraft ab"
-      : "Every field plowed depended entirely on physical muscle strength";
+        ? "Jeder Acker hing vollstaendig von koerperlicher Muskelkraft ab"
+        : "Every field plowed depended entirely on physical muscle strength";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Muscle and Animal Power">
-      <rect x="30" y="30" width="340" height="180" rx="12" fill="#fefce8" stroke="#fef08a" strokeWidth="2" />
+      <rect
+        x="30"
+        y="30"
+        width="340"
+        height="180"
+        rx="12"
+        fill="#fefce8"
+        stroke="#fef08a"
+        strokeWidth="2"
+      />
       <text x="200" y="60" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#854d0e">
         {title}
       </text>
 
       {/* Field soil lines */}
-      <line x1="60" y1="165" x2="340" y2="165" stroke="#a16207" strokeWidth="4" strokeDasharray="6 4" />
+      <line
+        x1="60"
+        y1="165"
+        x2="340"
+        y2="165"
+        stroke="#a16207"
+        strokeWidth="4"
+        strokeDasharray="6 4"
+      />
       <line x1="60" y1="180" x2="340" y2="180" stroke="#713f12" strokeWidth="3" />
 
       {/* Wooden plow */}
@@ -49,8 +66,8 @@ export function WindWaterMillDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Wykorzystanie wiatru i wody"
       : lang === "de"
-      ? "Wind und Wasser nutzen"
-      : "Harnessing Wind and Water";
+        ? "Wind und Wasser nutzen"
+        : "Harnessing Wind and Water";
 
   const waterLabel = lang === "pl" ? "Koło wodne" : lang === "de" ? "Wasserrad" : "Waterwheel";
   const windLabel = lang === "pl" ? "Wiatrak" : lang === "de" ? "Windmuehle" : "Windmill";
@@ -59,12 +76,21 @@ export function WindWaterMillDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Czysta energia, lecz rzeki zamarzały zimą, a wiatr cichł latem"
       : lang === "de"
-      ? "Saubere Kraft, doch Wasser fror im Winter und Wind schlief im Sommer ein"
-      : "Clean power, but water froze in winter and winds ceased in summer";
+        ? "Saubere Kraft, doch Wasser fror im Winter und Wind schlief im Sommer ein"
+        : "Clean power, but water froze in winter and winds ceased in summer";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Windmill and Waterwheel">
-      <rect x="40" y="30" width="320" height="180" rx="12" fill="#eff6ff" stroke="#bfdbfe" strokeWidth="2" />
+      <rect
+        x="40"
+        y="30"
+        width="320"
+        height="180"
+        rx="12"
+        fill="#eff6ff"
+        stroke="#bfdbfe"
+        strokeWidth="2"
+      />
       <text x="200" y="60" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#1e40af">
         {title}
       </text>
@@ -76,14 +102,18 @@ export function WindWaterMillDiagram({ lang, step }: DiagramProps) {
       <line x1="98" y1="120" x2="162" y2="120" stroke="#0369a1" strokeWidth="2" />
       <line x1="107" y1="97" x2="153" y2="143" stroke="#0369a1" strokeWidth="2" />
       <line x1="107" y1="143" x2="153" y2="97" stroke="#0369a1" strokeWidth="2" />
-      <text x="130" y="175" textAnchor="middle" fontSize="10" fill="#0369a1">{waterLabel}</text>
+      <text x="130" y="175" textAnchor="middle" fontSize="10" fill="#0369a1">
+        {waterLabel}
+      </text>
 
       {/* Windmill tower and blades */}
       <polygon points="255,160 285,160 278,110 262,110" fill="#94a3b8" />
       <circle cx="270" cy="110" r="5" fill="#334155" />
       <line x1="270" y1="82" x2="270" y2="138" stroke="#334155" strokeWidth="3" />
       <line x1="242" y1="110" x2="298" y2="110" stroke="#334155" strokeWidth="3" />
-      <text x="270" y="175" textAnchor="middle" fontSize="10" fill="#334155">{windLabel}</text>
+      <text x="270" y="175" textAnchor="middle" fontSize="10" fill="#334155">
+        {windLabel}
+      </text>
 
       {step >= 2 && (
         <text x="200" y="200" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1e3a8a">
@@ -99,35 +129,64 @@ export function BoilingKettlePistonDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Rozprężająca siła pary"
       : lang === "de"
-      ? "Die Dehnkraft des Wasserdampfs"
-      : "The Expanding Force of Steam";
+        ? "Die Dehnkraft des Wasserdampfs"
+        : "The Expanding Force of Steam";
 
-  const boilLabel = lang === "pl" ? "Wrząca woda" : lang === "de" ? "Kochendes Wasser" : "Boiling Water";
+  const boilLabel =
+    lang === "pl" ? "Wrząca woda" : lang === "de" ? "Kochendes Wasser" : "Boiling Water";
 
   const sub =
     lang === "pl"
       ? "Rozprężająca się para unosi tłok z potężną siłą mechaniczną"
       : lang === "de"
-      ? "Aufsteigender Dampf drueckt den Kolben mit grosser Kraft empor"
-      : "Expanding steam pushes the piston upwards with mighty mechanical pressure";
+        ? "Aufsteigender Dampf drueckt den Kolben mit grosser Kraft empor"
+        : "Expanding steam pushes the piston upwards with mighty mechanical pressure";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Steam Pressure and Piston">
-      <rect x="30" y="30" width="340" height="180" rx="12" fill="#f8fafc" stroke="#cbd5e1" strokeWidth="2" />
+      <rect
+        x="30"
+        y="30"
+        width="340"
+        height="180"
+        rx="12"
+        fill="#f8fafc"
+        stroke="#cbd5e1"
+        strokeWidth="2"
+      />
       <text x="200" y="58" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#0f172a">
         {title}
       </text>
 
       {/* Boiler pot */}
-      <rect x="90" y="110" width="80" height="60" rx="8" fill="#475569" stroke="#1e293b" strokeWidth="2" />
+      <rect
+        x="90"
+        y="110"
+        width="80"
+        height="60"
+        rx="8"
+        fill="#475569"
+        stroke="#1e293b"
+        strokeWidth="2"
+      />
       <path d="M100 170 Q130 185 160 170" stroke="#ea580c" strokeWidth="4" fill="none" />
-      <text x="130" y="145" textAnchor="middle" fontSize="11" fill="#f8fafc">{boilLabel}</text>
+      <text x="130" y="145" textAnchor="middle" fontSize="11" fill="#f8fafc">
+        {boilLabel}
+      </text>
 
       {/* Steam pipe */}
       <path d="M150 110 L150 90 L220 90 L220 110" stroke="#64748b" strokeWidth="8" fill="none" />
 
       {/* Piston cylinder */}
-      <rect x="200" y="110" width="60" height="60" fill="#e2e8f0" stroke="#475569" strokeWidth="2" />
+      <rect
+        x="200"
+        y="110"
+        width="60"
+        height="60"
+        fill="#e2e8f0"
+        stroke="#475569"
+        strokeWidth="2"
+      />
       <rect x="210" y="125" width="40" height="15" fill="#3b82f6" />
       <line x1="230" y1="125" x2="230" y2="80" stroke="#1d4ed8" strokeWidth="4" />
 
@@ -145,25 +204,42 @@ export function JamesWattEngineDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Maszyna parowa Jamesa Watta"
       : lang === "de"
-      ? "James Watts Dampfmaschine mit Rotationskraft"
-      : "James Watt Rotary Steam Engine";
+        ? "James Watts Dampfmaschine mit Rotationskraft"
+        : "James Watt Rotary Steam Engine";
 
   const sub =
     lang === "pl"
       ? "Zamiana posuwistego ruchu tłoka w ciągły ruch obrotowy"
       : lang === "de"
-      ? "Umwandlung von Hubbewegungen in dauerhafte Drehkraft"
-      : "Converting reciprocal up and down motion into continuous rotation";
+        ? "Umwandlung von Hubbewegungen in dauerhafte Drehkraft"
+        : "Converting reciprocal up and down motion into continuous rotation";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="James Watt Steam Engine">
-      <rect x="30" y="30" width="340" height="180" rx="12" fill="#fff7ed" stroke="#fed7aa" strokeWidth="2" />
+      <rect
+        x="30"
+        y="30"
+        width="340"
+        height="180"
+        rx="12"
+        fill="#fff7ed"
+        stroke="#fed7aa"
+        strokeWidth="2"
+      />
       <text x="200" y="55" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#9a3412">
         {title}
       </text>
 
       {/* Walking beam */}
-      <line x1="120" y1="95" x2="280" y2="95" stroke="#78350f" strokeWidth="6" strokeLinecap="round" />
+      <line
+        x1="120"
+        y1="95"
+        x2="280"
+        y2="95"
+        stroke="#78350f"
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
       <circle cx="200" cy="95" r="5" fill="#451a03" />
 
       {/* Flywheel */}
@@ -171,7 +247,15 @@ export function JamesWattEngineDiagram({ lang, step }: DiagramProps) {
       <line x1="280" y1="95" x2="280" y2="140" stroke="#9a3412" strokeWidth="3" />
 
       {/* Piston */}
-      <rect x="105" y="115" width="30" height="45" fill="#cbd5e1" stroke="#475569" strokeWidth="2" />
+      <rect
+        x="105"
+        y="115"
+        width="30"
+        height="45"
+        fill="#cbd5e1"
+        stroke="#475569"
+        strokeWidth="2"
+      />
       <line x1="120" y1="95" x2="120" y2="125" stroke="#334155" strokeWidth="3" />
 
       {step >= 2 && (
@@ -188,19 +272,28 @@ export function SteamLocomotiveTrainDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Żelazny koń: Parowozy"
       : lang === "de"
-      ? "Das Dampfross: Eisenbahnlokomotiven"
-      : "The Iron Horse: Steam Locomotives";
+        ? "Das Dampfross: Eisenbahnlokomotiven"
+        : "The Iron Horse: Steam Locomotives";
 
   const sub =
     lang === "pl"
       ? "Przewożenie ton towarów i pasażerów przez kontynenty w kilka godzin"
       : lang === "de"
-      ? "Transport von Fracht und Passagieren quer ueber Kontinente"
-      : "Carrying tons of cargo and passengers across mountain ranges and continents";
+        ? "Transport von Fracht und Passagieren quer ueber Kontinente"
+        : "Carrying tons of cargo and passengers across mountain ranges and continents";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Steam Locomotive">
-      <rect x="30" y="30" width="340" height="180" rx="12" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="2" />
+      <rect
+        x="30"
+        y="30"
+        width="340"
+        height="180"
+        rx="12"
+        fill="#f1f5f9"
+        stroke="#cbd5e1"
+        strokeWidth="2"
+      />
       <text x="200" y="55" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#1e293b">
         {title}
       </text>

@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <WhyHistoryToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <WhyHistoryToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -275,7 +269,8 @@ export const lesson: Lesson = {
           de: "Die Methodik der modernen Geschichtswissenschaft beruht auf der systematischen und kritischen Auswertung von Primaerquellen.",
           pl: "Metodologia współczesnej historiografii opiera się na krytycznej analizie, weryfikacji i porównywaniu źródeł pierwotnych.",
         },
-        source: "https://www.historians.org/about-aha-and-membership/aha-history-and-archives/historical-thinking-skills",
+        source:
+          "https://www.historians.org/about-aha-and-membership/aha-history-and-archives/historical-thinking-skills",
       },
       {
         text: {
@@ -307,7 +302,8 @@ export const lesson: Lesson = {
           de: "Die Allgemeine Erklaerung zur kulturellen Vielfalt (UNESCO 2001) betont das interkulturelle Erbe fuer das friedliche Zusammenleben.",
           pl: "Powszechna Deklaracja o Różnorodności Kulturowej (UNESCO 2001) uznaje dziedzictwo międzykulturowe za warunek pomyślnego rozwoju ludzkości.",
         },
-        source: "https://www.unesco.org/en/legal-affairs/unesco-universal-declaration-cultural-diversity",
+        source:
+          "https://www.unesco.org/en/legal-affairs/unesco-universal-declaration-cultural-diversity",
       },
     ],
     simplified: [

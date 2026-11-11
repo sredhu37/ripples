@@ -37,7 +37,7 @@ describe("ParentPanel", () => {
           onFacts={() => {}}
           onClose={() => {}}
           onToggleLesson={onToggle}
-        />
+        />,
       );
     });
 
@@ -69,7 +69,9 @@ describe("ParentPanel", () => {
     expect(firstGroupToggles.length).toBe(12);
 
     // Toggle the first lesson off
-    const firstCheckbox = firstGroupToggles[0].querySelector("input[type='checkbox']") as HTMLInputElement;
+    const firstCheckbox = firstGroupToggles[0].querySelector(
+      "input[type='checkbox']",
+    ) as HTMLInputElement;
     expect(firstCheckbox.checked).toBe(true);
 
     await act(async () => {
@@ -104,7 +106,7 @@ describe("ParentPanel", () => {
           onFacts={() => {}}
           onClose={() => {}}
           onToggleLesson={onToggle}
-        />
+        />,
       );
     });
 
@@ -124,7 +126,7 @@ describe("ParentPanel", () => {
     expect(group5.querySelector(".lesson-group-count")?.textContent?.trim()).toBe("7 / 8");
 
     const ww2Row = Array.from(group5.querySelectorAll(".lesson-toggle-row")).find((row) =>
-      row.textContent?.includes("World War 2")
+      row.textContent?.includes("World War 2"),
     );
     expect(ww2Row).toBeDefined();
     expect(ww2Row?.className).toContain("lesson-toggle-row-off");
@@ -168,7 +170,7 @@ describe("MapScreen with disabled lessons", () => {
           onOpenLesson={() => {}}
           onParents={() => {}}
           onTimeline={() => {}}
-        />
+        />,
       );
     });
 
@@ -214,7 +216,7 @@ describe("MapScreen with disabled lessons", () => {
           onOpenLesson={() => {}}
           onParents={() => {}}
           onTimeline={() => {}}
-        />
+        />,
       );
     });
 
@@ -233,7 +235,12 @@ describe("Age Groups integration", () => {
     const root = createRoot(container);
 
     const onAgeGroup = vi.fn();
-    const progress: Progress = { ...emptyProgress(), name: "Child", lang: "en", ageGroup: "junior" };
+    const progress: Progress = {
+      ...emptyProgress(),
+      name: "Child",
+      lang: "en",
+      ageGroup: "junior",
+    };
 
     await act(async () => {
       root.render(
@@ -245,7 +252,7 @@ describe("Age Groups integration", () => {
           onClose={() => {}}
           onToggleLesson={() => {}}
           onAgeGroup={onAgeGroup}
-        />
+        />,
       );
     });
 
@@ -284,13 +291,7 @@ describe("Age Groups integration", () => {
     const onDone = vi.fn();
 
     await act(async () => {
-      root.render(
-        <NameScreen
-          lang="en"
-          onLang={() => {}}
-          onDone={onDone}
-        />
-      );
+      root.render(<NameScreen lang="en" onLang={() => {}} onDone={onDone} />);
     });
 
     const input = container.querySelector("input")!;
@@ -321,7 +322,11 @@ describe("Age Groups integration", () => {
   });
 
   it("returns registered senior lesson when present", () => {
-    const dummySenior = { ...getLesson("money")!, id: "money", askDad: { en: "Senior prompt", de: "Senior prompt", pl: "Senior prompt" } };
+    const dummySenior = {
+      ...getLesson("money")!,
+      id: "money",
+      askDad: { en: "Senior prompt", de: "Senior prompt", pl: "Senior prompt" },
+    };
     registerSeniorLesson("money", dummySenior);
 
     expect(getLesson("money", "senior")).toBe(dummySenior);

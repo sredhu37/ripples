@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { CheckButton, animatedBeat } from "../lesson/toolkit";
 import type { Lesson, Text, ToyProps, WidgetProps } from "../lesson/types";
-import { BalanceDiagram, EarnDiagram, NeedsDiagram, PotDiagram, RoadDiagram, ShareDiagram, VoteDiagram } from "./taxes.diagrams";
+import {
+  BalanceDiagram,
+  EarnDiagram,
+  NeedsDiagram,
+  PotDiagram,
+  RoadDiagram,
+  ShareDiagram,
+  VoteDiagram,
+} from "./taxes.diagrams";
 import { BudgetBoard, budget } from "./taxes.toy";
 
 export { budget };
@@ -277,7 +285,13 @@ export const lesson: Lesson = {
       ),
       options: [
         { text: T("Finn puts in more", "Finn legt mehr hinein", "Finn wpłaca więcej") },
-        { text: T("They put in the same number of coins", "Sie legen gleich viele Münzen hinein", "Wpłacają tyle samo monet") },
+        {
+          text: T(
+            "They put in the same number of coins",
+            "Sie legen gleich viele Münzen hinein",
+            "Wpłacają tyle samo monet",
+          ),
+        },
         { text: T("Bea puts in more", "Bea legt mehr hinein", "Bea wpłaca więcej"), correct: true },
       ],
       hint: T(
@@ -320,7 +334,8 @@ export const lesson: Lesson = {
           de: "Steuern sind die wichtigste Einnahmequelle des Staates für Bildung, Gesundheit, Verkehrswege und Sicherheit.",
           pl: "Podatki stanowią główne źródło dochodów państwa, finansując edukację, służbę zdrowia, drogi oraz bezpieczeństwo publiczne.",
         },
-        source: "https://www.bundesfinanzministerium.de/Content/DE/Standardartikel/Themen/Steuern/steuern.html",
+        source:
+          "https://www.bundesfinanzministerium.de/Content/DE/Standardartikel/Themen/Steuern/steuern.html",
       },
       {
         text: {
@@ -328,7 +343,8 @@ export const lesson: Lesson = {
           de: "Mit Steuergeldern baut der Staat Krankenhäuser, Schulen und Straßen und bezahlt Polizei und Feuerwehr.",
           pl: "Z podatków państwo buduje szpitale, szkoły i drogi oraz opłaca policjantów i strażaków.",
         },
-        source: "https://www.bundesfinanzministerium.de/Content/DE/Standardartikel/Service/Leichte_Sprache/steuern.html",
+        source:
+          "https://www.bundesfinanzministerium.de/Content/DE/Standardartikel/Service/Leichte_Sprache/steuern.html",
       },
       {
         text: {
@@ -336,7 +352,8 @@ export const lesson: Lesson = {
           de: "Steuerprogression bedeutet, dass höhere Einkommen mit einem höheren Steuersatz besteuert werden.",
           pl: "Progresja podatkowa oznacza, że osoby o wyższych dochodach płacą wyższą stawkę podatkową.",
         },
-        source: "https://www.bundesfinanzministerium.de/Content/DE/Standardartikel/Service/Leichte_Sprache/steuern.html",
+        source:
+          "https://www.bundesfinanzministerium.de/Content/DE/Standardartikel/Service/Leichte_Sprache/steuern.html",
       },
       {
         text: {
@@ -344,7 +361,8 @@ export const lesson: Lesson = {
           de: "Arbeitgeber behalten die Lohnsteuer direkt vom Gehalt ein und führen sie an das Finanzamt ab.",
           pl: "Pracodawcy potrącają zaliczki na podatek dochodowy bezpośrednio z wynagrodzenia pracownika i przekazują je do urzędu skarbowego.",
         },
-        source: "https://esth.bundesfinanzministerium.de/lsth/2026/A-Einkommensteuergesetz/VI-Steuererhebung-36-47/2-Steuerabzug-vom-Arbeitslohn-Lohnsteuer-38-42g/Paragraf-38/paragraf-38.html",
+        source:
+          "https://esth.bundesfinanzministerium.de/lsth/2026/A-Einkommensteuergesetz/VI-Steuererhebung-36-47/2-Steuerabzug-vom-Arbeitslohn-Lohnsteuer-38-42g/Paragraf-38/paragraf-38.html",
       },
       {
         text: {

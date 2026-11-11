@@ -10,7 +10,19 @@ const alt = (en: string, de: string, pl: string, lang: DiagramProps["lang"]) =>
   lang === "pl" ? pl : lang === "de" ? de : en;
 
 /** Coins stacked downwards from (x, y). Each coin pops in. */
-function CoinStack({ x, y, n, size = 38, gap = 36 }: { x: number; y: number; n: number; size?: number; gap?: number }) {
+function CoinStack({
+  x,
+  y,
+  n,
+  size = 38,
+  gap = 36,
+}: {
+  x: number;
+  y: number;
+  n: number;
+  size?: number;
+  gap?: number;
+}) {
   return (
     <>
       {Array.from({ length: n }, (_, i) => (
@@ -56,22 +68,32 @@ export function JobsDiagram({ lang, step }: DiagramProps) {
       {step >= 1 && (
         <>
           <Villager who="Finn" x={20} />
-          <Pop><Fish x={152} y={150} size={66} /></Pop>
+          <Pop>
+            <Fish x={152} y={150} size={66} />
+          </Pop>
         </>
       )}
       {step >= 2 && (
         <>
           <Villager who="Bea" x={230} />
-          <Pop><Bread x={362} y={150} size={66} /></Pop>
+          <Pop>
+            <Bread x={362} y={150} size={66} />
+          </Pop>
         </>
       )}
       {step >= 3 && (
         <>
           <Villager who="Sam" x={440} />
-          <Pop><Shoe x={572} y={150} size={62} /></Pop>
+          <Pop>
+            <Shoe x={572} y={150} size={62} />
+          </Pop>
         </>
       )}
-      {step >= 4 && <TermChip x={200} y={8} w={240}>{alt("job", "Beruf", "zawód", lang)}</TermChip>}
+      {step >= 4 && (
+        <TermChip x={200} y={8} w={240}>
+          {alt("job", "Beruf", "zawód", lang)}
+        </TermChip>
+      )}
     </DiagramCanvas>
   );
 }
@@ -101,16 +123,28 @@ export function PayDiagram({ lang, step }: DiagramProps) {
       {step >= 2 && (
         <>
           <Villager who="Pip" x={20} />
-          <Pop><Coin x={228} y={64} size={44} /></Pop>
-          <Pop><Coin x={290} y={64} size={44} /></Pop>
-          <Pop><Coin x={352} y={64} size={44} /></Pop>
+          <Pop>
+            <Coin x={228} y={64} size={44} />
+          </Pop>
+          <Pop>
+            <Coin x={290} y={64} size={44} />
+          </Pop>
+          <Pop>
+            <Coin x={352} y={64} size={44} />
+          </Pop>
           <Arrow from={[170, 128]} to={[420, 128]} />
         </>
       )}
-      {step >= 3 && <TermChip x={200} y={4} w={240}>{alt("pay", "Lohn", "wynagrodzenie", lang)}</TermChip>}
+      {step >= 3 && (
+        <TermChip x={200} y={4} w={240}>
+          {alt("pay", "Lohn", "wynagrodzenie", lang)}
+        </TermChip>
+      )}
       {step >= 4 && (
         <>
-          <Pop><Bread x={290} y={156} size={58} /></Pop>
+          <Pop>
+            <Bread x={290} y={156} size={58} />
+          </Pop>
           <Arrow from={[430, 214]} to={[165, 214]} />
         </>
       )}
@@ -133,19 +167,26 @@ export function HoursDiagram({ lang, step }: DiagramProps) {
       <Villager who="Bea" x={20} />
       {step >= 1 && (
         <>
-          <Pop><Clock x={cx(0)} y={14} size={60} /></Pop>
+          <Pop>
+            <Clock x={cx(0)} y={14} size={60} />
+          </Pop>
           <CoinStack x={cx(0) + 10} y={84} n={3} size={40} gap={42} />
         </>
       )}
       {step >= 2 &&
         [1, 2, 3].map((i) => (
-          <Pop key={i}><Clock x={cx(i)} y={14} size={60} /></Pop>
+          <Pop key={i}>
+            <Clock x={cx(i)} y={14} size={60} />
+          </Pop>
         ))}
-      {step >= 3 && [1, 2, 3].map((i) => <CoinStack key={i} x={cx(i) + 10} y={84} n={3} size={40} gap={42} />)}
+      {step >= 3 &&
+        [1, 2, 3].map((i) => <CoinStack key={i} x={cx(i) + 10} y={84} n={3} size={40} gap={42} />)}
       {step >= 4 && (
         <Pop x={535} y={100}>
           <rect width="95" height="64" rx="32" fill="#f08a2e" />
-          <text className="chip-text" x="47.5" y="42" textAnchor="middle">= 12</text>
+          <text className="chip-text" x="47.5" y="42" textAnchor="middle">
+            = 12
+          </text>
         </Pop>
       )}
     </DiagramCanvas>
@@ -166,20 +207,32 @@ export function WhyDiagram({ lang, step }: DiagramProps) {
       {step >= 1 && (
         <>
           <Villager who="Bea" x={40} size={120} mood={step >= 3 ? "think" : "happy"} />
-          <Pop><Clock x={200} y={16} size={44} /></Pop>
+          <Pop>
+            <Clock x={200} y={16} size={44} />
+          </Pop>
           <CoinStack x={203} y={70} n={3} />
         </>
       )}
       {step >= 2 && (
         <>
           <Villager who="Sam" x={380} size={120} />
-          <Pop><Clock x={560} y={16} size={44} /></Pop>
+          <Pop>
+            <Clock x={560} y={16} size={44} />
+          </Pop>
           <CoinStack x={563} y={70} n={5} />
         </>
       )}
       {step >= 3 && (
         <Bubble x={366} y={4} w={110} h={64} thought tail="bottom-left">
-          <text x="55" y="48" textAnchor="middle" className="chip-text" style={{ fill: "#23383f", fontSize: 40 }}>?</text>
+          <text
+            x="55"
+            y="48"
+            textAnchor="middle"
+            className="chip-text"
+            style={{ fill: "#23383f", fontSize: 40 }}
+          >
+            ?
+          </text>
         </Bubble>
       )}
     </DiagramCanvas>
@@ -206,14 +259,20 @@ export function LearnDiagram({ lang, step }: DiagramProps) {
       {step >= 2 && (
         <>
           {[1, 2, 3].map((n) => (
-            <Pop key={n}><Calendar n={n} x={150 + (n - 1) * 78} y={112} size={70} /></Pop>
+            <Pop key={n}>
+              <Calendar n={n} x={150 + (n - 1) * 78} y={112} size={70} />
+            </Pop>
           ))}
-          <Pop><Shoe x={392} y={112} size={70} /></Pop>
+          <Pop>
+            <Shoe x={392} y={112} size={70} />
+          </Pop>
         </>
       )}
       {step >= 3 && (
         <>
-          <Pop><ArrowIcon dir="up" x={478} y={118} size={48} /></Pop>
+          <Pop>
+            <ArrowIcon dir="up" x={478} y={118} size={48} />
+          </Pop>
           <CoinCluster x={532} y={104} n={5} />
         </>
       )}
@@ -234,28 +293,48 @@ export function FewManyDiagram({ lang, step }: DiagramProps) {
     >
       {step >= 1 && (
         <>
-          <Pop><Person {...FIXER} x={30} y={110} size={120} /></Pop>
-          <Pop><Boat x={166} y={140} size={110} /></Pop>
+          <Pop>
+            <Person {...FIXER} x={30} y={110} size={120} />
+          </Pop>
+          <Pop>
+            <Boat x={166} y={140} size={110} />
+          </Pop>
         </>
       )}
       {step >= 2 && (
         <>
           {[0, 1, 2, 3, 4].map((i) => (
-            <Pop key={i}><Coin x={30 + i * 38} y={22} size={34} /></Pop>
+            <Pop key={i}>
+              <Coin x={30 + i * 38} y={22} size={34} />
+            </Pop>
           ))}
-          <Pop><ArrowIcon dir="up" x={232} y={16} size={44} /></Pop>
+          <Pop>
+            <ArrowIcon dir="up" x={232} y={16} size={44} />
+          </Pop>
         </>
       )}
       {step >= 3 && (
         <>
           <Pop>
-            <path d="M320 20 V260" stroke="#23383f" strokeWidth="3" strokeDasharray="8 8" opacity="0.4" />
+            <path
+              d="M320 20 V260"
+              stroke="#23383f"
+              strokeWidth="3"
+              strokeDasharray="8 8"
+              opacity="0.4"
+            />
           </Pop>
           {[0, 1, 2, 3, 4].map((i) => (
-            <Pop key={i}><Person {...FIXER} x={340 + i * 58} y={160} size={56} /></Pop>
+            <Pop key={i}>
+              <Person {...FIXER} x={340 + i * 58} y={160} size={56} />
+            </Pop>
           ))}
-          <Pop><Coin x={360} y={72} size={34} /></Pop>
-          <Pop><ArrowIcon dir="down" x={410} y={66} size={44} /></Pop>
+          <Pop>
+            <Coin x={360} y={72} size={34} />
+          </Pop>
+          <Pop>
+            <ArrowIcon dir="down" x={410} y={66} size={44} />
+          </Pop>
         </>
       )}
     </DiagramCanvas>
@@ -275,18 +354,30 @@ export function DemandDiagram({ lang, step }: DiagramProps) {
     >
       {step >= 1 && (
         <>
-          <Pop><Person {...FIXER} x={20} y={110} size={120} /></Pop>
-          <Pop><Boat x={150} y={150} size={80} /></Pop>
+          <Pop>
+            <Person {...FIXER} x={20} y={110} size={120} />
+          </Pop>
+          <Pop>
+            <Boat x={150} y={150} size={80} />
+          </Pop>
         </>
       )}
-      {step >= 2 && <TermChip x={200} y={4} w={240}>{alt("demand", "Nachfrage", "popyt", lang)}</TermChip>}
+      {step >= 2 && (
+        <TermChip x={200} y={4} w={240}>
+          {alt("demand", "Nachfrage", "popyt", lang)}
+        </TermChip>
+      )}
       {step >= 3 &&
         [1, 2, 3].map((i) => (
-          <Pop key={i}><Boat x={150 + i * 85} y={150} size={80} /></Pop>
+          <Pop key={i}>
+            <Boat x={150 + i * 85} y={150} size={80} />
+          </Pop>
         ))}
       {step >= 4 && (
         <>
-          <Pop><ArrowIcon dir="up" x={505} y={62} size={46} /></Pop>
+          <Pop>
+            <ArrowIcon dir="up" x={505} y={62} size={46} />
+          </Pop>
           <CoinCluster x={494} y={122} n={5} />
         </>
       )}
@@ -309,21 +400,29 @@ export function KeepDiagram({ lang, step }: DiagramProps) {
         <>
           <Villager who="Pip" x={20} />
           {[0, 1, 2, 3].map((i) => (
-            <Pop key={i}><Coin x={20 + i * 38} y={34} size={36} /></Pop>
+            <Pop key={i}>
+              <Coin x={20 + i * 38} y={34} size={36} />
+            </Pop>
           ))}
         </>
       )}
       {step >= 2 && (
         <>
           <Arrow from={[170, 130]} to={[330, 130]} />
-          <Pop><Bread x={344} y={96} size={80} /></Pop>
+          <Pop>
+            <Bread x={344} y={96} size={80} />
+          </Pop>
         </>
       )}
       {step >= 3 && (
         <>
           <Arrow from={[170, 214]} to={[450, 214]} />
-          <Pop><Piggy x={470} y={110} size={120} /></Pop>
-          <Pop><Coin x={508} y={60} size={40} /></Pop>
+          <Pop>
+            <Piggy x={470} y={110} size={120} />
+          </Pop>
+          <Pop>
+            <Coin x={508} y={60} size={40} />
+          </Pop>
         </>
       )}
     </DiagramCanvas>

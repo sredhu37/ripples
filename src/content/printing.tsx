@@ -257,11 +257,7 @@ export const lesson: Lesson = {
           ),
         },
         {
-          text: T(
-            "Never, not for any reason",
-            "Nie, aus keinem Grund",
-            "Nigdy, z żadnego powodu",
-          ),
+          text: T("Never, not for any reason", "Nie, aus keinem Grund", "Nigdy, z żadnego powodu"),
         },
         {
           text: T(
@@ -304,7 +300,8 @@ export const lesson: Lesson = {
           de: "Inflation ist ein breit angelegter Anstieg der Preise von Waren und Dienstleistungen, der den Wert der Währung mindert.",
           pl: "Inflacja to powszechny wzrost cen towarów i usług, który obniża wartość i siłę nabywczą waluty.",
         },
-        source: "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/what_is_inflation.en.html",
+        source:
+          "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/what_is_inflation.en.html",
       },
       {
         text: {
@@ -312,7 +309,8 @@ export const lesson: Lesson = {
           de: "1923 druckte die Reichsbank immer mehr Banknoten ohne entsprechendes Güterwachstum, was zu enormen Preissteigerungen führte.",
           pl: "W 1923 roku rząd niemiecki pożyczał od Reichsbanku, który drukował masowo banknoty bez pokrycia w towarach, wywołując hiperinflację.",
         },
-        source: "https://www.bundesbank.de/en/tasks/topics/inflation-lessons-learnt-from-history-666006",
+        source:
+          "https://www.bundesbank.de/en/tasks/topics/inflation-lessons-learnt-from-history-666006",
       },
       {
         text: {
@@ -320,7 +318,8 @@ export const lesson: Lesson = {
           de: "Der Brotpreis stieg in Deutschland von 0,80 Mark (1919) auf 201 Milliarden Mark (November 1923). Löhne wurden teils mit Schubkarren abgeholt.",
           pl: "Cena bochenka chleba w Niemczech wzrosła z 0,80 marki w 1919 roku do 201 miliardów marek w listopadzie 1923 roku.",
         },
-        source: "https://www.bundestag.de/parlament/geschichte/100-jahre-weimar/hyperinflation-970722",
+        source:
+          "https://www.bundestag.de/parlament/geschichte/100-jahre-weimar/hyperinflation-970722",
       },
       {
         text: {
@@ -344,7 +343,8 @@ export const lesson: Lesson = {
           de: "Hauptziel unabhängiger Zentralbanken ist die Preisstabilität, geschützt vor politischem Druck zur Geldschöpfung.",
           pl: "Głównym celem niezależnych banków centralnych (jak NBP czy EBC) jest utrzymanie stabilności cen.",
         },
-        source: "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/five_things.en.html",
+        source:
+          "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/five_things.en.html",
       },
     ],
     simplified: [

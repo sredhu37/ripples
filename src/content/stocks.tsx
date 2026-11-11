@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <StocksToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <StocksToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -200,11 +194,7 @@ export const lesson: Lesson = {
     },
     {
       kind: "choice",
-      prompt: T(
-        "What is a dividend?",
-        "Was ist eine Dividende?",
-        "Czym jest dywidenda?",
-      ),
+      prompt: T("What is a dividend?", "Was ist eine Dividende?", "Czym jest dywidenda?"),
       options: [
         {
           text: T(

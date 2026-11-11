@@ -14,7 +14,11 @@ export function calcPatternRecognition(sampleCount: number, hasCleanLabels: bool
   }
 
   const isTrained = accuracy >= 90;
-  const status = isTrained ? ("trained" as const) : accuracy >= 75 ? ("partial" as const) : ("untrained" as const);
+  const status = isTrained
+    ? ("trained" as const)
+    : accuracy >= 75
+      ? ("partial" as const)
+      : ("untrained" as const);
 
   return {
     sampleCount,
@@ -36,10 +40,7 @@ export function AiToy({ lang, mode = "toy", onDone }: AiToyProps) {
   const [hasCleanLabels, setHasCleanLabels] = useState(mode !== "quiz");
   const [showFeedback, setShowFeedback] = useState(false);
 
-  const { accuracy, isTrained, status } = calcPatternRecognition(
-    sampleCount,
-    hasCleanLabels
-  );
+  const { accuracy, isTrained, status } = calcPatternRecognition(sampleCount, hasCleanLabels);
 
   useEffect(() => {
     if (mode === "toy" && isTrained && onDone) {
@@ -77,8 +78,8 @@ export function AiToy({ lang, mode = "toy", onDone }: AiToyProps) {
           {lang === "pl"
             ? "Przykłady treningowe:"
             : lang === "de"
-            ? "Trainingsbeispiele:"
-            : "Training Examples:"}
+              ? "Trainingsbeispiele:"
+              : "Training Examples:"}
         </span>
         <div className="sample-btns">
           {[2, 5, 10].map((count) => (
@@ -111,13 +112,13 @@ export function AiToy({ lang, mode = "toy", onDone }: AiToyProps) {
             ? lang === "pl"
               ? "Zweryfikowane etykiety: Czyste (Jabłka i gruszki)"
               : lang === "de"
-              ? "Verifizierte Beschriftung: Sauber"
-              : "Verified Labels: Clean (Apples & Pears)"
+                ? "Verifizierte Beschriftung: Sauber"
+                : "Verified Labels: Clean (Apples & Pears)"
             : lang === "pl"
-            ? "Błędne / Zaszumione dane (Włącz czyste etykiety)"
-            : lang === "de"
-            ? "Falsche / Fehlerhafte Daten (Saubere Daten aktivieren)"
-            : "Mislabeled / Noisy Data (Turn On Clean Labels)"}
+              ? "Błędne / Zaszumione dane (Włącz czyste etykiety)"
+              : lang === "de"
+                ? "Falsche / Fehlerhafte Daten (Saubere Daten aktivieren)"
+                : "Mislabeled / Noisy Data (Turn On Clean Labels)"}
         </button>
       </div>
 
@@ -128,17 +129,14 @@ export function AiToy({ lang, mode = "toy", onDone }: AiToyProps) {
             {lang === "pl"
               ? "Dokładność rozpoznawania wzorców:"
               : lang === "de"
-              ? "Mustererkennungs-Genauigkeit:"
-              : "Pattern Recognition Accuracy:"}
+                ? "Mustererkennungs-Genauigkeit:"
+                : "Pattern Recognition Accuracy:"}
           </span>
           <strong className="accuracy-val">{accuracy}%</strong>
         </div>
 
         <div className="accuracy-meter-bar">
-          <div
-            className="accuracy-fill"
-            style={{ width: `${accuracy}%` }}
-          />
+          <div className="accuracy-fill" style={{ width: `${accuracy}%` }} />
         </div>
 
         <div className="inference-test-box">
@@ -146,27 +144,27 @@ export function AiToy({ lang, mode = "toy", onDone }: AiToyProps) {
             {lang === "pl"
               ? "Obraz testowy (Okrągły + czerwony owoc):"
               : lang === "de"
-              ? "Testbild (Rund + Rote Frucht):"
-              : "Test Image (Round + Red Fruit):"}
+                ? "Testbild (Rund + Rote Frucht):"
+                : "Test Image (Round + Red Fruit):"}
           </span>
           <strong className="test-prediction">
             {accuracy >= 90
               ? lang === "pl"
                 ? "Rozpoznano: Jabłko (98% pewności)"
                 : lang === "de"
-                ? "Erkannt: Apfel (98% Zuversicht)"
-                : "Predicted: Apple (98% confidence)"
+                  ? "Erkannt: Apfel (98% Zuversicht)"
+                  : "Predicted: Apple (98% confidence)"
               : accuracy >= 75
-              ? lang === "pl"
-                ? "Rozpoznano: Jabłko (80% pewności)"
-                : lang === "de"
-                ? "Erkannt: Apfel (80% Zuversicht)"
-                : "Predicted: Apple (80% confidence)"
-              : lang === "pl"
-              ? "Niepewne: Jabłko czy gruszka? (Dezorientacja)"
-              : lang === "de"
-              ? "Unsicher: Apfel oder Birne? (Verwirrt)"
-              : "Uncertain: Apple or Pear? (Confused)"}
+                ? lang === "pl"
+                  ? "Rozpoznano: Jabłko (80% pewności)"
+                  : lang === "de"
+                    ? "Erkannt: Apfel (80% Zuversicht)"
+                    : "Predicted: Apple (80% confidence)"
+                : lang === "pl"
+                  ? "Niepewne: Jabłko czy gruszka? (Dezorientacja)"
+                  : lang === "de"
+                    ? "Unsicher: Apfel oder Birne? (Verwirrt)"
+                    : "Uncertain: Apple or Pear? (Confused)"}
           </strong>
         </div>
       </div>
@@ -179,13 +177,13 @@ export function AiToy({ lang, mode = "toy", onDone }: AiToyProps) {
               ? lang === "pl"
                 ? "Sukces! 10 czystych przykładów treningowych pozwala algorytmowi rozpoznawać wzorce z dokładnością 98%."
                 : lang === "de"
-                ? "Erfolg! 10 saubere Beispiele ermoeglichen eine 98% zuverlaessige Mustererkennung."
-                : "Success! 10 clean training examples allow the algorithm to spot patterns with 98% accuracy."
+                  ? "Erfolg! 10 saubere Beispiele ermoeglichen eine 98% zuverlaessige Mustererkennung."
+                  : "Success! 10 clean training examples allow the algorithm to spot patterns with 98% accuracy."
               : lang === "pl"
-              ? "Wybierz 10 kart i upewnij się, że Zweryfikowane etykiety są włączone, aby osiągnąć dokładność >90%."
-              : lang === "de"
-              ? "Waehle 10 Karten und saubere Daten, um ueber 90% Genauigkeit zu erreichen."
-              : "Select 10 Cards and make sure Verified Labels are active to reach >90% accuracy."}
+                ? "Wybierz 10 kart i upewnij się, że Zweryfikowane etykiety są włączone, aby osiągnąć dokładność >90%."
+                : lang === "de"
+                  ? "Waehle 10 Karten und saubere Daten, um ueber 90% Genauigkeit zu erreichen."
+                  : "Select 10 Cards and make sure Verified Labels are active to reach >90% accuracy."}
           </div>
         )}
       </div>

@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <CommoditiesToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <CommoditiesToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -283,7 +277,8 @@ export const lesson: Lesson = {
           de: "Agrarrohstoffpreise unterliegen starken Schwankungen durch Witterungsverläufe, Erntemengen und saisonale Wetterereignisse.",
           pl: "Ceny surowców rolnych cechują się wysoką zmiennością wynikającą z warunków pogodowych, suszy oraz wielkości zbiorów raportowanych przez GUS.",
         },
-        source: "https://stat.gov.pl/obszary-tematyczne/rolnictwo-lesnictwo/uprawy-rolne-i-ogrodnicze/",
+        source:
+          "https://stat.gov.pl/obszary-tematyczne/rolnictwo-lesnictwo/uprawy-rolne-i-ogrodnicze/",
       },
       {
         text: {

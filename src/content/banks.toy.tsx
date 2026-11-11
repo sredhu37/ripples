@@ -39,20 +39,40 @@ export function bankIsBalanced(b: Board): boolean {
 const ASKERS: CastName[] = ["Pim", "Pip", "Sam", "Finn"];
 
 /** A grid of coins that pop in as they are added. */
-function CoinGrid({ n, x, y, size, perRow }: { n: number; x: number; y: number; size: number; perRow: number }) {
+function CoinGrid({
+  n,
+  x,
+  y,
+  size,
+  perRow,
+}: {
+  n: number;
+  x: number;
+  y: number;
+  size: number;
+  perRow: number;
+}) {
   return (
     <>
       {Array.from({ length: n }, (_, i) => (
         <Pop key={i}>
-          <Coin x={x + (i % perRow) * (size + 3)} y={y + Math.floor(i / perRow) * (size + 3)} size={size} />
+          <Coin
+            x={x + (i % perRow) * (size + 3)}
+            y={y + Math.floor(i / perRow) * (size + 3)}
+            size={size}
+          />
         </Pop>
       ))}
     </>
   );
 }
 
-const small = { font: "700 16px ui-rounded, 'SF Pro Rounded', Nunito, system-ui, sans-serif" } as const;
-const big = { font: "800 26px ui-rounded, 'SF Pro Rounded', Nunito, system-ui, sans-serif" } as const;
+const small = {
+  font: "700 16px ui-rounded, 'SF Pro Rounded', Nunito, system-ui, sans-serif",
+} as const;
+const big = {
+  font: "800 26px ui-rounded, 'SF Pro Rounded', Nunito, system-ui, sans-serif",
+} as const;
 
 export function BankBoard({ lang, s }: { lang: Lang; s: Board }) {
   const ready = s.saved - s.lent;
@@ -114,7 +134,15 @@ export function BankBoard({ lang, s }: { lang: Lang; s: Board }) {
   const askStart = 320 - (asks * askGap) / 2;
 
   return (
-    <Stage label={lang === "pl" ? "Oszczędzający, bank i Bea" : lang === "de" ? "Sparer, die Bank und Bea" : "Savers, the bank and Bea"}>
+    <Stage
+      label={
+        lang === "pl"
+          ? "Oszczędzający, bank i Bea"
+          : lang === "de"
+            ? "Sparer, die Bank und Bea"
+            : "Savers, the bank and Bea"
+      }
+    >
       <div className="bk">
         <svg
           className="diagram bk-svg"
@@ -124,18 +152,29 @@ export function BankBoard({ lang, s }: { lang: Lang; s: Board }) {
             lang === "pl"
               ? `${s.saved} monet zaoszczędzonych, ${ready} gotowych w banku, ${s.lent} pożyczonych Bei. Oszczędzający proszą o ${asks} monet.`
               : lang === "de"
-              ? `${s.saved} Münzen gespart, ${ready} bereit in der Bank, ${s.lent} an Bea verliehen. Die Sparer wollen ${asks} Münzen.`
-              : `${s.saved} coins saved, ${ready} ready in the bank, ${s.lent} lent to Bea. Savers ask for ${asks} coins.`
+                ? `${s.saved} Münzen gespart, ${ready} bereit in der Bank, ${s.lent} an Bea verliehen. Die Sparer wollen ${asks} Münzen.`
+                : `${s.saved} coins saved, ${ready} ready in the bank, ${s.lent} lent to Bea. Savers ask for ${asks} coins.`
           }
         >
           {/* savers */}
-          <rect x="4" y="4" width="170" height="216" rx="18" fill="#fff" stroke="#23383f" strokeWidth="3" />
+          <rect
+            x="4"
+            y="4"
+            width="170"
+            height="216"
+            rx="18"
+            fill="#fff"
+            stroke="#23383f"
+            strokeWidth="3"
+          />
           <Person {...CAST.Finn} x={44} y={10} size={86} />
           <text x="89" y="138" textAnchor="middle" className="diagram-name">
             {lang === "pl" ? "Oszczędzający" : lang === "de" ? "Sparer" : "Savers"}
           </text>
           <Coin x={28} y={152} size={38} />
-          <text x="76" y="182" fill="#23383f" style={big}>{s.saved}</text>
+          <text x="76" y="182" fill="#23383f" style={big}>
+            {s.saved}
+          </text>
           <text x="89" y="208" textAnchor="middle" fill="#5b7078" style={small}>
             {lang === "pl" ? "zaoszczędzone" : lang === "de" ? "Münzen gespart" : "coins saved"}
           </text>
@@ -145,32 +184,60 @@ export function BankBoard({ lang, s }: { lang: Lang; s: Board }) {
           <Arrow from={[428, 80]} to={[462, 80]} width={4} head={10} />
 
           {/* bank */}
-          <rect x="216" y="4" width="208" height="216" rx="18" fill={bankFill} stroke={bankStroke} strokeWidth="5" />
+          <rect
+            x="216"
+            y="4"
+            width="208"
+            height="216"
+            rx="18"
+            fill={bankFill}
+            stroke={bankStroke}
+            strokeWidth="5"
+          />
           <BankBuilding x={226} y={8} size={84} />
-          <text x="316" y="46" fill="#23383f" style={big}>{ready}</text>
+          <text x="316" y="46" fill="#23383f" style={big}>
+            {ready}
+          </text>
           <text x="316" y="68" fill="#5b7078" style={small}>
             {lang === "pl" ? "w gotowości" : lang === "de" ? "bereit" : "ready"}
           </text>
-          <text x="320" y="110" textAnchor="middle" className="diagram-name">Bank</text>
+          <text x="320" y="110" textAnchor="middle" className="diagram-name">
+            Bank
+          </text>
           <CoinGrid n={ready} x={224} y={120} size={21} perRow={8} />
           {Array.from({ length: asks }, (_, i) => (
             <Pop key={i} x={askStart + i * askGap} y={176}>
-              <Person {...CAST[ASKERS[i % ASKERS.length]]} mood={i < ready ? "happy" : "sad"} size={36} />
+              <Person
+                {...CAST[ASKERS[i % ASKERS.length]]}
+                mood={i < ready ? "happy" : "sad"}
+                size={36}
+              />
             </Pop>
           ))}
 
           {/* Bea */}
-          <rect x="466" y="4" width="170" height="216" rx="18" fill="#fff" stroke="#23383f" strokeWidth="3" />
+          <rect
+            x="466"
+            y="4"
+            width="170"
+            height="216"
+            rx="18"
+            fill="#fff"
+            stroke="#23383f"
+            strokeWidth="3"
+          />
           <Person {...CAST.Bea} x={474} y={14} size={72} />
           <Oven x={554} y={20} size={66} lit={s.lent >= OVEN_NEED} />
-          <text x="551" y="106" textAnchor="middle" className="diagram-name">Bea</text>
+          <text x="551" y="106" textAnchor="middle" className="diagram-name">
+            Bea
+          </text>
           <CoinGrid n={s.lent} x={472} y={116} size={20} perRow={7} />
           <text x="551" y="208" textAnchor="middle" fill="#5b7078" style={small}>
             {lang === "pl"
               ? `pożyczono ${s.lent}`
               : lang === "de"
-              ? `${s.lent} Münzen geliehen`
-              : `${s.lent} coins lent`}
+                ? `${s.lent} Münzen geliehen`
+                : `${s.lent} coins lent`}
           </text>
         </svg>
         <div className="bk-says" role="status">
@@ -209,13 +276,13 @@ export function Controls({ lang, s, set }: { lang: Lang; s: Board; set: (b: Boar
               ? lang === "pl"
                 ? "Uspokój tłum"
                 : lang === "de"
-                ? "Ansturm beenden"
-                : "Calm the crowd down"
+                  ? "Ansturm beenden"
+                  : "Calm the crowd down"
               : lang === "pl"
-              ? "Wywołaj panikę bankową"
-              : lang === "de"
-              ? "Einen Ansturm auslösen"
-              : "Start a bank run"}
+                ? "Wywołaj panikę bankową"
+                : lang === "de"
+                  ? "Einen Ansturm auslösen"
+                  : "Start a bank run"}
           </span>
         </ToyButton>
         <ToyButton onClick={() => set(START)}>

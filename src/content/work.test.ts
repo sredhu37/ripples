@@ -24,7 +24,15 @@ describe("work toy pay", () => {
   });
 
   it("shows the direction of each reason", () => {
-    expect(pushes({ years: 3, people: 2, need: 1 })).toEqual({ years: "up", people: "up", need: "down" });
-    expect(pushes({ years: 2, people: 4, need: 2 })).toEqual({ years: "same", people: "same", need: "same" });
+    expect(pushes({ years: 3, people: 2, need: 1 })).toEqual({
+      years: "up",
+      people: "up",
+      need: "down",
+    });
+    expect(pushes({ years: 2, people: 4, need: 2 })).toEqual({
+      years: "same",
+      people: "same",
+      need: "same",
+    });
   });
 });

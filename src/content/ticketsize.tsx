@@ -203,18 +203,10 @@ export const lesson: Lesson = {
       ),
       options: [
         {
-          text: T(
-            "Bea has higher sales",
-            "Bea hat mehr Umsatz",
-            "Bea ma wyższy przychód",
-          ),
+          text: T("Bea has higher sales", "Bea hat mehr Umsatz", "Bea ma wyższy przychód"),
         },
         {
-          text: T(
-            "Sam has higher sales",
-            "Sam hat mehr Umsatz",
-            "Sam ma wyższy przychód",
-          ),
+          text: T("Sam has higher sales", "Sam hat mehr Umsatz", "Sam ma wyższy przychód"),
         },
         {
           text: T(
@@ -295,7 +287,8 @@ export const lesson: Lesson = {
           de: "Statistische Ämter erfassen Konsumausgaben sowohl für alltägliche Kleinbeträge als auch für seltene, größere Anschaffungen.",
           pl: "Główny Urząd Statystyczny (GUS) bada wydatki gospodarstw domowych, dzieląc je na codzienne zakupy żywności oraz rzadkie zakupy dóbr trwałych.",
         },
-        source: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben/_inhalt.html",
+        source:
+          "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben/_inhalt.html",
       },
       {
         text: {

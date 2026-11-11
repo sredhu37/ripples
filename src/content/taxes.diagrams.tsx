@@ -18,7 +18,13 @@ function RoadStrip({ y, holes = [] }: { y: number; holes?: number[] }) {
   return (
     <Pop>
       <rect x="0" y={y} width="640" height="54" rx="10" fill="#5f6c75" />
-      <path d={`M16 ${y + 27} H624`} stroke="#f4f1e8" strokeWidth="4" strokeDasharray="26 22" strokeLinecap="round" />
+      <path
+        d={`M16 ${y + 27} H624`}
+        stroke="#f4f1e8"
+        strokeWidth="4"
+        strokeDasharray="26 22"
+        strokeLinecap="round"
+      />
       {holes.map((x) => (
         <g key={x}>
           <ellipse cx={x} cy={y + 30} rx="27" ry="12" fill="#434d54" />
@@ -46,7 +52,9 @@ export function RoadDiagram({ lang, step }: DiagramProps) {
           <Cart x={178} y={128} size={90} />
         </Pop>
       )}
-      {step >= 3 && <Villager who="Finn" x={26} y={34} size={110} mood={step >= 4 ? "sad" : "think"} />}
+      {step >= 3 && (
+        <Villager who="Finn" x={26} y={34} size={110} mood={step >= 4 ? "sad" : "think"} />
+      )}
       {step >= 3 && (
         <Pop>
           <Hammer x={118} y={70} size={56} />
@@ -82,24 +90,38 @@ export function NeedsDiagram({ lang, step }: DiagramProps) {
     >
       {step >= 1 && (
         <>
-          <Pop><School x={50} y={6} size={120} /></Pop>
-          <Label x={110} y={150}>{alt("School", "Schule", "Szkoła", lang)}</Label>
+          <Pop>
+            <School x={50} y={6} size={120} />
+          </Pop>
+          <Label x={110} y={150}>
+            {alt("School", "Schule", "Szkoła", lang)}
+          </Label>
         </>
       )}
       {step >= 2 && (
         <>
-          <Pop><FireTruck x={260} y={6} size={120} /></Pop>
-          <Label x={320} y={150}>{alt("Fire brigade", "Feuerwehr", "Straż pożarna", lang)}</Label>
+          <Pop>
+            <FireTruck x={260} y={6} size={120} />
+          </Pop>
+          <Label x={320} y={150}>
+            {alt("Fire brigade", "Feuerwehr", "Straż pożarna", lang)}
+          </Label>
         </>
       )}
       {step >= 3 && (
         <>
-          <Pop><Park x={470} y={6} size={120} /></Pop>
-          <Label x={530} y={150}>{alt("Park", "Park", "Park", lang)}</Label>
+          <Pop>
+            <Park x={470} y={6} size={120} />
+          </Pop>
+          <Label x={530} y={150}>
+            {alt("Park", "Park", "Park", lang)}
+          </Label>
         </>
       )}
       {step >= 4 &&
-        cast.map((who, i) => <Villager key={who} who={who} x={52 + i * 118} y={176} size={86} name="" />)}
+        cast.map((who, i) => (
+          <Villager key={who} who={who} x={52 + i * 118} y={176} size={86} name="" />
+        ))}
     </DiagramCanvas>
   );
 }
@@ -120,7 +142,9 @@ export function PotDiagram({ lang, step }: DiagramProps) {
       {step >= 1 && (
         <>
           <Villager who="Moss" x={20} y={14} size={110} />
-          <TermChip x={152} y={34} w={210}>{alt("mayor", "Bürgermeister", "burmistrz", lang)}</TermChip>
+          <TermChip x={152} y={34} w={210}>
+            {alt("mayor", "Bürgermeister", "burmistrz", lang)}
+          </TermChip>
         </>
       )}
       {step >= 2 && (
@@ -130,25 +154,35 @@ export function PotDiagram({ lang, step }: DiagramProps) {
               <Person {...CAST[who]} size={72} />
             </Pop>
           ))}
-          <Pop><Pot x={470} y={120} size={118} heap={2} /></Pop>
+          <Pop>
+            <Pot x={470} y={120} size={118} heap={2} />
+          </Pop>
           {payers.map((who, i) => {
             const from: [number, number] = [432 + i * 80, 86];
             const to: [number, number] = [500 + i * 30, 146];
             return (
               <g key={`a${who}`}>
                 <Arrow from={from} to={to} width={5} head={12} />
-                <Pop><Coin x={(from[0] + to[0]) / 2 - 13} y={(from[1] + to[1]) / 2 - 13} size={26} /></Pop>
+                <Pop>
+                  <Coin x={(from[0] + to[0]) / 2 - 13} y={(from[1] + to[1]) / 2 - 13} size={26} />
+                </Pop>
               </g>
             );
           })}
         </>
       )}
-      {step >= 3 && <TermChip x={196} y={112} w={190}>{alt("taxes", "Steuern", "podatki", lang)}</TermChip>}
+      {step >= 3 && (
+        <TermChip x={196} y={112} w={190}>
+          {alt("taxes", "Steuern", "podatki", lang)}
+        </TermChip>
+      )}
       {step >= 4 && (
         <>
           <Arrow from={[460, 232]} to={[366, 232]} width={5} head={13} />
           {items.map((Icon, i) => (
-            <Pop key={i}><Icon x={14 + i * 84} y={196} size={68} /></Pop>
+            <Pop key={i}>
+              <Icon x={14 + i * 84} y={196} size={68} />
+            </Pop>
           ))}
         </>
       )}
@@ -169,7 +203,13 @@ export function ShareDiagram({ lang, step }: DiagramProps) {
     >
       <Pop>
         <rect x="0" y="196" width="640" height="54" rx="10" fill="#5f6c75" />
-        <path d="M16 223 H624" stroke="#f4f1e8" strokeWidth="4" strokeDasharray="26 22" strokeLinecap="round" />
+        <path
+          d="M16 223 H624"
+          stroke="#f4f1e8"
+          strokeWidth="4"
+          strokeDasharray="26 22"
+          strokeLinecap="round"
+        />
       </Pop>
       {step >= 1 && (
         <>
@@ -182,7 +222,9 @@ export function ShareDiagram({ lang, step }: DiagramProps) {
       )}
       {step >= 2 && (
         <>
-          <Pop><Pot x={300} y={2} size={100} heap={2} /></Pop>
+          <Pop>
+            <Pot x={300} y={2} size={100} heap={2} />
+          </Pop>
           <Arrow from={[350, 106]} to={[350, 188]} width={6} />
           <Villager who="Bea" x={170} y={104} size={90} name="" />
           <Villager who="Sam" x={420} y={104} size={90} name="" />
@@ -198,13 +240,21 @@ export function EarnDiagram({ lang, step }: DiagramProps) {
   const row = (who: "Finn" | "Bea", y: number, earn: number) => (
     <>
       <Villager who={who} x={8} y={y} size={80} name={who} />
-      <Pop><Coin x={116} y={y + 12} size={54} /></Pop>
-      <Pop><text className="diagram-name" x="178" y={y + 52} style={BIG}>{earn}</text></Pop>
+      <Pop>
+        <Coin x={116} y={y + 12} size={54} />
+      </Pop>
+      <Pop>
+        <text className="diagram-name" x="178" y={y + 52} style={BIG}>
+          {earn}
+        </text>
+      </Pop>
     </>
   );
   const coins = (y: number, n: number) =>
     Array.from({ length: n }, (_, i) => (
-      <Pop key={i}><Coin x={314 + i * 42} y={y + 17} size={38} /></Pop>
+      <Pop key={i}>
+        <Coin x={314 + i * 42} y={y + 17} size={38} />
+      </Pop>
     ));
   return (
     <DiagramCanvas
@@ -231,13 +281,17 @@ export function EarnDiagram({ lang, step }: DiagramProps) {
           <Arrow from={[490, 196]} to={[552, 170]} width={5} head={13} />
         </>
       )}
-      {(step >= 2) && (
-        <Pop><Pot x={540} y={104} size={96} heap={step >= 3 ? 3 : 1} /></Pop>
+      {step >= 2 && (
+        <Pop>
+          <Pot x={540} y={104} size={96} heap={step >= 3 ? 3 : 1} />
+        </Pop>
       )}
       {step >= 4 && (
         <Pop x={230} y={104}>
           <rect width="150" height="46" rx="23" fill="#1b8a9a" />
-          <text className="chip-text" x="75" y="33" textAnchor="middle">4 &gt; 2</text>
+          <text className="chip-text" x="75" y="33" textAnchor="middle">
+            4 &gt; 2
+          </text>
         </Pop>
       )}
     </DiagramCanvas>
@@ -256,27 +310,58 @@ export function BalanceDiagram({ lang, step }: DiagramProps) {
       )}
     >
       {step >= 1 && (
-        <Villager who="Moss" x={268} y={142} size={96} mood={step >= 4 ? "happy" : "think"} name="Moss" />
+        <Villager
+          who="Moss"
+          x={268}
+          y={142}
+          size={96}
+          mood={step >= 4 ? "happy" : "think"}
+          name="Moss"
+        />
       )}
       {step >= 2 && (
         <>
-          <Pop><Pot x={80} y={36} size={84} heap={1} /></Pop>
-          <Pop><Road x={26} y={150} size={80} holes /></Pop>
-          <Pop><School x={126} y={150} size={80} /></Pop>
-          <Pop><NoSign x={26} y={150} size={80} /></Pop>
-          <Pop><NoSign x={126} y={150} size={80} /></Pop>
+          <Pop>
+            <Pot x={80} y={36} size={84} heap={1} />
+          </Pop>
+          <Pop>
+            <Road x={26} y={150} size={80} holes />
+          </Pop>
+          <Pop>
+            <School x={126} y={150} size={80} />
+          </Pop>
+          <Pop>
+            <NoSign x={26} y={150} size={80} />
+          </Pop>
+          <Pop>
+            <NoSign x={126} y={150} size={80} />
+          </Pop>
         </>
       )}
       {step >= 3 && (
         <>
-          <Pop><Pot x={452} y={0} size={140} heap={3} /></Pop>
-          <Pop><Bread x={414} y={150} size={80} /></Pop>
-          <Pop><Shoe x={514} y={150} size={80} /></Pop>
-          <Pop><NoSign x={414} y={150} size={80} /></Pop>
-          <Pop><NoSign x={514} y={150} size={80} /></Pop>
+          <Pop>
+            <Pot x={452} y={0} size={140} heap={3} />
+          </Pop>
+          <Pop>
+            <Bread x={414} y={150} size={80} />
+          </Pop>
+          <Pop>
+            <Shoe x={514} y={150} size={80} />
+          </Pop>
+          <Pop>
+            <NoSign x={414} y={150} size={80} />
+          </Pop>
+          <Pop>
+            <NoSign x={514} y={150} size={80} />
+          </Pop>
         </>
       )}
-      {step >= 4 && <Pop><Scale x={268} y={12} size={104} /></Pop>}
+      {step >= 4 && (
+        <Pop>
+          <Scale x={268} y={12} size={104} />
+        </Pop>
+      )}
     </DiagramCanvas>
   );
 }
@@ -305,8 +390,12 @@ export function VoteDiagram({ lang, step }: DiagramProps) {
           )}
           {step >= 2 && (
             <>
-              <TermChip x={8} y={4} w={176}>{alt("vote", "wählen", "głosować", lang)}</TermChip>
-              <Pop><BallotBox x={40} y={60} size={110} /></Pop>
+              <TermChip x={8} y={4} w={176}>
+                {alt("vote", "wählen", "głosować", lang)}
+              </TermChip>
+              <Pop>
+                <BallotBox x={40} y={60} size={110} />
+              </Pop>
               <Arrow from={[87, 188]} to={[87, 152]} width={5} head={12} />
             </>
           )}
@@ -315,7 +404,9 @@ export function VoteDiagram({ lang, step }: DiagramProps) {
               <Arrow from={[158, 108]} to={[250, 80]} width={5} head={13} />
               <Villager who="Pim" x={404} y={16} size={100} name="" />
               <Villager who="Pip" x={504} y={16} size={100} name="" />
-              <Label x={504} y={148}>{alt("council", "Rat", "rada", lang)}</Label>
+              <Label x={504} y={148}>
+                {alt("council", "Rat", "rada", lang)}
+              </Label>
             </>
           )}
         </>
@@ -324,7 +415,16 @@ export function VoteDiagram({ lang, step }: DiagramProps) {
         <>
           <Villager who="Moss" x={50} y={64} size={130} />
           <Pop>
-            <rect x="244" y="22" width="372" height="236" rx="22" fill="#fff" stroke="#23383f" strokeWidth="5" />
+            <rect
+              x="244"
+              y="22"
+              width="372"
+              height="236"
+              rx="22"
+              fill="#fff"
+              stroke="#23383f"
+              strokeWidth="5"
+            />
             {[Road, School, FireTruck, Park].map((Icon, i) => (
               <Icon key={i} x={262 + i * 88} y={40} size={72} />
             ))}

@@ -5,11 +5,7 @@ import "./tools.css";
 
 export type PowerSource = "muscle" | "waterwheel" | "steam";
 
-export function calcSteamPower(
-  source: PowerSource,
-  hasCoal: boolean,
-  hasWater: boolean
-) {
+export function calcSteamPower(source: PowerSource, hasCoal: boolean, hasWater: boolean) {
   if (source === "muscle") {
     return { power: 10, isContinuous: false, status: "muscle" as const };
   }
@@ -57,57 +53,57 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
     lang === "pl"
       ? "Siła mięśni (10 kW)"
       : lang === "de"
-      ? "Muskelkraft (10 kW)"
-      : "Muscle Power (10 kW)";
+        ? "Muskelkraft (10 kW)"
+        : "Muscle Power (10 kW)";
 
   const waterwheelLabel =
     lang === "pl"
       ? "Koło wodne (30 kW)"
       : lang === "de"
-      ? "Wasserrad (30 kW)"
-      : "Waterwheel (30 kW)";
+        ? "Wasserrad (30 kW)"
+        : "Waterwheel (30 kW)";
 
   const steamLabel =
     lang === "pl"
       ? "Maszyna parowa (100 kW)"
       : lang === "de"
-      ? "Dampfmaschine (100 kW)"
-      : "Steam Engine (100 kW)";
+        ? "Dampfmaschine (100 kW)"
+        : "Steam Engine (100 kW)";
 
   const coalBurningText =
     lang === "pl"
       ? "Piec: Węgiel płonie"
       : lang === "de"
-      ? "Ofen: Kohle brennt"
-      : "Furnace: Coal Burning";
+        ? "Ofen: Kohle brennt"
+        : "Furnace: Coal Burning";
 
   const addCoalText =
     lang === "pl"
       ? "Dodaj węgiel do pieca"
       : lang === "de"
-      ? "Kohle in den Ofen geben"
-      : "Add Coal to Furnace";
+        ? "Kohle in den Ofen geben"
+        : "Add Coal to Furnace";
 
   const waterFullText =
     lang === "pl"
       ? "Kocioł: Woda napełniona"
       : lang === "de"
-      ? "Kessel: Wasser gefuellt"
-      : "Boiler: Water Full";
+        ? "Kessel: Wasser gefuellt"
+        : "Boiler: Water Full";
 
   const fillWaterText =
     lang === "pl"
       ? "Napełnij kocioł wodą"
       : lang === "de"
-      ? "Kessel mit Wasser fuellen"
-      : "Fill Boiler with Water";
+        ? "Kessel mit Wasser fuellen"
+        : "Fill Boiler with Water";
 
   const powerOutputHeader =
     lang === "pl"
       ? "Mechaniczna moc wyjściowa:"
       : lang === "de"
-      ? "Mechanische Leistung:"
-      : "Mechanical Output Power:";
+        ? "Mechanische Leistung:"
+        : "Mechanical Output Power:";
 
   return (
     <div className="tools-wrap">
@@ -186,8 +182,8 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
               {lang === "pl"
                 ? "Ograniczona szybkim zmęczeniem ludzi i zwierząt roboczych."
                 : lang === "de"
-                ? "Begrenzt durch Ermuedung von Mensch und Tier."
-                : "Limited by human and animal fatigue."}
+                  ? "Begrenzt durch Ermuedung von Mensch und Tier."
+                  : "Limited by human and animal fatigue."}
             </span>
           )}
           {source === "waterwheel" && (
@@ -195,8 +191,8 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
               {lang === "pl"
                 ? "Czysta energia, lecz zamiera w czasie letnich susz i mroźnych zim."
                 : lang === "de"
-                ? "Sauber, aber abhaengig von Flusspegel und Jahreszeiten."
-                : "Clean, but ceases during dry summers and icy winters."}
+                  ? "Sauber, aber abhaengig von Flusspegel und Jahreszeiten."
+                  : "Clean, but ceases during dry summers and icy winters."}
             </span>
           )}
           {source === "steam" && isContinuous && (
@@ -204,8 +200,8 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
               {lang === "pl"
                 ? "Ciągła praca w dzień i w nocy napędza potężne maszyny fabryczne i pociągi!"
                 : lang === "de"
-                ? "Dauerhafte Kraft treibt Fabriken und Zuege Tag und Nacht an!"
-                : "Continuous day and night power drives heavy factory machines!"}
+                  ? "Dauerhafte Kraft treibt Fabriken und Zuege Tag und Nacht an!"
+                  : "Continuous day and night power drives heavy factory machines!"}
             </span>
           )}
           {source === "steam" && !isContinuous && (
@@ -213,8 +209,8 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
               {lang === "pl"
                 ? "Wymaga zarówno węgla w palenisku, jak i wody w kotle, by wytworzyć parę."
                 : lang === "de"
-                ? "Benoetigt Kohle und Wasser, um Dampfdruck aufzubauen."
-                : "Needs both coal heat and water to create steam pressure."}
+                  ? "Benoetigt Kohle und Wasser, um Dampfdruck aufzubauen."
+                  : "Needs both coal heat and water to create steam pressure."}
             </span>
           )}
         </div>
@@ -228,13 +224,13 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
               ? lang === "pl"
                 ? "Znakomicie! Maszyna parowa dostarcza niezmordowaną, ciągłą moc niezależnie od pory roku i pogody."
                 : lang === "de"
-                ? "Hervorragend! Die Dampfmaschine liefert unermuedliche Kraft unabhaengig vom Wetter."
-                : "Excellent! The steam engine provides tireless continuous power regardless of season."
+                  ? "Hervorragend! Die Dampfmaschine liefert unermuedliche Kraft unabhaengig vom Wetter."
+                  : "Excellent! The steam engine provides tireless continuous power regardless of season."
               : lang === "pl"
-              ? "Wybierz Maszynę parową i dodaj do niej zarówno węgiel, jak i wodę."
-              : lang === "de"
-              ? "Waehle Dampfmaschine und fuege Kohle und Wasser hinzu."
-              : "Select Steam Engine and add both coal and water."}
+                ? "Wybierz Maszynę parową i dodaj do niej zarówno węgiel, jak i wodę."
+                : lang === "de"
+                  ? "Waehle Dampfmaschine und fuege Kohle und Wasser hinzu."
+                  : "Select Steam Engine and add both coal and water."}
           </div>
         )}
       </div>

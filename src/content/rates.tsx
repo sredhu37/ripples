@@ -113,16 +113,15 @@ function Thermostat({ lang, sim, setSim }: { lang: Lang; sim: Sim; setSim: (s: S
     lang === "pl"
       ? "Stopy, które ludzie w mieście teraz odczuwają"
       : lang === "de"
-      ? "Zinsen, die die Leute jetzt spüren"
-      : "Rates people in town feel now";
+        ? "Zinsen, die die Leute jetzt spüren"
+        : "Rates people in town feel now";
   const catchingUpText =
     lang === "pl"
       ? "Stopy dopiero powoli docierają..."
       : lang === "de"
-      ? "Die Zinsen kommen erst langsam an..."
-      : "Rates are still catching up...";
-  const startAgainText =
-    lang === "pl" ? "Od nowa" : lang === "de" ? "Von vorn" : "Start again";
+        ? "Die Zinsen kommen erst langsam an..."
+        : "Rates are still catching up...";
+  const startAgainText = lang === "pl" ? "Od nowa" : lang === "de" ? "Von vorn" : "Start again";
   const pricesRisingLabel =
     lang === "pl" ? "Wzrost cen" : lang === "de" ? "Preise steigen" : "Prices rising";
   const slowlyLabel = lang === "pl" ? "wolno" : lang === "de" ? "langsam" : "slowly";
@@ -549,7 +548,8 @@ export const lesson: Lesson = {
           de: "Die EZB ist die Zentralbank für den Euro; ihr vorrangiges Ziel ist die Gewährleistung von Preisstabilität im Euroraum.",
           pl: "Narodowy Bank Polski (NBP) wraz z Radą Polityki Pieniężnej (RPP) odpowiada za stabilność polskiego złotego i poziom stóp procentowych.",
         },
-        source: "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/five_things.en.html",
+        source:
+          "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/five_things.en.html",
       },
       {
         text: {
@@ -557,7 +557,8 @@ export const lesson: Lesson = {
           de: "Die Zentralbank legt die Leitzinsen fest, an denen sich die Kreditzinsen und Sparzinsen der Geschäftsbanken orientieren.",
           pl: "Bank centralny ustala stopy referencyjne, które wyznaczają poziom oprocentowania kredytów i depozytów w bankach komercyjnych.",
         },
-        source: "https://www.ecb.europa.eu/ecb-and-you/explainers/html/interest-rates-changes.en.html",
+        source:
+          "https://www.ecb.europa.eu/ecb-and-you/explainers/html/interest-rates-changes.en.html",
       },
       {
         text: {
@@ -565,7 +566,8 @@ export const lesson: Lesson = {
           de: "Höhere Leitzinsen dämpfen die Nachfrage und bremsen die Inflation; Zinssenkungen kurbeln Investitionen und Konsum an.",
           pl: "Podwyżka stóp chłodzi popyt i tłumi inflację, a obniżka pobudza akcję kredytową i ożywia gospodarkę.",
         },
-        source: "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/five_things.en.html",
+        source:
+          "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/five_things.en.html",
       },
       {
         text: {

@@ -12,7 +12,19 @@ const alt = (en: string, de: string, pl: string, lang: Lang) =>
   lang === "pl" ? pl : lang === "de" ? de : en;
 
 /** A price tag with 1 or 2 coins on it, or an arrow (a price that rises or falls). */
-function PriceTag({ x, y, size = 100, coins, trend }: { x: number; y: number; size?: number; coins?: 1 | 2; trend?: ReactNode }) {
+function PriceTag({
+  x,
+  y,
+  size = 100,
+  coins,
+  trend,
+}: {
+  x: number;
+  y: number;
+  size?: number;
+  coins?: 1 | 2;
+  trend?: ReactNode;
+}) {
   return (
     <Pop x={x} y={y}>
       <Tag size={size}>
@@ -51,16 +63,25 @@ export function LastSummerDiagram({ lang, step }: DiagramProps) {
       {step >= 2 && (
         <>
           <Seller x={490} />
-          <Counter x={440} goods={[0, 1, 2].map((i) => <IceCream key={i} x={10 + i * 58} y={160} size={56} />)} />
+          <Counter
+            x={440}
+            goods={[0, 1, 2].map((i) => (
+              <IceCream key={i} x={10 + i * 58} y={160} size={56} />
+            ))}
+          />
         </>
       )}
       {step >= 3 && <PriceTag x={296} y={6} size={100} coins={1} />}
       {step >= 4 && (
         <>
           <Arrow from={[165, 156]} to={[420, 156]} />
-          <Pop><Coin x={282} y={112} size={36} /></Pop>
+          <Pop>
+            <Coin x={282} y={112} size={36} />
+          </Pop>
           <Arrow from={[420, 232]} to={[165, 232]} />
-          <Pop><IceCream x={274} y={178} size={46} /></Pop>
+          <Pop>
+            <IceCream x={274} y={178} size={46} />
+          </Pop>
         </>
       )}
     </DiagramCanvas>
@@ -81,20 +102,29 @@ export function TwoCoinsDiagram({ lang, step }: DiagramProps) {
       {step >= 1 && (
         <>
           <Seller x={490} />
-          <Counter x={440} goods={[0, 1, 2].map((i) => <IceCream key={i} x={10 + i * 58} y={160} size={56} />)} />
+          <Counter
+            x={440}
+            goods={[0, 1, 2].map((i) => (
+              <IceCream key={i} x={10 + i * 58} y={160} size={56} />
+            ))}
+          />
           <PriceTag x={350} y={20} size={100} coins={2} />
         </>
       )}
       {step >= 2 && (
         <>
           <Villager who="Finn" x={20} mood={step >= 3 ? "sad" : "think"} />
-          <Pop><Coin x={150} y={100} size={46} /></Pop>
+          <Pop>
+            <Coin x={150} y={100} size={46} />
+          </Pop>
         </>
       )}
       {step >= 3 && (
         <>
           <Arrow from={[205, 126]} to={[250, 126]} />
-          <Pop><IceCream half x={258} y={84} size={84} /></Pop>
+          <Pop>
+            <IceCream half x={258} y={84} size={84} />
+          </Pop>
         </>
       )}
     </DiagramCanvas>
@@ -115,7 +145,9 @@ export function ManyWantDiagram({ lang, step }: DiagramProps) {
       {step >= 1 && (
         <>
           <Bubble x={20} y={8} w={250} h={68} thought tail="bottom-left">
-            {[0, 1, 2].map((i) => <IceCream key={i} x={28 + i * 72} y={6} size={56} />)}
+            {[0, 1, 2].map((i) => (
+              <IceCream key={i} x={28 + i * 72} y={6} size={56} />
+            ))}
           </Bubble>
           <Villager who="Finn" x={0} y={116} size={96} name="" />
           <Villager who="Bea" x={100} y={116} size={96} name="" />
@@ -125,13 +157,20 @@ export function ManyWantDiagram({ lang, step }: DiagramProps) {
       {step >= 2 && (
         <>
           <Seller x={500} y={114} size={100} />
-          <Counter x={420} goods={[0, 1].map((i) => <IceCream key={i} x={10 + i * 58} y={160} size={56} />)} />
+          <Counter
+            x={420}
+            goods={[0, 1].map((i) => (
+              <IceCream key={i} x={10 + i * 58} y={160} size={56} />
+            ))}
+          />
         </>
       )}
       {step >= 3 && (
         <>
           <PriceTag x={316} y={96} size={100} coins={2} />
-          <Pop><Trend x={332} y={20} size={66} /></Pop>
+          <Pop>
+            <Trend x={332} y={20} size={66} />
+          </Pop>
         </>
       )}
     </DiagramCanvas>
@@ -151,10 +190,16 @@ export function CostsDiagram({ lang, step }: DiagramProps) {
     >
       {step >= 1 && (
         <>
-          <Pop><Milk x={50} y={30} size={100} /></Pop>
-          <Pop><Sugar x={170} y={30} size={100} /></Pop>
+          <Pop>
+            <Milk x={50} y={30} size={100} />
+          </Pop>
+          <Pop>
+            <Sugar x={170} y={30} size={100} />
+          </Pop>
           <Arrow from={[290, 82]} to={[372, 82]} />
-          <Pop><IceCream x={390} y={14} size={120} /></Pop>
+          <Pop>
+            <IceCream x={390} y={14} size={120} />
+          </Pop>
         </>
       )}
       {step >= 2 && (
@@ -166,7 +211,9 @@ export function CostsDiagram({ lang, step }: DiagramProps) {
       {step >= 3 && (
         <>
           <PriceTag x={390} y={156} size={100} coins={2} />
-          <Pop><Trend x={506} y={170} size={64} /></Pop>
+          <Pop>
+            <Trend x={506} y={170} size={64} />
+          </Pop>
         </>
       )}
     </DiagramCanvas>
@@ -187,20 +234,34 @@ export function InflationDiagram({ lang, step }: DiagramProps) {
     >
       {step >= 1 && (
         <>
-          <Pop><IceCream x={100} y={26} size={96} /></Pop>
-          <Pop><Bread x={272} y={28} size={96} /></Pop>
-          <Pop><Shoe x={444} y={28} size={96} /></Pop>
+          <Pop>
+            <IceCream x={100} y={26} size={96} />
+          </Pop>
+          <Pop>
+            <Bread x={272} y={28} size={96} />
+          </Pop>
+          <Pop>
+            <Shoe x={444} y={28} size={96} />
+          </Pop>
           <PriceTag x={160} y={72} size={64} trend={<Trend x={42} y={26} size={48} />} />
           <PriceTag x={332} y={72} size={64} trend={<Trend x={42} y={26} size={48} />} />
           <PriceTag x={504} y={72} size={64} trend={<Trend x={42} y={26} size={48} />} />
         </>
       )}
-      {step >= 2 && <TermChip x={200} y={140} w={240}>{word}</TermChip>}
+      {step >= 2 && (
+        <TermChip x={200} y={140} w={240}>
+          {word}
+        </TermChip>
+      )}
       {step >= 3 && (
         <>
-          <Pop><Coin x={186} y={204} size={60} /></Pop>
+          <Pop>
+            <Coin x={186} y={204} size={60} />
+          </Pop>
           <Arrow from={[262, 234]} to={[330, 234]} />
-          <Pop><IceCream half x={346} y={194} size={76} /></Pop>
+          <Pop>
+            <IceCream half x={346} y={194} size={76} />
+          </Pop>
         </>
       )}
     </DiagramCanvas>
@@ -209,7 +270,9 @@ export function InflationDiagram({ lang, step }: DiagramProps) {
 
 const fading = (list: number[], x0: number, y: number, size: number, gap: number, key: string) =>
   list.map((o, i) => (
-    <Pop key={`${key}${i}`}><IceCream opacity={o} x={x0 + i * gap} y={y} size={size} /></Pop>
+    <Pop key={`${key}${i}`}>
+      <IceCream opacity={o} x={x0 + i * gap} y={y} size={size} />
+    </Pop>
   ));
 
 /** Beat 6: Sam still gets 10 coins; a little inflation is normal, a lot is hard. */
@@ -226,10 +289,14 @@ export function SamDiagram({ lang, step }: DiagramProps) {
       {step >= 1 && (
         <>
           <Villager who="Sam" x={10} y={70} size={110} />
-          <Pop><Shoe x={124} y={140} size={52} /></Pop>
+          <Pop>
+            <Shoe x={124} y={140} size={52} />
+          </Pop>
           {[0, 1].map((r) =>
             [0, 1, 2, 3, 4].map((c) => (
-              <Pop key={`${r}${c}`}><Coin x={196 + c * 38} y={64 + r * 42} size={36} /></Pop>
+              <Pop key={`${r}${c}`}>
+                <Coin x={196 + c * 38} y={64 + r * 42} size={36} />
+              </Pop>
             )),
           )}
         </>
@@ -238,14 +305,22 @@ export function SamDiagram({ lang, step }: DiagramProps) {
         <>
           <Arrow from={[390, 106]} to={[436, 106]} />
           {step === 2 && fading([1, 1, 1, 0.5], 446, 80, 42, 46, "a")}
-          {step === 2 && <PriceTag x={496} y={150} size={72} trend={<Trend x={42} y={26} size={48} />} />}
+          {step === 2 && (
+            <PriceTag x={496} y={150} size={72} trend={<Trend x={42} y={26} size={48} />} />
+          )}
         </>
       )}
       {step >= 3 && (
         <>
           {fading([1, 0.55, 0.28, 0.1], 446, 80, 42, 46, "b")}
           {[0, 1, 2].map((i) => (
-            <PriceTag key={i} x={452 + i * 62} y={150} size={62} trend={<Trend x={42} y={26} size={48} />} />
+            <PriceTag
+              key={i}
+              x={452 + i * 62}
+              y={150}
+              size={62}
+              trend={<Trend x={42} y={26} size={48} />}
+            />
           ))}
         </>
       )}
@@ -267,20 +342,31 @@ export function JarDiagram({ lang, step }: DiagramProps) {
       {step >= 1 && (
         <>
           <Villager who="Finn" x={10} y={100} size={110} />
-          <Pop><Jar x={140} y={130} size={100} /></Pop>
+          <Pop>
+            <Jar x={140} y={130} size={100} />
+          </Pop>
           <Pop x={190} y={254}>
-            <text className="diagram-name" textAnchor="middle">10</text>
+            <text className="diagram-name" textAnchor="middle">
+              10
+            </text>
           </Pop>
         </>
       )}
       {step >= 2 && (
         <>
-          <Pop><Clock x={262} y={112} size={56} /></Pop>
+          <Pop>
+            <Clock x={262} y={112} size={56} />
+          </Pop>
           <Arrow from={[250, 196]} to={[330, 196]} />
           {[0, 1].map((r) =>
             [0, 1, 2, 3, 4].map((c) => (
               <Pop key={`${r}${c}`}>
-                <IceCream opacity={r * 5 + c >= 7 ? 0.18 : 1} x={346 + c * 54} y={96 + r * 62} size={50} />
+                <IceCream
+                  opacity={r * 5 + c >= 7 ? 0.18 : 1}
+                  x={346 + c * 54}
+                  y={96 + r * 62}
+                  size={50}
+                />
               </Pop>
             )),
           )}
@@ -290,7 +376,9 @@ export function JarDiagram({ lang, step }: DiagramProps) {
         <Bubble x={150} y={6} w={280} h={70} thought tail="bottom-left">
           <Coin x={16} y={14} size={42} />
           <Trend down={false} color={FALL} x={62} y={10} size={50} />
-          <text x="140" y="46" textAnchor="middle" className="diagram-name">=</text>
+          <text x="140" y="46" textAnchor="middle" className="diagram-name">
+            =
+          </text>
           <Tag x={168} y={6} size={56} />
           <Trend x={222} y={10} size={50} color={RISE} />
         </Bubble>
@@ -313,10 +401,18 @@ export function DeflationDiagram({ lang, step }: DiagramProps) {
     >
       {step >= 1 && (
         <>
-          <TermChip x={200} y={4} w={240}>{word}</TermChip>
-          <Pop><IceCream x={110} y={70} size={66} /></Pop>
-          <Pop><Bread x={287} y={70} size={66} /></Pop>
-          <Pop><Shoe x={464} y={70} size={66} /></Pop>
+          <TermChip x={200} y={4} w={240}>
+            {word}
+          </TermChip>
+          <Pop>
+            <IceCream x={110} y={70} size={66} />
+          </Pop>
+          <Pop>
+            <Bread x={287} y={70} size={66} />
+          </Pop>
+          <Pop>
+            <Shoe x={464} y={70} size={66} />
+          </Pop>
           <PriceTag x={160} y={100} size={52} trend={<Trend down x={42} y={26} size={48} />} />
           <PriceTag x={337} y={100} size={52} trend={<Trend down x={42} y={26} size={48} />} />
           <PriceTag x={514} y={100} size={52} trend={<Trend down x={42} y={26} size={48} />} />
@@ -332,7 +428,9 @@ export function DeflationDiagram({ lang, step }: DiagramProps) {
         <>
           <Villager who="Pip" x={380} y={152} size={100} mood="sad" name="" />
           <Arrow from={[490, 206]} to={[548, 206]} />
-          <Pop><Door x={556} y={150} size={90} /></Pop>
+          <Pop>
+            <Door x={556} y={150} size={90} />
+          </Pop>
         </>
       )}
     </DiagramCanvas>

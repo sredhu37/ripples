@@ -14,11 +14,7 @@ export function calcSupplyDemand(price: number, supplyCount = 6) {
   // At price 1: 15 buyers, price 4: 6 buyers, price 8: 1 buyer
   const demandCount = Math.max(1, Math.round(18 - 3 * price));
   const status =
-    demandCount > supplyCount
-      ? "shortage"
-      : demandCount < supplyCount
-      ? "surplus"
-      : "equilibrium";
+    demandCount > supplyCount ? "shortage" : demandCount < supplyCount ? "surplus" : "equilibrium";
   return { demandCount, supplyCount, status };
 }
 
@@ -39,8 +35,8 @@ export function SupplyDemandToy({ lang, mode = "toy", onDone }: SupplyDemandToyP
     demandCount > targetSupply
       ? "shortage"
       : demandCount < targetSupply
-      ? "surplus"
-      : "equilibrium";
+        ? "surplus"
+        : "equilibrium";
 
   useEffect(() => {
     if (mode === "toy") {
@@ -69,13 +65,11 @@ export function SupplyDemandToy({ lang, mode = "toy", onDone }: SupplyDemandToyP
     lang === "pl"
       ? "Złów w porcie (Podaż)"
       : lang === "de"
-      ? "Fang am Hafen (Angebot)"
-      : "Harbor Catch (Supply)";
+        ? "Fang am Hafen (Angebot)"
+        : "Harbor Catch (Supply)";
 
-  const fishWord =
-    lang === "pl" ? "Ryb" : lang === "de" ? "Fische" : "Fish";
-  const fishSingle =
-    lang === "pl" ? "Ryba" : lang === "de" ? "Fisch" : "Fish";
+  const fishWord = lang === "pl" ? "Ryb" : lang === "de" ? "Fische" : "Fish";
+  const fishSingle = lang === "pl" ? "Ryba" : lang === "de" ? "Fisch" : "Fish";
 
   const marketPriceTitle =
     lang === "pl" ? "Cena rynkowa" : lang === "de" ? "Marktpreis" : "Market Price";
@@ -87,48 +81,46 @@ export function SupplyDemandToy({ lang, mode = "toy", onDone }: SupplyDemandToyP
     lang === "pl"
       ? "Niedobór! Za mało ryb"
       : lang === "de"
-      ? "Mangel! Nicht genug Fisch"
-      : "Shortage! Not enough fish";
+        ? "Mangel! Nicht genug Fisch"
+        : "Shortage! Not enough fish";
 
   const surplusBadge =
     lang === "pl"
       ? "Nadwyżka! Niesprzedane ryby"
       : lang === "de"
-      ? "Überschuss! Fisch bleibt liegen"
-      : "Surplus! Fish unsold";
+        ? "Überschuss! Fisch bleibt liegen"
+        : "Surplus! Fish unsold";
 
   const equilibriumBadge =
     lang === "pl"
       ? "Równowaga! Idealny balans"
       : lang === "de"
-      ? "Gleichgewicht! Perfekte Balance"
-      : "Equilibrium! Perfect balance";
+        ? "Gleichgewicht! Perfekte Balance"
+        : "Equilibrium! Perfect balance";
 
   const demandTitle =
     lang === "pl"
       ? "Głodni kupcy (Popyt)"
       : lang === "de"
-      ? "Hungrige Käufer (Nachfrage)"
-      : "Hungry Buyers (Demand)";
+        ? "Hungrige Käufer (Nachfrage)"
+        : "Hungry Buyers (Demand)";
 
-  const buyerWord =
-    lang === "pl" ? "Kupców" : lang === "de" ? "Käufer" : "Buyers";
-  const buyerSingle =
-    lang === "pl" ? "Kupiec" : lang === "de" ? "Käufer" : "Buyer";
+  const buyerWord = lang === "pl" ? "Kupców" : lang === "de" ? "Käufer" : "Buyers";
+  const buyerSingle = lang === "pl" ? "Kupiec" : lang === "de" ? "Käufer" : "Buyer";
 
   const successFeedback =
     lang === "pl"
       ? "Każda ryba sprzedana po uczciwej cenie! Rynek jest zrównoważony."
       : lang === "de"
-      ? "Jeder Fisch wird zu einem fairen Preis verkauft! Der Markt ist geräumt."
-      : "Every fish is sold at a fair price! Market is cleared.";
+        ? "Jeder Fisch wird zu einem fairen Preis verkauft! Der Markt ist geräumt."
+        : "Every fish is sold at a fair price! Market is cleared.";
 
   const adjustFeedback =
     lang === "pl"
       ? "Rynek nie jest jeszcze w równowadze. Dostosuj suwak ceny."
       : lang === "de"
-      ? "Der Markt ist noch nicht im Gleichgewicht. Passe den Schieberegler an."
-      : "The market is not balanced yet. Adjust the price slider.";
+        ? "Der Markt ist noch nicht im Gleichgewicht. Passe den Schieberegler an."
+        : "The market is not balanced yet. Adjust the price slider.";
 
   return (
     <div className="supplydemand-wrap">
@@ -142,7 +134,10 @@ export function SupplyDemandToy({ lang, mode = "toy", onDone }: SupplyDemandToyP
             {Array.from({ length: targetSupply }).map((_, i) => (
               <span key={i} className="supplydemand-token" title={fishSingle}>
                 <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
-                  <path d="M2 10 C5 5 14 5 17 8 L19 6 V14 L17 12 C14 15 5 15 2 10 Z" fill="#0284c7" />
+                  <path
+                    d="M2 10 C5 5 14 5 17 8 L19 6 V14 L17 12 C14 15 5 15 2 10 Z"
+                    fill="#0284c7"
+                  />
                 </svg>
               </span>
             ))}
@@ -165,19 +160,13 @@ export function SupplyDemandToy({ lang, mode = "toy", onDone }: SupplyDemandToyP
           />
           <div className="supplydemand-status-label">
             {status === "shortage" && (
-              <span className="supplydemand-status-badge shortage">
-                {shortageBadge}
-              </span>
+              <span className="supplydemand-status-badge shortage">{shortageBadge}</span>
             )}
             {status === "surplus" && (
-              <span className="supplydemand-status-badge surplus">
-                {surplusBadge}
-              </span>
+              <span className="supplydemand-status-badge surplus">{surplusBadge}</span>
             )}
             {status === "equilibrium" && (
-              <span className="supplydemand-status-badge balanced">
-                {equilibriumBadge}
-              </span>
+              <span className="supplydemand-status-badge balanced">{equilibriumBadge}</span>
             )}
           </div>
         </div>
@@ -196,7 +185,9 @@ export function SupplyDemandToy({ lang, mode = "toy", onDone }: SupplyDemandToyP
                 </svg>
               </span>
             ))}
-            {demandCount > 12 && <span className="supplydemand-buyer-more">+{demandCount - 12}</span>}
+            {demandCount > 12 && (
+              <span className="supplydemand-buyer-more">+{demandCount - 12}</span>
+            )}
           </div>
         </div>
       </div>
@@ -204,7 +195,9 @@ export function SupplyDemandToy({ lang, mode = "toy", onDone }: SupplyDemandToyP
       <div className="supplydemand-actions">
         <CheckButton lang={lang} onClick={handleCheck} />
         {showFeedback && (
-          <div className={`supplydemand-feedback-msg ${status === "equilibrium" ? "success" : "warning"}`}>
+          <div
+            className={`supplydemand-feedback-msg ${status === "equilibrium" ? "success" : "warning"}`}
+          >
             {status === "equilibrium" ? successFeedback : adjustFeedback}
           </div>
         )}

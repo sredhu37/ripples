@@ -10,7 +10,11 @@ export function calcAutomationSafety(speed: number, hasSensors: boolean, hasCurt
   const safetyScore = Math.max(0, baseScore - penalty);
   const isSafe = safetyScore === 100;
   const isOptimal = isSafe && speed >= 2;
-  const status = isOptimal ? ("optimal" as const) : !isSafe ? ("hazard" as const) : ("slow" as const);
+  const status = isOptimal
+    ? ("optimal" as const)
+    : !isSafe
+      ? ("hazard" as const)
+      : ("slow" as const);
 
   return {
     speed,
@@ -37,7 +41,7 @@ export function AutomationToy({ lang, mode = "toy", onDone }: AutomationToyProps
   const { throughput, safetyScore, isOptimal, status } = calcAutomationSafety(
     speed,
     hasSensors,
-    hasCurtain
+    hasCurtain,
   );
 
   useEffect(() => {
@@ -58,11 +62,7 @@ export function AutomationToy({ lang, mode = "toy", onDone }: AutomationToyProps
   };
 
   const speedLabel =
-    lang === "pl"
-      ? "Tempo produkcji:"
-      : lang === "de"
-      ? "Fertigungstempo:"
-      : "Production Speed:";
+    lang === "pl" ? "Tempo produkcji:" : lang === "de" ? "Fertigungstempo:" : "Production Speed:";
 
   const getSpeedBtnText = (val: number) => {
     if (val === 1) {
@@ -78,46 +78,41 @@ export function AutomationToy({ lang, mode = "toy", onDone }: AutomationToyProps
     ? lang === "pl"
       ? "Czujniki odległości: Uzbrojone"
       : lang === "de"
-      ? "Abstandssensoren: Scharf"
-      : "Distance Sensors: Armed"
+        ? "Abstandssensoren: Scharf"
+        : "Distance Sensors: Armed"
     : lang === "pl"
-    ? "Włącz czujniki odległości"
-    : lang === "de"
-    ? "Abstandssensoren einschalten"
-    : "Turn On Distance Sensors";
+      ? "Włącz czujniki odległości"
+      : lang === "de"
+        ? "Abstandssensoren einschalten"
+        : "Turn On Distance Sensors";
 
   const curtainLabel = hasCurtain
     ? lang === "pl"
       ? "Kurtyna świetlna: Uzbrojona"
       : lang === "de"
-      ? "Sicherheits-Lichtgitter: Scharf"
-      : "Safety Light Curtain: Armed"
+        ? "Sicherheits-Lichtgitter: Scharf"
+        : "Safety Light Curtain: Armed"
     : lang === "pl"
-    ? "Włącz kurtynę świetlną"
-    : lang === "de"
-    ? "Lichtgitter aktivieren"
-    : "Arm Safety Light Curtain";
+      ? "Włącz kurtynę świetlną"
+      : lang === "de"
+        ? "Lichtgitter aktivieren"
+        : "Arm Safety Light Curtain";
 
   const outputLabel =
     lang === "pl"
       ? "Wydajność produkcji:"
       : lang === "de"
-      ? "Produktionsleistung:"
-      : "Production Output:";
+        ? "Produktionsleistung:"
+        : "Production Output:";
 
-  const unitsLabel =
-    lang === "pl"
-      ? "szt./godz."
-      : lang === "de"
-      ? "Stueck/h"
-      : "units/hr";
+  const unitsLabel = lang === "pl" ? "szt./godz." : lang === "de" ? "Stueck/h" : "units/hr";
 
   const safetyRatingLabel =
     lang === "pl"
       ? "Bezpieczeństwo pracy:"
       : lang === "de"
-      ? "Arbeitssicherheit:"
-      : "Human Safety Rating:";
+        ? "Arbeitssicherheit:"
+        : "Human Safety Rating:";
 
   return (
     <div className="automation-wrap">
@@ -170,7 +165,9 @@ export function AutomationToy({ lang, mode = "toy", onDone }: AutomationToyProps
       <div className={`automation-status-card ${status}`}>
         <div className="status-metric-row">
           <span>{outputLabel}</span>
-          <strong className="metric-val">{throughput} {unitsLabel}</strong>
+          <strong className="metric-val">
+            {throughput} {unitsLabel}
+          </strong>
         </div>
 
         <div className="status-metric-row">
@@ -186,8 +183,8 @@ export function AutomationToy({ lang, mode = "toy", onDone }: AutomationToyProps
               {lang === "pl"
                 ? "Optymalnie! Wysoka wydajność przy 100% bezpieczeństwie pracowników."
                 : lang === "de"
-                ? "Optimal! Hohe Leistung bei 100% Schutz der Mitarbeiter."
-                : "Optimal! High production output with 100% human worker safety."}
+                  ? "Optimal! Hohe Leistung bei 100% Schutz der Mitarbeiter."
+                  : "Optimal! High production output with 100% human worker safety."}
             </span>
           )}
           {status === "hazard" && (
@@ -195,8 +192,8 @@ export function AutomationToy({ lang, mode = "toy", onDone }: AutomationToyProps
               {lang === "pl"
                 ? "Uwaga: Wysokie tempo bez kurtyny świetlnej stwarza niebezpieczeństwo dla ludzi."
                 : lang === "de"
-                ? "Achtung: Hohes Tempo ohne Lichtgitter gefaehrdet Menschen."
-                : "Warning: High speed without safety curtain creates danger for workers."}
+                  ? "Achtung: Hohes Tempo ohne Lichtgitter gefaehrdet Menschen."
+                  : "Warning: High speed without safety curtain creates danger for workers."}
             </span>
           )}
           {status === "slow" && (
@@ -204,8 +201,8 @@ export function AutomationToy({ lang, mode = "toy", onDone }: AutomationToyProps
               {lang === "pl"
                 ? "Bezpiecznie, ale łagodne tempo nie wykorzystuje w pełni możliwości fabryki."
                 : lang === "de"
-                ? "Sicher, aber das sanfte Tempo nutzt die Fabrik nicht voll aus."
-                : "Safe, but gentle speed runs below factory capacity."}
+                  ? "Sicher, aber das sanfte Tempo nutzt die Fabrik nicht voll aus."
+                  : "Safe, but gentle speed runs below factory capacity."}
             </span>
           )}
         </div>
@@ -219,13 +216,13 @@ export function AutomationToy({ lang, mode = "toy", onDone }: AutomationToyProps
               ? lang === "pl"
                 ? "Znakomicie! Zautomatyzowane roboty pracują z dużą prędkością, w pełni chroniąc każdego pracownika."
                 : lang === "de"
-                ? "Perfekt! Roboter arbeiten mit hohem Tempo und schuetzen alle Mitarbeiter."
-                : "Perfect! Automated robots operate at high speed while safeguarding every worker."
+                  ? "Perfekt! Roboter arbeiten mit hohem Tempo und schuetzen alle Mitarbeiter."
+                  : "Perfect! Automated robots operate at high speed while safeguarding every worker."
               : lang === "pl"
-              ? "Włącz zarówno Czujniki odległości, jak i Kurtynę świetlną oraz wybierz tempo co najmniej 2x Standard."
-              : lang === "de"
-              ? "Aktiviere Sensoren und Lichtgitter und waehle mindestens 2x Standard-Tempo."
-              : "Activate both Distance Sensors and Safety Curtain, and select at least 2x Standard speed."}
+                ? "Włącz zarówno Czujniki odległości, jak i Kurtynę świetlną oraz wybierz tempo co najmniej 2x Standard."
+                : lang === "de"
+                  ? "Aktiviere Sensoren und Lichtgitter und waehle mindestens 2x Standard-Tempo."
+                  : "Activate both Distance Sensors and Safety Curtain, and select at least 2x Standard speed."}
           </div>
         )}
       </div>

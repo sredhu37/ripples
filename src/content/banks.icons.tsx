@@ -52,8 +52,14 @@ export function Oven({ lit, ...pos }: IconProps & { lit?: boolean }) {
       <path d="M26 90 V64 C26 46 74 46 74 64 V90 Z" fill="#3b2a25" />
       {lit && (
         <g>
-          <path d="M50 86 C34 82 34 66 46 56 C46 66 54 66 52 52 C66 62 68 80 50 86 Z" fill="#f08a2e" />
-          <path d="M50 86 C42 83 42 74 49 68 C49 74 56 75 54 70 C60 76 58 84 50 86 Z" fill="#f7cd4a" />
+          <path
+            d="M50 86 C34 82 34 66 46 56 C46 66 54 66 52 52 C66 62 68 80 50 86 Z"
+            fill="#f08a2e"
+          />
+          <path
+            d="M50 86 C42 83 42 74 49 68 C49 74 56 75 54 70 C60 76 58 84 50 86 Z"
+            fill="#f7cd4a"
+          />
         </g>
       )}
     </Box>
@@ -64,7 +70,13 @@ export function Oven({ lit, ...pos }: IconProps & { lit?: boolean }) {
 export function Cat(pos: IconProps) {
   return (
     <Box {...pos}>
-      <path d="M72 82 C94 82 96 56 84 48" stroke="#e8863a" strokeWidth="9" fill="none" strokeLinecap="round" />
+      <path
+        d="M72 82 C94 82 96 56 84 48"
+        stroke="#e8863a"
+        strokeWidth="9"
+        fill="none"
+        strokeLinecap="round"
+      />
       <ellipse cx="50" cy="72" rx="26" ry="22" fill="#e8863a" />
       <ellipse cx="50" cy="78" rx="14" ry="14" fill="#f6c28d" />
       <path d="M32 28 L35 8 L48 20 Z" fill="#e8863a" />
@@ -91,7 +103,16 @@ export function Bed(pos: IconProps) {
     <Box {...pos}>
       <rect x="5" y="20" width="9" height="66" rx="3" fill="#8a5a36" />
       <rect x="86" y="42" width="9" height="44" rx="3" fill="#8a5a36" />
-      <rect x="14" y="46" width="72" height="16" rx="4" fill="#fff" stroke="#d9d2c0" strokeWidth="2" />
+      <rect
+        x="14"
+        y="46"
+        width="72"
+        height="16"
+        rx="4"
+        fill="#fff"
+        stroke="#d9d2c0"
+        strokeWidth="2"
+      />
       <path d="M34 46 C34 36 40 34 50 34 H80 C84 34 86 38 86 46 Z" fill="#5aa0d6" />
       <ellipse cx="25" cy="42" rx="11" ry="7" fill="#f4f1e8" stroke="#d9d2c0" strokeWidth="2" />
       <rect x="5" y="62" width="90" height="8" rx="3" fill="#8a5a36" />
@@ -117,7 +138,14 @@ export function Shield(pos: IconProps) {
     <Box {...pos}>
       <path d="M50 5 L88 18 V48 C88 72 70 88 50 95 C30 88 12 72 12 48 V18 Z" fill="#1b8a9a" />
       <path d="M50 12 L80 22 V48 C80 67 66 80 50 87 Z" fill="#2fa7b8" />
-      <path d="M31 50 L45 64 L71 35" stroke="#fff" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path
+        d="M31 50 L45 64 L71 35"
+        stroke="#fff"
+        strokeWidth="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
     </Box>
   );
 }
@@ -148,10 +176,21 @@ export function Ledger(pos: IconProps) {
 }
 
 /** A question mark, drawn as text so it works in any language. */
-export function Question({ x = 0, y = 0, size = 100, color = INK }: IconProps & { color?: string }) {
+export function Question({
+  x = 0,
+  y = 0,
+  size = 100,
+  color = INK,
+}: IconProps & { color?: string }) {
   return (
     <Box x={x} y={y} size={size}>
-      <text x="50" y="80" textAnchor="middle" style={{ font: "800 88px ui-rounded, 'SF Pro Rounded', Nunito, system-ui, sans-serif" }} fill={color}>
+      <text
+        x="50"
+        y="80"
+        textAnchor="middle"
+        style={{ font: "800 88px ui-rounded, 'SF Pro Rounded', Nunito, system-ui, sans-serif" }}
+        fill={color}
+      >
         ?
       </text>
     </Box>

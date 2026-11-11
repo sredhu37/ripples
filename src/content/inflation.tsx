@@ -39,7 +39,10 @@ function HalfScoopsWidget({ lang, onAnswer }: WidgetProps) {
     <>
       <TimeMachine lang={lang} value={s} onChange={setS} />
       <div className="row nav">
-        <CheckButton lang={lang} onClick={() => onAnswer(scoopsFor(s.years, s.percent) === POCKET / 2)} />
+        <CheckButton
+          lang={lang}
+          onClick={() => onAnswer(scoopsFor(s.years, s.percent) === POCKET / 2)}
+        />
       </div>
     </>
   );
@@ -314,7 +317,8 @@ export const lesson: Lesson = {
           de: "Inflation bezeichnet einen dauerhaften Anstieg des allgemeinen Preisniveaus und mindert die Kaufkraft des Geldes.",
           pl: "Inflacja to trwały wzrost ogólnego poziomu cen w gospodarce, oznaczający spadek siły nabywczej pieniądza.",
         },
-        source: "https://www.bundesbank.de/en/bundesbank/research/survey-on-consumer-expectations-bop-hh/background-information-850064",
+        source:
+          "https://www.bundesbank.de/en/bundesbank/research/survey-on-consumer-expectations-bop-hh/background-information-850064",
       },
       {
         text: {
@@ -322,7 +326,8 @@ export const lesson: Lesson = {
           de: "Hohe Inflation schwächt die Kaufkraft von Einkommen und Ersparnissen merklich.",
           pl: "Wysoka inflacja oznacza utratę siły nabywczej: za dochody i oszczędności można kupić mniej dóbr niż wcześniej.",
         },
-        source: "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/stableprices.en.html",
+        source:
+          "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/stableprices.en.html",
       },
       {
         text: {
@@ -330,7 +335,8 @@ export const lesson: Lesson = {
           de: "Inflation kann durch hohe Nachfrage (Demand-Pull) oder gestiegene Produktionskosten (Cost-Push) ausgelöst werden.",
           pl: "Inflacja może wynikać z nadmiernego popytu (inflacja popytowa) lub rosnących kosztów produkcji (inflacja kosztowa).",
         },
-        source: "https://www.clevelandfed.org/center-for-inflation-research/inflation-explained-your-guide-to-inflation-basics/what-causes-inflation",
+        source:
+          "https://www.clevelandfed.org/center-for-inflation-research/inflation-explained-your-guide-to-inflation-basics/what-causes-inflation",
       },
       {
         text: {
@@ -338,7 +344,8 @@ export const lesson: Lesson = {
           de: "Der Realzins ist der Zins abzüglich der Inflationsrate; liegt der Zins unter der Inflation, verlieren Ersparnisse an Kaufkraft.",
           pl: "Realna stopa procentowa to oprocentowanie nominalne pomniejszone o inflację; gdy odsetki są niższe od inflacji, oszczędności tracą wartość.",
         },
-        source: "https://www.bundesbank.de/de/statistiken/geld-und-kapitalmaerkte/zinssaetze-und-renditen/realzinssaetze-auf-bankeinlagen/realzinssaetze-auf-bankeinlagen-772412",
+        source:
+          "https://www.bundesbank.de/de/statistiken/geld-und-kapitalmaerkte/zinssaetze-und-renditen/realzinssaetze-auf-bankeinlagen/realzinssaetze-auf-bankeinlagen-772412",
       },
       {
         text: {
@@ -346,7 +353,8 @@ export const lesson: Lesson = {
           de: "Deflation (sinkendes Preisniveau) kann zu Konsumaufschub, sinkenden Unternehmensgewinnen und Entlassungen führen.",
           pl: "Deflacja (spadek poziomu cen) prowadzi do odkładania zakupów, spadku zysków firm i zwolnień pracowników.",
         },
-        source: "https://www.bundesbank.de/en/service/school-service/animation-videos/price-stability-860064",
+        source:
+          "https://www.bundesbank.de/en/service/school-service/animation-videos/price-stability-860064",
       },
       {
         text: {
@@ -354,7 +362,8 @@ export const lesson: Lesson = {
           de: "Statistische Ämter messen monatlich den Verbraucherpreisindex anhand eines repräsentativen Warenkorbs.",
           pl: "Główny Urząd Statystyczny (GUS) bada co miesiąc wskaźnik cen towarów i usług konsumpcyjnych (CPI) na podstawie koszyka zakupowego.",
         },
-        source: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+        source:
+          "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
       },
       {
         text: {

@@ -12,10 +12,34 @@ export function Boat(pos: IconProps) {
   return (
     <Box {...pos}>
       <path d="M50 10 V62" stroke={INK} strokeWidth="4" strokeLinecap="round" />
-      <path d="M55 14 L86 56 H55 Z" fill="#ffffff" stroke={INK} strokeWidth="3.5" strokeLinejoin="round" />
-      <path d="M45 26 L20 56 H45 Z" fill="#f2b632" stroke={INK} strokeWidth="3.5" strokeLinejoin="round" />
-      <path d="M8 60 H92 L78 82 H22 Z" fill="#a86f3c" stroke={INK} strokeWidth="3.5" strokeLinejoin="round" />
-      <path d="M6 90 Q18 82 30 90 T54 90 T78 90 T94 90" stroke="#3b9ad9" strokeWidth="5" fill="none" strokeLinecap="round" />
+      <path
+        d="M55 14 L86 56 H55 Z"
+        fill="#ffffff"
+        stroke={INK}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M45 26 L20 56 H45 Z"
+        fill="#f2b632"
+        stroke={INK}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8 60 H92 L78 82 H22 Z"
+        fill="#a86f3c"
+        stroke={INK}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6 90 Q18 82 30 90 T54 90 T78 90 T94 90"
+        stroke="#3b9ad9"
+        strokeWidth="5"
+        fill="none"
+        strokeLinecap="round"
+      />
     </Box>
   );
 }
@@ -23,7 +47,13 @@ export function Boat(pos: IconProps) {
 export function Wrench(pos: IconProps) {
   return (
     <Box {...pos}>
-      <g transform="rotate(40 50 50)" fill="#8f9ea5" stroke={INK} strokeWidth="3.5" strokeLinejoin="round">
+      <g
+        transform="rotate(40 50 50)"
+        fill="#8f9ea5"
+        stroke={INK}
+        strokeWidth="3.5"
+        strokeLinejoin="round"
+      >
         <rect x="42" y="38" width="16" height="56" rx="8" />
         <path d="M30 8 H43 V24 H57 V8 H70 V30 A20 20 0 0 1 30 30 Z" />
       </g>
@@ -47,11 +77,28 @@ export function GradCap(pos: IconProps) {
 export function Calendar({ n, ...pos }: IconProps & { n?: number }) {
   return (
     <Box {...pos}>
-      <rect x="12" y="16" width="76" height="72" rx="10" fill="#ffffff" stroke={INK} strokeWidth="5" />
+      <rect
+        x="12"
+        y="16"
+        width="76"
+        height="72"
+        rx="10"
+        fill="#ffffff"
+        stroke={INK}
+        strokeWidth="5"
+      />
       <path d="M14 36 V28 A10 10 0 0 1 24 18 H76 A10 10 0 0 1 86 28 V36 Z" fill="#d6403a" />
       <path d="M32 8 V24 M68 8 V24" stroke={INK} strokeWidth="6" strokeLinecap="round" />
       {n !== undefined && (
-        <text x="50" y="76" textAnchor="middle" fontSize="38" fontWeight="800" fill={INK} fontFamily="ui-rounded, system-ui, sans-serif">
+        <text
+          x="50"
+          y="76"
+          textAnchor="middle"
+          fontSize="38"
+          fontWeight="800"
+          fill={INK}
+          fontFamily="ui-rounded, system-ui, sans-serif"
+        >
           {n}
         </text>
       )}
@@ -74,7 +121,14 @@ export function ArrowIcon({ dir, ...pos }: IconProps & { dir: Dir }) {
   return (
     <Box {...pos}>
       <circle cx="50" cy="50" r="44" fill={DIR_COLOR[dir]} />
-      <path d={d} stroke="#ffffff" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path
+        d={d}
+        stroke="#ffffff"
+        strokeWidth="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
     </Box>
   );
 }

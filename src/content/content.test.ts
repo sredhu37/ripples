@@ -60,7 +60,9 @@ function diagramLabels(l: Lesson, langs: readonly Lang[] = LANGS): Label[] {
       for (let step = 1; step <= steps; step++) {
         const html = renderToStaticMarkup(createElement(b.Diagram, { lang, step }));
         for (const m of html.matchAll(/<text\b[^>]*>([\s\S]*?)<\/text>/g)) {
-          const text = decode(m[1].replace(/<!--[\s\S]*?-->/g, "").replace(/<[^>]*>/g, " ")).replace(/\s+/g, " ").trim();
+          const text = decode(m[1].replace(/<!--[\s\S]*?-->/g, "").replace(/<[^>]*>/g, " "))
+            .replace(/\s+/g, " ")
+            .trim();
           if (text && !seen.has(text)) {
             seen.add(text);
             found.push({ where: `story ${i + 1}`, lang, text });
@@ -86,14 +88,16 @@ function decode(s: string): string {
 function texts(l: Lesson): { where: string; text: Text }[] {
   const out: { where: string; text: Text }[] = [];
   l.story.forEach((b, i) => {
-    if (b.lines) b.lines.forEach((line, j) => out.push({ where: `story ${i + 1} line ${j + 1}`, text: line }));
+    if (b.lines)
+      b.lines.forEach((line, j) => out.push({ where: `story ${i + 1} line ${j + 1}`, text: line }));
     else out.push({ where: `story ${i + 1}`, text: b.text });
   });
   out.push({ where: "toyIntro", text: l.toyIntro });
   l.questions.forEach((q, i) => {
     out.push({ where: `q${i + 1} prompt`, text: q.prompt });
     out.push({ where: `q${i + 1} hint`, text: q.hint });
-    if (q.kind === "choice") q.options.forEach((o, j) => out.push({ where: `q${i + 1} option ${j + 1}`, text: o.text }));
+    if (q.kind === "choice")
+      q.options.forEach((o, j) => out.push({ where: `q${i + 1} option ${j + 1}`, text: o.text }));
   });
   out.push({ where: "askDad", text: l.askDad });
   out.push({ where: "realLife title", text: l.realLife.title });
@@ -185,7 +189,9 @@ describe.each(LESSONS.filter((m) => hasLesson(m.id)))("lesson $id", (meta) => {
       for (const lang of ["en", "de", "pl"] as const) {
         expect((text[lang].match(/\*/g) ?? []).length % 2, `${where} ${lang} stars`).toBe(0);
       }
-      expect((text.en.match(/\*/g) ?? []).length, `${where} same terms en/de`).toBe((text.de.match(/\*/g) ?? []).length);
+      expect((text.en.match(/\*/g) ?? []).length, `${where} same terms en/de`).toBe(
+        (text.de.match(/\*/g) ?? []).length,
+      );
     }
   });
 
@@ -216,13 +222,60 @@ describe.each(LESSONS.filter((m) => hasLesson(m.id)))("lesson $id", (meta) => {
 // Save codes store badges as a bitmask over LESSONS order (src/progress.ts exportCode),
 // so a lesson id must never move. New ids may only be appended.
 const SAVED_LESSON_ORDER = [
-  "money", "work", "savings", "business", "equity", "loans", "banks", "interest", "taxes", "inflation", "printing", "rates",
-  "profit", "sales", "ticketsize", "marketshare", "competition", "marketing", "hiring", "scale",
-  "supplydemand", "commodities", "gold", "stocks", "bonds", "stocksvsbonds", "derivatives", "philanthropy",
-  "whygovernment", "elections", "democracy", "monarchy", "dictatorship", "capitalism", "communism", "powertriangle",
-  "mughals", "spicetrade", "britishinindia", "independence", "ww1", "ww2", "rebuilding", "whyhistory",
-  "tools", "massproduction", "computers", "internet", "automation", "ai", "jobs", "humanedge",
-  "supply_demand", "scarcity_prices",
+  "money",
+  "work",
+  "savings",
+  "business",
+  "equity",
+  "loans",
+  "banks",
+  "interest",
+  "taxes",
+  "inflation",
+  "printing",
+  "rates",
+  "profit",
+  "sales",
+  "ticketsize",
+  "marketshare",
+  "competition",
+  "marketing",
+  "hiring",
+  "scale",
+  "supplydemand",
+  "commodities",
+  "gold",
+  "stocks",
+  "bonds",
+  "stocksvsbonds",
+  "derivatives",
+  "philanthropy",
+  "whygovernment",
+  "elections",
+  "democracy",
+  "monarchy",
+  "dictatorship",
+  "capitalism",
+  "communism",
+  "powertriangle",
+  "mughals",
+  "spicetrade",
+  "britishinindia",
+  "independence",
+  "ww1",
+  "ww2",
+  "rebuilding",
+  "whyhistory",
+  "tools",
+  "massproduction",
+  "computers",
+  "internet",
+  "automation",
+  "ai",
+  "jobs",
+  "humanedge",
+  "supply_demand",
+  "scarcity_prices",
 ];
 
 describe("lesson order", () => {
@@ -239,23 +292,40 @@ describe("content count helpers", () => {
   });
 
   it("splits sentences on . ! ? followed by a space, not inside numbers", () => {
-    expect(sentences("Rates are 1.5 percent. Wow! Why? Yes")).toEqual(["Rates are 1.5 percent.", "Wow!", "Why?", "Yes"]);
+    expect(sentences("Rates are 1.5 percent. Wow! Why? Yes")).toEqual([
+      "Rates are 1.5 percent.",
+      "Wow!",
+      "Why?",
+      "Yes",
+    ]);
   });
 
   it("flags a 16-word sentence and passes a 15-word one", () => {
-    const fifteen = "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen.";
+    const fifteen =
+      "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen.";
     expect(sentences(fifteen).every((s) => words(s).length <= 15)).toBe(true);
-    expect(sentences(`${fifteen.slice(0, -1)} sixteen.`).every((s) => words(s).length <= 15)).toBe(false);
+    expect(sentences(`${fifteen.slice(0, -1)} sixteen.`).every((s) => words(s).length <= 15)).toBe(
+      false,
+    );
   });
 
   it("finds Polish strings at any depth, including diagram labels", () => {
-    expect(polishStrings({ a: [{ text: { en: "x", de: "y", pl: "Bartek" } }] })).toEqual(["Bartek"]);
+    expect(polishStrings({ a: [{ text: { en: "x", de: "y", pl: "Bartek" } }] })).toEqual([
+      "Bartek",
+    ]);
   });
 
   it("reads SVG labels from a story diagram", () => {
     const Diagram = ({ step }: { step: number }) =>
-      createElement("svg", null, createElement("text", null, "Trade"), step >= 2 ? createElement("text", null, "Trade blocked: needs don't match") : null);
-    const fake = { story: [{ text: { en: "", de: "", pl: "" }, lines: [{}, {}], Diagram }] } as unknown as Lesson;
+      createElement(
+        "svg",
+        null,
+        createElement("text", null, "Trade"),
+        step >= 2 ? createElement("text", null, "Trade blocked: needs don't match") : null,
+      );
+    const fake = {
+      story: [{ text: { en: "", de: "", pl: "" }, lines: [{}, {}], Diagram }],
+    } as unknown as Lesson;
     const long = diagramLabels(fake).filter((x) => words(x.text).length > 4);
     expect(long.map((x) => x.text)).toEqual(Array(3).fill("Trade blocked: needs don't match"));
   });
@@ -302,7 +372,8 @@ function optionViolations(l: Lesson): string[] {
     q.options.forEach((o, k) =>
       LANGS.forEach((lang) => {
         const n = words(o.text[lang]).length;
-        if (n >= 15) out.push(`${l.id} q${i + 1} option ${k + 1} ${lang} (${n} words): ${o.text[lang]}`);
+        if (n >= 15)
+          out.push(`${l.id} q${i + 1} option ${k + 1} ${lang} (${n} words): ${o.text[lang]}`);
       }),
     );
   });
@@ -320,7 +391,8 @@ describe("content counts", () => {
     const hits: string[] = [];
     for (const l of allLessons) {
       for (const s of polishStrings(l)) if (s.includes("Bartek")) hits.push(`${l.id}: ${s}`);
-      for (const x of diagramLabels(l, ["pl"])) if (x.text.includes("Bartek")) hits.push(`${l.id} ${x.where}: ${x.text}`);
+      for (const x of diagramLabels(l, ["pl"]))
+        if (x.text.includes("Bartek")) hits.push(`${l.id} ${x.where}: ${x.text}`);
     }
     expect(hits).toEqual([]);
   }, 120_000);

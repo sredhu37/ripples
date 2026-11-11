@@ -37,7 +37,9 @@ export function TimelineScreen({ lang, ageGroup, onLang, onClose }: Props) {
   const [region, setRegion] = useState<TimelineRegion | "all">("all");
   const era = TIMELINE_ERAS[eraIndex];
   const events = eventsFor(era.id, region);
-  const lanes = (region === "all" ? TIMELINE_REGIONS : [region]).filter((r) => events.some((e) => e.region === r));
+  const lanes = (region === "all" ? TIMELINE_REGIONS : [region]).filter((r) =>
+    events.some((e) => e.region === r),
+  );
 
   const pickEra = (i: number) => {
     sfx.tap();
@@ -58,8 +60,21 @@ export function TimelineScreen({ lang, ageGroup, onLang, onClose }: Props) {
 
       <p className="timeline-help">{t(lang, "timelineHelp")}</p>
 
-      <svg className="timeline-scrubber" viewBox="0 0 700 60" role="group" aria-label={t(lang, "timelineEra")}>
-        <line x1="30" y1="30" x2="670" y2="30" stroke="#1d3f47" strokeWidth="4" strokeLinecap="round" />
+      <svg
+        className="timeline-scrubber"
+        viewBox="0 0 700 60"
+        role="group"
+        aria-label={t(lang, "timelineEra")}
+      >
+        <line
+          x1="30"
+          y1="30"
+          x2="670"
+          y2="30"
+          stroke="#1d3f47"
+          strokeWidth="4"
+          strokeLinecap="round"
+        />
         {TIMELINE_ERAS.map((e, i) => {
           const x = 30 + (i * 640) / (TIMELINE_ERAS.length - 1);
           return (
@@ -75,7 +90,14 @@ export function TimelineScreen({ lang, ageGroup, onLang, onClose }: Props) {
               }}
               style={{ cursor: "pointer" }}
             >
-              <circle cx={x} cy="30" r={i === eraIndex ? 14 : 9} fill={i === eraIndex ? "#f08a2e" : "#fff"} stroke="#1d3f47" strokeWidth="3" />
+              <circle
+                cx={x}
+                cy="30"
+                r={i === eraIndex ? 14 : 9}
+                fill={i === eraIndex ? "#f08a2e" : "#fff"}
+                stroke="#1d3f47"
+                strokeWidth="3"
+              />
             </g>
           );
         })}
@@ -104,11 +126,22 @@ export function TimelineScreen({ lang, ageGroup, onLang, onClose }: Props) {
       </section>
 
       <div className="timeline-regions" role="group">
-        <button type="button" className={`chip${region === "all" ? " chip-on" : ""}`} aria-pressed={region === "all"} onClick={() => setRegion("all")}>
+        <button
+          type="button"
+          className={`chip${region === "all" ? " chip-on" : ""}`}
+          aria-pressed={region === "all"}
+          onClick={() => setRegion("all")}
+        >
           {t(lang, "timelineAll")}
         </button>
         {TIMELINE_REGIONS.map((r) => (
-          <button key={r} type="button" className={`chip${region === r ? " chip-on" : ""}`} aria-pressed={region === r} onClick={() => setRegion(r)}>
+          <button
+            key={r}
+            type="button"
+            className={`chip${region === r ? " chip-on" : ""}`}
+            aria-pressed={region === r}
+            onClick={() => setRegion(r)}
+          >
             <span className="dot" style={{ background: REGION_COLOR[r] }} aria-hidden="true" />
             {t(lang, REGION_KEY[r])}
           </button>
@@ -124,10 +157,16 @@ export function TimelineScreen({ lang, ageGroup, onLang, onClose }: Props) {
             {events
               .filter((e) => e.region === r)
               .map((e) => (
-                <li key={e.id} className="timeline-card" style={{ borderLeftColor: REGION_COLOR[r] }}>
+                <li
+                  key={e.id}
+                  className="timeline-card"
+                  style={{ borderLeftColor: REGION_COLOR[r] }}
+                >
                   <span className="timeline-year">{resolveText(e.year, lang)}</span>
                   <strong>{resolveText(e.title, lang)}</strong>
-                  <p>{resolveText(ageGroup === "senior" ? e.summary.senior : e.summary.junior, lang)}</p>
+                  <p>
+                    {resolveText(ageGroup === "senior" ? e.summary.senior : e.summary.junior, lang)}
+                  </p>
                 </li>
               ))}
           </ul>

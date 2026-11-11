@@ -36,7 +36,9 @@ export function stopSpeaking(): void {
 export function hasVoice(lang: Lang): boolean {
   if (!canSpeak()) return false;
   const langPrefix = SPEECH_LANG[lang].slice(0, 2).toLowerCase();
-  return window.speechSynthesis.getVoices().some((v) => v.lang.replace("_", "-").toLowerCase().startsWith(langPrefix));
+  return window.speechSynthesis
+    .getVoices()
+    .some((v) => v.lang.replace("_", "-").toLowerCase().startsWith(langPrefix));
 }
 
 /** Voices load late in Chrome, so listen for the change. */

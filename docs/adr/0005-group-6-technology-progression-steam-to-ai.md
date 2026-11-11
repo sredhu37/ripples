@@ -7,6 +7,7 @@ Accepted
 ## Context
 
 Group 6 of Ripples introduces the technological revolutions that transformed human civilization across lessons 43 to 50:
+
 1. Tools to Steam (`tools`)
 2. Mass Production (`massproduction`)
 3. Computers (`computers`)
@@ -17,6 +18,7 @@ Group 6 of Ripples introduces the technological revolutions that transformed hum
 8. The Human Edge (`humanedge`)
 
 Modern public discourse around technology, especially artificial intelligence and robotics, often generates severe anxiety and fatalism:
+
 1. Tech Anxiety and Helplessness: Sensationalist headlines claim robots and AI will make human work and human beings obsolete, creating dread rather than curiosity in young minds.
 2. Magical Thinking: Describing computers and AI algorithms as "mysterious sentient brains" obscures how they actually work, preventing children from building true digital literacy.
 3. Devaluation of Humanities and Care: Pure technocratic focus can mislead children into believing only coding or computational tasks have value, devaluing art, empathy, nursing, teaching, and craftsmanship.
@@ -31,27 +33,35 @@ We establish four foundational pedagogical pillars for technology education, spe
 ### 1. The Four Pedagogical Pillars
 
 #### Pillar A: Technology as an Amplifier of Human Purpose
+
 Technology is not an alien force acting upon humanity; it is the sum of tools invented by humans to solve human challenges.
+
 - A lever amplifies muscle force to lift heavy stone.
 - A steam engine turns boiling water and coal heat into wheel rotation.
 - A computer amplifies calculation speed.
 - AI amplifies pattern discovery across vast libraries of text and images.
-In every era, human beings choose what to build, set the goals, and decide ethical boundaries. The tool never replaces the human heart that directs it.
+  In every era, human beings choose what to build, set the goals, and decide ethical boundaries. The tool never replaces the human heart that directs it.
 
 #### Pillar B: Demystification Through Mechanical Clarity
+
 Fear comes from obscurity. When a child understands the basic mechanism behind a technology, the mystery transforms into mastery.
+
 - In `computers`, we show that computers do not "think"; they flip tiny electronic switches (bits: 0 and 1) millions of times per second according to clear instructions (code).
 - In `internet`, we show that web pages are sliced into numbered parcels (data packets) sent across cables like postcards, reassembled at the destination.
 - In `ai`, we show that machine learning models are clever mathematical pattern spotters: by examining thousands of cat and dog photos, they discover pixel regularities, but do not possess consciousness, feelings, or intent.
 
 #### Pillar C: History of Transition: How Work Evolves
+
 Throughout history, every major invention shifted the types of jobs humans perform.
+
 - When tractors arrived, 80% of workers no longer had to plow fields by hand; people became doctors, architects, teachers, and scientists.
 - When spreadsheets arrived, bookkeepers stopped calculating columns of numbers by pencil and became financial strategists.
 - Routine, repetitive, and hazardous tasks are automated, liberating human energy for higher-level problem solving, creative expression, and relational care.
 
 #### Pillar D: The Irreplaceable Human Edge
+
 The culmination of the curriculum (Lessons 49 and 50) celebrates what makes humans distinct and irreplaceable.
+
 - Machines excel at repetitive arithmetic, sorting huge datasets, and rapid repetition.
 - Humans excel at empathy, ethical judgment, authentic humor, emotional support, artistic voice, and moral courage.
 - An AI can draft words, but only a human child can truly care about a friend, stand up against unfairness on the playground, or create art that reflects personal lived experience.
@@ -95,6 +105,7 @@ The culmination of the curriculum (Lessons 49 and 50) celebrates what makes huma
 ### 3. Detailed Curriculum Specifications: Lessons 43 to 50
 
 #### Lesson 43: Tools to Steam (`tools`)
+
 - **Title (EN / DE):** Tools to Steam / Von Werkzeugen zum Dampf
 - **Pedagogical Goal:** Teach how early human hand tools were powered solely by muscle, and how James Watt and Thomas Newcomen's steam engines harnessed fuel heat to create continuous rotary motion.
 - **Story Beats (5):**
@@ -111,13 +122,14 @@ The culmination of the curriculum (Lessons 49 and 50) celebrates what makes huma
 - **Real Life Card:** German steam locomotive museums (e.g., Eisenbahnmuseum Bochum-Dahlhausen) and historic preserved steam railways across the Harz mountains.
 
 #### Lesson 44: Mass Production (`massproduction`)
+
 - **Title (EN / DE):** Mass Production / Die Massenfertigung
 - **Pedagogical Goal:** Teach how interchangeable parts and moving assembly lines lowered costs, making everyday goods accessible to regular families.
 - **Story Beats (5):**
   1. In earlier eras, every clock, carriage, and pair of shoes was crafted by hand by an individual artisan.
   2. Because handcrafting took weeks for a single item, goods were expensive and only wealthy families could afford them.
-  3. In the early twentieth century, engineers introduced *interchangeable parts*: standard components that fit any unit.
-  4. Henry Ford and factory engineers built the moving *assembly line*, where conveyor belts brought work directly to specialists.
+  3. In the early twentieth century, engineers introduced _interchangeable parts_: standard components that fit any unit.
+  4. Henry Ford and factory engineers built the moving _assembly line_, where conveyor belts brought work directly to specialists.
   5. Mass production dramatically lowered prices, allowing ordinary families to purchase bicycles, clocks, and home appliances.
 - **Interactive Toy:** `MassProductionToy` & `calcAssemblyThroughput`
   - Conveyor belt with 3 workstations (Frame assembly, Wheels, Inspection).
@@ -127,13 +139,14 @@ The culmination of the curriculum (Lessons 49 and 50) celebrates what makes huma
 - **Real Life Card:** Modern automotive manufacturing in Germany (e.g. Wolfsburg, Stuttgart) where specialized robots and skilled engineers assemble complex vehicles with millimeter precision.
 
 #### Lesson 45: Computers (`computers`)
+
 - **Title (EN / DE):** Computers / Computer und Rechenmaschinen
 - **Pedagogical Goal:** Teach how computers process information using binary switches (0 and 1) following clear algorithms, from Ada Lovelace and Konrad Zuse to modern microchips.
 - **Story Beats (5):**
   1. Long before electronic screens, mathematicians used calculating gears like the abacus to tabulate numbers.
   2. In the 1840s, visionary mathematician Ada Lovelace wrote the world's very first computer algorithm for Charles Babbage's Analytical Engine.
   3. In 1941, German engineer Konrad Zuse built the Z3 in Berlin: the first programmable electromechanical digital computer.
-  4. Inside modern microchips, billions of microscopic transistors act as tiny light switches: on (1) or off (0), called *binary*.
+  4. Inside modern microchips, billions of microscopic transistors act as tiny light switches: on (1) or off (0), called _binary_.
   5. By combining billions of simple 0s and 1s at lightning speed, computers process calculations, games, music, and maps.
 - **Interactive Toy:** `ComputersToy` & `calcBinaryLogic`
   - 4-bit binary switch register (values 8, 4, 2, 1).
@@ -144,11 +157,12 @@ The culmination of the curriculum (Lessons 49 and 50) celebrates what makes huma
 - **Real Life Card:** The Deutsches Museum in Munich and Deutsches Technikmuseum in Berlin, where children can inspect Konrad Zuse's original relays and room-sized computers.
 
 #### Lesson 46: The Internet (`internet`)
+
 - **Title (EN / DE):** The Internet / Das weltweite Netz
 - **Pedagogical Goal:** Teach how computers around the world communicate through interconnected protocols, fiber-optic undersea cables, and packet switching.
 - **Story Beats (5):**
   1. For decades, computers were isolated machines in separate rooms, unable to share information without physical tapes.
-  2. In the 1960s, scientists invented *packet switching*: slicing messages into small, numbered digital envelopes.
+  2. In the 1960s, scientists invented _packet switching_: slicing messages into small, numbered digital envelopes.
   3. Each packet travels independently across phone lines, fiber-optic glass cables, and satellite links, reassembling at the destination.
   4. In 1989, Tim Berners-Lee created the World Wide Web at CERN, introducing web addresses, browsers, and hyperlinks.
   5. Today, undersea fiber cables spanning ocean floors link billions of people across all continents in instantaneous communication.
@@ -160,11 +174,12 @@ The culmination of the curriculum (Lessons 49 and 50) celebrates what makes huma
 - **Real Life Card:** DE-CIX in Frankfurt am Main: the world's largest internet exchange point, where hundreds of terabits of data pass through fiber switches every single second.
 
 #### Lesson 47: Automation (`automation`)
+
 - **Title (EN / DE):** Robots and Automation / Roboter und Automation
 - **Pedagogical Goal:** Teach how sensors, actuators, and controllers automate repetitive, dangerous, or heavy physical tasks, keeping human workers safe.
 - **Story Beats (5):**
   1. In traditional workshops, workers had to carry heavy molten metal, breathe toxic paint fumes, and perform exhausting repetitive motions.
-  2. Engineers designed *automated robots*: machines equipped with electronic sensors to see and mechanical arms to move.
+  2. Engineers designed _automated robots_: machines equipped with electronic sensors to see and mechanical arms to move.
   3. A robot arm follows precise mathematical coordinates, welding steel, tightening bolts, or packaging groceries tirelessly.
   4. Sensors measure temperature, distance, and pressure, allowing the machine to stop instantly if a person steps nearby.
   5. Automation takes over dangerous and dull tasks, allowing humans to work as supervisors, designers, and creative problem-solvers.
@@ -176,11 +191,12 @@ The culmination of the curriculum (Lessons 49 and 50) celebrates what makes huma
 - **Real Life Card:** Modern German logistics and parcel distribution centers (e.g., Deutsche Post DHL hubs) where smart sorting conveyors and robotic arms sort millions of packages every night.
 
 #### Lesson 48: Artificial Intelligence (`ai`)
+
 - **Title (EN / DE):** Artificial Intelligence / Kuenstliche Intelligenz
 - **Pedagogical Goal:** Teach how machine learning recognizes statistical patterns in data to classify images, translate languages, and assist human thinking.
 - **Story Beats (5):**
   1. Classical computer software only followed rigid rules written directly by human programmers (if this, then that).
-  2. *Machine learning* introduced a new approach: training algorithms on millions of examples so they discover patterns on their own.
+  2. _Machine learning_ introduced a new approach: training algorithms on millions of examples so they discover patterns on their own.
   3. By examining thousands of pictures of apples and pears, an AI learns which shapes and colors distinguish them.
   4. AI assists astronomers finding distant exoplanets, doctors detecting illnesses in scans, and linguists translating languages.
   5. AI is a sophisticated pattern tool; it does not have feelings, consciousness, personal intentions, or moral values.
@@ -192,6 +208,7 @@ The culmination of the curriculum (Lessons 49 and 50) celebrates what makes huma
 - **Real Life Card:** AI-assisted weather forecasting at the Deutscher Wetterdienst (DWD) in Offenbach, predicting rainfall and storms with machine learning models.
 
 #### Lesson 49: How Work Evolves (`changingjobs`)
+
 - **Title (EN / DE):** How Work Evolves / Wie sich Arbeit veraendert
 - **Pedagogical Goal:** Teach that technology changes which tasks humans do, transforming dirty and hazardous jobs into safer, creative, and service-oriented professions.
 - **Story Beats (5):**
@@ -205,9 +222,10 @@ The culmination of the curriculum (Lessons 49 and 50) celebrates what makes huma
   - Visual distribution of workforce categories: Heavy Physical Labor vs Creative, Technical, and Caring Careers.
 - **Fact Card Sources:** OECD Future of Work Reports, German Federal Institute for Vocational Education and Training (BIBB), International Labour Organization (ILO).
 - **Ask Dad Question:** Papa, did your job exist when your grandparents were little children going to school?
-- **Real Life Card:** German dual vocational training system (*Duale Ausbildung*), where apprentices learn modern digital technologies alongside practical craftsmanship.
+- **Real Life Card:** German dual vocational training system (_Duale Ausbildung_), where apprentices learn modern digital technologies alongside practical craftsmanship.
 
 #### Lesson 50: The Human Edge (`humanedge`)
+
 - **Title (EN / DE):** The Human Edge / Was uns Menschen einzigartig macht
 - **Pedagogical Goal:** Celebrate the uniquely human gifts: empathy, creativity, kindness, ethical discernment, and love, which no algorithm can replace.
 - **Story Beats (5):**
@@ -221,13 +239,14 @@ The culmination of the curriculum (Lessons 49 and 50) celebrates what makes huma
   - Activating human virtues lights up the Golden Compass of Human Agency.
 - **Fact Card Sources:** UNESCO Recommendation on the Ethics of Artificial Intelligence (2021), Harvard Center on the Developing Child, Council of Europe Human Rights.
 - **Ask Dad Question:** Papa, what is something you did today that made someone feel happy or loved that no computer could ever do?
-- **Real Life Card:** Volunteer emergency services (*Freiwillige Feuerwehr*, *Technisches Hilfswerk*) and neighborhood care associations across German communities, where human dedication and neighborly compassion hold society together.
+- **Real Life Card:** Volunteer emergency services (_Freiwillige Feuerwehr_, _Technisches Hilfswerk_) and neighborhood care associations across German communities, where human dedication and neighborly compassion hold society together.
 
 ---
 
 ### 4. Verification and Definition of Done
 
 This decision will be verified when:
+
 1. ADR 0005 is committed, linked in `docs/adr/README.md`, and new technology terms are added to `GLOSSARY.md`.
 2. All 8 Group 6 lessons (43-50) are implemented in worktree `t_b13ed1f2` following these blueprints.
 3. Every lesson includes EN and DE bilingual text, SVG diagrams, CSS, and interactive simulation toys.

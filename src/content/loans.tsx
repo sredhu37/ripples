@@ -240,10 +240,35 @@ export const lesson: Lesson = {
         "Co NIE jest powodem, dla którego Pim chce odzyskać dodatkową kwotę?",
       ),
       options: [
-        { text: T("Pim has to wait for her coins", "Pim muss auf ihre Münzen warten", "Pim musi czekać na swoje monety") },
-        { text: T("Bea now has a shiny new oven", "Bea hat jetzt einen glänzenden neuen Ofen", "Bea ma teraz błyszczący nowy piec"), correct: true },
-        { text: T("Bea might not be able to pay", "Bea kann vielleicht nicht zahlen", "Bea może nie być w stanie zapłacić") },
-        { text: T("Pim could have used the coins herself", "Pim hätte die Münzen selbst nutzen können", "Pim mogła sama wykorzystać monety") },
+        {
+          text: T(
+            "Pim has to wait for her coins",
+            "Pim muss auf ihre Münzen warten",
+            "Pim musi czekać na swoje monety",
+          ),
+        },
+        {
+          text: T(
+            "Bea now has a shiny new oven",
+            "Bea hat jetzt einen glänzenden neuen Ofen",
+            "Bea ma teraz błyszczący nowy piec",
+          ),
+          correct: true,
+        },
+        {
+          text: T(
+            "Bea might not be able to pay",
+            "Bea kann vielleicht nicht zahlen",
+            "Bea może nie być w stanie zapłacić",
+          ),
+        },
+        {
+          text: T(
+            "Pim could have used the coins herself",
+            "Pim hätte die Münzen selbst nutzen können",
+            "Pim mogła sama wykorzystać monety",
+          ),
+        },
       ],
       hint: T(
         "Remember Pim's three reasons: she waits, Bea might not pay (a risk), and Pim could have used the coins herself. Bea's oven is not a reason.",
@@ -273,9 +298,28 @@ export const lesson: Lesson = {
         "Przez tydzień chleb sprzedaje się słabo. Co Bea musi mimo to zrobić?",
       ),
       options: [
-        { text: T("Nothing. Losing the coins is Pim's problem now", "Nichts. Dass die Münzen weg sind, ist jetzt Pims Problem", "Nic. Strata monet to teraz problem Pim") },
-        { text: T("Pay back only what the bread earned that week", "Nur zurückzahlen, was das Brot in der Woche gebracht hat", "Oddać tylko tyle, ile zarobiła w tym tygodniu") },
-        { text: T("Pay back as agreed, even when it is hard", "Zurückzahlen wie ausgemacht, auch wenn es schwer ist", "Spłacić zgodnie z umową, nawet jeśli to trudne"), correct: true },
+        {
+          text: T(
+            "Nothing. Losing the coins is Pim's problem now",
+            "Nichts. Dass die Münzen weg sind, ist jetzt Pims Problem",
+            "Nic. Strata monet to teraz problem Pim",
+          ),
+        },
+        {
+          text: T(
+            "Pay back only what the bread earned that week",
+            "Nur zurückzahlen, was das Brot in der Woche gebracht hat",
+            "Oddać tylko tyle, ile zarobiła w tym tygodniu",
+          ),
+        },
+        {
+          text: T(
+            "Pay back as agreed, even when it is hard",
+            "Zurückzahlen wie ausgemacht, auch wenn es schwer ist",
+            "Spłacić zgodnie z umową, nawet jeśli to trudne",
+          ),
+          correct: true,
+        },
       ],
       hint: T(
         "A loan is a promise. Bea agreed to pay back every week, even when bread sells badly. That is why we borrow only what we can pay back.",
@@ -341,7 +385,8 @@ export const lesson: Lesson = {
           de: "Verbraucherschutzgesetze verlangen transparente Verträge, die effektiven Jahreszins, Raten und den Gesamtbetrag vor Vertragsschluss ausweisen.",
           pl: "Przepisy o kredycie konsumenckim wymagają przejrzystej umowy zawierającej RRSO, harmonogram rat oraz całkowitą kwotę do spłaty.",
         },
-        source: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/kredit-schulden-insolvenz/kredite-und-darlehen-auch-beim-geldleihen-laesst-sich-sparen-10409",
+        source:
+          "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/kredit-schulden-insolvenz/kredite-und-darlehen-auch-beim-geldleihen-laesst-sich-sparen-10409",
       },
     ],
     simplified: [

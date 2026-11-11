@@ -4,7 +4,16 @@ import { Arrow, Bubble, DiagramCanvas, Pop, TermChip } from "../components/diagr
 import { Bread, Coin, NoSign, Person } from "../components/icons";
 import type { Mood } from "../components/icons";
 import type { DiagramProps } from "../lesson/types";
-import { BankBuilding, Chest, CoinPress, CoinStack, MetalDisc, River, Tick, UpArrow } from "./printing.icons";
+import {
+  BankBuilding,
+  Chest,
+  CoinPress,
+  CoinStack,
+  MetalDisc,
+  River,
+  Tick,
+  UpArrow,
+} from "./printing.icons";
 
 /** Animated diagrams for the printing lesson, one per story beat. `step` is how many taps so far. */
 
@@ -32,7 +41,13 @@ function Num({
   anchor?: "start" | "middle" | "end";
 }) {
   return (
-    <text className="diagram-name" x={x} y={y} textAnchor={anchor} style={{ fontSize: size, fontWeight: 800, fill }}>
+    <text
+      className="diagram-name"
+      x={x}
+      y={y}
+      textAnchor={anchor}
+      style={{ fontSize: size, fontWeight: 800, fill }}
+    >
       {children}
     </text>
   );
@@ -105,7 +120,12 @@ function Shelf({
   return (
     <g>
       {Array.from({ length: n }, (_, i) => (
-        <Bread key={i} x={x + (i % cols) * gap} y={y + Math.floor(i / cols) * (gap - 2)} size={size} />
+        <Bread
+          key={i}
+          x={x + (i % cols) * gap}
+          y={y + Math.floor(i / cols) * (gap - 2)}
+          size={size}
+        />
       ))}
     </g>
   );
@@ -453,7 +473,14 @@ export function HyperDiagram({ lang, step }: DiagramProps) {
     >
       {step >= 1 && (
         <>
-          <Villager who="Moss" x={6} y={104} size={104} mood={step >= 3 ? "sad" : "happy"} name="" />
+          <Villager
+            who="Moss"
+            x={6}
+            y={104}
+            size={104}
+            mood={step >= 3 ? "sad" : "happy"}
+            name=""
+          />
           <Pop>
             <CoinPress x={110} y={134} size={96} />
           </Pop>

@@ -143,7 +143,17 @@ function Ico({ size = 28, children }: { size?: number; children: ReactNode }) {
 }
 
 /** The four weekly coins, each one shown by where it goes: bike piggy bank, rainy-day jar or sweet. */
-function Split({ lang, saved, keep, treats }: { lang: Lang; saved: number; keep: number; treats: number }) {
+function Split({
+  lang,
+  saved,
+  keep,
+  treats,
+}: {
+  lang: Lang;
+  saved: number;
+  keep: number;
+  treats: number;
+}) {
   const tiles: ("bike" | "rain" | "treat")[] = [
     ...Array<"bike">(saved).fill("bike"),
     ...Array<"rain">(keep).fill("rain"),
@@ -155,13 +165,13 @@ function Split({ lang, saved, keep, treats }: { lang: Lang; saved: number; keep:
         <Ico size={26}>
           <Calendar />
         </Ico>
-        <span>
-          {lang === "pl" ? "Co tydzień" : lang === "de" ? "Jede Woche" : "Each week"}
-        </span>
+        <span>{lang === "pl" ? "Co tydzień" : lang === "de" ? "Jede Woche" : "Each week"}</span>
       </span>
       {tiles.map((k, i) => (
         <span key={i} className={`sv-tile sv-tile-${k}`}>
-          <Ico size={30}>{k === "bike" ? <BikePiggy /> : k === "rain" ? <RainyJar /> : <Candy />}</Ico>
+          <Ico size={30}>
+            {k === "bike" ? <BikePiggy /> : k === "rain" ? <RainyJar /> : <Candy />}
+          </Ico>
         </span>
       ))}
     </div>
@@ -199,8 +209,8 @@ export function Planner({
         lang === "pl"
           ? "Planer kieszonkowego Pipa"
           : lang === "de"
-          ? "Pips Taschengeld-Planer"
-          : "Pip's pocket money planner"
+            ? "Pips Taschengeld-Planer"
+            : "Pip's pocket money planner"
       }
     >
       <div className="sv">
@@ -209,7 +219,8 @@ export function Planner({
             <Ico>
               <Person {...CAST.Pip} />
             </Ico>
-            {lang === "pl" ? "Kieszonkowe" : lang === "de" ? "Taschengeld" : "Pocket money"}: {POCKET}
+            {lang === "pl" ? "Kieszonkowe" : lang === "de" ? "Taschengeld" : "Pocket money"}:{" "}
+            {POCKET}
             <Ico size={24}>
               <Coin />
             </Ico>
@@ -265,7 +276,10 @@ export function Planner({
             </Ico>
           </span>
           {p.weeks.map((w) => (
-            <span key={`b${w.n}`} className={`sv-cell${p.bikeWeek !== null && w.n > p.bikeWeek ? " sv-done" : ""}`}>
+            <span
+              key={`b${w.n}`}
+              className={`sv-cell${p.bikeWeek !== null && w.n > p.bikeWeek ? " sv-done" : ""}`}
+            >
               {w.bike}
             </span>
           ))}
@@ -293,15 +307,19 @@ export function Planner({
               lang === "pl"
                 ? "Monety odkładane co tydzień na rower"
                 : lang === "de"
-                ? "Münzen pro Woche fürs Fahrrad gespart"
-                : "Coins saved for the bike each week"
+                  ? "Münzen pro Woche fürs Fahrrad gespart"
+                  : "Coins saved for the bike each week"
             }
             value={eff}
             min={0}
             max={max}
             onChange={setSave}
-            left={lang === "pl" ? "więcej słodyczy" : lang === "de" ? "mehr Naschen" : "more sweets"}
-            right={lang === "pl" ? "rower szybciej" : lang === "de" ? "Fahrrad früher" : "bike sooner"}
+            left={
+              lang === "pl" ? "więcej słodyczy" : lang === "de" ? "mehr Naschen" : "more sweets"
+            }
+            right={
+              lang === "pl" ? "rower szybciej" : lang === "de" ? "Fahrrad früher" : "bike sooner"
+            }
           />
           {full && (
             <div className="row wrap">
@@ -315,12 +333,12 @@ export function Planner({
                       ? "Wkładaj monety do słoika na czarną godzinę"
                       : "Otwórz słoik na czarną godzinę"
                     : lang === "de"
-                    ? cushion
-                      ? "Münzen ins Regentag-Glas legen"
-                      : "Regentag-Glas öffnen"
-                    : cushion
-                    ? "Put coins in rainy-day jar"
-                    : "Open rainy-day jar"}
+                      ? cushion
+                        ? "Münzen ins Regentag-Glas legen"
+                        : "Regentag-Glas öffnen"
+                      : cushion
+                        ? "Put coins in rainy-day jar"
+                        : "Open rainy-day jar"}
                 </span>
               </ToyButton>
               <ToyButton pressed={rain} onClick={() => setRain(!rain)}>
@@ -333,12 +351,12 @@ export function Planner({
                       ? "Wywołaj deszczowy 4. tydzień"
                       : "Przegoń deszcz w 4. tygodniu"
                     : lang === "de"
-                    ? rain
-                      ? "Woche 4 verregnen lassen"
-                      : "Regen in Woche 4 beenden"
-                    : rain
-                    ? "Make it a rainy week 4"
-                    : "Clear rain in week 4"}
+                      ? rain
+                        ? "Woche 4 verregnen lassen"
+                        : "Regen in Woche 4 beenden"
+                      : rain
+                        ? "Make it a rainy week 4"
+                        : "Clear rain in week 4"}
                 </span>
               </ToyButton>
             </div>

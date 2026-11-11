@@ -118,7 +118,16 @@ function MiniHasWants({
 }) {
   return (
     <g transform={`translate(${x} ${y})`} className="has-wants-tag">
-      <rect x={0} y={0} width={92} height={52} rx={12} fill="#ffffff" stroke="#cbd5e1" strokeWidth={2} />
+      <rect
+        x={0}
+        y={0}
+        width={92}
+        height={52}
+        rx={12}
+        fill="#ffffff"
+        stroke="#cbd5e1"
+        strokeWidth={2}
+      />
       <g transform="translate(6 6)">{has}</g>
       <Arrow from={[42, 22]} to={[54, 22]} width={2.5} head={6} />
       <g transform="translate(56 6)">{wants}</g>
@@ -246,7 +255,7 @@ export function TradeBoard({
 
   const handlePointerDown = (item: "fish" | "coins", e: React.PointerEvent) => {
     if (b.phase === "coins" || b.phase === "done") return;
-    if (item === "fish" && (b.phase !== "barter" && b.phase !== "sell")) return;
+    if (item === "fish" && b.phase !== "barter" && b.phase !== "sell") return;
     if (item === "coins" && b.phase !== "bread") return;
 
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
@@ -271,8 +280,16 @@ export function TradeBoard({
     const relY = ((e.clientY - rect.top) / rect.height) * 280;
 
     // Hit tests for Bea (top-center) and Sam (bottom-right)
-    const hitBea = relX >= BEA_X - 25 && relX <= BEA_X + PERSON + 25 && relY >= BEA_Y - 20 && relY <= BEA_Y + PERSON + 50;
-    const hitSam = relX >= SAM_X - 25 && relX <= SAM_X + PERSON + 25 && relY >= SAM_Y - 20 && relY <= SAM_Y + PERSON + 50;
+    const hitBea =
+      relX >= BEA_X - 25 &&
+      relX <= BEA_X + PERSON + 25 &&
+      relY >= BEA_Y - 20 &&
+      relY <= BEA_Y + PERSON + 50;
+    const hitSam =
+      relX >= SAM_X - 25 &&
+      relX <= SAM_X + PERSON + 25 &&
+      relY >= SAM_Y - 20 &&
+      relY <= SAM_Y + PERSON + 50;
 
     if (currentItem === "fish") {
       if (b.phase === "barter" && hitBea) {
@@ -299,7 +316,13 @@ export function TradeBoard({
     }
   };
 
-  const finnMood: Mood = b.bread ? "happy" : b.phase === "coins" ? "sad" : b.coins > 0 ? "happy" : "think";
+  const finnMood: Mood = b.bread
+    ? "happy"
+    : b.phase === "coins"
+      ? "sad"
+      : b.coins > 0
+        ? "happy"
+        : "think";
   const targetBea = (b.phase === "barter" && b.fish) || (b.phase === "bread" && b.coins > 0);
   const targetSam = b.phase === "sell" && b.fish;
 
@@ -309,8 +332,8 @@ export function TradeBoard({
         lang === "pl"
           ? "Finn, Bea i Sam w Ripple Town"
           : lang === "de"
-          ? "Finn, Bea und Sam in Ripple Town"
-          : "Finn, Bea and Sam in Ripple Town"
+            ? "Finn, Bea und Sam in Ripple Town"
+            : "Finn, Bea and Sam in Ripple Town"
       }
     >
       <div
@@ -328,8 +351,8 @@ export function TradeBoard({
             lang === "pl"
               ? "Finn na dole po lewej ma rybę. Bea u góry na środku ma chleb i chce butów. Sam na dole po prawej ma buty i chce jabłek."
               : lang === "de"
-              ? "Finn unten links hat Fisch. Bea oben in der Mitte hat Brot und will Schuhe. Sam unten rechts hat Schuhe und will Äpfel."
-              : "Finn at bottom left has fish. Bea at top center has bread and wants shoes. Sam at bottom right has shoes and wants apples."
+                ? "Finn unten links hat Fisch. Bea oben in der Mitte hat Brot und will Schuhe. Sam unten rechts hat Schuhe und will Äpfel."
+                : "Finn at bottom left has fish. Bea at top center has bread and wants shoes. Sam at bottom right has shoes and wants apples."
           }
         >
           {/* Subtle triangle guide path in background */}
@@ -351,7 +374,9 @@ export function TradeBoard({
             {...CAST.Bea}
             name="Bea"
             isTarget={targetBea}
-            targetLabel={lang === "pl" ? "Upuść tutaj" : lang === "de" ? "Hier ablegen" : "Drop here"}
+            targetLabel={
+              lang === "pl" ? "Upuść tutaj" : lang === "de" ? "Hier ablegen" : "Drop here"
+            }
           />
 
           <Villager
@@ -361,7 +386,9 @@ export function TradeBoard({
             {...CAST.Sam}
             name="Sam"
             isTarget={targetSam}
-            targetLabel={lang === "pl" ? "Upuść tutaj" : lang === "de" ? "Hier ablegen" : "Drop here"}
+            targetLabel={
+              lang === "pl" ? "Upuść tutaj" : lang === "de" ? "Hier ablegen" : "Drop here"
+            }
           />
 
           {/* Has / Wants Cards for Bea and Sam */}
@@ -421,7 +448,16 @@ export function TradeBoard({
 
           {b.bread && (
             <g transform={`translate(${FINN_X + 6} ${FINN_Y + PERSON + 26})`}>
-              <rect x={0} y={0} width={80} height={44} rx={12} fill="#eef8ef" stroke="#38a169" strokeWidth={2} />
+              <rect
+                x={0}
+                y={0}
+                width={80}
+                height={44}
+                rx={12}
+                fill="#eef8ef"
+                stroke="#38a169"
+                strokeWidth={2}
+              />
               <g transform="translate(4 3)">
                 <Bread size={38} />
               </g>
@@ -485,21 +521,25 @@ export function TradeBoard({
             <ActionPrompt lang={lang}>{resolveText(prompt, lang)}</ActionPrompt>
             {b.phase === "coins" && (
               <ToyButton onClick={doBringCoins}>
-                {lang === "pl" ? "Wprowadź monety do miasta" : lang === "de" ? "Münzen in die Stadt bringen" : "Bring coins to town"}
+                {lang === "pl"
+                  ? "Wprowadź monety do miasta"
+                  : lang === "de"
+                    ? "Münzen in die Stadt bringen"
+                    : "Bring coins to town"}
               </ToyButton>
             )}
           </div>
         ) : (
           <div className="guided-done">
             <span>
-              {lang === "pl" ? "Finn ma chleb!" : lang === "de" ? "Finn hat Brot!" : "Finn has bread!"}
+              {lang === "pl"
+                ? "Finn ma chleb!"
+                : lang === "de"
+                  ? "Finn hat Brot!"
+                  : "Finn has bread!"}
             </span>
             {mode === "toy" && (
-              <button
-                type="button"
-                className="restart-link"
-                onClick={() => setB(START)}
-              >
+              <button type="button" className="restart-link" onClick={() => setB(START)}>
                 {lang === "pl" ? "Jeszcze raz" : lang === "de" ? "Noch einmal" : "Try again"}
               </button>
             )}

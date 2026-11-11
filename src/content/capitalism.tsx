@@ -1,8 +1,6 @@
 import { animatedBeat } from "../lesson/toolkit";
 import type { Lesson, Text, ToyProps, WidgetProps } from "../lesson/types";
-import {
-  CapitalismToy,
-} from "./capitalism.toy";
+import { CapitalismToy } from "./capitalism.toy";
 import {
   CompetitionDiagram,
   PrivateOwnershipDiagram,
@@ -18,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <CapitalismToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <CapitalismToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {

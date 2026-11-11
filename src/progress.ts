@@ -20,7 +20,14 @@ const PREFIX = "RIP1";
 const MAX_NAME = 20;
 
 export function emptyProgress(): Progress {
-  return { name: "", lang: "en", muted: false, badges: [], disabledLessons: [], ageGroup: "junior" };
+  return {
+    name: "",
+    lang: "en",
+    muted: false,
+    badges: [],
+    disabledLessons: [],
+    ageGroup: "junior",
+  };
 }
 
 export function cleanName(raw: string): string {

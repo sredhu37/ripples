@@ -8,7 +8,11 @@ import type { Beat, DiagramProps, Text } from "./types";
  * A story beat that builds up tap by tap. `lines` are what Otto says, one per tap;
  * the Diagram shows one more part for each tap. Put new words between *stars*.
  */
-export function animatedBeat(lines: Text[], Diagram: ComponentType<DiagramProps>, mood?: Beat["mood"]): Beat {
+export function animatedBeat(
+  lines: Text[],
+  Diagram: ComponentType<DiagramProps>,
+  mood?: Beat["mood"],
+): Beat {
   return {
     lines,
     Diagram,
@@ -76,7 +80,9 @@ interface ActionPromptProps {
 export function ActionPrompt({ lang, children }: ActionPromptProps) {
   return (
     <div className="action-prompt" role="status">
-      <span className="action-prompt-label">{lang === "en" ? "What to do now" : "Was du jetzt tun kannst"}</span>
+      <span className="action-prompt-label">
+        {lang === "en" ? "What to do now" : "Was du jetzt tun kannst"}
+      </span>
       <span className="action-prompt-text">{children}</span>
     </div>
   );

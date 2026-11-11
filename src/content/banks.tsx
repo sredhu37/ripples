@@ -56,13 +56,21 @@ export const lesson: Lesson = {
           "Das ist wieder Finn. Er hat ein paar Münzen übrig, die er heute nicht braucht.",
           "To znowu Finn. Ma kilka wolnych monet, których dzisiaj nie potrzebuje.",
         ),
-        T("So he hides them under his bed.", "Darum versteckt er sie unter seinem Bett.", "Chowa je więc pod swoim łóżkiem."),
+        T(
+          "So he hides them under his bed.",
+          "Darum versteckt er sie unter seinem Bett.",
+          "Chowa je więc pod swoim łóżkiem.",
+        ),
         T(
           "But what if the cat finds them? Or what if Finn forgets where he hid them?",
           "Aber was, wenn die Katze sie findet? Oder wenn Finn vergisst, wo er sie versteckt hat?",
           "Ale co, jeśli kot je znajdzie? Albo co, jeśli Finn zapomni, gdzie je schował?",
         ),
-        T("A bed is not a very safe place for coins.", "Ein Bett ist kein besonders sicherer Ort für Münzen.", "Łóżko nie jest zbyt bezpiecznym miejscem na monety."),
+        T(
+          "A bed is not a very safe place for coins.",
+          "Ein Bett ist kein besonders sicherer Ort für Münzen.",
+          "Łóżko nie jest zbyt bezpiecznym miejscem na monety.",
+        ),
       ],
       BedDiagram,
     ),
@@ -94,7 +102,11 @@ export const lesson: Lesson = {
           "Zum Glück gibt es in Ripple Town eine *Bank*. Eine Bank ist ein sicherer Ort, der auf die Münzen der Leute aufpasst.",
           "Na szczęście w Ripple Town jest *bank*. Bank to bezpieczne miejsce, które pilnuje monet mieszkańców.",
         ),
-        T("Finn brings his spare coins to the bank.", "Finn bringt seine übrigen Münzen zur Bank.", "Finn przynosi swoje wolne monety do banku."),
+        T(
+          "Finn brings his spare coins to the bank.",
+          "Finn bringt seine übrigen Münzen zur Bank.",
+          "Finn przynosi swoje wolne monety do banku.",
+        ),
         T(
           "Putting coins into a bank has a name. It is called a *deposit*. Finn makes a deposit.",
           "Münzen auf die Bank zu bringen hat einen Namen. Es heißt *Einzahlung*. Finn zahlt seine Münzen ein.",
@@ -116,9 +128,21 @@ export const lesson: Lesson = {
           "Jetzt geht Bea zur Bank. Sie fragt, ob sie sich 4 Münzen leihen darf.",
           "Teraz Bea idzie do banku. Pyta, czy może pożyczyć 4 monety.",
         ),
-        T("The bank lends her some of the saved coins.", "Die Bank leiht ihr einige der gesparten Münzen.", "Bank pożycza jej część zaoszczędzonych monet."),
-        T("Now Bea can buy her new oven!", "Jetzt kann Bea ihren neuen Ofen kaufen!", "Teraz Bea może kupić swój nowy piec!"),
-        T("Later, Bea pays the coins back to the bank.", "Später zahlt Bea die Münzen an die Bank zurück.", "Później Bea spłaca monety do banku."),
+        T(
+          "The bank lends her some of the saved coins.",
+          "Die Bank leiht ihr einige der gesparten Münzen.",
+          "Bank pożycza jej część zaoszczędzonych monet.",
+        ),
+        T(
+          "Now Bea can buy her new oven!",
+          "Jetzt kann Bea ihren neuen Ofen kaufen!",
+          "Teraz Bea może kupić swój nowy piec!",
+        ),
+        T(
+          "Later, Bea pays the coins back to the bank.",
+          "Später zahlt Bea die Münzen an die Bank zurück.",
+          "Później Bea spłaca monety do banku.",
+        ),
       ],
       LendDiagram,
     ),
@@ -221,9 +245,28 @@ export const lesson: Lesson = {
         "Dlaczego bank trzyma część monet w pogotowiu, zamiast pożyczyć wszystkie?",
       ),
       options: [
-        { text: T("Bea only needs a few coins", "Bea braucht nur ein paar Münzen", "Bea potrzebuje tylko kilku monet") },
-        { text: T("Lending coins is not allowed in Ripple Town", "Münzen verleihen ist in Ripple Town nicht erlaubt", "Pożyczanie monet jest zabronione w Ripple Town") },
-        { text: T("Savers can ask for their coins back", "Sparer können ihre Münzen zurückverlangen", "Oszczędzający mogą w każdej chwili zażądać zwrotu"), correct: true },
+        {
+          text: T(
+            "Bea only needs a few coins",
+            "Bea braucht nur ein paar Münzen",
+            "Bea potrzebuje tylko kilku monet",
+          ),
+        },
+        {
+          text: T(
+            "Lending coins is not allowed in Ripple Town",
+            "Münzen verleihen ist in Ripple Town nicht erlaubt",
+            "Pożyczanie monet jest zabronione w Ripple Town",
+          ),
+        },
+        {
+          text: T(
+            "Savers can ask for their coins back",
+            "Sparer können ihre Münzen zurückverlangen",
+            "Oszczędzający mogą w każdej chwili zażądać zwrotu",
+          ),
+          correct: true,
+        },
       ],
       hint: T(
         "Think of Finn. He may come to get his coins on any day. So the bank needs some coins ready for him.",
@@ -247,11 +290,34 @@ export const lesson: Lesson = {
     },
     {
       kind: "choice",
-      prompt: T("Sam pays Bea with a card. What does the bank do?", "Sam bezahlt Bea mit einer Karte. Was macht die Bank?", "Sam płaci Bei kartą. Co robi bank?"),
+      prompt: T(
+        "Sam pays Bea with a card. What does the bank do?",
+        "Sam bezahlt Bea mit einer Karte. Was macht die Bank?",
+        "Sam płaci Bei kartą. Co robi bank?",
+      ),
       options: [
-        { text: T("It changes numbers: less for Sam, more for Bea", "Sie ändert Zahlen: weniger bei Sam, mehr bei Bea", "Zmienia zapisy: mniej u Sama, więcej u Bei"), correct: true },
-        { text: T("It carries a bag of coins from Sam's house to Bea", "Sie trägt einen Beutel Münzen von Sams Haus zu Bea", "Niesie worek monet z domu Sama do Bei") },
-        { text: T("It waits until Sam brings enough coins to the bank", "Sie wartet, bis Sam genug Münzen zur Bank bringt", "Czeka, aż Sam przyniesie wystarczająco dużo monet do banku") },
+        {
+          text: T(
+            "It changes numbers: less for Sam, more for Bea",
+            "Sie ändert Zahlen: weniger bei Sam, mehr bei Bea",
+            "Zmienia zapisy: mniej u Sama, więcej u Bei",
+          ),
+          correct: true,
+        },
+        {
+          text: T(
+            "It carries a bag of coins from Sam's house to Bea",
+            "Sie trägt einen Beutel Münzen von Sams Haus zu Bea",
+            "Niesie worek monet z domu Sama do Bei",
+          ),
+        },
+        {
+          text: T(
+            "It waits until Sam brings enough coins to the bank",
+            "Sie wartet, bis Sam genug Münzen zur Bank bringt",
+            "Czeka, aż Sam przyniesie wystarczająco dużo monet do banku",
+          ),
+        },
       ],
       hint: T(
         "No coins have to move. Money in a bank is mostly numbers on a computer, so the bank just changes the numbers.",
@@ -293,7 +359,8 @@ export const lesson: Lesson = {
           de: "Banken arbeiten mit Teilreservern: Sie halten nur einen Teil als Barreserve, da Sparer ihr Geld selten gleichzeitig bar abheben.",
           pl: "Banki działają w systemie rezerwy cząstkowej: utrzymują w gotowości tylko część środków, ponieważ klienci rzadko wypłacają wszystko naraz.",
         },
-        source: "https://publikationen.bundesbank.de/publikationen-de/schule-bildung/geld-und-geldpolitik-921580?article=3-banken-und-buchgeld-922604",
+        source:
+          "https://publikationen.bundesbank.de/publikationen-de/schule-bildung/geld-und-geldpolitik-921580?article=3-banken-und-buchgeld-922604",
       },
       {
         text: {
@@ -301,7 +368,8 @@ export const lesson: Lesson = {
           de: "Wenn viele Sparer aus Sorge gleichzeitig ihr Geld abheben wollen, spricht man von einem Bankansturm (Bank Run).",
           pl: "Masowe i nagłe wycofywanie oszczędności przez zaniepokojonych klientów to panika bankowa (bank run).",
         },
-        source: "https://www.stlouisfed.org/publications/regional-economist/2023/may/interest-rate-risk-bank-runs",
+        source:
+          "https://www.stlouisfed.org/publications/regional-economist/2023/may/interest-rate-risk-bank-runs",
       },
       {
         text: {
@@ -309,7 +377,8 @@ export const lesson: Lesson = {
           de: "Gesetzliche Einlagensicherungen schützen Bankguthaben bis zu gesetzlichen Höchstgrenzen (z. B. 100.000 EUR in der EU) und beruhigen Sparer.",
           pl: "Ustawowe systemy gwarantowania depozytów (np. BFG w Polsce, 100 000 EUR) chronią oszczędności obywateli i zapobiegają panice.",
         },
-        source: "https://www.bundesbank.de/en/tasks/financial-supervision/individual-aspects/deposit-protection-622748",
+        source:
+          "https://www.bundesbank.de/en/tasks/financial-supervision/individual-aspects/deposit-protection-622748",
       },
       {
         text: {

@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <MughalsToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <MughalsToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -291,7 +285,8 @@ export const lesson: Lesson = {
           de: "Das Mogul-Reich erwirtschaftete vor der Kolonialisierung rund 24 Prozent der weltweiten Produktion.",
           pl: "Według badań historyków gospodarczych Indie w epoce Mogołów wytwarzały blisko 24 procent światowej produkcji manufakturowej, głównie tkanin bawełnianych.",
         },
-        source: "https://www.cambridge.org/core/books/cambridge-economic-history-of-india/mughal-economy/1C3C62F5290D5EEF565158A55BBE0E78",
+        source:
+          "https://www.cambridge.org/core/books/cambridge-economic-history-of-india/mughal-economy/1C3C62F5290D5EEF565158A55BBE0E78",
       },
       {
         text: {

@@ -85,7 +85,8 @@
   transition: transform 0.3s ease;
 }
 
-.beam-left, .beam-right {
+.beam-left,
+.beam-right {
   display: flex;
   flex-direction: column;
   font-size: 10px;

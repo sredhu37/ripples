@@ -3,7 +3,9 @@
 const CACHE = "ripples-v3";
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE).then((c) => c.addAll(["./", "./manifest.webmanifest", "./icon.svg"])));
+  event.waitUntil(
+    caches.open(CACHE).then((c) => c.addAll(["./", "./manifest.webmanifest", "./icon.svg"])),
+  );
   self.skipWaiting();
 });
 

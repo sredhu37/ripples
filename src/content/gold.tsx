@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <GoldToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <GoldToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -299,7 +293,8 @@ export const lesson: Lesson = {
           de: "Europäische Notenbanken stufen Gold als Reserveaktivum ohne Gegenparteirisiko in Krisenzeiten ein.",
           pl: "Europejski Bank Centralny i NBP klasyfikują złoto jako aktywum rezerwowe wolne od ryzyka kredytowego emitenta (brak ryzyka niewypłacalności).",
         },
-        source: "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/what_is_money.en.html",
+        source:
+          "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/what_is_money.en.html",
       },
       {
         text: {

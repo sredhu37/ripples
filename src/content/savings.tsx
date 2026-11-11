@@ -43,8 +43,16 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("This is Pip. Pip lives in Ripple Town too.", "Das ist Pip. Pip wohnt auch in Ripple Town.", "To jest Pip. Pip również mieszka w Ripple Town."),
-        T("Every week Pip gets 4 coins from Dad.", "Jede Woche bekommt Pip 4 Münzen von Papa.", "Co tydzień Pip dostaje 4 monety od Taty."),
+        T(
+          "This is Pip. Pip lives in Ripple Town too.",
+          "Das ist Pip. Pip wohnt auch in Ripple Town.",
+          "To jest Pip. Pip również mieszka w Ripple Town.",
+        ),
+        T(
+          "Every week Pip gets 4 coins from Dad.",
+          "Jede Woche bekommt Pip 4 Münzen von Papa.",
+          "Co tydzień Pip dostaje 4 monety od Taty.",
+        ),
         T(
           "Money that a child gets regularly has a name. It is called *pocket money*.",
           "Geld, das ein Kind regelmäßig bekommt, hat einen Namen. Es heißt *Taschengeld*.",
@@ -65,7 +73,11 @@ export const lesson: Lesson = {
           "Eines Tages sieht Pip in einem Schaufenster ein rotes Fahrrad.",
           "Pewnego dnia Pip widzi czerwony rower na wystawie sklepowej.",
         ),
-        T("The price tag says 12 coins.", "Auf dem Preisschild stehen 12 Münzen.", "Cena na etykiecie wynosi 12 monet."),
+        T(
+          "The price tag says 12 coins.",
+          "Auf dem Preisschild stehen 12 Münzen.",
+          "Cena na etykiecie wynosi 12 monet.",
+        ),
         T(
           "That is much more than the 4 coins Pip gets in a week. Pip cannot buy the bike today.",
           "Das ist viel mehr als die 4 Münzen, die Pip in einer Woche bekommt. Heute kann Pip das Fahrrad nicht kaufen.",
@@ -81,7 +93,11 @@ export const lesson: Lesson = {
     ),
     animatedBeat(
       [
-        T("Pip could spend all 4 coins on sweets. Yum!", "Pip könnte alle 4 Münzen für Süßes ausgeben. Lecker!", "Pip mógłby wydać wszystkie 4 monety na słodycze. Pycha!"),
+        T(
+          "Pip could spend all 4 coins on sweets. Yum!",
+          "Pip könnte alle 4 Münzen für Süßes ausgeben. Lecker!",
+          "Pip mógłby wydać wszystkie 4 monety na słodycze. Pycha!",
+        ),
         T(
           "Pip hands over the 4 coins and gets 4 sweets.",
           "Pip gibt die 4 Münzen her und bekommt dafür 4 Süßigkeiten.",
@@ -139,7 +155,11 @@ export const lesson: Lesson = {
           "Woche 2: 3 Münzen kommen dazu. Jetzt sind 6 Münzen im Sparschwein.",
           "Tydzień 2: kolejne 3 monety. W skarbonce jest już 6 monet.",
         ),
-        T("Week 3: 3 more coins. Now there are 9.", "Woche 3: wieder 3 Münzen. Jetzt sind es 9.", "Tydzień 3: znowu 3 monety. Jest już 9 monet."),
+        T(
+          "Week 3: 3 more coins. Now there are 9.",
+          "Woche 3: wieder 3 Münzen. Jetzt sind es 9.",
+          "Tydzień 3: znowu 3 monety. Jest już 9 monet.",
+        ),
         T(
           "Week 4: 3 more coins. Now there are 12 coins. That is exactly the price of the bike!",
           "Woche 4: wieder 3 Münzen. Jetzt sind es 12 Münzen. Das ist genau der Preis vom Fahrrad!",
@@ -156,8 +176,16 @@ export const lesson: Lesson = {
     ),
     animatedBeat(
       [
-        T("One day it rains hard.", "Eines Tages regnet es in Strömen.", "Pewnego dnia mocno pada deszcz."),
-        T("Oh no! Pip's boot breaks.", "Oh nein! Pips Stiefel geht kaputt.", "O nie! Kalosz Pipa pęka."),
+        T(
+          "One day it rains hard.",
+          "Eines Tages regnet es in Strömen.",
+          "Pewnego dnia mocno pada deszcz.",
+        ),
+        T(
+          "Oh no! Pip's boot breaks.",
+          "Oh nein! Pips Stiefel geht kaputt.",
+          "O nie! Kalosz Pipa pęka.",
+        ),
         T(
           "Fixing the boot costs 3 coins, and Pip needs the boot right now.",
           "Die Reparatur kostet 3 Münzen, und Pip braucht den Stiefel sofort.",
@@ -219,9 +247,28 @@ export const lesson: Lesson = {
         "Pip wydaje co tydzień wszystkie 4 monety na słodycze. Co stanie się z rowerem?",
       ),
       options: [
-        { text: T("The bike comes closer by itself", "Das Fahrrad kommt von allein näher", "Rower przybliża się sam z siebie") },
-        { text: T("Pip gets the bike next week", "Pip bekommt das Fahrrad nächste Woche", "Pip kupi rower już za tydzień") },
-        { text: T("Pip never has coins left for it", "Pip hat nie Münzen dafür übrig", "Pip nigdy nie uzbiera na niego monet"), correct: true },
+        {
+          text: T(
+            "The bike comes closer by itself",
+            "Das Fahrrad kommt von allein näher",
+            "Rower przybliża się sam z siebie",
+          ),
+        },
+        {
+          text: T(
+            "Pip gets the bike next week",
+            "Pip bekommt das Fahrrad nächste Woche",
+            "Pip kupi rower już za tydzień",
+          ),
+        },
+        {
+          text: T(
+            "Pip never has coins left for it",
+            "Pip hat nie Münzen dafür übrig",
+            "Pip nigdy nie uzbiera na niego monet",
+          ),
+          correct: true,
+        },
       ],
       hint: T(
         "Coins that are spent are gone. To buy the bike, Pip has to keep some coins each week.",
@@ -245,11 +292,30 @@ export const lesson: Lesson = {
     },
     {
       kind: "choice",
-      prompt: T("What is the rainy-day jar for?", "Wofür ist das Regentag-Glas da?", "Do czego służy słoik na czarną godzinę?"),
+      prompt: T(
+        "What is the rainy-day jar for?",
+        "Wofür ist das Regentag-Glas da?",
+        "Do czego służy słoik na czarną godzinę?",
+      ),
       options: [
-        { text: T("For surprises that cost coins", "Für Überraschungen, die Münzen kosten", "Na niespodziewane wydatki"), correct: true },
-        { text: T("For buying sweets every day", "Zum Süßigkeiten kaufen jeden Tag", "Do kupowania słodyczy każdego dnia") },
-        { text: T("For paying for the bike", "Zum Bezahlen des Fahrrads", "Do zapłacenia za rower") },
+        {
+          text: T(
+            "For surprises that cost coins",
+            "Für Überraschungen, die Münzen kosten",
+            "Na niespodziewane wydatki",
+          ),
+          correct: true,
+        },
+        {
+          text: T(
+            "For buying sweets every day",
+            "Zum Süßigkeiten kaufen jeden Tag",
+            "Do kupowania słodyczy każdego dnia",
+          ),
+        },
+        {
+          text: T("For paying for the bike", "Zum Bezahlen des Fahrrads", "Do zapłacenia za rower"),
+        },
       ],
       hint: T(
         "The bike has its own jar. The rainy-day jar waits for surprises, like a broken boot.",
@@ -283,7 +349,8 @@ export const lesson: Lesson = {
           de: "Ersparnisse sind Geld, das man heute zurücklegt, um es in der Zukunft zu nutzen: für Rechnungen, Schulbedarf oder persönliche Ziele.",
           pl: "Oszczędności to pieniądze odkładane dzisiaj z myślą o przyszłości. Ludzie oszczędzają na rachunki, wyprawkę szkolną lub cele osobiste.",
         },
-        source: "https://files.consumerfinance.gov/f/documents/cfpb_your-money-your-goals_savings_booklet_cobrand.pdf",
+        source:
+          "https://files.consumerfinance.gov/f/documents/cfpb_your-money-your-goals_savings_booklet_cobrand.pdf",
       },
       {
         text: {
@@ -307,7 +374,8 @@ export const lesson: Lesson = {
           de: "Kinderkonten und Taschengelderziehung geben Heranwachsenden einen verlässlichen Rahmen, um den Umgang mit Geld im Alltag zu üben.",
           pl: "Konta dla dzieci i kieszonkowe dają najmłodszym bezpieczne warunki do nauki planowania budżetu i podejmowania codziennych decyzji finansowych.",
         },
-        source: "https://www.verbraucherzentrale.de/podcast-umgang-mit-geld-infos-rund-ums-taschengeld-125596",
+        source:
+          "https://www.verbraucherzentrale.de/podcast-umgang-mit-geld-infos-rund-ums-taschengeld-125596",
       },
       {
         text: {

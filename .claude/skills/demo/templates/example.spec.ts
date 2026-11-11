@@ -1,7 +1,7 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test('feature demo', async ({ page }) => {
-  await page.goto('/');
+test("feature demo", async ({ page }) => {
+  await page.goto("/");
   await page.waitForTimeout(800);
   await expect(page).toHaveTitle(/.+/);
 });

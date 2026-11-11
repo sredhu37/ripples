@@ -107,8 +107,16 @@ export const lesson: Lesson = {
           "Schauen wir uns die Extra-Münzen an. Finn zahlt der Bank 5 Münzen Zinsen.",
           "Prześledźmy dodatkowe monety. Finn płaci bankowi 5 monet odsetek.",
         ),
-        T("The bank gives 3 of them to Bea.", "Die Bank gibt 3 davon an Bea weiter.", "Bank przekazuje 3 z nich Bei."),
-        T("The bank keeps the other 2 coins.", "Die anderen 2 Münzen behält die Bank.", "Pozostałe 2 monety bank zatrzymuje dla siebie."),
+        T(
+          "The bank gives 3 of them to Bea.",
+          "Die Bank gibt 3 davon an Bea weiter.",
+          "Bank przekazuje 3 z nich Bei.",
+        ),
+        T(
+          "The bank keeps the other 2 coins.",
+          "Die anderen 2 Münzen behält die Bank.",
+          "Pozostałe 2 monety bank zatrzymuje dla siebie.",
+        ),
         T(
           "Those 2 coins pay for the bank's work, and for loans that are never paid back.",
           "Mit diesen 2 Münzen bezahlt die Bank ihre Arbeit und auch Geld, das nie zurückkommt.",
@@ -181,8 +189,17 @@ export const lesson: Lesson = {
         "Odsetki to koszt pożyczki. Finn pożycza 100 monet. Która pożyczka kosztuje Finna najwięcej?",
       ),
       options: [
-        { text: T("5 extra coins a year", "5 Extra-Münzen im Jahr", "5 dodatkowych monet rocznie") },
-        { text: T("10 extra coins a year", "10 Extra-Münzen im Jahr", "10 dodatkowych monet rocznie"), correct: true },
+        {
+          text: T("5 extra coins a year", "5 Extra-Münzen im Jahr", "5 dodatkowych monet rocznie"),
+        },
+        {
+          text: T(
+            "10 extra coins a year",
+            "10 Extra-Münzen im Jahr",
+            "10 dodatkowych monet rocznie",
+          ),
+          correct: true,
+        },
         { text: T("2 extra coins a year", "2 Extra-Münzen im Jahr", "2 dodatkowe monety rocznie") },
       ],
       hint: T(
@@ -213,9 +230,28 @@ export const lesson: Lesson = {
         "Bea nie dokłada nowych monet. Dlaczego jej oszczędności rosną z biegiem lat coraz szybciej?",
       ),
       options: [
-        { text: T("The bank raises the interest every year", "Die Bank erhöht jedes Jahr die Zinsen", "Bank co roku podnosi odsetki") },
-        { text: T("Bea saves a few more coins each year", "Bea spart jedes Jahr ein paar Münzen mehr", "Bea co roku odkłada kilka dodatkowych monet") },
-        { text: T("The extra coins start to earn extra too", "Die Extra-Münzen bringen selbst auch Extra", "Dodatkowe monety same zaczynają zarabiać kolejne monety"), correct: true },
+        {
+          text: T(
+            "The bank raises the interest every year",
+            "Die Bank erhöht jedes Jahr die Zinsen",
+            "Bank co roku podnosi odsetki",
+          ),
+        },
+        {
+          text: T(
+            "Bea saves a few more coins each year",
+            "Bea spart jedes Jahr ein paar Münzen mehr",
+            "Bea co roku odkłada kilka dodatkowych monet",
+          ),
+        },
+        {
+          text: T(
+            "The extra coins start to earn extra too",
+            "Die Extra-Münzen bringen selbst auch Extra",
+            "Dodatkowe monety same zaczynają zarabiać kolejne monety",
+          ),
+          correct: true,
+        },
       ],
       hint: T(
         "Bea leaves the extra coins in the bank. Next year they earn interest too. That is compound interest, and it makes the pile grow faster and faster.",
@@ -249,7 +285,8 @@ export const lesson: Lesson = {
           de: "Zinsen sind der Preis für geliehenes Geld. Der Zinssatz wird in Prozent angegeben und bestimmt den Anteil am Betrag.",
           pl: "Odsetki to koszt pożyczenia pieniędzy. Stopa procentowa wyrażana jest w procentach i określa, jaka część pożyczonej lub zaoszczędzonej kwoty stanowi odsetki.",
         },
-        source: "https://www.bundesbank.de/de/service/schule-und-bildung/erklaerfilme/was-sind-zinsen--860012",
+        source:
+          "https://www.bundesbank.de/de/service/schule-und-bildung/erklaerfilme/was-sind-zinsen--860012",
       },
       {
         text: {
@@ -257,7 +294,8 @@ export const lesson: Lesson = {
           de: "Eine Bank zahlt Sparern Zinsen auf Einlagen; Kreditnehmer zahlen Zinsen an die Bank. Je höher das Ausfallrisiko, desto höher der Zins.",
           pl: "Bank płaci oszczędzającym odsetki od depozytów, a pożyczkobiorca płaci odsetki bankowi. Im większe ryzyko niespłacenia pożyczki, tym wyższe oprocentowanie.",
         },
-        source: "https://www.bundesbank.de/de/service/schule-und-bildung/erklaerfilme/was-sind-zinsen--860012",
+        source:
+          "https://www.bundesbank.de/de/service/schule-und-bildung/erklaerfilme/was-sind-zinsen--860012",
       },
       {
         text: {
@@ -273,7 +311,8 @@ export const lesson: Lesson = {
           de: "Banken kalkulieren Kreditzinsen so, dass sie Eigenkapitalkosten, erwartete Kreditausfälle und Betriebskosten decken.",
           pl: "Banki ustalają oprocentowanie kredytów tak, aby pokryć koszty operacyjne, ryzyko niewypłacalności i koszty finansowania.",
         },
-        source: "https://publikationen.bundesbank.de/caas/v1/media/794132/data/9d633327cfea2255dfa059fe89f2cef1",
+        source:
+          "https://publikationen.bundesbank.de/caas/v1/media/794132/data/9d633327cfea2255dfa059fe89f2cef1",
       },
       {
         text: {
@@ -281,7 +320,8 @@ export const lesson: Lesson = {
           de: "Zinseszins bedeutet Zinsen auf Zinsen: 100 zu 5 % werden nach einem Jahr zu 105 und nach zwei Jahren zu 110,25.",
           pl: "Procent składany to odsetki naliczane od wcześniejszych odsetek: 100 zł przy 5% rocznie daje 105 zł po roku i 110,25 zł po dwóch latach.",
         },
-        source: "https://www.investor.gov/additional-resources/information/youth/teachers-classroom-resources/what-compound-interest",
+        source:
+          "https://www.investor.gov/additional-resources/information/youth/teachers-classroom-resources/what-compound-interest",
       },
       {
         text: {
@@ -297,7 +337,8 @@ export const lesson: Lesson = {
           de: "In Deutschland ermöglicht ein Freistellungsauftrag bis zu 1.000 Euro steuerfreie Kapitalerträge pro Person.",
           pl: "W Polsce zyski kapitałowe (w tym odsetki od lokat i rachunków) podlegają 19% zryczałtowanemu podatkowi dochodowemu (tzw. podatek Belki).",
         },
-        source: "https://verwaltung.bund.de/leistungsverzeichnis/de/leistung/99102040010000/herausgeber/RP-229931708/region/070000000000",
+        source:
+          "https://verwaltung.bund.de/leistungsverzeichnis/de/leistung/99102040010000/herausgeber/RP-229931708/region/070000000000",
       },
       {
         text: {
@@ -305,7 +346,8 @@ export const lesson: Lesson = {
           de: "Kreditgeber sind gesetzlich verpflichtet, den effektiven Jahreszins einschließlich aller Nebenkosten auszuweisen.",
           pl: "Instytucje finansowe mają obowiązek podawania Rzeczywistej Rocznej Stopy Oprocentowania (RRSO) uwzględniającej wszystkie koszty kredytu.",
         },
-        source: "https://www.bundesbank.de/de/service/schule-und-bildung/erklaerfilme/was-sind-zinsen--860012",
+        source:
+          "https://www.bundesbank.de/de/service/schule-und-bildung/erklaerfilme/was-sind-zinsen--860012",
       },
     ],
     simplified: [

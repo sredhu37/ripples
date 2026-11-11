@@ -1,6 +1,18 @@
 import { Counter, Villager } from "../components/cast";
 import { Arrow, Bubble, DiagramCanvas, Pop, TermChip } from "../components/diagram";
-import { Apple, Bread, Clock, Coin, Fish, Magnifier, NoSign, Piggy, Shoe, Swap, Tag } from "../components/icons";
+import {
+  Apple,
+  Bread,
+  Clock,
+  Coin,
+  Fish,
+  Magnifier,
+  NoSign,
+  Piggy,
+  Shoe,
+  Swap,
+  Tag,
+} from "../components/icons";
 import type { DiagramProps } from "../lesson/types";
 
 /** Animated diagrams for the Money lesson, one per story beat. `step` is how many taps so far. */
@@ -16,7 +28,7 @@ export function MeetDiagram({ lang, step }: DiagramProps) {
         "Finn has three fish and wants bread. Bea the baker has bread.",
         "Finn hat drei Fische und will Brot. Bäckerin Bea hat Brot.",
         "Finn ma trzy ryby i chce chleba. Piekarka Bea ma chleb.",
-        lang
+        lang,
       )}
     >
       {step >= 1 && <Villager who="Finn" x={20} />}
@@ -29,8 +41,12 @@ export function MeetDiagram({ lang, step }: DiagramProps) {
       )}
       {step >= 3 && (
         <>
-          <Pop><Fish x={256} y={178} size={64} /></Pop>
-          <Pop><Fish x={326} y={178} size={64} /></Pop>
+          <Pop>
+            <Fish x={256} y={178} size={64} />
+          </Pop>
+          <Pop>
+            <Fish x={326} y={178} size={64} />
+          </Pop>
         </>
       )}
       {step >= 4 && (
@@ -61,16 +77,20 @@ export function BarterDiagram({ lang, step }: DiagramProps) {
         "Finn offers a fish for bread. This is called barter. Bea wants shoes.",
         "Finn bietet einen Fisch für Brot an. Das heißt Tauschhandel. Bea will Schuhe.",
         "Finn proponuje rybę za chleb. To jest handel wymienny. Bea chce buty.",
-        lang
+        lang,
       )}
     >
       <Villager who="Finn" x={20} mood={step >= 3 ? "sad" : "happy"} />
       <Villager who="Bea" x={490} />
       {step >= 1 && (
         <>
-          <Pop><Fish x={178} y={40} size={62} /></Pop>
+          <Pop>
+            <Fish x={178} y={40} size={62} />
+          </Pop>
           <Arrow from={[170, 112]} to={[420, 112]} />
-          <Pop><Bread x={410} y={150} size={62} /></Pop>
+          <Pop>
+            <Bread x={410} y={150} size={62} />
+          </Pop>
           <Arrow from={[400, 200]} to={[160, 200]} />
         </>
       )}
@@ -98,11 +118,13 @@ export function SearchDiagram({ lang, step }: DiagramProps) {
         "Sam has shoes but wants apples, not fish. Finn could search all day.",
         "Sam hat Schuhe, will aber Äpfel und keinen Fisch. Finn könnte den ganzen Tag suchen.",
         "Sam ma buty, ale chce jabłek, a nie ryb. Finn mógłby szukać cały dzień.",
-        lang
+        lang,
       )}
     >
       <Villager who="Finn" x={20} mood={step >= 3 ? "sad" : "think"} />
-      <Pop><Fish x={150} y={170} size={60} /></Pop>
+      <Pop>
+        <Fish x={150} y={170} size={60} />
+      </Pop>
       {step === 1 && (
         <Bubble x={44} y={8} w={150} h={66} thought tail="bottom-left">
           <Shoe x={14} y={6} size={58} />
@@ -144,7 +166,7 @@ export function MoneyDiagram({ lang, step }: DiagramProps) {
         "Money is something everybody accepts. In Ripple Town it is coins.",
         "Geld nimmt jeder an. In Ripple Town sind es Münzen.",
         "Pieniądze to coś, co każdy przyjmuje. W Ripple Town są to monety.",
-        lang
+        lang,
       )}
     >
       {step >= 1 && (
@@ -153,7 +175,9 @@ export function MoneyDiagram({ lang, step }: DiagramProps) {
             {alt("money", "Geld", "pieniądze", lang)}
           </TermChip>
           {[0, 1, 2].map((i) => (
-            <Pop key={i}><Coin x={196 + i * 82} y={60} size={76} /></Pop>
+            <Pop key={i}>
+              <Coin x={196 + i * 82} y={60} size={76} />
+            </Pop>
           ))}
         </>
       )}
@@ -176,40 +200,63 @@ export function SwapWithCoinsDiagram({ lang, step }: DiagramProps) {
         "Finn sells a fish to Sam for 2 coins, then buys bread from Bea.",
         "Finn verkauft Sam einen Fisch für 2 Münzen und kauft dann bei Bea Brot.",
         "Finn sprzedaje rybę Samowi za 2 monety, a potem kupuje chleb od Bei.",
-        lang
+        lang,
       )}
     >
       <Villager who="Finn" x={20} />
       {step === 1 && (
         <>
           <Villager who="Sam" x={490} />
-          <Pop><Fish x={290} y={26} size={58} /></Pop>
+          <Pop>
+            <Fish x={290} y={26} size={58} />
+          </Pop>
           <Arrow from={[165, 104]} to={[470, 104]} />
-          <Pop><Coin x={262} y={132} size={46} /></Pop>
-          <Pop><Coin x={320} y={132} size={46} /></Pop>
+          <Pop>
+            <Coin x={262} y={132} size={46} />
+          </Pop>
+          <Pop>
+            <Coin x={320} y={132} size={46} />
+          </Pop>
           <Arrow from={[470, 200]} to={[165, 200]} />
         </>
       )}
       {step >= 2 && (
         <>
           <Villager who="Bea" x={490} />
-          <Counter x={440} goods={[0, 1, 2, 3].map((i) => <Bread key={i} x={8 + i * 46} y={164} size={54} />)} />
+          <Counter
+            x={440}
+            goods={[0, 1, 2, 3].map((i) => (
+              <Bread key={i} x={8 + i * 46} y={164} size={54} />
+            ))}
+          />
         </>
       )}
       {step === 2 && (
         <>
-          <Pop><Coin x={46} y={34} size={42} /></Pop>
-          <Pop><Coin x={92} y={34} size={42} /></Pop>
+          <Pop>
+            <Coin x={46} y={34} size={42} />
+          </Pop>
+          <Pop>
+            <Coin x={92} y={34} size={42} />
+          </Pop>
           <Arrow from={[170, 150]} to={[420, 150]} />
         </>
       )}
       {step >= 3 && (
         <>
-          <Pop><Coin x={262} y={30} size={46} /></Pop>
-          <Pop><Coin x={320} y={30} size={46} /></Pop>
+          <Pop>
+            <Coin x={262} y={30} size={46} />
+          </Pop>
+          <Pop>
+            <Coin x={320} y={30} size={46} />
+          </Pop>
           <Arrow from={[165, 104]} to={[430, 104]} />
-          <Pop><Bread x={290} y={134} size={58} /></Pop>
-          <Pop><Bread x={146} y={172} size={58} /></Pop>
+          <Pop>
+            <Bread x={290} y={134} size={58} />
+          </Pop>
+          <Pop>
+            <Bread x={146} y={172} size={58} />
+          </Pop>
           <Arrow from={[430, 200]} to={[165, 200]} />
         </>
       )}
@@ -222,7 +269,9 @@ export function JobsDiagram({ lang, step }: DiagramProps) {
   const badge = (x: number, n: number) => (
     <Pop x={x} y={14}>
       <circle cx="0" cy="22" r="22" fill="#1b8a9a" />
-      <text x="0" y="31" textAnchor="middle" className="chip-text">{n}</text>
+      <text x="0" y="31" textAnchor="middle" className="chip-text">
+        {n}
+      </text>
     </Pop>
   );
   return (
@@ -231,17 +280,27 @@ export function JobsDiagram({ lang, step }: DiagramProps) {
         "Money does three jobs: helps us swap, shows the price, lets us save.",
         "Geld hat drei Aufgaben: Tauschen helfen, den Preis zeigen, Sparen möglich machen.",
         "Pieniądze pełnią trzy zadania: pomagają wymieniać, pokazują cenę, pozwalają oszczędzać.",
-        lang
+        lang,
       )}
     >
       {step >= 1 && (
         <>
           {badge(107, 1)}
-          <Pop><Fish x={85} y={72} size={44} /></Pop>
-          <Pop><Swap x={90} y={118} size={34} rotate /></Pop>
-          <Pop><Coin x={85} y={150} size={44} /></Pop>
-          <Pop><Swap x={90} y={196} size={34} rotate /></Pop>
-          <Pop><Bread x={85} y={228} size={44} /></Pop>
+          <Pop>
+            <Fish x={85} y={72} size={44} />
+          </Pop>
+          <Pop>
+            <Swap x={90} y={118} size={34} rotate />
+          </Pop>
+          <Pop>
+            <Coin x={85} y={150} size={44} />
+          </Pop>
+          <Pop>
+            <Swap x={90} y={196} size={34} rotate />
+          </Pop>
+          <Pop>
+            <Bread x={85} y={228} size={44} />
+          </Pop>
         </>
       )}
       {step >= 2 && (
@@ -252,15 +311,23 @@ export function JobsDiagram({ lang, step }: DiagramProps) {
               <Bread x={40} y={30} size={46} />
             </Tag>
           </Pop>
-          <Pop><Coin x={276} y={200} size={44} /></Pop>
-          <Pop><Coin x={326} y={200} size={44} /></Pop>
+          <Pop>
+            <Coin x={276} y={200} size={44} />
+          </Pop>
+          <Pop>
+            <Coin x={326} y={200} size={44} />
+          </Pop>
         </>
       )}
       {step >= 3 && (
         <>
           {badge(533, 3)}
-          <Pop><Piggy x={473} y={116} size={120} /></Pop>
-          <Pop><Coin x={508} y={70} size={44} /></Pop>
+          <Pop>
+            <Piggy x={473} y={116} size={120} />
+          </Pop>
+          <Pop>
+            <Coin x={508} y={70} size={44} />
+          </Pop>
         </>
       )}
     </DiagramCanvas>

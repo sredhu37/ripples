@@ -10,7 +10,17 @@ const alt = (en: string, de: string, pl: string, lang: DiagramProps["lang"]) =>
   lang === "pl" ? pl : lang === "de" ? de : en;
 
 /** A number written next to an icon. */
-function Num({ x, y, children, anchor = "start" }: { x: number; y: number; children: string | number; anchor?: "start" | "middle" | "end" }) {
+function Num({
+  x,
+  y,
+  children,
+  anchor = "start",
+}: {
+  x: number;
+  y: number;
+  children: string | number;
+  anchor?: "start" | "middle" | "end";
+}) {
   return (
     <text className="diagram-name" x={x} y={y} textAnchor={anchor} style={{ fontSize: 28 }}>
       {children}
@@ -37,8 +47,12 @@ export function TinyOvenDiagram({ lang, step }: DiagramProps) {
       )}
       {step >= 3 && (
         <>
-          <Pop><Bread x={290} y={170} size={52} /></Pop>
-          <Pop><Bread x={340} y={170} size={52} /></Pop>
+          <Pop>
+            <Bread x={290} y={170} size={52} />
+          </Pop>
+          <Pop>
+            <Bread x={340} y={170} size={52} />
+          </Pop>
         </>
       )}
       {step >= 4 && (
@@ -80,9 +94,13 @@ export function BigOvenDiagram({ lang, step }: DiagramProps) {
       )}
       {step >= 2 && (
         <>
-          <Pop><Oven x={250} y={40} size={150} /></Pop>
+          <Pop>
+            <Oven x={250} y={40} size={150} />
+          </Pop>
           {[0, 1, 2, 3].map((i) => (
-            <Pop key={i}><Bread x={232 + i * 46} y={204} size={46} /></Pop>
+            <Pop key={i}>
+              <Bread x={232 + i * 46} y={204} size={46} />
+            </Pop>
           ))}
         </>
       )}
@@ -90,14 +108,18 @@ export function BigOvenDiagram({ lang, step }: DiagramProps) {
         <Pop x={450} y={60}>
           <Tag size={150}>
             <Coin x={44} y={18} size={38} />
-            <text x="62" y="73" textAnchor="middle" fontSize="26" fontWeight="800" fill="#23383f">40</text>
+            <text x="62" y="73" textAnchor="middle" fontSize="26" fontWeight="800" fill="#23383f">
+              40
+            </text>
           </Tag>
         </Pop>
       )}
       {step >= 4 && (
         <>
           {[0, 1, 2, 3, 4].map((i) => (
-            <Pop key={i}><Coin x={146 + (i % 3) * 30} y={176 - Math.floor(i / 3) * 30} size={34} /></Pop>
+            <Pop key={i}>
+              <Coin x={146 + (i % 3) * 30} y={176 - Math.floor(i / 3) * 30} size={34} />
+            </Pop>
           ))}
         </>
       )}
@@ -119,7 +141,9 @@ export function LoanDiagram({ lang, step }: DiagramProps) {
       {step >= 1 && (
         <>
           <Villager who="Pim" x={20} y={80} size={120} />
-          <Pop><Jar x={160} y={150} size={84} /></Pop>
+          <Pop>
+            <Jar x={160} y={150} size={84} />
+          </Pop>
         </>
       )}
       {step >= 2 && (
@@ -127,7 +151,9 @@ export function LoanDiagram({ lang, step }: DiagramProps) {
           <Villager who="Bea" x={500} y={80} size={120} />
           <Bubble x={30} y={0} w={140} h={64} tail="bottom-left">
             <Coin x={14} y={6} size={50} />
-            <text x="82" y="44" fontSize="30" fontWeight="800" fill="#23383f">40</text>
+            <text x="82" y="44" fontSize="30" fontWeight="800" fill="#23383f">
+              40
+            </text>
           </Bubble>
         </>
       )}
@@ -135,12 +161,20 @@ export function LoanDiagram({ lang, step }: DiagramProps) {
         <>
           <Arrow from={[170, 130]} to={[490, 130]} />
           {[0, 1, 2].map((i) => (
-            <Pop key={i}><Coin x={254 + i * 52} y={66} size={46} /></Pop>
+            <Pop key={i}>
+              <Coin x={254 + i * 52} y={66} size={46} />
+            </Pop>
           ))}
-          <TermChip x={230} y={8} w={190}>{alt("borrow", "leihen", "pożyczać", lang)}</TermChip>
+          <TermChip x={230} y={8} w={190}>
+            {alt("borrow", "leihen", "pożyczać", lang)}
+          </TermChip>
         </>
       )}
-      {step >= 4 && <TermChip x={265} y={200} w={200}>{alt("loan", "Darlehen", "pożyczka", lang)}</TermChip>}
+      {step >= 4 && (
+        <TermChip x={265} y={200} w={200}>
+          {alt("loan", "Darlehen", "pożyczka", lang)}
+        </TermChip>
+      )}
     </DiagramCanvas>
   );
 }
@@ -159,17 +193,25 @@ export function BuyOvenDiagram({ lang, step }: DiagramProps) {
       <Villager who="Bea" x={10} y={90} size={110} mood="happy" />
       {step >= 1 && (
         <>
-          <Pop><Coin x={126} y={54} size={46} /></Pop>
-          <Num x={178} y={88}>40</Num>
+          <Pop>
+            <Coin x={126} y={54} size={46} />
+          </Pop>
+          <Num x={178} y={88}>
+            40
+          </Num>
           <Arrow from={[128, 124]} to={[212, 124]} />
-          <Pop><Oven x={218} y={70} size={130} /></Pop>
+          <Pop>
+            <Oven x={218} y={70} size={130} />
+          </Pop>
         </>
       )}
       {step >= 2 && (
         <>
           {[0, 1].map((r) =>
             [0, 1].map((c) => (
-              <Pop key={`${r}${c}`}><Bread x={346 + c * 52} y={92 + r * 56} size={50} /></Pop>
+              <Pop key={`${r}${c}`}>
+                <Bread x={346 + c * 52} y={92 + r * 56} size={50} />
+              </Pop>
             )),
           )}
         </>
@@ -204,9 +246,15 @@ export function PayBackDiagram({ lang, step }: DiagramProps) {
           <Villager who="Bea" x={20} y={80} size={120} />
           <Villager who="Pim" x={500} y={80} size={120} />
           <Arrow from={[160, 130]} to={[490, 130]} />
-          <Pop><Coin x={258} y={70} size={42} /></Pop>
-          <Pop><Coin x={314} y={70} size={42} /></Pop>
-          <Pop><Clock x={392} y={62} size={54} /></Pop>
+          <Pop>
+            <Coin x={258} y={70} size={42} />
+          </Pop>
+          <Pop>
+            <Coin x={314} y={70} size={42} />
+          </Pop>
+          <Pop>
+            <Clock x={392} y={62} size={54} />
+          </Pop>
         </>
       )}
       {step >= 2 && (
@@ -224,7 +272,9 @@ export function PayBackDiagram({ lang, step }: DiagramProps) {
               <rect width="50" height="16" rx="8" fill="#1b8a9a" />
               <Coin x={7} y={20} size={36} />
             </Pop>
-          ))}\n        </>
+          ))}
+          \n{" "}
+        </>
       )}
     </DiagramCanvas>
   );
@@ -235,10 +285,23 @@ export function ReasonsDiagram({ lang, step }: DiagramProps) {
   const badge = (x: number, n: number) => (
     <g>
       <circle cx={x} cy={44} r={20} fill="#1b8a9a" />
-      <text x={x} y={53} textAnchor="middle" className="chip-text" style={{ fontSize: 24 }}>{n}</text>
+      <text x={x} y={53} textAnchor="middle" className="chip-text" style={{ fontSize: 24 }}>
+        {n}
+      </text>
     </g>
   );
-  const panel = (x: number) => <rect x={x} y={20} width={140} height={244} rx={22} fill="#fff" stroke="#23383f" strokeWidth="3.5" />;
+  const panel = (x: number) => (
+    <rect
+      x={x}
+      y={20}
+      width={140}
+      height={244}
+      rx={22}
+      fill="#fff"
+      stroke="#23383f"
+      strokeWidth="3.5"
+    />
+  );
   return (
     <DiagramCanvas
       label={alt(
@@ -253,7 +316,9 @@ export function ReasonsDiagram({ lang, step }: DiagramProps) {
           <Villager who="Pim" x={14} y={80} size={120} mood="think" />
           <Bubble x={24} y={0} w={126} h={58} thought tail="bottom-left">
             <Coin x={10} y={6} size={46} />
-            <text x="60" y="42" fontSize="28" fontWeight="800" fill="#23383f">40+</text>
+            <text x="60" y="42" fontSize="28" fontWeight="800" fill="#23383f">
+              40+
+            </text>
           </Bubble>
         </>
       )}
@@ -273,7 +338,9 @@ export function ReasonsDiagram({ lang, step }: DiagramProps) {
           <Person {...CAST.Bea} mood="sad" x={336} y={84} size={70} />
           <Coin x={412} y={104} size={44} />
           <NoSign x={406} y={98} size={56} />
-          <TermChip x={335} y={196} w={120}>{alt("risk", "Risiko", "ryzyko", lang)}</TermChip>
+          <TermChip x={335} y={196} w={120}>
+            {alt("risk", "Risiko", "ryzyko", lang)}
+          </TermChip>
         </Pop>
       )}
       {step >= 4 && (
@@ -304,27 +371,47 @@ export function ExtraDiagram({ lang, step }: DiagramProps) {
           <Villager who="Pim" x={500} y={80} size={120} />
           <Villager who="Bea" x={20} y={80} size={120} />
           {step === 1 && (
-          <Bubble x={400} y={0} w={92} h={56} tail="bottom-right">
-            <Plus x={8} y={10} size={34} />
-            <Coin x={44} y={7} size={40} />
-          </Bubble>
+            <Bubble x={400} y={0} w={92} h={56} tail="bottom-right">
+              <Plus x={8} y={10} size={34} />
+              <Coin x={44} y={7} size={40} />
+            </Bubble>
           )}
         </>
       )}
       {step >= 2 && (
         <>
           <Arrow from={[160, 150]} to={[490, 150]} />
-          <Pop><Coin x={200} y={44} size={52} /></Pop>
-          <Num x={262} y={82}>40</Num>
-          <Pop><Plus x={300} y={54} size={34} /></Pop>
-          <Pop><Coin x={346} y={48} size={44} /></Pop>
-          <Pop><Coin x={394} y={48} size={44} /></Pop>
+          <Pop>
+            <Coin x={200} y={44} size={52} />
+          </Pop>
+          <Num x={262} y={82}>
+            40
+          </Num>
+          <Pop>
+            <Plus x={300} y={54} size={34} />
+          </Pop>
+          <Pop>
+            <Coin x={346} y={48} size={44} />
+          </Pop>
+          <Pop>
+            <Coin x={394} y={48} size={44} />
+          </Pop>
         </>
       )}
       {step >= 3 && (
         <>
           <Pop>
-            <rect x="334" y="34" width="116" height="74" rx="37" fill="none" stroke="#f08a2e" strokeWidth="5" strokeDasharray="12 8" />
+            <rect
+              x="334"
+              y="34"
+              width="116"
+              height="74"
+              rx="37"
+              fill="none"
+              stroke="#f08a2e"
+              strokeWidth="5"
+              strokeDasharray="12 8"
+            />
           </Pop>
           <Pop x={316} y={160}>
             <Tag size={130}>
@@ -352,9 +439,15 @@ export function CarefulDiagram({ lang, step }: DiagramProps) {
       {step >= 1 && (
         <>
           <Villager who="Bea" x={20} y={80} size={120} mood="sad" />
-          <Pop><Warning x={170} y={40} size={84} /></Pop>
-          <Pop><Bread x={170} y={150} size={60} /></Pop>
-          <Pop><DownTrend x={236} y={154} size={52} /></Pop>
+          <Pop>
+            <Warning x={170} y={40} size={84} />
+          </Pop>
+          <Pop>
+            <Bread x={170} y={150} size={60} />
+          </Pop>
+          <Pop>
+            <DownTrend x={236} y={154} size={52} />
+          </Pop>
         </>
       )}
       {step >= 2 && (

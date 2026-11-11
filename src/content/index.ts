@@ -123,7 +123,10 @@ for (const [lessonId, m] of Object.entries(MEANWHILE)) {
     const source = EVENT_SOURCES[e.id];
     if (!source) continue;
     const line = (l: "en" | "de" | "pl") => `${e.year[l]}: ${e.title[l]}. ${e.summary.senior[l]}`;
-    lesson.factCard.claims.push({ text: { en: line("en"), de: line("de"), pl: line("pl") }, source });
+    lesson.factCard.claims.push({
+      text: { en: line("en"), de: line("de"), pl: line("pl") },
+      source,
+    });
   }
 }
 

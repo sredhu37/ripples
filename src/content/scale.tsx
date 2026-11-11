@@ -266,7 +266,8 @@ export const lesson: Lesson = {
           de: "Das Institut für Mittelstandsforschung (IfM Bonn) dokumentiert den Beitrag und die Beschäftigungskraft kleiner und mittlerer Unternehmen.",
           pl: "Polska Agencja Rozwoju Przedsiębiorczości (PARP) analizuje w corocznych raportach wkład sektora MŚP w tworzenie miejsc pracy i polskie PKB.",
         },
-        source: "https://www.parp.gov.pl/storage/publications/pdf/Raport_o_stanie_sektora_MSP_w_Polsce.pdf",
+        source:
+          "https://www.parp.gov.pl/storage/publications/pdf/Raport_o_stanie_sektora_MSP_w_Polsce.pdf",
       },
       {
         text: {
@@ -274,7 +275,8 @@ export const lesson: Lesson = {
           de: "Das Statistische Bundesamt (Destatis) erfasst Unternehmensregister nach Größenklassen von Kleinstbetrieben bis zu Industrieunternehmen.",
           pl: "Główny Urząd Statystyczny (GUS) klasyfikuje podmioty gospodarcze w rejestrze REGON od mikroprzedsiębiorstw po wielkie zakłady przemysłowe.",
         },
-        source: "https://stat.gov.pl/obszary-tematyczne/podmioty-gospodarcze-wyniki-finansowe/przedsiebiorstwa-niefinansowe/",
+        source:
+          "https://stat.gov.pl/obszary-tematyczne/podmioty-gospodarcze-wyniki-finansowe/przedsiebiorstwa-niefinansowe/",
       },
       {
         text: {

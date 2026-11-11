@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <SpiceTradeToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <SpiceTradeToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -299,7 +293,8 @@ export const lesson: Lesson = {
           de: "Schwarzer Pfeffer machte im 17. Jahrhundert ueber die Haelfte aller nach Europa importierten asiatischen Gewuerze aus.",
           pl: "Czarny pieprz stanowił ponad połowę całkowitego wolumenu przypraw azjatyckich sprowadzanych do europejskich portów w XVII wieku.",
         },
-        source: "https://www.cambridge.org/core/books/trade-and-civilisation-in-the-indian-ocean/7074E3BE79586BEBA85E2DF7D114FDDF",
+        source:
+          "https://www.cambridge.org/core/books/trade-and-civilisation-in-the-indian-ocean/7074E3BE79586BEBA85E2DF7D114FDDF",
       },
       {
         text: {

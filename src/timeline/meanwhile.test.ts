@@ -16,7 +16,8 @@ describe("meanwhile around the world", () => {
   it("has trilingual junior and senior text that differs per language", () => {
     for (const [id, m] of Object.entries(MEANWHILE)) {
       for (const text of [m.junior, m.senior]) {
-        for (const l of ["en", "de", "pl"] as const) expect(text[l].trim(), `${id} ${l}`).not.toBe("");
+        for (const l of ["en", "de", "pl"] as const)
+          expect(text[l].trim(), `${id} ${l}`).not.toBe("");
         expect(text.de).not.toBe(text.en);
         expect(text.pl).not.toBe(text.en);
         expect(JSON.stringify(text)).not.toMatch(/[\u2013\u2014]/);
@@ -53,7 +54,10 @@ describe("meanwhile around the world", () => {
     for (const [id, m] of Object.entries(MEANWHILE)) {
       const claims = getLesson(id)!.factCard.claims;
       for (const e of meanwhileEvents(m)) {
-        expect(claims.some((c) => c.source === EVENT_SOURCES[e.id] && c.text.en.includes(e.title.en)), `${id} ${e.id}`).toBe(true);
+        expect(
+          claims.some((c) => c.source === EVENT_SOURCES[e.id] && c.text.en.includes(e.title.en)),
+          `${id} ${e.id}`,
+        ).toBe(true);
       }
     }
   });

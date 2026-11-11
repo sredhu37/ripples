@@ -10,10 +10,10 @@ Live site: https://sredhu37.github.io/ripples/ (add it to the iPad home screen; 
 
 ## Status
 
-| Group | Lessons | State |
-| --- | --- | --- |
-| Money and Work | 10 | All 10 lessons written (EN and DE), fact cards waiting for Sunny's review |
-| Business, Markets, Governments, History, Technology | to be planned | Not started |
+| Group                                               | Lessons       | State                                                                     |
+| --------------------------------------------------- | ------------- | ------------------------------------------------------------------------- |
+| Money and Work                                      | 10            | All 10 lessons written (EN and DE), fact cards waiting for Sunny's review |
+| Business, Markets, Governments, History, Technology | to be planned | Not started                                                               |
 
 The full list of design decisions is in [docs/design.md](docs/design.md).
 

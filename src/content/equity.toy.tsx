@@ -39,8 +39,24 @@ export function EquityPartnerToy({ lang, onDone, isWidget, onWidgetAnswer }: Equ
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%", maxWidth: "560px", margin: "0 auto" }}>
-      <Stage label={txt("Finn & Mira's Partnership Cart", "Finns & Miras Gemeinschaftswagen", "Wspólny wózek Finna i Miry", lang)}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "16px",
+        width: "100%",
+        maxWidth: "560px",
+        margin: "0 auto",
+      }}
+    >
+      <Stage
+        label={txt(
+          "Finn & Mira's Partnership Cart",
+          "Finns & Miras Gemeinschaftswagen",
+          "Wspólny wózek Finna i Miry",
+          lang,
+        )}
+      >
         <svg viewBox="0 0 400 160" width="100%" height="160" style={{ display: "block" }}>
           <IceCreamCart x={120} y={15} size={130} />
           <WafflePressIcon x={245} y={25} size={50} />
@@ -53,7 +69,12 @@ export function EquityPartnerToy({ lang, onDone, isWidget, onWidgetAnswer }: Equ
       {/* Slider for cones sold */}
       <div style={{ padding: "0 10px" }}>
         <Slider
-          label={txt("Weekly waffle cones sold", "Wöchentlich verkaufte Waffeln", "Tygodniowa sprzedaż gofrów", lang)}
+          label={txt(
+            "Weekly waffle cones sold",
+            "Wöchentlich verkaufte Waffeln",
+            "Tygodniowa sprzedaż gofrów",
+            lang,
+          )}
           min={0}
           max={40}
           step={2}
@@ -78,25 +99,42 @@ export function EquityPartnerToy({ lang, onDone, isWidget, onWidgetAnswer }: Equ
           fontSize: "14px",
         }}
       >
-        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "6px" }}>
+        <div
+          style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "6px" }}
+        >
           <span>
-            <strong>{txt("Sales", "Einnahmen", "Sprzedaż", lang)}:</strong> +{revenue} {txt("coins", "Münzen", "monet", lang)}
+            <strong>{txt("Sales", "Einnahmen", "Sprzedaż", lang)}:</strong> +{revenue}{" "}
+            {txt("coins", "Münzen", "monet", lang)}
           </span>
           <span>
-            <strong>{txt("Costs", "Kosten", "Koszty", lang)}:</strong> -{totalCosts} (Leo: 4, {txt("Ingredients", "Zutaten", "Składniki", lang)}: {ingredientsCost})
+            <strong>{txt("Costs", "Kosten", "Koszty", lang)}:</strong> -{totalCosts} (Leo: 4,{" "}
+            {txt("Ingredients", "Zutaten", "Składniki", lang)}: {ingredientsCost})
           </span>
           <span style={{ color: "#15803d", fontWeight: "bold" }}>
-            {txt("Total Profit", "Gewinn", "Zysk", lang)}: +{totalProfit} {txt("coins", "Münzen", "monet", lang)}
+            {txt("Total Profit", "Gewinn", "Zysk", lang)}: +{totalProfit}{" "}
+            {txt("coins", "Münzen", "monet", lang)}
           </span>
         </div>
 
         {/* 50/50 Equity Split cards */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginTop: "4px" }}>
-          <div style={{ background: "#eff6ff", border: "1.5px solid #93c5fd", borderRadius: "8px", padding: "10px", textAlign: "center" }}>
+        <div
+          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginTop: "4px" }}
+        >
+          <div
+            style={{
+              background: "#eff6ff",
+              border: "1.5px solid #93c5fd",
+              borderRadius: "8px",
+              padding: "10px",
+              textAlign: "center",
+            }}
+          >
             <div style={{ fontWeight: "bold", color: "#1e40af", fontSize: "13px" }}>
               Finn (50% {txt("Equity", "Anteil", "Udział", lang)})
             </div>
-            <div style={{ fontSize: "20px", fontWeight: "bold", color: "#2563eb", marginTop: "4px" }}>
+            <div
+              style={{ fontSize: "20px", fontWeight: "bold", color: "#2563eb", marginTop: "4px" }}
+            >
               +{finnShare} {txt("coins", "Münzen", "monet", lang)}
             </div>
             <div style={{ fontSize: "11px", color: "#64748b", marginTop: "2px" }}>
@@ -104,11 +142,21 @@ export function EquityPartnerToy({ lang, onDone, isWidget, onWidgetAnswer }: Equ
             </div>
           </div>
 
-          <div style={{ background: "#fdf2f8", border: "1.5px solid #f472b6", borderRadius: "8px", padding: "10px", textAlign: "center" }}>
+          <div
+            style={{
+              background: "#fdf2f8",
+              border: "1.5px solid #f472b6",
+              borderRadius: "8px",
+              padding: "10px",
+              textAlign: "center",
+            }}
+          >
             <div style={{ fontWeight: "bold", color: "#9d174d", fontSize: "13px" }}>
               Mira (50% {txt("Equity", "Anteil", "Udział", lang)})
             </div>
-            <div style={{ fontSize: "20px", fontWeight: "bold", color: "#db2777", marginTop: "4px" }}>
+            <div
+              style={{ fontSize: "20px", fontWeight: "bold", color: "#db2777", marginTop: "4px" }}
+            >
               +{miraShare} {txt("coins", "Münzen", "monet", lang)}
             </div>
             <div style={{ fontSize: "11px", color: "#64748b", marginTop: "2px" }}>

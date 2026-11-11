@@ -58,11 +58,22 @@ describe("MeanwhileCard", () => {
     const lesson = {
       ...base,
       story: [{ text, scene: "x" }],
-      Toy: ({ onDone }: { onDone?: () => void }) => <button type="button" className="toy-done" onClick={onDone}>go</button>,
+      Toy: ({ onDone }: { onDone?: () => void }) => (
+        <button type="button" className="toy-done" onClick={onDone}>
+          go
+        </button>
+      ),
       questions: [choice, choice, choice],
     };
     const c = await mount(
-      <LessonRunner lesson={lesson} meta={meta} lang="en" alreadyDone={false} onBadge={() => {}} onExit={() => {}} />,
+      <LessonRunner
+        lesson={lesson}
+        meta={meta}
+        lang="en"
+        alreadyDone={false}
+        onBadge={() => {}}
+        onExit={() => {}}
+      />,
     );
     let toyClicked = false;
     for (let i = 0; i < 40 && !c.querySelector(".meanwhile"); i++) {
@@ -74,7 +85,9 @@ describe("MeanwhileCard", () => {
       }
       const pick =
         c.querySelector<HTMLButtonElement>(".choice:not([disabled])") ??
-        Array.from(c.querySelectorAll<HTMLButtonElement>("button.btn:not(.btn-quiet)")).find((b) => !b.disabled);
+        Array.from(c.querySelectorAll<HTMLButtonElement>("button.btn:not(.btn-quiet)")).find(
+          (b) => !b.disabled,
+        );
       if (!pick) break;
       await act(async () => pick.click());
     }

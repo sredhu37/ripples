@@ -7,8 +7,8 @@ export function PepperCornDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Niegdyś wart tyle samo, co monety z czystego srebra!"
       : lang === "de"
-      ? "Einst mit purem Silber aufgewogen!"
-      : "Once worth its weight in pure silver coins!";
+        ? "Einst mit purem Silber aufgewogen!"
+        : "Once worth its weight in pure silver coins!";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Black Pepper Sacks">
@@ -19,7 +19,16 @@ export function PepperCornDiagram({ lang, step }: DiagramProps) {
         </radialGradient>
       </defs>
       {/* Sacks */}
-      <rect x="120" y="80" width="160" height="100" rx="16" fill="#d97706" stroke="#92400e" strokeWidth="3" />
+      <rect
+        x="120"
+        y="80"
+        width="160"
+        height="100"
+        rx="16"
+        fill="#d97706"
+        stroke="#92400e"
+        strokeWidth="3"
+      />
       <text x="200" y="130" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#ffffff">
         {sackLabel}
       </text>
@@ -41,24 +50,39 @@ export function SilkRoadCaravanDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Lądowy Jedwabny Szlak (12 miesięcy)"
       : lang === "de"
-      ? "Die Seidenstraße über Land (12 Monate)"
-      : "The Overland Silk Road (12 Months)";
+        ? "Die Seidenstraße über Land (12 Monate)"
+        : "The Overland Silk Road (12 Months)";
 
   const sub =
     lang === "pl"
       ? "Przełęcze górskie, burze piaskowe i dziesiątki rogatek celnych"
       : lang === "de"
-      ? "Gebirgspässe, Wüstenstürme und Dutzende Zollstationen"
-      : "Mountain passes, desert storms, and dozens of toll gates";
+        ? "Gebirgspässe, Wüstenstürme und Dutzende Zollstationen"
+        : "Mountain passes, desert storms, and dozens of toll gates";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Silk Road Overland Caravan">
-      <rect x="40" y="40" width="320" height="160" rx="12" fill="#fffbeb" stroke="#fde68a" strokeWidth="2" />
+      <rect
+        x="40"
+        y="40"
+        width="320"
+        height="160"
+        rx="12"
+        fill="#fffbeb"
+        stroke="#fde68a"
+        strokeWidth="2"
+      />
       <text x="200" y="65" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#92400e">
         {title}
       </text>
       {/* Camels / Trail */}
-      <path d="M60 140 Q150 90 250 140 T340 120" fill="none" stroke="#d97706" strokeWidth="4" strokeDasharray="6 6" />
+      <path
+        d="M60 140 Q150 90 250 140 T340 120"
+        fill="none"
+        stroke="#d97706"
+        strokeWidth="4"
+        strokeDasharray="6 6"
+      />
       <circle cx="100" cy="130" r="10" fill="#b45309" />
       <circle cx="180" cy="115" r="10" fill="#b45309" />
       <circle cx="270" cy="135" r="10" fill="#b45309" />
@@ -76,23 +100,31 @@ export function MonsoonWindDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Wiatry monsunowe na Morzu Arabskim"
       : lang === "de"
-      ? "Monsunwinde über dem Arabischen Meer"
-      : "Monsoon Winds Across the Arabian Sea";
+        ? "Monsunwinde über dem Arabischen Meer"
+        : "Monsoon Winds Across the Arabian Sea";
 
-  const windLabel =
-    lang === "pl" ? "Wiatr letni" : lang === "de" ? "Sommerwind" : "Summer Wind";
+  const windLabel = lang === "pl" ? "Wiatr letni" : lang === "de" ? "Sommerwind" : "Summer Wind";
 
   const sub =
     lang === "pl"
       ? "Sezonowe wiatry niosły karawele przez otwarty ocean"
       : lang === "de"
-      ? "Saisonale Winde trugen Segelschiffe über das Meer"
-      : "Seasonal winds blew ocean caravels across the open sea";
+        ? "Saisonale Winde trugen Segelschiffe über das Meer"
+        : "Seasonal winds blew ocean caravels across the open sea";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Monsoon Wind Sailing">
       {/* Sea background */}
-      <rect x="30" y="30" width="340" height="180" rx="12" fill="#f0f9ff" stroke="#bae6fd" strokeWidth="2" />
+      <rect
+        x="30"
+        y="30"
+        width="340"
+        height="180"
+        rx="12"
+        fill="#f0f9ff"
+        stroke="#bae6fd"
+        strokeWidth="2"
+      />
       <text x="200" y="60" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#0369a1">
         {title}
       </text>
@@ -100,7 +132,9 @@ export function MonsoonWindDiagram({ lang, step }: DiagramProps) {
       <path d="M60 160 C120 130 180 130 240 90" stroke="#0284c7" strokeWidth="4" fill="none" />
       <path d="M100 190 C160 160 220 160 280 120" stroke="#0284c7" strokeWidth="4" fill="none" />
       <path d="M140 210 C200 180 260 180 320 140" stroke="#0284c7" strokeWidth="4" fill="none" />
-      <text x="120" y="110" fontSize="12" fontWeight="bold" fill="#0284c7">{windLabel}</text>
+      <text x="120" y="110" fontSize="12" fontWeight="bold" fill="#0284c7">
+        {windLabel}
+      </text>
       {step >= 2 && (
         <text x="200" y="195" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#0c4a6e">
           {sub}
@@ -115,8 +149,8 @@ export function CaravelShipDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Przewozi 50 worków pieprzu bezpośrednio do portu"
       : lang === "de"
-      ? "Transportiert 50 Säcke Pfeffer direkt in den Hafen"
-      : "Carrying 50 sacks of pepper directly to port";
+        ? "Transportiert 50 Säcke Pfeffer direkt in den Hafen"
+        : "Carrying 50 sacks of pepper directly to port";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Ocean Caravel Ship">
@@ -129,7 +163,12 @@ export function CaravelShipDiagram({ lang, step }: DiagramProps) {
       {/* Ocean waves */}
       <path d="M30 170 Q100 150 200 170 T370 170 L370 210 L30 210 Z" fill="#38bdf8" />
       {/* Hull */}
-      <path d="M100 160 L140 200 L260 200 L300 150 L100 160 Z" fill="url(#hull)" stroke="#1e293b" strokeWidth="2" />
+      <path
+        d="M100 160 L140 200 L260 200 L300 150 L100 160 Z"
+        fill="url(#hull)"
+        stroke="#1e293b"
+        strokeWidth="2"
+      />
       {/* Masts & Sails */}
       <line x1="170" y1="80" x2="170" y2="160" stroke="#78350f" strokeWidth="3" />
       <path d="M170 85 Q210 110 170 145 Z" fill="#f8fafc" stroke="#cbd5e1" strokeWidth="2" />
@@ -149,11 +188,15 @@ export function SpeicherstadtWarehouseDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Spichlerze portowe: Magazyny przypraw i korzeni"
       : lang === "de"
-      ? "Hamburger Speicherstadt: Gewürzspeicher Europas"
-      : "Hamburg's Speicherstadt: Spice Warehouse of Europe";
+        ? "Hamburger Speicherstadt: Gewürzspeicher Europas"
+        : "Hamburg's Speicherstadt: Spice Warehouse of Europe";
 
   return (
-    <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Hamburg Speicherstadt Brick Warehouse">
+    <svg
+      viewBox="0 0 400 240"
+      className="diagram-svg"
+      aria-label="Hamburg Speicherstadt Brick Warehouse"
+    >
       <defs>
         <linearGradient id="brick" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#dc2626" />
@@ -163,7 +206,15 @@ export function SpeicherstadtWarehouseDiagram({ lang, step }: DiagramProps) {
       {/* Canal water */}
       <rect x="30" y="170" width="340" height="40" fill="#0284c7" />
       {/* Warehouse building */}
-      <rect x="70" y="60" width="260" height="110" fill="url(#brick)" stroke="#450a0a" strokeWidth="2" />
+      <rect
+        x="70"
+        y="60"
+        width="260"
+        height="110"
+        fill="url(#brick)"
+        stroke="#450a0a"
+        strokeWidth="2"
+      />
       {/* Windows */}
       <g fill="#fef2f2">
         <rect x="90" y="80" width="20" height="25" />

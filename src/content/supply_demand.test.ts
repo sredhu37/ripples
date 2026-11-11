@@ -5,14 +5,16 @@ import type { Lesson, Text } from "../lesson/types";
 function texts(l: Lesson): { where: string; text: Text }[] {
   const out: { where: string; text: Text }[] = [];
   l.story.forEach((b, i) => {
-    if (b.lines) b.lines.forEach((line, j) => out.push({ where: `story ${i + 1} line ${j + 1}`, text: line }));
+    if (b.lines)
+      b.lines.forEach((line, j) => out.push({ where: `story ${i + 1} line ${j + 1}`, text: line }));
     else out.push({ where: `story ${i + 1}`, text: b.text });
   });
   out.push({ where: "toyIntro", text: l.toyIntro });
   l.questions.forEach((q, i) => {
     out.push({ where: `q${i + 1} prompt`, text: q.prompt });
     out.push({ where: `q${i + 1} hint`, text: q.hint });
-    if (q.kind === "choice") q.options.forEach((o, j) => out.push({ where: `q${i + 1} option ${j + 1}`, text: o.text }));
+    if (q.kind === "choice")
+      q.options.forEach((o, j) => out.push({ where: `q${i + 1} option ${j + 1}`, text: o.text }));
   });
   out.push({ where: "askDad", text: l.askDad });
   out.push({ where: "realLife title", text: l.realLife.title });
@@ -67,7 +69,9 @@ describe("Lesson 3.9: supply_demand", () => {
         for (const lang of ["en", "de", "pl"] as const) {
           expect((text[lang].match(/\*/g) ?? []).length % 2, `${where} ${lang} stars`).toBe(0);
         }
-        expect((text.en.match(/\*/g) ?? []).length, `${where} same terms en/de`).toBe((text.de.match(/\*/g) ?? []).length);
+        expect((text.en.match(/\*/g) ?? []).length, `${where} same terms en/de`).toBe(
+          (text.de.match(/\*/g) ?? []).length,
+        );
       }
     });
 
