@@ -18,7 +18,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       # Config in lighthouserc.json: vite preview on port 4733, 3 runs, speed and accessibility limits.
-      - run: npx lhci autorun
+      - run: npx --yes @lhci/cli@0.16.0 autorun
       - name: Show median numbers in the job summary
         if: always()
         run: |
