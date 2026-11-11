@@ -60,7 +60,15 @@ const STRIP_X = 362;
 const STRIP_Y = 160;
 
 /** The tax board: four things to pay for on top, the pot and one person's coins below. */
-export function BudgetBoard({ lang, tax, onTax }: { lang: Lang; tax: number; onTax: (v: number) => void }) {
+export function BudgetBoard({
+  lang,
+  tax,
+  onTax,
+}: {
+  lang: Lang;
+  tax: number;
+  onTax: (v: number) => void;
+}) {
   const b = budget(tax);
   const heap = (b.pot === 0 ? 0 : b.pot < 20 ? 1 : b.pot < 40 ? 2 : 3) as 0 | 1 | 2 | 3;
   const keptX = STRIP_X + tax * PITCH;
@@ -69,43 +77,31 @@ export function BudgetBoard({ lang, tax, onTax }: { lang: Lang; tax: number; onT
     lang === "pl"
       ? `Garnek: ${b.pot} monet. Opłacono: ${b.funded.length} z ${ITEMS.length}. Każdy zatrzymuje ${b.keep} monet, ${b.enough ? "wystarczająco" : "za mało"} (potrzeba ${NEED}).`
       : lang === "de"
-      ? `Topf: ${b.pot} Münzen. Bezahlt: ${b.funded.length} von ${ITEMS.length}. Jeder behält ${b.keep} Münzen, ${b.enough ? "genug" : "zu wenig"} (nötig: ${NEED}).`
-      : `Pot: ${b.pot} coins. Paid for: ${b.funded.length} of ${ITEMS.length}. Each person keeps ${b.keep} coins, ${b.enough ? "enough" : "too few"} (needs ${NEED}).`;
+        ? `Topf: ${b.pot} Münzen. Bezahlt: ${b.funded.length} von ${ITEMS.length}. Jeder behält ${b.keep} Münzen, ${b.enough ? "genug" : "zu wenig"} (nötig: ${NEED}).`
+        : `Pot: ${b.pot} coins. Paid for: ${b.funded.length} of ${ITEMS.length}. Each person keeps ${b.keep} coins, ${b.enough ? "enough" : "too few"} (needs ${NEED}).`;
 
   const stageLabel =
     lang === "pl"
       ? "Tablica budżetowa burmistrza Mossa"
       : lang === "de"
-      ? "Bürgermeister Moss' Steuer-Tafel"
-      : "Mayor Moss's tax board";
+        ? "Bürgermeister Moss' Steuer-Tafel"
+        : "Mayor Moss's tax board";
 
   const keepsLabel =
-    lang === "pl"
-      ? `zostaje ${b.keep}`
-      : lang === "de"
-      ? `behält ${b.keep}`
-      : `keeps ${b.keep}`;
+    lang === "pl" ? `zostaje ${b.keep}` : lang === "de" ? `behält ${b.keep}` : `keeps ${b.keep}`;
 
   const needsLabel =
-    lang === "pl"
-      ? `potrzeba ${NEED}`
-      : lang === "de"
-      ? `braucht ${NEED}`
-      : `needs ${NEED}`;
+    lang === "pl" ? `potrzeba ${NEED}` : lang === "de" ? `braucht ${NEED}` : `needs ${NEED}`;
 
   const sliderLabel =
     lang === "pl"
       ? "Podatek od każdych 10 monet"
       : lang === "de"
-      ? "Steuer von je 10 Münzen"
-      : "Tax from every 10 coins";
+        ? "Steuer von je 10 Münzen"
+        : "Tax from every 10 coins";
 
   const sliderLeft =
-    lang === "pl"
-      ? "0 (brak podatku)"
-      : lang === "de"
-      ? "0 (keine Steuer)"
-      : "0 (no tax)";
+    lang === "pl" ? "0 (brak podatku)" : lang === "de" ? "0 (keine Steuer)" : "0 (no tax)";
 
   return (
     <Stage label={stageLabel}>
@@ -124,10 +120,21 @@ export function BudgetBoard({ lang, tax, onTax }: { lang: Lang; tax: number; onT
                   strokeWidth="4"
                   strokeDasharray={on ? undefined : "9 7"}
                 />
-                <g key={on ? "on" : "off"} className="pop" opacity={on ? 1 : 0.5} style={on ? undefined : { filter: "grayscale(1)" }}>
+                <g
+                  key={on ? "on" : "off"}
+                  className="pop"
+                  opacity={on ? 1 : 0.5}
+                  style={on ? undefined : { filter: "grayscale(1)" }}
+                >
                   <it.Icon x={(TILE_W - 74) / 2} y={6} size={74} holes={it.id === "road" && !on} />
                 </g>
-                <text className="diagram-name" x={TILE_W / 2} y="100" textAnchor="middle" style={{ fontSize: 19 }}>
+                <text
+                  className="diagram-name"
+                  x={TILE_W / 2}
+                  y="100"
+                  textAnchor="middle"
+                  style={{ fontSize: 19 }}
+                >
                   {it.name[lang] || it.name.en}
                 </text>
                 <Coin x={TILE_W / 2 - 34} y={106} size={26} />
@@ -173,8 +180,19 @@ export function BudgetBoard({ lang, tax, onTax }: { lang: Lang; tax: number; onT
           ))}
           {tax > 0 && (
             <>
-              <path d={`M${STRIP_X} 200 H${STRIP_X + tax * PITCH - (PITCH - COIN) - 2}`} stroke="#1b8a9a" strokeWidth="5" strokeLinecap="round" />
-              <text className="diagram-name" x={STRIP_X + (tax * PITCH) / 2 - 8} y="226" textAnchor="middle" style={{ fill: "#1b8a9a" }}>
+              <path
+                d={`M${STRIP_X} 200 H${STRIP_X + tax * PITCH - (PITCH - COIN) - 2}`}
+                stroke="#1b8a9a"
+                strokeWidth="5"
+                strokeLinecap="round"
+              />
+              <text
+                className="diagram-name"
+                x={STRIP_X + (tax * PITCH) / 2 - 8}
+                y="226"
+                textAnchor="middle"
+                style={{ fill: "#1b8a9a" }}
+              >
                 {tax}
               </text>
             </>
@@ -202,7 +220,11 @@ export function BudgetBoard({ lang, tax, onTax }: { lang: Lang; tax: number; onT
             {needsLabel}
           </text>
           <g key={b.enough ? "ok" : "low"} className="pop">
-            {b.enough ? <Tick x={STRIP_X + 218} y={236} size={38} /> : <Cross x={STRIP_X + 218} y={236} size={38} />}
+            {b.enough ? (
+              <Tick x={STRIP_X + 218} y={236} size={38} />
+            ) : (
+              <Cross x={STRIP_X + 218} y={236} size={38} />
+            )}
           </g>
         </DiagramCanvas>
         <p className="sr-only" role="status">

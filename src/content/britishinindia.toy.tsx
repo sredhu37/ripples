@@ -41,7 +41,7 @@ interface BritishInIndiaToyProps {
 
 export function BritishInIndiaToy({ lang, mode = "toy", onDone }: BritishInIndiaToyProps) {
   const [policy, setPolicy] = useState<"colonial" | "fair">(
-    mode === "quiz" ? "colonial" : "colonial"
+    mode === "quiz" ? "colonial" : "colonial",
   );
   const [showFeedback, setShowFeedback] = useState(false);
 
@@ -77,7 +77,11 @@ export function BritishInIndiaToy({ lang, mode = "toy", onDone }: BritishInIndia
             setShowFeedback(false);
           }}
         >
-          {lang === "en" ? "Colonial Monopoly Tariffs" : lang === "de" ? "Koloniale Schutzzoelle" : "Kolonialne cła monopolistyczne"}
+          {lang === "en"
+            ? "Colonial Monopoly Tariffs"
+            : lang === "de"
+              ? "Koloniale Schutzzoelle"
+              : "Kolonialne cła monopolistyczne"}
         </button>
         <button
           type="button"
@@ -87,7 +91,11 @@ export function BritishInIndiaToy({ lang, mode = "toy", onDone }: BritishInIndia
             setShowFeedback(false);
           }}
         >
-          {lang === "en" ? "Fair Reciprocal Trade" : lang === "de" ? "Faire Handelsbedingungen" : "Uczciwy handel wzajemny"}
+          {lang === "en"
+            ? "Fair Reciprocal Trade"
+            : lang === "de"
+              ? "Faire Handelsbedingungen"
+              : "Uczciwy handel wzajemny"}
         </button>
       </div>
 
@@ -96,36 +104,64 @@ export function BritishInIndiaToy({ lang, mode = "toy", onDone }: BritishInIndia
         {/* Bengal Handloom */}
         <div className={`producer-box ${artisanStatus}`}>
           <div className="prod-title">
-            {lang === "en" ? "Bengal Village Weaver" : lang === "de" ? "Weber im Dorf" : "Wiejski tkacz"}
+            {lang === "en"
+              ? "Bengal Village Weaver"
+              : lang === "de"
+                ? "Weber im Dorf"
+                : "Wiejski tkacz"}
           </div>
           <div className="tariff-tag">
-            {lang === "en" ? "Export Tariff:" : lang === "de" ? "Exportzoll:" : "Cło eksportowe:"} <strong>{artisanTariff}%</strong>
+            {lang === "en" ? "Export Tariff:" : lang === "de" ? "Exportzoll:" : "Cło eksportowe:"}{" "}
+            <strong>{artisanTariff}%</strong>
           </div>
           <div className="income-badge">
-            {artisanIncome} {lang === "en" ? "Coins/day" : lang === "de" ? "Muenzen/Tag" : "Monet/dzień"}
+            {artisanIncome}{" "}
+            {lang === "en" ? "Coins/day" : lang === "de" ? "Muenzen/Tag" : "Monet/dzień"}
           </div>
           <div className="prod-state">
             {artisanStatus === "thriving"
-              ? lang === "en" ? "Handloom Busy & Thriving!" : lang === "de" ? "Webstuhl aktiv & erfolgreich!" : "Krosno działa i prosperuje!"
-              : lang === "en" ? "Loom Silent (Crushed by Tax)" : lang === "de" ? "Webstuhl still (Ueberlastet)" : "Krosno milczy (zniszczone podatkiem)"}
+              ? lang === "en"
+                ? "Handloom Busy & Thriving!"
+                : lang === "de"
+                  ? "Webstuhl aktiv & erfolgreich!"
+                  : "Krosno działa i prosperuje!"
+              : lang === "en"
+                ? "Loom Silent (Crushed by Tax)"
+                : lang === "de"
+                  ? "Webstuhl still (Ueberlastet)"
+                  : "Krosno milczy (zniszczone podatkiem)"}
           </div>
         </div>
 
         {/* Manchester Mill */}
         <div className="producer-box factory">
           <div className="prod-title">
-            {lang === "en" ? "Industrial Steam Mill" : lang === "de" ? "Industrie-Dampfmuehle" : "Fabryka parowa"}
+            {lang === "en"
+              ? "Industrial Steam Mill"
+              : lang === "de"
+                ? "Industrie-Dampfmuehle"
+                : "Fabryka parowa"}
           </div>
           <div className="tariff-tag">
-            {lang === "en" ? "Import Tariff:" : lang === "de" ? "Importzoll:" : "Cło importowe:"} <strong>{factoryTariff}%</strong>
+            {lang === "en" ? "Import Tariff:" : lang === "de" ? "Importzoll:" : "Cło importowe:"}{" "}
+            <strong>{factoryTariff}%</strong>
           </div>
           <div className="income-badge">
-            {factoryIncome} {lang === "en" ? "Coins/day" : lang === "de" ? "Muenzen/Tag" : "Monet/dzień"}
+            {factoryIncome}{" "}
+            {lang === "en" ? "Coins/day" : lang === "de" ? "Muenzen/Tag" : "Monet/dzień"}
           </div>
           <div className="prod-state">
             {policy === "colonial"
-              ? lang === "en" ? "Monopoly Advantage" : lang === "de" ? "Monopol-Vorteil" : "Przewaga monopolu"
-              : lang === "en" ? "Healthy Competition" : lang === "de" ? "Gesunder Wettbewerb" : "Zdrowa konkurencja"}
+              ? lang === "en"
+                ? "Monopoly Advantage"
+                : lang === "de"
+                  ? "Monopol-Vorteil"
+                  : "Przewaga monopolu"
+              : lang === "en"
+                ? "Healthy Competition"
+                : lang === "de"
+                  ? "Gesunder Wettbewerb"
+                  : "Zdrowa konkurencja"}
           </div>
         </div>
       </div>
@@ -140,13 +176,13 @@ export function BritishInIndiaToy({ lang, mode = "toy", onDone }: BritishInIndia
               ? lang === "en"
                 ? "Excellent! Removing unfair colonial tariffs restored balance and protected local weavers."
                 : lang === "de"
-                ? "Ausgezeichnet! Faire Handelsregeln schuetzen Handwerker und schaffen Balance."
-                : "Wspaniale! Usunięcie niesprawiedliwych ceł przywróciło równowagę i ochroniło tkaczy."
+                  ? "Ausgezeichnet! Faire Handelsregeln schuetzen Handwerker und schaffen Balance."
+                  : "Wspaniale! Usunięcie niesprawiedliwych ceł przywróciło równowagę i ochroniło tkaczy."
               : lang === "en"
-              ? "Switch to Fair Reciprocal Trade to give local artisans an equal chance."
-              : lang === "de"
-              ? "Wechsle zu Faire Handelsbedingungen, um Handwerkern gleiche Chancen zu geben."
-              : "Przełącz na uczciwe warunki handlu, aby dać rzemieślnikom równe szanse."}
+                ? "Switch to Fair Reciprocal Trade to give local artisans an equal chance."
+                : lang === "de"
+                  ? "Wechsle zu Faire Handelsbedingungen, um Handwerkern gleiche Chancen zu geben."
+                  : "Przełącz na uczciwe warunki handlu, aby dać rzemieślnikom równe szanse."}
           </div>
         )}
       </div>

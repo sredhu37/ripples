@@ -95,7 +95,11 @@ export const lesson: Lesson = {
           "Lohn wird oft nach Stunden gezählt. Bea bekommt 3 Münzen für jede Stunde, die sie arbeitet.",
           "Płacę często liczy się na godziny. Bea dostaje 3 monety za każdą godzinę pracy.",
         ),
-        T("Today Bea works for 4 hours.", "Heute arbeitet Bea 4 Stunden.", "Dzisiaj Bea pracuje przez 4 godziny."),
+        T(
+          "Today Bea works for 4 hours.",
+          "Heute arbeitet Bea 4 Stunden.",
+          "Dzisiaj Bea pracuje przez 4 godziny.",
+        ),
         T(
           "In every one of those hours she earns 3 coins.",
           "In jeder dieser Stunden verdient sie 3 Münzen.",
@@ -111,7 +115,11 @@ export const lesson: Lesson = {
     ),
     animatedBeat(
       [
-        T("Bea gets 3 coins for each hour of her work.", "Bea bekommt 3 Münzen für jede Stunde Arbeit.", "Bea dostaje 3 monety za każdą godzinę pracy."),
+        T(
+          "Bea gets 3 coins for each hour of her work.",
+          "Bea bekommt 3 Münzen für jede Stunde Arbeit.",
+          "Bea dostaje 3 monety za każdą godzinę pracy.",
+        ),
         T(
           "But Sam gets 5 coins for each hour. That is more than Bea!",
           "Aber Sam bekommt 5 Münzen für jede Stunde. Das ist mehr als bei Bea!",
@@ -193,9 +201,21 @@ export const lesson: Lesson = {
     ),
     animatedBeat(
       [
-        T("The coins you earn are yours.", "Die Münzen, die du verdienst, gehören dir.", "Monety, które zarobisz, należą do ciebie."),
-        T("You can spend them, for example on bread.", "Du kannst sie ausgeben, zum Beispiel für Brot.", "Możesz je wydać, na przykład na chleb."),
-        T("Or you can save some of them for later.", "Oder du sparst einen Teil für später.", "Albo odłożyć część z nich na później."),
+        T(
+          "The coins you earn are yours.",
+          "Die Münzen, die du verdienst, gehören dir.",
+          "Monety, które zarobisz, należą do ciebie.",
+        ),
+        T(
+          "You can spend them, for example on bread.",
+          "Du kannst sie ausgeben, zum Beispiel für Brot.",
+          "Możesz je wydać, na przykład na chleb.",
+        ),
+        T(
+          "Or you can save some of them for later.",
+          "Oder du sparst einen Teil für später.",
+          "Albo odłożyć część z nich na później.",
+        ),
       ],
       KeepDiagram,
     ),
@@ -215,9 +235,28 @@ export const lesson: Lesson = {
         "Sam uczył się robić buty przez trzy lata. Zawodu Tima można nauczyć się w jedno popołudnie. Który zawód zazwyczaj przynosi większy zarobek na godzinę?",
       ),
       options: [
-        { text: T("Tim's job, learned in one afternoon", "Tims Beruf, an einem Nachmittag gelernt", "Zawód Tima, poznany w jedno popołudnie") },
-        { text: T("Sam's job, learned in three years", "Sams Beruf, in drei Jahren gelernt", "Zawód Sama, wymagający trzech lat nauki"), correct: true },
-        { text: T("They always pay exactly the same", "Sie zahlen immer genau gleich viel", "Oba przynoszą zawsze dokładnie tyle samo") },
+        {
+          text: T(
+            "Tim's job, learned in one afternoon",
+            "Tims Beruf, an einem Nachmittag gelernt",
+            "Zawód Tima, poznany w jedno popołudnie",
+          ),
+        },
+        {
+          text: T(
+            "Sam's job, learned in three years",
+            "Sams Beruf, in drei Jahren gelernt",
+            "Zawód Sama, wymagający trzech lat nauki",
+          ),
+          correct: true,
+        },
+        {
+          text: T(
+            "They always pay exactly the same",
+            "Sie zahlen immer genau gleich viel",
+            "Oba przynoszą zawsze dokładnie tyle samo",
+          ),
+        },
       ],
       hint: T(
         "A job that takes years to learn is harder to find people for. So it usually pays more per hour.",
@@ -249,7 +288,13 @@ export const lesson: Lesson = {
       options: [
         { text: T("It goes up", "Er steigt", "Wzrasta"), correct: true },
         { text: T("It goes down", "Er sinkt", "Spada") },
-        { text: T("It stays exactly the same", "Er bleibt genau gleich", "Pozostaje dokładnie taka sama") },
+        {
+          text: T(
+            "It stays exactly the same",
+            "Er bleibt genau gleich",
+            "Pozostaje dokładnie taka sama",
+          ),
+        },
       ],
       hint: T(
         "Lots of work and only a few people who can do it. So the town has to pay more coins to get a boat fixed.",
@@ -283,7 +328,8 @@ export const lesson: Lesson = {
           de: "Auf dem Arbeitsmarkt ist das gehandelte Gut die Arbeit, und ihr Preis ist der Lohn. Der Arbeitsmarkt funktioniert wie andere Märkte mit Angebot und Nachfrage.",
           pl: "Na rynku pracy 'towarem', który podlega kupnu i sprzedaży, jest praca, a jej ceną jest wynagrodzenie. Rynek pracy działa jak inne rynki z kupującymi i sprzedającymi.",
         },
-        source: "https://www.federalreserveeducation.org/teaching-resources/economics/labor-income/the-labor-market-podcast",
+        source:
+          "https://www.federalreserveeducation.org/teaching-resources/economics/labor-income/the-labor-market-podcast",
       },
       {
         text: {
@@ -291,7 +337,8 @@ export const lesson: Lesson = {
           de: "Arbeitskräfte können ihre Produktivität und Löhne durch Fähigkeiten, Bildung und Ausbildung steigern. Höhere Löhne erzielen Berufe mit hoher Nachfrage und knappem Angebot an Fachkräften.",
           pl: "Pracownicy mogą podnosić swoją produktywność i zarobki poprzez zdobywanie umiejętności i wykształcenia. Wyższe płace oferują zawody o wysokim popycie i ograniczonej liczbie wykwalifikowanych specjalistów.",
         },
-        source: "https://www.federalreserveeducation.org/teaching-resources/economics/labor-income/the-labor-market-podcast",
+        source:
+          "https://www.federalreserveeducation.org/teaching-resources/economics/labor-income/the-labor-market-podcast",
       },
       {
         text: {
@@ -307,7 +354,8 @@ export const lesson: Lesson = {
           de: "Gesetzliche Mindestlöhne schützen Arbeitnehmer durch eine verbindliche Lohnuntergrenze, während qualifizierte Berufe je nach Ausbildung höhere Marktlöhne erzielen.",
           pl: "Ustawowa płaca minimalna chroni pracowników, zapewniając prawnie gwarantowany próg zarobków, podczas gdy zawody specjalistyczne osiągają wyższe wynagrodzenia rynkowe.",
         },
-        source: "https://www.bmas.de/DE/Arbeit/Arbeitsrecht/Mindestlohn/Informationen-zum-Mindestlohn/informationen-zum-mindestlohn-deutsch.html",
+        source:
+          "https://www.bmas.de/DE/Arbeit/Arbeitsrecht/Mindestlohn/Informationen-zum-Mindestlohn/informationen-zum-mindestlohn-deutsch.html",
       },
       {
         text: {
@@ -315,7 +363,8 @@ export const lesson: Lesson = {
           de: "Der Bruttolohn ist das Gehalt vor Abzug von Steuern und Sozialabgaben. Der Nettolohn ist der Auszahlungsbetrag, der nach allen Abzügen übrig bleibt.",
           pl: "Wynagrodzenie brutto to kwota przed potrąceniem podatków i składek na ubezpieczenia społeczne. Wynagrodzenie netto (na rękę) to kwota wypłacana pracownikowi po potrąceniach.",
         },
-        source: "https://www.bpb.de/kurz-knapp/lexika/das-junge-politik-lexikon/319967/bruttolohn-nettolohn/",
+        source:
+          "https://www.bpb.de/kurz-knapp/lexika/das-junge-politik-lexikon/319967/bruttolohn-nettolohn/",
       },
     ],
     simplified: [

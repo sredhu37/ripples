@@ -55,7 +55,15 @@ function sayFor(s: Setting, tenths: number, scoops: number): Text {
 }
 
 /** Ice cream time machine: jump ahead some years, set how fast prices rise, see what 10 coins buy. */
-export function TimeMachine({ lang, value, onChange }: { lang: Lang; value: Setting; onChange: (s: Setting) => void }) {
+export function TimeMachine({
+  lang,
+  value,
+  onChange,
+}: {
+  lang: Lang;
+  value: Setting;
+  onChange: (s: Setting) => void;
+}) {
   const tenths = priceTenths(value.years, value.percent);
   const scoops = scoopsFor(value.years, value.percent);
   const say = sayFor(value, tenths, scoops);
@@ -64,8 +72,8 @@ export function TimeMachine({ lang, value, onChange }: { lang: Lang; value: Sett
     lang === "pl"
       ? "Maszyna czasu lodów"
       : lang === "de"
-      ? "Eis-Zeitmaschine"
-      : "Ice cream time machine";
+        ? "Eis-Zeitmaschine"
+        : "Ice cream time machine";
 
   const yearsLabel =
     lang === "pl" ? "Lata później" : lang === "de" ? "Jahre später" : "Years later";
@@ -76,8 +84,8 @@ export function TimeMachine({ lang, value, onChange }: { lang: Lang; value: Sett
     lang === "pl"
       ? "Wzrost cen co roku (%)"
       : lang === "de"
-      ? "Preisanstieg pro Jahr (%)"
-      : "Price rise each year (%)";
+        ? "Preisanstieg pro Jahr (%)"
+        : "Price rise each year (%)";
   const rateLeft = lang === "pl" ? "brak" : lang === "de" ? "keiner" : "none";
   const rateRight = lang === "pl" ? "20 na 100" : lang === "de" ? "20 von 100" : "20 out of 100";
 
@@ -85,22 +93,18 @@ export function TimeMachine({ lang, value, onChange }: { lang: Lang; value: Sett
     lang === "pl"
       ? "Jedna gałka kosztuje"
       : lang === "de"
-      ? "Eine Kugel kostet"
-      : "One scoop costs";
+        ? "Eine Kugel kostet"
+        : "One scoop costs";
 
   const scoopsAria =
-    lang === "pl"
-      ? `${scoops} gałek`
-      : lang === "de"
-      ? `${scoops} Kugeln`
-      : `${scoops} scoops`;
+    lang === "pl" ? `${scoops} gałek` : lang === "de" ? `${scoops} Kugeln` : `${scoops} scoops`;
 
   const srSummary =
     lang === "pl"
       ? `10 monet kupuje ${scoops} gałek`
       : lang === "de"
-      ? `10 Münzen kaufen ${scoops} ${scoops === 1 ? "Kugel" : "Kugeln"}`
-      : `10 coins buy ${scoops} ${scoops === 1 ? "scoop" : "scoops"}`;
+        ? `10 Münzen kaufen ${scoops} ${scoops === 1 ? "Kugel" : "Kugeln"}`
+        : `10 coins buy ${scoops} ${scoops === 1 ? "scoop" : "scoops"}`;
 
   return (
     <Stage label={stageLabel}>
@@ -146,7 +150,11 @@ export function TimeMachine({ lang, value, onChange }: { lang: Lang; value: Sett
           <div>
             <div className="inf-scoops" role="img" aria-label={scoopsAria}>
               {Array.from({ length: POCKET }, (_, i) => (
-                <span key={i} className={i < scoops ? "inf-scoop" : "inf-scoop gone"} aria-hidden="true">
+                <span
+                  key={i}
+                  className={i < scoops ? "inf-scoop" : "inf-scoop gone"}
+                  aria-hidden="true"
+                >
                   <InlineIcon size={42}>
                     <IceCream />
                   </InlineIcon>
@@ -154,16 +162,13 @@ export function TimeMachine({ lang, value, onChange }: { lang: Lang; value: Sett
               ))}
             </div>
             <div className="inf-count">
-              <span className="sr-only">
-                {srSummary}
-              </span>
+              <span className="sr-only">{srSummary}</span>
               <span className="btn-icons" aria-hidden="true">
                 10
                 <InlineIcon size={30}>
                   <Coin />
                 </InlineIcon>
-                →
-                {scoops}
+                →{scoops}
                 <InlineIcon size={30}>
                   <IceCream />
                 </InlineIcon>

@@ -8,15 +8,30 @@
     },
     "assert": {
       "assertions": {
-        "largest-contentful-paint": ["error", { "maxNumericValue": 2500, "aggregationMethod": "median" }],
-        "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1, "aggregationMethod": "median" }],
+        "largest-contentful-paint": [
+          "error",
+          { "maxNumericValue": 2500, "aggregationMethod": "median" }
+        ],
+        "cumulative-layout-shift": [
+          "error",
+          { "maxNumericValue": 0.1, "aggregationMethod": "median" }
+        ],
         "total-blocking-time": ["error", { "maxNumericValue": 200, "aggregationMethod": "median" }],
-        "categories:accessibility": ["error", { "minScore": 1, "aggregationMethod": "pessimistic" }],
+        "categories:accessibility": [
+          "error",
+          { "minScore": 1, "aggregationMethod": "pessimistic" }
+        ],
         "aria-allowed-role": ["error", { "minScore": 1, "aggregationMethod": "pessimistic" }],
         "empty-heading": ["error", { "minScore": 1, "aggregationMethod": "pessimistic" }],
-        "identical-links-same-purpose": ["error", { "minScore": 1, "aggregationMethod": "pessimistic" }],
+        "identical-links-same-purpose": [
+          "error",
+          { "minScore": 1, "aggregationMethod": "pessimistic" }
+        ],
         "image-redundant-alt": ["error", { "minScore": 1, "aggregationMethod": "pessimistic" }],
-        "label-content-name-mismatch": ["error", { "minScore": 1, "aggregationMethod": "pessimistic" }],
+        "label-content-name-mismatch": [
+          "error",
+          { "minScore": 1, "aggregationMethod": "pessimistic" }
+        ],
         "table-duplicate-name": ["error", { "minScore": 1, "aggregationMethod": "pessimistic" }],
         "table-fake-caption": ["error", { "minScore": 1, "aggregationMethod": "pessimistic" }],
         "td-has-header": ["error", { "minScore": 1, "aggregationMethod": "pessimistic" }]

@@ -1,13 +1,14 @@
 import type { DiagramProps } from "../lesson/types";
 
 export function CharteredSealDiagram({ lang, step }: DiagramProps) {
-  const sealText = lang === "pl" ? "PRZYWILEJ 1600" : lang === "de" ? "FREIBRIEF 1600" : "1600 CHARTER";
+  const sealText =
+    lang === "pl" ? "PRZYWILEJ 1600" : lang === "de" ? "FREIBRIEF 1600" : "1600 CHARTER";
   const sub =
     lang === "pl"
       ? "Prywatna spółka z królewskim monopolem na handel zamorski"
       : lang === "de"
-      ? "Eine private Gesellschaft mit koeniglichem Handelsmonopol"
-      : "A private company granted monopoly trading rights";
+        ? "Eine private Gesellschaft mit koeniglichem Handelsmonopol"
+        : "A private company granted monopoly trading rights";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Royal Chartered Company Seal">
@@ -18,7 +19,15 @@ export function CharteredSealDiagram({ lang, step }: DiagramProps) {
         </radialGradient>
       </defs>
       <circle cx="200" cy="110" r="55" fill="url(#waxSeal)" stroke="#450a0a" strokeWidth="4" />
-      <circle cx="200" cy="110" r="45" fill="none" stroke="#fecaca" strokeWidth="2" strokeDasharray="4 4" />
+      <circle
+        cx="200"
+        cy="110"
+        r="45"
+        fill="none"
+        stroke="#fecaca"
+        strokeWidth="2"
+        strokeDasharray="4 4"
+      />
       <text x="200" y="115" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#ffffff">
         {sealText}
       </text>
@@ -36,22 +45,39 @@ export function CompanyFortressDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Fort William / Twierdza portowa"
       : lang === "de"
-      ? "Fort William / Hafenfestung"
-      : "Fort William / Harbor Fortress";
+        ? "Fort William / Hafenfestung"
+        : "Fort William / Harbor Fortress";
 
   const sub =
     lang === "pl"
       ? "Prywatne wojsko i bastiony chroniące magazyny korporacji"
       : lang === "de"
-      ? "Privatarmeen und Mauern schuetzten Lagerhaeuser der Kompanie"
-      : "Private armies and walls protecting company warehouses";
+        ? "Privatarmeen und Mauern schuetzten Lagerhaeuser der Kompanie"
+        : "Private armies and walls protecting company warehouses";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Company Armed Fortress">
-      <rect x="50" y="70" width="300" height="110" rx="4" fill="#64748b" stroke="#334155" strokeWidth="3" />
+      <rect
+        x="50"
+        y="70"
+        width="300"
+        height="110"
+        rx="4"
+        fill="#64748b"
+        stroke="#334155"
+        strokeWidth="3"
+      />
       {/* Bastions */}
       <rect x="40" y="50" width="40" height="130" fill="#475569" stroke="#1e293b" strokeWidth="2" />
-      <rect x="320" y="50" width="40" height="130" fill="#475569" stroke="#1e293b" strokeWidth="2" />
+      <rect
+        x="320"
+        y="50"
+        width="40"
+        height="130"
+        fill="#475569"
+        stroke="#1e293b"
+        strokeWidth="2"
+      />
       {/* Flag */}
       <line x1="200" y1="20" x2="200" y2="70" stroke="#1e293b" strokeWidth="3" />
       <rect x="200" y="20" width="40" height="25" fill="#ef4444" />
@@ -72,19 +98,28 @@ export function VillageHandloomDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Tradycyjne bengalskie krosno wiejskie"
       : lang === "de"
-      ? "Bengalischer Baumwoll-Webstuhl"
-      : "Bengal Village Cotton Handloom";
+        ? "Bengalischer Baumwoll-Webstuhl"
+        : "Bengal Village Cotton Handloom";
 
   const sub =
     lang === "pl"
       ? "Tkactwo słynnego na cały świat delikatnego muślinu"
       : lang === "de"
-      ? "Herstellung des weltbekannten feinen Musselins"
-      : "Weaving world-renowned fine muslin fabrics";
+        ? "Herstellung des weltbekannten feinen Musselins"
+        : "Weaving world-renowned fine muslin fabrics";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Indian Artisan Handloom">
-      <rect x="40" y="30" width="320" height="175" rx="10" fill="#fffbeb" stroke="#fde68a" strokeWidth="2" />
+      <rect
+        x="40"
+        y="30"
+        width="320"
+        height="175"
+        rx="10"
+        fill="#fffbeb"
+        stroke="#fde68a"
+        strokeWidth="2"
+      />
       <text x="200" y="60" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#92400e">
         {title}
       </text>
@@ -112,19 +147,32 @@ export function IndustrialLoomManchesterDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Przemysłowa tkalnia parowa w Manchesterze"
       : lang === "de"
-      ? "Industrielle Dampf-Webfabrik"
-      : "Industrial Steam Loom Factory";
+        ? "Industrielle Dampf-Webfabrik"
+        : "Industrial Steam Loom Factory";
 
   const sub =
     lang === "pl"
       ? "Masowa produkcja taniej tkaniny zasilana parą węglową"
       : lang === "de"
-      ? "Massenproduktion billiger Stoffe durch Kohledampf"
-      : "Mass-producing cheap cloth powered by coal steam";
+        ? "Massenproduktion billiger Stoffe durch Kohledampf"
+        : "Mass-producing cheap cloth powered by coal steam";
 
   return (
-    <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Industrial Steam Factory in Manchester">
-      <rect x="40" y="30" width="320" height="175" rx="10" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="2" />
+    <svg
+      viewBox="0 0 400 240"
+      className="diagram-svg"
+      aria-label="Industrial Steam Factory in Manchester"
+    >
+      <rect
+        x="40"
+        y="30"
+        width="320"
+        height="175"
+        rx="10"
+        fill="#f1f5f9"
+        stroke="#cbd5e1"
+        strokeWidth="2"
+      />
       <text x="200" y="60" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#334155">
         {title}
       </text>
@@ -151,8 +199,8 @@ export function RailwayExportPortDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Kolej zbudowana do wywozu surowców"
       : lang === "de"
-      ? "Eisenbahnen fuer den Rohstoffexport"
-      : "Railways Built for Raw Resource Export";
+        ? "Eisenbahnen fuer den Rohstoffexport"
+        : "Railways Built for Raw Resource Export";
 
   const cotton = lang === "pl" ? "Bawełna" : lang === "de" ? "Rohbaumwolle" : "Raw Cotton";
   const tea = lang === "pl" ? "Herbata" : lang === "de" ? "Teeblaetter" : "Tea Leaves";
@@ -161,12 +209,21 @@ export function RailwayExportPortDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Wywóz bogactw naturalnych przez porty oceaniczne"
       : lang === "de"
-      ? "Verschiffung von Rohstoffen ueber Seehaefen"
-      : "Shipping natural wealth out through ocean ports";
+        ? "Verschiffung von Rohstoffen ueber Seehaefen"
+        : "Shipping natural wealth out through ocean ports";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Railway Line to Ocean Harbor">
-      <rect x="30" y="30" width="340" height="180" rx="12" fill="#ecfdf5" stroke="#a7f3d0" strokeWidth="2" />
+      <rect
+        x="30"
+        y="30"
+        width="340"
+        height="180"
+        rx="12"
+        fill="#ecfdf5"
+        stroke="#a7f3d0"
+        strokeWidth="2"
+      />
       <text x="200" y="60" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#065f46">
         {title}
       </text>
@@ -178,9 +235,13 @@ export function RailwayExportPortDiagram({ lang, step }: DiagramProps) {
         <line key={x} x1={x} y1="122" x2={x} y2="153" stroke="#52525b" strokeWidth="4" />
       ))}
       <rect x="70" y="85" width="70" height="35" rx="4" fill="#047857" />
-      <text x="105" y="107" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#ffffff">{cotton}</text>
+      <text x="105" y="107" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#ffffff">
+        {cotton}
+      </text>
       <rect x="160" y="85" width="70" height="35" rx="4" fill="#047857" />
-      <text x="195" y="107" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#ffffff">{tea}</text>
+      <text x="195" y="107" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#ffffff">
+        {tea}
+      </text>
       {step >= 2 && (
         <text x="200" y="190" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#064e3b">
           {sub}

@@ -278,7 +278,8 @@ export const lesson: Lesson = {
           de: "Statistische Ämter erfassen Bruttoanlageinvestitionen von Unternehmen, um die Ausstattung der Wirtschaft mit produktivem Sachkapital abzubilden.",
           pl: "Główny Urząd Statystyczny (GUS) publikuje dane o nakładach brutto na środki trwałe, ilustrując inwestycje firm w nowoczesny park maszynowy.",
         },
-        source: "https://www.destatis.de/DE/Themen/Wirtschaft/Volkswirtschaftliche-Gesamtrechnungen-Inlandsprodukt/_inhalt.html",
+        source:
+          "https://www.destatis.de/DE/Themen/Wirtschaft/Volkswirtschaftliche-Gesamtrechnungen-Inlandsprodukt/_inhalt.html",
       },
       {
         text: {

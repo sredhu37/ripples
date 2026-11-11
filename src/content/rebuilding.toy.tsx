@@ -24,10 +24,7 @@ export function RebuildingToy({ lang, mode = "toy", onDone }: RebuildingToyProps
   const [beamsPlaced, setBeamsPlaced] = useState(mode === "quiz" ? 1 : 0);
   const [showFeedback, setShowFeedback] = useState(false);
 
-  const { peaceScore, bridgeComplete, status } = calcRebuildingProgress(
-    isEGKS,
-    beamsPlaced
-  );
+  const { peaceScore, bridgeComplete, status } = calcRebuildingProgress(isEGKS, beamsPlaced);
 
   useEffect(() => {
     if (mode === "toy" && isEGKS && bridgeComplete && onDone) {
@@ -62,21 +59,24 @@ export function RebuildingToy({ lang, mode = "toy", onDone }: RebuildingToyProps
     lang === "pl"
       ? "Osobne, rywalizujące granice"
       : lang === "de"
-      ? "Getrennte Grenzen"
-      : "Separate Rival Borders";
+        ? "Getrennte Grenzen"
+        : "Separate Rival Borders";
 
   const egksLabel =
     lang === "pl"
       ? "Wspólnota Węgla i Stali (EWWiS)"
       : lang === "de"
-      ? "Montanunion (EGKS)"
-      : "Pooled Coal & Steel (EGKS)";
+        ? "Montanunion (EGKS)"
+        : "Pooled Coal & Steel (EGKS)";
 
-  const franceLabel =
-    lang === "pl" ? "🇫🇷 Francja" : lang === "de" ? "Frankreich 🇫🇷" : "🇫🇷 France";
+  const franceLabel = lang === "pl" ? "🇫🇷 Francja" : lang === "de" ? "Frankreich 🇫🇷" : "🇫🇷 France";
 
   const riverLabel =
-    lang === "pl" ? "🌊 Rzeka Ren - dawna granica" : lang === "de" ? "🌊 Rhein-Grenze" : "🌊 Rhine River Border";
+    lang === "pl"
+      ? "🌊 Rzeka Ren - dawna granica"
+      : lang === "de"
+        ? "🌊 Rhein-Grenze"
+        : "🌊 Rhine River Border";
 
   const germanyLabel =
     lang === "pl" ? "Niemcy 🇩🇪" : lang === "de" ? "Deutschland 🇩🇪" : "Germany 🇩🇪";
@@ -85,24 +85,27 @@ export function RebuildingToy({ lang, mode = "toy", onDone }: RebuildingToyProps
     lang === "pl" ? "🔩 Stalowy dźwigar" : lang === "de" ? "🔩 Stahlträger" : "🔩 Steel Girder";
 
   const connectBeamBtn =
-    lang === "pl" ? "+ Zamontuj stalowy dźwigar" : lang === "de" ? "+ Stahlträger einbauen" : "+ Connect Steel Beam";
+    lang === "pl"
+      ? "+ Zamontuj stalowy dźwigar"
+      : lang === "de"
+        ? "+ Stahlträger einbauen"
+        : "+ Connect Steel Beam";
 
-  const resetBtn =
-    lang === "pl" ? "Reset" : lang === "de" ? "Zurücksetzen" : "Reset";
+  const resetBtn = lang === "pl" ? "Reset" : lang === "de" ? "Zurücksetzen" : "Reset";
 
   const peaceMeterLabel =
     lang === "pl"
       ? "Pokój i integracja europejska:"
       : lang === "de"
-      ? "Frieden & Europäische Einigung:"
-      : "European Peace & Integration:";
+        ? "Frieden & Europäische Einigung:"
+        : "European Peace & Integration:";
 
   const trainCelebration =
     lang === "pl"
       ? "🚅 Most jest otwarty! Szybkie pociągi łączą europejskie stolice w pokoju."
       : lang === "de"
-      ? "🚅 Die Brücke steht! Züge verbinden Paris und Berlin in Frieden."
-      : "🚅 The bridge is open! Fast trains connect Paris and Berlin in peace.";
+        ? "🚅 Die Brücke steht! Züge verbinden Paris und Berlin in Frieden."
+        : "🚅 The bridge is open! Fast trains connect Paris and Berlin in peace.";
 
   return (
     <div className="rebuilding-wrap">
@@ -163,17 +166,12 @@ export function RebuildingToy({ lang, mode = "toy", onDone }: RebuildingToyProps
       {/* Peace & Integration Meter */}
       <div className="peace-meter-card">
         <div className="pm-label">
-          {peaceMeterLabel}{" "}
-          <strong>{peaceScore}%</strong>
+          {peaceMeterLabel} <strong>{peaceScore}%</strong>
         </div>
         <div className="pm-bar">
           <div className="pm-fill" style={{ width: `${peaceScore}%` }} />
         </div>
-        {bridgeComplete && (
-          <div className="train-celebration">
-            {trainCelebration}
-          </div>
-        )}
+        {bridgeComplete && <div className="train-celebration">{trainCelebration}</div>}
       </div>
 
       <div className="rebuilding-actions">
@@ -184,13 +182,13 @@ export function RebuildingToy({ lang, mode = "toy", onDone }: RebuildingToyProps
               ? lang === "pl"
                 ? "Znakomicie! Wspólne zarządzanie węglem i stalą uczyniło przyszłą wojnę niemożliwą i zjednoczyło dawnych rywali."
                 : lang === "de"
-                ? "Hervorragend! Das Teilen von Kohle und Stahl machte Krieg unmöglich und schuf Einigung."
-                : "Outstanding! Pooling coal and steel made future war impossible and united former rivals."
+                  ? "Hervorragend! Das Teilen von Kohle und Stahl machte Krieg unmöglich und schuf Einigung."
+                  : "Outstanding! Pooling coal and steel made future war impossible and united former rivals."
               : lang === "pl"
-              ? "Wybierz 'Wspólnotę Węgla i Stali (EWWiS)' i zamontuj wszystkie 4 stalowe dźwigary."
-              : lang === "de"
-              ? "Wähle Montanunion (EGKS) und baue alle 4 Stahlträger ein."
-              : "Select 'Pooled Coal & Steel (EGKS)' and place all 4 steel beams."}
+                ? "Wybierz 'Wspólnotę Węgla i Stali (EWWiS)' i zamontuj wszystkie 4 stalowe dźwigary."
+                : lang === "de"
+                  ? "Wähle Montanunion (EGKS) und baue alle 4 Stahlträger ein."
+                  : "Select 'Pooled Coal & Steel (EGKS)' and place all 4 steel beams."}
           </div>
         )}
       </div>

@@ -83,7 +83,9 @@ describe("Senior Curriculum: Group 3 Markets", () => {
         expect(lesson.realLife.body.en.length).toBeGreaterThan(50);
         expect(lesson.factCard.claims.length).toBe(5);
         for (const claim of lesson.factCard.claims) {
-          expect(claim.source.startsWith("https://") || claim.source.startsWith("http://")).toBe(true);
+          expect(claim.source.startsWith("https://") || claim.source.startsWith("http://")).toBe(
+            true,
+          );
         }
       });
 

@@ -30,9 +30,20 @@ export function CoinStack(pos: IconProps) {
         const y = 74 - i * 17;
         return (
           <g key={i}>
-            <path d={`M20 ${y} V${y + 14} C20 ${y + 24} 80 ${y + 24} 80 ${y + 14} V${y} Z`} fill="#c98d0e" />
+            <path
+              d={`M20 ${y} V${y + 14} C20 ${y + 24} 80 ${y + 24} 80 ${y + 14} V${y} Z`}
+              fill="#c98d0e"
+            />
             <ellipse cx="50" cy={y} rx="30" ry="11" fill="#e3a91a" />
-            <ellipse cx="50" cy={y - 1.5} rx="22" ry="7" fill="none" stroke="#fbe08a" strokeWidth="3" />
+            <ellipse
+              cx="50"
+              cy={y - 1.5}
+              rx="22"
+              ry="7"
+              fill="none"
+              stroke="#fbe08a"
+              strokeWidth="3"
+            />
           </g>
         );
       })}
@@ -59,23 +70,55 @@ export function Chest(pos: IconProps) {
 }
 
 /** A river with a bank on each side. `ghost` draws the new bridge as a dashed plan, `built` as a real bridge. */
-export function River({ bridge = "none", ...pos }: IconProps & { bridge?: "none" | "ghost" | "built" }) {
+export function River({
+  bridge = "none",
+  ...pos
+}: IconProps & { bridge?: "none" | "ghost" | "built" }) {
   return (
     <Box {...pos}>
       <rect x="22" y="48" width="56" height="44" fill="#8ccbe6" />
-      <path d="M30 66 q6 -5 12 0 t12 0 M44 82 q6 -5 12 0 t12 0" stroke="#fff" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.85" />
+      <path
+        d="M30 66 q6 -5 12 0 t12 0 M44 82 q6 -5 12 0 t12 0"
+        stroke="#fff"
+        strokeWidth="3"
+        fill="none"
+        strokeLinecap="round"
+        opacity="0.85"
+      />
       <rect x="0" y="42" width="26" height="50" rx="6" fill="#6bb26f" />
       <rect x="74" y="42" width="26" height="50" rx="6" fill="#6bb26f" />
       {bridge === "ghost" && (
         <g opacity="0.55">
-          <rect x="16" y="36" width="68" height="10" rx="2" fill="#a86f3c" stroke={INK} strokeWidth="3" strokeDasharray="6 5" />
-          <path d="M20 22 H80 M24 22 V36 M50 22 V36 M76 22 V36" stroke="#8a5a36" strokeWidth="4" strokeLinecap="round" fill="none" />
+          <rect
+            x="16"
+            y="36"
+            width="68"
+            height="10"
+            rx="2"
+            fill="#a86f3c"
+            stroke={INK}
+            strokeWidth="3"
+            strokeDasharray="6 5"
+          />
+          <path
+            d="M20 22 H80 M24 22 V36 M50 22 V36 M76 22 V36"
+            stroke="#8a5a36"
+            strokeWidth="4"
+            strokeLinecap="round"
+            fill="none"
+          />
         </g>
       )}
       {bridge === "built" && (
         <g>
           <rect x="16" y="38" width="68" height="8" rx="2" fill="#a86f3c" />
-          <path d="M20 22 H80 M24 22 V38 M42 22 V38 M58 22 V38 M76 22 V38" stroke="#8a5a36" strokeWidth="4" strokeLinecap="round" fill="none" />
+          <path
+            d="M20 22 H80 M24 22 V38 M42 22 V38 M58 22 V38 M76 22 V38"
+            stroke="#8a5a36"
+            strokeWidth="4"
+            strokeLinecap="round"
+            fill="none"
+          />
         </g>
       )}
     </Box>
@@ -89,7 +132,17 @@ export function BankBuilding(pos: IconProps) {
       <path d="M8 38 L50 12 L92 38 Z" fill="#5b7078" />
       <circle cx="50" cy="30" r="5" fill="#dff1f6" />
       {[0, 1, 2, 3].map((i) => (
-        <rect key={i} x={16 + i * 20} y="42" width="10" height="34" rx="2" fill="#f4f1e8" stroke="#c9c1a9" strokeWidth="1.5" />
+        <rect
+          key={i}
+          x={16 + i * 20}
+          y="42"
+          width="10"
+          height="34"
+          rx="2"
+          fill="#f4f1e8"
+          stroke="#c9c1a9"
+          strokeWidth="1.5"
+        />
       ))}
       <rect x="10" y="78" width="80" height="8" rx="2" fill="#8a9aa1" />
       <rect x="4" y="86" width="92" height="8" rx="2" fill="#5b7078" />
@@ -102,7 +155,14 @@ export function Tick(pos: IconProps) {
   return (
     <Box {...pos}>
       <circle cx="50" cy="50" r="40" fill="#4fa75a" />
-      <path d="M28 52 L44 68 L74 34" stroke="#fff" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path
+        d="M28 52 L44 68 L74 34"
+        stroke="#fff"
+        strokeWidth="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
     </Box>
   );
 }
@@ -111,7 +171,13 @@ export function Tick(pos: IconProps) {
 export function UpArrow({ color = "#d6403a", ...pos }: IconProps & { color?: string }) {
   return (
     <Box {...pos}>
-      <path d="M50 8 L86 46 H64 V92 H36 V46 H14 Z" fill={color} stroke={color} strokeWidth="4" strokeLinejoin="round" />
+      <path
+        d="M50 8 L86 46 H64 V92 H36 V46 H14 Z"
+        fill={color}
+        stroke={color}
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
     </Box>
   );
 }

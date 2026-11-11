@@ -6,10 +6,17 @@ import type { DiagramProps } from "../lesson/types";
 export function FlourIcon({ x = 0, y = 0, size = 50 }: { x?: number; y?: number; size?: number }) {
   return (
     <g transform={`translate(${x} ${y}) scale(${size / 100})`}>
-      <path d="M25 85 C20 50 30 35 45 35 H55 C70 35 80 50 75 85 Z" fill="#f4f1e8" stroke="#cfc6ad" strokeWidth="4" />
+      <path
+        d="M25 85 C20 50 30 35 45 35 H55 C70 35 80 50 75 85 Z"
+        fill="#f4f1e8"
+        stroke="#cfc6ad"
+        strokeWidth="4"
+      />
       <path d="M40 35 L35 22 H65 L60 35 Z" fill="#e8b98c" stroke="#cfc6ad" strokeWidth="3" />
       <circle cx="50" cy="60" r="14" fill="#e8863a" opacity="0.3" />
-      <text x="50" y="66" textAnchor="middle" fill="#23383f" fontSize="18" fontWeight="bold">F</text>
+      <text x="50" y="66" textAnchor="middle" fill="#23383f" fontSize="18" fontWeight="bold">
+        F
+      </text>
     </g>
   );
 }
@@ -17,8 +24,26 @@ export function FlourIcon({ x = 0, y = 0, size = 50 }: { x?: number; y?: number;
 export function WoodIcon({ x = 0, y = 0, size = 50 }: { x?: number; y?: number; size?: number }) {
   return (
     <g transform={`translate(${x} ${y}) scale(${size / 100})`}>
-      <rect x="15" y="55" width="70" height="20" rx="10" fill="#8a5a36" stroke="#5a2f1a" strokeWidth="3" />
-      <rect x="20" y="32" width="60" height="20" rx="10" fill="#a86f3c" stroke="#5a2f1a" strokeWidth="3" />
+      <rect
+        x="15"
+        y="55"
+        width="70"
+        height="20"
+        rx="10"
+        fill="#8a5a36"
+        stroke="#5a2f1a"
+        strokeWidth="3"
+      />
+      <rect
+        x="20"
+        y="32"
+        width="60"
+        height="20"
+        rx="10"
+        fill="#a86f3c"
+        stroke="#5a2f1a"
+        strokeWidth="3"
+      />
       <circle cx="25" cy="65" r="7" fill="#6f4627" />
       <circle cx="28" cy="42" r="6" fill="#5a2f1a" />
     </g>
@@ -28,7 +53,16 @@ export function WoodIcon({ x = 0, y = 0, size = 50 }: { x?: number; y?: number; 
 export function BakeryOven({ x = 0, y = 0 }: { x?: number; y?: number }) {
   return (
     <g transform={`translate(${x} ${y})`}>
-      <rect x="0" y="20" width="120" height="90" rx="8" fill="#d47355" stroke="#23383f" strokeWidth="4" />
+      <rect
+        x="0"
+        y="20"
+        width="120"
+        height="90"
+        rx="8"
+        fill="#d47355"
+        stroke="#23383f"
+        strokeWidth="4"
+      />
       <path d="M20 75 C20 45 100 45 100 75 Z" fill="#23383f" />
       <path d="M40 75 C40 60 80 60 80 75 Z" fill="#f2b632" />
       <rect x="10" y="100" width="100" height="16" rx="4" fill="#a9b6bd" />
@@ -41,8 +75,8 @@ export function BakeBeatDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Bea piecze chleb w swojej piekarni"
       : lang === "de"
-      ? "Bea backt Brot in ihrer Bäckerei"
-      : "Bea bakes bread in her bakery";
+        ? "Bea backt Brot in ihrer Bäckerei"
+        : "Bea bakes bread in her bakery";
   const freshBread =
     lang === "pl" ? "Świeży chleb" : lang === "de" ? "Frisches Brot" : "Fresh bread";
 
@@ -76,10 +110,9 @@ export function CustomerSaleDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Klient płaci 4 monety za chleb"
       : lang === "de"
-      ? "Kundschaft zahlt 4 Münzen für Brot"
-      : "Customer pays 4 coins for bread";
-  const fourCoins =
-    lang === "pl" ? "4 monety" : lang === "de" ? "4 Münzen" : "4 coins";
+        ? "Kundschaft zahlt 4 Münzen für Brot"
+        : "Customer pays 4 coins for bread";
+  const fourCoins = lang === "pl" ? "4 monety" : lang === "de" ? "4 Münzen" : "4 coins";
 
   return (
     <DiagramCanvas label={label}>
@@ -124,8 +157,8 @@ export function CostsDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Mąka, drewno i czynsz za piec to koszty"
       : lang === "de"
-      ? "Mehl, Holz und Ofenmiete sind Kosten"
-      : "Flour, wood, and oven rent are costs";
+        ? "Mehl, Holz und Ofenmiete sind Kosten"
+        : "Flour, wood, and oven rent are costs";
   const flourText =
     lang === "pl" ? "Mąka: 1 moneta" : lang === "de" ? "Mehl: 1 Münze" : "Flour: 1 coin";
   const woodText =
@@ -136,13 +169,22 @@ export function CostsDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Koszty razem: 3 monety"
       : lang === "de"
-      ? "Gesamtkosten: 3 Münzen"
-      : "Total costs: 3 coins";
+        ? "Gesamtkosten: 3 Münzen"
+        : "Total costs: 3 coins";
 
   return (
     <DiagramCanvas label={label}>
       <Pop x={40} y={60}>
-        <rect x="0" y="0" width="160" height="150" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
+        <rect
+          x="0"
+          y="0"
+          width="160"
+          height="150"
+          rx="14"
+          fill="#ffffff"
+          stroke="#cbd5e1"
+          strokeWidth="3"
+        />
         <FlourIcon x={45} y={10} size={70} />
         <text x="80" y="95" textAnchor="middle" fill="#23383f" fontSize={15} fontWeight="bold">
           {flourText}
@@ -151,7 +193,16 @@ export function CostsDiagram({ lang, step }: DiagramProps) {
       </Pop>
       {step >= 2 && (
         <Pop x={240} y={60}>
-          <rect x="0" y="0" width="160" height="150" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
+          <rect
+            x="0"
+            y="0"
+            width="160"
+            height="150"
+            rx="14"
+            fill="#ffffff"
+            stroke="#cbd5e1"
+            strokeWidth="3"
+          />
           <WoodIcon x={45} y={10} size={70} />
           <text x="80" y="95" textAnchor="middle" fill="#23383f" fontSize={15} fontWeight="bold">
             {woodText}
@@ -161,7 +212,16 @@ export function CostsDiagram({ lang, step }: DiagramProps) {
       )}
       {step >= 3 && (
         <Pop x={440} y={60}>
-          <rect x="0" y="0" width="160" height="150" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
+          <rect
+            x="0"
+            y="0"
+            width="160"
+            height="150"
+            rx="14"
+            fill="#ffffff"
+            stroke="#cbd5e1"
+            strokeWidth="3"
+          />
           <g transform="translate(30, 10) scale(0.8)">
             <BakeryOven />
           </g>
@@ -188,12 +248,11 @@ export function ProfitSplitDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Koszty są płacone najpierw, reszta to zysk"
       : lang === "de"
-      ? "Kosten werden zuerst bezahlt, der Rest ist Gewinn"
-      : "Costs are paid first, remaining coin is profit";
+        ? "Kosten werden zuerst bezahlt, der Rest ist Gewinn"
+        : "Costs are paid first, remaining coin is profit";
   const salesPrice =
     lang === "pl" ? "Cena sprzedaży" : lang === "de" ? "Verkaufspreis" : "Sales price";
-  const fourCoins =
-    lang === "pl" ? "4 monety" : lang === "de" ? "4 Münzen" : "4 coins";
+  const fourCoins = lang === "pl" ? "4 monety" : lang === "de" ? "4 Münzen" : "4 coins";
   const costsLabel =
     lang === "pl" ? "Koszty (3 monety)" : lang === "de" ? "Kosten (3 Münzen)" : "Costs (3 coins)";
   const profitLabel =
@@ -202,7 +261,16 @@ export function ProfitSplitDiagram({ lang, step }: DiagramProps) {
   return (
     <DiagramCanvas label={label}>
       <Pop x={30} y={70}>
-        <rect x="0" y="0" width="140" height="130" rx="12" fill="#fff" stroke="#23383f" strokeWidth="3" />
+        <rect
+          x="0"
+          y="0"
+          width="140"
+          height="130"
+          rx="12"
+          fill="#fff"
+          stroke="#23383f"
+          strokeWidth="3"
+        />
         <text x="70" y="30" textAnchor="middle" fill="#23383f" fontSize={14} fontWeight="bold">
           {salesPrice}
         </text>
@@ -219,7 +287,16 @@ export function ProfitSplitDiagram({ lang, step }: DiagramProps) {
       {step >= 2 && (
         <Pop x={200} y={50}>
           <Arrow from={[0, 30]} to={[60, 30]} color="#d6403a" width={4} head={12} />
-          <rect x="70" y="0" width="160" height="90" rx="10" fill="#fee2e2" stroke="#d6403a" strokeWidth="2" />
+          <rect
+            x="70"
+            y="0"
+            width="160"
+            height="90"
+            rx="10"
+            fill="#fee2e2"
+            stroke="#d6403a"
+            strokeWidth="2"
+          />
           <text x="150" y="28" textAnchor="middle" fill="#991b1b" fontSize={14} fontWeight="bold">
             {costsLabel}
           </text>
@@ -233,7 +310,16 @@ export function ProfitSplitDiagram({ lang, step }: DiagramProps) {
       {step >= 3 && (
         <Pop x={200} y={150}>
           <Arrow from={[0, 30]} to={[60, 30]} color="#16a34a" width={4} head={12} />
-          <rect x="70" y="0" width="160" height="90" rx="10" fill="#dcfce7" stroke="#16a34a" strokeWidth="2" />
+          <rect
+            x="70"
+            y="0"
+            width="160"
+            height="90"
+            rx="10"
+            fill="#dcfce7"
+            stroke="#16a34a"
+            strokeWidth="2"
+          />
           <text x="150" y="28" textAnchor="middle" fill="#15803d" fontSize={14} fontWeight="bold">
             {profitLabel}
           </text>
@@ -259,8 +345,8 @@ export function LossDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Niska cena powoduje stratę"
       : lang === "de"
-      ? "Niedriger Preis führt zu Verlust"
-      : "Low price causes a loss";
+        ? "Niedriger Preis führt zu Verlust"
+        : "Low price causes a loss";
   const priceTwo =
     lang === "pl" ? "Cena: 2 monety" : lang === "de" ? "Preis: 2 Münzen" : "Price: 2 coins";
   const costsThree =
@@ -268,12 +354,25 @@ export function LossDiagram({ lang, step }: DiagramProps) {
   const lossText =
     lang === "pl" ? "1 moneta straty!" : lang === "de" ? "1 Münze Verlust!" : "1 coin loss!";
   const subText =
-    lang === "pl" ? "Bea musi dopłacić" : lang === "de" ? "Bea muss draufzahlen" : "Bea must pay from jar";
+    lang === "pl"
+      ? "Bea musi dopłacić"
+      : lang === "de"
+        ? "Bea muss draufzahlen"
+        : "Bea must pay from jar";
 
   return (
     <DiagramCanvas label={label}>
       <Pop x={40} y={60}>
-        <rect x="0" y="0" width="150" height="130" rx="12" fill="#fff" stroke="#23383f" strokeWidth="3" />
+        <rect
+          x="0"
+          y="0"
+          width="150"
+          height="130"
+          rx="12"
+          fill="#fff"
+          stroke="#23383f"
+          strokeWidth="3"
+        />
         <text x="75" y="30" textAnchor="middle" fill="#23383f" fontSize={14} fontWeight="bold">
           {priceTwo}
         </text>
@@ -284,7 +383,16 @@ export function LossDiagram({ lang, step }: DiagramProps) {
       </Pop>
       {step >= 2 && (
         <Pop x={230} y={60}>
-          <rect x="0" y="0" width="170" height="130" rx="12" fill="#fee2e2" stroke="#d6403a" strokeWidth="3" />
+          <rect
+            x="0"
+            y="0"
+            width="170"
+            height="130"
+            rx="12"
+            fill="#fee2e2"
+            stroke="#d6403a"
+            strokeWidth="3"
+          />
           <text x="85" y="30" textAnchor="middle" fill="#991b1b" fontSize={14} fontWeight="bold">
             {costsThree}
           </text>
@@ -316,26 +424,26 @@ export function HealthyBusinessDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Zysk utrzymuje firmę przy życiu"
       : lang === "de"
-      ? "Gewinn hält das Geschäft gesund"
-      : "Profit keeps the business healthy";
+        ? "Gewinn hält das Geschäft gesund"
+        : "Profit keeps the business healthy";
   const formula =
     lang === "pl"
       ? "Przychód - Koszty = Zysk"
       : lang === "de"
-      ? "Umsatz - Kosten = Gewinn"
-      : "Sales - Costs = Profit";
+        ? "Umsatz - Kosten = Gewinn"
+        : "Sales - Costs = Profit";
   const line1 =
     lang === "pl"
       ? "Pokrywa czynsz piekarni i składniki"
       : lang === "de"
-      ? "Zahlt Miete und Zutaten der Bäckerei"
-      : "Covers bakery rent and ingredients";
+        ? "Zahlt Miete und Zutaten der Bäckerei"
+        : "Covers bakery rent and ingredients";
   const line2 =
     lang === "pl"
       ? "Zostawia oszczędności dla Bei i rodziny"
       : lang === "de"
-      ? "Bringt Ersparnisse für Bea und Familie"
-      : "Leaves savings for Bea and family";
+        ? "Bringt Ersparnisse für Bea und Familie"
+        : "Leaves savings for Bea and family";
 
   return (
     <DiagramCanvas label={label}>
@@ -347,7 +455,16 @@ export function HealthyBusinessDiagram({ lang, step }: DiagramProps) {
       </Pop>
       {step >= 2 && (
         <Pop x={220} y={70}>
-          <rect x="0" y="0" width="370" height="130" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
+          <rect
+            x="0"
+            y="0"
+            width="370"
+            height="130"
+            rx="14"
+            fill="#ffffff"
+            stroke="#cbd5e1"
+            strokeWidth="3"
+          />
           <text x="185" y="35" textAnchor="middle" fill="#23383f" fontSize={16} fontWeight="bold">
             {formula}
           </text>

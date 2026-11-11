@@ -1,6 +1,13 @@
 import { animatedBeat } from "../lesson/toolkit";
 import type { Lesson, Text, ToyProps, WidgetProps } from "../lesson/types";
-import { BarterDiagram, JobsDiagram, MeetDiagram, MoneyDiagram, SearchDiagram, SwapWithCoinsDiagram } from "./money.diagrams";
+import {
+  BarterDiagram,
+  JobsDiagram,
+  MeetDiagram,
+  MoneyDiagram,
+  SearchDiagram,
+  SwapWithCoinsDiagram,
+} from "./money.diagrams";
 import { TradeBoard } from "./money.toy";
 
 const T = (en: string, de: string, pl: string): Text => ({ en, de, pl });
@@ -18,14 +25,26 @@ export const lesson: Lesson = {
   story: [
     animatedBeat(
       [
-        T("Let's meet Finn. Finn lives in Ripple Town.", "Das ist Finn. Finn wohnt in Ripple Town.", "Poznaj Finna. Finn mieszka w Ripple Town."),
+        T(
+          "Let's meet Finn. Finn lives in Ripple Town.",
+          "Das ist Finn. Finn wohnt in Ripple Town.",
+          "Poznaj Finna. Finn mieszka w Ripple Town.",
+        ),
         T(
           "Finn is a fisherman. That means his job is to catch fish.",
           "Finn ist Fischer. Das heißt, sein Beruf ist es, Fische zu fangen.",
           "Finn jest rybakiem. To znaczy, że łowi ryby.",
         ),
-        T("Today he caught three fish. One, two, three!", "Heute hat er drei Fische gefangen. Eins, zwei, drei!", "Dzisiaj złowił trzy ryby. Raz, dwa, trzy!"),
-        T("Now Finn is hungry. He would love some bread.", "Jetzt hat Finn Hunger. Er hätte so gern Brot.", "Teraz Finn jest głodny. Bardzo chciałby zjeść chleb."),
+        T(
+          "Today he caught three fish. One, two, three!",
+          "Heute hat er drei Fische gefangen. Eins, zwei, drei!",
+          "Dzisiaj złowił trzy ryby. Raz, dwa, trzy!",
+        ),
+        T(
+          "Now Finn is hungry. He would love some bread.",
+          "Jetzt hat Finn Hunger. Er hätte so gern Brot.",
+          "Teraz Finn jest głodny. Bardzo chciałby zjeść chleb.",
+        ),
         T(
           "Bea is a baker. That means she bakes bread, and she has lots of it!",
           "Bea ist Bäckerin. Das heißt, sie backt Brot, und sie hat jede Menge davon!",
@@ -103,7 +122,11 @@ export const lesson: Lesson = {
           "Jetzt verkauft Finn einen Fisch an Sam. Sam bezahlt 2 Münzen.",
           "Teraz Finn sprzedaje jedną rybę Samowi. Sam płaci 2 monety.",
         ),
-        T("Finn walks to Bea with his 2 coins.", "Finn geht mit seinen 2 Münzen zu Bea.", "Finn idzie z 2 monetami do Bei."),
+        T(
+          "Finn walks to Bea with his 2 coins.",
+          "Finn geht mit seinen 2 Münzen zu Bea.",
+          "Finn idzie z 2 monetami do Bei.",
+        ),
         T(
           "Finn buys bread from Bea. She is happy to take the coins. Now Finn has bread, and nobody had to want fish!",
           "Finn kauft bei Bea Brot. Sie nimmt die Münzen gern. Jetzt hat Finn Brot, und niemand musste Fisch wollen!",
@@ -114,7 +137,11 @@ export const lesson: Lesson = {
     ),
     animatedBeat(
       [
-        T("Money does three jobs. Job one: it helps us swap.", "Geld hat drei Aufgaben. Aufgabe eins: Es hilft uns beim Tauschen.", "Pieniądze pełnią trzy zadania. Zadanie pierwsze: pomagają nam wymieniać rzeczy."),
+        T(
+          "Money does three jobs. Job one: it helps us swap.",
+          "Geld hat drei Aufgaben. Aufgabe eins: Es hilft uns beim Tauschen.",
+          "Pieniądze pełnią trzy zadania. Zadanie pierwsze: pomagają nam wymieniać rzeczy.",
+        ),
         T(
           "Job two: it shows the *price*. A price tells us how many coins something costs. Bread costs 2 coins.",
           "Aufgabe zwei: Es zeigt den *Preis*. Ein Preis sagt uns, wie viele Münzen etwas kostet. Brot kostet 2 Münzen.",
@@ -138,10 +165,27 @@ export const lesson: Lesson = {
   questions: [
     {
       kind: "choice",
-      prompt: T("Why couldn't Finn swap his fish for bread?", "Warum konnte Finn seinen Fisch nicht gegen Brot tauschen?", "Dlaczego Finn nie mógł wymienić ryby na chleb?"),
+      prompt: T(
+        "Why couldn't Finn swap his fish for bread?",
+        "Warum konnte Finn seinen Fisch nicht gegen Brot tauschen?",
+        "Dlaczego Finn nie mógł wymienić ryby na chleb?",
+      ),
       options: [
-        { text: T("Bea wanted shoes, not fish", "Bea wollte Schuhe, keinen Fisch", "Bea chciała buty, a nie rybę"), correct: true },
-        { text: T("Finn had no fish left", "Finn hatte keinen Fisch mehr", "Finnowi skończyły się ryby") },
+        {
+          text: T(
+            "Bea wanted shoes, not fish",
+            "Bea wollte Schuhe, keinen Fisch",
+            "Bea chciała buty, a nie rybę",
+          ),
+          correct: true,
+        },
+        {
+          text: T(
+            "Finn had no fish left",
+            "Finn hatte keinen Fisch mehr",
+            "Finnowi skończyły się ryby",
+          ),
+        },
         { text: T("Bea does not like bread", "Bea mag kein Brot", "Bea nie lubi chleba") },
       ],
       hint: T(
@@ -166,12 +210,41 @@ export const lesson: Lesson = {
     },
     {
       kind: "choice",
-      prompt: T("Which of these is NOT a job of money?", "Was kann Geld NICHT?", "Co NIE jest zadaniem pieniędzy?"),
+      prompt: T(
+        "Which of these is NOT a job of money?",
+        "Was kann Geld NICHT?",
+        "Co NIE jest zadaniem pieniędzy?",
+      ),
       options: [
-        { text: T("Helps us swap things", "Uns beim Tauschen helfen", "Pomaganie w wymianie rzeczy") },
-        { text: T("Shows the price of things", "Zeigen, was etwas kostet", "Pokazywanie, ile coś kosztuje") },
-        { text: T("Makes more fish by itself", "Von allein mehr Fische machen", "Tworzenie nowych ryb samych z siebie"), correct: true },
-        { text: T("Lets us keep value for later", "Wert für später aufheben", "Zachowywanie wartości na później") },
+        {
+          text: T(
+            "Helps us swap things",
+            "Uns beim Tauschen helfen",
+            "Pomaganie w wymianie rzeczy",
+          ),
+        },
+        {
+          text: T(
+            "Shows the price of things",
+            "Zeigen, was etwas kostet",
+            "Pokazywanie, ile coś kosztuje",
+          ),
+        },
+        {
+          text: T(
+            "Makes more fish by itself",
+            "Von allein mehr Fische machen",
+            "Tworzenie nowych ryb samych z siebie",
+          ),
+          correct: true,
+        },
+        {
+          text: T(
+            "Lets us keep value for later",
+            "Wert für später aufheben",
+            "Zachowywanie wartości na później",
+          ),
+        },
       ],
       hint: T(
         "Money can't make fish! It helps us swap, shows prices, and lets us keep value for later.",
@@ -205,7 +278,8 @@ export const lesson: Lesson = {
           de: "Tauschhandel braucht das 'doppelte Zusammentreffen von Wünschen': Jede Seite muss haben, was die andere will.",
           pl: "Handel wymienny wymaga tzw. 'podwójnej zbieżności potrzeb': każda ze stron musi chcieć tego, co oferuje druga.",
         },
-        source: "https://www.stlouisfed.org/publications/page-one-economics/2013/03/01/money-and-inflation-a-functional-relationship",
+        source:
+          "https://www.stlouisfed.org/publications/page-one-economics/2013/03/01/money-and-inflation-a-functional-relationship",
       },
       {
         text: {
@@ -221,7 +295,8 @@ export const lesson: Lesson = {
           de: "Geld hat drei Funktionen: Tauschmittel, Recheneinheit (Preise), Wertaufbewahrungsmittel.",
           pl: "Pieniądz pełni trzy funkcje: środek wymiany, jednostka rozliczeniowa (ceny) oraz środek przechowywania wartości.",
         },
-        source: "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/what_is_money.en.html",
+        source:
+          "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/what_is_money.en.html",
       },
       {
         text: {

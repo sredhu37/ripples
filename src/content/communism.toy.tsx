@@ -18,7 +18,7 @@ export function CommunismToy({ lang, mode = "toy", onDone }: CommunismToyProps) 
   const [quizCorrect, setQuizCorrect] = useState(false);
 
   const neededMountain = 60; // Needs warm coats
-  const neededHarbor = 10;   // Sunny harbor
+  const neededHarbor = 10; // Sunny harbor
 
   const mountainDeficit = neededMountain - allocatedMountain;
   const harborSurplus = allocatedHarbor - neededHarbor;
@@ -49,28 +49,23 @@ export function CommunismToy({ lang, mode = "toy", onDone }: CommunismToyProps) 
     lang === "pl"
       ? "Symulator Państwowej Komisji Planowania"
       : lang === "de"
-      ? "Staatliche Plankommission Simulator"
-      : "Central Planning Desk Simulator";
+        ? "Staatliche Plankommission Simulator"
+        : "Central Planning Desk Simulator";
 
   const subText =
     lang === "pl"
       ? "Spróbuj rozdzielić 100 płaszczy z odległego biura bez rynkowych sygnałów cenowych"
       : lang === "de"
-      ? "Teile 100 Mäntel aus der Ferne ohne Markt-Preissignale ein"
-      : "Try dividing 100 coats from a distant central office without local price signals";
+        ? "Teile 100 Mäntel aus der Ferne ohne Markt-Preissignale ein"
+        : "Try dividing 100 coats from a distant central office without local price signals";
 
-  const coatsWord =
-    lang === "pl" ? "płaszczy" : lang === "de" ? "Mäntel" : "coats";
+  const coatsWord = lang === "pl" ? "płaszczy" : lang === "de" ? "Mäntel" : "coats";
 
   return (
     <div className="communism-toy p-4 bg-slate-50 rounded-xl max-w-md mx-auto">
       <div className="text-center mb-3">
-        <h4 className="font-bold text-slate-800">
-          {titleText}
-        </h4>
-        <p className="text-xs text-slate-500">
-          {subText}
-        </p>
+        <h4 className="font-bold text-slate-800">{titleText}</h4>
+        <p className="text-xs text-slate-500">{subText}</p>
       </div>
 
       <div className="grid grid-cols-3 gap-2 mb-4">
@@ -86,7 +81,8 @@ export function CommunismToy({ lang, mode = "toy", onDone }: CommunismToyProps) 
           {revealed && (
             <div className="text-[10px] text-red-600 font-bold mt-1">
               {mountainDeficit > 0
-                ? `-${mountainDeficit} ` + (lang === "pl" ? "Niedobór!" : lang === "de" ? "Mangel!" : "Shortage!")
+                ? `-${mountainDeficit} ` +
+                  (lang === "pl" ? "Niedobór!" : lang === "de" ? "Mangel!" : "Shortage!")
                 : "OK"}
             </div>
           )}
@@ -104,7 +100,8 @@ export function CommunismToy({ lang, mode = "toy", onDone }: CommunismToyProps) 
           {revealed && (
             <div className="text-[10px] text-blue-600 font-bold mt-1">
               {harborSurplus > 0
-                ? `+${harborSurplus} ` + (lang === "pl" ? "Nadwyżka!" : lang === "de" ? "Überschuss!" : "Surplus!")
+                ? `+${harborSurplus} ` +
+                  (lang === "pl" ? "Nadwyżka!" : lang === "de" ? "Überschuss!" : "Surplus!")
                 : "OK"}
             </div>
           )}
@@ -121,7 +118,11 @@ export function CommunismToy({ lang, mode = "toy", onDone }: CommunismToyProps) 
           </div>
           {revealed && (
             <div className="text-[10px] text-slate-600 mt-1">
-              {lang === "pl" ? "Kolejka w sklepie" : lang === "de" ? "Warteschlange" : "Waiting line"}
+              {lang === "pl"
+                ? "Kolejka w sklepie"
+                : lang === "de"
+                  ? "Warteschlange"
+                  : "Waiting line"}
             </div>
           )}
         </div>
@@ -133,14 +134,19 @@ export function CommunismToy({ lang, mode = "toy", onDone }: CommunismToyProps) 
             {lang === "pl"
               ? "Rozdzielono 100 płaszczy po równo (33-33-34). Kliknij poniżej, aby poznać prawdziwe potrzeby i pogodę!"
               : lang === "de"
-              ? "Du hast 100 Mäntel gleichmäßig aufgeteilt (33-33-34). Tippe, um den echten Bedarf zu sehen!"
-              : "You divided 100 coats equally (33-33-34). Tap below to see what the districts actually needed!"}
+                ? "Du hast 100 Mäntel gleichmäßig aufgeteilt (33-33-34). Tippe, um den echten Bedarf zu sehen!"
+                : "You divided 100 coats equally (33-33-34). Tap below to see what the districts actually needed!"}
           </p>
           <button
             onClick={handleReveal}
             className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded shadow transition"
           >
-            📋 {lang === "pl" ? "Odkryj prawdziwe potrzeby regionów" : lang === "de" ? "Echten regionalen Bedarf aufdecken" : "Reveal District Actual Weather & Needs"}
+            📋{" "}
+            {lang === "pl"
+              ? "Odkryj prawdziwe potrzeby regionów"
+              : lang === "de"
+                ? "Echten regionalen Bedarf aufdecken"
+                : "Reveal District Actual Weather & Needs"}
           </button>
         </div>
       )}
@@ -150,8 +156,8 @@ export function CommunismToy({ lang, mode = "toy", onDone }: CommunismToyProps) 
           {lang === "pl"
             ? "Błąd informacyjny: Mieszkańcy gór marzną, bo potrzebowali 60 płaszczy, a w słonecznej przystani leży 23 niepotrzebnych płaszczy!"
             : lang === "de"
-            ? "Informationsversagen: Die Bergbewohner frieren bei 60 nötigen Mänteln, während der sonnige Hafen 23 ungenutzte Mäntel hat!"
-            : "Information Failure: Mountain villagers freeze because they needed 60 coats, while Harbor sailors got 23 coats they didn't need!"}
+              ? "Informationsversagen: Die Bergbewohner frieren bei 60 nötigen Mänteln, während der sonnige Hafen 23 ungenutzte Mäntel hat!"
+              : "Information Failure: Mountain villagers freeze because they needed 60 coats, while Harbor sailors got 23 coats they didn't need!"}
         </div>
       )}
 
@@ -161,8 +167,8 @@ export function CommunismToy({ lang, mode = "toy", onDone }: CommunismToyProps) 
             {lang === "pl"
               ? "Dlaczego centralne biuro wyprodukowało niewłaściwe ilości butów i płaszczy?"
               : lang === "de"
-              ? "Warum plante das zentrale Planungsbüro die falschen Mengen an Schuhen und Mänteln?"
-              : "Why did the central planning desk produce the wrong sizes of shoes and coats?"}
+                ? "Warum plante das zentrale Planungsbüro die falschen Mengen an Schuhen und Mänteln?"
+                : "Why did the central planning desk produce the wrong sizes of shoes and coats?"}
           </div>
           <div className="space-y-2">
             <button
@@ -176,8 +182,8 @@ export function CommunismToy({ lang, mode = "toy", onDone }: CommunismToyProps) 
               {lang === "pl"
                 ? "A) Odległe biuro nie jest w stanie odgadnąć codziennych lokalnych potrzeb tysięcy ludzi"
                 : lang === "de"
-                ? "A) Ein fernes Büro kann den täglichen Bedarf tausender Menschen unmöglich erraten"
-                : "A) A distant central office cannot guess the daily local needs of thousands of people"}
+                  ? "A) Ein fernes Büro kann den täglichen Bedarf tausender Menschen unmöglich erraten"
+                  : "A) A distant central office cannot guess the daily local needs of thousands of people"}
             </button>
             <button
               onClick={() => setSelectedQuizAnswer("cheese")}
@@ -190,8 +196,8 @@ export function CommunismToy({ lang, mode = "toy", onDone }: CommunismToyProps) 
               {lang === "pl"
                 ? "B) Ciepłe wełniane płaszcze zamieniły się w kozi ser"
                 : lang === "de"
-                ? "B) Die warmen Wollmäntel verwandelten sich in Ziegenkäse"
-                : "B) The warm wool coats transformed into goat cheese"}
+                  ? "B) Die warmen Wollmäntel verwandelten sich in Ziegenkäse"
+                  : "B) The warm wool coats transformed into goat cheese"}
             </button>
             <button
               onClick={() => setSelectedQuizAnswer("feet")}
@@ -204,8 +210,8 @@ export function CommunismToy({ lang, mode = "toy", onDone }: CommunismToyProps) 
               {lang === "pl"
                 ? "C) Nikt w miasteczku nie miał stóp ani rąk"
                 : lang === "de"
-                ? "C) Niemand im Dorf hatte Füße oder Hände"
-                : "C) Nobody in the village had feet or hands"}
+                  ? "C) Niemand im Dorf hatte Füße oder Hände"
+                  : "C) Nobody in the village had feet or hands"}
             </button>
           </div>
         </div>
@@ -214,18 +220,20 @@ export function CommunismToy({ lang, mode = "toy", onDone }: CommunismToyProps) 
       <div className="flex flex-col items-center">
         <CheckButton lang={lang} onClick={handleCheck} />
         {showQuizResult && (
-          <div className={`mt-2 text-xs font-bold ${quizCorrect ? "text-green-600" : "text-amber-600"}`}>
+          <div
+            className={`mt-2 text-xs font-bold ${quizCorrect ? "text-green-600" : "text-amber-600"}`}
+          >
             {quizCorrect
-              ? (lang === "pl"
-                  ? "✓ Prawidłowo! To zjawisko w ekonomii nazywa się problemem wiedzy lokalnej."
-                  : lang === "de"
+              ? lang === "pl"
+                ? "✓ Prawidłowo! To zjawisko w ekonomii nazywa się problemem wiedzy lokalnej."
+                : lang === "de"
                   ? "✓ Richtig! Dies nennt man das Wissensproblem."
-                  : "✓ Correct! This is known as the local knowledge problem.")
-              : (lang === "pl"
-                  ? "Wskazówka: Zastanów się, dlaczego centralnemu planiście brakuje informacji o lokalnych potrzebach."
-                  : lang === "de"
+                  : "✓ Correct! This is known as the local knowledge problem."
+              : lang === "pl"
+                ? "Wskazówka: Zastanów się, dlaczego centralnemu planiście brakuje informacji o lokalnych potrzebach."
+                : lang === "de"
                   ? "Hinweis: Überlege, warum fernen Planern lokale Details fehlen."
-                  : "Hint: Think about why central planners lack local on-the-ground details.")}
+                  : "Hint: Think about why central planners lack local on-the-ground details."}
           </div>
         )}
       </div>

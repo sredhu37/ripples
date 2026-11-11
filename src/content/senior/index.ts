@@ -34,7 +34,14 @@ export const GROUP_1_SENIOR_LESSONS: Lesson[] = [
   ratesSenior,
 ];
 
-export { GROUP_2_SENIOR_LESSONS, GROUP_3_SENIOR_LESSONS, GROUP_5_SENIOR_LESSONS, group5Lessons, GROUP_6_SENIOR_LESSONS, group6Lessons };
+export {
+  GROUP_2_SENIOR_LESSONS,
+  GROUP_3_SENIOR_LESSONS,
+  GROUP_5_SENIOR_LESSONS,
+  group5Lessons,
+  GROUP_6_SENIOR_LESSONS,
+  group6Lessons,
+};
 
 export const ALL_SENIOR_LESSONS: Lesson[] = [
   ...GROUP_1_SENIOR_LESSONS,

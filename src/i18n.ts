@@ -70,7 +70,8 @@ const en: Dict = {
   allLessons: "All lessons",
   restartLesson: "Start over",
   factCards: "Fact cards",
-  factCardsHelp: "Claims and primary sources behind each lesson. Review these before claiming a lesson verified.",
+  factCardsHelp:
+    "Claims and primary sources behind each lesson. Review these before claiming a lesson verified.",
   claims: "Claims",
   simplified: "Simplified for an 8-year-old",
   noLessons: "No lessons built yet.",
@@ -129,7 +130,8 @@ const de: Dict = {
   copy: "Code kopieren",
   copied: "Kopiert!",
   restoreTitle: "Fortschritt wiederherstellen",
-  restoreHelp: "Fuege hier einen Code ein, um deine Abzeichen auf diesem Geraet wiederherzustellen.",
+  restoreHelp:
+    "Fuege hier einen Code ein, um deine Abzeichen auf diesem Geraet wiederherzustellen.",
   restoreGo: "Wiederherstellen",
   restoreBad: "Dieser Code hat nicht geklappt. Pruefe ihn noch einmal.",
   restoreOk: "Fortschritt wiederhergestellt.",
@@ -152,12 +154,14 @@ const de: Dict = {
   allLessons: "Alle Lektionen",
   restartLesson: "Neu starten",
   factCards: "Fakten-Karten",
-  factCardsHelp: "Behauptungen und Quellen zu jeder Lektion. Pruefe diese, bevor eine Lektion als verifiziert gilt.",
+  factCardsHelp:
+    "Behauptungen und Quellen zu jeder Lektion. Pruefe diese, bevor eine Lektion als verifiziert gilt.",
   claims: "Behauptungen",
   simplified: "Fuer ein 8-jaehriges Kind vereinfacht",
   noLessons: "Noch keine Lektionen gebaut.",
   lessonSelectionTitle: "Lektionenauswahl",
-  lessonSelectionHelp: "Schalte Lektionen ein oder aus, um festzulegen, was auf dem Pfad erscheint.",
+  lessonSelectionHelp:
+    "Schalte Lektionen ein oder aus, um festzulegen, was auf dem Pfad erscheint.",
   lessonEnabled: "Aktiviert",
   lessonDisabled: "Deaktiviert",
   ageGroupTitle: "Altersgruppe",
@@ -234,7 +238,8 @@ const pl: Dict = {
   allLessons: "Wszystkie lekcje",
   restartLesson: "Zacznij od nowa",
   factCards: "Karty faktów",
-  factCardsHelp: "Tezy i źródła stojące za każdą lekcją. Sprawdź je, zanim lekcja zostanie uznana za zweryfikowaną.",
+  factCardsHelp:
+    "Tezy i źródła stojące za każdą lekcją. Sprawdź je, zanim lekcja zostanie uznana za zweryfikowaną.",
   claims: "Tezy",
   simplified: "Uproszczone dla 8-latka",
   noLessons: "Brak gotowych lekcji.",

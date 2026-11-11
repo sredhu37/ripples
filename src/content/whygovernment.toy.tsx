@@ -24,8 +24,8 @@ export function WhyGovernmentToy({ lang, mode = "toy", onDone }: WhyGovernmentTo
           lang === "pl"
             ? "Wozy zderzają się na zakrętach, woda w studni mętnieje, a mieszkańcy kłócą się bezradnie."
             : lang === "en"
-            ? "Carts collide, well water turns brown, villagers complain"
-            : "Kutschen stoßen zusammen, Brunnenwasser wird braun, Dorfbewohner beschweren sich",
+              ? "Carts collide, well water turns brown, villagers complain"
+              : "Kutschen stoßen zusammen, Brunnenwasser wird braun, Dorfbewohner beschweren sich",
       };
     } else if (rulesLevel > 80) {
       return {
@@ -36,8 +36,8 @@ export function WhyGovernmentToy({ lang, mode = "toy", onDone }: WhyGovernmentTo
           lang === "pl"
             ? "Pięć punktów kontrolnych blokuje przejazd, wozy stoją w korku, a dostawy żywności zamierają."
             : lang === "en"
-            ? "Five checkpoints block the road, carts cannot move, deliveries freeze"
-            : "Fünf Kontrollpunkte blockieren die Straße, Kutschen können sich nicht bewegen, Lieferungen frieren ein",
+              ? "Five checkpoints block the road, carts cannot move, deliveries freeze"
+              : "Fünf Kontrollpunkte blockieren die Straße, Kutschen können sich nicht bewegen, Lieferungen frieren ein",
       };
     } else {
       return {
@@ -48,8 +48,8 @@ export function WhyGovernmentToy({ lang, mode = "toy", onDone }: WhyGovernmentTo
           lang === "pl"
             ? "Wozy płynnie mijają się prawą stroną, wiejski mularz naprawia kamienie studni i płynie czysta woda."
             : lang === "en"
-            ? "Carts drive on the right side smoothly, town mason repairs well stones, sparkling water flows"
-            : "Kutschen fahren auf der rechten Seite reibungslos, Dorfmaurer repariert Brunnensteine, sprudelndes Wasser fließt",
+              ? "Carts drive on the right side smoothly, town mason repairs well stones, sparkling water flows"
+              : "Kutschen fahren auf der rechten Seite reibungslos, Dorfmaurer repariert Brunnensteine, sprudelndes Wasser fließt",
       };
     }
   };
@@ -82,38 +82,48 @@ export function WhyGovernmentToy({ lang, mode = "toy", onDone }: WhyGovernmentTo
   }, [rulesLevel, mode, onDone]);
 
   const controlLabel =
-    lang === "pl" ? "Poziom reguł i koordynacji" : lang === "de" ? "Regeln & Pflege-Stufe" : "Rules & Care Level";
-  const noRulesLabel =
-    lang === "pl" ? "Brak reguł" : lang === "de" ? "Keine Regeln" : "No Rules";
-  const balancedLabel =
-    lang === "pl" ? "Równowaga" : lang === "de" ? "Ausgewogen" : "Balanced";
+    lang === "pl"
+      ? "Poziom reguł i koordynacji"
+      : lang === "de"
+        ? "Regeln & Pflege-Stufe"
+        : "Rules & Care Level";
+  const noRulesLabel = lang === "pl" ? "Brak reguł" : lang === "de" ? "Keine Regeln" : "No Rules";
+  const balancedLabel = lang === "pl" ? "Równowaga" : lang === "de" ? "Ausgewogen" : "Balanced";
   const overRegulatedLabel =
     lang === "pl" ? "Przeregulowanie" : lang === "de" ? "Überreguliert" : "Over-regulated";
   const levelText =
-    lang === "pl" ? `Poziom: ${rulesLevel}` : lang === "de" ? `Stufe: ${rulesLevel}` : `Level: ${rulesLevel}`;
+    lang === "pl"
+      ? `Poziom: ${rulesLevel}`
+      : lang === "de"
+        ? `Stufe: ${rulesLevel}`
+        : `Level: ${rulesLevel}`;
 
   const quizInstruction =
     lang === "pl"
       ? "Ustaw suwak reguł tak, aby wozy mogły płynnie dowozić żywność, a wspólna studnia pozostała czysta."
       : lang === "de"
-      ? "Stelle den Dorfregler-Schieber so ein, dass Kutschen Lebensmittel reibungslos liefern können und der gemeinsame Wasserbrunnen sauber bleibt."
-      : "Set the town rules slider so carts can deliver food smoothly and the shared water well stays clean.";
+        ? "Stelle den Dorfregler-Schieber so ein, dass Kutschen Lebensmittel reibungslos liefern können und der gemeinsame Wasserbrunnen sauber bleibt."
+        : "Set the town rules slider so carts can deliver food smoothly and the shared water well stays clean.";
 
   const toyInstruction =
     lang === "pl"
       ? "Znajdź zieloną strefę równowagi, w której miasteczko działa harmonijnie!"
       : lang === "de"
-      ? "Finde die ausgewogene Zone, in der das Dorf gut funktioniert!"
-      : "Find the balanced zone where the town works well!";
+        ? "Finde die ausgewogene Zone, in der das Dorf gut funktioniert!"
+        : "Find the balanced zone where the town works well!";
 
   const quizSuccess =
-    lang === "pl" ? "✓ Idealna równowaga!" : lang === "de" ? "✓ Perfekte Balance!" : "✓ Perfect balance!";
+    lang === "pl"
+      ? "✓ Idealna równowaga!"
+      : lang === "de"
+        ? "✓ Perfekte Balance!"
+        : "✓ Perfect balance!";
   const quizRetry =
     lang === "pl"
       ? "Spróbuj przesunąć suwak w stronę środkowej zielonej strefy"
       : lang === "de"
-      ? "Versuche, den Schieber in die grüne Zone zu stellen"
-      : "Try adjusting the slider to the green zone";
+        ? "Versuche, den Schieber in die grüne Zone zu stellen"
+        : "Try adjusting the slider to the green zone";
 
   return (
     <div className="whygovernment-toy">
@@ -123,16 +133,17 @@ export function WhyGovernmentToy({ lang, mode = "toy", onDone }: WhyGovernmentTo
         </div>
         <div className={`road ${townState.cartState}`}>
           {townState.checkpointCount > 0 &&
-            Array(townState.checkpointCount).fill(0).map((_, i) => (
-              <span key={i} className="checkpoint">🚧</span>
-            ))
-          }
+            Array(townState.checkpointCount)
+              .fill(0)
+              .map((_, i) => (
+                <span key={i} className="checkpoint">
+                  🚧
+                </span>
+              ))}
           <div className="cart">🛒</div>
           <div className="cart">🛒</div>
         </div>
-        <div className="mason">
-          {rulesLevel >= 40 && rulesLevel <= 60 ? "🧱🔨" : "🧱"}
-        </div>
+        <div className="mason">{rulesLevel >= 40 && rulesLevel <= 60 ? "🧱🔨" : "🧱"}</div>
       </div>
 
       <div className="rules-control">

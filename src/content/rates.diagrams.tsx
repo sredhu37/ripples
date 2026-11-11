@@ -201,7 +201,11 @@ export function RaiseDiagram({ lang, step }: DiagramProps) {
       {step >= 1 && (
         <>
           <Pop x={-4} y={60}>
-            <Thermometer level={calm ? 0.55 : 0.9} color={calm ? ZONE_COLOR.right : ZONE_COLOR.hot} size={150} />
+            <Thermometer
+              level={calm ? 0.55 : 0.9}
+              color={calm ? ZONE_COLOR.right : ZONE_COLOR.hot}
+              size={150}
+            />
           </Pop>
           {!calm && (
             <Pop x={92} y={50}>
@@ -274,7 +278,11 @@ export function LowerDiagram({ lang, step }: DiagramProps) {
       {step >= 1 && (
         <>
           <Pop x={-4} y={64}>
-            <Thermometer level={warm ? 0.55 : 0.12} color={warm ? ZONE_COLOR.right : ZONE_COLOR.cold} size={150} />
+            <Thermometer
+              level={warm ? 0.55 : 0.12}
+              color={warm ? ZONE_COLOR.right : ZONE_COLOR.cold}
+              size={150}
+            />
           </Pop>
           {!warm && (
             <Pop x={88} y={40}>

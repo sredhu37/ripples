@@ -37,8 +37,26 @@ export function School(pos: IconProps) {
       <circle cx="50" cy="37" r="6.5" fill="#fff" stroke={INK} strokeWidth="2.5" />
       <path d="M50 33 V37 H54" stroke={INK} strokeWidth="2" fill="none" strokeLinecap="round" />
       <rect x="42" y="62" width="16" height="26" rx="2" fill="#7a4a24" />
-      <rect x="19" y="58" width="15" height="15" rx="2" fill="#dff1f6" stroke={INK} strokeWidth="2.5" />
-      <rect x="66" y="58" width="15" height="15" rx="2" fill="#dff1f6" stroke={INK} strokeWidth="2.5" />
+      <rect
+        x="19"
+        y="58"
+        width="15"
+        height="15"
+        rx="2"
+        fill="#dff1f6"
+        stroke={INK}
+        strokeWidth="2.5"
+      />
+      <rect
+        x="66"
+        y="58"
+        width="15"
+        height="15"
+        rx="2"
+        fill="#dff1f6"
+        stroke={INK}
+        strokeWidth="2.5"
+      />
     </Box>
   );
 }
@@ -108,7 +126,13 @@ export function Pot({ heap = 0, ...pos }: IconProps & { heap?: 0 | 1 | 2 | 3 }) 
       <path d="M20 42 C12 66 22 90 50 90 C78 90 88 66 80 42 Z" fill="#1b8a9a" />
       <ellipse cx="50" cy="42" rx="31" ry="9" fill="#157684" />
       <ellipse cx="50" cy="43" rx="24" ry="5.5" fill="#0f5560" />
-      <path d="M26 58 C24 68 28 78 36 82" stroke="#6cc3d0" strokeWidth="4" fill="none" strokeLinecap="round" />
+      <path
+        d="M26 58 C24 68 28 78 36 82"
+        stroke="#6cc3d0"
+        strokeWidth="4"
+        fill="none"
+        strokeLinecap="round"
+      />
       <circle cx="56" cy="66" r="10" fill="#e3a91a" stroke="#c98d0e" strokeWidth="2.5" />
       <path d="M56 61 V71 M52 66 H60" stroke="#c98d0e" strokeWidth="2.5" strokeLinecap="round" />
     </Box>
@@ -137,14 +161,31 @@ export function Scale(pos: IconProps) {
 export function BallotBox(pos: IconProps) {
   return (
     <Box {...pos}>
-      <rect x="30" y="2" width="40" height="46" rx="3" fill="#fff" stroke={INK} strokeWidth="3" transform="rotate(-6 50 25)" />
+      <rect
+        x="30"
+        y="2"
+        width="40"
+        height="46"
+        rx="3"
+        fill="#fff"
+        stroke={INK}
+        strokeWidth="3"
+        transform="rotate(-6 50 25)"
+      />
       <g stroke="#9db4bb" strokeWidth="3" strokeLinecap="round" transform="rotate(-6 50 25)">
         <path d="M38 14 H62" />
         <path d="M38 24 H62" />
       </g>
       <rect x="14" y="44" width="72" height="46" rx="6" fill="#2f7fb8" />
       <rect x="28" y="44" width="44" height="7" rx="3.5" fill={INK} />
-      <path d="M44 66 L50 72 L62 58" stroke="#fff" strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M44 66 L50 72 L62 58"
+        stroke="#fff"
+        strokeWidth="5"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </Box>
   );
 }
@@ -186,7 +227,14 @@ export function Tick(pos: IconProps) {
   return (
     <Box {...pos}>
       <circle cx="50" cy="50" r="44" fill="#3f9b4a" />
-      <path d="M27 52 L43 68 L74 34" stroke="#fff" strokeWidth="11" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M27 52 L43 68 L74 34"
+        stroke="#fff"
+        strokeWidth="11"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </Box>
   );
 }
@@ -196,7 +244,13 @@ export function Cross(pos: IconProps) {
   return (
     <Box {...pos}>
       <circle cx="50" cy="50" r="44" fill="#d6403a" />
-      <path d="M32 32 L68 68 M68 32 L32 68" stroke="#fff" strokeWidth="11" fill="none" strokeLinecap="round" />
+      <path
+        d="M32 32 L68 68 M68 32 L32 68"
+        stroke="#fff"
+        strokeWidth="11"
+        fill="none"
+        strokeLinecap="round"
+      />
     </Box>
   );
 }

@@ -8,11 +8,26 @@ import { MapScreen } from "./components/MapScreen";
 import { NameScreen } from "./components/NameScreen";
 import { TimelineScreen } from "./components/TimelineScreen";
 import { ParentPanel } from "./components/ParentPanel";
-import { cleanName, earnBadge, emptyProgress, loadProgress, saveProgress, setAgeGroup, toggleLesson, type Lang, type Progress } from "./progress";
+import {
+  cleanName,
+  earnBadge,
+  emptyProgress,
+  loadProgress,
+  saveProgress,
+  setAgeGroup,
+  toggleLesson,
+  type Lang,
+  type Progress,
+} from "./progress";
 import { setMuted } from "./sound";
 import { stopSpeaking } from "./speech";
 
-type Screen = { kind: "map" } | { kind: "lesson"; id: string } | { kind: "parents" } | { kind: "facts" } | { kind: "timeline" };
+type Screen =
+  | { kind: "map" }
+  | { kind: "lesson"; id: string }
+  | { kind: "parents" }
+  | { kind: "facts" }
+  | { kind: "timeline" };
 
 export function App() {
   const [progress, setProgress] = useState<Progress>(() => loadProgress(window.localStorage));
@@ -35,10 +50,7 @@ export function App() {
     void navigator.storage?.persist?.();
   }, []);
 
-  const awardBadge = useCallback(
-    (id: string) => setProgress((p) => earnBadge(p, id)),
-    [],
-  );
+  const awardBadge = useCallback((id: string) => setProgress((p) => earnBadge(p, id)), []);
 
   const setLang = (lang: Lang) => setProgress((p) => ({ ...p, lang }));
 

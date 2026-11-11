@@ -76,19 +76,32 @@ describe("storage", () => {
 
   it("ignores wrong types in stored data", () => {
     const s = { getItem: () => JSON.stringify({ name: 5, lang: "fr", badges: ["a", 3, "a"] }) };
-    expect(loadProgress(s)).toEqual({ name: "", lang: "en", muted: false, badges: ["a"], disabledLessons: [], ageGroup: "junior" });
+    expect(loadProgress(s)).toEqual({
+      name: "",
+      lang: "en",
+      muted: false,
+      badges: ["a"],
+      disabledLessons: [],
+      ageGroup: "junior",
+    });
   });
 });
 
 describe("save and restore code", () => {
   it("round-trips name, language and badges, including umlauts", () => {
-    const p = earnBadge(earnBadge({ ...emptyProgress(), name: "Jörg", lang: "de" }, "money"), "savings");
+    const p = earnBadge(
+      earnBadge({ ...emptyProgress(), name: "Jörg", lang: "de" }, "money"),
+      "savings",
+    );
     const restored = importCode(exportCode(p, order), order);
     expect(restored).toEqual({ ...p, muted: false });
   });
 
   it("round-trips Polish progress with diacritics", () => {
-    const p = earnBadge(earnBadge({ ...emptyProgress(), name: "Zosia Ł.", lang: "pl" }, "money"), "work");
+    const p = earnBadge(
+      earnBadge({ ...emptyProgress(), name: "Zosia Ł.", lang: "pl" }, "money"),
+      "work",
+    );
     const restored = importCode(exportCode(p, order), order);
     expect(restored).toEqual({ ...p, muted: false });
   });

@@ -6,10 +6,19 @@ import type { Text } from "../lesson/types";
 function allTexts(): { where: string; text: Text }[] {
   const out: { where: string; text: Text }[] = [];
   for (const e of TIMELINE_ERAS) {
-    out.push({ where: `${e.id} label`, text: e.label }, { where: `${e.id} range`, text: e.dateRange }, { where: `${e.id} desc`, text: e.description });
+    out.push(
+      { where: `${e.id} label`, text: e.label },
+      { where: `${e.id} range`, text: e.dateRange },
+      { where: `${e.id} desc`, text: e.description },
+    );
   }
   for (const e of TIMELINE_EVENTS) {
-    out.push({ where: `${e.id} title`, text: e.title }, { where: `${e.id} junior`, text: e.summary.junior }, { where: `${e.id} senior`, text: e.summary.senior }, { where: `${e.id} year`, text: e.year });
+    out.push(
+      { where: `${e.id} title`, text: e.title },
+      { where: `${e.id} junior`, text: e.summary.junior },
+      { where: `${e.id} senior`, text: e.summary.senior },
+      { where: `${e.id} year`, text: e.year },
+    );
   }
   return out;
 }
@@ -17,7 +26,8 @@ function allTexts(): { where: string; text: Text }[] {
 describe("world timeline data", () => {
   it("has 7 eras, each with at least 4 events", () => {
     expect(TIMELINE_ERAS).toHaveLength(7);
-    for (const era of TIMELINE_ERAS) expect(eventsFor(era.id, "all").length, era.id).toBeGreaterThanOrEqual(4);
+    for (const era of TIMELINE_ERAS)
+      expect(eventsFor(era.id, "all").length, era.id).toBeGreaterThanOrEqual(4);
   });
 
   it("has unique event ids and valid eras", () => {
@@ -28,12 +38,17 @@ describe("world timeline data", () => {
   });
 
   it("covers every regional track and science", () => {
-    for (const r of TIMELINE_REGIONS) expect(TIMELINE_EVENTS.some((e) => e.region === r), r).toBe(true);
+    for (const r of TIMELINE_REGIONS)
+      expect(
+        TIMELINE_EVENTS.some((e) => e.region === r),
+        r,
+      ).toBe(true);
   });
 
   it("includes the named scientific discoveries", () => {
     const ids = TIMELINE_EVENTS.filter((e) => e.region === "science").map((e) => e.id);
-    for (const id of ["galileo", "newton", "edison", "wright", "atom", "penicillin"]) expect(ids).toContain(id);
+    for (const id of ["galileo", "newton", "edison", "wright", "atom", "penicillin"])
+      expect(ids).toContain(id);
   });
 
   it("links only to real lessons", () => {
@@ -43,7 +58,8 @@ describe("world timeline data", () => {
 
   it("has non-empty English, German and Polish text, with titles and summaries differing", () => {
     for (const { where, text } of allTexts()) {
-      for (const l of ["en", "de", "pl"] as const) expect(text[l].trim(), `${where} ${l}`).not.toBe("");
+      for (const l of ["en", "de", "pl"] as const)
+        expect(text[l].trim(), `${where} ${l}`).not.toBe("");
     }
     for (const e of TIMELINE_EVENTS) {
       for (const text of [e.title, e.summary.junior, e.summary.senior]) {

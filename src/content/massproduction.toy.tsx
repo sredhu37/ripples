@@ -40,7 +40,7 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
 
   const { bikesProduced, costPerBike, hoursSpent, isAffordable, status } = calcAssemblyThroughput(
     prodMode,
-    stage
+    stage,
   );
 
   useEffect(() => {
@@ -76,85 +76,59 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
     lang === "pl"
       ? "Warsztat rzemieślniczy"
       : lang === "de"
-      ? "Handwerksbetrieb"
-      : "Artisan Workshop";
+        ? "Handwerksbetrieb"
+        : "Artisan Workshop";
 
   const assemblyLabel =
     lang === "pl"
       ? "Taśma montażowa"
       : lang === "de"
-      ? "Fliessband-Fertigung"
-      : "Moving Assembly Line";
+        ? "Fliessband-Fertigung"
+        : "Moving Assembly Line";
 
   const station1Name =
-    lang === "pl"
-      ? "Spawanie ramy"
-      : lang === "de"
-      ? "Rahmen schweißen"
-      : "Weld Frame";
+    lang === "pl" ? "Spawanie ramy" : lang === "de" ? "Rahmen schweißen" : "Weld Frame";
 
   const station2Name =
-    lang === "pl"
-      ? "Montaż kół"
-      : lang === "de"
-      ? "Raeder montieren"
-      : "Attach Wheels";
+    lang === "pl" ? "Montaż kół" : lang === "de" ? "Raeder montieren" : "Attach Wheels";
 
   const station3Name =
     lang === "pl"
       ? "Kontrola jakości"
       : lang === "de"
-      ? "Qualitaetspruefung"
-      : "Final Quality Check";
+        ? "Qualitaetspruefung"
+        : "Final Quality Check";
 
   const advanceLabel =
     lang === "pl"
       ? "Przesuń taśmę montażową"
       : lang === "de"
-      ? "Fliessband weiterruecken"
-      : "Advance Assembly Line";
+        ? "Fliessband weiterruecken"
+        : "Advance Assembly Line";
 
   const resetLabel =
-    lang === "pl"
-      ? "Resetuj taśmę"
-      : lang === "de"
-      ? "Zuruecksetzen"
-      : "Reset Line";
+    lang === "pl" ? "Resetuj taśmę" : lang === "de" ? "Zuruecksetzen" : "Reset Line";
 
   const timeSpentLabel =
-    lang === "pl"
-      ? "Czas pracy:"
-      : lang === "de"
-      ? "Benoetigte Arbeitszeit:"
-      : "Time spent:";
+    lang === "pl" ? "Czas pracy:" : lang === "de" ? "Benoetigte Arbeitszeit:" : "Time spent:";
 
-  const hoursLabel =
-    lang === "pl"
-      ? "godzin"
-      : lang === "de"
-      ? "Stunden"
-      : "hours";
+  const hoursLabel = lang === "pl" ? "godzin" : lang === "de" ? "Stunden" : "hours";
 
   const bikesCompletedLabel =
     lang === "pl"
       ? "Gotowe rowery:"
       : lang === "de"
-      ? "Fertige Fahrraeder:"
-      : "Bicycles completed:";
+        ? "Fertige Fahrraeder:"
+        : "Bicycles completed:";
 
   const costPerBikeLabel =
     lang === "pl"
       ? "Koszt jednego roweru:"
       : lang === "de"
-      ? "Kosten pro Fahrrad:"
-      : "Cost per bicycle:";
+        ? "Kosten pro Fahrrad:"
+        : "Cost per bicycle:";
 
-  const coinsLabel =
-    lang === "pl"
-      ? "złotych monet"
-      : lang === "de"
-      ? "Goldmuenzen"
-      : "gold coins";
+  const coinsLabel = lang === "pl" ? "złotych monet" : lang === "de" ? "Goldmuenzen" : "gold coins";
 
   return (
     <div className="massproduction-wrap">
@@ -185,15 +159,21 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
       {/* Assembly conveyor line visual */}
       <div className={`massproduction-conveyor-card ${status}`}>
         <div className="massproduction-conveyor-stations">
-          <div className={`massproduction-station ${prodMode === "assembly" && stage >= 1 ? "done" : ""}`}>
+          <div
+            className={`massproduction-station ${prodMode === "assembly" && stage >= 1 ? "done" : ""}`}
+          >
             <span className="station-num">1</span>
             <span className="station-name">{station1Name}</span>
           </div>
-          <div className={`massproduction-station ${prodMode === "assembly" && stage >= 2 ? "done" : ""}`}>
+          <div
+            className={`massproduction-station ${prodMode === "assembly" && stage >= 2 ? "done" : ""}`}
+          >
             <span className="station-num">2</span>
             <span className="station-name">{station2Name}</span>
           </div>
-          <div className={`massproduction-station ${prodMode === "assembly" && stage >= 3 ? "done" : ""}`}>
+          <div
+            className={`massproduction-station ${prodMode === "assembly" && stage >= 3 ? "done" : ""}`}
+          >
             <span className="station-num">3</span>
             <span className="station-name">{station3Name}</span>
           </div>
@@ -225,7 +205,9 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
       <div className="massproduction-metrics-card">
         <div className="metric-row">
           <span>{timeSpentLabel}</span>
-          <strong>{hoursSpent} {hoursLabel}</strong>
+          <strong>
+            {hoursSpent} {hoursLabel}
+          </strong>
         </div>
         <div className="metric-row">
           <span>{bikesCompletedLabel}</span>
@@ -247,13 +229,13 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
               ? lang === "pl"
                 ? "Wspaniale! Standardowy montaż na taśmie obniżył koszt jednostkowy z 500 do 50 monet!"
                 : lang === "de"
-                ? "Grossartig! Die getaktete Montage senkte die Stueckkosten von 500 auf 50 Muenzen!"
-                : "Terrific! Standardized assembly lowered unit costs from 500 down to 50 coins!"
+                  ? "Grossartig! Die getaktete Montage senkte die Stueckkosten von 500 auf 50 Muenzen!"
+                  : "Terrific! Standardized assembly lowered unit costs from 500 down to 50 coins!"
               : lang === "pl"
-              ? "Wybierz Taśmę montażową i przesuń wszystkie 3 stanowiska."
-              : lang === "de"
-              ? "Waehle Fliessband-Fertigung und ruecke alle 3 Stationen vor."
-              : "Select Moving Assembly Line and advance all 3 stations."}
+                ? "Wybierz Taśmę montażową i przesuń wszystkie 3 stanowiska."
+                : lang === "de"
+                  ? "Waehle Fliessband-Fertigung und ruecke alle 3 Stationen vor."
+                  : "Select Moving Assembly Line and advance all 3 stations."}
           </div>
         )}
       </div>

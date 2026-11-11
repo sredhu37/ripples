@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <SupplyDemandToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <SupplyDemandToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -275,7 +269,8 @@ export const lesson: Lesson = {
           de: "Der markträumende Preis bildet sich im Schnittpunkt von Angebot und Nachfrage, wo die gehandelte Menge geräumt wird.",
           pl: "Cena równowagi rynkowej ustala się w punkcie przecięcia krzywych popytu i podaży, oczyszczając rynek z nadwyżek i niedoborów.",
         },
-        source: "https://stat.gov.pl/metainformacje/slownik-pojec/pojecia-stosowane-w-statystyce-publicznej/2753,pojecie.html",
+        source:
+          "https://stat.gov.pl/metainformacje/slownik-pojec/pojecia-stosowane-w-statystyce-publicznej/2753,pojecie.html",
       },
       {
         text: {

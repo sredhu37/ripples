@@ -11,10 +11,10 @@ export function calcPacketRouting(north: boolean, central: boolean, south: boole
   const assembledMessage = isComplete
     ? "HELLO RIPPLES!"
     : deliveredCount === 2
-    ? "HEL... RIP..."
-    : deliveredCount === 1
-    ? "H... ..."
-    : "...";
+      ? "HEL... RIP..."
+      : deliveredCount === 1
+        ? "H... ..."
+        : "...";
 
   return {
     deliveredCount,
@@ -40,7 +40,7 @@ export function InternetToy({ lang, mode = "toy", onDone }: InternetToyProps) {
   const { deliveredCount, isComplete, latencyMs, assembledMessage } = calcPacketRouting(
     north,
     central,
-    south
+    south,
   );
 
   useEffect(() => {
@@ -64,58 +64,58 @@ export function InternetToy({ lang, mode = "toy", onDone }: InternetToyProps) {
     ? lang === "pl"
       ? "Kabel Północny: Aktywny (Pakiet 1)"
       : lang === "de"
-      ? "Nord-Kabel: Aktiv (Paket 1)"
-      : "North Cable: Active (Packet 1)"
+        ? "Nord-Kabel: Aktiv (Paket 1)"
+        : "North Cable: Active (Packet 1)"
     : lang === "pl"
-    ? "Podłącz Kabel Północny"
-    : lang === "de"
-    ? "Nord-Kabel verbinden"
-    : "Connect North Cable";
+      ? "Podłącz Kabel Północny"
+      : lang === "de"
+        ? "Nord-Kabel verbinden"
+        : "Connect North Cable";
 
   const centralLabel = central
     ? lang === "pl"
       ? "Kabel Środkowy: Aktywny (Pakiet 2)"
       : lang === "de"
-      ? "Zentral-Kabel: Aktiv (Paket 2)"
-      : "Central Cable: Active (Packet 2)"
+        ? "Zentral-Kabel: Aktiv (Paket 2)"
+        : "Central Cable: Active (Packet 2)"
     : lang === "pl"
-    ? "Podłącz Kabel Środkowy"
-    : lang === "de"
-    ? "Zentral-Kabel verbinden"
-    : "Connect Central Cable";
+      ? "Podłącz Kabel Środkowy"
+      : lang === "de"
+        ? "Zentral-Kabel verbinden"
+        : "Connect Central Cable";
 
   const southLabel = south
     ? lang === "pl"
       ? "Kabel Południowy: Aktywny (Pakiet 3)"
       : lang === "de"
-      ? "Sued-Kabel: Aktiv (Paket 3)"
-      : "South Cable: Active (Packet 3)"
+        ? "Sued-Kabel: Aktiv (Paket 3)"
+        : "South Cable: Active (Packet 3)"
     : lang === "pl"
-    ? "Podłącz Kabel Południowy"
-    : lang === "de"
-    ? "Sued-Kabel verbinden"
-    : "Connect South Cable";
+      ? "Podłącz Kabel Południowy"
+      : lang === "de"
+        ? "Sued-Kabel verbinden"
+        : "Connect South Cable";
 
   const deliveredLabel =
     lang === "pl"
       ? "Dostarczone pakiety danych:"
       : lang === "de"
-      ? "Zugestellte Datenpakete:"
-      : "Data Packets Delivered:";
+        ? "Zugestellte Datenpakete:"
+        : "Data Packets Delivered:";
 
   const latencyLabel =
     lang === "pl"
       ? "Czas przesyłu przez ocean:"
       : lang === "de"
-      ? "Untersee-Laufzeit:"
-      : "Undersea Transit Time:";
+        ? "Untersee-Laufzeit:"
+        : "Undersea Transit Time:";
 
   const reassembledLabel =
     lang === "pl"
       ? "Złożona wiadomość:"
       : lang === "de"
-      ? "Zusammengesetzte Nachricht:"
-      : "Reassembled Message:";
+        ? "Zusammengesetzte Nachricht:"
+        : "Reassembled Message:";
 
   return (
     <div className="internet-wrap">
@@ -181,13 +181,13 @@ export function InternetToy({ lang, mode = "toy", onDone }: InternetToyProps) {
               ? lang === "pl"
                 ? "Wspaniale! Wszystkie 3 pakiety dotarły bez uszkodzeń i złożyły się w kompletną wiadomość!"
                 : lang === "de"
-                ? "Hervorragend! Alle 3 Pakete kamen an und wurden zur vollstaendigen Nachricht zusammengesetzt!"
-                : "Brilliant! All 3 packets arrived intact and assembled into the original message!"
+                  ? "Hervorragend! Alle 3 Pakete kamen an und wurden zur vollstaendigen Nachricht zusammengesetzt!"
+                  : "Brilliant! All 3 packets arrived intact and assembled into the original message!"
               : lang === "pl"
-              ? "Podłącz wszystkie trzy kable sieciowe, aby przesłać każdy pakiet danych."
-              : lang === "de"
-              ? "Verbinde alle drei Netzwerkkabel, um jedes Datenpaket zu uebertragen."
-              : "Connect all three network cables to deliver every packet."}
+                ? "Podłącz wszystkie trzy kable sieciowe, aby przesłać każdy pakiet danych."
+                : lang === "de"
+                  ? "Verbinde alle drei Netzwerkkabel, um jedes Datenpaket zu uebertragen."
+                  : "Connect all three network cables to deliver every packet."}
           </div>
         )}
       </div>

@@ -31,9 +31,7 @@ export function HiringToy({
   onWidgetAnswer?: (correct: boolean) => void;
 }) {
   const [hired, setHired] = useState(isWidget ? true : false);
-  const [weather, setWeather] = useState<"sunny" | "stormy">(
-    isWidget ? "stormy" : "sunny",
-  );
+  const [weather, setWeather] = useState<"sunny" | "stormy">(isWidget ? "stormy" : "sunny");
   const [paidFromReserve, setPaidFromReserve] = useState(false);
 
   const [seenSunnyHired, setSeenSunnyHired] = useState(false);
@@ -58,27 +56,24 @@ export function HiringToy({
     lang === "pl"
       ? "Zespół piekarni i symulator pogody"
       : lang === "de"
-      ? "Bäckerei-Team und Wettersimulator"
-      : "Bakery team and weather simulator";
+        ? "Bäckerei-Team und Wettersimulator"
+        : "Bakery team and weather simulator";
 
-  const canvasLabel =
-    lang === "pl" ? "Backstube" : lang === "de" ? "Backstube" : "Bakery kitchen";
+  const canvasLabel = lang === "pl" ? "Backstube" : lang === "de" ? "Backstube" : "Bakery kitchen";
 
   const teamTitle =
     lang === "pl" ? "Zespół piekarni" : lang === "de" ? "Das Bäckerei-Team" : "The Bakery Team";
 
-  const coinsLabel =
-    lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "coins";
+  const coinsLabel = lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "coins";
 
   const wageBadge =
     lang === "pl"
       ? `Płaca: 5 ${coinsLabel}`
       : lang === "de"
-      ? `Lohn: 5 ${coinsLabel}`
-      : "Wage: 5 coins";
+        ? `Lohn: 5 ${coinsLabel}`
+        : "Wage: 5 coins";
 
-  const openJobTitle =
-    lang === "pl" ? "Wolny etat" : lang === "de" ? "Offene Stelle" : "Open Job";
+  const openJobTitle = lang === "pl" ? "Wolny etat" : lang === "de" ? "Offene Stelle" : "Open Job";
 
   const hireLeoSub =
     lang === "pl" ? "(Zatrudnij Leo)" : lang === "de" ? "(Leo einstellen)" : "(Hire Leo)";
@@ -88,27 +83,27 @@ export function HiringToy({
       ? lang === "pl"
         ? "Słoneczny dzień (duży popyt)"
         : lang === "de"
-        ? "Sonniger Tag (Hohe Nachfrage)"
-        : "Sunny Day (High Demand)"
+          ? "Sonniger Tag (Hohe Nachfrage)"
+          : "Sunny Day (High Demand)"
       : lang === "pl"
-      ? "Burzowy dzień (mały popyt)"
-      : lang === "de"
-      ? "Regentag (Wenig Nachfrage)"
-      : "Stormy Day (Low Demand)";
+        ? "Burzowy dzień (mały popyt)"
+        : lang === "de"
+          ? "Regentag (Wenig Nachfrage)"
+          : "Stormy Day (Low Demand)";
 
   const loavesSoldLabel =
     lang === "pl"
       ? `Sprzedaż (${stats.loavesSold} bochenków):`
       : lang === "de"
-      ? `Umsatz (${stats.loavesSold} Brote):`
-      : `Sales (${stats.loavesSold} loaves):`;
+        ? `Umsatz (${stats.loavesSold} Brote):`
+        : `Sales (${stats.loavesSold} loaves):`;
 
   const fuelCostLabel =
     lang === "pl"
       ? "Mąka i drewno do pieca:"
       : lang === "de"
-      ? "Mehl & Ofenholz:"
-      : "Flour & oven fuel:";
+        ? "Mehl & Ofenholz:"
+        : "Flour & oven fuel:";
 
   const leoWageLabel =
     lang === "pl" ? "Płaca Leo:" : lang === "de" ? "Leos Gehalt:" : "Leo's wage:";
@@ -120,25 +115,25 @@ export function HiringToy({
     ? lang === "pl"
       ? "Najpierw zatrudnij Leo jako pomocnika, aby zwiększyć wydajność do 8 bochenków!"
       : lang === "de"
-      ? "Stelle zuerst Leo als Bäckergesellen ein, um die Kapazität auf 8 Brote zu verdoppeln!"
-      : "First, hire Leo as assistant baker to expand bakery capacity to 8 loaves!"
+        ? "Stelle zuerst Leo als Bäckergesellen ein, um die Kapazität auf 8 Brote zu verdoppeln!"
+        : "First, hire Leo as assistant baker to expand bakery capacity to 8 loaves!"
     : !seenSunnyHired
-    ? lang === "pl"
-      ? "Sprawdź słoneczny dzień z Leo, aby zobaczyć, jak wysoki zysk bez problemu pokrywa jego płacę!"
-      : lang === "de"
-      ? "Teste einen sonnigen Tag mit Leo: Hohe Gewinne decken seinen Lohn mühelos!"
-      : "Test a Sunny Day with Leo to see high profits cover his wage easily!"
-    : !seenStormyHired
-    ? lang === "pl"
-      ? "Teraz przełącz na burzowy dzień, aby zobaczyć, co się dzieje, gdy sprzedaż drastycznie spada!"
-      : lang === "de"
-      ? "Wechsle nun zu einem stürmischen Tag, um zu sehen, was bei wenig Kundschaft passiert!"
-      : "Now switch to a Stormy Day to see what happens when sales drop!"
-    : lang === "pl"
-    ? "Zobacz: zatrudnienie przynosi wyższy zysk w dobre dni, ale niesie ryzyko stałej płacy w gorsze dni!"
-    : lang === "de"
-    ? "Siehst du: Einstellen bringt mehr Gewinn an guten Tagen, aber festes Lohnrisiko an Regentagen!"
-    : "Notice how hiring brings higher profit on good days, but fixed wage risk on slow days!";
+      ? lang === "pl"
+        ? "Sprawdź słoneczny dzień z Leo, aby zobaczyć, jak wysoki zysk bez problemu pokrywa jego płacę!"
+        : lang === "de"
+          ? "Teste einen sonnigen Tag mit Leo: Hohe Gewinne decken seinen Lohn mühelos!"
+          : "Test a Sunny Day with Leo to see high profits cover his wage easily!"
+      : !seenStormyHired
+        ? lang === "pl"
+          ? "Teraz przełącz na burzowy dzień, aby zobaczyć, co się dzieje, gdy sprzedaż drastycznie spada!"
+          : lang === "de"
+            ? "Wechsle nun zu einem stürmischen Tag, um zu sehen, was bei wenig Kundschaft passiert!"
+            : "Now switch to a Stormy Day to see what happens when sales drop!"
+        : lang === "pl"
+          ? "Zobacz: zatrudnienie przynosi wyższy zysk w dobre dni, ale niesie ryzyko stałej płacy w gorsze dni!"
+          : lang === "de"
+            ? "Siehst du: Einstellen bringt mehr Gewinn an guten Tagen, aber festes Lohnrisiko an Regentagen!"
+            : "Notice how hiring brings higher profit on good days, but fixed wage risk on slow days!";
 
   return (
     <div className="hiring-wrap">
@@ -146,7 +141,16 @@ export function HiringToy({
         <DiagramCanvas label={canvasLabel}>
           {/* Bea and Leo */}
           <Pop x={30} y={35}>
-            <rect x="0" y="0" width="250" height="190" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
+            <rect
+              x="0"
+              y="0"
+              width="250"
+              height="190"
+              rx="14"
+              fill="#ffffff"
+              stroke="#cbd5e1"
+              strokeWidth="3"
+            />
             <text x="125" y="25" textAnchor="middle" fill="#23383f" fontSize={13} fontWeight="bold">
               {teamTitle}
             </text>
@@ -162,7 +166,14 @@ export function HiringToy({
                   Leo
                 </text>
                 <rect x="120" y="145" width="120" height="24" rx="4" fill="#dcfce7" />
-                <text x="180" y="161" textAnchor="middle" fill="#15803d" fontSize={10} fontWeight="bold">
+                <text
+                  x="180"
+                  y="161"
+                  textAnchor="middle"
+                  fill="#15803d"
+                  fontSize={10}
+                  fontWeight="bold"
+                >
                   {wageBadge}
                 </text>
               </>
@@ -178,7 +189,14 @@ export function HiringToy({
                   stroke="#94a3b8"
                   strokeDasharray="4 4"
                 />
-                <text x="47" y="45" textAnchor="middle" fill="#64748b" fontSize={11} fontWeight="bold">
+                <text
+                  x="47"
+                  y="45"
+                  textAnchor="middle"
+                  fill="#64748b"
+                  fontSize={11}
+                  fontWeight="bold"
+                >
                   {openJobTitle}
                 </text>
                 <text x="47" y="65" textAnchor="middle" fill="#94a3b8" fontSize={10}>
@@ -190,7 +208,16 @@ export function HiringToy({
 
           {/* Daily Ledger */}
           <Pop x={310} y={35}>
-            <rect x="0" y="0" width="300" height="190" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
+            <rect
+              x="0"
+              y="0"
+              width="300"
+              height="190"
+              rx="14"
+              fill="#ffffff"
+              stroke="#cbd5e1"
+              strokeWidth="3"
+            />
             <text x="150" y="25" textAnchor="middle" fill="#23383f" fontSize={13} fontWeight="bold">
               {dayDemandTitle}
             </text>
@@ -249,13 +276,13 @@ export function HiringToy({
                 ? lang === "pl"
                   ? "Leo zatrudniony (kliknij na tryb solo)"
                   : lang === "de"
-                  ? "Leo eingestellt (Klick für Solo)"
-                  : "Leo Hired (Click to go Solo)"
+                    ? "Leo eingestellt (Klick für Solo)"
+                    : "Leo Hired (Click to go Solo)"
                 : lang === "pl"
-                ? "Zatrudnij Leo (5 monet płacy)"
-                : lang === "de"
-                ? "Leo einstellen (5 Münzen Lohn)"
-                : "Hire Leo (5 coins wage)"}
+                  ? "Zatrudnij Leo (5 monet płacy)"
+                  : lang === "de"
+                    ? "Leo einstellen (5 Münzen Lohn)"
+                    : "Hire Leo (5 coins wage)"}
             </button>
             <button
               type="button"
@@ -274,9 +301,7 @@ export function HiringToy({
           </div>
         )}
 
-        {!isWidget && (
-          <ActionPrompt lang={lang}>{promptText}</ActionPrompt>
-        )}
+        {!isWidget && <ActionPrompt lang={lang}>{promptText}</ActionPrompt>}
 
         {isWidget && (
           <div className="hiring-widget-controls">
@@ -288,15 +313,12 @@ export function HiringToy({
               {lang === "pl"
                 ? "Wypłać Leo gwarantowane 5 monet płacy z rezerwy"
                 : lang === "de"
-                ? "Zahle Leo garantierte 5 Münzen Lohn aus der Rücklage"
-                : "Pay Leo guaranteed 5 coins wage from reserve"}
+                  ? "Zahle Leo garantierte 5 Münzen Lohn aus der Rücklage"
+                  : "Pay Leo guaranteed 5 coins wage from reserve"}
             </button>
             {onWidgetAnswer && (
               <div className="row nav">
-                <CheckButton
-                  lang={lang}
-                  onClick={() => onWidgetAnswer(paidFromReserve)}
-                />
+                <CheckButton lang={lang} onClick={() => onWidgetAnswer(paidFromReserve)} />
               </div>
             )}
           </div>

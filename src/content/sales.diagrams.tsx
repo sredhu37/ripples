@@ -21,7 +21,12 @@ export function FerryBoat({ x = 0, y = 0 }: { x?: number; y?: number }) {
       <rect x="35" y="25" width="45" height="25" rx="3" fill="#2f7fb8" />
       <circle cx="48" cy="37" r="6" fill="#f4f1e8" />
       <circle cx="68" cy="37" r="6" fill="#f4f1e8" />
-      <path d="M0 85 C30 80 60 90 90 85 C110 80 130 90 140 85" stroke="#38bdf8" strokeWidth="4" fill="none" />
+      <path
+        d="M0 85 C30 80 60 90 90 85 C110 80 130 90 140 85"
+        stroke="#38bdf8"
+        strokeWidth="4"
+        fill="none"
+      />
     </g>
   );
 }
@@ -31,8 +36,8 @@ export function CatchFishDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Finn łowi ryby przy pomoście"
       : lang === "de"
-      ? "Finn fängt Fische am Hafen"
-      : "Finn catches fish at the dock";
+        ? "Finn fängt Fische am Hafen"
+        : "Finn catches fish at the dock";
   const fullBasket =
     lang === "pl" ? "Pełen kosz!" : lang === "de" ? "Voller Korb!" : "Full basket!";
   const freshTrout =
@@ -54,7 +59,16 @@ export function CatchFishDiagram({ lang, step }: DiagramProps) {
       )}
       {step >= 3 && (
         <Pop x={440} y={80}>
-          <rect x="0" y="0" width="150" height="110" rx="12" fill="#fff" stroke="#23383f" strokeWidth="3" />
+          <rect
+            x="0"
+            y="0"
+            width="150"
+            height="110"
+            rx="12"
+            fill="#fff"
+            stroke="#23383f"
+            strokeWidth="3"
+          />
           <text x="75" y="45" textAnchor="middle" fill="#23383f" fontSize="15" fontWeight="bold">
             {fullBasket}
           </text>
@@ -72,10 +86,9 @@ export function EmptyDocksDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Finn czeka w pustym porcie"
       : lang === "de"
-      ? "Finn wartet am leeren Hafen"
-      : "Finn waits at empty harbor";
-  const emptyDock =
-    lang === "pl" ? "Pusty pomost" : lang === "de" ? "Leerer Hafen" : "Empty dock";
+        ? "Finn wartet am leeren Hafen"
+        : "Finn waits at empty harbor";
+  const emptyDock = lang === "pl" ? "Pusty pomost" : lang === "de" ? "Leerer Hafen" : "Empty dock";
   const noShoppers =
     lang === "pl" ? "Brak klientów" : lang === "de" ? "Noch keine Leute" : "No shoppers yet";
 
@@ -93,7 +106,16 @@ export function EmptyDocksDiagram({ lang, step }: DiagramProps) {
       </Pop>
       {step >= 2 && (
         <Pop x={450} y={80}>
-          <rect x="0" y="0" width="150" height="90" rx="10" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="2" />
+          <rect
+            x="0"
+            y="0"
+            width="150"
+            height="90"
+            rx="10"
+            fill="#f1f5f9"
+            stroke="#cbd5e1"
+            strokeWidth="2"
+          />
           <text x="75" y="38" textAnchor="middle" fill="#64748b" fontSize="14" fontWeight="bold">
             {emptyDock}
           </text>
@@ -111,16 +133,20 @@ export function NoSalesDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Ryby w skrzynkach nie dają monet"
       : lang === "de"
-      ? "Lagernde Fische bringen null Münzen"
-      : "Stored fish make zero coins";
+        ? "Lagernde Fische bringen null Münzen"
+        : "Stored fish make zero coins";
   const invZero =
-    lang === "pl" ? "Towar w skrzynce = 0 monet" : lang === "de" ? "Lager = 0 Münzen" : "Inventory = 0 coins";
+    lang === "pl"
+      ? "Towar w skrzynce = 0 monet"
+      : lang === "de"
+        ? "Lager = 0 Münzen"
+        : "Inventory = 0 coins";
   const mustSell =
     lang === "pl"
       ? "Towar musi zostać sprzedany, by dać zysk"
       : lang === "de"
-      ? "Waren bringen erst Geld beim Verkauf"
-      : "Goods must be sold to bring money";
+        ? "Waren bringen erst Geld beim Verkauf"
+        : "Goods must be sold to bring money";
 
   return (
     <DiagramCanvas label={label}>
@@ -130,7 +156,16 @@ export function NoSalesDiagram({ lang, step }: DiagramProps) {
       </Pop>
       {step >= 2 && (
         <Pop x={300} y={70}>
-          <rect x="0" y="0" width="280" height="120" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
+          <rect
+            x="0"
+            y="0"
+            width="280"
+            height="120"
+            rx="14"
+            fill="#ffffff"
+            stroke="#cbd5e1"
+            strokeWidth="3"
+          />
           <text x="140" y="40" textAnchor="middle" fill="#23383f" fontSize={16} fontWeight="bold">
             {invZero}
           </text>
@@ -148,10 +183,9 @@ export function FerryArrivalDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Prom przypływa z klientami"
       : lang === "de"
-      ? "Die Fähre bringt Kundschaft"
-      : "Ferry arrives with customers";
-  const customersText =
-    lang === "pl" ? "Klienci!" : lang === "de" ? "Kundschaft!" : "Customers!";
+        ? "Die Fähre bringt Kundschaft"
+        : "Ferry arrives with customers";
+  const customersText = lang === "pl" ? "Klienci!" : lang === "de" ? "Kundschaft!" : "Customers!";
   const readyToBuy =
     lang === "pl" ? "Gotowi do zakupu" : lang === "de" ? "Kaufbereit" : "Ready to buy";
 
@@ -178,7 +212,16 @@ export function FerryArrivalDiagram({ lang, step }: DiagramProps) {
       )}
       {step >= 4 && (
         <Pop x={490} y={70}>
-          <rect x="0" y="0" width="130" height="90" rx="10" fill="#dcfce7" stroke="#16a34a" strokeWidth="2" />
+          <rect
+            x="0"
+            y="0"
+            width="130"
+            height="90"
+            rx="10"
+            fill="#dcfce7"
+            stroke="#16a34a"
+            strokeWidth="2"
+          />
           <text x="65" y="38" textAnchor="middle" fill="#15803d" fontSize={14} fontWeight="bold">
             {customersText}
           </text>
@@ -196,8 +239,8 @@ export function SalesExchangeDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Wymiana ryby na monety tworzy sprzedaż"
       : lang === "de"
-      ? "Tausch von Fisch gegen Münzen bringt Umsatz"
-      : "Exchange of fish for coins creates sales";
+        ? "Tausch von Fisch gegen Münzen bringt Umsatz"
+        : "Exchange of fish for coins creates sales";
   const completeText =
     lang === "pl" ? "Sprzedaż udana!" : lang === "de" ? "Verkauf geglückt!" : "Sale complete!";
 
@@ -233,7 +276,16 @@ export function SalesExchangeDiagram({ lang, step }: DiagramProps) {
       )}
       {step >= 4 && (
         <Pop x={240} y={210}>
-          <rect x="0" y="0" width="160" height="40" rx="8" fill="#e0f2fe" stroke="#0284c7" strokeWidth="2" />
+          <rect
+            x="0"
+            y="0"
+            width="160"
+            height="40"
+            rx="8"
+            fill="#e0f2fe"
+            stroke="#0284c7"
+            strokeWidth="2"
+          />
           <text x="80" y="25" textAnchor="middle" fill="#0369a1" fontSize={14} fontWeight="bold">
             {completeText}
           </text>
@@ -248,26 +300,26 @@ export function BusinessSalesGoalDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Przychód ze sprzedaży utrzymuje firmę na rynku"
       : lang === "de"
-      ? "Umsatz hält das Geschäft am Laufen"
-      : "Sales keep the business running";
+        ? "Umsatz hält das Geschäft am Laufen"
+        : "Sales keep the business running";
   const mainTitle =
     lang === "pl"
       ? "Przychód = Wszystkie otrzymane monety"
       : lang === "de"
-      ? "Umsatz = Alle eingenommenen Münzen"
-      : "Sales = Total Coins Received";
+        ? "Umsatz = Alle eingenommenen Münzen"
+        : "Sales = Total Coins Received";
   const subLine1 =
     lang === "pl"
       ? "Od każdego zadowolonego klienta"
       : lang === "de"
-      ? "Von allen zufriedenen Kundinnen und Kunden"
-      : "From every happy customer";
+        ? "Von allen zufriedenen Kundinnen und Kunden"
+        : "From every happy customer";
   const subLine2 =
     lang === "pl"
       ? "Większa sprzedaż pomaga naprawiać łódź i sieci"
       : lang === "de"
-      ? "Mehr Umsatz hilft beim Boot-Unterhalt"
-      : "More sales help pay for boat repairs";
+        ? "Mehr Umsatz hilft beim Boot-Unterhalt"
+        : "More sales help pay for boat repairs";
 
   return (
     <DiagramCanvas label={label}>
@@ -279,7 +331,16 @@ export function BusinessSalesGoalDiagram({ lang, step }: DiagramProps) {
       </Pop>
       {step >= 2 && (
         <Pop x={220} y={60}>
-          <rect x="0" y="0" width="370" height="140" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
+          <rect
+            x="0"
+            y="0"
+            width="370"
+            height="140"
+            rx="14"
+            fill="#ffffff"
+            stroke="#cbd5e1"
+            strokeWidth="3"
+          />
           <text x="185" y="40" textAnchor="middle" fill="#23383f" fontSize={16} fontWeight="bold">
             {mainTitle}
           </text>

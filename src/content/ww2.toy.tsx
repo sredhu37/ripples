@@ -22,11 +22,7 @@ export function Ww2Toy({ lang, mode = "toy", onDone }: Ww2ToyProps) {
   const [courage, setCourage] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
 
-  const { libertyScore, isFullyDefended } = calcHumanRightsDefense(
-    speech,
-    equalRights,
-    courage
-  );
+  const { libertyScore, isFullyDefended } = calcHumanRightsDefense(speech, equalRights, courage);
 
   useEffect(() => {
     if (mode === "toy" && isFullyDefended && onDone) {
@@ -49,8 +45,8 @@ export function Ww2Toy({ lang, mode = "toy", onDone }: Ww2ToyProps) {
     lang === "pl"
       ? "Godność człowieka jest nienaruszalna"
       : lang === "de"
-      ? "Die Wuerde des Menschen ist unantastbar"
-      : "Human Dignity is Inviolable";
+        ? "Die Wuerde des Menschen ist unantastbar"
+        : "Human Dignity is Inviolable";
 
   const protectionLevel =
     lang === "pl" ? "Poziom ochrony:" : lang === "de" ? "Schutzgrad:" : "Protection Level:";
@@ -59,7 +55,11 @@ export function Ww2Toy({ lang, mode = "toy", onDone }: Ww2ToyProps) {
     lang === "pl" ? "Wolna prasa i słowo" : lang === "de" ? "Freie Presse" : "Free Speech & Press";
 
   const equalRightsLabel =
-    lang === "pl" ? "Równe prawa dla wszystkich" : lang === "de" ? "Gleiche Rechte" : "Equal Rights for All";
+    lang === "pl"
+      ? "Równe prawa dla wszystkich"
+      : lang === "de"
+        ? "Gleiche Rechte"
+        : "Equal Rights for All";
 
   const courageLabel =
     lang === "pl" ? "Odwaga cywilna" : lang === "de" ? "Zivilcourage" : "Civil Courage";
@@ -69,9 +69,7 @@ export function Ww2Toy({ lang, mode = "toy", onDone }: Ww2ToyProps) {
       {/* Central Flame of Human Dignity */}
       <div className={`dignity-monument ${isFullyDefended ? "illuminated" : ""}`}>
         <div className="flame-icon">🕯️</div>
-        <div className="monument-title">
-          {dignityTitle}
-        </div>
+        <div className="monument-title">{dignityTitle}</div>
         <div className="liberty-meter">
           {protectionLevel} <strong>{libertyScore}%</strong>
         </div>
@@ -127,13 +125,13 @@ export function Ww2Toy({ lang, mode = "toy", onDone }: Ww2ToyProps) {
               ? lang === "pl"
                 ? "Wspaniale! Wzniesienie wszystkich trzech filarów chroni społeczeństwo przed tyranią i bezprawiem."
                 : lang === "de"
-                ? "Grossartig! Alle drei Pfeiler schuetzen die Gesellschaft vor Willkuer und Unrecht."
-                : "Brilliant! Raising all three pillars protects society against tyranny and prejudice."
+                  ? "Grossartig! Alle drei Pfeiler schuetzen die Gesellschaft vor Willkuer und Unrecht."
+                  : "Brilliant! Raising all three pillars protects society against tyranny and prejudice."
               : lang === "pl"
-              ? "Aktywuj wszystkie trzy filary, aby zapewnić pełną 100% ochronę godności ludzkiej."
-              : lang === "de"
-              ? "Aktiviere alle drei Pfeiler fuer vollstaendigen Schutz."
-              : "Activate all three pillars to achieve complete 100% protection."}
+                ? "Aktywuj wszystkie trzy filary, aby zapewnić pełną 100% ochronę godności ludzkiej."
+                : lang === "de"
+                  ? "Aktiviere alle drei Pfeiler fuer vollstaendigen Schutz."
+                  : "Activate all three pillars to achieve complete 100% protection."}
           </div>
         )}
       </div>

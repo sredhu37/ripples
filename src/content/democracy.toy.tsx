@@ -17,10 +17,7 @@ export function DemocracyToy({ lang, mode = "toy", onDone }: DemocracyToyProps) 
 
   const totalTokens = lighthouseTokens + grainTokens + parkTokens;
   const isBalanced =
-    totalTokens === 10 &&
-    lighthouseTokens >= 2 &&
-    grainTokens >= 2 &&
-    parkTokens >= 2;
+    totalTokens === 10 && lighthouseTokens >= 2 && grainTokens >= 2 && parkTokens >= 2;
 
   const handleCheck = () => {
     if (mode === "quiz") {
@@ -38,23 +35,43 @@ export function DemocracyToy({ lang, mode = "toy", onDone }: DemocracyToyProps) 
   };
 
   const chamberTitle =
-    lang === "pl" ? "Sala obrad rady: sztuka kompromisu" : lang === "de" ? "Gemeinderat Kompromiss-Kammer" : "Town Council Compromise Chamber";
+    lang === "pl"
+      ? "Sala obrad rady: sztuka kompromisu"
+      : lang === "de"
+        ? "Gemeinderat Kompromiss-Kammer"
+        : "Town Council Compromise Chamber";
   const chamberSub =
     lang === "pl"
       ? "Podziel 10 żetonów budżetu sprawiedliwie, by wszystkie 3 grupy doszły do zgody!"
       : lang === "de"
-      ? "Teile 10 Budget-Münzen fair auf, damit alle 3 Gruppen zustimmen!"
-      : "Divide 10 budget tokens fairly so all 3 groups agree!";
+        ? "Teile 10 Budget-Münzen fair auf, damit alle 3 Gruppen zustimmen!"
+        : "Divide 10 budget tokens fairly so all 3 groups agree!";
 
   const budgetUsedLabel =
-    lang === "pl" ? "Wykorzystany budżet:" : lang === "de" ? "Verwendetes Budget:" : "Total Budget Used:";
+    lang === "pl"
+      ? "Wykorzystany budżet:"
+      : lang === "de"
+        ? "Verwendetes Budget:"
+        : "Total Budget Used:";
 
   const sailorsTitle =
-    lang === "pl" ? "Żeglarze (Latarnia morska)" : lang === "de" ? "Seeleute (Leuchtturm)" : "Sailors (Lighthouse)";
+    lang === "pl"
+      ? "Żeglarze (Latarnia morska)"
+      : lang === "de"
+        ? "Seeleute (Leuchtturm)"
+        : "Sailors (Lighthouse)";
   const bakersTitle =
-    lang === "pl" ? "Piekarze (Spichlerz zbożowy)" : lang === "de" ? "Bäcker (Kornspeicher)" : "Bakers (Grain Store)";
+    lang === "pl"
+      ? "Piekarze (Spichlerz zbożowy)"
+      : lang === "de"
+        ? "Bäcker (Kornspeicher)"
+        : "Bakers (Grain Store)";
   const familiesTitle =
-    lang === "pl" ? "Rodziny (Park miejski)" : lang === "de" ? "Familien (Dorf-Park)" : "Families (Town Park)";
+    lang === "pl"
+      ? "Rodziny (Park miejski)"
+      : lang === "de"
+        ? "Familien (Dorf-Park)"
+        : "Families (Town Park)";
 
   const satisfiedLabel =
     lang === "pl" ? "✓ Zadowoleni" : lang === "de" ? "✓ Zufrieden" : "✓ Satisfied";
@@ -65,15 +82,15 @@ export function DemocracyToy({ lang, mode = "toy", onDone }: DemocracyToyProps) 
     lang === "pl"
       ? "✓ Demokratyczny kompromis osiągnięty! Podstawowe potrzeby wszystkich zostały spełnione."
       : lang === "de"
-      ? "✓ Demokratischer Kompromiss erzielt! Alle wichtigen Bedürfnisse erfüllt."
-      : "✓ Democratic compromise achieved! Everyone's core needs are met.";
+        ? "✓ Demokratischer Kompromiss erzielt! Alle wichtigen Bedürfnisse erfüllt."
+        : "✓ Democratic compromise achieved! Everyone's core needs are met.";
 
   const quizRetry =
     lang === "pl"
       ? "Upewnij się, że suma wynosi dokładnie 10 i każda grupa ma co najmniej 2 żetony."
       : lang === "de"
-      ? "Stelle sicher, dass die Gesamtsumme 10 ist und jede Gruppe mindestens 2 erhält."
-      : "Ensure total budget is 10 and each group gets at least 2 tokens.";
+        ? "Stelle sicher, dass die Gesamtsumme 10 ist und jede Gruppe mindestens 2 erhält."
+        : "Ensure total budget is 10 and each group gets at least 2 tokens.";
 
   return (
     <div className="democracy-toy p-4 bg-slate-50 rounded-xl max-w-md mx-auto">
@@ -85,7 +102,9 @@ export function DemocracyToy({ lang, mode = "toy", onDone }: DemocracyToyProps) 
       <div className="bg-white p-3 rounded-lg border border-slate-200 mb-4 shadow-sm">
         <div className="flex justify-between items-center mb-1">
           <span className="text-xs font-semibold text-slate-600">{budgetUsedLabel}</span>
-          <span className={`text-sm font-bold ${totalTokens === 10 ? "text-green-600" : "text-amber-600"}`}>
+          <span
+            className={`text-sm font-bold ${totalTokens === 10 ? "text-green-600" : "text-amber-600"}`}
+          >
             {totalTokens} / 10
           </span>
         </div>
@@ -117,7 +136,9 @@ export function DemocracyToy({ lang, mode = "toy", onDone }: DemocracyToyProps) 
             >
               -
             </button>
-            <span className="w-4 text-center text-sm font-bold text-blue-900">{lighthouseTokens}</span>
+            <span className="w-4 text-center text-sm font-bold text-blue-900">
+              {lighthouseTokens}
+            </span>
             <button
               type="button"
               onClick={() => setLighthouseTokens(Math.min(10, lighthouseTokens + 1))}
@@ -192,7 +213,9 @@ export function DemocracyToy({ lang, mode = "toy", onDone }: DemocracyToyProps) 
       <div className="flex flex-col items-center">
         <CheckButton lang={lang} onClick={handleCheck} />
         {showQuizResult && (
-          <div className={`mt-2 text-xs font-bold ${quizCorrect ? "text-green-600" : "text-amber-600"}`}>
+          <div
+            className={`mt-2 text-xs font-bold ${quizCorrect ? "text-green-600" : "text-amber-600"}`}
+          >
             {quizCorrect ? quizSuccess : quizRetry}
           </div>
         )}

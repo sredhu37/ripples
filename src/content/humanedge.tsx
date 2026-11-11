@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <HumanEdgeToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <HumanEdgeToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -282,7 +276,8 @@ export const lesson: Lesson = {
           de: "Historische Studien zeigen, dass gesellschaftlicher Wohlstand durch Technik von demokratischen Institutionen abhaengt.",
           pl: "Badania historyczne nad rewolucjami technicznymi wykazują, że o powszechnym dobrobycie decydują instytucje demokratyczne i inwestycje w ludzi.",
         },
-        source: "https://www.nber.org/books-and-chapters/power-and-progress-our-thousand-year-struggle-over-technology-and-prosperity",
+        source:
+          "https://www.nber.org/books-and-chapters/power-and-progress-our-thousand-year-struggle-over-technology-and-prosperity",
       },
     ],
     simplified: [

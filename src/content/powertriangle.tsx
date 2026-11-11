@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <PowerTriangleToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <PowerTriangleToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -163,11 +157,7 @@ export const lesson: Lesson = {
           correct: true,
         },
         {
-          text: T(
-            "Cats, dogs, and pigeons",
-            "Katzen, Hunde und Tauben",
-            "Koty, psy i gołębie",
-          ),
+          text: T("Cats, dogs, and pigeons", "Katzen, Hunde und Tauben", "Koty, psy i gołębie"),
         },
         {
           text: T(

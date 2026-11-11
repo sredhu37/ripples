@@ -73,63 +73,56 @@ export function ProfitKitchen({
     lang === "pl"
       ? "Stanowisko piekarni Bei"
       : lang === "de"
-      ? "Beas Bäckerei"
-      : "Bea's bakery workstation";
+        ? "Beas Bäckerei"
+        : "Bea's bakery workstation";
 
   const canvasLabel =
     lang === "pl"
       ? "Kuchnia zysków Bei"
       : lang === "de"
-      ? "Beas Backstube"
-      : "Bea's profit kitchen";
+        ? "Beas Backstube"
+        : "Bea's profit kitchen";
 
-  const ingredientsText =
-    lang === "pl" ? "Składniki" : lang === "de" ? "Zutaten" : "Ingredients";
-  const flourText =
-    lang === "pl" ? "Mąka (1)" : lang === "de" ? "Mehl (1)" : "Flour (1)";
-  const woodText =
-    lang === "pl" ? "Drewno (1)" : lang === "de" ? "Holz (1)" : "Wood (1)";
+  const ingredientsText = lang === "pl" ? "Składniki" : lang === "de" ? "Zutaten" : "Ingredients";
+  const flourText = lang === "pl" ? "Mąka (1)" : lang === "de" ? "Mehl (1)" : "Flour (1)";
+  const woodText = lang === "pl" ? "Drewno (1)" : lang === "de" ? "Holz (1)" : "Wood (1)";
   const costBadge =
-    lang === "pl"
-      ? "Koszt: 2 monety"
-      : lang === "de"
-      ? "Kosten: 2 Münzen"
-      : "Cost: 2 coins";
+    lang === "pl" ? "Koszt: 2 monety" : lang === "de" ? "Kosten: 2 Münzen" : "Cost: 2 coins";
 
   const priceBadge =
     lang === "pl"
       ? `Cena: ${price} monet`
       : lang === "de"
-      ? `Preis: ${price} Münzen`
-      : `Price: ${price} coins`;
+        ? `Preis: ${price} Münzen`
+        : `Price: ${price} coins`;
 
   const profitBadge =
     lang === "pl"
       ? `Zysk: +${lastBake?.profit}`
       : lang === "de"
-      ? `Gewinn: +${lastBake?.profit}`
-      : `Profit: +${lastBake?.profit}`;
+        ? `Gewinn: +${lastBake?.profit}`
+        : `Profit: +${lastBake?.profit}`;
 
   const beaKeepsText =
     lang === "pl"
       ? "Bea zatrzymuje monety!"
       : lang === "de"
-      ? "Bea behält Münzen!"
-      : "Bea keeps coins!";
+        ? "Bea behält Münzen!"
+        : "Bea keeps coins!";
 
   const lossBadge =
     lang === "pl"
       ? `Strata: -${lastBake?.loss}`
       : lang === "de"
-      ? `Verlust: -${lastBake?.loss}`
-      : `Loss: -${lastBake?.loss}`;
+        ? `Verlust: -${lastBake?.loss}`
+        : `Loss: -${lastBake?.loss}`;
 
   const payFromJarText =
     lang === "pl"
       ? "Musi dopłacić ze słoika"
       : lang === "de"
-      ? "Zahlt aus dem Glas"
-      : "Must pay from jar";
+        ? "Zahlt aus dem Glas"
+        : "Must pay from jar";
 
   const readyToBakeText =
     lang === "pl" ? "Gotowa do pieczenia" : lang === "de" ? "Bereit zum Backen" : "Ready to bake";
@@ -138,8 +131,8 @@ export function ProfitKitchen({
     lang === "pl"
       ? "Cena sprzedaży za bochenek"
       : lang === "de"
-      ? "Verkaufspreis pro Laib"
-      : "Selling price per loaf";
+        ? "Verkaufspreis pro Laib"
+        : "Selling price per loaf";
 
   const sliderLeft =
     lang === "pl" ? "1 moneta (tanio)" : lang === "de" ? "1 Münze (billig)" : "1 coin (cheap)";
@@ -150,27 +143,27 @@ export function ProfitKitchen({
     lang === "pl"
       ? `Upiecz i sprzedaj za ${price} monet`
       : lang === "de"
-      ? `Backen und für ${price} Münzen verkaufen`
-      : `Bake and sell for ${price} coins`;
+        ? `Backen und für ${price} Münzen verkaufen`
+        : `Bake and sell for ${price} coins`;
 
   const promptText =
     sim.profitsSeen === 0
       ? lang === "pl"
         ? "Ustaw cenę wyższą niż 2 monety i upiecz chleb, aby osiągnąć zysk."
         : lang === "de"
-        ? "Stelle einen Preis über 2 Münzen ein und backe, um Gewinn zu machen."
-        : "Set a price higher than 2 coins and bake to make a profit."
+          ? "Stelle einen Preis über 2 Münzen ein und backe, um Gewinn zu machen."
+          : "Set a price higher than 2 coins and bake to make a profit."
       : sim.lossesSeen === 0
-      ? lang === "pl"
-        ? "Teraz ustaw cenę na 1 lub 2 monety, aby zobaczyć, co się stanie, gdy koszty przewyższą cenę."
-        : lang === "de"
-        ? "Stelle nun 1 oder 2 Münzen ein, um zu sehen, was bei zu geringem Preis geschieht."
-        : "Now set price to 1 or 2 coins to see what happens when costs exceed price."
-      : lang === "pl"
-      ? "Świetna robota! Zobaczyłeś, jak działają zysk i strata. Możesz eksperymentować dalej lub przejść do pytań."
-      : lang === "de"
-      ? "Toll gemacht! Du hast Gewinn und Verlust erlebt. Du kannst weitermachen."
-      : "Great job! You saw how profit and loss work. You can keep testing or move forward.";
+        ? lang === "pl"
+          ? "Teraz ustaw cenę na 1 lub 2 monety, aby zobaczyć, co się stanie, gdy koszty przewyższą cenę."
+          : lang === "de"
+            ? "Stelle nun 1 oder 2 Münzen ein, um zu sehen, was bei zu geringem Preis geschieht."
+            : "Now set price to 1 or 2 coins to see what happens when costs exceed price."
+        : lang === "pl"
+          ? "Świetna robota! Zobaczyłeś, jak działają zysk i strata. Możesz eksperymentować dalej lub przejść do pytań."
+          : lang === "de"
+            ? "Toll gemacht! Du hast Gewinn und Verlust erlebt. Du kannst weitermachen."
+            : "Great job! You saw how profit and loss work. You can keep testing or move forward.";
 
   return (
     <div className="profit-wrap">
@@ -178,7 +171,16 @@ export function ProfitKitchen({
         <DiagramCanvas label={canvasLabel}>
           {/* Left: Ingredients & Cost */}
           <Pop x={30} y={40}>
-            <rect x="0" y="0" width="160" height="180" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
+            <rect
+              x="0"
+              y="0"
+              width="160"
+              height="180"
+              rx="14"
+              fill="#ffffff"
+              stroke="#cbd5e1"
+              strokeWidth="3"
+            />
             <text x="80" y="28" textAnchor="middle" fill="#23383f" fontSize="14" fontWeight="bold">
               {ingredientsText}
             </text>
@@ -207,7 +209,16 @@ export function ProfitKitchen({
 
           {/* Right: Bea & Outcome */}
           <Pop x={450} y={40}>
-            <rect x="0" y="0" width="160" height="180" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
+            <rect
+              x="0"
+              y="0"
+              width="160"
+              height="180"
+              rx="14"
+              fill="#ffffff"
+              stroke="#cbd5e1"
+              strokeWidth="3"
+            />
             <Person
               {...CAST.Bea}
               mood={lastBake ? (lastBake.profit > 0 ? "happy" : "sad") : "happy"}
@@ -219,8 +230,24 @@ export function ProfitKitchen({
               <g transform="translate(15, 115)">
                 {lastBake.profit > 0 ? (
                   <g>
-                    <rect x="0" y="0" width="130" height="50" rx="8" fill="#dcfce7" stroke="#16a34a" strokeWidth="2" />
-                    <text x="65" y="24" textAnchor="middle" fill="#15803d" fontSize={13} fontWeight="bold">
+                    <rect
+                      x="0"
+                      y="0"
+                      width="130"
+                      height="50"
+                      rx="8"
+                      fill="#dcfce7"
+                      stroke="#16a34a"
+                      strokeWidth="2"
+                    />
+                    <text
+                      x="65"
+                      y="24"
+                      textAnchor="middle"
+                      fill="#15803d"
+                      fontSize={13}
+                      fontWeight="bold"
+                    >
                       {profitBadge}
                     </text>
                     <text x="65" y="42" textAnchor="middle" fill="#15803d" fontSize={11}>
@@ -229,8 +256,24 @@ export function ProfitKitchen({
                   </g>
                 ) : (
                   <g>
-                    <rect x="0" y="0" width="130" height="50" rx="8" fill="#fee2e2" stroke="#d6403a" strokeWidth="2" />
-                    <text x="65" y="24" textAnchor="middle" fill="#991b1b" fontSize={13} fontWeight="bold">
+                    <rect
+                      x="0"
+                      y="0"
+                      width="130"
+                      height="50"
+                      rx="8"
+                      fill="#fee2e2"
+                      stroke="#d6403a"
+                      strokeWidth="2"
+                    />
+                    <text
+                      x="65"
+                      y="24"
+                      textAnchor="middle"
+                      fill="#991b1b"
+                      fontSize={13}
+                      fontWeight="bold"
+                    >
                       {lossBadge}
                     </text>
                     <text x="65" y="42" textAnchor="middle" fill="#991b1b" fontSize={11}>

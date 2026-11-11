@@ -44,15 +44,15 @@ export function CapitalismToy({ lang, mode = "toy", onDone }: CapitalismToyProps
     lang === "pl"
       ? "Rynek i reguły gry"
       : lang === "de"
-      ? "Marktplatz & Spielregeln"
-      : "Market Square & Ground Rules";
+        ? "Marktplatz & Spielregeln"
+        : "Market Square & Ground Rules";
 
   const subtitle =
     lang === "pl"
       ? "Połącz prywatną inicjatywę ze sprawiedliwymi zasadami dla pracowników i środowiska"
       : lang === "de"
-      ? "Verbinde private Initiative mit fairen Regeln für Arbeiter & Natur"
-      : "Balance private initiative with fair rules for workers & nature";
+        ? "Verbinde private Initiative mit fairen Regeln für Arbeiter & Natur"
+        : "Balance private initiative with fair rules for workers & nature";
 
   const beaTitle =
     lang === "pl" ? "Piekarnia Bei" : lang === "de" ? "Beas Bäckerei" : "Bea's Bakery";
@@ -60,8 +60,8 @@ export function CapitalismToy({ lang, mode = "toy", onDone }: CapitalismToyProps
     lang === "pl"
       ? "Własny piec i przepis na bułki sezamowe"
       : lang === "de"
-      ? "Eigener Ofen & Sesam-Rezept"
-      : "Owns brick oven & sesame recipe";
+        ? "Eigener Ofen & Sesam-Rezept"
+        : "Owns brick oven & sesame recipe";
 
   const leoTitle =
     lang === "pl" ? "Piekarnia Leo" : lang === "de" ? "Leos Bäckerei" : "Leo's Bakery";
@@ -69,32 +69,38 @@ export function CapitalismToy({ lang, mode = "toy", onDone }: CapitalismToyProps
     lang === "pl"
       ? "Konkuruje świeżym chlebem ziarnistym"
       : lang === "de"
-      ? "Konkurriert mit Körnerbrot"
-      : "Competes with fresh seeded loaves";
+        ? "Konkurriert mit Körnerbrot"
+        : "Competes with fresh seeded loaves";
 
   const sliderLabel =
     lang === "pl"
       ? "Innowacje i inwestycje piekarzy:"
       : lang === "de"
-      ? "Bäcker-Innovation & Investition:"
-      : "Baker Innovation & Investment:";
+        ? "Bäcker-Innovation & Investition:"
+        : "Baker Innovation & Investment:";
 
   const rulesLabel =
     lang === "pl"
       ? "Sprawiedliwe reguły (Płace i rzeka):"
       : lang === "de"
-      ? "Faire Spielregeln (Löhne & Fluss):"
-      : "Fair Ground Rules (Wages & River):";
+        ? "Faire Spielregeln (Löhne & Fluss):"
+        : "Fair Ground Rules (Wages & River):";
 
-  const activeLabel =
-    lang === "pl" ? "Aktywne" : lang === "de" ? "Aktiv" : "Active";
-  const offLabel =
-    lang === "pl" ? "Wyłączone" : lang === "de" ? "Aus" : "Off";
+  const activeLabel = lang === "pl" ? "Aktywne" : lang === "de" ? "Aktiv" : "Active";
+  const offLabel = lang === "pl" ? "Wyłączone" : lang === "de" ? "Aus" : "Off";
 
   const varietyLabel =
-    lang === "pl" ? "Różnorodność i jakość pieczywa:" : lang === "de" ? "Brotvielfalt & Qualität:" : "Bread Variety & Quality:";
+    lang === "pl"
+      ? "Różnorodność i jakość pieczywa:"
+      : lang === "de"
+        ? "Brotvielfalt & Qualität:"
+        : "Bread Variety & Quality:";
   const fairnessLabel =
-    lang === "pl" ? "Godne warunki pracowników:" : lang === "de" ? "Faire Löhne:" : "Worker Fairness:";
+    lang === "pl"
+      ? "Godne warunki pracowników:"
+      : lang === "de"
+        ? "Faire Löhne:"
+        : "Worker Fairness:";
   const riverLabel =
     lang === "pl" ? "Czystość rzeki:" : lang === "de" ? "Sauberer Fluss:" : "River Cleanliness:";
 
@@ -102,43 +108,43 @@ export function CapitalismToy({ lang, mode = "toy", onDone }: CapitalismToyProps
     lang === "pl"
       ? "Co w gospodarce rynkowej motywuje Beę do wczesnego wstawania i pieczenia pysznego chleba?"
       : lang === "de"
-      ? "Was motiviert Bea in einer Marktwirtschaft, früh aufzustehen und leckeres Brot zu backen?"
-      : "In a market economy, what motivates Bea to wake up early and bake delicious bread?";
+        ? "Was motiviert Bea in einer Marktwirtschaft, früh aufzustehen und leckeres Brot zu backen?"
+        : "In a market economy, what motivates Bea to wake up early and bake delicious bread?";
 
   const optA =
     lang === "pl"
       ? "A) Jest właścicielką piekarni, tworzy nowe przepisy i zarabia dzięki zadowolonym klientom"
       : lang === "de"
-      ? "A) Sie besitzt ihre Bäckerei, erfindet Rezepte und verdient Geld durch zufriedene Kunden"
-      : "A) She owns her bakery, invents recipes, and earns income from satisfied customers";
+        ? "A) Sie besitzt ihre Bäckerei, erfindet Rezepte und verdient Geld durch zufriedene Kunden"
+        : "A) She owns her bakery, invents recipes, and earns income from satisfied customers";
 
   const optB =
     lang === "pl"
       ? "B) Przywódca miasteczka groził jej aresztowaniem"
       : lang === "de"
-      ? "B) Der Dorfanführer drohte ihr mit Verhaftung"
-      : "B) The town leader threatened to arrest her";
+        ? "B) Der Dorfanführer drohte ihr mit Verhaftung"
+        : "B) The town leader threatened to arrest her";
 
   const optC =
     lang === "pl"
       ? "C) Nikt w miasteczku nigdy niczego nie je"
       : lang === "de"
-      ? "C) Niemand im Dorf isst jemals etwas"
-      : "C) Nobody in the village ever eats food";
+        ? "C) Niemand im Dorf isst jemals etwas"
+        : "C) Nobody in the village ever eats food";
 
   const quizSuccess =
     lang === "pl"
       ? "✓ Dokładnie tak! Własność prywatna i zachęty rynkowe wspierają innowacje i zaangażowanie."
       : lang === "de"
-      ? "✓ Genau richtig! Privateigentum und Markt-Anreize fördern Innovation."
-      : "✓ Exactly right! Private ownership and market incentives encourage innovation.";
+        ? "✓ Genau richtig! Privateigentum und Markt-Anreize fördern Innovation."
+        : "✓ Exactly right! Private ownership and market incentives encourage innovation.";
 
   const quizHint =
     lang === "pl"
       ? "Wskazówka: Własność prywatna pozwala twórcom czerpać korzyści z własnego wysiłku i talentu."
       : lang === "de"
-      ? "Hinweis: Privateigentum belohnt Produzenten für Fleiß und Ideen."
-      : "Hint: Private ownership allows producers to benefit from their effort.";
+        ? "Hinweis: Privateigentum belohnt Produzenten für Fleiß und Ideen."
+        : "Hint: Private ownership allows producers to benefit from their effort.";
 
   return (
     <div className="capitalism-toy p-4 bg-slate-50 rounded-xl max-w-md mx-auto">
@@ -186,9 +192,7 @@ export function CapitalismToy({ lang, mode = "toy", onDone }: CapitalismToyProps
               type="button"
               onClick={() => setFairRulesEnabled(!fairRulesEnabled)}
               className={`px-3 py-1 rounded-full text-xs font-bold transition ${
-                fairRulesEnabled
-                  ? "bg-emerald-600 text-white"
-                  : "bg-slate-300 text-slate-700"
+                fairRulesEnabled ? "bg-emerald-600 text-white" : "bg-slate-300 text-slate-700"
               }`}
             >
               {fairRulesEnabled ? activeLabel : offLabel}
@@ -205,13 +209,17 @@ export function CapitalismToy({ lang, mode = "toy", onDone }: CapitalismToyProps
         </div>
         <div className="flex justify-between items-center text-xs">
           <span className="text-slate-600">{fairnessLabel}</span>
-          <span className={`font-bold ${metrics.workerFairness > 50 ? "text-green-600" : "text-red-500"}`}>
+          <span
+            className={`font-bold ${metrics.workerFairness > 50 ? "text-green-600" : "text-red-500"}`}
+          >
             {metrics.workerFairness}
           </span>
         </div>
         <div className="flex justify-between items-center text-xs">
           <span className="text-slate-600">{riverLabel}</span>
-          <span className={`font-bold ${metrics.cleanRiver > 50 ? "text-green-600" : "text-red-500"}`}>
+          <span
+            className={`font-bold ${metrics.cleanRiver > 50 ? "text-green-600" : "text-red-500"}`}
+          >
             {metrics.cleanRiver}%
           </span>
         </div>
@@ -261,7 +269,9 @@ export function CapitalismToy({ lang, mode = "toy", onDone }: CapitalismToyProps
       <div className="flex flex-col items-center">
         <CheckButton lang={lang} onClick={handleCheck} />
         {showQuizResult && (
-          <div className={`mt-2 text-xs font-bold ${quizCorrect ? "text-green-600" : "text-amber-600"}`}>
+          <div
+            className={`mt-2 text-xs font-bold ${quizCorrect ? "text-green-600" : "text-amber-600"}`}
+          >
             {quizCorrect ? quizSuccess : quizHint}
           </div>
         )}

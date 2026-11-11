@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <AutomationToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <AutomationToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -266,7 +260,8 @@ export const lesson: Lesson = {
           de: "Laut der International Federation of Robotics (IFR) sind weltweit ueber 3,9 Millionen Industrieroboter in Fabriken im Einsatz.",
           pl: "Według Międzynarodowej Federacji Robotyki (IFR) w fabrykach na całym świecie pracuje ponad 3,9 miliona robotów przemysłowych.",
         },
-        source: "https://ifr.org/ifr-press-releases/news/record-of-553000-industrial-robots-installed-globally-in-2022",
+        source:
+          "https://ifr.org/ifr-press-releases/news/record-of-553000-industrial-robots-installed-globally-in-2022",
       },
       {
         text: {

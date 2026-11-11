@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <IndependenceToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <IndependenceToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -307,7 +301,8 @@ export const lesson: Lesson = {
           de: "Die Montagsdemonstrationen 1989 in Leipzig und die polnische Solidarność-Bewegung von 1980 bewiesen die Kraft gewaltlosen Buergermuts.",
           pl: "Powstanie Solidarności w 1980 roku w Polsce oraz demonstracje ze świecami w Lipsku w 1989 roku dowiodły, że pokojowa solidarność obywatelska potrafi przełamać dyktaturę.",
         },
-        source: "https://www.bundesarchiv.de/themen-entdecken/online-ausstellungen/die-friedliche-revolution-1989/",
+        source:
+          "https://www.bundesarchiv.de/themen-entdecken/online-ausstellungen/die-friedliche-revolution-1989/",
       },
     ],
     simplified: [

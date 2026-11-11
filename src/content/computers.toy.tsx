@@ -3,13 +3,7 @@ import type { Lang } from "../progress";
 import { CheckButton } from "../lesson/toolkit";
 import "./computers.css";
 
-export function calcBinaryLogic(
-  b3: boolean,
-  b2: boolean,
-  b1: boolean,
-  b0: boolean,
-  target = 5
-) {
+export function calcBinaryLogic(b3: boolean, b2: boolean, b1: boolean, b0: boolean, target = 5) {
   const val8 = b3 ? 8 : 0;
   const val4 = b2 ? 4 : 0;
   const val2 = b1 ? 2 : 0;
@@ -67,8 +61,8 @@ export function ComputersToy({ lang, mode = "toy", onDone }: ComputersToyProps) 
     lang === "pl"
       ? "Szukana liczba dziesiętna:"
       : lang === "de"
-      ? "Gesuchte Dezimalzahl:"
-      : "Target Decimal Number:";
+        ? "Gesuchte Dezimalzahl:"
+        : "Target Decimal Number:";
 
   const getBitAction = (bit: boolean) => {
     if (bit) {
@@ -78,26 +72,20 @@ export function ComputersToy({ lang, mode = "toy", onDone }: ComputersToyProps) 
   };
 
   const binaryCodeLabel =
-    lang === "pl"
-      ? "Kod binarny:"
-      : lang === "de"
-      ? "Binaerer Code:"
-      : "Binary Code:";
+    lang === "pl" ? "Kod binarny:" : lang === "de" ? "Binaerer Code:" : "Binary Code:";
 
   const calcValueLabel =
     lang === "pl"
       ? "Obliczona wartość:"
       : lang === "de"
-      ? "Berechneter Wert:"
-      : "Calculated Value:";
+        ? "Berechneter Wert:"
+        : "Calculated Value:";
 
   return (
     <div className="computers-wrap">
       {/* Target indicator */}
       <div className="computers-target-card">
-        <span className="computers-target-label">
-          {targetLabel}
-        </span>
+        <span className="computers-target-label">{targetLabel}</span>
         <strong className="computers-target-num">{target}</strong>
       </div>
 
@@ -180,13 +168,13 @@ export function ComputersToy({ lang, mode = "toy", onDone }: ComputersToyProps) 
               ? lang === "pl"
                 ? `Brawo! Binarny ${binary} odpowiada dokładnie liczbie dziesiętnej ${target}!`
                 : lang === "de"
-                ? `Richtig! Binaer ${binary} entspricht genau der Dezimalzahl ${target}!`
-                : `Success! Binary ${binary} equals decimal ${target} perfectly!`
+                  ? `Richtig! Binaer ${binary} entspricht genau der Dezimalzahl ${target}!`
+                  : `Success! Binary ${binary} equals decimal ${target} perfectly!`
               : lang === "pl"
-              ? `Bieżąca wartość to ${decimal}. Przestaw bity, aby uzyskać ${target}.`
-              : lang === "de"
-              ? `Aktueller Wert ist ${decimal}. Passe die Schalter an, um ${target} zu erreichen.`
-              : `Current value is ${decimal}. Adjust switches to reach ${target}.`}
+                ? `Bieżąca wartość to ${decimal}. Przestaw bity, aby uzyskać ${target}.`
+                : lang === "de"
+                  ? `Aktueller Wert ist ${decimal}. Passe die Schalter an, um ${target} zu erreichen.`
+                  : `Current value is ${decimal}. Adjust switches to reach ${target}.`}
           </div>
         )}
       </div>

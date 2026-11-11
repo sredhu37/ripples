@@ -2,10 +2,10 @@
 
 Ripples is source-available, not open source. You can read it, run it and learn from it. You cannot use it to make money.
 
-| What | License | File |
-| --- | --- | --- |
-| Code | PolyForm Noncommercial 1.0.0 | [LICENSE](LICENSE) |
-| Lesson content | CC BY-NC-ND 4.0 | [LICENSE-CONTENT.txt](LICENSE-CONTENT.txt) |
+| What           | License                      | File                                       |
+| -------------- | ---------------------------- | ------------------------------------------ |
+| Code           | PolyForm Noncommercial 1.0.0 | [LICENSE](LICENSE)                         |
+| Lesson content | CC BY-NC-ND 4.0              | [LICENSE-CONTENT.txt](LICENSE-CONTENT.txt) |
 
 ## Lesson content
 

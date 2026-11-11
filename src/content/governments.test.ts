@@ -83,7 +83,7 @@ describe("Group 4 Governments Mechanics", () => {
       const spread = Math.max(
         Math.abs(citizens - avg),
         Math.abs(business - avg),
-        Math.abs(government - avg)
+        Math.abs(government - avg),
       );
       if (spread <= 25 && citizens >= 30 && business >= 30 && government >= 30) {
         return "equilibrium";

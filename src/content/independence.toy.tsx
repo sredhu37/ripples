@@ -52,46 +52,52 @@ export function IndependenceToy({ lang, mode = "toy", onDone }: IndependenceToyP
     lang === "pl"
       ? "Tradycyjny drewniany kołowrotek Charkha"
       : lang === "de"
-      ? "Am hoelzernen Spinnrad"
-      : "Spinning the Wooden Charkha";
+        ? "Am hoelzernen Spinnrad"
+        : "Spinning the Wooden Charkha";
 
   const spoolsLabel =
     lang === "pl"
       ? `${spools} szpulek własnoręcznie uprzędzionej nici`
       : lang === "de"
-      ? `${spools} Spulen selbstgesponnenes Garn`
-      : `${spools} Spools of Homespun Yarn`;
+        ? `${spools} Spulen selbstgesponnenes Garn`
+        : `${spools} Spools of Homespun Yarn`;
 
   const spinBtnLabel =
     lang === "pl"
       ? "Obróć koło (+1 szpulka)"
       : lang === "de"
-      ? "Rad drehen (+1 Spule)"
-      : "Spin Thread (+1 Spool)";
+        ? "Rad drehen (+1 Spule)"
+        : "Spin Thread (+1 Spool)";
 
-  const resetBtnLabel =
-    lang === "pl" ? "Reset" : lang === "de" ? "Zuruecksetzen" : "Reset";
+  const resetBtnLabel = lang === "pl" ? "Reset" : lang === "de" ? "Zuruecksetzen" : "Reset";
 
   const solLabel =
     lang === "pl"
       ? "Solidarność wspólnoty i samowystarczalność:"
       : lang === "de"
-      ? "Gemeinschaft & Selbstbestimmung:"
-      : "Community Solidarity & Self-Reliance:";
+        ? "Gemeinschaft & Selbstbestimmung:"
+        : "Community Solidarity & Self-Reliance:";
 
   const freedomBanner =
     lang === "pl"
       ? "Pokojowa jedność osiągnięta! (Swaraj)"
       : lang === "de"
-      ? "Friedliche Einheit erreicht! (Swaraj)"
-      : "Peaceful Unity Achieved! (Swaraj)";
+        ? "Friedliche Einheit erreicht! (Swaraj)"
+        : "Peaceful Unity Achieved! (Swaraj)";
 
   return (
     <div className="independence-wrap">
       {/* Charkha Spinning Box */}
       <div className={`charkha-box ${isFree ? "complete" : ""}`}>
         <div className="wheel-art">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#78350f" strokeWidth="2">
+          <svg
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#78350f"
+            strokeWidth="2"
+          >
             <circle cx="12" cy="12" r="10" />
             <line x1="12" y1="2" x2="12" y2="22" />
             <line x1="2" y1="12" x2="22" y2="12" />
@@ -99,17 +105,11 @@ export function IndependenceToy({ lang, mode = "toy", onDone }: IndependenceToyP
             <line x1="19.07" y1="4.93" x2="4.93" y2="19.07" />
           </svg>
         </div>
-        <div className="charkha-title">
-          {charkhaTitle}
-        </div>
-        <div className="spool-count">
-          {spoolsLabel}
-        </div>
+        <div className="charkha-title">{charkhaTitle}</div>
+        <div className="spool-count">{spoolsLabel}</div>
 
         <div className="charkha-controls">
-          <ToyButton onClick={handleSpin}>
-            {spinBtnLabel}
-          </ToyButton>
+          <ToyButton onClick={handleSpin}>{spinBtnLabel}</ToyButton>
           <ToyButton onClick={handleReset} disabled={spools === 0}>
             {resetBtnLabel}
           </ToyButton>
@@ -119,17 +119,12 @@ export function IndependenceToy({ lang, mode = "toy", onDone }: IndependenceToyP
       {/* Solidarity Meter */}
       <div className="solidarity-meter-card">
         <div className="sol-label">
-          {solLabel}{" "}
-          <strong>{solidarity}%</strong>
+          {solLabel} <strong>{solidarity}%</strong>
         </div>
         <div className="sol-bar">
           <div className="sol-fill" style={{ width: `${solidarity}%` }} />
         </div>
-        {isFree && (
-          <div className="freedom-banner">
-            {freedomBanner}
-          </div>
-        )}
+        {isFree && <div className="freedom-banner">{freedomBanner}</div>}
       </div>
 
       <div className="independence-actions">
@@ -140,13 +135,13 @@ export function IndependenceToy({ lang, mode = "toy", onDone }: IndependenceToyP
               ? lang === "pl"
                 ? "Wspaniale! Wspólne przędzenie nici zbudowało niezwyciężoną, pokojową jedność."
                 : lang === "de"
-                ? "Wunderbar! Das gemeinsame Spinnen schuf friedliche Verbundenheit."
-                : "Wonderful! Spinning yarn together built unstoppable peaceful unity."
+                  ? "Wunderbar! Das gemeinsame Spinnen schuf friedliche Verbundenheit."
+                  : "Wonderful! Spinning yarn together built unstoppable peaceful unity."
               : lang === "pl"
-              ? "Obróć koło Charkha, aby uprząść co najmniej 3 szpulki nici."
-              : lang === "de"
-              ? "Drehe das Rad, um mindestens 3 Spulen Garn zu spinnen."
-              : "Spin the Charkha to create at least 3 spools of thread."}
+                ? "Obróć koło Charkha, aby uprząść co najmniej 3 szpulki nici."
+                : lang === "de"
+                  ? "Drehe das Rad, um mindestens 3 Spulen Garn zu spinnen."
+                  : "Spin the Charkha to create at least 3 spools of thread."}
           </div>
         )}
       </div>

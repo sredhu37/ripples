@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <AiToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <AiToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -282,7 +276,8 @@ export const lesson: Lesson = {
           de: "Deutschland beschloss 2018 seine nationale Strategie Kuenstliche Intelligenz fuer verantwortungsvolle Forschung.",
           pl: "Polska przyjęła Politykę Rozwoju Sztucznej Inteligencji, wspierając etyczny rozwój AI i europejski akt o sztucznej inteligencji (AI Act).",
         },
-        source: "https://www.gov.pl/web/ai/polityka-dla-rozwoju-sztucznej-inteligencji-w-polsce-od-roku-2020",
+        source:
+          "https://www.gov.pl/web/ai/polityka-dla-rozwoju-sztucznej-inteligencji-w-polsce-od-roku-2020",
       },
     ],
     simplified: [

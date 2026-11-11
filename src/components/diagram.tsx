@@ -11,7 +11,12 @@ export const DIAGRAM_H = 280;
 
 export function DiagramCanvas({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <svg className="diagram" viewBox={`0 0 ${DIAGRAM_W} ${DIAGRAM_H}`} role="img" aria-label={label}>
+    <svg
+      className="diagram"
+      viewBox={`0 0 ${DIAGRAM_W} ${DIAGRAM_H}`}
+      role="img"
+      aria-label={label}
+    >
       {children}
     </svg>
   );
@@ -58,7 +63,14 @@ export function Arrow({
         strokeLinecap="round"
         fill="none"
       />
-      <polygon className="arrow-head" points={`${x2},${y2} ${p1} ${p2}`} fill={color} stroke={color} strokeWidth="2" strokeLinejoin="round" />
+      <polygon
+        className="arrow-head"
+        points={`${x2},${y2} ${p1} ${p2}`}
+        fill={color}
+        stroke={color}
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
     </g>
   );
 }
@@ -108,7 +120,17 @@ export function Bubble({
 }
 
 /** A name or word label, for example a person's name or a new term. */
-export function Label({ x, y, children, term }: { x: number; y: number; children: ReactNode; term?: boolean }) {
+export function Label({
+  x,
+  y,
+  children,
+  term,
+}: {
+  x: number;
+  y: number;
+  children: ReactNode;
+  term?: boolean;
+}) {
   return (
     <Pop x={x} y={y}>
       <text className={term ? "diagram-term" : "diagram-name"} textAnchor="middle">
@@ -119,7 +141,17 @@ export function Label({ x, y, children, term }: { x: number; y: number; children
 }
 
 /** The pill that names a new word, such as "barter". */
-export function TermChip({ x, y, w = 240, children }: { x: number; y: number; w?: number; children: ReactNode }) {
+export function TermChip({
+  x,
+  y,
+  w = 240,
+  children,
+}: {
+  x: number;
+  y: number;
+  w?: number;
+  children: ReactNode;
+}) {
   return (
     <Pop x={x} y={y}>
       <rect width={w} height="52" rx="26" fill="#f08a2e" />

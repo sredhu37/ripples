@@ -14,7 +14,15 @@ const INK = "#23383f";
 
 export function Box({ x = 0, y = 0, size = 100, children }: IconProps & { children: ReactNode }) {
   return (
-    <svg x={x} y={y} width={size} height={size} viewBox="0 0 100 100" overflow="visible" aria-hidden="true">
+    <svg
+      x={x}
+      y={y}
+      width={size}
+      height={size}
+      viewBox="0 0 100 100"
+      overflow="visible"
+      aria-hidden="true"
+    >
       {children}
     </svg>
   );
@@ -53,11 +61,31 @@ export function Person({ hat, shirt, mood = "happy", skin = "#f3cfa6", ...pos }:
           <path d="M63 31 L54 33" />
         </g>
       )}
-      {mood === "think" && <path d="M54 31 L63 30" stroke={INK} strokeWidth="2" strokeLinecap="round" />}
+      {mood === "think" && (
+        <path d="M54 31 L63 30" stroke={INK} strokeWidth="2" strokeLinecap="round" />
+      )}
       {/* mouth */}
-      {mood === "happy" && <path d="M42 47 Q50 55 58 47" stroke={INK} strokeWidth="2.4" fill="none" strokeLinecap="round" />}
-      {mood === "sad" && <path d="M43 52 Q50 45 57 52" stroke={INK} strokeWidth="2.4" fill="none" strokeLinecap="round" />}
-      {mood === "think" && <path d="M44 50 H56" stroke={INK} strokeWidth="2.4" strokeLinecap="round" />}
+      {mood === "happy" && (
+        <path
+          d="M42 47 Q50 55 58 47"
+          stroke={INK}
+          strokeWidth="2.4"
+          fill="none"
+          strokeLinecap="round"
+        />
+      )}
+      {mood === "sad" && (
+        <path
+          d="M43 52 Q50 45 57 52"
+          stroke={INK}
+          strokeWidth="2.4"
+          fill="none"
+          strokeLinecap="round"
+        />
+      )}
+      {mood === "think" && (
+        <path d="M44 50 H56" stroke={INK} strokeWidth="2.4" strokeLinecap="round" />
+      )}
       {/* hats */}
       {hat === "fisher" && (
         <g>
@@ -73,7 +101,12 @@ export function Person({ hat, shirt, mood = "happy", skin = "#f3cfa6", ...pos }:
           <rect x="33" y="14" width="34" height="14" rx="3" />
         </g>
       )}
-      {hat === "none" && <path d="M29 36 C27 12 73 12 71 36 C66 24 56 20 50 20 C42 20 34 24 29 36 Z" fill="#6f4627" />}
+      {hat === "none" && (
+        <path
+          d="M29 36 C27 12 73 12 71 36 C66 24 56 20 50 20 C42 20 34 24 29 36 Z"
+          fill="#6f4627"
+        />
+      )}
       {hat === "mayor" && (
         <g>
           <rect x="30" y="31" width="40" height="6" rx="3" fill="#23383f" />
@@ -113,7 +146,13 @@ export function Fish({ flip, ...pos }: IconProps & { flip?: boolean }) {
         <ellipse cx="42" cy="50" rx="31" ry="21" fill="#3b9ad9" />
         <path d="M18 54 C32 66 56 66 68 54 C58 70 30 72 18 54 Z" fill="#a9d8f5" />
         <path d="M34 31 C42 20 54 22 58 32 Z" fill="#2e86c1" />
-        <path d="M58 38 C62 46 62 54 58 62" stroke="#2e86c1" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+        <path
+          d="M58 38 C62 46 62 54 58 62"
+          stroke="#2e86c1"
+          strokeWidth="2.5"
+          fill="none"
+          strokeLinecap="round"
+        />
         <circle cx="26" cy="45" r="5" fill="#fff" />
         <circle cx="25" cy="45" r="2.4" fill={INK} />
       </g>
@@ -175,9 +214,24 @@ export function Coin(pos: IconProps) {
 export function Apple(pos: IconProps) {
   return (
     <Box {...pos}>
-      <path d="M50 30 C34 20 12 32 14 56 C16 78 34 90 50 84 C66 90 84 78 86 56 C88 32 66 20 50 30 Z" fill="#df4a3f" />
-      <path d="M24 46 C26 38 32 34 38 34" stroke="#f08a80" strokeWidth="5" strokeLinecap="round" fill="none" />
-      <path d="M50 30 C50 20 52 14 58 8" stroke="#6b4423" strokeWidth="4" strokeLinecap="round" fill="none" />
+      <path
+        d="M50 30 C34 20 12 32 14 56 C16 78 34 90 50 84 C66 90 84 78 86 56 C88 32 66 20 50 30 Z"
+        fill="#df4a3f"
+      />
+      <path
+        d="M24 46 C26 38 32 34 38 34"
+        stroke="#f08a80"
+        strokeWidth="5"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <path
+        d="M50 30 C50 20 52 14 58 8"
+        stroke="#6b4423"
+        strokeWidth="4"
+        strokeLinecap="round"
+        fill="none"
+      />
       <path d="M56 22 C62 10 76 12 78 16 C72 26 62 26 56 22 Z" fill="#4fa75a" />
     </Box>
   );
@@ -186,7 +240,15 @@ export function Apple(pos: IconProps) {
 export function Magnifier(pos: IconProps) {
   return (
     <Box {...pos}>
-      <circle cx="42" cy="42" r="26" fill="#dff1f6" fillOpacity="0.8" stroke={INK} strokeWidth="7" />
+      <circle
+        cx="42"
+        cy="42"
+        r="26"
+        fill="#dff1f6"
+        fillOpacity="0.8"
+        stroke={INK}
+        strokeWidth="7"
+      />
       <path d="M62 62 L88 88" stroke={INK} strokeWidth="10" strokeLinecap="round" />
     </Box>
   );
@@ -207,7 +269,13 @@ export function Piggy(pos: IconProps) {
     <Box {...pos}>
       <rect x="24" y="68" width="12" height="18" rx="5" fill="#e58aa3" />
       <rect x="60" y="68" width="12" height="18" rx="5" fill="#e58aa3" />
-      <path d="M78 46 C90 44 94 52 88 58" stroke="#e58aa3" strokeWidth="5" fill="none" strokeLinecap="round" />
+      <path
+        d="M78 46 C90 44 94 52 88 58"
+        stroke="#e58aa3"
+        strokeWidth="5"
+        fill="none"
+        strokeLinecap="round"
+      />
       <ellipse cx="48" cy="54" rx="36" ry="28" fill="#f4a3ba" />
       <path d="M32 30 L40 16 L50 30 Z" fill="#e58aa3" />
       <ellipse cx="20" cy="56" rx="11" ry="9" fill="#e58aa3" />
@@ -223,7 +291,14 @@ export function Clock(pos: IconProps) {
   return (
     <Box {...pos}>
       <circle cx="50" cy="50" r="40" fill="#fff" stroke={INK} strokeWidth="6" />
-      <path d="M50 24 V50 L68 60" stroke={INK} strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path
+        d="M50 24 V50 L68 60"
+        stroke={INK}
+        strokeWidth="6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
     </Box>
   );
 }
@@ -232,7 +307,14 @@ export function Clock(pos: IconProps) {
 export function Swap({ rotate, ...pos }: IconProps & { rotate?: boolean }) {
   return (
     <Box {...pos}>
-      <g transform={rotate ? "rotate(90 50 50)" : undefined} stroke={INK} strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" fill="none">
+      <g
+        transform={rotate ? "rotate(90 50 50)" : undefined}
+        stroke={INK}
+        strokeWidth="8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      >
         <path d="M18 38 H78 M62 22 L80 38 L62 54" />
         <path d="M82 66 H22 M38 50 L20 66 L38 82" />
       </g>
@@ -243,7 +325,13 @@ export function Swap({ rotate, ...pos }: IconProps & { rotate?: boolean }) {
 export function Tag({ children, ...pos }: IconProps & { children?: ReactNode }) {
   return (
     <Box {...pos}>
-      <path d="M8 50 L30 20 H90 V80 H30 Z" fill="#fff" stroke={INK} strokeWidth="5" strokeLinejoin="round" />
+      <path
+        d="M8 50 L30 20 H90 V80 H30 Z"
+        fill="#fff"
+        stroke={INK}
+        strokeWidth="5"
+        strokeLinejoin="round"
+      />
       <circle cx="28" cy="50" r="6" fill="#dff1f6" stroke={INK} strokeWidth="4" />
       {children}
     </Box>
@@ -253,7 +341,13 @@ export function Tag({ children, ...pos }: IconProps & { children?: ReactNode }) 
 /** An icon inside normal HTML, for example on a button. Pass one icon as the child. */
 export function InlineIcon({ children, size = 34 }: { children: ReactNode; size?: number }) {
   return (
-    <svg className="inline-icon" viewBox="0 0 100 100" width={size} height={size} aria-hidden="true">
+    <svg
+      className="inline-icon"
+      viewBox="0 0 100 100"
+      width={size}
+      height={size}
+      aria-hidden="true"
+    >
       {children}
     </svg>
   );

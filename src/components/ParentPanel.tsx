@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { CURRICULUM_GROUPS, LESSONS, LESSON_ORDER, getGroupTitle, getLessonTitle } from "../lessons";
+import {
+  CURRICULUM_GROUPS,
+  LESSONS,
+  LESSON_ORDER,
+  getGroupTitle,
+  getLessonTitle,
+} from "../lessons";
 import { t } from "../i18n";
 import { exportCode, importCode, type Progress, type Lang, type AgeGroup } from "../progress";
 import { LangSwitch } from "./LangSwitch";
@@ -20,7 +26,16 @@ function makeGate() {
 }
 
 /** Parent area. A small multiplication gate keeps a young child out of it. */
-export function ParentPanel({ progress, onRestore, onReset, onFacts, onClose, onLang, onToggleLesson, onAgeGroup }: Props) {
+export function ParentPanel({
+  progress,
+  onRestore,
+  onReset,
+  onFacts,
+  onClose,
+  onLang,
+  onToggleLesson,
+  onAgeGroup,
+}: Props) {
   const lang = progress.lang;
   const [gate] = useState(makeGate);
   const [open, setOpen] = useState(false);
@@ -107,7 +122,9 @@ export function ParentPanel({ progress, onRestore, onReset, onFacts, onClose, on
         <div className="curriculum-groups">
           {CURRICULUM_GROUPS.map((group) => {
             const groupLessons = LESSONS.filter((l) => group.lessonIds.includes(l.id));
-            const disabledCount = groupLessons.filter((l) => progress.disabledLessons?.includes(l.id)).length;
+            const disabledCount = groupLessons.filter((l) =>
+              progress.disabledLessons?.includes(l.id),
+            ).length;
             return (
               <details key={group.id} className="lesson-group-accordion">
                 <summary className="lesson-group-summary">
@@ -121,7 +138,10 @@ export function ParentPanel({ progress, onRestore, onReset, onFacts, onClose, on
                     const isOff = progress.disabledLessons?.includes(l.id) ?? false;
                     const title = getLessonTitle(l, lang);
                     return (
-                      <label key={l.id} className={`lesson-toggle-row ${isOff ? "lesson-toggle-row-off" : ""}`}>
+                      <label
+                        key={l.id}
+                        className={`lesson-toggle-row ${isOff ? "lesson-toggle-row-off" : ""}`}
+                      >
                         <span className="lesson-toggle-info">
                           <span className="lesson-toggle-title">{title}</span>
                           <span className="lesson-toggle-status">
@@ -155,7 +175,13 @@ export function ParentPanel({ progress, onRestore, onReset, onFacts, onClose, on
 
         <h2>{t(lang, "saveTitle")}</h2>
         <p>{t(lang, "saveHelp")}</p>
-        <textarea className="text-input code" readOnly value={code} rows={3} aria-label={t(lang, "saveTitle")} />
+        <textarea
+          className="text-input code"
+          readOnly
+          value={code}
+          rows={3}
+          aria-label={t(lang, "saveTitle")}
+        />
         <button
           className="btn"
           type="button"

@@ -70,17 +70,23 @@ export function StocksToy({ lang, mode = "toy", onDone }: StocksToyProps) {
   const frostBtn =
     lang === "pl" ? "Mrozy (0 zysku)" : lang === "de" ? "Frost (0 Gewinn)" : "Frost (0 Profit)";
   const normalBtn =
-    lang === "pl" ? "Zwykłe (20 zysku)" : lang === "de" ? "Normal (20 Gewinn)" : "Normal (20 Profit)";
+    lang === "pl"
+      ? "Zwykłe (20 zysku)"
+      : lang === "de"
+        ? "Normal (20 Gewinn)"
+        : "Normal (20 Profit)";
   const bumperBtn =
-    lang === "pl" ? "Urodzaj (50 zysku)" : lang === "de" ? "Rekord (50 Gewinn)" : "Bumper (50 Profit)";
+    lang === "pl"
+      ? "Urodzaj (50 zysku)"
+      : lang === "de"
+        ? "Rekord (50 Gewinn)"
+        : "Bumper (50 Profit)";
 
   const millProfitLabel =
     lang === "pl" ? "Zysk tłoczni:" : lang === "de" ? "Mühlengewinn:" : "Mill Profit:";
-  const coinsLabel =
-    lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "Coins";
+  const coinsLabel = lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "Coins";
 
-  const dividendLabel =
-    lang === "pl" ? "Dywidenda:" : lang === "de" ? "Dividende:" : "Dividend:";
+  const dividendLabel = lang === "pl" ? "Dywidenda:" : lang === "de" ? "Dividende:" : "Dividend:";
   const coinsPerShare =
     lang === "pl" ? "monet/akcję" : lang === "de" ? "Münzen/Aktie" : "Coins/Share";
 
@@ -88,17 +94,20 @@ export function StocksToy({ lang, mode = "toy", onDone }: StocksToyProps) {
     lang === "pl" ? "Odbierz dywidendę" : lang === "de" ? "Dividende abholen" : "Collect Dividend";
 
   const portfolioTitle =
-    lang === "pl" ? "Twoje certyfikaty akcji" : lang === "de" ? "Deine Anteilssteine" : "Your Share Tiles";
+    lang === "pl"
+      ? "Twoje certyfikaty akcji"
+      : lang === "de"
+        ? "Deine Anteilssteine"
+        : "Your Share Tiles";
 
   const sharesOwnedText =
     lang === "pl"
       ? `${sharesOwned} / 10 posiadanych akcji`
       : lang === "de"
-      ? `${sharesOwned} / 10 Aktien im Besitz`
-      : `${sharesOwned} / 10 Shares Owned`;
+        ? `${sharesOwned} / 10 Aktien im Besitz`
+        : `${sharesOwned} / 10 Shares Owned`;
 
-  const walletLabel =
-    lang === "pl" ? "Portfel:" : lang === "de" ? "Geldbeutel:" : "Wallet:";
+  const walletLabel = lang === "pl" ? "Portfel:" : lang === "de" ? "Geldbeutel:" : "Wallet:";
 
   const tradingTitle =
     lang === "pl" ? "Tablica giełdowa" : lang === "de" ? "Handelstafel" : "Trading Board";
@@ -109,8 +118,8 @@ export function StocksToy({ lang, mode = "toy", onDone }: StocksToyProps) {
     lang === "pl"
       ? "Sprzedaj akcję, by zdobyć monety, lub trzymaj dla przyszłych dywidend."
       : lang === "de"
-      ? "Verkaufe eine Aktie oder behalte sie für künftige Dividenden."
-      : "Sell a share to cash out, or hold for future dividends.";
+        ? "Verkaufe eine Aktie oder behalte sie für künftige Dividenden."
+        : "Sell a share to cash out, or hold for future dividends.";
 
   const sellShareBtn =
     lang === "pl" ? "Sprzedaj 1 akcję" : lang === "de" ? "1 Aktie verkaufen" : "Sell 1 Share";
@@ -119,15 +128,15 @@ export function StocksToy({ lang, mode = "toy", onDone }: StocksToyProps) {
     lang === "pl"
       ? "Dywidendy odebrane! Zarabiasz bezpośrednio na zyskach firmy."
       : lang === "de"
-      ? "Dividenden eingesammelt! Du verdienst direkt an den Unternehmensgewinnen."
-      : "Dividends collected! You earn income directly from company profits.";
+        ? "Dividenden eingesammelt! Du verdienst direkt an den Unternehmensgewinnen."
+        : "Dividends collected! You earn income directly from company profits.";
 
   const promptMsg =
     lang === "pl"
       ? "Naciśnij Odbierz dywidendę, aby otrzymać swoją wypłatę."
       : lang === "de"
-      ? "Tippe auf Dividende abholen, um deine Auszahlung zu erhalten."
-      : "Tap Collect Dividend to receive your payout.";
+        ? "Tippe auf Dividende abholen, um deine Auszahlung zu erhalten."
+        : "Tap Collect Dividend to receive your payout.";
 
   return (
     <div className="stocks-wrap">
@@ -161,14 +170,18 @@ export function StocksToy({ lang, mode = "toy", onDone }: StocksToyProps) {
             </div>
           )}
           <div className="profit-display">
-            {millProfitLabel} <strong>{totalProfit} {coinsLabel}</strong>
+            {millProfitLabel}{" "}
+            <strong>
+              {totalProfit} {coinsLabel}
+            </strong>
           </div>
           <div className="dividend-tag">
-            {dividendLabel} <strong>{dividendPerShare} {coinsPerShare}</strong>
+            {dividendLabel}{" "}
+            <strong>
+              {dividendPerShare} {coinsPerShare}
+            </strong>
           </div>
-          <ToyButton onClick={handleCollectDividend}>
-            {collectBtn}
-          </ToyButton>
+          <ToyButton onClick={handleCollectDividend}>{collectBtn}</ToyButton>
         </div>
 
         {/* Share Portfolio */}
@@ -176,19 +189,17 @@ export function StocksToy({ lang, mode = "toy", onDone }: StocksToyProps) {
           <div className="panel-title">{portfolioTitle}</div>
           <div className="tiles-holder">
             {Array.from({ length: 10 }).map((_, i) => (
-              <div
-                key={i}
-                className={`share-tile ${i < sharesOwned ? "owned" : "other"}`}
-              >
+              <div key={i} className={`share-tile ${i < sharesOwned ? "owned" : "other"}`}>
                 {i < sharesOwned ? "📜" : "·"}
               </div>
             ))}
           </div>
-          <div className="shares-count">
-            {sharesOwnedText}
-          </div>
+          <div className="shares-count">{sharesOwnedText}</div>
           <div className="wallet-badge">
-            🪙 {walletLabel} <strong>{walletCoins} {coinsLabel}</strong>
+            🪙 {walletLabel}{" "}
+            <strong>
+              {walletCoins} {coinsLabel}
+            </strong>
           </div>
         </div>
 
@@ -197,11 +208,11 @@ export function StocksToy({ lang, mode = "toy", onDone }: StocksToyProps) {
           <div className="panel-title">{tradingTitle}</div>
           <div className="board-price">
             {buyerBidLabel}{" "}
-            <span className="price-num">{sharePrice} {coinsLabel}</span>
+            <span className="price-num">
+              {sharePrice} {coinsLabel}
+            </span>
           </div>
-          <div className="trading-desc">
-            {tradingDesc}
-          </div>
+          <div className="trading-desc">{tradingDesc}</div>
           <ToyButton onClick={handleSellShare} disabled={sharesOwned <= 0}>
             {sellShareBtn}
           </ToyButton>
@@ -211,7 +222,9 @@ export function StocksToy({ lang, mode = "toy", onDone }: StocksToyProps) {
       <div className="stocks-actions">
         <CheckButton lang={lang} onClick={handleCheck} />
         {showFeedback && (
-          <div className={`feedback-msg ${walletCoins >= (mode === "quiz" ? 8 : 1) ? "success" : "warning"}`}>
+          <div
+            className={`feedback-msg ${walletCoins >= (mode === "quiz" ? 8 : 1) ? "success" : "warning"}`}
+          >
             {walletCoins >= (mode === "quiz" ? 8 : 1) ? successMsg : promptMsg}
           </div>
         )}

@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <MassProductionToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <MassProductionToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -258,7 +252,8 @@ export const lesson: Lesson = {
           de: "Henry Ford fuehrte 1913 in Highland Park das erste bewegliche Fliessband fuer die Automobilmassenfertigung ein.",
           pl: "Henry Ford uruchomił w 1913 roku w Highland Park pierwszą ruchomą linię montażową do seryjnej produkcji samochodów.",
         },
-        source: "https://www.thehenryford.org/explore/stories-of-innovation/visionaries/henry-ford/assembly-line/",
+        source:
+          "https://www.thehenryford.org/explore/stories-of-innovation/visionaries/henry-ford/assembly-line/",
       },
       {
         text: {
@@ -282,7 +277,8 @@ export const lesson: Lesson = {
           de: "Das Deutsche Museum in Muenchen zeigt historische Werkzeugmaschinen und Ausstellungen zur industriellen Normung.",
           pl: "Centralny Okręg Przemysłowy (COP) w II RP w latach 1936-1939 stworzył nowoczesne fabryki maszynowe i zbrojeniowe w Stalowej Woli i Mielcu.",
         },
-        source: "https://dzieje.pl/aktualnosci/centralny-okreg-przemyslowy-najwieksze-przedsiewziecie-gospodarcze-ii-rp",
+        source:
+          "https://dzieje.pl/aktualnosci/centralny-okreg-przemyslowy-najwieksze-przedsiewziecie-gospodarcze-ii-rp",
       },
     ],
     simplified: [

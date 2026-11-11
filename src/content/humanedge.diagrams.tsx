@@ -5,17 +5,14 @@ export function TimelineStoneToAiDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Wielki łuk ludzkich narzędzi"
       : lang === "de"
-      ? "Der grosse Bogen menschlicher Werkzeuge"
-      : "The Great Arc of Human Tools";
+        ? "Der grosse Bogen menschlicher Werkzeuge"
+        : "The Great Arc of Human Tools";
 
-  const axeLabel =
-    lang === "pl" ? "Kamienny topór" : lang === "de" ? "Faustkeil" : "Stone Axe";
+  const axeLabel = lang === "pl" ? "Kamienny topór" : lang === "de" ? "Faustkeil" : "Stone Axe";
 
-  const steamLabel =
-    lang === "pl" ? "Koło parowe" : lang === "de" ? "Dampfrad" : "Steam Gear";
+  const steamLabel = lang === "pl" ? "Koło parowe" : lang === "de" ? "Dampfrad" : "Steam Gear";
 
-  const chipLabel =
-    lang === "pl" ? "Mikroprocesor" : lang === "de" ? "Mikrochip" : "Microchip";
+  const chipLabel = lang === "pl" ? "Mikroprocesor" : lang === "de" ? "Mikrochip" : "Microchip";
 
   const aiLabel =
     lang === "pl" ? "Sieć neuronowa" : lang === "de" ? "KI-Netzwerk" : "AI Neural Net";
@@ -24,12 +21,21 @@ export function TimelineStoneToAiDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Przez tysiące lat ludzie nieustannie tworzyli narzędzia, by poszerzać swoje możliwości"
       : lang === "de"
-      ? "Seit Jahrtausenden erfinden Menschen Werkzeuge, um ihre Faehigkeiten zu erweitern"
-      : "Across thousands of years, humans have continually invented tools to expand capability";
+        ? "Seit Jahrtausenden erfinden Menschen Werkzeuge, um ihre Faehigkeiten zu erweitern"
+        : "Across thousands of years, humans have continually invented tools to expand capability";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Timeline from Stone to AI">
-      <rect x="30" y="30" width="340" height="180" rx="12" fill="#f8fafc" stroke="#cbd5e1" strokeWidth="2" />
+      <rect
+        x="30"
+        y="30"
+        width="340"
+        height="180"
+        rx="12"
+        fill="#f8fafc"
+        stroke="#cbd5e1"
+        strokeWidth="2"
+      />
       <text x="200" y="55" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#0f172a">
         {title}
       </text>
@@ -39,16 +45,24 @@ export function TimelineStoneToAiDiagram({ lang, step }: DiagramProps) {
 
       {/* 4 milestones */}
       <circle cx="90" cy="120" r="14" fill="#d97706" />
-      <text x="90" y="150" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#78350f">{axeLabel}</text>
+      <text x="90" y="150" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#78350f">
+        {axeLabel}
+      </text>
 
       <circle cx="160" cy="120" r="14" fill="#0284c7" />
-      <text x="160" y="150" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#0369a1">{steamLabel}</text>
+      <text x="160" y="150" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#0369a1">
+        {steamLabel}
+      </text>
 
       <circle cx="240" cy="120" r="14" fill="#10b981" />
-      <text x="240" y="150" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#065f46">{chipLabel}</text>
+      <text x="240" y="150" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#065f46">
+        {chipLabel}
+      </text>
 
       <circle cx="310" cy="120" r="14" fill="#8b5cf6" />
-      <text x="310" y="150" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#5b21b6">{aiLabel}</text>
+      <text x="310" y="150" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#5b21b6">
+        {aiLabel}
+      </text>
 
       {step >= 2 && (
         <text x="200" y="198" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1e293b">
@@ -64,11 +78,10 @@ export function MachineSpeedComparisonDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Szybkość kontra refleksja i mądrość"
       : lang === "de"
-      ? "Geschwindigkeit vs Nachdenken"
-      : "Speed vs Thoughtful Reflection";
+        ? "Geschwindigkeit vs Nachdenken"
+        : "Speed vs Thoughtful Reflection";
 
-  const computerTitle =
-    lang === "pl" ? "Komputer" : lang === "de" ? "Computer" : "Computer";
+  const computerTitle = lang === "pl" ? "Komputer" : lang === "de" ? "Computer" : "Computer";
 
   const computerOps =
     lang === "pl" ? "1 000 000 000" : lang === "de" ? "1.000.000.000" : "1,000,000,000";
@@ -76,40 +89,86 @@ export function MachineSpeedComparisonDiagram({ lang, step }: DiagramProps) {
   const computerSub =
     lang === "pl" ? "Obliczeń / sek." : lang === "de" ? "Rechnungen / Sek." : "Calculations / Sec";
 
-  const humanTitle =
-    lang === "pl" ? "Ludzki umysł" : lang === "de" ? "Mensch" : "Human Mind";
+  const humanTitle = lang === "pl" ? "Ludzki umysł" : lang === "de" ? "Mensch" : "Human Mind";
 
   const humanWisdom =
     lang === "pl" ? "Mądrość i etyka" : lang === "de" ? "Weisheit & Ethik" : "Wisdom & Ethics";
 
   const humanSub =
-    lang === "pl" ? "Dlaczego to ważne?" : lang === "de" ? "Warum ist das wichtig?" : "Why Does It Matter?";
+    lang === "pl"
+      ? "Dlaczego to ważne?"
+      : lang === "de"
+        ? "Warum ist das wichtig?"
+        : "Why Does It Matter?";
 
   const sub =
     lang === "pl"
       ? "Komputery dają czystą szybkość, lecz to ludzie wnoszą sumienie, osąd i poczucie sensu"
       : lang === "de"
-      ? "Computer bieten Rechenkraft, doch Menschen schenken Gewissen, Urteilskraft und Sinn"
-      : "Computers provide raw speed, but humans supply conscience, judgment, and purpose";
+        ? "Computer bieten Rechenkraft, doch Menschen schenken Gewissen, Urteilskraft und Sinn"
+        : "Computers provide raw speed, but humans supply conscience, judgment, and purpose";
 
   return (
-    <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Machine Speed vs Human Reflection">
-      <rect x="30" y="30" width="340" height="180" rx="12" fill="#f0f9ff" stroke="#bae6fd" strokeWidth="2" />
+    <svg
+      viewBox="0 0 400 240"
+      className="diagram-svg"
+      aria-label="Machine Speed vs Human Reflection"
+    >
+      <rect
+        x="30"
+        y="30"
+        width="340"
+        height="180"
+        rx="12"
+        fill="#f0f9ff"
+        stroke="#bae6fd"
+        strokeWidth="2"
+      />
       <text x="200" y="55" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#0369a1">
         {title}
       </text>
 
       {/* Left box: Machine speed */}
-      <rect x="60" y="80" width="125" height="75" rx="8" fill="#e0f2fe" stroke="#0284c7" strokeWidth="2" />
-      <text x="122" y="105" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#0369a1">{computerTitle}</text>
-      <text x="122" y="125" textAnchor="middle" fontSize="10" fill="#0284c7">{computerOps}</text>
-      <text x="122" y="140" textAnchor="middle" fontSize="8" fill="#64748b">{computerSub}</text>
+      <rect
+        x="60"
+        y="80"
+        width="125"
+        height="75"
+        rx="8"
+        fill="#e0f2fe"
+        stroke="#0284c7"
+        strokeWidth="2"
+      />
+      <text x="122" y="105" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#0369a1">
+        {computerTitle}
+      </text>
+      <text x="122" y="125" textAnchor="middle" fontSize="10" fill="#0284c7">
+        {computerOps}
+      </text>
+      <text x="122" y="140" textAnchor="middle" fontSize="8" fill="#64748b">
+        {computerSub}
+      </text>
 
       {/* Right box: Human pondering */}
-      <rect x="215" y="80" width="125" height="75" rx="8" fill="#fef3c7" stroke="#d97706" strokeWidth="2" />
-      <text x="277" y="105" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#92400e">{humanTitle}</text>
-      <text x="277" y="125" textAnchor="middle" fontSize="10" fill="#b45309">{humanWisdom}</text>
-      <text x="277" y="140" textAnchor="middle" fontSize="8" fill="#64748b">{humanSub}</text>
+      <rect
+        x="215"
+        y="80"
+        width="125"
+        height="75"
+        rx="8"
+        fill="#fef3c7"
+        stroke="#d97706"
+        strokeWidth="2"
+      />
+      <text x="277" y="105" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#92400e">
+        {humanTitle}
+      </text>
+      <text x="277" y="125" textAnchor="middle" fontSize="10" fill="#b45309">
+        {humanWisdom}
+      </text>
+      <text x="277" y="140" textAnchor="middle" fontSize="8" fill="#64748b">
+        {humanSub}
+      </text>
 
       {step >= 2 && (
         <text x="200" y="198" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#0c4a6e">
@@ -125,19 +184,28 @@ export function HeartEmpathyCompassionDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Empatia: Wyjątkowy ludzki dar"
       : lang === "de"
-      ? "Mitgefuehl: Die einzigartige menschliche Gabe"
-      : "Empathy: The Uniquely Human Gift";
+        ? "Mitgefuehl: Die einzigartige menschliche Gabe"
+        : "Empathy: The Uniquely Human Gift";
 
   const sub =
     lang === "pl"
       ? "Żaden algorytm nie potrafi szczerze pocieszyć płaczącego przyjaciela ani poczuć czułości"
       : lang === "de"
-      ? "Kein Algorithmus kann weinende Freunde troesten oder echte Zuneigung empfinden"
-      : "No algorithm can genuinely comfort a crying friend or feel real human tenderness";
+        ? "Kein Algorithmus kann weinende Freunde troesten oder echte Zuneigung empfinden"
+        : "No algorithm can genuinely comfort a crying friend or feel real human tenderness";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Empathy and Human Care">
-      <rect x="30" y="30" width="340" height="180" rx="12" fill="#fff1f2" stroke="#fecdd3" strokeWidth="2" />
+      <rect
+        x="30"
+        y="30"
+        width="340"
+        height="180"
+        rx="12"
+        fill="#fff1f2"
+        stroke="#fecdd3"
+        strokeWidth="2"
+      />
       <text x="200" y="55" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#9f1239">
         {title}
       </text>
@@ -171,19 +239,28 @@ export function CreativeTeamCollaborationDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Kreatywność i praca zespołowa"
       : lang === "de"
-      ? "Kreativitaet und Teamgeist"
-      : "Creativity and Teamwork";
+        ? "Kreativitaet und Teamgeist"
+        : "Creativity and Teamwork";
 
   const sub =
     lang === "pl"
       ? "Wspólna praca z przyjaciółmi nad pomysłowymi rozwiązaniami to unikalna ludzka supermoc"
       : lang === "de"
-      ? "Gemeinsam mit Freunden fantasievolle Loesungen zu bauen, ist unsere Superkraft"
-      : "Collaborating with friends to build imaginative solutions is a uniquely human superpower";
+        ? "Gemeinsam mit Freunden fantasievolle Loesungen zu bauen, ist unsere Superkraft"
+        : "Collaborating with friends to build imaginative solutions is a uniquely human superpower";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Creative Human Collaboration">
-      <rect x="30" y="30" width="340" height="180" rx="12" fill="#faf5ff" stroke="#e9d5ff" strokeWidth="2" />
+      <rect
+        x="30"
+        y="30"
+        width="340"
+        height="180"
+        rx="12"
+        fill="#faf5ff"
+        stroke="#e9d5ff"
+        strokeWidth="2"
+      />
       <text x="200" y="55" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#6b21a8">
         {title}
       </text>
@@ -211,19 +288,32 @@ export function AmplifiedHumanValuesFutureDiagram({ lang, step }: DiagramProps) 
     lang === "pl"
       ? "Technologia wzmacnia ludzkie wartości"
       : lang === "de"
-      ? "Technik verstaerkt menschliche Werte"
-      : "Technology Amplifies Human Purpose";
+        ? "Technik verstaerkt menschliche Werte"
+        : "Technology Amplifies Human Purpose";
 
   const sub =
     lang === "pl"
       ? "Gdy kierujemy się empatią i etyką, nasze narzędzia budują sprawiedliwszy i zdrowszy świat"
       : lang === "de"
-      ? "Wenn wir von Mitgefuehl und Ethik geleitet werden, schaffen unsere Werkzeuge eine bessere Welt"
-      : "When guided by kindness and ethics, our tools can build a fairer, healthier world";
+        ? "Wenn wir von Mitgefuehl und Ethik geleitet werden, schaffen unsere Werkzeuge eine bessere Welt"
+        : "When guided by kindness and ethics, our tools can build a fairer, healthier world";
 
   return (
-    <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Human Values Guiding Future Technology">
-      <rect x="30" y="30" width="340" height="180" rx="12" fill="#ecfdf5" stroke="#a7f3d0" strokeWidth="2" />
+    <svg
+      viewBox="0 0 400 240"
+      className="diagram-svg"
+      aria-label="Human Values Guiding Future Technology"
+    >
+      <rect
+        x="30"
+        y="30"
+        width="340"
+        height="180"
+        rx="12"
+        fill="#ecfdf5"
+        stroke="#a7f3d0"
+        strokeWidth="2"
+      />
       <text x="200" y="55" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#065f46">
         {title}
       </text>
@@ -234,7 +324,15 @@ export function AmplifiedHumanValuesFutureDiagram({ lang, step }: DiagramProps) 
       <path d="M210 105 Q220 120 215 130 Q205 120 210 105 Z" fill="#22c55e" />
 
       {/* Supporting rays */}
-      <circle cx="200" cy="115" r="42" fill="none" stroke="#10b981" strokeWidth="1.5" strokeDasharray="4 4" />
+      <circle
+        cx="200"
+        cy="115"
+        r="42"
+        fill="none"
+        stroke="#10b981"
+        strokeWidth="1.5"
+        strokeDasharray="4 4"
+      />
 
       {step >= 2 && (
         <text x="200" y="198" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#064e3b">

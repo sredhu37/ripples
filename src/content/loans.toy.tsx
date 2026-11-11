@@ -50,8 +50,8 @@ function sayFor(p: Plan, lang: Lang): { text: string; ok: boolean } {
         lang === "pl"
           ? `To jeszcze za mało na piec. Kosztuje ${OVEN_COST} monet.`
           : lang === "de"
-          ? `Das reicht noch nicht für den Ofen. Er kostet ${OVEN_COST} Münzen.`
-          : `Not enough for the oven yet. It costs ${OVEN_COST} coins.`,
+            ? `Das reicht noch nicht für den Ofen. Er kostet ${OVEN_COST} Münzen.`
+            : `Not enough for the oven yet. It costs ${OVEN_COST} coins.`,
     };
   }
   if (!p.covered) {
@@ -61,8 +61,8 @@ function sayFor(p: Plan, lang: Lang): { text: string; ok: boolean } {
         lang === "pl"
           ? `Za dużo w każdym tygodniu! Bei brakuje ${p.shortBy} ${p.shortBy === 1 ? "monety" : "monet"} tygodniowo.`
           : lang === "de"
-          ? `Pro Woche zu viel! Beas Brotgeld fehlt jede Woche ${p.shortBy} ${p.shortBy === 1 ? "Münze" : "Münzen"}.`
-          : `Too much each week! Bea's bread money is ${p.shortBy} coin${p.shortBy === 1 ? "" : "s"} short every week.`,
+            ? `Pro Woche zu viel! Beas Brotgeld fehlt jede Woche ${p.shortBy} ${p.shortBy === 1 ? "Münze" : "Münzen"}.`
+            : `Too much each week! Bea's bread money is ${p.shortBy} coin${p.shortBy === 1 ? "" : "s"} short every week.`,
     };
   }
   if (p.leftOver > 0) {
@@ -72,8 +72,8 @@ function sayFor(p: Plan, lang: Lang): { text: string; ok: boolean } {
         lang === "pl"
           ? `Bea może płacić co tydzień. Zostało jednak ${p.leftOver} pożyczonych monet i je również musi spłacić!`
           : lang === "de"
-          ? `Bea kann jede Woche zahlen. Aber ${p.leftOver} geliehene Münzen bleiben übrig, und die zahlt sie auch zurück!`
-          : `Bea can pay each week. But ${p.leftOver} borrowed coins are left over, and she pays them back too!`,
+            ? `Bea kann jede Woche zahlen. Aber ${p.leftOver} geliehene Münzen bleiben übrig, und die zahlt sie auch zurück!`
+            : `Bea can pay each week. But ${p.leftOver} borrowed coins are left over, and she pays them back too!`,
     };
   }
   return {
@@ -82,8 +82,8 @@ function sayFor(p: Plan, lang: Lang): { text: string; ok: boolean } {
       lang === "pl"
         ? "Bea kupuje piec, a zyski ze sprzedaży chleba pokrywają raty. To działa!"
         : lang === "de"
-        ? "Bea kauft den Ofen und ihr Brotgeld zahlt jede Woche. Es klappt!"
-        : "Bea buys the oven and her bread money pays each week. It works!",
+          ? "Bea kauft den Ofen und ihr Brotgeld zahlt jede Woche. Es klappt!"
+          : "Bea buys the oven and her bread money pays each week. It works!",
   };
 }
 
@@ -91,7 +91,19 @@ const X0 = 96;
 const UNIT = 20;
 
 /** A coin with a number next to it, drawn in the toy picture. */
-function CoinNum({ x, y, n, size = 38, plus }: { x: number; y: number; n: number; size?: number; plus?: boolean }) {
+function CoinNum({
+  x,
+  y,
+  n,
+  size = 38,
+  plus,
+}: {
+  x: number;
+  y: number;
+  n: number;
+  size?: number;
+  plus?: boolean;
+}) {
   return (
     <g>
       {plus && <Plus x={x - 34} y={y + 4} size={28} />}
@@ -128,8 +140,8 @@ export function LoanBoard({ lang, coins, weeks, onCoins, onWeeks }: LoanBoardPro
               lang === "pl"
                 ? "Monety pożyczane przez Beę"
                 : lang === "de"
-                ? "Münzen, die Bea leiht"
-                : "Coins Bea borrows"
+                  ? "Münzen, die Bea leiht"
+                  : "Coins Bea borrows"
             }
             value={coins}
             min={10}
@@ -142,8 +154,8 @@ export function LoanBoard({ lang, coins, weeks, onCoins, onWeeks }: LoanBoardPro
               lang === "pl"
                 ? "Liczba tygodni na spłatę"
                 : lang === "de"
-                ? "Wochen zum Zurückzahlen"
-                : "Weeks to pay back"
+                  ? "Wochen zum Zurückzahlen"
+                  : "Weeks to pay back"
             }
             value={weeks}
             min={4}
@@ -160,15 +172,21 @@ export function LoanBoard({ lang, coins, weeks, onCoins, onWeeks }: LoanBoardPro
             lang === "pl"
               ? `Pim pożycza Bei ${coins} monet. Dodatek to ${p.extra} monet, więc Bea oddaje łącznie ${p.total} monet, po ${p.weekly} monet tygodniowo przez ${weeks} tygodni. Jej sprzedaż chleba przynosi ${SALES_PER_WEEK} monet tygodniowo.`
               : lang === "de"
-              ? `Pim leiht Bea ${coins} Münzen. Das Extra sind ${p.extra} Münzen, also zahlt Bea insgesamt ${p.total} Münzen zurück, jede Woche ${p.weekly} Münzen, ${weeks} Wochen lang. Ihr Brotverkauf bringt ${SALES_PER_WEEK} Münzen pro Woche.`
-              : `Pim lends Bea ${coins} coins. The extra is ${p.extra} coins, so Bea pays back ${p.total} coins in total, ${p.weekly} coins each week for ${weeks} weeks. Her bread sales are ${SALES_PER_WEEK} coins each week.`
+                ? `Pim leiht Bea ${coins} Münzen. Das Extra sind ${p.extra} Münzen, also zahlt Bea insgesamt ${p.total} Münzen zurück, jede Woche ${p.weekly} Münzen, ${weeks} Wochen lang. Ihr Brotverkauf bringt ${SALES_PER_WEEK} Münzen pro Woche.`
+                : `Pim lends Bea ${coins} coins. The extra is ${p.extra} coins, so Bea pays back ${p.total} coins in total, ${p.weekly} coins each week for ${weeks} weeks. Her bread sales are ${SALES_PER_WEEK} coins each week.`
           }
         >
           {/* Pim lends coins to Bea, Bea has the oven */}
           <Person {...CAST.Pim} x={6} y={4} size={96} />
           <CoinNum x={110} y={6} n={coins} />
           <path d="M108 68 H200" stroke="#23383f" strokeWidth="5" strokeLinecap="round" />
-          <polygon points="214,68 198,59 198,77" fill="#23383f" stroke="#23383f" strokeWidth="2" strokeLinejoin="round" />
+          <polygon
+            points="214,68 198,59 198,77"
+            fill="#23383f"
+            stroke="#23383f"
+            strokeWidth="2"
+            strokeLinejoin="round"
+          />
           <Person {...CAST.Bea} mood={mood} x={216} y={4} size={96} />
           <g opacity={p.ovenBought ? 1 : 0.28}>
             <Oven x={318} y={14} size={86} />
@@ -182,7 +200,13 @@ export function LoanBoard({ lang, coins, weeks, onCoins, onWeeks }: LoanBoardPro
           {p.leftOver > 0 && (
             <g>
               <Coin x={414} y={22} size={34} />
-              <text className="diagram-name" x="431" y="80" textAnchor="middle" style={{ fontSize: 22 }}>
+              <text
+                className="diagram-name"
+                x="431"
+                y="80"
+                textAnchor="middle"
+                style={{ fontSize: 22 }}
+              >
                 {p.leftOver}
               </text>
             </g>
@@ -190,7 +214,16 @@ export function LoanBoard({ lang, coins, weeks, onCoins, onWeeks }: LoanBoardPro
 
           {/* what Bea pays back in total */}
           <g>
-            <rect x="468" y="4" width="166" height="108" rx="16" fill="#fff" stroke="#23383f" strokeWidth="3" />
+            <rect
+              x="468"
+              y="4"
+              width="166"
+              height="108"
+              rx="16"
+              fill="#fff"
+              stroke="#23383f"
+              strokeWidth="3"
+            />
             <CoinNum x={484} y={10} n={coins} size={30} />
             <g>
               <Plus x={470} y={46} size={24} />
@@ -206,17 +239,35 @@ export function LoanBoard({ lang, coins, weeks, onCoins, onWeeks }: LoanBoardPro
           </g>
 
           {/* weekly payment against weekly bread sales */}
-          <line x1={limitX} y1="124" x2={limitX} y2="232" stroke="#357a3e" strokeWidth="3" strokeDasharray="7 6" />
+          <line
+            x1={limitX}
+            y1="124"
+            x2={limitX}
+            y2="232"
+            stroke="#357a3e"
+            strokeWidth="3"
+            strokeDasharray="7 6"
+          />
           <Coin x={8} y={126} size={30} />
           <Clock x={42} y={126} size={30} />
           <rect x={X0} y="124" width={barW(p.weekly)} height="42" rx="10" fill="#f08a2e" />
-          <text className="diagram-name" x={X0 + barW(p.weekly) + 10} y="154" style={{ fontSize: 26 }}>
+          <text
+            className="diagram-name"
+            x={X0 + barW(p.weekly) + 10}
+            y="154"
+            style={{ fontSize: 26 }}
+          >
             {p.weekly}
           </text>
           <Bread x={8} y={184} size={30} />
           <Clock x={42} y={184} size={30} />
           <rect x={X0} y="182" width={barW(SALES_PER_WEEK)} height="42" rx="10" fill="#4fa75a" />
-          <text className="diagram-name" x={X0 + barW(SALES_PER_WEEK) + 10} y="212" style={{ fontSize: 26 }}>
+          <text
+            className="diagram-name"
+            x={X0 + barW(SALES_PER_WEEK) + 10}
+            y="212"
+            style={{ fontSize: 26 }}
+          >
             {SALES_PER_WEEK}
           </text>
         </svg>

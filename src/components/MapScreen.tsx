@@ -18,11 +18,20 @@ interface Props {
   onTimeline: () => void;
 }
 
-export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLesson, onParents, onTimeline }: Props) {
+export function MapScreen({
+  progress,
+  returning,
+  onLang,
+  onToggleMute,
+  onOpenLesson,
+  onParents,
+  onTimeline,
+}: Props) {
   const { lang, name, muted } = progress;
   const visibleLessons = LESSONS.filter((l) => !progress.disabledLessons?.includes(l.id));
   const next = nextLessonId(progress, LESSON_ORDER);
-  const greeting = next === null ? t(lang, "allDone") : t(lang, returning ? "welcomeBack" : "welcome", { name });
+  const greeting =
+    next === null ? t(lang, "allDone") : t(lang, returning ? "welcomeBack" : "welcome", { name });
   const nextLesson = LESSONS.find((l) => l.id === next);
 
   return (
@@ -40,10 +49,20 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
           >
             <UiIcon name={muted ? "speakerOff" : "speakerOn"} />
           </button>
-          <button type="button" className="icon-btn" aria-label={t(lang, "worldTimeline")} onClick={onTimeline}>
+          <button
+            type="button"
+            className="icon-btn"
+            aria-label={t(lang, "worldTimeline")}
+            onClick={onTimeline}
+          >
             <UiIcon name="globe" />
           </button>
-          <button type="button" className="icon-btn" aria-label={t(lang, "parents")} onClick={onParents}>
+          <button
+            type="button"
+            className="icon-btn"
+            aria-label={t(lang, "parents")}
+            onClick={onParents}
+          >
             <UiIcon name="gear" />
           </button>
         </div>
@@ -77,7 +96,8 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
               <li key={l.id} className={earned ? "medal medal-on" : "medal"} title={title}>
                 <span aria-hidden="true">{earned ? <LessonIcon id={l.id} size={34} /> : null}</span>
                 <span className="sr-only">
-                  {title}: {earned ? (lang === "en" ? "done" : lang === "de" ? "fertig" : "zrobione") : "-"}
+                  {title}:{" "}
+                  {earned ? (lang === "en" ? "done" : lang === "de" ? "fertig" : "zrobione") : "-"}
                 </span>
               </li>
             );
@@ -102,14 +122,24 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
                 }}
               >
                 <span className="place-icon" aria-hidden="true">
-                  {state === "locked" ? <UiIcon name="lock" size={40} /> : <LessonIcon id={l.id} size={48} />}
+                  {state === "locked" ? (
+                    <UiIcon name="lock" size={40} />
+                  ) : (
+                    <LessonIcon id={l.id} size={48} />
+                  )}
                 </span>
                 <span className="place-text">
                   <span className="place-title">
                     {i + 1}. {title}
                   </span>
                   <span className="place-tag">
-                    {state === "done" ? <UiIcon name="medal" size={22} label={t(lang, "badges")} /> : state === "next" ? t(lang, "nextUp") : t(lang, "locked")}
+                    {state === "done" ? (
+                      <UiIcon name="medal" size={22} label={t(lang, "badges")} />
+                    ) : state === "next" ? (
+                      t(lang, "nextUp")
+                    ) : (
+                      t(lang, "locked")
+                    )}
                     {state !== "locked" && !hasLesson(l.id) ? ` · ${t(lang, "comingSoon")}` : ""}
                   </span>
                 </span>

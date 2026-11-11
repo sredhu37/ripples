@@ -54,25 +54,27 @@ export function BondsToy({ lang, mode = "toy", onDone }: BondsToyProps) {
   };
 
   const scrollTitle =
-    lang === "pl" ? "Obligacja ratusza" : lang === "de" ? "Rathaus-Anleihe" : "Town Hall Bond Scroll";
+    lang === "pl"
+      ? "Obligacja ratusza"
+      : lang === "de"
+        ? "Rathaus-Anleihe"
+        : "Town Hall Bond Scroll";
   const principalBadge =
     lang === "pl"
       ? "Wartość nominalna: 100 monet"
       : lang === "de"
-      ? "Nennwert: 100 Münzen"
-      : "Principal: 100 Coins";
+        ? "Nennwert: 100 Münzen"
+        : "Principal: 100 Coins";
 
-  const couponActive =
-    lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "Coins";
-  const couponTorn =
-    lang === "pl" ? "Odebrany" : lang === "de" ? "Eingelöst" : "Collected";
+  const couponActive = lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "Coins";
+  const couponTorn = lang === "pl" ? "Odebrany" : lang === "de" ? "Eingelöst" : "Collected";
 
   const tearBtn =
     lang === "pl"
       ? "Oderwij kupon (Święto Plonów)"
       : lang === "de"
-      ? "Kupon abreißen (Erntetag)"
-      : "Tear Off Coupon (Harvest Day)";
+        ? "Kupon abreißen (Erntetag)"
+        : "Tear Off Coupon (Harvest Day)";
 
   const interestLabel =
     lang === "pl" ? "Łączne odsetki:" : lang === "de" ? "Gesamtzinsen:" : "Total Interest:";
@@ -81,11 +83,10 @@ export function BondsToy({ lang, mode = "toy", onDone }: BondsToyProps) {
     lang === "pl"
       ? "Huśtawka cenowa obligacji (Zins-Wippe)"
       : lang === "de"
-      ? "Die Zins-Wippe (Interest Seesaw)"
-      : "Die Zins-Wippe (Interest Seesaw)";
+        ? "Die Zins-Wippe (Interest Seesaw)"
+        : "Die Zins-Wippe (Interest Seesaw)";
 
-  const beamRateLabel =
-    lang === "pl" ? "Stopa bankowa" : lang === "de" ? "Bankzins" : "Bank Rate";
+  const beamRateLabel = lang === "pl" ? "Stopa bankowa" : lang === "de" ? "Bankzins" : "Bank Rate";
   const beamPriceLabel =
     lang === "pl" ? "Cena obligacji" : lang === "de" ? "Anleihepreis" : "Bond Price";
 
@@ -93,22 +94,22 @@ export function BondsToy({ lang, mode = "toy", onDone }: BondsToyProps) {
     lang === "pl"
       ? "Stopa procentowa w Banku Miejskim:"
       : lang === "de"
-      ? "Bankzinssatz im Dorf:"
-      : "Town Bank Interest Rate:";
+        ? "Bankzinssatz im Dorf:"
+        : "Town Bank Interest Rate:";
 
   const successMsg =
     lang === "pl"
       ? "Prawidłowo! Gdy nowe stopy rosną do 7%, starsze obligacje 5% tanieją do 90 monet."
       : lang === "de"
-      ? "Richtig! Steigen die Bankzinsen auf 7%, sinkt der Preis älterer 5%-Anleihen auf 90 Münzen."
-      : "Correct! When new bank rates rise to 7%, older 5% bonds discount down to 90 coins.";
+        ? "Richtig! Steigen die Bankzinsen auf 7%, sinkt der Preis älterer 5%-Anleihen auf 90 Münzen."
+        : "Correct! When new bank rates rise to 7%, older 5% bonds discount down to 90 coins.";
 
   const promptMsg =
     lang === "pl"
       ? "Ustaw stopę w Banku Miejskim na 7% lub wyższą, aby zobaczyć spadek ceny obligacji."
       : lang === "de"
-      ? "Stelle den Bankzins auf 7% oder höher, um den Kursabschlag zu sehen."
-      : "Set the Town Bank rate to 7% or higher to show the price discount.";
+        ? "Stelle den Bankzins auf 7% oder höher, um den Kursabschlag zu sehen."
+        : "Set the Town Bank rate to 7% or higher to show the price discount.";
 
   return (
     <div className="bonds-wrap">
@@ -116,18 +117,11 @@ export function BondsToy({ lang, mode = "toy", onDone }: BondsToyProps) {
         {/* Loan Scroll & Coupons */}
         <div className="bonds-panel scroll-panel">
           <div className="panel-title">{scrollTitle}</div>
-          <div className="principal-badge">
-            📜 {principalBadge}
-          </div>
+          <div className="principal-badge">📜 {principalBadge}</div>
           <div className="coupons-stack">
             {Array.from({ length: 3 }).map((_, i) => (
-              <div
-                key={i}
-                className={`coupon-ticket ${i < couponsLeft ? "active" : "torn"}`}
-              >
-                {i < couponsLeft
-                  ? `🎟️ 5 ${couponActive}`
-                  : `✓ ${couponTorn}`}
+              <div key={i} className={`coupon-ticket ${i < couponsLeft ? "active" : "torn"}`}>
+                {i < couponsLeft ? `🎟️ 5 ${couponActive}` : `✓ ${couponTorn}`}
               </div>
             ))}
           </div>
@@ -136,7 +130,9 @@ export function BondsToy({ lang, mode = "toy", onDone }: BondsToyProps) {
           </ToyButton>
           <div className="collected-badge">
             {interestLabel}{" "}
-            <strong>{collectedCoins} {couponActive}</strong>
+            <strong>
+              {collectedCoins} {couponActive}
+            </strong>
           </div>
         </div>
 
@@ -164,9 +160,7 @@ export function BondsToy({ lang, mode = "toy", onDone }: BondsToyProps) {
           </div>
 
           <div className="seesaw-slider-wrap">
-            <label className="slider-label">
-              {sliderLabel}
-            </label>
+            <label className="slider-label">{sliderLabel}</label>
             <input
               type="range"
               min="1"

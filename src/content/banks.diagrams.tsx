@@ -2,14 +2,27 @@ import { CAST, Villager } from "../components/cast";
 import { Arrow, Bubble, DiagramCanvas, Pop, TermChip } from "../components/diagram";
 import { Coin, NoSign, Person, Tag } from "../components/icons";
 import type { DiagramProps } from "../lesson/types";
-import { BankBuilding, Bed, Card, Cat, Door, Ledger, Oven, Question, Safe, Shield } from "./banks.icons";
+import {
+  BankBuilding,
+  Bed,
+  Card,
+  Cat,
+  Door,
+  Ledger,
+  Oven,
+  Question,
+  Safe,
+  Shield,
+} from "./banks.icons";
 
 /** Animated diagrams for the Banks lesson, one per story beat. `step` is how many taps so far. */
 
 const alt = (en: string, de: string, pl: string, lang: DiagramProps["lang"]) =>
   lang === "pl" ? pl : lang === "de" ? de : en;
 
-const numStyle = { font: "800 30px ui-rounded, 'SF Pro Rounded', Nunito, system-ui, sans-serif" } as const;
+const numStyle = {
+  font: "800 30px ui-rounded, 'SF Pro Rounded', Nunito, system-ui, sans-serif",
+} as const;
 
 /** Beat 1: Finn hides coins under his bed. Is that safe? */
 export function BedDiagram({ lang, step }: DiagramProps) {
@@ -25,28 +38,48 @@ export function BedDiagram({ lang, step }: DiagramProps) {
       {step >= 1 && <Villager who="Finn" x={20} mood={step >= 3 ? "think" : "happy"} />}
       {step === 1 && (
         <>
-          <Pop><Coin x={170} y={168} size={46} /></Pop>
-          <Pop><Coin x={224} y={168} size={46} /></Pop>
-          <Pop><Coin x={278} y={168} size={46} /></Pop>
+          <Pop>
+            <Coin x={170} y={168} size={46} />
+          </Pop>
+          <Pop>
+            <Coin x={224} y={168} size={46} />
+          </Pop>
+          <Pop>
+            <Coin x={278} y={168} size={46} />
+          </Pop>
         </>
       )}
       {step >= 2 && (
         <>
-          <Pop x={360} y={70}><Bed size={200} /></Pop>
-          <Pop><Coin x={412} y={216} size={34} /></Pop>
-          <Pop><Coin x={448} y={216} size={34} /></Pop>
-          <Pop><Coin x={484} y={216} size={34} /></Pop>
+          <Pop x={360} y={70}>
+            <Bed size={200} />
+          </Pop>
+          <Pop>
+            <Coin x={412} y={216} size={34} />
+          </Pop>
+          <Pop>
+            <Coin x={448} y={216} size={34} />
+          </Pop>
+          <Pop>
+            <Coin x={484} y={216} size={34} />
+          </Pop>
         </>
       )}
       {step >= 3 && (
         <>
-          <Pop><Cat x={552} y={150} size={84} /></Pop>
+          <Pop>
+            <Cat x={552} y={150} size={84} />
+          </Pop>
           <Bubble x={44} y={8} w={112} h={66} thought tail="bottom-left">
             <Question x={26} y={0} size={66} />
           </Bubble>
         </>
       )}
-      {step >= 4 && <Pop><NoSign x={420} y={120} size={100} /></Pop>}
+      {step >= 4 && (
+        <Pop>
+          <NoSign x={420} y={120} size={100} />
+        </Pop>
+      )}
     </DiagramCanvas>
   );
 }
@@ -74,12 +107,22 @@ export function OvenDiagram({ lang, step }: DiagramProps) {
         <>
           <Pop x={196} y={92}>
             <Tag size={130}>
-              <text x="60" y="62" textAnchor="middle" fill="#23383f" style={{ font: "800 30px ui-rounded, 'SF Pro Rounded', Nunito, system-ui, sans-serif" }}>
+              <text
+                x="60"
+                y="62"
+                textAnchor="middle"
+                fill="#23383f"
+                style={{
+                  font: "800 30px ui-rounded, 'SF Pro Rounded', Nunito, system-ui, sans-serif",
+                }}
+              >
                 4
               </text>
             </Tag>
           </Pop>
-          <Pop><Coin x={336} y={114} size={66} /></Pop>
+          <Pop>
+            <Coin x={336} y={114} size={66} />
+          </Pop>
         </>
       )}
       {step >= 3 && (
@@ -109,20 +152,34 @@ export function DepositDiagram({ lang, step }: DiagramProps) {
     >
       {step >= 1 && (
         <>
-          <Pop x={430} y={54}><BankBuilding size={190} /></Pop>
-          <TermChip x={430} y={0} w={190}>{alt("bank", "Bank", "bank", lang)}</TermChip>
+          <Pop x={430} y={54}>
+            <BankBuilding size={190} />
+          </Pop>
+          <TermChip x={430} y={0} w={190}>
+            {alt("bank", "Bank", "bank", lang)}
+          </TermChip>
         </>
       )}
       {step >= 2 && (
         <>
           <Villager who="Finn" x={10} />
-          <Pop><Coin x={205} y={112} size={44} /></Pop>
-          <Pop><Coin x={255} y={112} size={44} /></Pop>
-          <Pop><Coin x={305} y={112} size={44} /></Pop>
+          <Pop>
+            <Coin x={205} y={112} size={44} />
+          </Pop>
+          <Pop>
+            <Coin x={255} y={112} size={44} />
+          </Pop>
+          <Pop>
+            <Coin x={305} y={112} size={44} />
+          </Pop>
           <Arrow from={[155, 170]} to={[415, 170]} />
         </>
       )}
-      {step >= 3 && <TermChip x={165} y={196} w={250}>{alt("deposit", "Einzahlung", "wpłata", lang)}</TermChip>}
+      {step >= 3 && (
+        <TermChip x={165} y={196} w={250}>
+          {alt("deposit", "Einzahlung", "wpłata", lang)}
+        </TermChip>
+      )}
       {step >= 4 && (
         <Bubble x={215} y={2} w={190} h={78} tail="bottom-right">
           <Ledger x={20} y={8} size={62} />
@@ -144,9 +201,13 @@ export function LendDiagram({ lang, step }: DiagramProps) {
         lang,
       )}
     >
-      <Pop x={16} y={26}><BankBuilding size={190} /></Pop>
+      <Pop x={16} y={26}>
+        <BankBuilding size={190} />
+      </Pop>
       {[0, 1, 2, 3, 4, 5].map((i) => (
-        <Pop key={i}><Coin x={22 + i * 32} y={226} size={30} /></Pop>
+        <Pop key={i}>
+          <Coin x={22 + i * 32} y={226} size={30} />
+        </Pop>
       ))}
       {step >= 1 && (
         <>
@@ -163,17 +224,25 @@ export function LendDiagram({ lang, step }: DiagramProps) {
       {step >= 2 && (
         <>
           {[0, 1, 2, 3].map((i) => (
-            <Pop key={i}><Coin x={254 + i * 46} y={90} size={40} /></Pop>
+            <Pop key={i}>
+              <Coin x={254 + i * 46} y={90} size={40} />
+            </Pop>
           ))}
           <Arrow from={[222, 150]} to={[470, 150]} />
         </>
       )}
-      {step >= 3 && <Pop><Oven x={500} y={0} size={96} lit /></Pop>}
+      {step >= 3 && (
+        <Pop>
+          <Oven x={500} y={0} size={96} lit />
+        </Pop>
+      )}
       {step >= 4 && (
         <>
           <Arrow from={[470, 204]} to={[222, 204]} color="#1b8a9a" />
           {[0, 1, 2, 3].map((i) => (
-            <Pop key={i}><Coin x={254 + i * 46} y={218} size={40} /></Pop>
+            <Pop key={i}>
+              <Coin x={254 + i * 46} y={218} size={40} />
+            </Pop>
           ))}
         </>
       )}
@@ -202,17 +271,29 @@ export function ReadyDiagram({ lang, step }: DiagramProps) {
       )}
       {step >= 2 && (
         <>
-          <Pop x={300} y={46}><BankBuilding size={190} /></Pop>
-          <Pop x={500} y={110}><Safe size={124} /></Pop>
-          <Pop><Coin x={506} y={70} size={36} /></Pop>
-          <Pop><Coin x={546} y={70} size={36} /></Pop>
-          <Pop><Coin x={586} y={70} size={36} /></Pop>
+          <Pop x={300} y={46}>
+            <BankBuilding size={190} />
+          </Pop>
+          <Pop x={500} y={110}>
+            <Safe size={124} />
+          </Pop>
+          <Pop>
+            <Coin x={506} y={70} size={36} />
+          </Pop>
+          <Pop>
+            <Coin x={546} y={70} size={36} />
+          </Pop>
+          <Pop>
+            <Coin x={586} y={70} size={36} />
+          </Pop>
         </>
       )}
       {step >= 3 && (
         <>
           <Arrow from={[290, 196]} to={[165, 196]} />
-          <Pop><Coin x={196} y={140} size={46} /></Pop>
+          <Pop>
+            <Coin x={196} y={140} size={46} />
+          </Pop>
         </>
       )}
     </DiagramCanvas>
@@ -233,7 +314,9 @@ export function RunDiagram({ lang, step }: DiagramProps) {
     >
       {step >= 1 && (
         <>
-          <Pop x={330} y={70}><BankBuilding size={170} /></Pop>
+          <Pop x={330} y={70}>
+            <BankBuilding size={170} />
+          </Pop>
           {queue.map((who, i) => (
             <Pop key={who} x={4 + i * 80} y={120}>
               <Person {...CAST[who]} mood={step >= 2 ? "sad" : "think"} size={84} />
@@ -244,12 +327,22 @@ export function RunDiagram({ lang, step }: DiagramProps) {
       {step >= 2 && (
         <>
           <Villager who="Bea" x={530} y={110} size={100} name="" />
-          <Pop><Coin x={518} y={218} size={34} /></Pop>
-          <Pop><Coin x={554} y={218} size={34} /></Pop>
-          <Pop><Coin x={590} y={218} size={34} /></Pop>
+          <Pop>
+            <Coin x={518} y={218} size={34} />
+          </Pop>
+          <Pop>
+            <Coin x={554} y={218} size={34} />
+          </Pop>
+          <Pop>
+            <Coin x={590} y={218} size={34} />
+          </Pop>
         </>
       )}
-      {step >= 3 && <TermChip x={130} y={4} w={380}>{alt("bank run", "Ansturm auf die Bank", "panika bankowa", lang)}</TermChip>}
+      {step >= 3 && (
+        <TermChip x={130} y={4} w={380}>
+          {alt("bank run", "Ansturm auf die Bank", "panika bankowa", lang)}
+        </TermChip>
+      )}
     </DiagramCanvas>
   );
 }
@@ -268,17 +361,29 @@ export function ProtectDiagram({ lang, step }: DiagramProps) {
       {step >= 1 && (
         <>
           <Villager who="Finn" x={10} mood={step >= 3 ? "happy" : "think"} />
-          <Pop x={430} y={54}><BankBuilding size={190} /></Pop>
-          <Pop><Coin x={205} y={122} size={44} /></Pop>
-          <Pop><Coin x={255} y={122} size={44} /></Pop>
-          <Pop><Coin x={305} y={122} size={44} /></Pop>
+          <Pop x={430} y={54}>
+            <BankBuilding size={190} />
+          </Pop>
+          <Pop>
+            <Coin x={205} y={122} size={44} />
+          </Pop>
+          <Pop>
+            <Coin x={255} y={122} size={44} />
+          </Pop>
+          <Pop>
+            <Coin x={305} y={122} size={44} />
+          </Pop>
           <Arrow from={[155, 182]} to={[415, 182]} />
         </>
       )}
       {step >= 2 && (
         <>
-          <Pop x={276} y={4}><Shield size={104} /></Pop>
-          <TermChip x={135} y={208} w={290}>{alt("deposit protection", "Einlagensicherung", "ochrona depozytów", lang)}</TermChip>
+          <Pop x={276} y={4}>
+            <Shield size={104} />
+          </Pop>
+          <TermChip x={135} y={208} w={290}>
+            {alt("deposit protection", "Einlagensicherung", "ochrona depozytów", lang)}
+          </TermChip>
         </>
       )}
       {step >= 3 && (
@@ -292,19 +397,45 @@ export function ProtectDiagram({ lang, step }: DiagramProps) {
 }
 
 /** One small number tile: a person's head and a number that changes. */
-function NumberTile({ x, who, from, to, step }: { x: number; who: keyof typeof CAST; from: number; to: number; step: number }) {
+function NumberTile({
+  x,
+  who,
+  from,
+  to,
+  step,
+}: {
+  x: number;
+  who: keyof typeof CAST;
+  from: number;
+  to: number;
+  step: number;
+}) {
   return (
     <Pop x={x} y={198}>
       <rect width="170" height="64" rx="16" fill="#fff" stroke="#23383f" strokeWidth="4" />
       <Person {...CAST[who]} x={6} y={8} size={48} />
       {step >= 3 ? (
         <>
-          <text x="84" y="42" textAnchor="middle" fill="#8a97a0" style={{ ...numStyle, textDecoration: "line-through" }}>{from}</text>
-          <text x="118" y="42" textAnchor="middle" fill="#23383f" style={numStyle}>{"\u2192"}</text>
-          <text x="152" y="42" textAnchor="middle" fill="#1b8a9a" style={numStyle}>{to}</text>
+          <text
+            x="84"
+            y="42"
+            textAnchor="middle"
+            fill="#8a97a0"
+            style={{ ...numStyle, textDecoration: "line-through" }}
+          >
+            {from}
+          </text>
+          <text x="118" y="42" textAnchor="middle" fill="#23383f" style={numStyle}>
+            {"\u2192"}
+          </text>
+          <text x="152" y="42" textAnchor="middle" fill="#1b8a9a" style={numStyle}>
+            {to}
+          </text>
         </>
       ) : (
-        <text x="118" y="42" textAnchor="middle" fill="#23383f" style={numStyle}>{from}</text>
+        <text x="118" y="42" textAnchor="middle" fill="#23383f" style={numStyle}>
+          {from}
+        </text>
       )}
     </Pop>
   );
@@ -326,14 +457,22 @@ export function CardDiagram({ lang, step }: DiagramProps) {
           <Villager who="Sam" x={10} y={60} size={110} />
           <Villager who="Bea" x={520} y={60} size={110} />
           <Arrow from={[135, 150]} to={[510, 150]} width={5} />
-          <Pop><Card x={282} y={100} size={76} /></Pop>
+          <Pop>
+            <Card x={282} y={100} size={76} />
+          </Pop>
         </>
       )}
       {step >= 2 && (
         <>
-          <Pop x={265} y={0}><BankBuilding size={110} /></Pop>
-          <Pop><Coin x={410} y={22} size={54} /></Pop>
-          <Pop><NoSign x={410} y={22} size={54} /></Pop>
+          <Pop x={265} y={0}>
+            <BankBuilding size={110} />
+          </Pop>
+          <Pop>
+            <Coin x={410} y={22} size={54} />
+          </Pop>
+          <Pop>
+            <NoSign x={410} y={22} size={54} />
+          </Pop>
           <NumberTile x={145} who="Sam" from={10} to={8} step={step} />
           <NumberTile x={325} who="Bea" from={5} to={7} step={step} />
         </>

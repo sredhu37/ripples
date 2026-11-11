@@ -23,15 +23,15 @@ new issue ──► TRIAGE ──► READY ──► BUILD ──► CI TOOLS �
                                                      HUMAN ──► Sunny (Your turn)          live-good
 ```
 
-| Station | Who | Trigger | Output |
-|---|---|---|---|
-| Triage | Sunny with `/triage` | issue has `factory:triage` | `factory:ready` + agent brief, `factory:human`, `wontfix`, or parked |
-| Ready | waiting | `factory:ready` added | build starts when no build runs and all blockers are closed |
-| Build | build agent | pickup | PR with the 4-heading summary, specs, `Closes #n` |
-| CI tools | GitHub Actions | PR opened or pushed | pass, or straight back to build (no round used) |
-| Review | 4 review agents | CI green | findings: FAIL or SUGGESTION |
-| Gate | risky list, then gate agent | review passed | MERGE or HUMAN |
-| Live check | Lighthouse on the live URL | deploy finished | tag `live-good` moves, or rollback |
+| Station    | Who                         | Trigger                    | Output                                                               |
+| ---------- | --------------------------- | -------------------------- | -------------------------------------------------------------------- |
+| Triage     | Sunny with `/triage`        | issue has `factory:triage` | `factory:ready` + agent brief, `factory:human`, `wontfix`, or parked |
+| Ready      | waiting                     | `factory:ready` added      | build starts when no build runs and all blockers are closed          |
+| Build      | build agent                 | pickup                     | PR with the 4-heading summary, specs, `Closes #n`                    |
+| CI tools   | GitHub Actions              | PR opened or pushed        | pass, or straight back to build (no round used)                      |
+| Review     | 4 review agents             | CI green                   | findings: FAIL or SUGGESTION                                         |
+| Gate       | risky list, then gate agent | review passed              | MERGE or HUMAN                                                       |
+| Live check | Lighthouse on the live URL  | deploy finished            | tag `live-good` moves, or rollback                                   |
 
 ## Labels and board
 
@@ -39,14 +39,14 @@ new issue ──► TRIAGE ──► READY ──► BUILD ──► CI TOOLS �
 
 Exactly one `factory:` label per issue at a time. The factory swaps it at each step. Labels sit on the issue only; the PR links with `Closes #n`.
 
-| Label | Board column | Set by |
-|---|---|---|
-| `factory:triage` | Backlog | automatically on every new issue and every suggestions issue; also parked items |
-| `factory:ready` | Ready | Sunny, or a confirmed wayfinder spec |
-| `factory:in-progress` | In progress | factory, when the build starts |
-| `factory:in-review` | In review | factory, when the PR opens |
-| `factory:human` | Your turn (new column) | factory, whenever it needs Sunny |
-| `factory:done` | Done | factory, when the issue closes (merged, or closed with plain `wontfix`) |
+| Label                 | Board column           | Set by                                                                          |
+| --------------------- | ---------------------- | ------------------------------------------------------------------------------- |
+| `factory:triage`      | Backlog                | automatically on every new issue and every suggestions issue; also parked items |
+| `factory:ready`       | Ready                  | Sunny, or a confirmed wayfinder spec                                            |
+| `factory:in-progress` | In progress            | factory, when the build starts                                                  |
+| `factory:in-review`   | In review              | factory, when the PR opens                                                      |
+| `factory:human`       | Your turn (new column) | factory, whenever it needs Sunny                                                |
+| `factory:done`        | Done                   | factory, when the issue closes (merged, or closed with plain `wontfix`)         |
 
 ```
 triage ─► ready ─► in-progress ─► in-review ─► done
@@ -86,20 +86,20 @@ triage ─► ready ─► in-progress ─► in-review ─► done
 
 Deterministic checks run before any review agent. A failure goes straight back to the build agent and uses no review round.
 
-| Check | Tool | Default settings |
-|---|---|---|
-| Tests, types, build | `npm run test`, `npm run typecheck`, `npm run build` | as today |
-| Code mistakes | oxlint | defaults, no config |
-| Formatting | oxfmt (no Prettier) | defaults |
-| Dependency holes | `npm audit` | defaults |
-| XSS, injection patterns | CodeQL default setup | to turn on |
-| Secrets | GitHub secret scanning + push protection | already on |
-| Speed | Lighthouse CI (`@lhci/cli`), median of 3 runs | fail on LCP > 2.5 s, CLS > 0.1, TBT > 200 ms |
-| Accessibility basics | Lighthouse accessibility audits | any failed audit fails |
-| Lesson content counts | `src/content/content.test.ts` | new: max 15 words per sentence; question max 20 words, options under 15; no "Bartek"; diagram labels max 4 words |
-| Save-code order | new test on `src/lessons.ts` | an existing lesson id never changes position |
-| Specs present | CI rule | a change to `*.tsx` or `*.css` must change at least one `e2e/*.spec.ts` |
-| Specs pass | Playwright (all specs, video on) | see [Evidence](#evidence) |
+| Check                   | Tool                                                 | Default settings                                                                                                 |
+| ----------------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Tests, types, build     | `npm run test`, `npm run typecheck`, `npm run build` | as today                                                                                                         |
+| Code mistakes           | oxlint                                               | defaults, no config                                                                                              |
+| Formatting              | oxfmt (no Prettier)                                  | defaults                                                                                                         |
+| Dependency holes        | `npm audit`                                          | defaults                                                                                                         |
+| XSS, injection patterns | CodeQL default setup                                 | to turn on                                                                                                       |
+| Secrets                 | GitHub secret scanning + push protection             | already on                                                                                                       |
+| Speed                   | Lighthouse CI (`@lhci/cli`), median of 3 runs        | fail on LCP > 2.5 s, CLS > 0.1, TBT > 200 ms                                                                     |
+| Accessibility basics    | Lighthouse accessibility audits                      | any failed audit fails                                                                                           |
+| Lesson content counts   | `src/content/content.test.ts`                        | new: max 15 words per sentence; question max 20 words, options under 15; no "Bartek"; diagram labels max 4 words |
+| Save-code order         | new test on `src/lessons.ts`                         | an existing lesson id never changes position                                                                     |
+| Specs present           | CI rule                                              | a change to `*.tsx` or `*.css` must change at least one `e2e/*.spec.ts`                                          |
+| Specs pass              | Playwright (all specs, video on)                     | see [Evidence](#evidence)                                                                                        |
 
 - ESLint is not used while `typescript-eslint` supports only TypeScript below 6.1; ripples uses 7.0.2. Switching later is its own ticket.
 - A one-time PR applies oxfmt to the whole repo and fixes existing accessibility and content-count failures.
@@ -110,12 +110,12 @@ Deterministic checks run before any review agent. A failure goes straight back t
 
 Four review agents, all on every PR and all again after every fix round. They run in parallel once CI is green. An agent with nothing to check returns PASS with a reason (for example "no UI changed").
 
-| Agent | Checks | Sources, in order |
-|---|---|---|
-| ux-ui | friction (too many buttons, taps or choices), confusing screens, Ripples UX rules, what tools cannot see in WCAG | Ripples rules in `docs/design.md` "Experience" (moved there from agent notes), [Nielsen's 10 heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/), [Laws of UX](https://lawsofux.com/hicks-law/), [WCAG 2.2 AA](https://www.w3.org/WAI/WCAG22/quickref/) |
-| security | private data readable in client code, unsafe input handling (save codes), prompt injection, app-specific logic holes | [OWASP Top 10](https://owasp.org/Top10/), [OWASP DOM XSS cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html), [OWASP LLM01](https://genai.owasp.org/llmrisk/llm01-prompt-injection/) |
-| content | plain words for a 10-year-old, a physical anchor before each concept, story arc, each fact against its source, natural DE and PL with the same meaning | `docs/writing-lessons.md` (rules from agent notes moved in: per-language character names, the "Bartek" ban, balanced starred terms), `docs/AGE_10_STANDARD.md` |
-| code-quality | where code goes, reuse, naming, design, the change has a test | `ARCHITECTURE.md` and `docs/adr/` first, then standards picked to fit the change ([Google TS Style Guide](https://google.github.io/styleguide/tsguide.html), [React docs](https://react.dev/learn/thinking-in-react), ...). Repo decisions win on conflict. No own rule doc. |
+| Agent        | Checks                                                                                                                                                 | Sources, in order                                                                                                                                                                                                                                                            |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ux-ui        | friction (too many buttons, taps or choices), confusing screens, Ripples UX rules, what tools cannot see in WCAG                                       | Ripples rules in `docs/design.md` "Experience" (moved there from agent notes), [Nielsen's 10 heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/), [Laws of UX](https://lawsofux.com/hicks-law/), [WCAG 2.2 AA](https://www.w3.org/WAI/WCAG22/quickref/)  |
+| security     | private data readable in client code, unsafe input handling (save codes), prompt injection, app-specific logic holes                                   | [OWASP Top 10](https://owasp.org/Top10/), [OWASP DOM XSS cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html), [OWASP LLM01](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)                                      |
+| content      | plain words for a 10-year-old, a physical anchor before each concept, story arc, each fact against its source, natural DE and PL with the same meaning | `docs/writing-lessons.md` (rules from agent notes moved in: per-language character names, the "Bartek" ban, balanced starred terms), `docs/AGE_10_STANDARD.md`                                                                                                               |
+| code-quality | where code goes, reuse, naming, design, the change has a test                                                                                          | `ARCHITECTURE.md` and `docs/adr/` first, then standards picked to fit the change ([Google TS Style Guide](https://google.github.io/styleguide/tsguide.html), [React docs](https://react.dev/learn/thinking-in-react), ...). Repo decisions win on conflict. No own rule doc. |
 
 **Finding format** (all agents, plain words):
 
@@ -154,7 +154,7 @@ review passed ──► any changed file on the risky list? ──yes──► f
   - a risk cannot be undone by merging a fix;
   - a product or privacy call: new screen or path, something kids have is removed or renamed, new child input or saved data, new outside address;
   - the agent is unsure.
-  Otherwise MERGE.
+    Otherwise MERGE.
 - Output: one PR comment with the risks, MERGE or HUMAN, and the reason.
 
 **Ruleset on main:** PR only, every CI check green, no force-push, Sunny on the bypass list.
@@ -198,14 +198,14 @@ merge ──► pages.yml: build ──► deploy ──► live-check
 
 GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`. Hermes is Sunny's cockpit (ask it about the factory), not the engine.
 
-| Workflow | Runs on | Does |
-|---|---|---|
-| `factory-build.yml` | `issues: labeled` (`factory:ready`), `issues: closed` (unblocks), `workflow_dispatch` | pickup, label swap, build agent, opens PR |
-| `factory-review.yml` | `pull_request` (opened, synchronize) after CI | 4 review agents in parallel, suggestions issue, fix round, round counter |
-| `factory-gate.yml` | review passed | risky list, gate agent, merge with `FACTORY_TOKEN` or `factory:human` |
-| `factory-sweep.yml` | hourly; Monday 09:00 | restart paused `factory:ready` tickets; triage reminder |
-| `pages.yml` | push to main | build, deploy, live check, rollback |
-| `demo.yml` (fixed) | `pull_request` | specs, evidence branch, evidence comment |
+| Workflow             | Runs on                                                                               | Does                                                                     |
+| -------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `factory-build.yml`  | `issues: labeled` (`factory:ready`), `issues: closed` (unblocks), `workflow_dispatch` | pickup, label swap, build agent, opens PR                                |
+| `factory-review.yml` | `pull_request` (opened, synchronize) after CI                                         | 4 review agents in parallel, suggestions issue, fix round, round counter |
+| `factory-gate.yml`   | review passed                                                                         | risky list, gate agent, merge with `FACTORY_TOKEN` or `factory:human`    |
+| `factory-sweep.yml`  | hourly; Monday 09:00                                                                  | restart paused `factory:ready` tickets; triage reminder                  |
+| `pages.yml`          | push to main                                                                          | build, deploy, live check, rollback                                      |
+| `demo.yml` (fixed)   | `pull_request`                                                                        | specs, evidence branch, evidence comment                                 |
 
 **Claude account:** 2-week pilot on Sunny's Pro token (`CLAUDE_CODE_OAUTH_TOKEN`), Sonnet. Measure tokens per issue and how often Sunny is locked out, then choose an API key with a spend cap, a bigger plan, or Pro. Switch to an API key before porting to `repo-template`.
 
@@ -213,22 +213,22 @@ GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`
 
 ([#113](https://github.com/sredhu37/ripples/issues/113), [#126](https://github.com/sredhu37/ripples/issues/126))
 
-| Actor | Identity | Used for |
-|---|---|---|
-| Agent code | `claude[bot]` via the Claude GitHub App, Sunny as co-author | commits and PR on the build branch |
-| Factory plumbing | machine account `sredhu37-factory`, classic token `FACTORY_TOKEN` (`repo`, `project`, 1-year expiry) | board moves, gate merge (so `pages.yml` fires), revert PRs |
-| Label swaps, comments | `GITHUB_TOKEN` | no new workflow runs, so no loops |
-| Notifications | Telegram factory bot, `TELEGRAM_TOKEN` + chat id | "Your turn", rollbacks, triage reminder |
+| Actor                 | Identity                                                                                             | Used for                                                   |
+| --------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| Agent code            | `claude[bot]` via the Claude GitHub App, Sunny as co-author                                          | commits and PR on the build branch                         |
+| Factory plumbing      | machine account `sredhu37-factory`, classic token `FACTORY_TOKEN` (`repo`, `project`, 1-year expiry) | board moves, gate merge (so `pages.yml` fires), revert PRs |
+| Label swaps, comments | `GITHUB_TOKEN`                                                                                       | no new workflow runs, so no loops                          |
+| Notifications         | Telegram factory bot, `TELEGRAM_TOKEN` + chat id                                                     | "Your turn", rollbacks, triage reminder                    |
 
 **Trusted input:** every agent step sets `include_comments_by_actor` to `sredhu37`, `sredhu37-factory`, `claude[bot]`, `github-actions[bot]`. Other comments stay visible on GitHub but never reach an agent.
 
 **Tools per agent** (`--allowedTools`):
 
-| Agent | Read repo | Edit | npm, git | Web read | Comment | Push |
-|---|---|---|---|---|---|---|
-| build | ✓ | ✓ | ✓ | ✓ | ✓ | own PR |
-| ux-ui, security, content, code-quality | ✓ | ✗ | ✗ | ✓ | ✓ | ✗ |
-| gate | ✓ | ✗ | ✗ | ✗ | ✓ | ✗ |
+| Agent                                  | Read repo | Edit | npm, git | Web read | Comment | Push   |
+| -------------------------------------- | --------- | ---- | -------- | -------- | ------- | ------ |
+| build                                  | ✓         | ✓    | ✓        | ✓        | ✓       | own PR |
+| ux-ui, security, content, code-quality | ✓         | ✗    | ✗        | ✓        | ✓       | ✗      |
+| gate                                   | ✓         | ✗    | ✗        | ✗        | ✓       | ✗      |
 
 **Rules come from main:** workflows fetch `.claude/agents/*`, `.github/gate-paths.txt`, `docs/writing-lessons.md`, `docs/AGE_10_STANDARD.md`, `docs/design.md`, `ARCHITECTURE.md` and `docs/adr/` from `main`, never from the PR branch.
 
@@ -252,12 +252,12 @@ Normal merges are silent.
 
 ([#115](https://github.com/sredhu37/ripples/issues/115), [#117](https://github.com/sredhu37/ripples/issues/117), [#114](https://github.com/sredhu37/ripples/issues/114), [#113](https://github.com/sredhu37/ripples/issues/113))
 
-| Ports to the template | Stays in ripples (and web repos) |
-|---|---|
-| ux-ui, security, code-quality agents and the finding format | content agent and its rule docs |
-| the 6 `factory:` labels (board optional) | oxlint, oxfmt, Lighthouse, Playwright evidence |
-| the 4-heading PR summary, fixed `demo.yml` and `/demo` skill | ripples' risky list entries |
-| the workflows | Pro token (template uses an API key) |
+| Ports to the template                                        | Stays in ripples (and web repos)               |
+| ------------------------------------------------------------ | ---------------------------------------------- |
+| ux-ui, security, code-quality agents and the finding format  | content agent and its rule docs                |
+| the 6 `factory:` labels (board optional)                     | oxlint, oxfmt, Lighthouse, Playwright evidence |
+| the 4-heading PR summary, fixed `demo.yml` and `/demo` skill | ripples' risky list entries                    |
+| the workflows                                                | Pro token (template uses an API key)           |
 
 ## Sunny's setup checklist
 
@@ -273,16 +273,16 @@ Steps only a human can do. Filed as one `factory:human` ticket.
 
 Choices the agent made, not decided in a grilling round. Check these.
 
-| Default | Value | Source |
-|---|---|---|
-| Model | Sonnet for all agents during the pilot | #113 guardrail |
-| Turn caps | build 60, each review agent 15, gate 10 | #126 |
-| Job timeout | 30 minutes per agent job | #126 |
-| Spec run time | revisit if the full run exceeds 10 minutes | #117 |
-| Live check wait | poll `version.txt` with a cache-busting query; Pages caches for 10 minutes | #116 |
-| `npm audit` | default level, which fails on any known hole, including low severity | new while writing |
-| Lighthouse in PR CI | runs against the built app served by `vite preview` | new while writing |
-| Suggestions issue title | `Suggestions from PR #<n>: <PR title>` | new while writing |
-| Weekly reminder | Monday 09:00 Europe/Berlin, only when issues wait | #124 |
-| Hourly check | every hour, at a minute off the hour to avoid GitHub's busy top of the hour | new while writing |
-| `.worktrees/` | added to `.gitignore` in the first build ticket | #109 |
+| Default                 | Value                                                                       | Source            |
+| ----------------------- | --------------------------------------------------------------------------- | ----------------- |
+| Model                   | Sonnet for all agents during the pilot                                      | #113 guardrail    |
+| Turn caps               | build 60, each review agent 15, gate 10                                     | #126              |
+| Job timeout             | 30 minutes per agent job                                                    | #126              |
+| Spec run time           | revisit if the full run exceeds 10 minutes                                  | #117              |
+| Live check wait         | poll `version.txt` with a cache-busting query; Pages caches for 10 minutes  | #116              |
+| `npm audit`             | default level, which fails on any known hole, including low severity        | new while writing |
+| Lighthouse in PR CI     | runs against the built app served by `vite preview`                         | new while writing |
+| Suggestions issue title | `Suggestions from PR #<n>: <PR title>`                                      | new while writing |
+| Weekly reminder         | Monday 09:00 Europe/Berlin, only when issues wait                           | #124              |
+| Hourly check            | every hour, at a minute off the hour to avoid GitHub's busy top of the hour | new while writing |
+| `.worktrees/`           | added to `.gitignore` in the first build ticket                             | #109              |

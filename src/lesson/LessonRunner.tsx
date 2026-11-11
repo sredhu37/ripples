@@ -32,7 +32,16 @@ type Phase =
   | { k: "meanwhile" }
   | { k: "dad" };
 
-export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit, onLang, ageGroup = "junior" }: Props) {
+export function LessonRunner({
+  lesson,
+  meta,
+  lang,
+  alreadyDone,
+  onBadge,
+  onExit,
+  onLang,
+  ageGroup = "junior",
+}: Props) {
   const [phase, setPhase] = useState<Phase>({ k: "story", i: 0 });
   const [toyCompleted, setToyCompleted] = useState(false);
   const wasDone = useRef(alreadyDone);
@@ -55,11 +64,20 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit,
     <main className="screen lesson">
       <header className="lesson-head">
         <div className="lesson-head-actions">
-          <button type="button" className="btn btn-quiet btn-small" onClick={onExit} aria-label={t(lang, "allLessons")}>
+          <button
+            type="button"
+            className="btn btn-quiet btn-small"
+            onClick={onExit}
+            aria-label={t(lang, "allLessons")}
+          >
             ← {t(lang, "allLessons")}
           </button>
           {(phase.k !== "story" || phase.i > 0) && (
-            <button type="button" className="btn btn-quiet btn-small btn-restart" onClick={handleRestart}>
+            <button
+              type="button"
+              className="btn btn-quiet btn-small btn-restart"
+              onClick={handleRestart}
+            >
               {t(lang, "restartLesson")}
             </button>
           )}
@@ -78,9 +96,13 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit,
           index={phase.i}
           fromEnd={phase.back}
           lang={lang}
-          onPrev={() => setPhase(phase.i === 0 ? phase : { k: "story", i: phase.i - 1, back: true })}
+          onPrev={() =>
+            setPhase(phase.i === 0 ? phase : { k: "story", i: phase.i - 1, back: true })
+          }
           onNext={() =>
-            setPhase(phase.i + 1 < lesson.story.length ? { k: "story", i: phase.i + 1 } : { k: "toy" })
+            setPhase(
+              phase.i + 1 < lesson.story.length ? { k: "story", i: phase.i + 1 } : { k: "toy" },
+            )
           }
         />
       )}
@@ -113,7 +135,13 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit,
           q={lesson.questions[phase.i]}
           lang={lang}
           last={phase.i + 1 === lesson.questions.length}
-          onDone={() => setPhase(phase.i + 1 < lesson.questions.length ? { k: "quiz", i: phase.i + 1 } : { k: "badge" })}
+          onDone={() =>
+            setPhase(
+              phase.i + 1 < lesson.questions.length
+                ? { k: "quiz", i: phase.i + 1 }
+                : { k: "badge" },
+            )
+          }
         />
       )}
 
@@ -136,7 +164,11 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit,
             <p>{resolveText(lesson.realLife.body, lang)}</p>
           </div>
           <div className="row nav">
-            <button type="button" className="btn" onClick={() => setPhase(getMeanwhile(meta.id) ? { k: "meanwhile" } : { k: "dad" })}>
+            <button
+              type="button"
+              className="btn"
+              onClick={() => setPhase(getMeanwhile(meta.id) ? { k: "meanwhile" } : { k: "dad" })}
+            >
               {t(lang, "next")}
             </button>
           </div>
@@ -175,9 +207,17 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit,
 
 function Dots({ total, position, lang }: { total: number; position: number; lang: Lang }) {
   return (
-    <div className="dots" role="img" aria-label={`${Math.min(position + 1, total)} / ${total}`} data-lang={lang}>
+    <div
+      className="dots"
+      role="img"
+      aria-label={`${Math.min(position + 1, total)} / ${total}`}
+      data-lang={lang}
+    >
       {Array.from({ length: total }, (_, i) => (
-        <span key={i} className={i < position ? "dot dot-done" : i === position ? "dot dot-now" : "dot"} />
+        <span
+          key={i}
+          className={i < position ? "dot dot-done" : i === position ? "dot dot-now" : "dot"}
+        />
       ))}
     </div>
   );
@@ -271,7 +311,11 @@ function QuestionView({
   const [tried, setTried] = useState<number[]>([]);
 
   const say =
-    state === "right" ? t(lang, "rightLine") : state === "wrong" ? resolveText(q.hint, lang) : resolveText(q.prompt, lang);
+    state === "right"
+      ? t(lang, "rightLine")
+      : state === "wrong"
+        ? resolveText(q.hint, lang)
+        : resolveText(q.prompt, lang);
 
   const answer = (ok: boolean) => {
     if (ok) {

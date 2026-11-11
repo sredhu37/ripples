@@ -168,11 +168,7 @@ export const lesson: Lesson = {
           correct: true,
         },
         {
-          text: T(
-            "They must be painted",
-            "Sie müssen bemalt werden",
-            "Muszą zostać pomalowane",
-          ),
+          text: T("They must be painted", "Sie müssen bemalt werden", "Muszą zostać pomalowane"),
         },
       ],
       hint: T(
@@ -239,7 +235,8 @@ export const lesson: Lesson = {
           de: "Statistische Ämter erfassen den monatlichen Einzelhandelsumsatz als zentralen Maßstab für Wirtschaftsleistung und Konsumnachfrage.",
           pl: "Główny Urząd Statystyczny (GUS) publikuje miesięczne dane o sprzedaży detalicznej jako kluczowy wskaźnik koniunktury i popytu konsumentów.",
         },
-        source: "https://www.destatis.de/DE/Themen/Wirtschaft/Grosshandel-Einzelhandel/_inhalt.html",
+        source:
+          "https://www.destatis.de/DE/Themen/Wirtschaft/Grosshandel-Einzelhandel/_inhalt.html",
       },
       {
         text: {

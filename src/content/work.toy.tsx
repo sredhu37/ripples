@@ -76,7 +76,15 @@ function Reason({
   );
 }
 
-export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market; onChange?: (pay: number) => void }) {
+export function JobMarket({
+  lang,
+  start,
+  onChange,
+}: {
+  lang: Lang;
+  start: Market;
+  onChange?: (pay: number) => void;
+}) {
   const [m, setM] = useState<Market>(start);
   const pay = payPerHour(m);
   const p = pushes(m);
@@ -99,7 +107,11 @@ export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market
 
   const payUnit = () => {
     if (lang === "pl") {
-      return pay === 1 ? "moneta za godzinę" : pay >= 2 && pay <= 4 ? "monety za godzinę" : "monet za godzinę";
+      return pay === 1
+        ? "moneta za godzinę"
+        : pay >= 2 && pay <= 4
+          ? "monety za godzinę"
+          : "monet za godzinę";
     }
     if (lang === "de") {
       return pay === 1 ? "Münze pro Stunde" : "Münzen pro Stunde";
@@ -124,8 +136,8 @@ export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market
           lang === "pl"
             ? "Zawód: naprawa łodzi"
             : lang === "de"
-            ? "Beruf: Boote reparieren"
-            : "Boat fixing job"
+              ? "Beruf: Boote reparieren"
+              : "Boat fixing job"
         }
       >
         <div className="job">
@@ -140,8 +152,8 @@ export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market
               {lang === "pl"
                 ? "Zawód: naprawa łodzi"
                 : lang === "de"
-                ? "Beruf: Boote reparieren"
-                : "Job: fix boats"}
+                  ? "Beruf: Boote reparieren"
+                  : "Job: fix boats"}
             </span>
           </div>
           <div className="job-pay" role="status">
@@ -161,11 +173,7 @@ export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market
             <Reason
               lead={dirWord(p.years)}
               label={
-                lang === "pl"
-                  ? "Długo się uczy"
-                  : lang === "de"
-                  ? "Lange lernen"
-                  : "Long to learn"
+                lang === "pl" ? "Długo się uczy" : lang === "de" ? "Lange lernen" : "Long to learn"
               }
               arrow={p.years}
               count={m.years}
@@ -178,8 +186,8 @@ export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market
                 lang === "pl"
                   ? "Niewielu to potrafi"
                   : lang === "de"
-                  ? "Wenige können es"
-                  : "Few can do it"
+                    ? "Wenige können es"
+                    : "Few can do it"
               }
               arrow={p.people}
               count={m.people}
@@ -192,8 +200,8 @@ export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market
                 lang === "pl"
                   ? "Miasto tego potrzebuje"
                   : lang === "de"
-                  ? "Wird gebraucht"
-                  : "Town needs it"
+                    ? "Wird gebraucht"
+                    : "Town needs it"
               }
               arrow={p.need}
               count={m.need}
@@ -209,8 +217,8 @@ export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market
             lang === "pl"
               ? "Lata nauki zawodu"
               : lang === "de"
-              ? "Jahre zum Lernen"
-              : "Years to learn the job"
+                ? "Jahre zum Lernen"
+                : "Years to learn the job"
           }
           value={m.years}
           min={1}
@@ -224,8 +232,8 @@ export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market
             lang === "pl"
               ? "Liczba naprawiaczy łodzi"
               : lang === "de"
-              ? "Leute, die Boote reparieren"
-              : "People who fix boats"
+                ? "Leute, die Boote reparieren"
+                : "People who fix boats"
           }
           value={m.people}
           min={1}
@@ -239,8 +247,8 @@ export function JobMarket({ lang, start, onChange }: { lang: Lang; start: Market
             lang === "pl"
               ? "Zapotrzebowanie na pracę"
               : lang === "de"
-              ? "Wie sehr man es braucht"
-              : "How much it is needed"
+                ? "Wie sehr man es braucht"
+                : "How much it is needed"
           }
           value={m.need}
           min={1}

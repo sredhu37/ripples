@@ -49,9 +49,21 @@ export function Otto({ size = 140, mood = "happy" }: OttoProps) {
         )}
         {/* mouth */}
         {mood === "happy" ? (
-          <path d="M90 100 Q100 110 110 100" stroke="#2d1b12" strokeWidth="3" fill="none" strokeLinecap="round" />
+          <path
+            d="M90 100 Q100 110 110 100"
+            stroke="#2d1b12"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+          />
         ) : (
-          <path d="M92 103 L108 103" stroke="#2d1b12" strokeWidth="3" fill="none" strokeLinecap="round" />
+          <path
+            d="M92 103 L108 103"
+            stroke="#2d1b12"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+          />
         )}
         {/* whiskers */}
         <g stroke="#2d1b12" strokeWidth="1.8" strokeLinecap="round" opacity="0.55">

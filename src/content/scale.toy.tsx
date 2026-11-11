@@ -56,91 +56,95 @@ export function ScaleToy({
   const stageLabel = pl
     ? "Symulator skali i rzemiosła"
     : en
-    ? "Scale and craft simulator"
-    : "Größenvorteil und Handwerk";
+      ? "Scale and craft simulator"
+      : "Größenvorteil und Handwerk";
 
   const canvasLabel = pl
     ? "Porównanie rzemiosła i fabryki"
     : en
-    ? "Artisan vs Factory comparison"
-    : "Handwerksbetrieb und Fabrik im Vergleich";
+      ? "Artisan vs Factory comparison"
+      : "Handwerksbetrieb und Fabrik im Vergleich";
 
-  const artisanTitle = pl
-    ? "Warsztat rzemieślniczy"
-    : en
-    ? "Artisan Workshop"
-    : "Handwerksbetrieb";
+  const artisanTitle = pl ? "Warsztat rzemieślniczy" : en ? "Artisan Workshop" : "Handwerksbetrieb";
 
   const artisanSub = pl
     ? "Szycie na miarę, unikat"
     : en
-    ? "Custom, personal fit"
-    : "Maßarbeit, Einzelstücke";
+      ? "Custom, personal fit"
+      : "Maßarbeit, Einzelstücke";
 
   const customOrderText = routedCustom
     ? pl
       ? "✓ Uszyto buty na miarę dla Mossa!"
       : en
-      ? "✓ Moss Custom Order Crafted!"
-      : "✓ Moss Maßstiefel gefertigt!"
+        ? "✓ Moss Custom Order Crafted!"
+        : "✓ Moss Maßstiefel gefertigt!"
     : pl
-    ? "Oczekiwanie na zamówienie na miarę"
-    : en
-    ? "Awaiting Custom Order"
-    : "Wartet auf Maßauftrag";
+      ? "Oczekiwanie na zamówienie na miarę"
+      : en
+        ? "Awaiting Custom Order"
+        : "Wartet auf Maßauftrag";
 
   const factoryTitle = pl
     ? "Fabryka butów w Grand Harbor"
     : en
-    ? "Grand Harbor Shoe Factory"
-    : "Schuhfabrik Großer Hafen";
+      ? "Grand Harbor Shoe Factory"
+      : "Schuhfabrik Großer Hafen";
 
   const factorySub = pl
     ? "Wielkie maszyny, tanie partie hurtowe"
     : en
-    ? "Big machines, identical bulk boots"
-    : "Große Maschinen, günstige Großmengen";
+      ? "Big machines, identical bulk boots"
+      : "Große Maschinen, günstige Großmengen";
 
   const bulkOrderText = routedBulk
     ? pl
       ? "✓ Dostarczono 40 butów dla Mayi!"
       : en
-      ? "✓ Maya 40 Boots Delivered!"
-      : "✓ Mayas 40 Stiefel geliefert!"
+        ? "✓ Maya 40 Boots Delivered!"
+        : "✓ Mayas 40 Stiefel geliefert!"
     : pl
-    ? "Oczekiwanie na zamówienie hurtowe"
-    : en
-    ? "Awaiting Bulk Order"
-    : "Wartet auf Großauftrag";
+      ? "Oczekiwanie na zamówienie hurtowe"
+      : en
+        ? "Awaiting Bulk Order"
+        : "Wartet auf Großauftrag";
 
   const discountNote = material.discountActive
     ? pl
       ? "(Rabat hurtowy!)"
       : en
-      ? "(Wholesale discount!)"
-      : "(Großkundenrabatt!)"
+        ? "(Wholesale discount!)"
+        : "(Großkundenrabatt!)"
     : "";
 
   const sliderLabel = pl
     ? `Płaty skóry: ${sheets} | Cena sztuki: ${material.unitCost} monet ${discountNote}`
     : en
-    ? `Leather sheets: ${sheets} | Unit price: ${material.unitCost} coins ${discountNote}`
-    : `Lederstücke: ${sheets} | Stückpreis: ${material.unitCost} Münzen ${discountNote}`;
+      ? `Leather sheets: ${sheets} | Unit price: ${material.unitCost} coins ${discountNote}`
+      : `Lederstücke: ${sheets} | Stückpreis: ${material.unitCost} Münzen ${discountNote}`;
 
   const routeCustomLabel = pl
     ? "Skieruj zamówienie Mossa na miarę -> Warsztat Sama"
     : en
-    ? "Route Moss Custom Order -> Sam's Shop"
-    : "Moss Maßstiefel -> Sams Werkstatt";
+      ? "Route Moss Custom Order -> Sam's Shop"
+      : "Moss Maßstiefel -> Sams Werkstatt";
 
   const routeBulkLabel = pl
     ? "Skieruj zamówienie hurtowe 40 butów Mayi -> Fabryka"
     : en
-    ? "Route Maya 40 Bulk Boots -> Factory"
-    : "Mayas 40 Arbeitsstiefel -> Fabrik";
+      ? "Route Maya 40 Bulk Boots -> Factory"
+      : "Mayas 40 Arbeitsstiefel -> Fabrik";
 
-  const samBtn = pl ? "Warsztat rzemieślniczy Sama" : en ? "Sam's Artisan Workshop" : "Sams Handwerkswerkstatt";
-  const factoryBtn = pl ? "Fabryka butów w Grand Harbor" : en ? "Grand Harbor Factory" : "Schuhfabrik Großer Hafen";
+  const samBtn = pl
+    ? "Warsztat rzemieślniczy Sama"
+    : en
+      ? "Sam's Artisan Workshop"
+      : "Sams Handwerkswerkstatt";
+  const factoryBtn = pl
+    ? "Fabryka butów w Grand Harbor"
+    : en
+      ? "Grand Harbor Factory"
+      : "Schuhfabrik Großer Hafen";
 
   return (
     <div className="scale-wrap">
@@ -148,7 +152,16 @@ export function ScaleToy({
         <DiagramCanvas label={canvasLabel}>
           {/* Sam's Workshop */}
           <Pop x={30} y={35}>
-            <rect x="0" y="0" width="260" height="185" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
+            <rect
+              x="0"
+              y="0"
+              width="260"
+              height="185"
+              rx="14"
+              fill="#ffffff"
+              stroke="#cbd5e1"
+              strokeWidth="3"
+            />
             <Person {...CAST.Sam} x={20} y={15} size={80} />
             <text className="diagram-name" x={60} y={105} textAnchor="middle">
               Sam
@@ -161,7 +174,14 @@ export function ScaleToy({
               {artisanSub}
             </text>
 
-            <rect x="20" y="120" width="220" height="45" rx="8" fill={routedCustom ? "#dcfce7" : "#f1f5f9"} />
+            <rect
+              x="20"
+              y="120"
+              width="220"
+              height="45"
+              rx="8"
+              fill={routedCustom ? "#dcfce7" : "#f1f5f9"}
+            />
             <text
               x="130"
               y="148"
@@ -176,8 +196,26 @@ export function ScaleToy({
 
           {/* Grand Harbor Factory */}
           <Pop x={320} y={35}>
-            <rect x="0" y="0" width="290" height="185" rx="14" fill="#ffffff" stroke="#cbd5e1" strokeWidth="3" />
-            <rect x="15" y="15" width="260" height="45" rx="8" fill="#f1f5f9" stroke="#94a3b8" strokeWidth="2" />
+            <rect
+              x="0"
+              y="0"
+              width="290"
+              height="185"
+              rx="14"
+              fill="#ffffff"
+              stroke="#cbd5e1"
+              strokeWidth="3"
+            />
+            <rect
+              x="15"
+              y="15"
+              width="260"
+              height="45"
+              rx="8"
+              fill="#f1f5f9"
+              stroke="#94a3b8"
+              strokeWidth="2"
+            />
             <text x="145" y="42" textAnchor="middle" fill="#1e293b" fontSize="13" fontWeight="bold">
               {factoryTitle}
             </text>
@@ -185,7 +223,14 @@ export function ScaleToy({
               {factorySub}
             </text>
 
-            <rect x="20" y="120" width="250" height="45" rx="8" fill={routedBulk ? "#dcfce7" : "#f1f5f9"} />
+            <rect
+              x="20"
+              y="120"
+              width="250"
+              height="45"
+              rx="8"
+              fill={routedBulk ? "#dcfce7" : "#f1f5f9"}
+            />
             <text
               x="145"
               y="148"
@@ -233,19 +278,19 @@ export function ScaleToy({
               ? pl
                 ? "Przesuń suwak skóry na 20 lub więcej płatów, aby zobaczyć rabat hurtowy w akcji!"
                 : en
-                ? "Move the leather slider to 20 or more sheets to see the bulk discount in action!"
-                : "Schiebe den Schieber auf 20 oder mehr Lederstücke, um den Mengenrabatt zu sehen!"
+                  ? "Move the leather slider to 20 or more sheets to see the bulk discount in action!"
+                  : "Schiebe den Schieber auf 20 oder mehr Lederstücke, um den Mengenrabatt zu sehen!"
               : !routedCustom || !routedBulk
-              ? pl
-                ? "Skieruj zarówno zamówienie na miarę, jak i zamówienie hurtowe do właściwego wytwórcy!"
-                : en
-                ? "Route both the custom order and the bulk order to the right business!"
-                : "Leite sowohl den Maßauftrag als auch den Großauftrag an den passenden Betrieb weiter!"
-              : pl
-              ? "Zobacz: małe warsztaty wygrywają dopasowaniem i kunsztem, a fabryki niską ceną dzięki skali!"
-              : en
-              ? "Notice how small shops excel at custom craft while factories win on scale!"
-              : "Siehst du: Kleinbetriebe glänzen bei Maßarbeit, Fabriken beim Größenvorteil!"}
+                ? pl
+                  ? "Skieruj zarówno zamówienie na miarę, jak i zamówienie hurtowe do właściwego wytwórcy!"
+                  : en
+                    ? "Route both the custom order and the bulk order to the right business!"
+                    : "Leite sowohl den Maßauftrag als auch den Großauftrag an den passenden Betrieb weiter!"
+                : pl
+                  ? "Zobacz: małe warsztaty wygrywają dopasowaniem i kunsztem, a fabryki niską ceną dzięki skali!"
+                  : en
+                    ? "Notice how small shops excel at custom craft while factories win on scale!"
+                    : "Siehst du: Kleinbetriebe glänzen bei Maßarbeit, Fabriken beim Größenvorteil!"}
           </ActionPrompt>
         </div>
       )}

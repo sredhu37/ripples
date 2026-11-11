@@ -16,13 +16,7 @@ function Toy({ lang, onDone }: ToyProps) {
 }
 
 function Widget({ lang, onAnswer }: WidgetProps) {
-  return (
-    <BritishInIndiaToy
-      lang={lang}
-      mode="quiz"
-      onDone={() => onAnswer(true)}
-    />
-  );
+  return <BritishInIndiaToy lang={lang} mode="quiz" onDone={() => onAnswer(true)} />;
 }
 
 export const lesson: Lesson = {
@@ -291,7 +285,8 @@ export const lesson: Lesson = {
           de: "Indiens Anteil an der weltweiten Industrieproduktion sank von rund 25 Prozent im Jahr 1750 auf unter 3 Prozent im Jahr 1900.",
           pl: "Udział Indii w światowej produkcji przemysłowej spadł z około 25 procent w 1750 roku do poniżej 3 procent w roku 1900.",
         },
-        source: "https://www.cambridge.org/core/books/economic-history-of-india-18571947/72F18A370EF5EF4C2161A28A6993CEF7",
+        source:
+          "https://www.cambridge.org/core/books/economic-history-of-india-18571947/72F18A370EF5EF4C2161A28A6993CEF7",
       },
       {
         text: {
@@ -307,7 +302,8 @@ export const lesson: Lesson = {
           de: "Der Eisenbahnbau im kolonialen Indien verband das landwirtschaftliche Binnenland direkt mit den Exportseehaefen.",
           pl: "Budowa kolei w Indiach kolonialnych łączyła rolnicze i surowcowe zaplecze kraju bezpośrednio z portami morskimi służącymi do eksportu surowców.",
         },
-        source: "https://www.cambridge.org/core/books/railways-in-modern-india/E341F758C5A3764831B39F29E0436FF0",
+        source:
+          "https://www.cambridge.org/core/books/railways-in-modern-india/E341F758C5A3764831B39F29E0436FF0",
       },
     ],
     simplified: [
