@@ -41,6 +41,10 @@ No accounts, no tracking, no server. The child's name, language and badges stay 
 claude plugin install mattpocock-skills@claude-plugins-official --scope project
 ```
 
+## License
+
+Source-available, free for noncommercial use: practise DevOps on it, learn from it, run it yourself. Commercial use is not allowed. Code is PolyForm Noncommercial 1.0.0, lesson content is CC BY-NC-ND 4.0. Details: [LICENSING.md](LICENSING.md).
+
 ## Support
 
 If this saved you time, you can [buy me a coffee](https://ko-fi.com/sunnyredhu).
