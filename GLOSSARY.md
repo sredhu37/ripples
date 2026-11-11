@@ -19,6 +19,11 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Animated beat | A story beat that builds up tap by tap: one Otto line and one new diagram part per tap | slideshow, animation |
 | Term | A new word the lesson teaches by name (barter, money, price, save). Written between *stars* in lesson text, shown highlighted | keyword, vocabulary |
 | Save code | Parent-only text code that restores name, language and badges | backup, password |
+| Review agent | An agent that reviews a PR at the REVIEW station for what CI tools cannot check: ux-ui, security, content, code-quality | reviewer bot, linter |
+| Finding | One problem a review agent reports: problem, where, fix, and a link to the rule it quotes | comment, nit |
+| FAIL | A finding that breaks a rule the agent can link to; one FAIL sends the PR back to the build agent | blocker, error |
+| SUGGESTION | A finding that would improve the change but breaks no linked rule; never blocks the PR | nit, warning |
+| Suggestions issue | The one issue per PR, filed after review passes, that collects all SUGGESTIONs without duplicates and enters triage | follow-up ticket, backlog dump |
 | Ticket size | The average price or coin value of one sale | receipt, basket |
 | Market share | The fraction or slice of total customers buying from one business | monopoly |
 | Mittelstand | German small and medium enterprises featured in the scale lesson | big business |
