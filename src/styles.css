@@ -5,6 +5,8 @@
   --teal: #1b8a9a;
   --teal-dark: #146a77;
   --orange: #f08a2e;
+  /* darker orange for white text: 4.6:1 contrast */
+  --orange-dark: #b85a10;
   --green: #4fa75a;
   --grey: #c6d2d5;
   --white: #ffffff;
@@ -204,17 +206,17 @@ p {
   padding: 0 28px;
   border: 0;
   border-radius: 999px;
-  background: var(--orange);
+  background: var(--orange-dark);
   color: var(--white);
   font: inherit;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 4px 0 #b9631a;
+  box-shadow: 0 4px 0 #7f3d08;
 }
 
 .btn:active {
   transform: translateY(3px);
-  box-shadow: 0 1px 0 #b9631a;
+  box-shadow: 0 1px 0 #7f3d08;
 }
 
 .btn:disabled {
@@ -664,7 +666,7 @@ p {
 }
 
 .lesson-head .btn-restart {
-  color: #6a7c82;
+  color: #5f7177;
   border-color: #cbd5e1;
 }
 
@@ -1174,7 +1176,7 @@ mark.term {
 .timeline-year { font-size: 0.8rem; font-weight: 700; color: #4b6b72; }
 .timeline-empty { font-style: italic; }
 .chip { border: 2px solid #1d3f47; background: #fff; border-radius: 999px; padding: 6px 12px; font: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
-.chip-on { background: #f08a2e; color: #fff; border-color: #f08a2e; }
+.chip-on { background: var(--orange-dark); color: #fff; border-color: var(--orange-dark); }
 .chip .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
 @media (min-width: 720px) {
   .timeline-lane ul { flex-direction: row; flex-wrap: wrap; }
