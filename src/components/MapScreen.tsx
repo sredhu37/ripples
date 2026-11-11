@@ -96,7 +96,6 @@ export function MapScreen({ progress, returning, onLang, onToggleMute, onOpenLes
                 type="button"
                 className="place"
                 disabled={!open}
-                aria-label={`${i + 1}. ${title}`}
                 onClick={() => {
                   sfx.tap();
                   onOpenLesson(l.id);
