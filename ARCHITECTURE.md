@@ -30,6 +30,8 @@ flowchart LR
 
 See [docs/design.md](docs/design.md) and [docs/adr](docs/adr).
 
+How work moves from an issue to the live site (agents, review, gate, deploy): [docs/factory.md](docs/factory.md). The factory is specified, not yet built.
+
 ## How to run and test
 
 ```bash
