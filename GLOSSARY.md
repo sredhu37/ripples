@@ -35,8 +35,10 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Factory label | One of six `factory:` labels (triage, ready, in-progress, in-review, human, done); exactly one per issue, it is the issue's station and the board column follows it | status tag, column |
 | Your turn | The board column for `factory:human`: the factory has stopped and waits for Sunny to answer, implement or review | blocked, on hold |
 | Machine account | `sredhu37-factory`, the GitHub account the factory acts as for board moves, gate merges and revert PRs; collaborator on ripples only | bot user, service account |
-| Factory bot | The Telegram bot that messages Sunny only for "Your turn" and live-site rollbacks | Hermes bot, notifier |
+| Factory bot | The Telegram bot that messages Sunny only for "Your turn", live-site rollbacks and the weekly triage reminder | Hermes bot, notifier |
 | Hourly check | The scheduled workflow that restarts `factory:ready` tickets paused by a usage limit or missed by an event | cron, sweeper |
+| Agent brief | The comment `/triage` posts when an issue moves to `factory:ready`: what to build and how to check it, read by the build agent | spec, ticket body |
+| Triage reminder | The Monday 09:00 Telegram message from the factory bot with the count of issues waiting in `factory:triage` | digest, nag |
 | Ticket size | The average price or coin value of one sale | receipt, basket |
 | Market share | The fraction or slice of total customers buying from one business | monopoly |
 | Mittelstand | German small and medium enterprises featured in the scale lesson | big business |
