@@ -28,6 +28,10 @@ Shared vocabulary for this project. Agents use these terms exactly.
 | Gate agent | The agent that writes a risk analysis for a reviewed PR outside the risky list and answers MERGE or HUMAN with a reason | approver, merge bot |
 | Live check | The Lighthouse run against the live site after every deploy: does it render, any console errors | smoke test, monitoring |
 | live-good | The git tag on the newest commit that passed the live check; a failed live check redeploys it | stable, release tag |
+| PR summary | The PR description with four headings: What changed, Decisions, Verified, Left | handoff doc, changelog |
+| Spec | A Playwright file per screen in `e2e/` that is a test and records the demo at once | e2e test only, script |
+| Evidence comment | The one PR comment, updated in place, that shows step screenshots and a GIF inline and links the full video | demo post, bot comment |
+| Evidence branch | The `evidence` branch that holds `pr-<n>/` images for inline display; cleaned after merge | assets repo, artifacts |
 | Ticket size | The average price or coin value of one sale | receipt, basket |
 | Market share | The fraction or slice of total customers buying from one business | monopoly |
 | Mittelstand | German small and medium enterprises featured in the scale lesson | big business |
