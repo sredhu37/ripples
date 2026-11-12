@@ -12,8 +12,8 @@ Prefer `animatedBeat(lines, Diagram, mood?)` from `src/lesson/toolkit.tsx` over 
 
 - **Lines:** 2 to 6 per beat, one idea each, written like a friendly teacher talking to the child: warm full sentences, not caption fragments. Say what a job is called ("Finn is a fisherman. That means his job is to catch fish.").
 - **Terms:** when a new word first appears, name it and say what it is called, in all three languages: "Swapping things without any money has a name. It is called _barter_." Put the word between _stars_; the app highlights it and reads it without the stars. EN, DE and PL must have the same number of starred terms on every line (`content.test.ts` compares EN and DE today; check PL yourself). Also show the word on a `TermChip` in the diagram.
-- **Diagram:** a component receiving `{ lang, step }`. Show a part with `step >= n` (parts mount on their tap and pop in). Build from `src/components/diagram.tsx` and the SVG icons in `src/components/icons.tsx`. Add new icons there, flat shapes, no emoji. Use icons and arrows rather than text; a name or term label must work in both languages.
-- **Canvas:** 640 x 280. Check every tap in a browser at 1366x768, on an iPad-size window, and in German.
+- **Diagram:** a component receiving `{ lang, step }`. Show a part with `step >= n` (parts mount on their tap and pop in). Build from `src/components/diagram.tsx` and the SVG icons in `src/components/icons.tsx`. Add new icons there, flat shapes, no emoji. Use icons and arrows rather than text; a name or term label must work in all three languages.
+- **Canvas:** 640 x 280. Check every tap in a browser at 1366x768, on an iPad-size window, and in German and Polish.
 
 ## Rules
 
@@ -36,6 +36,6 @@ Prefer `animatedBeat(lines, Diagram, mood?)` from `src/lesson/toolkit.tsx` over 
 
 - Lesson-specific styles go in `src/content/<id>.css`, imported from your tsx. Do not edit `src/styles.css`, `src/lesson/*`, `src/lessons.ts`, `src/content/index.ts` or other lessons' files. If you need a shared change, say so in your final report instead of making it.
 - Write multilingual text with a local helper: `const T = (en: string, de: string, pl: string): Text => ({ en, de, pl });`
-- `npm test` runs `src/content/content.test.ts` over your lesson automatically (structure, both languages, no dashes, sources). Add your own tests next to your file only if the toy has real logic worth testing.
+- `npm test` runs `src/content/content.test.ts` over your lesson automatically (structure, all three languages, no dashes, sources). Add your own tests next to your file only if the toy has real logic worth testing.
 - `npm run build` must pass (type check included).
-- Look at it in a browser if you can: `npx vite preview --port <your port>` after a build, then walk the whole lesson (story, toy, wrong answer, right answer, widget question, badge). Set `localStorage` key `ripples.progress.v1` to `{"name":"Mia","lang":"en","muted":true,"badges":[<earlier ids>]}` to unlock your lesson. Check German too.
+- Look at it in a browser if you can: `npx vite preview --port <your port>` after a build, then walk the whole lesson (story, toy, wrong answer, right answer, widget question, badge). Set `localStorage` key `ripples.progress.v1` to `{"name":"Mia","lang":"en","muted":true,"badges":[<earlier ids>]}` to unlock your lesson. Check German and Polish too.
