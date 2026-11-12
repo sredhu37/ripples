@@ -32,8 +32,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -42,7 +42,7 @@ jobs:
       - run: npm run build
       - name: Write version.txt (the live check waits for this commit id)
         run: printf '%s\n' "$GITHUB_SHA" > dist/version.txt
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
@@ -54,7 +54,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
   live-check:
     needs: deploy
@@ -63,8 +63,8 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
       - name: Wait until the live site serves this commit
@@ -82,7 +82,7 @@ jobs:
         run: |
           git tag -f live-good "$GITHUB_SHA"
           git push --force origin refs/tags/live-good
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: live-lighthouse-reports
@@ -103,7 +103,7 @@ jobs:
             echo "::error::Rollback impossible: tag live-good does not exist. Place it on a known good commit of main (git tag live-good <sha> && git push origin live-good), then re-run this workflow."
             exit 1
           fi
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: live-good
           persist-credentials: false
@@ -116,7 +116,7 @@ jobs:
           if [ "$sha" = "$GITHUB_SHA" ]; then
             echo "::warning::live-good already points at this commit, so the rollback redeploys the same code."
           fi
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -125,7 +125,7 @@ jobs:
       - name: Write version.txt for the live-good commit
         run: git rev-parse HEAD > dist/version.txt
       # Own artifact name: this run already holds the "github-pages" artifact of the failed deploy.
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           name: github-pages-rollback
           path: dist
@@ -143,10 +143,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
         with:
           artifact_name: github-pages-rollback
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - name: Wait until the live site serves live-good
@@ -164,7 +164,7 @@ jobs:
       RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
       ROLLBACK_RESULT: build ${{ needs.rollback-build.result }}, deploy ${{ needs.rollback-deploy.result }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
           persist-credentials: false

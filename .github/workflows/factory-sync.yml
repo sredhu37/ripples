@@ -33,7 +33,7 @@ jobs:
       contents: read # scripts
       issues: write # labels
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           sparse-checkout: .github/scripts
           persist-credentials: false
