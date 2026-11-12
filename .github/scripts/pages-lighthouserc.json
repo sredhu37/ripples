@@ -1,0 +1,16 @@
+{
+  "ci": {
+    "collect": {
+      "numberOfRuns": 2
+    },
+    "assert": {
+      "assertions": {
+        "errors-in-console": ["error", { "minScore": 1, "aggregationMethod": "optimistic" }]
+      }
+    },
+    "upload": {
+      "target": "filesystem",
+      "outputDir": ".lighthouseci/reports"
+    }
+  }
+}
