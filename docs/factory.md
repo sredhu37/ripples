@@ -158,9 +158,22 @@ review passed ──► any changed file on the risky list? ──yes──► f
     Otherwise MERGE.
 - Output: one PR comment with the risks, MERGE or HUMAN, and the reason.
 
+**How `factory-gate.yml` runs it:**
+
+- `factory-review.yml` dispatches it with `pr` after a PASS. It checks: a factory PR, issue in `factory:in-review`, the head's review summary is a PASS and status `factory-review` is green, every required check is green, no gate comment for the head yet.
+- Risky list: the PR's changed files, old names of renamed files too, against `.github/gate-paths.txt` from main (`gate.mjs match`: `*` inside one folder, `**` any depth, anything else an exact path). One hit is HUMAN; the gate agent does not run.
+- Gate agent: `.claude/agents/gate.md` from main, Sonnet, 10 turns, `Read`, `Grep`, `Glob` only, a read-only `GITHUB_TOKEN`. It gets the diff, the PR description, the review summary and the evidence screenshots. Its final json `{decision, reason}` decides; a missing or invalid block is HUMAN.
+- One gate comment per head, marker `<!-- factory-gate sha=<sha> -->`: risks (risky files, or the agent's analysis), decision, reason.
+- MERGE: the head must be unchanged and every check green, then `sredhu37-bot` squash-merges with `FACTORY_TOKEN` (a `GITHUB_TOKEN` merge starts no push workflow, so `pages.yml` would not deploy). `Closes #n` closes the issue; the gate sets `factory:done` and moves the card to Done. A refused merge is HUMAN.
+- HUMAN: `factory:human`, card to Needs human, Telegram: `Needs human: PR #n "title"`, the reason, the PR link and the evidence video link (the first `/demo.mp4` link in the evidence comment, or the PR link).
+
 **Ruleset on main:** PR only, every CI check green, no force-push, Sunny on the bypass list.
 
-**Sunny's review:** pressing Merge is the approval. A comment from Sunny on a PR in "Needs human" starts a fix run; a question gets a reply instead of a code change. After the fix the PR returns to Sunny, not the gate (once HUMAN, stays HUMAN). These rounds do not count toward the 5-round limit.
+**Sunny's review:** Sunny's approving review is the approval (changed 12.11.2026; before, pressing Merge was the approval, [#116](https://github.com/sredhu37/ripples/issues/116), [#141](https://github.com/sredhu37/ripples/issues/141)). It applies to every PR in Needs human: risky-list PRs, gate HUMAN PRs and the revert PRs from `pages.yml`.
+
+- **Approve:** when `sredhu37` approves the PR's current head (the review's commit is the head; an approval of an older commit does not count) and every required check (`ci`, `lint`, `audit`, `lighthouse`, `demo`, `spec-rule`, `CodeQL`) is green, `sredhu37-bot` squash-merges it with `FACTORY_TOKEN`, so `pages.yml` deploys. Checks still running: the run waits up to 20 minutes. Still not green, or the head moved: no merge, a PR comment says why; approve again, or rerun `factory-gate.yml` with `pr` and mode `approve`.
+- **Comment or request changes:** a comment, a comment review or a "Request changes" review from `sredhu37` on a factory PR in `factory:human` starts a fix round: `factory-build.yml` with `issue`, `pr` and `human=<review|comment>:<id>`. A question gets a reply instead of a code change. After the round the PR returns to Sunny with a Telegram message, not to the gate (once HUMAN, stays HUMAN). These rounds do not count toward the 5-round limit.
+- **Why a relay:** `issue_comment` runs the workflow file from main, but `pull_request_review` runs the file from the PR's merge commit, so a PR that edits `factory-gate.yml` would run its own copy. The `pull_request_review` and `issue_comment` jobs therefore only dispatch `factory-gate.yml` on main (no secret, `actions: write`), and the dispatched run reads the review or comment again from the API. Merges and board moves run in jobs that check out main only and run no agent.
 
 ## Evidence
 
@@ -190,7 +203,7 @@ merge ──► pages.yml: build ──► deploy ──► live-check
 
 - The live site serves the last uploaded build (`build_type: workflow`), not the main branch, so a rollback needs no merge.
 - The live check has no speed limits (live network varies; speed is checked before merge).
-- The revert PR is opened with `FACTORY_TOKEN`, so its checks run without an approval click. It waits for Sunny's merge.
+- The revert PR is opened with `FACTORY_TOKEN`, so its checks run without an approval click. It waits for Sunny: his approval on its latest commit merges it (see Gate, Sunny's review).
 - At setup, `live-good` is placed once on the current main.
 
 ## Engine
@@ -199,33 +212,38 @@ merge ──► pages.yml: build ──► deploy ──► live-check
 
 GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`. Hermes is Sunny's cockpit (ask it about the factory), not the engine.
 
-| Workflow             | Runs on                                                                               | Does                                                                                        |
-| -------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `factory-build.yml`  | `issues: labeled` (`factory:ready`), `issues: closed` (unblocks), `workflow_dispatch` | pickup, label swap, build agent, opens PR                                                   |
-| `factory-review.yml` | `workflow_run` (CI workflows done on a factory PR), `workflow_dispatch`               | 4 review agents in parallel, suggestions issue, fix round, round counter                    |
-| `factory-gate.yml`   | review passed                                                                         | risky list, gate agent, merge with `FACTORY_TOKEN` or `factory:human`                       |
-| `factory-sweep.yml`  | hourly at :07; Monday 09:00 Europe/Berlin; `workflow_dispatch` (`task`, `dry_run`)    | restart paused `factory:ready` tickets, flag stuck builds, board reconcile; triage reminder |
-| `factory-sync.yml`   | `issues: labeled, closed, reopened`                                                   | card to the label's column; close sets `factory:done`                                       |
-| `pages.yml`          | push to main                                                                          | build, deploy, live check, rollback                                                         |
-| `demo.yml` (fixed)   | `pull_request`                                                                        | specs, evidence branch, evidence comment                                                    |
+| Workflow             | Runs on                                                                               | Does                                                                                                 |
+| -------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `factory-build.yml`  | `issues: labeled` (`factory:ready`), `issues: closed` (unblocks), `workflow_dispatch` | pickup, label swap, build agent, opens PR                                                            |
+| `factory-review.yml` | `workflow_run` (CI workflows done on a factory PR), `workflow_dispatch`               | 4 review agents in parallel, suggestions issue, fix round, round counter                             |
+| `factory-gate.yml`   | `workflow_dispatch` (`pr`, `mode`); `pull_request_review`, `issue_comment` (relay)    | risky list, gate agent, merge with `FACTORY_TOKEN` or `factory:human`; Sunny's approval and comments |
+| `factory-sweep.yml`  | hourly at :07; Monday 09:00 Europe/Berlin; `workflow_dispatch` (`task`, `dry_run`)    | restart paused `factory:ready` tickets, flag stuck builds, board reconcile; triage reminder          |
+| `factory-sync.yml`   | `issues: labeled, closed, reopened`                                                   | card to the label's column; close sets `factory:done`                                                |
+| `pages.yml`          | push to main                                                                          | build, deploy, live check, rollback                                                                  |
+| `demo.yml` (fixed)   | `pull_request`                                                                        | specs, evidence branch, evidence comment                                                             |
 
 Shared scripts in `.github/scripts/`, for every factory workflow:
 
-| Script                 | Does                                                                  | Token                      |
-| ---------------------- | --------------------------------------------------------------------- | -------------------------- |
-| `label-set.sh`         | gives an issue exactly one `factory:` label                           | `GITHUB_TOKEN`             |
-| `board-move.sh`        | moves the issue's card to a Status column, adds the card if missing   | `FACTORY_TOKEN` (no agent) |
-| `telegram.sh`          | sends a factory bot message to Sunny                                  | `TELEGRAM_TOKEN` + chat id |
-| `open-blockers.sh`     | lists an issue's open blockers                                        | `GITHUB_TOKEN`             |
-| `next-unblocked.sh`    | oldest `factory:ready` issue a closed issue unblocked                 | `GITHUB_TOKEN`             |
-| `usage-limit.sh`       | did a claude-code-action run stop on a Claude limit (execution file)  | none                       |
-| `build-runs-active.sh` | lists the `factory-build` runs that have not finished                 | `GITHUB_TOKEN`             |
-| `sweep-restart.sh`     | oldest unblocked `factory:ready` issue to restart, when no build runs | `GITHUB_TOKEN`             |
-| `sweep-stuck.sh`       | `factory:in-progress` issues with no build run for over 45 minutes    | `GITHUB_TOKEN`             |
-| `triage-reminder.sh`   | the triage reminder text, empty when no issue waits                   | `GITHUB_TOKEN`             |
-| `board-reconcile.sh`   | moves every card to its label's column (`DRY_RUN=1` only prints)      | `FACTORY_TOKEN` (no agent) |
-| `review-gate.sh`       | factory PR, current head, required checks green, round (max 5)        | `GITHUB_TOKEN`             |
-| `review.mjs`           | parses review agent json; writes the round summary and suggestions    | none                       |
+| Script                 | Does                                                                    | Token                      |
+| ---------------------- | ----------------------------------------------------------------------- | -------------------------- |
+| `label-set.sh`         | gives an issue exactly one `factory:` label                             | `GITHUB_TOKEN`             |
+| `board-move.sh`        | moves the issue's card to a Status column, adds the card if missing     | `FACTORY_TOKEN` (no agent) |
+| `telegram.sh`          | sends a factory bot message to Sunny                                    | `TELEGRAM_TOKEN` + chat id |
+| `open-blockers.sh`     | lists an issue's open blockers                                          | `GITHUB_TOKEN`             |
+| `next-unblocked.sh`    | oldest `factory:ready` issue a closed issue unblocked                   | `GITHUB_TOKEN`             |
+| `usage-limit.sh`       | did a claude-code-action run stop on a Claude limit (execution file)    | none                       |
+| `build-runs-active.sh` | lists the `factory-build` runs that have not finished                   | `GITHUB_TOKEN`             |
+| `sweep-restart.sh`     | oldest unblocked `factory:ready` issue to restart, when no build runs   | `GITHUB_TOKEN`             |
+| `sweep-stuck.sh`       | `factory:in-progress` issues with no build run for over 45 minutes      | `GITHUB_TOKEN`             |
+| `triage-reminder.sh`   | the triage reminder text, empty when no issue waits                     | `GITHUB_TOKEN`             |
+| `board-reconcile.sh`   | moves every card to its label's column (`DRY_RUN=1` only prints)        | `FACTORY_TOKEN` (no agent) |
+| `review-gate.sh`       | factory PR, current head, required checks green, round (max 5)          | `GITHUB_TOKEN`             |
+| `review.mjs`           | parses review agent json; writes the round summary and suggestions      | none                       |
+| `gate-check.sh`        | should the gate act: modes gate, approve, fix; risky files              | `GITHUB_TOKEN`             |
+| `gate.mjs`             | risky list matcher; parses the gate agent json; writes the gate comment | none                       |
+| `checks-green.sh`      | are a commit's required checks green; waits while they run              | `GITHUB_TOKEN`             |
+| `gate-merge.sh`        | squash-merges a PR if its head is unchanged and checks are green        | `FACTORY_TOKEN` (no agent) |
+| `pr-needs-human.sh`    | Telegram "Needs human" for a PR with the evidence video link            | `TELEGRAM_TOKEN` + chat id |
 
 **Claude account:** 2-week pilot on Sunny's Pro token (`CLAUDE_CODE_OAUTH_TOKEN`), Sonnet. Measure tokens per issue and how often Sunny is locked out, then choose an API key with a spend cap, a bigger plan, or Pro. Switch to an API key before porting to `repo-template`.
 
@@ -263,7 +281,7 @@ The factory bot messages Sunny only when he has to act or should know:
 ```
 Needs human: PR #130 "Lesson 4 toy"       Live site rolled back to live-good    Triage: 23 waiting
 reason: gate HUMAN, new screen            broken: #131                          (oldest 9 days)
-[video] link to PR                       revert PR #132 waits for your merge   link to board
+[video] link to PR                       revert PR #132 waits for your approval link to board
 ```
 
 Normal merges are silent.
@@ -306,4 +324,5 @@ Choices the agent made, not decided in a grilling round. Check these.
 | Weekly reminder         | Monday 09:00 Europe/Berlin, only when issues wait                                                                     | #124              |
 | Hourly check            | every hour, at a minute off the hour to avoid GitHub's busy top of the hour                                           | new while writing |
 | Stuck build             | `factory:in-progress` set by the factory over 45 minutes ago, no build run that could be building it: `factory:human` | #143              |
+| Approval wait           | after Sunny's approval, wait up to 20 minutes for running checks, then stop with a PR comment                         | new while writing |
 | `.worktrees/`           | added to `.gitignore` in the first build ticket                                                                       | #109              |
