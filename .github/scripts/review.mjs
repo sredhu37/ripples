@@ -176,12 +176,12 @@ export function dedupeSuggestions(results) {
   return [...byKey.values()];
 }
 
-/** Agent text made safe for a comment: no HTML comments (fake markers), length cut. */
+/** Agent text made safe for a comment: no HTML comment can open or close (fake markers), length cut. */
 export function clean(s) {
   let out = String(s ?? "")
     .replace(/\r/g, "")
-    .replace(/<!--/g, "<! --")
-    .replace(/-->/g, "-- >");
+    .replace(/<!/g, "< !")
+    .replace(/--!?>/g, "-- >");
   if (out.length > FIELD_MAX) out = `${out.slice(0, FIELD_MAX)} [cut]`;
   return out;
 }
