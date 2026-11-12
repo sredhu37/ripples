@@ -134,6 +134,8 @@ jobs:
   # an artifact uploaded a moment earlier in the same job (actions/deploy-pages#451).
   rollback-deploy:
     needs: rollback-build
+    # always(): live-check failed upstream, which would otherwise skip this job.
+    if: always() && needs.rollback-build.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment:
