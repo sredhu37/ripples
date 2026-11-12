@@ -224,26 +224,27 @@ GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`
 
 Shared scripts in `.github/scripts/`, for every factory workflow:
 
-| Script                 | Does                                                                    | Token                      |
-| ---------------------- | ----------------------------------------------------------------------- | -------------------------- |
-| `label-set.sh`         | gives an issue exactly one `factory:` label                             | `GITHUB_TOKEN`             |
-| `board-move.sh`        | moves the issue's card to a Status column, adds the card if missing     | `FACTORY_TOKEN` (no agent) |
-| `telegram.sh`          | sends a factory bot message to Sunny                                    | `TELEGRAM_TOKEN` + chat id |
-| `open-blockers.sh`     | lists an issue's open blockers                                          | `GITHUB_TOKEN`             |
-| `next-unblocked.sh`    | oldest `factory:ready` issue a closed issue unblocked                   | `GITHUB_TOKEN`             |
-| `usage-limit.sh`       | did a claude-code-action run stop on a Claude limit (execution file)    | none                       |
-| `build-runs-active.sh` | lists the `factory-build` runs that have not finished                   | `GITHUB_TOKEN`             |
-| `sweep-restart.sh`     | oldest unblocked `factory:ready` issue to restart, when no build runs   | `GITHUB_TOKEN`             |
-| `sweep-stuck.sh`       | `factory:in-progress` issues with no build run for over 45 minutes      | `GITHUB_TOKEN`             |
-| `triage-reminder.sh`   | the triage reminder text, empty when no issue waits                     | `GITHUB_TOKEN`             |
-| `board-reconcile.sh`   | moves every card to its label's column (`DRY_RUN=1` only prints)        | `FACTORY_TOKEN` (no agent) |
-| `review-gate.sh`       | factory PR, current head, required checks green, round (max 5)          | `GITHUB_TOKEN`             |
-| `review.mjs`           | parses review agent json; writes the round summary and suggestions      | none                       |
-| `gate-check.sh`        | should the gate act: modes gate, approve, fix; risky files              | `GITHUB_TOKEN`             |
-| `gate.mjs`             | risky list matcher; parses the gate agent json; writes the gate comment | none                       |
-| `checks-green.sh`      | are a commit's required checks green; waits while they run              | `GITHUB_TOKEN`             |
-| `gate-merge.sh`        | squash-merges a PR if its head is unchanged and checks are green        | `FACTORY_TOKEN` (no agent) |
-| `pr-needs-human.sh`    | Telegram "Needs human" for a PR with the evidence video link            | `TELEGRAM_TOKEN` + chat id |
+| Script                 | Does                                                                                           | Token                      |
+| ---------------------- | ---------------------------------------------------------------------------------------------- | -------------------------- |
+| `label-set.sh`         | gives an issue exactly one `factory:` label                                                    | `GITHUB_TOKEN`             |
+| `board-move.sh`        | moves the issue's card to a Status column, adds the card if missing                            | `FACTORY_TOKEN` (no agent) |
+| `telegram.sh`          | sends a factory bot message to Sunny                                                           | `TELEGRAM_TOKEN` + chat id |
+| `open-blockers.sh`     | lists an issue's open blockers                                                                 | `GITHUB_TOKEN`             |
+| `next-unblocked.sh`    | oldest `factory:ready` issue a closed issue unblocked                                          | `GITHUB_TOKEN`             |
+| `usage-limit.sh`       | did a claude-code-action run stop on a Claude limit (execution file)                           | none                       |
+| `agent-last-words.sh`  | the agent's final message and refused tools, for a stop without a PR (issue comment, Telegram) | none                       |
+| `build-runs-active.sh` | lists the `factory-build` runs that have not finished                                          | `GITHUB_TOKEN`             |
+| `sweep-restart.sh`     | oldest unblocked `factory:ready` issue to restart, when no build runs                          | `GITHUB_TOKEN`             |
+| `sweep-stuck.sh`       | `factory:in-progress` issues with no build run for over 45 minutes                             | `GITHUB_TOKEN`             |
+| `triage-reminder.sh`   | the triage reminder text, empty when no issue waits                                            | `GITHUB_TOKEN`             |
+| `board-reconcile.sh`   | moves every card to its label's column (`DRY_RUN=1` only prints)                               | `FACTORY_TOKEN` (no agent) |
+| `review-gate.sh`       | factory PR, current head, required checks green, round (max 5)                                 | `GITHUB_TOKEN`             |
+| `review.mjs`           | parses review agent json; writes the round summary and suggestions                             | none                       |
+| `gate-check.sh`        | should the gate act: modes gate, approve, fix; risky files                                     | `GITHUB_TOKEN`             |
+| `gate.mjs`             | risky list matcher; parses the gate agent json; writes the gate comment                        | none                       |
+| `checks-green.sh`      | are a commit's required checks green; waits while they run                                     | `GITHUB_TOKEN`             |
+| `gate-merge.sh`        | squash-merges a PR if its head is unchanged and checks are green                               | `FACTORY_TOKEN` (no agent) |
+| `pr-needs-human.sh`    | Telegram "Needs human" for a PR with the evidence video link                                   | `TELEGRAM_TOKEN` + chat id |
 
 **Claude account:** 2-week pilot on Sunny's Pro token (`CLAUDE_CODE_OAUTH_TOKEN`), Sonnet. Measure tokens per issue and how often Sunny is locked out, then choose an API key with a spend cap, a bigger plan, or Pro. Switch to an API key before porting to `repo-template`.
 

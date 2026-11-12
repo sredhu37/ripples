@@ -205,6 +205,7 @@ jobs:
     outputs:
       limit: ${{ steps.limit.outputs.limit }}
       limit_evidence: ${{ steps.limit.outputs.evidence }}
+      last_words: ${{ steps.words.outputs.text }}
     env:
       ISSUE: ${{ needs.pickup.outputs.issue }}
       BRANCH: factory/issue-${{ needs.pickup.outputs.issue }}
@@ -379,6 +380,20 @@ jobs:
             echo "limit=false" >> "$GITHUB_OUTPUT"
           fi
 
+      # The action hides the transcript (show_full_output: false) and deletes it with the job,
+      # so keep the agent's final message: a stop without a PR must say why.
+      - name: Agent's last words
+        id: words
+        if: always()
+        env:
+          EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          file=${EXECUTION_FILE:-$RUNNER_TEMP/claude-execution-output.json}
+          text=$(.github/scripts/agent-last-words.sh "$file" 1500 || true)
+          printf '%s\n' "${text:-(no final message)}"
+          delim="EOF_$(openssl rand -hex 8)"
+          { echo "text<<$delim"; printf '%s\n' "$text"; echo "$delim"; } >> "$GITHUB_OUTPUT"
+
   finish:
     needs: [pickup, build]
     if: always() && needs.pickup.outputs.go == 'true'
@@ -484,15 +499,23 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           REASON: ${{ steps.outcome.outputs.reason }}
           HUMAN: ${{ needs.pickup.outputs.human }}
+          LAST_WORDS: ${{ needs.build.outputs.last_words }}
         run: |
           set -euo pipefail
           .github/scripts/label-set.sh "$ISSUE" factory:human
           if [ -n "$HUMAN" ]; then
             exit 0 # Sunny's own round: the PR note and the Telegram message say it
           fi
-          gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body "Needs human: $REASON.
-
-          Run: $RUN_URL"
+          {
+            printf 'Needs human: %s.\n\n' "$REASON"
+            if [ -n "$LAST_WORDS" ]; then
+              printf 'The build agent said:\n\n'
+              printf '%s\n' "$LAST_WORDS" | sed 's/^/> /'
+              printf '\n'
+            fi
+            printf 'Run: %s\n' "$RUN_URL"
+          } > "$RUNNER_TEMP/needs-human.md"
+          gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/needs-human.md"
       - name: Board to Needs human
         if: steps.outcome.outputs.outcome == 'human'
         continue-on-error: true
@@ -515,10 +538,18 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           REASON: ${{ steps.outcome.outputs.reason }}
+          LAST_WORDS: ${{ needs.build.outputs.last_words }}
         run: |
           set -euo pipefail
           title=$(gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE" --jq .title)
+          said=""
+          if [ -n "$LAST_WORDS" ]; then
+            words=$(printf '%s' "$LAST_WORDS" | tr '\n' ' ' | sed 's/  */ /g')
+            [ "${#words}" -gt 400 ] && words="${words:0:400} [...]"
+            said="
+          agent: $words"
+          fi
           .github/scripts/telegram.sh "Needs human: #$ISSUE \"$title\"
-          reason: build, $REASON
+          reason: build, $REASON$said
           $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/issues/$ISSUE
           run: $RUN_URL"
