@@ -69,3 +69,4 @@ End your answer with exactly one fenced json block, nothing after it:
 ```
 
 `result` is `"PASS"` or `"FAIL"`. `level` is `"FAIL"` or `"SUGGESTION"`. `findings` is `[]` when there are none.
+
