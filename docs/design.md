@@ -6,7 +6,7 @@ Settled with Sunny before building. Change one only by naming it as a change.
 
 1. **Audience:** a family tool for one child (age 8). No accounts, no product features.
 2. **Lesson shape:** story, then toy, then 3 questions, about 5 minutes.
-3. **Languages:** English and German with a switch. Every lesson is written in both.
+3. **Languages:** English, German and Polish with a switch. Every lesson is written in all three.
 4. **Scope order:** Money and Work first. Then Business, Markets, Governments, History, Technology (dependency order, groups 2 and 4 can swap).
 5. **Real world link:** every lesson ends with an "In real life" card in Germany and euros.
 6. **Parent role:** the child plays alone. One "Ask Dad" question per lesson. No parent dashboard.
