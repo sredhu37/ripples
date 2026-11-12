@@ -207,6 +207,17 @@ GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`
 | `pages.yml`          | push to main                                                                          | build, deploy, live check, rollback                                      |
 | `demo.yml` (fixed)   | `pull_request`                                                                        | specs, evidence branch, evidence comment                                 |
 
+Shared scripts in `.github/scripts/`, for every factory workflow:
+
+| Script              | Does                                                                 | Token                      |
+| ------------------- | -------------------------------------------------------------------- | -------------------------- |
+| `label-set.sh`      | gives an issue exactly one `factory:` label                          | `GITHUB_TOKEN`             |
+| `board-move.sh`     | moves the issue's card to a Status column, adds the card if missing  | `FACTORY_TOKEN` (no agent) |
+| `telegram.sh`       | sends a factory bot message to Sunny                                 | `TELEGRAM_TOKEN` + chat id |
+| `open-blockers.sh`  | lists an issue's open blockers                                       | `GITHUB_TOKEN`             |
+| `next-unblocked.sh` | oldest `factory:ready` issue a closed issue unblocked                | `GITHUB_TOKEN`             |
+| `usage-limit.sh`    | did a claude-code-action run stop on a Claude limit (execution file) | none                       |
+
 **Claude account:** 2-week pilot on Sunny's Pro token (`CLAUDE_CODE_OAUTH_TOKEN`), Sonnet. Measure tokens per issue and how often Sunny is locked out, then choose an API key with a spend cap, a bigger plan, or Pro. Switch to an API key before porting to `repo-template`.
 
 ## Identity, secrets and permissions

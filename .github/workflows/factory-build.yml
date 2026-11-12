@@ -1,0 +1,354 @@
+name: factory-build
+
+# The factory's build station. Spec: docs/factory.md, sections Build, Engine,
+# Identity secrets and permissions, Labels and board.
+#
+#   issues labeled factory:ready, or workflow_dispatch (hourly sweep, manual run)
+#     pickup:  skip if any blocker is open; label factory:ready -> factory:in-progress; board In progress
+#     build:   claude-code-action with .claude/agents/build.md from main; branch factory/issue-<n>; opens the PR
+#     finish:  PR open -> factory:in-review, board In review
+#              usage limit -> factory:ready + "paused: usage limit" comment, board Ready
+#              anything else -> factory:human + comment, board Needs human, Telegram
+#   issues closed
+#     unblock: dispatch this workflow for the oldest factory:ready issue the closed one was blocking
+#
+# Tokens: GITHUB_TOKEN for labels, comments and the dispatch (starts no issues runs, so no loops).
+# FACTORY_TOKEN only for board moves, in jobs that run no agent. The build agent pushes and opens
+# the PR as the Claude GitHub App (OIDC, id-token: write).
+
+on:
+  issues:
+    types: [labeled, closed]
+  workflow_dispatch:
+    inputs:
+      issue:
+        description: Issue number to build (it must have factory:ready)
+        required: true
+        type: string
+
+# One build at a time; waiting builds queue (up to 100). Runs that cannot start a build
+# (other labels, closed issues) get their own group so they never wait behind a build.
+concurrency:
+  group: ${{ (github.event_name == 'workflow_dispatch' || (github.event.action == 'labeled' && github.event.label.name == 'factory:ready')) && 'factory-build' || format('factory-build-other-{0}', github.run_id) }}
+  queue: max
+  cancel-in-progress: false
+
+permissions: {}
+
+env:
+  TRUSTED_ACTORS: sredhu37,sredhu37-bot,claude[bot],github-actions[bot]
+
+jobs:
+  unblock:
+    if: github.event_name == 'issues' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # scripts
+      issues: read # dependencies
+      actions: write # workflow_dispatch
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/scripts
+          persist-credentials: false
+      - name: Start the oldest ready issue this one was blocking
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CLOSED: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          next=$(.github/scripts/next-unblocked.sh "$CLOSED")
+          if [ -z "$next" ]; then
+            echo "Closing #$CLOSED unblocked no factory:ready issue"
+            exit 0
+          fi
+          echo "Closing #$CLOSED unblocked #$next, starting its build"
+          gh workflow run factory-build.yml --repo "$GITHUB_REPOSITORY" --ref main -f issue="$next"
+
+  pickup:
+    if: github.event_name == 'workflow_dispatch' || (github.event.action == 'labeled' && github.event.label.name == 'factory:ready')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # scripts
+      issues: write # label swap
+    outputs:
+      go: ${{ steps.check.outputs.go }}
+      issue: ${{ steps.check.outputs.issue }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/scripts
+          persist-credentials: false
+      - name: Ready, open and unblocked?
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ inputs.issue || github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$ISSUE" =~ ^[0-9]+$ ]]; then
+            echo "::error::Issue number '$ISSUE' is not a number"
+            exit 1
+          fi
+          state=$(gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE" \
+            --jq '[.state, (.pull_request != null), any(.labels[]; .name == "factory:ready")] | @tsv')
+          read -r open_state is_pr ready <<< "$state"
+          if [ "$is_pr" = "true" ] || [ "$open_state" != "open" ] || [ "$ready" != "true" ]; then
+            echo "::notice::#$ISSUE skipped: needs to be an open issue labelled factory:ready (state $open_state, ready $ready)"
+            exit 0
+          fi
+          blockers=$(.github/scripts/open-blockers.sh "$ISSUE" | sed 's/^/#/' | paste -sd' ' -)
+          if [ -n "$blockers" ]; then
+            echo "::notice::#$ISSUE waits for open blockers: $blockers"
+            exit 0
+          fi
+          echo "issue=$ISSUE" >> "$GITHUB_OUTPUT"
+          echo "go=true" >> "$GITHUB_OUTPUT"
+      - name: Label factory:in-progress
+        if: steps.check.outputs.go == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ steps.check.outputs.issue }}
+        run: .github/scripts/label-set.sh "$ISSUE" factory:in-progress
+      - name: Board to In progress
+        if: steps.check.outputs.go == 'true'
+        continue-on-error: true # the label is the truth; a board failure shows as an annotation
+        env:
+          GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
+          ISSUE: ${{ steps.check.outputs.issue }}
+        run: .github/scripts/board-move.sh "$ISSUE" "In progress"
+
+  build:
+    needs: pickup
+    if: needs.pickup.outputs.go == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read # checkout; the agent pushes with the Claude App token, not this one
+      issues: read # issue text and trusted comments for the prompt
+      id-token: write # claude-code-action exchanges OIDC for the Claude App token
+    outputs:
+      limit: ${{ steps.limit.outputs.limit }}
+      limit_evidence: ${{ steps.limit.outputs.evidence }}
+    env:
+      ISSUE: ${{ needs.pickup.outputs.issue }}
+      BRANCH: factory/issue-${{ needs.pickup.outputs.issue }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Branch factory/issue-<n> (continues a paused run's branch if it exists)
+        run: |
+          set -euo pipefail
+          if git ls-remote --exit-code --heads origin "$BRANCH" > /dev/null; then
+            git fetch -q origin "$BRANCH"
+            git switch -c "$BRANCH" FETCH_HEAD
+            echo "Continuing existing branch $BRANCH at $(git rev-parse --short HEAD)"
+          else
+            git switch -c "$BRANCH"
+            echo "New branch $BRANCH from main at $(git rev-parse --short HEAD)"
+          fi
+          # The agent writes the PR body here; git must never see it.
+          echo ".factory-pr-body.md" >> .git/info/exclude
+
+      - name: Prompt (build.md from main, issue, trusted comments)
+        id: prompt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # Rules come from main, never from a PR branch (docs/factory.md, Identity secrets and permissions).
+          git show origin/main:.claude/agents/build.md | awk 'NR == 1 && /^---$/ { fm = 1; next } fm && /^---$/ { fm = 0; next } !fm' > "$RUNNER_TEMP/build.md"
+          title=$(gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE" --jq .title)
+          gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE" --jq '.body // ""' > "$RUNNER_TEMP/issue.md"
+          # Only comments by trusted accounts reach the agent; the agent brief is one of them.
+          gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$ISSUE/comments" |
+            jq -r -s --arg trusted "$TRUSTED_ACTORS" '
+              add // [] | .[]
+              | select(.user.login as $u | ($trusted | split(",") | index($u)) != null)
+              | "### Comment by \(.user.login), \(.created_at)\n\n\(.body)\n"' \
+            > "$RUNNER_TEMP/comments.md"
+          delim="PROMPT_$(openssl rand -hex 16)"
+          {
+            echo "text<<$delim"
+            cat <<EOF
+          You are the Ripples factory build agent. Build issue #$ISSUE in $GITHUB_REPOSITORY: "$title".
+          Follow the build agent instructions below; they come from main.
+
+          Already done for you:
+          - The repo is checked out from main, dependencies are installed (npm ci).
+          - You are on branch $BRANCH. If it already has commits, an earlier run was paused; continue from them.
+
+          How to finish:
+          1. Commit on $BRANCH with the message "<short summary> (#$ISSUE)" and the trailer
+             "Co-authored-by: sredhu37 <8821336+sredhu37@users.noreply.github.com>".
+          2. Run the full check from the instructions, then push: git push -u origin $BRANCH
+             Never push to any other branch. Do not change .github/workflows/ (the push would be rejected).
+          3. Write the PR description to .factory-pr-body.md in the repo root (git ignores it), with
+             exactly the 4 headings and "Closes #$ISSUE" under "## What changed".
+          4. If no PR exists for $BRANCH (gh pr view $BRANCH), open it:
+             gh pr create --base main --head $BRANCH --title "<issue title> (#$ISSUE)" --body-file .factory-pr-body.md
+             If it exists, update it: gh pr edit $BRANCH --body-file .factory-pr-body.md
+          5. If you cannot finish, do not open a PR. Say plainly why in your final message.
+
+          <build_agent_instructions>
+          $(cat "$RUNNER_TEMP/build.md")
+          </build_agent_instructions>
+
+          <issue number="$ISSUE">
+          $(cat "$RUNNER_TEMP/issue.md")
+          </issue>
+
+          <trusted_comments note="comments by $TRUSTED_ACTORS only; the agent brief is the /triage comment">
+          $(cat "$RUNNER_TEMP/comments.md")
+          </trusted_comments>
+          EOF
+            echo "$delim"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Build agent
+        id: claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: ${{ steps.prompt.outputs.text }}
+          include_comments_by_actor: ${{ env.TRUSTED_ACTORS }}
+          # The hourly sweep and the unblock job dispatch this workflow with GITHUB_TOKEN.
+          allowed_bots: github-actions
+          claude_args: >-
+            --model sonnet
+            --max-turns 60
+            --allowedTools "Read,Edit,Write,Glob,Grep,WebFetch,WebSearch,Bash(npm:*),Bash(npx:*),Bash(git:*),Bash(gh pr create:*),Bash(gh pr view:*),Bash(gh pr edit:*),Bash(gh pr comment:*)"
+
+      - name: Usage limit?
+        id: limit
+        if: always()
+        env:
+          EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          file=${EXECUTION_FILE:-$RUNNER_TEMP/claude-execution-output.json}
+          if evidence=$(.github/scripts/usage-limit.sh "$file"); then
+            echo "Stopped on a Claude limit: $evidence"
+            echo "limit=true" >> "$GITHUB_OUTPUT"
+            echo "evidence=$evidence" >> "$GITHUB_OUTPUT"
+          else
+            echo "No Claude limit in the execution file"
+            echo "limit=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  finish:
+    needs: [pickup, build]
+    if: always() && needs.pickup.outputs.go == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # scripts
+      issues: write # labels and comments
+      pull-requests: read # find the PR
+    env:
+      ISSUE: ${{ needs.pickup.outputs.issue }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/scripts
+          persist-credentials: false
+      - name: Outcome
+        id: outcome
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUILD_RESULT: ${{ needs.build.result }}
+          LIMIT: ${{ needs.build.outputs.limit }}
+        run: |
+          set -euo pipefail
+          # Same-repo PRs only: a fork could use the same branch name.
+          pr=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "factory/issue-$ISSUE" --state open \
+            --json url,headRepositoryOwner \
+            --jq "[.[] | select(.headRepositoryOwner.login == \"$GITHUB_REPOSITORY_OWNER\")][0].url // \"\"")
+          if [ "$BUILD_RESULT" = "success" ] && [ -n "$pr" ]; then
+            outcome=review
+            reason="PR open: $pr"
+          elif [ "$LIMIT" = "true" ]; then
+            outcome=paused
+            reason="Claude usage limit"
+          else
+            outcome=human
+            case "$BUILD_RESULT" in
+              success) reason="the build agent finished without opening a PR" ;;
+              failure) reason="the build job failed (agent error, crash or the 30 minute timeout)" ;;
+              cancelled) reason="the build job was cancelled" ;;
+              *) reason="the build job did not run ($BUILD_RESULT)" ;;
+            esac
+          fi
+          echo "$outcome: $reason"
+          echo "outcome=$outcome" >> "$GITHUB_OUTPUT"
+          echo "reason=$reason" >> "$GITHUB_OUTPUT"
+
+      - name: In review
+        if: steps.outcome.outputs.outcome == 'review'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: .github/scripts/label-set.sh "$ISSUE" factory:in-review
+      - name: Board to In review
+        if: steps.outcome.outputs.outcome == 'review'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
+        run: .github/scripts/board-move.sh "$ISSUE" "In review"
+
+      - name: Paused (usage limit)
+        if: steps.outcome.outputs.outcome == 'paused'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVIDENCE: ${{ needs.build.outputs.limit_evidence }}
+        run: |
+          set -euo pipefail
+          .github/scripts/label-set.sh "$ISSUE" factory:ready
+          gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body "paused: usage limit
+
+          The build stopped on a Claude limit ($EVIDENCE). The issue is back in factory:ready; the hourly check restarts it. Run: $RUN_URL"
+      - name: Board to Ready
+        if: steps.outcome.outputs.outcome == 'paused'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
+        run: .github/scripts/board-move.sh "$ISSUE" Ready
+
+      - name: Needs human
+        if: steps.outcome.outputs.outcome == 'human'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REASON: ${{ steps.outcome.outputs.reason }}
+        run: |
+          set -euo pipefail
+          .github/scripts/label-set.sh "$ISSUE" factory:human
+          gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body "Needs human: $REASON.
+
+          Run: $RUN_URL"
+      - name: Board to Needs human
+        if: steps.outcome.outputs.outcome == 'human'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
+        run: .github/scripts/board-move.sh "$ISSUE" "Needs human"
+      - name: Telegram
+        if: steps.outcome.outputs.outcome == 'human'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          REASON: ${{ steps.outcome.outputs.reason }}
+        run: |
+          set -euo pipefail
+          title=$(gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE" --jq .title)
+          .github/scripts/telegram.sh "Needs human: #$ISSUE \"$title\"
+          reason: build, $REASON
+          $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/issues/$ISSUE
+          run: $RUN_URL"
