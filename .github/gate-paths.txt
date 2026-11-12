@@ -1,0 +1,21 @@
+# Risky list for the factory gate. Spec: docs/factory.md, section Gate.
+# A PR that changes any file matching a pattern below goes to Sunny (factory:human).
+# Format: one pattern per line, relative to the repo root. "*" matches inside one folder, "**" matches any depth.
+# Lines starting with "#" and blank lines are ignored.
+# This file is on its own list.
+src/progress.ts
+public/sw.js
+public/manifest.webmanifest
+package.json
+package-lock.json
+vite.config.ts
+.github/**
+.github/gate-paths.txt
+AGENTS.md
+CLAUDE.md
+.claude/**
+ARCHITECTURE.md
+docs/**
+LICENSE
+LICENSE-CONTENT.txt
+LICENSING.md
