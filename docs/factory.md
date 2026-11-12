@@ -213,14 +213,14 @@ GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`
 
 ([#113](https://github.com/sredhu37/ripples/issues/113), [#126](https://github.com/sredhu37/ripples/issues/126))
 
-| Actor                 | Identity                                                                                             | Used for                                                   |
-| --------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| Agent code            | `claude[bot]` via the Claude GitHub App, Sunny as co-author                                          | commits and PR on the build branch                         |
-| Factory plumbing      | machine account `sredhu37-factory`, classic token `FACTORY_TOKEN` (`repo`, `project`, 1-year expiry) | board moves, gate merge (so `pages.yml` fires), revert PRs |
-| Label swaps, comments | `GITHUB_TOKEN`                                                                                       | no new workflow runs, so no loops                          |
-| Notifications         | Telegram factory bot, `TELEGRAM_TOKEN` + chat id                                                     | "Your turn", rollbacks, triage reminder                    |
+| Actor                 | Identity                                                                                         | Used for                                                   |
+| --------------------- | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- |
+| Agent code            | `claude[bot]` via the Claude GitHub App, Sunny as co-author                                      | commits and PR on the build branch                         |
+| Factory plumbing      | machine account `sredhu37-bot`, classic token `FACTORY_TOKEN` (`repo`, `project`, 1-year expiry) | board moves, gate merge (so `pages.yml` fires), revert PRs |
+| Label swaps, comments | `GITHUB_TOKEN`                                                                                   | no new workflow runs, so no loops                          |
+| Notifications         | Telegram factory bot, `TELEGRAM_TOKEN` + chat id                                                 | "Your turn", rollbacks, triage reminder                    |
 
-**Trusted input:** every agent step sets `include_comments_by_actor` to `sredhu37`, `sredhu37-factory`, `claude[bot]`, `github-actions[bot]`. Other comments stay visible on GitHub but never reach an agent.
+**Trusted input:** every agent step sets `include_comments_by_actor` to `sredhu37`, `sredhu37-bot`, `claude[bot]`, `github-actions[bot]`. Other comments stay visible on GitHub but never reach an agent.
 
 **Tools per agent** (`--allowedTools`):
 
@@ -263,7 +263,7 @@ Normal merges are silent.
 
 Steps only a human can do. Filed as one `factory:human` ticket.
 
-1. Create the machine account `sredhu37-factory` (own email, 2FA), invite it to ripples and to board #2, create its classic token, store it as `FACTORY_TOKEN`.
+1. Create the machine account `sredhu37-bot` (own email, 2FA), invite it to ripples and to board #2, create its classic token, store it as `FACTORY_TOKEN`.
 2. Create the Telegram factory bot in BotFather; store `TELEGRAM_TOKEN` and the chat id.
 3. Run `claude setup-token`; store it as `CLAUDE_CODE_OAUTH_TOKEN`. Install the Claude GitHub App on ripples.
 4. Board #2: add the "Your turn" column; turn off the 4 board workflows listed under [Labels and board](#labels-and-board).
