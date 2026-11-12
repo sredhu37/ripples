@@ -55,6 +55,7 @@ triage ─► ready ─► in-progress ─► in-review ─► done
 ```
 
 - Status changes on a user-owned board cannot trigger anything (`projects_v2_item` is org-only), so a label starts the factory and the engine moves the card. Nobody drags cards.
+- **Board reconcile:** every hour `factory-sweep.yml` puts each card back in the column of its issue's `factory:` label, so a dragged card or a missed label event fixes itself. A closed issue goes to Done. An issue with no `factory:` label, more than one, or an open issue with `factory:done` (Done would close it) stays where it is.
 - `wontfix` stays a plain label. GitHub's other default labels stay and the factory ignores them.
 - Build tickets split from a confirmed wayfinder spec get `factory:ready`. `wayfinder:task` keeps its meaning: work that unblocks a decision.
 - `docs/agents/triage-labels.md` maps the `/triage` skill's roles: `needs-triage` → `factory:triage`, `ready-for-agent` → `factory:ready`, `needs-info` and `ready-for-human` → `factory:human`, `wontfix` → `wontfix`.
@@ -198,25 +199,30 @@ merge ──► pages.yml: build ──► deploy ──► live-check
 
 GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`. Hermes is Sunny's cockpit (ask it about the factory), not the engine.
 
-| Workflow             | Runs on                                                                               | Does                                                                     |
-| -------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `factory-build.yml`  | `issues: labeled` (`factory:ready`), `issues: closed` (unblocks), `workflow_dispatch` | pickup, label swap, build agent, opens PR                                |
-| `factory-review.yml` | `pull_request` (opened, synchronize) after CI                                         | 4 review agents in parallel, suggestions issue, fix round, round counter |
-| `factory-gate.yml`   | review passed                                                                         | risky list, gate agent, merge with `FACTORY_TOKEN` or `factory:human`    |
-| `factory-sweep.yml`  | hourly; Monday 09:00                                                                  | restart paused `factory:ready` tickets; triage reminder                  |
-| `pages.yml`          | push to main                                                                          | build, deploy, live check, rollback                                      |
-| `demo.yml` (fixed)   | `pull_request`                                                                        | specs, evidence branch, evidence comment                                 |
+| Workflow             | Runs on                                                                               | Does                                                                                        |
+| -------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `factory-build.yml`  | `issues: labeled` (`factory:ready`), `issues: closed` (unblocks), `workflow_dispatch` | pickup, label swap, build agent, opens PR                                                   |
+| `factory-review.yml` | `pull_request` (opened, synchronize) after CI                                         | 4 review agents in parallel, suggestions issue, fix round, round counter                    |
+| `factory-gate.yml`   | review passed                                                                         | risky list, gate agent, merge with `FACTORY_TOKEN` or `factory:human`                       |
+| `factory-sweep.yml`  | hourly at :07; Monday 09:00 Europe/Berlin; `workflow_dispatch` (`task`, `dry_run`)    | restart paused `factory:ready` tickets, flag stuck builds, board reconcile; triage reminder |
+| `pages.yml`          | push to main                                                                          | build, deploy, live check, rollback                                                         |
+| `demo.yml` (fixed)   | `pull_request`                                                                        | specs, evidence branch, evidence comment                                                    |
 
 Shared scripts in `.github/scripts/`, for every factory workflow:
 
-| Script              | Does                                                                 | Token                      |
-| ------------------- | -------------------------------------------------------------------- | -------------------------- |
-| `label-set.sh`      | gives an issue exactly one `factory:` label                          | `GITHUB_TOKEN`             |
-| `board-move.sh`     | moves the issue's card to a Status column, adds the card if missing  | `FACTORY_TOKEN` (no agent) |
-| `telegram.sh`       | sends a factory bot message to Sunny                                 | `TELEGRAM_TOKEN` + chat id |
-| `open-blockers.sh`  | lists an issue's open blockers                                       | `GITHUB_TOKEN`             |
-| `next-unblocked.sh` | oldest `factory:ready` issue a closed issue unblocked                | `GITHUB_TOKEN`             |
-| `usage-limit.sh`    | did a claude-code-action run stop on a Claude limit (execution file) | none                       |
+| Script                 | Does                                                                  | Token                      |
+| ---------------------- | --------------------------------------------------------------------- | -------------------------- |
+| `label-set.sh`         | gives an issue exactly one `factory:` label                           | `GITHUB_TOKEN`             |
+| `board-move.sh`        | moves the issue's card to a Status column, adds the card if missing   | `FACTORY_TOKEN` (no agent) |
+| `telegram.sh`          | sends a factory bot message to Sunny                                  | `TELEGRAM_TOKEN` + chat id |
+| `open-blockers.sh`     | lists an issue's open blockers                                        | `GITHUB_TOKEN`             |
+| `next-unblocked.sh`    | oldest `factory:ready` issue a closed issue unblocked                 | `GITHUB_TOKEN`             |
+| `usage-limit.sh`       | did a claude-code-action run stop on a Claude limit (execution file)  | none                       |
+| `build-runs-active.sh` | lists the `factory-build` runs that have not finished                 | `GITHUB_TOKEN`             |
+| `sweep-restart.sh`     | oldest unblocked `factory:ready` issue to restart, when no build runs | `GITHUB_TOKEN`             |
+| `sweep-stuck.sh`       | `factory:in-progress` issues with no build run for over 45 minutes    | `GITHUB_TOKEN`             |
+| `triage-reminder.sh`   | the triage reminder text, empty when no issue waits                   | `GITHUB_TOKEN`             |
+| `board-reconcile.sh`   | moves every card to its label's column (`DRY_RUN=1` only prints)      | `FACTORY_TOKEN` (no agent) |
 
 **Claude account:** 2-week pilot on Sunny's Pro token (`CLAUDE_CODE_OAUTH_TOKEN`), Sonnet. Measure tokens per issue and how often Sunny is locked out, then choose an API key with a spend cap, a bigger plan, or Pro. Switch to an API key before porting to `repo-template`.
 
@@ -284,16 +290,17 @@ Steps only a human can do. Filed as one `factory:human` ticket.
 
 Choices the agent made, not decided in a grilling round. Check these.
 
-| Default                 | Value                                                                       | Source            |
-| ----------------------- | --------------------------------------------------------------------------- | ----------------- |
-| Model                   | Sonnet for all agents during the pilot                                      | #113 guardrail    |
-| Turn caps               | build 60, each review agent 15, gate 10                                     | #126              |
-| Job timeout             | 30 minutes per agent job                                                    | #126              |
-| Spec run time           | revisit if the full run exceeds 10 minutes                                  | #117              |
-| Live check wait         | poll `version.txt` with a cache-busting query; Pages caches for 10 minutes  | #116              |
-| `npm audit`             | default level, which fails on any known hole, including low severity        | new while writing |
-| Lighthouse in PR CI     | runs against the built app served by `vite preview`                         | new while writing |
-| Suggestions issue title | `Suggestions from PR #<n>: <PR title>`                                      | new while writing |
-| Weekly reminder         | Monday 09:00 Europe/Berlin, only when issues wait                           | #124              |
-| Hourly check            | every hour, at a minute off the hour to avoid GitHub's busy top of the hour | new while writing |
-| `.worktrees/`           | added to `.gitignore` in the first build ticket                             | #109              |
+| Default                 | Value                                                                                                                 | Source            |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| Model                   | Sonnet for all agents during the pilot                                                                                | #113 guardrail    |
+| Turn caps               | build 60, each review agent 15, gate 10                                                                               | #126              |
+| Job timeout             | 30 minutes per agent job                                                                                              | #126              |
+| Spec run time           | revisit if the full run exceeds 10 minutes                                                                            | #117              |
+| Live check wait         | poll `version.txt` with a cache-busting query; Pages caches for 10 minutes                                            | #116              |
+| `npm audit`             | default level, which fails on any known hole, including low severity                                                  | new while writing |
+| Lighthouse in PR CI     | runs against the built app served by `vite preview`                                                                   | new while writing |
+| Suggestions issue title | `Suggestions from PR #<n>: <PR title>`                                                                                | new while writing |
+| Weekly reminder         | Monday 09:00 Europe/Berlin, only when issues wait                                                                     | #124              |
+| Hourly check            | every hour, at a minute off the hour to avoid GitHub's busy top of the hour                                           | new while writing |
+| Stuck build             | `factory:in-progress` set by the factory over 45 minutes ago, no build run that could be building it: `factory:human` | #143              |
+| `.worktrees/`           | added to `.gitignore` in the first build ticket                                                                       | #109              |

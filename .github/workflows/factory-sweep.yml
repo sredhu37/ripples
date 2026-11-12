@@ -1,0 +1,184 @@
+name: factory-sweep
+
+# The factory's safety net. Spec: docs/factory.md, sections Build, Triage, Labels and board, Engine.
+#
+#   hourly at :07 (off GitHub's busy top of the hour)
+#     sweep:     restart the oldest unblocked factory:ready issue when no build runs
+#                (paused by a usage limit, or its event was missed): dispatch factory-build.yml.
+#                factory:in-progress set by the factory over 45 minutes ago with no build run
+#                that could be building it: factory:human, comment, board Needs human, Telegram.
+#     reconcile: put every card on board #2 back in the column of its issue's factory: label
+#                (board drags trigger nothing on a user-owned board).
+#   Monday 09:00 Europe/Berlin
+#     reminder:  Telegram with the count of open factory:triage issues, the oldest age and the
+#                board link; silent when none waits.
+#   workflow_dispatch: run one part (or all) by hand; reconcile can be a dry run.
+#
+# Tokens: GITHUB_TOKEN for reads, labels, comments and the dispatch (a dispatch starts a run,
+# label events from it do not). FACTORY_TOKEN only for the board, in steps that run no agent.
+
+on:
+  schedule:
+    - cron: "7 * * * *"
+    - cron: "0 9 * * 1"
+      timezone: Europe/Berlin
+  workflow_dispatch:
+    inputs:
+      task:
+        description: Which part to run
+        required: true
+        default: all
+        type: choice
+        options: [all, sweep, reminder, reconcile]
+      dry_run:
+        description: Reconcile only prints the moves
+        required: false
+        default: false
+        type: boolean
+
+permissions: {}
+
+jobs:
+  sweep:
+    if: github.event.schedule == '7 * * * *' || inputs.task == 'sweep' || inputs.task == 'all'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Two sweeps at once could dispatch the same issue twice.
+    concurrency:
+      group: factory-sweep-restart
+      cancel-in-progress: false
+    permissions:
+      contents: read # scripts
+      issues: write # labels and comments
+      actions: write # read factory-build runs, dispatch factory-build
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/scripts
+          persist-credentials: false
+
+      - name: Restart a paused or missed factory:ready issue
+        run: |
+          set -euo pipefail
+          issue=$(.github/scripts/sweep-restart.sh)
+          if [ -z "$issue" ]; then
+            echo "Nothing to restart"
+            exit 0
+          fi
+          echo "::notice::Restarting #$issue: dispatching factory-build"
+          gh workflow run factory-build.yml --repo "$GITHUB_REPOSITORY" --ref main -f issue="$issue"
+
+      - name: Find builds stuck in factory:in-progress
+        id: stuck
+        run: |
+          set -euo pipefail
+          stuck=$(.github/scripts/sweep-stuck.sh)
+          if [ -z "$stuck" ]; then
+            echo "No stuck build"
+            exit 0
+          fi
+          echo "::warning::Stuck in factory:in-progress (issue, minutes): $(echo "$stuck" | paste -sd';' -)"
+          {
+            echo "issues=$(echo "$stuck" | awk '{ print $1 }' | paste -sd' ' -)"
+            echo "lines<<STUCK_EOF"
+            echo "$stuck"
+            echo "STUCK_EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Stuck builds to factory:human
+        if: steps.stuck.outputs.issues != ''
+        env:
+          STUCK: ${{ steps.stuck.outputs.lines }}
+        run: |
+          set -euo pipefail
+          while read -r issue minutes; do
+            .github/scripts/label-set.sh "$issue" factory:human
+            gh issue comment "$issue" --repo "$GITHUB_REPOSITORY" --body "Needs human: the build looks stuck. The issue has been in factory:in-progress for $minutes minutes with no factory-build run that could be building it.
+
+          Sweep run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          done <<< "$STUCK"
+
+      - name: Board to Needs human
+        if: steps.stuck.outputs.issues != ''
+        continue-on-error: true # the label is the truth; the hourly reconcile retries the card
+        env:
+          GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
+          ISSUES: ${{ steps.stuck.outputs.issues }}
+        run: |
+          set -euo pipefail
+          failed=0
+          for issue in $ISSUES; do
+            .github/scripts/board-move.sh "$issue" "Needs human" || failed=1
+          done
+          exit "$failed"
+
+      - name: Telegram
+        if: steps.stuck.outputs.issues != ''
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          STUCK: ${{ steps.stuck.outputs.lines }}
+        run: |
+          set -euo pipefail
+          while read -r issue minutes; do
+            title=$(gh api "repos/$GITHUB_REPOSITORY/issues/$issue" --jq .title)
+            .github/scripts/telegram.sh "Needs human: #$issue \"$title\"
+          reason: build stuck, $minutes min in progress with no build run
+          $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/issues/$issue"
+          done <<< "$STUCK"
+
+  reconcile:
+    needs: sweep
+    # After the sweep, so its moves are already on the board. Runs alone when the sweep is skipped.
+    if: >-
+      always() &&
+      (github.event.schedule == '7 * * * *' || inputs.task == 'reconcile' || inputs.task == 'all')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: factory-board-reconcile
+      cancel-in-progress: false
+    permissions:
+      contents: read # scripts
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/scripts
+          persist-credentials: false
+      - name: Cards to the column of their label
+        env:
+          GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
+        run: .github/scripts/board-reconcile.sh
+
+  reminder:
+    # Any schedule but the hourly one is the Monday cron (its timezone may change how it is named).
+    if: >-
+      (github.event_name == 'schedule' && github.event.schedule != '7 * * * *') ||
+      inputs.task == 'reminder' || inputs.task == 'all'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read # scripts
+      issues: read # count factory:triage issues
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/scripts
+          persist-credentials: false
+      - name: Telegram when triage issues wait
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          set -euo pipefail
+          text=$(.github/scripts/triage-reminder.sh)
+          if [ -z "$text" ]; then
+            echo "No factory:triage issue waits, no message"
+            exit 0
+          fi
+          echo "$text"
+          .github/scripts/telegram.sh "$text"
