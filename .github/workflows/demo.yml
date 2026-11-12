@@ -1,50 +1,180 @@
 name: demo-video
 
+# Runs every Playwright spec with video, then posts the evidence:
+# step screenshots and demo.gif on the `evidence` branch under pr-<n>/,
+# and one PR comment (found by the <!-- evidence --> marker) updated in place.
+# See docs/factory.md, sections Evidence and CI tools.
+
 on:
   pull_request:
 
 permissions:
   contents: read
-  pull-requests: write
+
+concurrency:
+  group: demo-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
-  demo:
+  spec-rule:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # hashFiles is not allowed in a job-level `if`, so the e2e check is a step.
-      - id: e2e
-        run: |
-          if [ -f e2e/playwright.config.ts ]; then
-            echo "present=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "present=false" >> "$GITHUB_OUTPUT"
-            echo "No e2e/playwright.config.ts, skipping the demo video."
-          fi
-      - if: steps.e2e.outputs.present == 'true'
-        uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
       - run: npm ci
-        if: ${{ steps.e2e.outputs.present == 'true' && hashFiles('package-lock.json') != '' }}
-      - run: npm install
-        if: steps.e2e.outputs.present == 'true'
+      - name: Unit test of the spec rule
+        run: npx vitest run --root scripts
+      - name: Specs present (a *.tsx or *.css change needs an e2e/*.spec.ts change)
+        run: node scripts/check-spec-changed.mjs "origin/${{ github.base_ref }}"
+
+  demo:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # push to the evidence branch
+      pull-requests: write # create or update the evidence comment
+    env:
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      REPO: ${{ github.repository }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      EVIDENCE_OUT: ${{ github.workspace }}/../evidence-out
+      # A fork's token cannot push or comment.
+      SAME_REPO: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            e2e/package-lock.json
+      - run: npm ci
+      - run: npm ci
         working-directory: e2e
       - run: npx playwright install --with-deps chromium
-        if: steps.e2e.outputs.present == 'true'
         working-directory: e2e
-      - run: npx playwright test
-        if: steps.e2e.outputs.present == 'true'
+
+      - name: Lesson ids from changed src/content/<id>.* files
+        id: lessons
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          ids=$(git diff --name-only "origin/${BASE_REF}...HEAD" -- src/content \
+            | grep -v '^src/content/senior/' \
+            | sed -nE 's#^src/content/([a-z0-9_]+)\..*$#\1#p' \
+            | sort -u \
+            | while read -r id; do
+                if [ -f "src/content/$id.tsx" ] && grep -q "id: \"$id\"" src/lessons.ts; then echo "$id"; fi
+              done \
+            | paste -sd, -)
+          echo "ids=$ids" >> "$GITHUB_OUTPUT"
+          echo "Lesson ids: ${ids:-none changed, the spec uses money}"
+
+      - name: Specs (all, video on)
+        id: specs
         working-directory: e2e
+        env:
+          LESSON_IDS: ${{ steps.lessons.outputs.ids }}
+        run: |
+          start=$(date +%s)
+          set +e
+          npx playwright test
+          status=$?
+          seconds=$(( $(date +%s) - start ))
+          echo "seconds=$seconds" >> "$GITHUB_OUTPUT"
+          echo "Spec run time: ${seconds}s (exit $status)" | tee -a "$GITHUB_STEP_SUMMARY"
+          exit $status
+
       - id: upload
-        if: always() && steps.e2e.outputs.present == 'true'
+        if: always() && steps.specs.outcome != 'skipped'
         uses: actions/upload-artifact@v4
         with:
           name: demo-video
           path: e2e/test-results/**/video.webm
+          retention-days: 90
           if-no-files-found: warn
-      - if: always() && steps.upload.outputs.artifact-url != ''
+
+      - name: ffmpeg (installed with apt if the runner lacks it)
+        if: always() && steps.specs.outcome != 'skipped'
+        run: |
+          if command -v ffmpeg > /dev/null; then
+            echo "ffmpeg is preinstalled on this runner"
+          else
+            echo "ffmpeg missing, installing with apt"
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg > /dev/null
+          fi
+          ffmpeg -version | head -n 1
+
+      - name: Build evidence (screenshots, demo.gif, comment)
+        if: always() && steps.specs.outcome != 'skipped'
+        working-directory: e2e
+        env:
+          ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          SPECS_OUTCOME: ${{ steps.specs.outcome }}
+          SPECS_SECONDS: ${{ steps.specs.outputs.seconds }}
+        run: node build-evidence.mjs "$EVIDENCE_OUT"
+
+      - name: Push evidence to the evidence branch
+        if: always() && steps.specs.outcome != 'skipped' && env.SAME_REPO == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh pr comment ${{ github.event.pull_request.number }} --body "Demo video, download the artifact zip: ${{ steps.upload.outputs.artifact-url }}"
+          set -euo pipefail
+          dir="pr-$PR_NUMBER"
+          repo_dir="$RUNNER_TEMP/evidence-repo"
+          git init -q "$repo_dir"
+          cd "$repo_dir"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+          # Retry from a fresh fetch: another PR may push, or cleanup may rewrite the branch.
+          for attempt in 1 2 3 4; do
+            if git ls-remote --exit-code --heads origin evidence > /dev/null; then
+              git fetch -q --depth 1 origin evidence
+              git checkout -q -f -B "work-$attempt" FETCH_HEAD
+            else
+              echo "No evidence branch yet, starting an orphan branch"
+              git checkout -q -f --orphan "work-$attempt"
+              git rm -rq --cached . > /dev/null 2>&1 || true
+            fi
+            rm -rf "$dir"
+            cp -R "$EVIDENCE_OUT/$dir" "$dir"
+            git add -A "$dir"
+            if git diff --cached --quiet; then
+              echo "Evidence unchanged"
+              exit 0
+            fi
+            git commit -q -m "Evidence for PR #$PR_NUMBER at ${HEAD_SHA:0:7}"
+            if git push -q origin "HEAD:refs/heads/evidence"; then
+              echo "Pushed $dir to evidence"
+              exit 0
+            fi
+            sleep $(( attempt * 5 ))
+          done
+          echo "Could not push to the evidence branch"
+          exit 1
+
+      - name: Create or update the evidence comment
+        if: always() && steps.specs.outcome != 'skipped' && env.SAME_REPO == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          body="$EVIDENCE_OUT/comment.md"
+          ids=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate \
+            --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- evidence -->"))) | .id')
+          id="${ids%%$'\n'*}"
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/$REPO/issues/comments/$id" -F "body=@$body" --jq .html_url
+          else
+            gh api -X POST "repos/$REPO/issues/$PR_NUMBER/comments" -F "body=@$body" --jq .html_url
+          fi

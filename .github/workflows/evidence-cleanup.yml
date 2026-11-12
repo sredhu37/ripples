@@ -1,0 +1,53 @@
+name: evidence-cleanup
+
+# After a PR is merged, delete its pr-<n>/ folder from the `evidence` branch
+# and rewrite the branch to a single commit, so old screenshots do not pile up.
+# Force-push is allowed: only main is protected.
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      REPO: ${{ github.repository }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Remove pr-<n>/ and squash the evidence branch
+        run: |
+          set -euo pipefail
+          git init -q evidence
+          cd evidence
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+          # Retry when a demo run pushes between our fetch and our push.
+          for attempt in 1 2 3 4; do
+            if ! git ls-remote --exit-code --heads origin evidence > /dev/null; then
+              echo "No evidence branch, nothing to clean"
+              exit 0
+            fi
+            git fetch -q --depth 1 origin evidence
+            before=$(git rev-parse FETCH_HEAD)
+            git checkout -q -f --detach FETCH_HEAD
+            git rm -rq --ignore-unmatch "pr-$PR_NUMBER"
+            git checkout -q --orphan "squash-$attempt"
+            git commit -q --allow-empty -m "Evidence of open pull requests (pr-$PR_NUMBER removed)"
+            if git push -q --force-with-lease="refs/heads/evidence:$before" origin "HEAD:refs/heads/evidence"; then
+              echo "evidence is now one commit without pr-$PR_NUMBER/:"
+              git ls-tree --name-only HEAD
+              exit 0
+            fi
+            sleep $(( attempt * 5 ))
+          done
+          echo "Could not rewrite the evidence branch"
+          exit 1
