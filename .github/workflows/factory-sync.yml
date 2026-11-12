@@ -2,9 +2,10 @@ name: factory-sync
 
 # Keeps board #2 in step with the factory: labels. Spec: docs/factory.md, section Labels and board.
 #
-#   issues labeled factory:*  -> move the card to the column of the issue's current factory: label
-#   issues closed             -> label factory:done, card Done
-#   issues reopened           -> label factory:triage, card Backlog
+#   issues labeled factory:X    -> remove every other factory: label (one label per issue), card to X's column
+#   issues unlabeled factory:*  -> card to the column of the label that is left
+#   issues closed               -> label factory:done, card Done (a closed issue's card is always Done)
+#   issues reopened             -> label factory:triage, card Backlog
 #
 # Label changes made with GITHUB_TOKEN (factory-build, this workflow) start no runs, so those
 # workflows move the card themselves. This one covers changes by people and by FACTORY_TOKEN.
@@ -13,7 +14,7 @@ name: factory-sync
 
 on:
   issues:
-    types: [labeled, closed, reopened]
+    types: [labeled, unlabeled, closed, reopened]
 
 concurrency:
   group: factory-sync-${{ github.event.issue.number }}
@@ -24,20 +25,21 @@ permissions: {}
 jobs:
   sync:
     if: >-
-      github.event.action != 'labeled' || startsWith(github.event.label.name, 'factory:')
+      (github.event.action != 'labeled' && github.event.action != 'unlabeled')
+      || startsWith(github.event.label.name, 'factory:')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
       contents: read # scripts
       issues: write # labels
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           sparse-checkout: .github/scripts
           persist-credentials: false
 
       - name: Set the label on close or reopen
-        if: github.event.action != 'labeled'
+        if: github.event.action == 'closed' || github.event.action == 'reopened'
         env:
           GH_TOKEN: ${{ github.token }}
           ISSUE: ${{ github.event.issue.number }}
@@ -47,6 +49,27 @@ jobs:
           if [ "$ACTION" = closed ]; then label=factory:done; else label=factory:triage; fi
           .github/scripts/label-set.sh "$ISSUE" "$label"
 
+      - name: One factory label per issue
+        if: github.event.action == 'labeled'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number }}
+          ADDED: ${{ github.event.label.name }}
+        run: |
+          set -euo pipefail
+          # Read the labels now: if the added label is already gone (the build swapped it), do nothing.
+          # Only labels seen now are removed, so a label another run adds meanwhile survives.
+          labels=$(gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE/labels" --jq '.[].name | select(startswith("factory:"))')
+          if ! printf '%s\n' "$labels" | grep -qxF "$ADDED"; then
+            echo "$ADDED is no longer on #$ISSUE; nothing to remove"
+            exit 0
+          fi
+          for old in $labels; do
+            [ "$old" = "$ADDED" ] && continue
+            gh api -X DELETE "repos/$GITHUB_REPOSITORY/issues/$ISSUE/labels/$old" --silent || true
+            echo "Removed $old from #$ISSUE (kept $ADDED)"
+          done
+
       - name: Move the card to the label's column
         env:
           GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
@@ -54,9 +77,13 @@ jobs:
           ISSUE: ${{ github.event.issue.number }}
         run: |
           set -euo pipefail
-          # Read the label now, not from the event: another run may have swapped it since.
+          # Read the state and label now, not from the event: another run may have swapped it since.
+          state=$(GH_TOKEN=$LABEL_TOKEN gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE" --jq .state)
           label=$(GH_TOKEN=$LABEL_TOKEN gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE/labels" \
             --jq '[.[].name | select(startswith("factory:"))] | first // ""')
+          if [ "$state" = closed ]; then
+            label=factory:done
+          fi
           case "$label" in
             factory:triage) column=Backlog ;;
             factory:ready) column=Ready ;;

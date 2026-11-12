@@ -67,7 +67,7 @@ jobs:
       issues: read # dependencies
       actions: write # workflow_dispatch
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           sparse-checkout: .github/scripts
           persist-credentials: false
@@ -98,7 +98,7 @@ jobs:
       start_sha: ${{ steps.check.outputs.start_sha }}
       human: ${{ steps.check.outputs.human }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           sparse-checkout: .github/scripts
           persist-credentials: false
@@ -212,12 +212,12 @@ jobs:
       FIX_PR: ${{ needs.pickup.outputs.pr }}
       HUMAN: ${{ needs.pickup.outputs.human }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: main
           fetch-depth: 0
           persist-credentials: false
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -406,7 +406,7 @@ jobs:
       ISSUE: ${{ needs.pickup.outputs.issue }}
       RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           sparse-checkout: .github/scripts
           persist-credentials: false

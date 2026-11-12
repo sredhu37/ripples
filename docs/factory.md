@@ -37,7 +37,7 @@ new issue ──► TRIAGE ──► READY ──► BUILD ──► CI TOOLS �
 
 ([#114](https://github.com/sredhu37/ripples/issues/114), facts from [#110](https://github.com/sredhu37/ripples/issues/110), [#112](https://github.com/sredhu37/ripples/issues/112))
 
-Exactly one `factory:` label per issue at a time. The factory swaps it at each step. Labels sit on the issue only; the PR links with `Closes #n`.
+Exactly one `factory:` label per issue at a time. The factory swaps it at each step; adding one by hand removes the others (`factory-sync.yml`). Labels sit on the issue only; the PR links with `Closes #n`.
 
 | Label                 | Board column                  | Set by                                                                          |
 | --------------------- | ----------------------------- | ------------------------------------------------------------------------------- |
@@ -234,7 +234,7 @@ GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`
 | `factory-review.yml` | `workflow_run` (CI workflows done on a factory PR), `workflow_dispatch`               | 4 review agents in parallel, suggestions issue, fix round, round counter                             |
 | `factory-gate.yml`   | `workflow_dispatch` (`pr`, `mode`); `pull_request_review`, `issue_comment` (relay)    | risky list, gate agent, merge with `FACTORY_TOKEN` or `factory:human`; Sunny's approval and comments |
 | `factory-sweep.yml`  | hourly at :07; Monday 09:00 Europe/Berlin; `workflow_dispatch` (`task`, `dry_run`)    | restart paused `factory:ready` tickets, flag stuck builds, board reconcile; triage reminder          |
-| `factory-sync.yml`   | `issues: labeled, closed, reopened`                                                   | card to the label's column; close sets `factory:done`                                                |
+| `factory-sync.yml`   | `issues: labeled, unlabeled, closed, reopened`                                        | keeps one `factory:` label (the newest); card to its column; close sets `factory:done`               |
 | `pages.yml`          | push to main                                                                          | build, deploy, live check, rollback                                                                  |
 | `demo.yml` (fixed)   | `pull_request`                                                                        | specs, evidence branch, evidence comment                                                             |
 
