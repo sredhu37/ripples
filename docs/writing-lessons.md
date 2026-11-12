@@ -39,3 +39,5 @@ Prefer `animatedBeat(lines, Diagram, mood?)` from `src/lesson/toolkit.tsx` over 
 - `npm test` runs `src/content/content.test.ts` over your lesson automatically (structure, all three languages, no dashes, sources). Add your own tests next to your file only if the toy has real logic worth testing.
 - `npm run build` must pass (type check included).
 - Look at it in a browser if you can: `npx vite preview --port <your port>` after a build, then walk the whole lesson (story, toy, wrong answer, right answer, widget question, badge). Set `localStorage` key `ripples.progress.v1` to `{"name":"Mia","lang":"en","muted":true,"badges":[<earlier ids>]}` to unlock your lesson. Check German and Polish too.
+
+Probe line for #168, throwaway.
