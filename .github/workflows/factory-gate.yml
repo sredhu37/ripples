@@ -184,15 +184,10 @@ jobs:
       DENIED_TOOLS: Bash,Edit,Write,MultiEdit,NotebookEdit,Task,Agent,Skill,WebFetch,WebSearch
     steps:
       # The agent runs in the main checkout, so only main's CLAUDE.md and .claude/ settings load.
+      # The PR head is never checked out here: its files are exported as plain data below.
       - uses: actions/checkout@v4
         with:
           ref: main
-          persist-credentials: false
-      # PR head for context only: nothing from it is run.
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ needs.check.outputs.sha }}
-          path: pr-head
           fetch-depth: 0
           persist-credentials: false
 
@@ -201,11 +196,15 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          mkdir -p "$INPUTS"
-          # The PR's own .claude/ (settings, skills, agents) must never load; its diff still shows it.
-          if [ -d pr-head/.claude ]; then mv pr-head/.claude pr-head/.claude-from-pr; fi
-          git -C pr-head diff origin/main...HEAD > "$INPUTS/diff.patch"
-          git -C pr-head diff --stat=200 origin/main...HEAD > "$INPUTS/files.txt"
+          mkdir -p "$INPUTS/head"
+          # PR head for context only: a file export (git archive), nothing from it is run.
+          git fetch -q --no-tags origin "$SHA"
+          git archive "$SHA" | tar -x -C "$INPUTS/head"
+          # The PR's own .claude/ and CLAUDE.md must never load; the diff still shows them.
+          if [ -d "$INPUTS/head/.claude" ]; then mv "$INPUTS/head/.claude" "$INPUTS/head/.claude-from-pr"; fi
+          if [ -f "$INPUTS/head/CLAUDE.md" ]; then mv "$INPUTS/head/CLAUDE.md" "$INPUTS/head/CLAUDE.md.from-pr"; fi
+          git diff "origin/main...$SHA" > "$INPUTS/diff.patch"
+          git diff --stat=200 "origin/main...$SHA" > "$INPUTS/files.txt"
           echo "Diff: $(wc -l < "$INPUTS/diff.patch") lines; $(tail -n 1 "$INPUTS/files.txt")"
           # The review summary for this head (by github-actions[bot], marker on line 1).
           gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR/comments" |
@@ -247,7 +246,7 @@ jobs:
 
           Where things are (all read only):
           - ./ is main. Judge against the docs here (docs/, ARCHITECTURE.md, docs/adr/), not the PR's copies.
-          - ./pr-head/ is the PR head. Its .claude/ folder is at ./pr-head/.claude-from-pr/.
+          - $INPUTS/head/ is the PR head (a file export). Its .claude/ folder is at $INPUTS/head/.claude-from-pr/.
           - $INPUTS/diff.patch is the PR diff against main; $INPUTS/files.txt lists the changed files.
           - $INPUTS/review.md is the review summary that passed this head.
           - $INPUTS/evidence/: the evidence screenshots, one folder per spec (screen and language);
