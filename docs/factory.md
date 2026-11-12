@@ -20,7 +20,7 @@ new issue ──► TRIAGE ──► READY ──► BUILD ──► CI TOOLS �
                                      ▲                     SUGGEST.   gate                   │
                                      └──── FAIL: fix round (max 5) ◄──┘ agent            broken:
                                                                          │               redeploy
-                                                     HUMAN ──► Sunny (Your turn)          live-good
+                                                     HUMAN ──► Sunny (Needs human)        live-good
 ```
 
 | Station    | Who                         | Trigger                    | Output                                                               |
@@ -39,14 +39,14 @@ new issue ──► TRIAGE ──► READY ──► BUILD ──► CI TOOLS �
 
 Exactly one `factory:` label per issue at a time. The factory swaps it at each step. Labels sit on the issue only; the PR links with `Closes #n`.
 
-| Label                 | Board column           | Set by                                                                          |
-| --------------------- | ---------------------- | ------------------------------------------------------------------------------- |
-| `factory:triage`      | Backlog                | automatically on every new issue and every suggestions issue; also parked items |
-| `factory:ready`       | Ready                  | Sunny, or a confirmed wayfinder spec                                            |
-| `factory:in-progress` | In progress            | factory, when the build starts                                                  |
-| `factory:in-review`   | In review              | factory, when the PR opens                                                      |
-| `factory:human`       | Your turn (new column) | factory, whenever it needs Sunny                                                |
-| `factory:done`        | Done                   | factory, when the issue closes (merged, or closed with plain `wontfix`)         |
+| Label                 | Board column                  | Set by                                                                          |
+| --------------------- | ----------------------------- | ------------------------------------------------------------------------------- |
+| `factory:triage`      | Backlog                       | automatically on every new issue and every suggestions issue; also parked items |
+| `factory:ready`       | Ready                         | Sunny, or a confirmed wayfinder spec                                            |
+| `factory:in-progress` | In progress                   | factory, when the build starts                                                  |
+| `factory:in-review`   | In review                     | factory, when the PR opens                                                      |
+| `factory:human`       | Needs human (new column, red) | factory, whenever it needs Sunny                                                |
+| `factory:done`        | Done                          | factory, when the issue closes (merged, or closed with plain `wontfix`)         |
 
 ```
 triage ─► ready ─► in-progress ─► in-review ─► done
@@ -159,7 +159,7 @@ review passed ──► any changed file on the risky list? ──yes──► f
 
 **Ruleset on main:** PR only, every CI check green, no force-push, Sunny on the bypass list.
 
-**Sunny's review:** pressing Merge is the approval. A comment from Sunny on a PR in "Your turn" starts a fix run; a question gets a reply instead of a code change. After the fix the PR returns to Sunny, not the gate (once HUMAN, stays HUMAN). These rounds do not count toward the 5-round limit.
+**Sunny's review:** pressing Merge is the approval. A comment from Sunny on a PR in "Needs human" starts a fix run; a question gets a reply instead of a code change. After the fix the PR returns to Sunny, not the gate (once HUMAN, stays HUMAN). These rounds do not count toward the 5-round limit.
 
 ## Evidence
 
@@ -213,12 +213,12 @@ GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`
 
 ([#113](https://github.com/sredhu37/ripples/issues/113), [#126](https://github.com/sredhu37/ripples/issues/126))
 
-| Actor                 | Identity                                                                                         | Used for                                                   |
-| --------------------- | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- |
-| Agent code            | `claude[bot]` via the Claude GitHub App, Sunny as co-author                                      | commits and PR on the build branch                         |
-| Factory plumbing      | machine account `sredhu37-bot`, classic token `FACTORY_TOKEN` (`repo`, `project`, 1-year expiry) | board moves, gate merge (so `pages.yml` fires), revert PRs |
-| Label swaps, comments | `GITHUB_TOKEN`                                                                                   | no new workflow runs, so no loops                          |
-| Notifications         | Telegram factory bot, `TELEGRAM_TOKEN` + chat id                                                 | "Your turn", rollbacks, triage reminder                    |
+| Actor                 | Identity                                                                                                                     | Used for                                                   |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| Agent code            | `claude[bot]` via the Claude GitHub App, Sunny as co-author                                                                  | commits and PR on the build branch                         |
+| Factory plumbing      | machine account `sredhu37-bot`, classic token `FACTORY_TOKEN` (`public_repo`, `project`, 1-year expiry; no `workflow` scope) | board moves, gate merge (so `pages.yml` fires), revert PRs |
+| Label swaps, comments | `GITHUB_TOKEN`                                                                                                               | no new workflow runs, so no loops                          |
+| Notifications         | Telegram factory bot, `TELEGRAM_TOKEN` + chat id                                                                             | "Needs human", rollbacks, triage reminder                  |
 
 **Trusted input:** every agent step sets `include_comments_by_actor` to `sredhu37`, `sredhu37-bot`, `claude[bot]`, `github-actions[bot]`. Other comments stay visible on GitHub but never reach an agent.
 
@@ -241,7 +241,7 @@ GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`
 The factory bot messages Sunny only when he has to act or should know:
 
 ```
-Your turn: PR #130 "Lesson 4 toy"         Live site rolled back to live-good    Triage: 23 waiting
+Needs human: PR #130 "Lesson 4 toy"       Live site rolled back to live-good    Triage: 23 waiting
 reason: gate HUMAN, new screen            broken: #131                          (oldest 9 days)
 [GIF]  link to PR                         revert PR #132 waits for your merge   link to board
 ```
@@ -266,7 +266,7 @@ Steps only a human can do. Filed as one `factory:human` ticket.
 1. Create the machine account `sredhu37-bot` (own email, 2FA), invite it to ripples and to board #2, create its classic token, store it as `FACTORY_TOKEN`.
 2. Create the Telegram factory bot in BotFather; store `TELEGRAM_TOKEN` and the chat id.
 3. Run `claude setup-token`; store it as `CLAUDE_CODE_OAUTH_TOKEN`. Install the Claude GitHub App on ripples.
-4. Board #2: add the "Your turn" column; turn off the 4 board workflows listed under [Labels and board](#labels-and-board).
+4. Board #2: add the "Needs human" column (red, description "The factory stopped. Answer, review or merge to move it on."); turn off the 4 board workflows listed under [Labels and board](#labels-and-board).
 5. Turn on CodeQL default setup.
 
 ## Implementation defaults
