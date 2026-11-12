@@ -16,7 +16,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Markdown-only PR (docs/factory.md, CI tools): the jobs below skip; a skipped required check passes.
+  changes:
+    uses: ./.github/workflows/md-only.yml
+
   spec-rule:
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.md_only != 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,6 +39,8 @@ jobs:
         run: node scripts/check-spec-changed.mjs "origin/${{ github.base_ref }}"
 
   demo:
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.md_only != 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write # push to the evidence branch

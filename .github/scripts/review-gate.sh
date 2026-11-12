@@ -12,6 +12,8 @@
 #        CODEQL_WAIT      seconds to wait for CodeQL once every other check is green (default 600);
 #                         CodeQL is a dynamic workflow, so no workflow_run fires when it finishes
 #        REQUIRED_CHECKS  default "ci lint audit lighthouse demo spec-rule CodeQL" (the main ruleset)
+# Green: conclusion success, or skipped (a markdown-only PR skips ci, demo, spec-rule and lighthouse
+#        with a job-level if; GitHub counts a skipped required check as passed).
 # Output: key=value lines on stdout: go, reason, pr, sha, issue, round. Also appended to
 #         GITHUB_OUTPUT when it is set. Exit 0 for every decision; non-zero only on API errors.
 #
@@ -108,7 +110,7 @@ while :; do
     IFS=$'\t' read -r _ status conclusion <<< "$line"
     if [ "$status" != "completed" ]; then
       pending="$pending $name"
-    elif [ "$conclusion" != "success" ]; then
+    elif [ "$conclusion" != "success" ] && [ "$conclusion" != "skipped" ]; then
       skip "check $name is $conclusion; a red CI is not reviewed and uses no round"
     fi
   done

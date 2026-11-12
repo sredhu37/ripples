@@ -8,6 +8,8 @@
 #        REPO             owner/name, defaults to GITHUB_REPOSITORY, then to the current gh repo
 #        REQUIRED_CHECKS  default "ci lint audit lighthouse demo spec-rule CodeQL" (the main ruleset)
 #        POLL_SECONDS     seconds between looks (default 30)
+# Green: conclusion success, or skipped (a markdown-only PR skips ci, demo, spec-rule and lighthouse
+#        with a job-level if; GitHub counts a skipped required check as passed).
 # Output: state=green|red|pending and detail=<text> on stdout. Exit 0 for every state;
 #         non-zero only on API errors. A red check ends the wait at once.
 set -euo pipefail
@@ -43,7 +45,7 @@ while :; do
     IFS=$'\t' read -r _ status conclusion <<< "$line"
     if [ "$status" != "completed" ]; then
       pending="$pending $name"
-    elif [ "$conclusion" != "success" ]; then
+    elif [ "$conclusion" != "success" ] && [ "$conclusion" != "skipped" ]; then
       red="$red $name ($conclusion)"
     fi
   done

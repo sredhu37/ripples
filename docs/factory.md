@@ -105,6 +105,21 @@ Deterministic checks run before any review agent. A failure goes straight back t
 - ESLint is not used while `typescript-eslint` supports only TypeScript below 6.1; ripples uses 7.0.2. Switching later is its own ticket.
 - A one-time PR applies oxfmt to the whole repo and fixes existing accessibility and content-count failures.
 
+**Markdown-only PRs** ([#168](https://github.com/sredhu37/ripples/issues/168)): every changed file ends in `.md` and none is under `.claude/` (`src/factory.test.ts` reads `.claude/agents/*.md`; a rename counts both names; no changed file counts as not markdown-only).
+
+| Check                                | On a markdown-only PR                      |
+| ------------------------------------ | ------------------------------------------ |
+| `lint`, `audit` (oxfmt checks `.md`) | run                                        |
+| `ci` (tests, types, build)           | skipped                                    |
+| `demo`, `spec-rule`                  | skipped, no evidence comment               |
+| `lighthouse`                         | skipped                                    |
+| `CodeQL`                             | runs (GitHub default setup, not our files) |
+| Review agents and gate               | run (the content agent judges docs)        |
+
+- No path filter on a required workflow: a required check skipped by a path filter stays "Expected" and blocks the merge. Every workflow starts; its first job `changes` (`.github/workflows/md-only.yml`, which runs `.github/scripts/md-only.sh HEAD^1 HEAD` on the PR's merge commit) decides, and the slow jobs skip with a job-level `if`. GitHub counts a skipped required check as passed.
+- The `if` is `!cancelled() && needs.changes.outputs.md_only != 'true'`: when `changes` itself fails, everything runs.
+- `review-gate.sh` (review) and `checks-green.sh` (gate merge, Sunny's approval) count `skipped` as green.
+
 ## Review
 
 ([#115](https://github.com/sredhu37/ripples/issues/115))
@@ -181,7 +196,7 @@ review passed ──► any changed file on the risky list? ──yes──► f
 
 - One Playwright **spec** per screen (`e2e/`; ripples has 5 screens: map, lesson, facts, parents, timeline). Each spec is a test and records the demo.
 - The lesson spec takes lesson ids. CI passes the ids from changed `src/content/<id>.*` files and runs them in EN, DE and PL. A change only in `src/content/**` needs no spec edit.
-- Every PR runs all specs with video on. Each step saves a screenshot.
+- Every PR runs all specs with video on (a markdown-only PR skips them, see [CI tools](#ci-tools)). Each step saves a screenshot.
 - The **evidence branch** `evidence` holds `pr-<n>/step-*.png` and `pr-<n>/demo.mp4` (the spec videos joined with ffmpeg; Playwright draws the pointer and outlines each clicked element). One **evidence comment** per PR, updated in place, shows the screenshots inline, links the walkthrough video through jsDelivr (GitHub strips video players from comments and serves raw `.mp4` as a download; jsDelivr serves it as `video/mp4`, so the browser's own player can pause and rewind), and links the full video artifact (90-day retention).
 - Review agents and the gate agent read the PNGs. Sunny watches on HUMAN PRs.
 - After merge, CI deletes `pr-<n>/` and rewrites `evidence` to a single commit.
@@ -205,6 +220,7 @@ merge ──► pages.yml: build ──► deploy ──► live-check
 - The live check has no speed limits (live network varies; speed is checked before merge).
 - The revert PR is opened with `FACTORY_TOKEN`, so its checks run without an approval click. It waits for Sunny: his approval on its latest commit merges it (see Gate, Sunny's review).
 - At setup, `live-good` is placed once on the current main.
+- A markdown-only push (every file `*.md`, none under `.claude/`; same rule as CI tools) starts no `pages.yml` run, so no deploy and no live check; `live-good` stays where it is. This is a path filter (`paths: "**"`, `"!**.md"`, `".claude/**"`), fine here because `pages.yml` is not a required check. A manual `workflow_dispatch` still deploys.
 
 ## Engine
 

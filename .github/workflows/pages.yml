@@ -8,6 +8,12 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+    # A markdown-only push (every file *.md, none under .claude/) starts no deploy: same rule as
+    # .github/scripts/md-only.sh. A path filter is fine here, pages is not a required check.
+    paths:
+      - "**"
+      - "!**.md"
+      - ".claude/**"
   workflow_dispatch:
     inputs:
       simulate_broken:

@@ -7,8 +7,14 @@ permissions:
   contents: read
 
 jobs:
+  # Markdown-only PR (docs/factory.md, CI tools): the jobs below skip; a skipped required check passes.
+  changes:
+    uses: ./.github/workflows/md-only.yml
+
   ci:
     name: ci
+    needs: changes
+    if: ${{ !cancelled() && needs.changes.outputs.md_only != 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
