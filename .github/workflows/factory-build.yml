@@ -14,6 +14,11 @@ name: factory-build
 #     build:   same branch and PR; the prompt adds the latest review summary (fix every FAIL)
 #     finish:  as above, but a fix round that pushed no new commit -> factory:human
 #     A factory:ready issue whose branch already has an open PR (a paused fix round) runs as a fix round.
+#   workflow_dispatch with pr and human (Sunny's comment on a PR in Needs human, dispatched by factory-gate.yml)
+#     pickup:  the issue keeps factory:human; human is review:<id> or comment:<id> by sredhu37 on the PR
+#     build:   same branch and PR; the prompt adds Sunny's comment: a question gets a reply, a change a commit
+#     finish:  always back to factory:human, board Needs human, Telegram (once HUMAN, stays HUMAN);
+#              no review round runs and none is counted
 #   issues closed
 #     unblock: dispatch this workflow for the oldest factory:ready issue the closed one was blocking
 #
@@ -32,6 +37,11 @@ on:
         type: string
       pr:
         description: Fix round (factory-review sets it). The issue's open factory PR; the agent fixes every FAIL in its latest review summary
+        required: false
+        type: string
+        default: ""
+      human:
+        description: Fix round from Sunny's comment (factory-gate sets it). review:<id> or comment:<id> by sredhu37 on pr; the issue keeps factory:human
         required: false
         type: string
         default: ""
@@ -86,6 +96,7 @@ jobs:
       issue: ${{ steps.check.outputs.issue }}
       pr: ${{ steps.check.outputs.pr }}
       start_sha: ${{ steps.check.outputs.start_sha }}
+      human: ${{ steps.check.outputs.human }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -97,6 +108,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           ISSUE: ${{ inputs.issue || github.event.issue.number }}
           FIX_PR: ${{ inputs.pr }}
+          HUMAN: ${{ inputs.human }}
         run: |
           set -euo pipefail
           if ! [[ "$ISSUE" =~ ^[0-9]+$ ]]; then
@@ -107,16 +119,28 @@ jobs:
             echo "::error::PR number '$FIX_PR' is not a number"
             exit 1
           fi
+          if [ -n "$HUMAN" ] && { [ -z "$FIX_PR" ] || ! [[ "$HUMAN" =~ ^(review|comment):[0-9]+$ ]]; }; then
+            echo "::error::human '$HUMAN' needs pr and the form review:<id> or comment:<id>"
+            exit 1
+          fi
           state=$(gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE" \
-            --jq '[.state, (.pull_request != null), any(.labels[]; .name == "factory:ready"), any(.labels[]; .name == "factory:in-review")] | @tsv')
-          read -r open_state is_pr ready in_review <<< "$state"
+            --jq '[.state, (.pull_request != null), any(.labels[]; .name == "factory:ready"), any(.labels[]; .name == "factory:in-review"), any(.labels[]; .name == "factory:human")] | @tsv')
+          read -r open_state is_pr ready in_review human_label <<< "$state"
           if [ "$is_pr" = "true" ] || [ "$open_state" != "open" ]; then
             echo "::notice::#$ISSUE skipped: needs to be an open issue (state $open_state)"
             exit 0
           fi
+          if [ -n "$HUMAN" ]; then
+            # Fix round from Sunny's comment (factory-gate): the issue stays factory:human.
+            if [ "$human_label" != "true" ]; then
+              echo "::notice::#$ISSUE skipped: a fix round from Sunny's comment needs factory:human"
+              exit 0
+            fi
+            ready=false
+          fi
           if [ -n "$FIX_PR" ]; then
             # Fix round from factory-review: the issue stays factory:in-review.
-            if [ "$in_review" != "true" ] && [ "$ready" != "true" ]; then
+            if [ -z "$HUMAN" ] && [ "$in_review" != "true" ] && [ "$ready" != "true" ]; then
               echo "::notice::#$ISSUE skipped: a fix round needs factory:in-review or factory:ready"
               exit 0
             fi
@@ -152,6 +176,7 @@ jobs:
           {
             echo "issue=$ISSUE"
             echo "ready=$ready"
+            echo "human=$HUMAN"
             echo "go=true"
           } >> "$GITHUB_OUTPUT"
       - name: Label factory:in-progress
@@ -184,6 +209,7 @@ jobs:
       ISSUE: ${{ needs.pickup.outputs.issue }}
       BRANCH: factory/issue-${{ needs.pickup.outputs.issue }}
       FIX_PR: ${{ needs.pickup.outputs.pr }}
+      HUMAN: ${{ needs.pickup.outputs.human }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -229,7 +255,40 @@ jobs:
             > "$RUNNER_TEMP/comments.md"
           # Fix round: the latest review summary on the PR (by github-actions[bot], marker on line 1).
           : > "$RUNNER_TEMP/fix.md"
-          if [ -n "$FIX_PR" ]; then
+          if [ -n "$HUMAN" ]; then
+            # Sunny's comment, read again from the API: only sredhu37's own text reaches the agent.
+            id=${HUMAN#*:}
+            if [ "${HUMAN%%:*}" = "review" ]; then
+              gh api "repos/$GITHUB_REPOSITORY/pulls/$FIX_PR/reviews/$id" > "$RUNNER_TEMP/human.json"
+              gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$FIX_PR/reviews/$id/comments" |
+                jq -r -s 'add // [] | .[] | "- \(.path):\(.line // .original_line // "file"): \(.body)"' > "$RUNNER_TEMP/human-inline.md"
+            else
+              gh api "repos/$GITHUB_REPOSITORY/issues/comments/$id" > "$RUNNER_TEMP/human.json"
+              : > "$RUNNER_TEMP/human-inline.md"
+            fi
+            author=$(jq -r '.user.login' "$RUNNER_TEMP/human.json")
+            if [ "$author" != "sredhu37" ]; then
+              echo "::error::$HUMAN is by $author, not sredhu37"
+              exit 1
+            fi
+            {
+              echo "This is a fix round for PR #$FIX_PR on $BRANCH, started by Sunny's comment below."
+              echo "The PR is in Needs human: it goes back to Sunny after this round, not to review."
+              echo "If the comment asks a question, answer it with gh pr comment $FIX_PR and change no code."
+              echo "If it asks for a change, make it, push new commits (never force-push), and update the PR"
+              echo "body with gh pr edit (rewrite Verified with this round's real output). Then reply with"
+              echo "gh pr comment $FIX_PR in one or two sentences: what you changed, or why you did not."
+              echo ""
+              echo "<sunny_comment pr=\"$FIX_PR\" source=\"$HUMAN\" note=\"by sredhu37, the owner\">"
+              jq -r '.body // ""' "$RUNNER_TEMP/human.json"
+              if [ -s "$RUNNER_TEMP/human-inline.md" ]; then
+                echo ""
+                echo "Line comments:"
+                cat "$RUNNER_TEMP/human-inline.md"
+              fi
+              echo "</sunny_comment>"
+            } > "$RUNNER_TEMP/fix.md"
+          elif [ -n "$FIX_PR" ]; then
             gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$FIX_PR/comments" |
               jq -r -s '[add // [] | .[]
                 | select(.user.login == "github-actions[bot]"
@@ -343,6 +402,8 @@ jobs:
           BUILD_RESULT: ${{ needs.build.result }}
           LIMIT: ${{ needs.build.outputs.limit }}
           START_SHA: ${{ needs.pickup.outputs.start_sha }}
+          HUMAN: ${{ needs.pickup.outputs.human }}
+          FIX_PR: ${{ needs.pickup.outputs.pr }}
         run: |
           set -euo pipefail
           # Same-repo PRs only: a fork could use the same branch name.
@@ -368,6 +429,20 @@ jobs:
               cancelled) reason="the build job was cancelled" ;;
               *) reason="the build job did not run ($BUILD_RESULT)" ;;
             esac
+          fi
+          if [ -n "$HUMAN" ]; then
+            # Sunny's fix round: back to Sunny whatever happened (once HUMAN, stays HUMAN).
+            head=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$FIX_PR" --jq .head.sha)
+            if [ "$outcome" = "review" ] && [ "$head" != "$START_SHA" ]; then
+              reason="fix round after your ${HUMAN%%:*} pushed ${head:0:7}"
+            elif [ "$outcome" = "review" ] || { [ "$outcome" = "human" ] && [ "$BUILD_RESULT" = "success" ]; }; then
+              reason="no new commit after your ${HUMAN%%:*}: see the agent's reply on the PR"
+            elif [ "$outcome" = "paused" ]; then
+              reason="the fix round after your ${HUMAN%%:*} stopped on a Claude usage limit; comment again later"
+            else
+              reason="the fix round after your ${HUMAN%%:*} failed: $reason"
+            fi
+            outcome=human
           fi
           echo "$outcome: $reason"
           echo "outcome=$outcome" >> "$GITHUB_OUTPUT"
@@ -408,9 +483,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           REASON: ${{ steps.outcome.outputs.reason }}
+          HUMAN: ${{ needs.pickup.outputs.human }}
         run: |
           set -euo pipefail
           .github/scripts/label-set.sh "$ISSUE" factory:human
+          if [ -n "$HUMAN" ]; then
+            exit 0 # Sunny's own round: the PR note and the Telegram message say it
+          fi
           gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body "Needs human: $REASON.
 
           Run: $RUN_URL"
@@ -420,8 +499,17 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
         run: .github/scripts/board-move.sh "$ISSUE" "Needs human"
+      - name: Telegram (Sunny's fix round)
+        if: steps.outcome.outputs.outcome == 'human' && needs.pickup.outputs.human != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          REASON: ${{ steps.outcome.outputs.reason }}
+          PR: ${{ needs.pickup.outputs.pr }}
+        run: .github/scripts/pr-needs-human.sh "$PR" "$REASON"
       - name: Telegram
-        if: steps.outcome.outputs.outcome == 'human'
+        if: steps.outcome.outputs.outcome == 'human' && needs.pickup.outputs.human == ''
         env:
           GH_TOKEN: ${{ github.token }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
