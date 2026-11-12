@@ -73,7 +73,7 @@ jobs:
       issue: ${{ steps.gate.outputs.issue }}
       round: ${{ steps.gate.outputs.round }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: main
           sparse-checkout: .github/scripts
@@ -139,12 +139,12 @@ jobs:
       DENIED_TOOLS: Bash,Edit,Write,MultiEdit,NotebookEdit,Task,Agent,Skill
     steps:
       # The agent runs in the main checkout, so only main's CLAUDE.md and .claude/ settings load.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: main
           persist-credentials: false
       # PR head for context only: nothing from it is run.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.gate.outputs.sha }}
           path: pr-head
@@ -268,7 +268,7 @@ jobs:
             tee -a "$GITHUB_STEP_SUMMARY"
 
       - if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: review-${{ matrix.agent }}
           path: ${{ runner.temp }}/result/${{ matrix.agent }}.json
@@ -293,12 +293,12 @@ jobs:
       ROUND: ${{ needs.gate.outputs.round }}
       RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: main
           sparse-checkout: .github/scripts
           persist-credentials: false
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         continue-on-error: true # no result files at all: every agent counts as an error below
         with:
           pattern: review-*

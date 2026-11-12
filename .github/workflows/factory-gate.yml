@@ -137,7 +137,7 @@ jobs:
       source: ${{ steps.check.outputs.source }}
     steps:
       # Rules come from main, never from a PR branch: the scripts and .github/gate-paths.txt.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: main
           sparse-checkout: .github
@@ -161,7 +161,7 @@ jobs:
             echo "::notice::No $MODE: $reason"
           fi
       - if: steps.check.outputs.go == 'true' && steps.check.outputs.mode == 'gate'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: gate-risky
           path: ${{ runner.temp }}/gate/risky.txt
@@ -185,7 +185,7 @@ jobs:
     steps:
       # The agent runs in the main checkout, so only main's CLAUDE.md and .claude/ settings load.
       # The PR head is never checked out here: its files are exported as plain data below.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: main
           fetch-depth: 0
@@ -308,7 +308,7 @@ jobs:
             tee -a "$GITHUB_STEP_SUMMARY"
 
       - if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: gate-result
           path: ${{ runner.temp }}/result/gate.json
@@ -331,12 +331,12 @@ jobs:
       ISSUE: ${{ needs.check.outputs.issue }}
       RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: main
           sparse-checkout: .github/scripts
           persist-credentials: false
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         continue-on-error: true # no agent result: HUMAN below
         with:
           pattern: gate-*
@@ -436,7 +436,7 @@ jobs:
       KIND: ${{ needs.check.outputs.kind }}
       RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: main
           sparse-checkout: .github/scripts
