@@ -202,7 +202,7 @@ GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`
 | Workflow             | Runs on                                                                               | Does                                                                                        |
 | -------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | `factory-build.yml`  | `issues: labeled` (`factory:ready`), `issues: closed` (unblocks), `workflow_dispatch` | pickup, label swap, build agent, opens PR                                                   |
-| `factory-review.yml` | `pull_request` (opened, synchronize) after CI                                         | 4 review agents in parallel, suggestions issue, fix round, round counter                    |
+| `factory-review.yml` | `workflow_run` (CI workflows done on a factory PR), `workflow_dispatch`               | 4 review agents in parallel, suggestions issue, fix round, round counter                    |
 | `factory-gate.yml`   | review passed                                                                         | risky list, gate agent, merge with `FACTORY_TOKEN` or `factory:human`                       |
 | `factory-sweep.yml`  | hourly at :07; Monday 09:00 Europe/Berlin; `workflow_dispatch` (`task`, `dry_run`)    | restart paused `factory:ready` tickets, flag stuck builds, board reconcile; triage reminder |
 | `pages.yml`          | push to main                                                                          | build, deploy, live check, rollback                                                         |
@@ -223,6 +223,8 @@ Shared scripts in `.github/scripts/`, for every factory workflow:
 | `sweep-stuck.sh`       | `factory:in-progress` issues with no build run for over 45 minutes    | `GITHUB_TOKEN`             |
 | `triage-reminder.sh`   | the triage reminder text, empty when no issue waits                   | `GITHUB_TOKEN`             |
 | `board-reconcile.sh`   | moves every card to its label's column (`DRY_RUN=1` only prints)      | `FACTORY_TOKEN` (no agent) |
+| `review-gate.sh`       | factory PR, current head, required checks green, round (max 5)        | `GITHUB_TOKEN`             |
+| `review.mjs`           | parses review agent json; writes the round summary and suggestions    | none                       |
 
 **Claude account:** 2-week pilot on Sunny's Pro token (`CLAUDE_CODE_OAUTH_TOKEN`), Sonnet. Measure tokens per issue and how often Sunny is locked out, then choose an API key with a spend cap, a bigger plan, or Pro. Switch to an API key before porting to `repo-template`.
 
