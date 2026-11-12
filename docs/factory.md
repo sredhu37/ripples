@@ -169,7 +169,7 @@ review passed ──► any changed file on the risky list? ──yes──► f
 - One Playwright **spec** per screen (`e2e/`; ripples has 5 screens: map, lesson, facts, parents, timeline). Each spec is a test and records the demo.
 - The lesson spec takes lesson ids. CI passes the ids from changed `src/content/<id>.*` files and runs them in EN, DE and PL. A change only in `src/content/**` needs no spec edit.
 - Every PR runs all specs with video on. Each step saves a screenshot.
-- The **evidence branch** `evidence` holds `pr-<n>/step-*.png` and `pr-<n>/demo.gif` (made from the video with ffmpeg). One **evidence comment** per PR, updated in place, shows them inline and links the full video artifact (90-day retention).
+- The **evidence branch** `evidence` holds `pr-<n>/step-*.png` and `pr-<n>/demo.mp4` (the spec videos joined with ffmpeg; Playwright draws the pointer and outlines each clicked element). One **evidence comment** per PR, updated in place, shows the screenshots inline, links the walkthrough video through jsDelivr (GitHub strips video players from comments and serves raw `.mp4` as a download; jsDelivr serves it as `video/mp4`, so the browser's own player can pause and rewind), and links the full video artifact (90-day retention).
 - Review agents and the gate agent read the PNGs. Sunny watches on HUMAN PRs.
 - After merge, CI deletes `pr-<n>/` and rewrites `evidence` to a single commit.
 - `demo.yml` is fixed first: it fails on every PR today (job-level `if` uses `hashFiles`).
@@ -263,7 +263,7 @@ The factory bot messages Sunny only when he has to act or should know:
 ```
 Needs human: PR #130 "Lesson 4 toy"       Live site rolled back to live-good    Triage: 23 waiting
 reason: gate HUMAN, new screen            broken: #131                          (oldest 9 days)
-[GIF]  link to PR                         revert PR #132 waits for your merge   link to board
+[video] link to PR                       revert PR #132 waits for your merge   link to board
 ```
 
 Normal merges are silent.
