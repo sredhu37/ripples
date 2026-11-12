@@ -160,8 +160,8 @@ const ok = (agent: string, findings: unknown[]) => {
 };
 
 describe("dedupeSuggestions", () => {
-  it("merges the same where and problem across agents", () => {
-    const same = { ...suggestion, problem: "The map title could be shorter." };
+  it("merges the same place across agents, whatever the wording", () => {
+    const same = { ...suggestion, problem: "Two lines still say both languages." };
     const other = { ...suggestion, where: "src/x.tsx:1" };
     const list = dedupeSuggestions([
       ok("ux-ui", [suggestion]),

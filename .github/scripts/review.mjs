@@ -157,14 +157,17 @@ export function normalise(s) {
     .trim();
 }
 
-/** All SUGGESTIONs from ok agents, deduplicated on normalised where + problem, agents merged. */
+/**
+ * All SUGGESTIONs from ok agents, one per place: agents word the same finding differently,
+ * so the key is the normalised `where` alone. The first wording is kept, agents merged.
+ */
 export function dedupeSuggestions(results) {
   const byKey = new Map();
   for (const r of results) {
     if (!r.ok) continue;
     for (const f of r.findings) {
       if (f.level !== "SUGGESTION") continue;
-      const key = `${normalise(f.where)}|${normalise(f.problem)}`;
+      const key = normalise(f.where);
       const seen = byKey.get(key);
       if (seen) {
         if (!seen.agents.includes(r.agent)) seen.agents.push(r.agent);
