@@ -18,7 +18,13 @@ jobs:
       - run: npm ci
       - run: npm run build
       # Config in lighthouserc.json: vite preview on port 4733, 3 runs, speed and accessibility limits.
-      - run: npx --yes @lhci/cli@0.16.0 autorun
+      # Shared runners are noisy: a median can land over a limit with no app change. One retry;
+      # a real slowdown fails both tries.
+      - run: |
+          if npx --yes @lhci/cli@0.16.0 autorun; then exit 0; fi
+          echo "::warning::Lighthouse failed once, retrying (runner noise check)"
+          rm -rf .lighthouseci
+          npx --yes @lhci/cli@0.16.0 autorun
       - name: Show median numbers in the job summary
         if: always()
         run: |

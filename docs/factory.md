@@ -87,20 +87,20 @@ triage ─► ready ─► in-progress ─► in-review ─► done
 
 Deterministic checks run before any review agent. A failure goes straight back to the build agent and uses no review round.
 
-| Check                   | Tool                                                 | Default settings                                                                                                 |
-| ----------------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Tests, types, build     | `npm run test`, `npm run typecheck`, `npm run build` | as today                                                                                                         |
-| Code mistakes           | oxlint                                               | defaults, no config                                                                                              |
-| Formatting              | oxfmt (no Prettier)                                  | defaults                                                                                                         |
-| Dependency holes        | `npm audit`                                          | defaults                                                                                                         |
-| XSS, injection patterns | CodeQL default setup                                 | to turn on                                                                                                       |
-| Secrets                 | GitHub secret scanning + push protection             | already on                                                                                                       |
-| Speed                   | Lighthouse CI (`@lhci/cli`), median of 3 runs        | fail on LCP > 2.5 s, CLS > 0.1, TBT > 200 ms                                                                     |
-| Accessibility basics    | Lighthouse accessibility audits                      | any failed audit fails                                                                                           |
-| Lesson content counts   | `src/content/content.test.ts`                        | new: max 15 words per sentence; question max 20 words, options under 15; no "Bartek"; diagram labels max 4 words |
-| Save-code order         | new test on `src/lessons.ts`                         | an existing lesson id never changes position                                                                     |
-| Specs present           | CI rule                                              | a change to `*.tsx` or `*.css` must change at least one `e2e/*.spec.ts`                                          |
-| Specs pass              | Playwright (all specs, video on)                     | see [Evidence](#evidence)                                                                                        |
+| Check                   | Tool                                                                | Default settings                                                                                                 |
+| ----------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Tests, types, build     | `npm run test`, `npm run typecheck`, `npm run build`                | as today                                                                                                         |
+| Code mistakes           | oxlint                                                              | defaults, no config                                                                                              |
+| Formatting              | oxfmt (no Prettier)                                                 | defaults                                                                                                         |
+| Dependency holes        | `npm audit`                                                         | defaults                                                                                                         |
+| XSS, injection patterns | CodeQL default setup                                                | to turn on                                                                                                       |
+| Secrets                 | GitHub secret scanning + push protection                            | already on                                                                                                       |
+| Speed                   | Lighthouse CI (`@lhci/cli`), median of 3 runs, one retry on failure | fail on LCP > 2.5 s, CLS > 0.1, TBT > 200 ms                                                                     |
+| Accessibility basics    | Lighthouse accessibility audits                                     | any failed audit fails                                                                                           |
+| Lesson content counts   | `src/content/content.test.ts`                                       | new: max 15 words per sentence; question max 20 words, options under 15; no "Bartek"; diagram labels max 4 words |
+| Save-code order         | new test on `src/lessons.ts`                                        | an existing lesson id never changes position                                                                     |
+| Specs present           | CI rule                                                             | a change to `*.tsx` or `*.css` must change at least one `e2e/*.spec.ts`                                          |
+| Specs pass              | Playwright (all specs, video on)                                    | see [Evidence](#evidence)                                                                                        |
 
 - ESLint is not used while `typescript-eslint` supports only TypeScript below 6.1; ripples uses 7.0.2. Switching later is its own ticket.
 - A one-time PR applies oxfmt to the whole repo and fixes existing accessibility and content-count failures.
