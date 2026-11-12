@@ -49,7 +49,7 @@ export function collectRuns(results = RESULTS) {
 
 /**
  * The GIF shows one run per screen (for the lesson: the first id in English),
- * at double speed, so it stays short enough to watch inline.
+ * at real speed; the specs pause after every action (slowMo) so a person can follow it.
  */
 export function gifRuns(runs) {
   const seen = new Set();
@@ -67,7 +67,7 @@ function makeGif(videos, file) {
   const inputs = videos.flatMap((v) => ["-i", v]);
   const joined = videos.map((_, i) => `[${i}:v]`).join("");
   const filter =
-    `${joined}concat=n=${videos.length}:v=1:a=0,setpts=0.5*PTS,fps=8,` +
+    `${joined}concat=n=${videos.length}:v=1:a=0,fps=6,` +
     "scale=640:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128[p];[b][p]paletteuse";
   execFileSync("ffmpeg", ["-y", "-loglevel", "error", ...inputs, "-filter_complex", filter, file], {
     stdio: "inherit",

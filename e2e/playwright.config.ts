@@ -12,6 +12,8 @@ export default defineConfig({
   use: {
     baseURL: `http://localhost:${PORT}/ripples/`,
     video: "on",
+    // Pause after every action so a person can follow the evidence GIF.
+    launchOptions: { slowMo: 600 },
     actionTimeout: 15_000,
     viewport: { width: 1280, height: 720 },
   },

@@ -205,6 +205,7 @@ GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`
 | `factory-review.yml` | `workflow_run` (CI workflows done on a factory PR), `workflow_dispatch`               | 4 review agents in parallel, suggestions issue, fix round, round counter                    |
 | `factory-gate.yml`   | review passed                                                                         | risky list, gate agent, merge with `FACTORY_TOKEN` or `factory:human`                       |
 | `factory-sweep.yml`  | hourly at :07; Monday 09:00 Europe/Berlin; `workflow_dispatch` (`task`, `dry_run`)    | restart paused `factory:ready` tickets, flag stuck builds, board reconcile; triage reminder |
+| `factory-sync.yml`   | `issues: labeled, closed, reopened`                                                   | card to the label's column; close sets `factory:done`                                       |
 | `pages.yml`          | push to main                                                                          | build, deploy, live check, rollback                                                         |
 | `demo.yml` (fixed)   | `pull_request`                                                                        | specs, evidence branch, evidence comment                                                    |
 
