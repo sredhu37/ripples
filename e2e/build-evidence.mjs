@@ -3,7 +3,7 @@
 // Reads test-results/<name>/step-<k>.png and video.txt written by evidence.ts,
 // then writes into <out>:
 //   pr-<n>/<name>/step-<k>.png   screenshots, one folder per spec run
-//   pr-<n>/demo.gif              the spec videos joined, made with ffmpeg
+//   pr-<n>/demo.mp4              the spec videos joined (H.264), made with ffmpeg
 //   comment.md                   the evidence comment body
 //
 // Usage: node build-evidence.mjs <out>
@@ -17,7 +17,7 @@ import { pathToFileURL } from "node:url";
 
 export const MARKER = "<!-- evidence -->";
 const RESULTS = path.join(import.meta.dirname, "test-results");
-// Order of the screens in the GIF and the comment.
+// Order of the screens in the video and the comment.
 const ORDER = ["map", "lesson", "facts", "parents", "timeline"];
 
 function rank(name) {
@@ -48,10 +48,10 @@ export function collectRuns(results = RESULTS) {
 }
 
 /**
- * The GIF shows one run per screen (for the lesson: the first id in English),
- * at double speed, so it stays short enough to watch inline.
+ * The walkthrough video shows one run per screen (for the lesson: the first id in English).
+ * The specs pause after every action and Playwright draws the pointer and the clicked element.
  */
-export function gifRuns(runs) {
+export function videoRuns(runs) {
   const seen = new Set();
   return runs.filter((r) => {
     if (!fs.existsSync(r.video)) return false;
@@ -63,20 +63,36 @@ export function gifRuns(runs) {
   });
 }
 
-function makeGif(videos, file) {
+// H.264 MP4 plays in every browser's own player (pause, rewind, speed); a GIF cannot pause.
+function makeVideo(videos, file) {
   const inputs = videos.flatMap((v) => ["-i", v]);
   const joined = videos.map((_, i) => `[${i}:v]`).join("");
-  const filter =
-    `${joined}concat=n=${videos.length}:v=1:a=0,setpts=0.5*PTS,fps=8,` +
-    "scale=640:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128[p];[b][p]paletteuse";
-  execFileSync("ffmpeg", ["-y", "-loglevel", "error", ...inputs, "-filter_complex", filter, file], {
-    stdio: "inherit",
-  });
+  const filter = `${joined}concat=n=${videos.length}:v=1:a=0,scale=trunc(iw/2)*2:trunc(ih/2)*2`;
+  const encode = ["-c:v", "libx264", "-crf", "28", "-preset", "veryfast", "-pix_fmt", "yuv420p"];
+  execFileSync(
+    "ffmpeg",
+    [
+      "-y",
+      "-loglevel",
+      "error",
+      ...inputs,
+      "-filter_complex",
+      filter,
+      ...encode,
+      "-movflags",
+      "+faststart",
+      file,
+    ],
+    { stdio: "inherit" },
+  );
 }
+
+/** Replaced in demo.yml with the evidence branch commit, once it is pushed. */
+export const EVIDENCE_SHA = "__EVIDENCE_SHA__";
 
 export function commentBody({
   runs,
-  hasGif,
+  hasVideo,
   pr,
   repo,
   sha,
@@ -93,7 +109,12 @@ export function commentBody({
     `Commit \`${sha.slice(0, 7)}\`. Specs: **${outcome}** in ${seconds}s. [Run](${runUrl}).`,
     "",
   ];
-  if (hasGif) lines.push(`![demo](${raw("demo.gif")})`, "");
+  // GitHub strips <video> and serves raw .mp4 as a download; jsDelivr serves it as video/mp4.
+  // Pinned to the evidence commit, so an update never shows a cached older video.
+  const cdn = (p) => `https://cdn.jsdelivr.net/gh/${repo}@${EVIDENCE_SHA}/pr-${pr}/${p}`;
+  if (hasVideo) {
+    lines.push(`▶ [Watch the walkthrough](${cdn("demo.mp4")}) (pause, rewind, speed)`, "");
+  }
   lines.push(
     artifactUrl
       ? `Full videos: [demo-video artifact](${artifactUrl}) (kept 90 days).`
@@ -127,16 +148,16 @@ function main() {
     for (const s of r.steps) fs.copyFileSync(path.join(r.dir, s), path.join(target, r.name, s));
   }
 
-  const videos = gifRuns(runs).map((r) => r.video);
-  let hasGif = false;
+  const videos = videoRuns(runs).map((r) => r.video);
+  let hasVideo = false;
   if (videos.length > 0) {
-    makeGif(videos, path.join(target, "demo.gif"));
-    hasGif = true;
+    makeVideo(videos, path.join(target, "demo.mp4"));
+    hasVideo = true;
   }
 
   const body = commentBody({
     runs,
-    hasGif,
+    hasVideo,
     pr,
     repo: process.env.REPO ?? "",
     sha: process.env.HEAD_SHA ?? "",
@@ -147,7 +168,9 @@ function main() {
   });
   fs.writeFileSync(path.join(out, "comment.md"), body);
   const shots = runs.reduce((n, r) => n + r.steps.length, 0);
-  console.log(`${runs.length} spec runs, ${shots} screenshots, gif from ${videos.length} videos.`);
+  console.log(
+    `${runs.length} spec runs, ${shots} screenshots, walkthrough from ${videos.length} videos.`,
+  );
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();

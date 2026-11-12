@@ -1,0 +1,73 @@
+name: factory-sync
+
+# Keeps board #2 in step with the factory: labels. Spec: docs/factory.md, section Labels and board.
+#
+#   issues labeled factory:*  -> move the card to the column of the issue's current factory: label
+#   issues closed             -> label factory:done, card Done
+#   issues reopened           -> label factory:triage, card Backlog
+#
+# Label changes made with GITHUB_TOKEN (factory-build, this workflow) start no runs, so those
+# workflows move the card themselves. This one covers changes by people and by FACTORY_TOKEN.
+# The hourly sweep (factory-sweep.yml) resets any card that still drifted, for example one
+# dragged by hand: board drags trigger nothing on a user-owned board.
+
+on:
+  issues:
+    types: [labeled, closed, reopened]
+
+concurrency:
+  group: factory-sync-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  sync:
+    if: >-
+      github.event.action != 'labeled' || startsWith(github.event.label.name, 'factory:')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read # scripts
+      issues: write # labels
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/scripts
+          persist-credentials: false
+
+      - name: Set the label on close or reopen
+        if: github.event.action != 'labeled'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number }}
+          ACTION: ${{ github.event.action }}
+        run: |
+          set -euo pipefail
+          if [ "$ACTION" = closed ]; then label=factory:done; else label=factory:triage; fi
+          .github/scripts/label-set.sh "$ISSUE" "$label"
+
+      - name: Move the card to the label's column
+        env:
+          GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
+          LABEL_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          # Read the label now, not from the event: another run may have swapped it since.
+          label=$(GH_TOKEN=$LABEL_TOKEN gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE/labels" \
+            --jq '[.[].name | select(startswith("factory:"))] | first // ""')
+          case "$label" in
+            factory:triage) column=Backlog ;;
+            factory:ready) column=Ready ;;
+            factory:in-progress) column="In progress" ;;
+            factory:in-review) column="In review" ;;
+            factory:human) column="Needs human" ;;
+            factory:done) column=Done ;;
+            *)
+              echo "Issue #$ISSUE has no factory: label; card left as is."
+              exit 0
+              ;;
+          esac
+          .github/scripts/board-move.sh "$ISSUE" "$column"
+          echo "Issue #$ISSUE ($label) -> $column"

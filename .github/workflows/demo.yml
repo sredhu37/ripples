@@ -1,7 +1,7 @@
 name: demo-video
 
 # Runs every Playwright spec with video, then posts the evidence:
-# step screenshots and demo.gif on the `evidence` branch under pr-<n>/,
+# step screenshots and demo.mp4 on the `evidence` branch under pr-<n>/,
 # and one PR comment (found by the <!-- evidence --> marker) updated in place.
 # See docs/factory.md, sections Evidence and CI tools.
 
@@ -113,7 +113,7 @@ jobs:
           fi
           ffmpeg -version | head -n 1
 
-      - name: Build evidence (screenshots, demo.gif, comment)
+      - name: Build evidence (screenshots, demo.mp4, comment)
         if: always() && steps.specs.outcome != 'skipped'
         working-directory: e2e
         env:
@@ -124,6 +124,7 @@ jobs:
         run: node build-evidence.mjs "$EVIDENCE_OUT"
 
       - name: Push evidence to the evidence branch
+        id: push
         if: always() && steps.specs.outcome != 'skipped' && env.SAME_REPO == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -151,11 +152,13 @@ jobs:
             git add -A "$dir"
             if git diff --cached --quiet; then
               echo "Evidence unchanged"
+              echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
               exit 0
             fi
             git commit -q -m "Evidence for PR #$PR_NUMBER at ${HEAD_SHA:0:7}"
             if git push -q origin "HEAD:refs/heads/evidence"; then
               echo "Pushed $dir to evidence"
+              echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
               exit 0
             fi
             sleep $(( attempt * 5 ))
@@ -167,9 +170,12 @@ jobs:
         if: always() && steps.specs.outcome != 'skipped' && env.SAME_REPO == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
+          EVIDENCE_SHA: ${{ steps.push.outputs.sha }}
         run: |
           set -euo pipefail
           body="$EVIDENCE_OUT/comment.md"
+          # The video link is pinned to the evidence commit just pushed.
+          sed -i "s/__EVIDENCE_SHA__/${EVIDENCE_SHA:-evidence}/g" "$body"
           ids=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate \
             --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- evidence -->"))) | .id')
           id="${ids%%$'\n'*}"

@@ -20,7 +20,7 @@ Show the change you just made with the Playwright specs in `e2e/`. The same spec
 2. Update the spec for that screen: walk through the changed behavior, call `await step()` after each visible change, and add real assertions so it also works as a test. Reach screens through the UI or `seedProgress`; add a `data-testid` only if nothing else works.
 3. Run `cd e2e && npx playwright test <spec>`. For lessons: `LESSON_IDS=money,banks npx playwright test lesson` runs each id in EN, DE and PL (default `money`).
 4. Videos land in `e2e/test-results/**/video.webm`, screenshots in `e2e/test-results/<name>/step-<k>.png`. Run `open` on the one that shows your change.
-5. Optional, the CI evidence locally (needs ffmpeg): `PR_NUMBER=0 node build-evidence.mjs <out-dir>` writes the PNGs, `demo.gif` and `comment.md`.
+5. Optional, the CI evidence locally (needs ffmpeg): `PR_NUMBER=0 node build-evidence.mjs <out-dir>` writes the PNGs, `demo.mp4` and `comment.md`.
 6. Report the paths and one sentence per step shown. If a spec failed, say so; do not hide it.
 
 ## In CI

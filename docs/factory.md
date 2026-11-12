@@ -169,7 +169,7 @@ review passed ──► any changed file on the risky list? ──yes──► f
 - One Playwright **spec** per screen (`e2e/`; ripples has 5 screens: map, lesson, facts, parents, timeline). Each spec is a test and records the demo.
 - The lesson spec takes lesson ids. CI passes the ids from changed `src/content/<id>.*` files and runs them in EN, DE and PL. A change only in `src/content/**` needs no spec edit.
 - Every PR runs all specs with video on. Each step saves a screenshot.
-- The **evidence branch** `evidence` holds `pr-<n>/step-*.png` and `pr-<n>/demo.gif` (made from the video with ffmpeg). One **evidence comment** per PR, updated in place, shows them inline and links the full video artifact (90-day retention).
+- The **evidence branch** `evidence` holds `pr-<n>/step-*.png` and `pr-<n>/demo.mp4` (the spec videos joined with ffmpeg; Playwright draws the pointer and outlines each clicked element). One **evidence comment** per PR, updated in place, shows the screenshots inline, links the walkthrough video through jsDelivr (GitHub strips video players from comments and serves raw `.mp4` as a download; jsDelivr serves it as `video/mp4`, so the browser's own player can pause and rewind), and links the full video artifact (90-day retention).
 - Review agents and the gate agent read the PNGs. Sunny watches on HUMAN PRs.
 - After merge, CI deletes `pr-<n>/` and rewrites `evidence` to a single commit.
 - `demo.yml` is fixed first: it fails on every PR today (job-level `if` uses `hashFiles`).
@@ -205,6 +205,7 @@ GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`
 | `factory-review.yml` | `workflow_run` (CI workflows done on a factory PR), `workflow_dispatch`               | 4 review agents in parallel, suggestions issue, fix round, round counter                    |
 | `factory-gate.yml`   | review passed                                                                         | risky list, gate agent, merge with `FACTORY_TOKEN` or `factory:human`                       |
 | `factory-sweep.yml`  | hourly at :07; Monday 09:00 Europe/Berlin; `workflow_dispatch` (`task`, `dry_run`)    | restart paused `factory:ready` tickets, flag stuck builds, board reconcile; triage reminder |
+| `factory-sync.yml`   | `issues: labeled, closed, reopened`                                                   | card to the label's column; close sets `factory:done`                                       |
 | `pages.yml`          | push to main                                                                          | build, deploy, live check, rollback                                                         |
 | `demo.yml` (fixed)   | `pull_request`                                                                        | specs, evidence branch, evidence comment                                                    |
 
@@ -262,7 +263,7 @@ The factory bot messages Sunny only when he has to act or should know:
 ```
 Needs human: PR #130 "Lesson 4 toy"       Live site rolled back to live-good    Triage: 23 waiting
 reason: gate HUMAN, new screen            broken: #131                          (oldest 9 days)
-[GIF]  link to PR                         revert PR #132 waits for your merge   link to board
+[video] link to PR                       revert PR #132 waits for your merge   link to board
 ```
 
 Normal merges are silent.
