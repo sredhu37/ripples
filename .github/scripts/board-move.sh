@@ -37,19 +37,33 @@ fi
 
 content=$(gh api "repos/$repo/issues/$issue" --jq .node_id)
 
-item=$(gh api graphql -f content="$content" -f query='
-  query($content: ID!) {
-    node(id: $content) {
-      ... on Issue { projectItems(first: 50) { nodes { id project { id } } } }
-    }
-  }' --jq ".data.node.projectItems.nodes[] | select(.project.id == \"$project\") | .id")
+find_item() {
+  gh api graphql -f content="$content" -f query='
+    query($content: ID!) {
+      node(id: $content) {
+        ... on Issue { projectItems(first: 50) { nodes { id project { id } } } }
+      }
+    }' --jq ".data.node.projectItems.nodes[] | select(.project.id == \"$project\") | .id"
+}
+
+item=$(find_item)
 
 if [ -z "$item" ]; then
-  item=$(gh api graphql -f project="$project" -f content="$content" -f query='
+  # addProjectV2ItemById returns the existing item when the card is already there, but fails with
+  # "Content already exists" while the board's Auto-add workflow adds the same issue; then look again.
+  if item=$(gh api graphql -f project="$project" -f content="$content" -f query='
     mutation($project: ID!, $content: ID!) {
       addProjectV2ItemById(input: { projectId: $project, contentId: $content }) { item { id } }
-    }' --jq .data.addProjectV2ItemById.item.id)
-  echo "board-move: added #$issue to the board"
+    }' --jq .data.addProjectV2ItemById.item.id 2> /dev/null); then
+    echo "board-move: added #$issue to the board"
+  else
+    sleep 3
+    item=$(find_item)
+  fi
+  if [ -z "$item" ]; then
+    echo "board-move: could not add #$issue to the board" >&2
+    exit 1
+  fi
 fi
 
 gh api graphql -f project="$project" -f item="$item" -f field="$field" -f option="$option" -f query='
