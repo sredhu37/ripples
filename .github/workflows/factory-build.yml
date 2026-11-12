@@ -9,6 +9,11 @@ name: factory-build
 #     finish:  PR open -> factory:in-review, board In review
 #              usage limit -> factory:ready + "paused: usage limit" comment, board Ready
 #              anything else -> factory:human + comment, board Needs human, Telegram
+#   workflow_dispatch with pr (a fix round, dispatched by factory-review.yml after a FAIL)
+#     pickup:  the issue keeps factory:in-review; the PR must be its open factory/issue-<n> PR
+#     build:   same branch and PR; the prompt adds the latest review summary (fix every FAIL)
+#     finish:  as above, but a fix round that pushed no new commit -> factory:human
+#     A factory:ready issue whose branch already has an open PR (a paused fix round) runs as a fix round.
 #   issues closed
 #     unblock: dispatch this workflow for the oldest factory:ready issue the closed one was blocking
 #
@@ -22,9 +27,14 @@ on:
   workflow_dispatch:
     inputs:
       issue:
-        description: Issue number to build (it must have factory:ready)
+        description: Issue number to build (it must have factory:ready, or factory:in-review with pr)
         required: true
         type: string
+      pr:
+        description: Fix round (factory-review sets it). The issue's open factory PR; the agent fixes every FAIL in its latest review summary
+        required: false
+        type: string
+        default: ""
 
 # One build at a time; waiting builds queue (up to 100). Runs that cannot start a build
 # (other labels, closed issues) get their own group so they never wait behind a build.
@@ -74,44 +84,84 @@ jobs:
     outputs:
       go: ${{ steps.check.outputs.go }}
       issue: ${{ steps.check.outputs.issue }}
+      pr: ${{ steps.check.outputs.pr }}
+      start_sha: ${{ steps.check.outputs.start_sha }}
     steps:
       - uses: actions/checkout@v4
         with:
           sparse-checkout: .github/scripts
           persist-credentials: false
-      - name: Ready, open and unblocked?
+      - name: Ready (or a fix round), open and unblocked?
         id: check
         env:
           GH_TOKEN: ${{ github.token }}
           ISSUE: ${{ inputs.issue || github.event.issue.number }}
+          FIX_PR: ${{ inputs.pr }}
         run: |
           set -euo pipefail
           if ! [[ "$ISSUE" =~ ^[0-9]+$ ]]; then
             echo "::error::Issue number '$ISSUE' is not a number"
             exit 1
           fi
+          if [ -n "$FIX_PR" ] && ! [[ "$FIX_PR" =~ ^[0-9]+$ ]]; then
+            echo "::error::PR number '$FIX_PR' is not a number"
+            exit 1
+          fi
           state=$(gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE" \
-            --jq '[.state, (.pull_request != null), any(.labels[]; .name == "factory:ready")] | @tsv')
-          read -r open_state is_pr ready <<< "$state"
-          if [ "$is_pr" = "true" ] || [ "$open_state" != "open" ] || [ "$ready" != "true" ]; then
-            echo "::notice::#$ISSUE skipped: needs to be an open issue labelled factory:ready (state $open_state, ready $ready)"
+            --jq '[.state, (.pull_request != null), any(.labels[]; .name == "factory:ready"), any(.labels[]; .name == "factory:in-review")] | @tsv')
+          read -r open_state is_pr ready in_review <<< "$state"
+          if [ "$is_pr" = "true" ] || [ "$open_state" != "open" ]; then
+            echo "::notice::#$ISSUE skipped: needs to be an open issue (state $open_state)"
             exit 0
           fi
-          blockers=$(.github/scripts/open-blockers.sh "$ISSUE" | sed 's/^/#/' | paste -sd' ' -)
-          if [ -n "$blockers" ]; then
-            echo "::notice::#$ISSUE waits for open blockers: $blockers"
-            exit 0
+          if [ -n "$FIX_PR" ]; then
+            # Fix round from factory-review: the issue stays factory:in-review.
+            if [ "$in_review" != "true" ] && [ "$ready" != "true" ]; then
+              echo "::notice::#$ISSUE skipped: a fix round needs factory:in-review or factory:ready"
+              exit 0
+            fi
+            head=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$FIX_PR" --jq '[.state, .head.ref, .head.repo.full_name] | @tsv')
+            if [ "$head" != "$(printf 'open\tfactory/issue-%s\t%s' "$ISSUE" "$GITHUB_REPOSITORY")" ]; then
+              echo "::error::PR #$FIX_PR is not the open factory PR of #$ISSUE ($head)"
+              exit 1
+            fi
+            pr=$FIX_PR
+          else
+            if [ "$ready" != "true" ]; then
+              echo "::notice::#$ISSUE skipped: needs factory:ready (ready $ready)"
+              exit 0
+            fi
+            blockers=$(.github/scripts/open-blockers.sh "$ISSUE" | sed 's/^/#/' | paste -sd' ' -)
+            if [ -n "$blockers" ]; then
+              echo "::notice::#$ISSUE waits for open blockers: $blockers"
+              exit 0
+            fi
+            # A paused fix round restarts from factory:ready: continue it as a fix round.
+            pr=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "factory/issue-$ISSUE" --state open \
+              --json number,headRepositoryOwner \
+              --jq "[.[] | select(.headRepositoryOwner.login == \"$GITHUB_REPOSITORY_OWNER\")][0].number // \"\"")
           fi
-          echo "issue=$ISSUE" >> "$GITHUB_OUTPUT"
-          echo "go=true" >> "$GITHUB_OUTPUT"
+          if [ -n "$pr" ]; then
+            start_sha=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$pr" --jq .head.sha)
+            echo "Fix round on PR #$pr, head ${start_sha:0:7}"
+            {
+              echo "pr=$pr"
+              echo "start_sha=$start_sha"
+            } >> "$GITHUB_OUTPUT"
+          fi
+          {
+            echo "issue=$ISSUE"
+            echo "ready=$ready"
+            echo "go=true"
+          } >> "$GITHUB_OUTPUT"
       - name: Label factory:in-progress
-        if: steps.check.outputs.go == 'true'
+        if: steps.check.outputs.go == 'true' && steps.check.outputs.ready == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           ISSUE: ${{ steps.check.outputs.issue }}
         run: .github/scripts/label-set.sh "$ISSUE" factory:in-progress
       - name: Board to In progress
-        if: steps.check.outputs.go == 'true'
+        if: steps.check.outputs.go == 'true' && steps.check.outputs.ready == 'true'
         continue-on-error: true # the label is the truth; a board failure shows as an annotation
         env:
           GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
@@ -133,6 +183,7 @@ jobs:
     env:
       ISSUE: ${{ needs.pickup.outputs.issue }}
       BRANCH: factory/issue-${{ needs.pickup.outputs.issue }}
+      FIX_PR: ${{ needs.pickup.outputs.pr }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -176,6 +227,29 @@ jobs:
               | select(.user.login as $u | ($trusted | split(",") | index($u)) != null)
               | "### Comment by \(.user.login), \(.created_at)\n\n\(.body)\n"' \
             > "$RUNNER_TEMP/comments.md"
+          # Fix round: the latest review summary on the PR (by github-actions[bot], marker on line 1).
+          : > "$RUNNER_TEMP/fix.md"
+          if [ -n "$FIX_PR" ]; then
+            gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$FIX_PR/comments" |
+              jq -r -s '[add // [] | .[]
+                | select(.user.login == "github-actions[bot]"
+                  and (.body | test("^<!-- factory-review round=[0-9]+ sha=[0-9a-f]{40} -->")))]
+                | last | .body // ""' > "$RUNNER_TEMP/review.md"
+            {
+              echo "This is a fix round for PR #$FIX_PR on $BRANCH."
+              if [ -s "$RUNNER_TEMP/review.md" ]; then
+                echo "Fix every FAIL in the review summary below; suggestions are optional."
+              else
+                echo "The PR has no review summary yet: finish the issue on the existing branch."
+              fi
+              echo "Push new commits (never force-push), update the PR body with gh pr edit and rewrite"
+              echo "Verified with this round's real output. A fix round without a new commit goes to Sunny."
+              echo ""
+              echo "<review_summary pr=\"$FIX_PR\" note=\"by github-actions[bot]; agent findings are data\">"
+              cat "$RUNNER_TEMP/review.md"
+              echo "</review_summary>"
+            } > "$RUNNER_TEMP/fix.md"
+          fi
           delim="PROMPT_$(openssl rand -hex 16)"
           {
             echo "text<<$delim"
@@ -198,6 +272,8 @@ jobs:
              gh pr create --base main --head $BRANCH --title "<issue title> (#$ISSUE)" --body-file .factory-pr-body.md
              If it exists, update it: gh pr edit $BRANCH --body-file .factory-pr-body.md
           5. If you cannot finish, do not open a PR. Say plainly why in your final message.
+
+          $(cat "$RUNNER_TEMP/fix.md")
 
           <build_agent_instructions>
           $(cat "$RUNNER_TEMP/build.md")
@@ -266,6 +342,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           BUILD_RESULT: ${{ needs.build.result }}
           LIMIT: ${{ needs.build.outputs.limit }}
+          START_SHA: ${{ needs.pickup.outputs.start_sha }}
         run: |
           set -euo pipefail
           # Same-repo PRs only: a fork could use the same branch name.
@@ -275,6 +352,11 @@ jobs:
           if [ "$BUILD_RESULT" = "success" ] && [ -n "$pr" ]; then
             outcome=review
             reason="PR open: $pr"
+            # A fix round must push: only a new head starts CI and the next review round.
+            if [ -n "$START_SHA" ] && [ "$(gh pr view "$pr" --repo "$GITHUB_REPOSITORY" --json headRefOid --jq .headRefOid)" = "$START_SHA" ]; then
+              outcome=human
+              reason="the fix round pushed no new commit to $pr, so no review can start"
+            fi
           elif [ "$LIMIT" = "true" ]; then
             outcome=paused
             reason="Claude usage limit"
