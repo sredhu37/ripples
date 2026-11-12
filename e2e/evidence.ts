@@ -36,7 +36,6 @@ export async function seedProgress(
     muted: true,
     badges: progress.badges ?? [],
     disabledLessons: progress.disabledLessons ?? [],
-    ageGroup: "junior",
   });
   await page.addInitScript((v) => {
     window.localStorage.setItem("ripples.progress.v1", v);

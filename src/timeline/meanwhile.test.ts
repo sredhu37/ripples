@@ -13,9 +13,9 @@ describe("meanwhile around the world", () => {
     for (const id of Object.keys(MEANWHILE)) expect(LESSONS.some((l) => l.id === id)).toBe(true);
   });
 
-  it("has trilingual junior and senior text that differs per language", () => {
+  it("has trilingual text that differs per language", () => {
     for (const [id, m] of Object.entries(MEANWHILE)) {
-      for (const text of [m.junior, m.senior]) {
+      for (const text of [m.text]) {
         for (const l of ["en", "de", "pl"] as const)
           expect(text[l].trim(), `${id} ${l}`).not.toBe("");
         expect(text.de).not.toBe(text.en);

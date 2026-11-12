@@ -7,7 +7,7 @@ import {
   getLessonTitle,
 } from "../lessons";
 import { t } from "../i18n";
-import { exportCode, importCode, type Progress, type Lang, type AgeGroup } from "../progress";
+import { exportCode, importCode, type Progress, type Lang } from "../progress";
 import { LangSwitch } from "./LangSwitch";
 
 interface Props {
@@ -18,7 +18,6 @@ interface Props {
   onClose: () => void;
   onLang?: (l: Lang) => void;
   onToggleLesson: (lessonId: string, enabled: boolean) => void;
-  onAgeGroup?: (age: AgeGroup) => void;
 }
 
 function makeGate() {
@@ -34,7 +33,6 @@ export function ParentPanel({
   onClose,
   onLang,
   onToggleLesson,
-  onAgeGroup,
 }: Props) {
   const lang = progress.lang;
   const [gate] = useState(makeGate);
@@ -90,31 +88,6 @@ export function ParentPanel({
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <h2>{t(lang, "parents")}</h2>
           {onLang && <LangSwitch lang={lang} onLang={onLang} />}
-        </div>
-
-        <h2>{t(lang, "ageGroupTitle")}</h2>
-        <p>{t(lang, "ageGroupHelp")}</p>
-        <div className="age-group-field" role="group" aria-label={t(lang, "ageGroupTitle")}>
-          <div className="age-pill-row">
-            <button
-              type="button"
-              className={`age-pill-btn ${(progress.ageGroup ?? "junior") === "junior" ? "active" : ""}`}
-              onClick={() => onAgeGroup?.("junior")}
-              aria-pressed={(progress.ageGroup ?? "junior") === "junior"}
-            >
-              <span className="age-pill-label">{t(lang, "ageJunior")}</span>
-              <span className="age-pill-desc">{t(lang, "ageJuniorDesc")}</span>
-            </button>
-            <button
-              type="button"
-              className={`age-pill-btn ${progress.ageGroup === "senior" ? "active" : ""}`}
-              onClick={() => onAgeGroup?.("senior")}
-              aria-pressed={progress.ageGroup === "senior"}
-            >
-              <span className="age-pill-label">{t(lang, "ageSenior")}</span>
-              <span className="age-pill-desc">{t(lang, "ageSeniorDesc")}</span>
-            </button>
-          </div>
         </div>
 
         <h2>{t(lang, "lessonSelectionTitle")}</h2>

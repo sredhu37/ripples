@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { t, type UiKey } from "../i18n";
 import { resolveText } from "../lesson/types";
-import type { AgeGroup, Lang } from "../progress";
+import type { Lang } from "../progress";
 import { sfx } from "../sound";
 import { eventsFor, TIMELINE_ERAS, TIMELINE_REGIONS } from "../timeline/data";
 import type { TimelineRegion } from "../timeline/types";
@@ -9,7 +9,6 @@ import { LangSwitch } from "./LangSwitch";
 
 interface Props {
   lang: Lang;
-  ageGroup: AgeGroup;
   onLang: (l: Lang) => void;
   onClose: () => void;
 }
@@ -32,7 +31,7 @@ const REGION_COLOR: Record<TimelineRegion, string> = {
   science: "#eab308",
 };
 
-export function TimelineScreen({ lang, ageGroup, onLang, onClose }: Props) {
+export function TimelineScreen({ lang, onLang, onClose }: Props) {
   const [eraIndex, setEraIndex] = useState(0);
   const [region, setRegion] = useState<TimelineRegion | "all">("all");
   const era = TIMELINE_ERAS[eraIndex];
@@ -164,9 +163,7 @@ export function TimelineScreen({ lang, ageGroup, onLang, onClose }: Props) {
                 >
                   <span className="timeline-year">{resolveText(e.year, lang)}</span>
                   <strong>{resolveText(e.title, lang)}</strong>
-                  <p>
-                    {resolveText(ageGroup === "senior" ? e.summary.senior : e.summary.junior, lang)}
-                  </p>
+                  <p>{resolveText(e.summary, lang)}</p>
                 </li>
               ))}
           </ul>

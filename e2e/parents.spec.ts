@@ -16,16 +16,10 @@ test("parents: the panel sits behind the maths gate and controls the trail", asy
   await expect(code).toHaveValue(/^RIP1\./);
   await code.scrollIntoViewIfNeeded();
   await step();
-  await page.getByRole("heading", { name: "Age group" }).scrollIntoViewIfNeeded();
 
-  // Age group switch.
-  const senior = page.getByRole("button", { name: /Senior/ });
-  const junior = page.getByRole("button", { name: /Junior/ });
-  await senior.click();
-  await expect(senior).toHaveAttribute("aria-pressed", "true");
-  await step();
-  await junior.click();
-  await expect(junior).toHaveAttribute("aria-pressed", "true");
+  // One age group: the panel has no age section.
+  await expect(page.getByRole("heading", { name: "Age group" })).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Lesson selection" })).toBeVisible();
 
   // Turn off the first lesson of the first group.
   const group = page.locator("details.lesson-group-accordion").first();

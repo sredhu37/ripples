@@ -79,12 +79,6 @@ const en: Dict = {
   lessonSelectionHelp: "Turn lessons on or off to choose what appears on the trail.",
   lessonEnabled: "Enabled",
   lessonDisabled: "Disabled",
-  ageGroupTitle: "Age group",
-  ageGroupHelp: "Choose an age group to adapt stories, toys, and questions.",
-  ageJunior: "Ages 7-10 (Junior)",
-  ageSenior: "Ages 10-14 (Senior)",
-  ageJuniorDesc: "Concrete stories, visual guides, and foundational concepts.",
-  ageSeniorDesc: "Deeper mechanics, real-world examples, and advanced challenges.",
 };
 
 const de: Dict = {
@@ -164,12 +158,6 @@ const de: Dict = {
     "Schalte Lektionen ein oder aus, um festzulegen, was auf dem Pfad erscheint.",
   lessonEnabled: "Aktiviert",
   lessonDisabled: "Deaktiviert",
-  ageGroupTitle: "Altersgruppe",
-  ageGroupHelp: "Waehle eine Altersgruppe, um Geschichten, Spielzeuge und Fragen anzupassen.",
-  ageJunior: "Alter 7-10 (Junior)",
-  ageSenior: "Alter 10-14 (Senior)",
-  ageJuniorDesc: "Anschauliche Geschichten, visuelle Hilfen und grundlegende Konzepte.",
-  ageSeniorDesc: "Tiefere Zusammenhaenge, echte Beispiele und kniffligere Aufgaben.",
 };
 
 const pl: Dict = {
@@ -247,12 +235,6 @@ const pl: Dict = {
   lessonSelectionHelp: "Włączaj lub wyłączaj lekcje, aby wybrać, co pojawia się na ścieżce.",
   lessonEnabled: "Włączona",
   lessonDisabled: "Wyłączona",
-  ageGroupTitle: "Grupa wiekowa",
-  ageGroupHelp: "Wybierz grupę wiekową, aby dopasować historie, zabawki i pytania.",
-  ageJunior: "Wiek 7-10 (Młodsza)",
-  ageSenior: "Wiek 10-14 (Starsza)",
-  ageJuniorDesc: "Przystępne opowieści, wizualne wskazówki i podstawowe pojęcia.",
-  ageSeniorDesc: "Głębsze mechanizmy, realne przykłady i bardziej zaawansowane wyzwania.",
 };
 
 const dicts: Record<Lang, Dict> = { en, de, pl };

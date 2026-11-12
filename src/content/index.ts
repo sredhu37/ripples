@@ -111,9 +111,7 @@ const ALL: Record<string, Lesson | undefined> = {
   scarcity_prices,
 };
 
-import type { AgeGroup } from "../progress";
 import { EVENT_SOURCES, MEANWHILE, meanwhileEvents } from "../timeline/meanwhile";
-import { SENIOR_LESSONS } from "./senior";
 
 // Every concurrent event a history lesson shows also appears on its fact card, with a source.
 for (const [lessonId, m] of Object.entries(MEANWHILE)) {
@@ -122,7 +120,7 @@ for (const [lessonId, m] of Object.entries(MEANWHILE)) {
   for (const e of meanwhileEvents(m)) {
     const source = EVENT_SOURCES[e.id];
     if (!source) continue;
-    const line = (l: "en" | "de" | "pl") => `${e.year[l]}: ${e.title[l]}. ${e.summary.senior[l]}`;
+    const line = (l: "en" | "de" | "pl") => `${e.year[l]}: ${e.title[l]}. ${e.summary[l]}`;
     lesson.factCard.claims.push({
       text: { en: line("en"), de: line("de"), pl: line("pl") },
       source,
@@ -130,22 +128,10 @@ for (const [lessonId, m] of Object.entries(MEANWHILE)) {
   }
 }
 
-const SENIOR: Record<string, Lesson> = { ...SENIOR_LESSONS };
-
-export function registerSeniorLesson(id: string, lesson: Lesson): void {
-  SENIOR[id] = lesson;
-}
-
-export function getLesson(id: string, ageGroup?: AgeGroup): Lesson | undefined {
-  if (ageGroup === "senior" && SENIOR[id]) {
-    return SENIOR[id];
-  }
+export function getLesson(id: string): Lesson | undefined {
   return ALL[id];
 }
 
-export function hasLesson(id: string, ageGroup?: AgeGroup): boolean {
-  if (ageGroup === "senior" && SENIOR[id]) {
-    return true;
-  }
+export function hasLesson(id: string): boolean {
   return ALL[id] !== undefined;
 }

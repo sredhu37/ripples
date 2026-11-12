@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { t } from "../i18n";
 import { resolveText } from "../lesson/types";
-import type { AgeGroup, Lang } from "../progress";
+import type { Lang } from "../progress";
 import { REGION_KEY } from "./TimelineScreen";
 import { eventYear } from "../timeline/data";
 import { snapshotAt, type Meanwhile } from "../timeline/meanwhile";
@@ -9,19 +9,17 @@ import { snapshotAt, type Meanwhile } from "../timeline/meanwhile";
 interface Props {
   meanwhile: Meanwhile;
   lang: Lang;
-  ageGroup: AgeGroup;
 }
 
 /** "Meanwhile around the world": a year slider showing the latest event on each track. */
-export function MeanwhileCard({ meanwhile, lang, ageGroup }: Props) {
+export function MeanwhileCard({ meanwhile, lang }: Props) {
   const [year, setYear] = useState(meanwhile.from);
   const shown = snapshotAt(meanwhile, year);
-  const summary = ageGroup === "senior" ? meanwhile.senior : meanwhile.junior;
 
   return (
     <div className="card meanwhile">
       <h3>{t(lang, "meanwhileTitle")}</h3>
-      <p>{resolveText(summary, lang)}</p>
+      <p>{resolveText(meanwhile.text, lang)}</p>
       <label className="meanwhile-slider">
         <span>
           {t(lang, "meanwhileYear")}: <strong>{year}</strong>
@@ -43,7 +41,7 @@ export function MeanwhileCard({ meanwhile, lang, ageGroup }: Props) {
               {t(lang, REGION_KEY[e.region])} · {resolveText(e.year, lang)}
             </span>
             <strong>{resolveText(e.title, lang)}</strong>
-            <p>{resolveText(ageGroup === "senior" ? e.summary.senior : e.summary.junior, lang)}</p>
+            <p>{resolveText(e.summary, lang)}</p>
             <span hidden>{eventYear(e)}</span>
           </li>
         ))}

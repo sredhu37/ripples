@@ -9,7 +9,6 @@ import {
   loadProgress,
   nextLessonId,
   saveProgress,
-  setAgeGroup,
   toggleLesson,
   type Progress,
 } from "./progress";
@@ -82,7 +81,6 @@ describe("storage", () => {
       muted: false,
       badges: ["a"],
       disabledLessons: [],
-      ageGroup: "junior",
     });
   });
 });
@@ -229,17 +227,11 @@ describe("disabled lessons", () => {
     const code = exportCode(p, order);
     const restored = importCode(code, order);
     expect(restored?.disabledLessons).toEqual([]);
-    expect(restored?.ageGroup).toBe("junior");
   });
 
-  it("updates and round-trips senior ageGroup in progress and save code", () => {
-    let p = emptyProgress();
-    expect(p.ageGroup).toBe("junior");
-    p = setAgeGroup(p, "senior");
-    expect(p.ageGroup).toBe("senior");
-
-    const code = exportCode(p, order);
-    const restored = importCode(code, order);
-    expect(restored?.ageGroup).toBe("senior");
+  it("never writes an age key into the save code payload", () => {
+    const code = exportCode({ ...emptyProgress(), name: "Maya" }, order);
+    const payload = JSON.parse(atob(code.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")));
+    expect(Object.keys(payload).sort()).toEqual(["b", "l", "n"]);
   });
 });

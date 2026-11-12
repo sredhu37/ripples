@@ -23,21 +23,14 @@ function texts(l: Lesson): { where: string; text: Text }[] {
 }
 
 describe("Lesson 3.10: scarcity_prices", () => {
-  it("is registered and resolvable for junior and senior", () => {
+  it("is registered and resolvable", () => {
     expect(hasLesson("scarcity_prices")).toBe(true);
-    const junior = getLesson("scarcity_prices", "junior");
-    const senior = getLesson("scarcity_prices", "senior");
-    expect(junior).toBeDefined();
-    expect(senior).toBeDefined();
-    expect(junior).not.toBe(senior);
+    expect(getLesson("scarcity_prices")).toBeDefined();
   });
 
-  const tiers: [string, Lesson][] = [
-    ["junior", getLesson("scarcity_prices", "junior")!],
-    ["senior", getLesson("scarcity_prices", "senior")!],
-  ];
+  const lesson: Lesson = getLesson("scarcity_prices")!;
 
-  describe.each(tiers)("%s tier", (_tier, lesson) => {
+  describe("content", () => {
     it("has 5 to 8 story beats", () => {
       expect(lesson.story.length).toBeGreaterThanOrEqual(5);
       expect(lesson.story.length).toBeLessThanOrEqual(8);
