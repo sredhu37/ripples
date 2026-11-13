@@ -69,7 +69,7 @@ jobs:
           node-version: 24
       - name: Wait until the live site serves this commit
         run: .github/scripts/pages-wait-version.sh "$GITHUB_SHA" 600
-      # No speed limits here: live network varies, speed is checked before merge (lighthouse.yml).
+      # No speed limits here: live network varies, speed is checked before merge (pr-checks.yml, job lighthouse).
       # lhci fails the step when the page paints nothing (NO_FCP) or the console logs an error.
       - name: Lighthouse on the live URL (page renders, no console errors)
         run: npx --yes @lhci/cli@0.16.0 autorun --config=.github/scripts/pages-lighthouserc.json "--collect.url=${SITE_URL}?v=${GITHUB_SHA}"
