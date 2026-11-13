@@ -37,7 +37,7 @@ new issue ──► TRIAGE ──► READY ──► BUILD ──► CI TOOLS �
 
 ([#114](https://github.com/sredhu37/ripples/issues/114), facts from [#110](https://github.com/sredhu37/ripples/issues/110), [#112](https://github.com/sredhu37/ripples/issues/112))
 
-Exactly one `factory:` label per issue at a time. The factory swaps it at each step; adding one by hand removes the others (`factory-sync.yml`). Labels sit on the issue only; the PR links with `Closes #n`.
+Exactly one `factory:` label per issue at a time. The factory swaps it at each step; adding one by hand removes the others (`factory-sync.yml`). Labels sit on the issue only; the PR links with `Closes #n`. A PR opened by hand with `Closes #n` puts #n in review (`factory-pr-link.yml`): the label and the card move at once, so a hand-built ticket does not sit in In progress (where the sweep would flag it as stuck). Drafts, fork PRs and issues in `factory:human`, `factory:in-review` or `factory:done` are skipped.
 
 | Label                 | Board column                  | Set by                                                                          |
 | --------------------- | ----------------------------- | ------------------------------------------------------------------------------- |
@@ -228,39 +228,41 @@ merge ──► pages.yml: build ──► deploy ──► live-check
 
 GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`. Hermes is Sunny's cockpit (ask it about the factory), not the engine.
 
-| Workflow             | Runs on                                                                               | Does                                                                                                 |
-| -------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `factory-build.yml`  | `issues: labeled` (`factory:ready`), `issues: closed` (unblocks), `workflow_dispatch` | pickup, label swap, build agent, opens PR                                                            |
-| `factory-review.yml` | `workflow_run` (CI workflows done on a factory PR), `workflow_dispatch`               | 4 review agents in parallel, suggestions issue, fix round, round counter                             |
-| `factory-gate.yml`   | `workflow_dispatch` (`pr`, `mode`); `pull_request_review`, `issue_comment` (relay)    | risky list, gate agent, merge with `FACTORY_TOKEN` or `factory:human`; Sunny's approval and comments |
-| `factory-sweep.yml`  | hourly at :07; Monday 09:00 Europe/Berlin; `workflow_dispatch` (`task`, `dry_run`)    | restart paused `factory:ready` tickets, flag stuck builds, board reconcile; triage reminder          |
-| `factory-sync.yml`   | `issues: labeled, unlabeled, closed, reopened`                                        | keeps one `factory:` label (the newest); card to its column; close sets `factory:done`               |
-| `pages.yml`          | push to main                                                                          | build, deploy, live check, rollback                                                                  |
-| `demo.yml` (fixed)   | `pull_request`                                                                        | specs, evidence branch, evidence comment                                                             |
+| Workflow              | Runs on                                                                               | Does                                                                                                 |
+| --------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `factory-build.yml`   | `issues: labeled` (`factory:ready`), `issues: closed` (unblocks), `workflow_dispatch` | pickup, label swap, build agent, opens PR                                                            |
+| `factory-review.yml`  | `workflow_run` (CI workflows done on a factory PR), `workflow_dispatch`               | 4 review agents in parallel, suggestions issue, fix round, round counter                             |
+| `factory-gate.yml`    | `workflow_dispatch` (`pr`, `mode`); `pull_request_review`, `issue_comment` (relay)    | risky list, gate agent, merge with `FACTORY_TOKEN` or `factory:human`; Sunny's approval and comments |
+| `factory-sweep.yml`   | hourly at :07; Monday 09:00 Europe/Berlin; `workflow_dispatch` (`task`, `dry_run`)    | restart paused `factory:ready` tickets, flag stuck builds, board reconcile; triage reminder          |
+| `factory-sync.yml`    | `issues: labeled, unlabeled, closed, reopened`                                        | keeps one `factory:` label (the newest); card to its column; close sets `factory:done`               |
+| `factory-pr-link.yml` | `pull_request_target: opened, reopened, ready_for_review`                             | a hand-opened PR with `Closes #n` puts #n in `factory:in-review`, card In review                     |
+| `pages.yml`           | push to main                                                                          | build, deploy, live check, rollback                                                                  |
+| `demo.yml` (fixed)    | `pull_request`                                                                        | specs, evidence branch, evidence comment                                                             |
 
 Shared scripts in `.github/scripts/`, for every factory workflow:
 
-| Script                 | Does                                                                                           | Token                      |
-| ---------------------- | ---------------------------------------------------------------------------------------------- | -------------------------- |
-| `label-set.sh`         | gives an issue exactly one `factory:` label                                                    | `GITHUB_TOKEN`             |
-| `board-move.sh`        | moves the issue's card to a Status column, adds the card if missing                            | `FACTORY_TOKEN` (no agent) |
-| `telegram.sh`          | sends a factory bot message to Sunny                                                           | `TELEGRAM_TOKEN` + chat id |
-| `open-blockers.sh`     | lists an issue's open blockers                                                                 | `GITHUB_TOKEN`             |
-| `next-unblocked.sh`    | oldest `factory:ready` issue a closed issue unblocked                                          | `GITHUB_TOKEN`             |
-| `usage-limit.sh`       | did a claude-code-action run stop on a Claude limit (execution file)                           | none                       |
-| `agent-last-words.sh`  | the agent's final message and refused tools, for a stop without a PR (issue comment, Telegram) | none                       |
-| `build-runs-active.sh` | lists the `factory-build` runs that have not finished                                          | `GITHUB_TOKEN`             |
-| `sweep-restart.sh`     | oldest unblocked `factory:ready` issue to restart, when no build runs                          | `GITHUB_TOKEN`             |
-| `sweep-stuck.sh`       | `factory:in-progress` issues with no build run for over 45 minutes                             | `GITHUB_TOKEN`             |
-| `triage-reminder.sh`   | the triage reminder text, empty when no issue waits                                            | `GITHUB_TOKEN`             |
-| `board-reconcile.sh`   | moves every card to its label's column (`DRY_RUN=1` only prints)                               | `FACTORY_TOKEN` (no agent) |
-| `review-gate.sh`       | factory PR, current head, required checks green, round (max 5)                                 | `GITHUB_TOKEN`             |
-| `review.mjs`           | parses review agent json; writes the round summary and suggestions                             | none                       |
-| `gate-check.sh`        | should the gate act: modes gate, approve, fix; risky files                                     | `GITHUB_TOKEN`             |
-| `gate.mjs`             | risky list matcher; parses the gate agent json; writes the gate comment                        | none                       |
-| `checks-green.sh`      | are a commit's required checks green; waits while they run                                     | `GITHUB_TOKEN`             |
-| `gate-merge.sh`        | squash-merges a PR if its head is unchanged and checks are green                               | `FACTORY_TOKEN` (no agent) |
-| `pr-needs-human.sh`    | Telegram "Needs human" for a PR with the evidence video link                                   | `TELEGRAM_TOKEN` + chat id |
+| Script                 | Does                                                                                           | Token                                       |
+| ---------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| `label-set.sh`         | gives an issue exactly one `factory:` label                                                    | `GITHUB_TOKEN`                              |
+| `board-move.sh`        | moves the issue's card to a Status column, adds the card if missing                            | `FACTORY_TOKEN` (no agent)                  |
+| `pr-in-review.sh`      | the issues a hand-opened PR closes: label `factory:in-review`, card In review                  | `GITHUB_TOKEN` + `FACTORY_TOKEN` (no agent) |
+| `telegram.sh`          | sends a factory bot message to Sunny                                                           | `TELEGRAM_TOKEN` + chat id                  |
+| `open-blockers.sh`     | lists an issue's open blockers                                                                 | `GITHUB_TOKEN`                              |
+| `next-unblocked.sh`    | oldest `factory:ready` issue a closed issue unblocked                                          | `GITHUB_TOKEN`                              |
+| `usage-limit.sh`       | did a claude-code-action run stop on a Claude limit (execution file)                           | none                                        |
+| `agent-last-words.sh`  | the agent's final message and refused tools, for a stop without a PR (issue comment, Telegram) | none                                        |
+| `build-runs-active.sh` | lists the `factory-build` runs that have not finished                                          | `GITHUB_TOKEN`                              |
+| `sweep-restart.sh`     | oldest unblocked `factory:ready` issue to restart, when no build runs                          | `GITHUB_TOKEN`                              |
+| `sweep-stuck.sh`       | `factory:in-progress` issues with no build run for over 45 minutes                             | `GITHUB_TOKEN`                              |
+| `triage-reminder.sh`   | the triage reminder text, empty when no issue waits                                            | `GITHUB_TOKEN`                              |
+| `board-reconcile.sh`   | moves every card to its label's column (`DRY_RUN=1` only prints)                               | `FACTORY_TOKEN` (no agent)                  |
+| `review-gate.sh`       | factory PR, current head, required checks green, round (max 5)                                 | `GITHUB_TOKEN`                              |
+| `review.mjs`           | parses review agent json; writes the round summary and suggestions                             | none                                        |
+| `gate-check.sh`        | should the gate act: modes gate, approve, fix; risky files                                     | `GITHUB_TOKEN`                              |
+| `gate.mjs`             | risky list matcher; parses the gate agent json; writes the gate comment                        | none                                        |
+| `checks-green.sh`      | are a commit's required checks green; waits while they run                                     | `GITHUB_TOKEN`                              |
+| `gate-merge.sh`        | squash-merges a PR if its head is unchanged and checks are green                               | `FACTORY_TOKEN` (no agent)                  |
+| `pr-needs-human.sh`    | Telegram "Needs human" for a PR with the evidence video link                                   | `TELEGRAM_TOKEN` + chat id                  |
 
 **Claude account:** 2-week pilot on Sunny's Pro token (`CLAUDE_CODE_OAUTH_TOKEN`), Sonnet. Measure tokens per issue and how often Sunny is locked out, then choose an API key with a spend cap, a bigger plan, or Pro. Switch to an API key before porting to `repo-template`.
 
