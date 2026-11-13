@@ -6,7 +6,6 @@ import { MapScreen } from "./MapScreen";
 import { NameScreen } from "./NameScreen";
 import { emptyProgress, type Progress } from "../progress";
 import { LESSONS, CURRICULUM_GROUPS } from "../lessons";
-import { getLesson, registerSeniorLesson } from "../content";
 
 // Tell React it is in a test environment so act(...) warnings are suppressed
 // @ts-expect-error test flag
@@ -228,18 +227,16 @@ describe("MapScreen with disabled lessons", () => {
   });
 });
 
-describe("Age Groups integration", () => {
-  it("renders age group selector in ParentPanel and calls onAgeGroup", async () => {
+describe("One age group", () => {
+  it("ParentPanel has no age group section", async () => {
     const container = document.createElement("div");
     document.body.appendChild(container);
     const root = createRoot(container);
 
-    const onAgeGroup = vi.fn();
     const progress: Progress = {
       ...emptyProgress(),
       name: "Child",
       lang: "en",
-      ageGroup: "junior",
     };
 
     await act(async () => {
@@ -251,7 +248,6 @@ describe("Age Groups integration", () => {
           onFacts={() => {}}
           onClose={() => {}}
           onToggleLesson={() => {}}
-          onAgeGroup={onAgeGroup}
         />,
       );
     });
@@ -267,23 +263,14 @@ describe("Age Groups integration", () => {
       form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
     });
 
-    expect(container.textContent).toContain("Age group");
-    const pills = container.querySelectorAll(".age-pill-btn");
-    expect(pills.length).toBe(2);
-    expect(pills[0].classList.contains("active")).toBe(true);
-    expect(pills[1].classList.contains("active")).toBe(false);
-
-    await act(async () => {
-      (pills[1] as HTMLButtonElement).click();
-    });
-
-    expect(onAgeGroup).toHaveBeenCalledWith("senior");
+    expect(container.textContent).toContain("Lesson selection");
+    expect(container.textContent).not.toMatch(/age group|junior|senior/i);
 
     root.unmount();
     container.remove();
   });
 
-  it("selects senior age group in NameScreen and submits", async () => {
+  it("NameScreen has no age choice and submits only the name", async () => {
     const container = document.createElement("div");
     document.body.appendChild(container);
     const root = createRoot(container);
@@ -295,41 +282,17 @@ describe("Age Groups integration", () => {
     });
 
     const input = container.querySelector("input")!;
-    const pills = container.querySelectorAll(".age-pill-btn");
-    expect(pills.length).toBe(2);
+    expect(container.textContent).not.toMatch(/age group|junior|senior/i);
 
-    // Select Senior
     await act(async () => {
-      (pills[1] as HTMLButtonElement).click();
       changeInput(input, "Alex");
       const form = container.querySelector("form")!;
       form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
     });
 
-    expect(onDone).toHaveBeenCalledWith("Alex", "senior");
+    expect(onDone).toHaveBeenCalledWith("Alex");
 
     root.unmount();
     container.remove();
-  });
-
-  it("falls back to junior lesson when senior lesson is not registered", () => {
-    const junior = getLesson("ticketsize", "junior");
-    expect(junior).toBeDefined();
-
-    // ticketsize has not yet been forked for seniors, so it cleanly falls back
-    const senior = getLesson("ticketsize", "senior");
-    expect(senior).toBe(junior);
-  });
-
-  it("returns registered senior lesson when present", () => {
-    const dummySenior = {
-      ...getLesson("money")!,
-      id: "money",
-      askDad: { en: "Senior prompt", de: "Senior prompt", pl: "Senior prompt" },
-    };
-    registerSeniorLesson("money", dummySenior);
-
-    expect(getLesson("money", "senior")).toBe(dummySenior);
-    expect(getLesson("money", "junior")).not.toBe(dummySenior);
   });
 });

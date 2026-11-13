@@ -5,7 +5,7 @@ import { MeanwhileCard } from "./MeanwhileCard";
 import { LessonRunner } from "../lesson/LessonRunner";
 import { getLesson } from "../content";
 import { LESSONS } from "../lessons";
-import { MEANWHILE } from "../timeline/meanwhile";
+import { MEANWHILE, meanwhileEvents } from "../timeline/meanwhile";
 
 // @ts-expect-error test flag
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
@@ -30,7 +30,7 @@ async function setYear(c: HTMLElement, year: number) {
 
 describe("MeanwhileCard", () => {
   it("starts empty and fills as the slider moves", async () => {
-    const c = await mount(<MeanwhileCard meanwhile={MEANWHILE.ww2} lang="en" ageGroup="junior" />);
+    const c = await mount(<MeanwhileCard meanwhile={MEANWHILE.ww2} lang="en" />);
     expect(c.textContent).toContain("Meanwhile around the world");
     expect(c.querySelectorAll(".timeline-card")).toHaveLength(0);
     await setYear(c, 1943);
@@ -39,10 +39,17 @@ describe("MeanwhileCard", () => {
     expect(c.textContent).toContain("India becomes independent");
   });
 
-  it("shows senior text for the senior tier and German when asked", async () => {
-    const c = await mount(<MeanwhileCard meanwhile={MEANWHILE.ww2} lang="de" ageGroup="senior" />);
+  it("shows the single intro text, in German when asked", async () => {
+    const c = await mount(<MeanwhileCard meanwhile={MEANWHILE.ww2} lang="de" />);
     expect(c.textContent).toContain("Waehrenddessen in der Welt");
-    expect(c.textContent).toContain("Quit-India-Bewegung");
+    expect(c.textContent).toContain(MEANWHILE.ww2.text.de);
+  });
+
+  it("shows each event's single summary", async () => {
+    const c = await mount(<MeanwhileCard meanwhile={MEANWHILE.ww2} lang="en" />);
+    await setYear(c, 1943);
+    const event = meanwhileEvents(MEANWHILE.ww2).find((e) => e.title.en.includes("Bengal famine"))!;
+    expect(c.textContent).toContain(event.summary.en);
   });
 
   it("appears in the lesson runner after the real life card", async () => {

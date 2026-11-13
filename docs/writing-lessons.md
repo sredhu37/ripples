@@ -30,7 +30,14 @@ Prefer `animatedBeat(lines, Diagram, mood?)` from `src/lesson/toolkit.tsx` over 
 8. **Real life card:** Germany and euros, 2 to 4 sentences. Use only facts you verified. Prefer facts that stay true (institution names, rules) over numbers that change; if you use a number, say "about" and record the date in the fact card.
 9. **Fact card:** at least 5 claims, each with an https source you actually opened and that supports the claim: official or institutional sources first (ECB, Bundesbank, Destatis, BMF, Bundesregierung, Verbraucherzentrale, Fed or Bank of England explainers, university or encyclopedia pages). For every simplification the lesson makes, add a line in `simplified` saying what was simplified and why it is fair. If a source cannot be opened or does not say it, replace it. Do not cite from memory. English only.
 10. **No product or brand advice.** Never name a specific bank or financial product as a recommendation. Nothing the child could read as investment advice.
-11. **Facts from today:** the current date is late October 2026. Use web search for anything time-sensitive (rates, minimum wage, deadlines).
+11. **Physical anchor:** before any technical or economic concept, anchor it in an everyday object or kid activity (pizza slices, sneaker drops, lemonade, a gaming PC build, dominoes, a light switch). Use direct, concrete, everyday words in all three languages.
+12. **Length caps:**
+    - Story sentences: at most 15 words.
+    - Diagram labels and badges: at most 4 words each, in every language. Icons and arrows carry the meaning; a diagram must lower reading effort, not add to it.
+    - Question prompts: at most 20 words, clear and conversational.
+    - Answer options: under 15 words, one clause, no walls of text.
+    - Distractors: plausible but distinct, in a fun and gentle tone.
+13. **Facts from today:** the current date is late October 2026. Use web search for anything time-sensitive (rates, minimum wage, deadlines).
 
 ## Mechanics
 

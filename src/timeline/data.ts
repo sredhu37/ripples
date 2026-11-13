@@ -86,10 +86,9 @@ const ev = (
   region: TimelineRegion,
   year: Text,
   title: Text,
-  junior: Text,
-  senior: Text,
+  summary: Text,
   lessonId?: string,
-): TimelineEvent => ({ id, era, region, year, title, summary: { junior, senior }, lessonId });
+): TimelineEvent => ({ id, era, region, year, title, summary, lessonId });
 
 export const TIMELINE_EVENTS: TimelineEvent[] = [
   // Ancient
@@ -104,11 +103,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Menschen bauen ordentliche Staedte mit Abwasserkanaelen und Brunnen.",
       "Ludzie budują zadbane miasta z kanałami i wspólnymi studniami.",
     ),
-    T(
-      "Harappa and Mohenjo-daro had planned streets, standard weights and trade with Mesopotamia.",
-      "Harappa und Mohenjo-Daro hatten geplante Strassen, einheitliche Gewichte und Handel mit Mesopotamien.",
-      "Harappa i Mohendżo-Daro miały zaplanowane ulice, ujednolicone miary i handel z Mezopotamią.",
-    ),
   ),
   ev(
     "giza",
@@ -121,11 +115,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Tausende Arbeiter stapeln riesige Steine fuer das Grab eines Koenigs.",
       "Tysiące robotników układa ogromne kamienie na grobowiec króla.",
     ),
-    T(
-      "Egypt's state organised labour, food and stone transport on a scale no earlier society had managed.",
-      "Aegyptens Staat organisierte Arbeit, Nahrung und Steintransport in nie dagewesenem Ausmass.",
-      "Państwo egipskie zorganizowało pracę, żywność i transport kamienia na niespotykaną dotąd skalę.",
-    ),
   ),
   ev(
     "oracle",
@@ -137,11 +126,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Kings in China scratch questions on bones to ask the future.",
       "Koenige in China ritzen Fragen in Knochen, um die Zukunft zu erfragen.",
       "Królowie w Chinach rysują pytania na kościach, by zapytać o przyszłość.",
-    ),
-    T(
-      "Shang dynasty inscriptions are the oldest known Chinese writing and the ancestor of today's characters.",
-      "Die Inschriften der Shang-Dynastie sind die aelteste bekannte chinesische Schrift und Vorlaeufer der heutigen Zeichen.",
-      "Inskrypcje dynastii Shang to najstarsze znane chińskie pismo i przodek dzisiejszych znaków.",
     ),
   ),
   ev(
@@ -159,11 +143,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "In Mexiko meisseln Kuenstler Koepfe, die so gross sind wie ein Mensch.",
       "W Meksyku artyści rzeźbią głowy wielkie jak człowiek.",
     ),
-    T(
-      "The Olmec are often called the mother culture of Mesoamerica, shaping later Maya and Aztec traditions.",
-      "Die Olmeken gelten als Mutterkultur Mesoamerikas und praegten spaetere Maya und Azteken.",
-      "Olmekowie uchodzą za kulturę macierzystą Mezoameryki, która ukształtowała Majów i Azteków.",
-    ),
   ),
   ev(
     "athens",
@@ -179,11 +158,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Citizens in Athens vote on laws together.",
       "Buerger in Athen stimmen gemeinsam ueber Gesetze ab.",
       "Obywatele Aten wspólnie głosują nad prawami.",
-    ),
-    T(
-      "Cleisthenes' reforms gave male citizens a direct vote, though women, slaves and foreigners were excluded.",
-      "Kleisthenes' Reformen gaben maennlichen Buergern ein direktes Stimmrecht, Frauen, Sklaven und Fremde blieben ausgeschlossen.",
-      "Reformy Klejstenesa dały męskim obywatelom bezpośrednie prawo głosu, z wyłączeniem kobiet, niewolników i obcych.",
     ),
     "democracy",
   ),
@@ -202,11 +176,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Ein Denker in der Badewanne findet heraus, warum Dinge schwimmen.",
       "Myśliciel w wannie odkrywa, dlaczego rzeczy pływają.",
     ),
-    T(
-      "Archimedes' principle states that buoyant force equals the weight of the fluid displaced.",
-      "Das archimedische Prinzip besagt, dass der Auftrieb dem Gewicht der verdraengten Fluessigkeit entspricht.",
-      "Prawo Archimedesa mówi, że siła wyporu równa się ciężarowi wypartej cieczy.",
-    ),
   ),
   // Middle Ages
   ev(
@@ -224,11 +193,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Indische Mathematiker nutzen die Null als echte Zahl.",
       "Indyjscy matematycy używają zera jak prawdziwej liczby.",
     ),
-    T(
-      "The Indian place-value system with zero later reached Europe through Arab scholars and became our digits.",
-      "Das indische Stellenwertsystem mit Null kam ueber arabische Gelehrte nach Europa und wurde zu unseren Ziffern.",
-      "Indyjski system pozycyjny z zerem trafił do Europy przez arabskich uczonych i stał się naszymi cyframi.",
-    ),
   ),
   ev(
     "charlemagne",
@@ -244,11 +208,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "A Frankish king gets a crown in Rome.",
       "Ein fraenkischer Koenig bekommt in Rom eine Krone.",
       "Frankijski król dostaje koronę w Rzymie.",
-    ),
-    T(
-      "His empire covered much of today's Germany and France and set up schools that preserved ancient texts.",
-      "Sein Reich umfasste weite Teile des heutigen Deutschlands und Frankreichs und gruendete Schulen, die alte Texte bewahrten.",
-      "Jego państwo obejmowało wiele dzisiejszych Niemiec i Francji i zakładało szkoły, które zachowały dawne teksty.",
     ),
   ),
   ev(
@@ -266,11 +225,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Ein Gelehrter in Kairo testet, wie Augen sehen.",
       "Uczony w Kairze sprawdza, jak widzą oczy.",
     ),
-    T(
-      "His Book of Optics argued from experiments that we see because light enters the eye, a pillar of the scientific method.",
-      "Sein Buch der Optik zeigte durch Versuche, dass wir sehen, weil Licht ins Auge faellt, ein Grundstein der Wissenschaftsmethode.",
-      "W Księdze optyki dowodził doświadczeniami, że widzimy, bo światło wpada do oka, co stało się podstawą metody naukowej.",
-    ),
   ),
   ev(
     "bisheng",
@@ -286,11 +240,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "In China, clay letters can be rearranged to print pages.",
       "In China lassen sich Tonbuchstaben neu ordnen, um Seiten zu drucken.",
       "W Chinach gliniane litery można układać na nowo, by drukować strony.",
-    ),
-    T(
-      "Bi Sheng's clay type predates Gutenberg's metal press by about four centuries.",
-      "Bi Shengs Tonlettern kamen rund vier Jahrhunderte vor Gutenbergs Metallpresse.",
-      "Gliniana czcionka Bi Shenga powstała około czterech wieków przed metalową prasą Gutenberga.",
     ),
   ),
   ev(
@@ -308,11 +257,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Der Koenig von Mali bringt so viel Gold mit, dass in Kairo die Preise steigen.",
       "Król Mali przywozi tyle złota, że ceny w Kairze rosną.",
     ),
-    T(
-      "Gold from Mali's mines made Mansa Musa famously wealthy and his spending is said to have caused inflation in Egypt.",
-      "Gold aus Malis Minen machte Mansa Musa beruehmt reich, seine Ausgaben sollen in Aegypten Inflation ausgeloest haben.",
-      "Złoto z kopalni Mali uczyniło Mansę Musę słynnie bogatym, a jego wydatki podobno wywołały inflację w Egipcie.",
-    ),
   ),
   ev(
     "inca",
@@ -324,11 +268,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Runners carry messages along mountain roads.",
       "Laeufer tragen Nachrichten ueber Bergstrassen.",
       "Gońcy niosą wieści górskimi drogami.",
-    ),
-    T(
-      "Under Pachacuti the Inca built about 40,000 km of roads and kept records with knotted cords called quipu.",
-      "Unter Pachacuti bauten die Inka rund 40.000 km Strassen und fuehrten Aufzeichnungen mit Knotenschnueren, den Quipu.",
-      "Za Pachacutiego Inkowie zbudowali około 40 000 km dróg i prowadzili zapisy na sznurach węzełkowych zwanych kipu.",
     ),
   ),
   // Trade and empires
@@ -347,11 +286,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Im Norden Indiens waechst ein neues Reich.",
       "Na północy Indii rośnie nowe imperium.",
     ),
-    T(
-      "After winning at Panipat, Babur began a dynasty that ruled much of South Asia for over three centuries.",
-      "Nach dem Sieg bei Panipat begann Babur eine Dynastie, die ueber drei Jahrhunderte weite Teile Suedasiens beherrschte.",
-      "Po zwycięstwie pod Panipat Babur zapoczątkował dynastię, która przez ponad trzy wieki rządziła większością Azji Południowej.",
-    ),
     "mughals",
   ),
   ev(
@@ -369,11 +303,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Ein deutscher Moench streitet ueber Kirchenregeln, und gedruckte Flugblaetter verbreiten seine Ideen.",
       "Niemiecki mnich spiera się o zasady Kościoła, a drukowane ulotki roznoszą jego pomysły.",
     ),
-    T(
-      "Luther's 95 Theses spread fast thanks to the printing press and split Western Christianity.",
-      "Luthers 95 Thesen verbreiteten sich dank des Buchdrucks schnell und spalteten das westliche Christentum.",
-      "95 tez Lutra rozeszło się szybko dzięki drukowi i podzieliło zachodnie chrześcijaństwo.",
-    ),
   ),
   ev(
     "aztec",
@@ -385,11 +314,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Tenochtitlan, a city on a lake, is conquered by Spain and its allies.",
       "Tenochtitlan, eine Stadt im See, wird von Spanien und seinen Verbuendeten erobert.",
       "Tenochtitlan, miasto na jeziorze, zostaje podbite przez Hiszpanię i jej sojuszników.",
-    ),
-    T(
-      "Disease, alliances with local rivals of the Aztecs and Spanish weapons all played a part in the conquest.",
-      "Krankheiten, Buendnisse mit Rivalen der Azteken und spanische Waffen spielten alle eine Rolle.",
-      "W podboju odegrały rolę choroby, sojusze z rywalami Azteków i hiszpańska broń.",
     ),
   ),
   ev(
@@ -406,11 +330,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Ships carry Chinese silk across the Pacific for silver.",
       "Schiffe bringen chinesische Seide ueber den Pazifik gegen Silber.",
       "Statki wożą chiński jedwab przez Pacyfik w zamian za srebro.",
-    ),
-    T(
-      "American silver flowed to China through Manila, making it one of the first truly global trade routes.",
-      "Amerikanisches Silber floss ueber Manila nach China, eine der ersten wirklich globalen Handelsrouten.",
-      "Amerykańskie srebro płynęło do Chin przez Manilę, tworząc jeden z pierwszych naprawdę globalnych szlaków handlowych.",
     ),
     "spicetrade",
   ),
@@ -429,11 +348,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Haendler und Schueler treffen sich in einer Wuestenstadt.",
       "Kupcy i uczniowie spotykają się w pustynnym mieście.",
     ),
-    T(
-      "Under the Songhai Empire, Timbuktu's scholars copied manuscripts and the city sat on trans-Saharan salt and gold routes.",
-      "Unter dem Songhai-Reich kopierten Gelehrte in Timbuktu Handschriften, die Stadt lag an den Salz- und Goldrouten durch die Sahara.",
-      "Za imperium Songhaj uczeni z Timbuktu kopiowali rękopisy, a miasto leżało na saharyjskich szlakach soli i złota.",
-    ),
   ),
   ev(
     "copernicus",
@@ -449,11 +363,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "A Polish astronomer says Earth travels around the Sun.",
       "Ein polnischer Astronom sagt, die Erde kreist um die Sonne.",
       "Polski astronom twierdzi, że Ziemia krąży wokół Słońca.",
-    ),
-    T(
-      "His book On the Revolutions of the Heavenly Spheres began the shift from an Earth-centred to a Sun-centred model.",
-      "Sein Buch ueber die Umlaufbahnen der Himmelskoerper leitete den Wechsel vom erdzentrierten zum sonnenzentrierten Weltbild ein.",
-      "Jego dzieło O obrotach sfer niebieskich zapoczątkowało przejście od modelu z Ziemią w centrum do modelu ze Słońcem.",
     ),
   ),
   // Scientific revolution
@@ -472,11 +381,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Er sieht Monde, die um den Jupiter kreisen.",
       "Widzi księżyce krążące wokół Jowisza.",
     ),
-    T(
-      "Jupiter's moons showed that not everything orbits Earth, strong evidence for the Copernican view.",
-      "Jupitermonde zeigten, dass nicht alles die Erde umkreist, ein starkes Indiz fuer Kopernikus.",
-      "Księżyce Jowisza pokazały, że nie wszystko krąży wokół Ziemi, co silnie poparło tezy Kopernika.",
-    ),
   ),
   ev(
     "newton",
@@ -488,11 +392,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "The same pull makes an apple fall and the Moon circle Earth.",
       "Dieselbe Kraft laesst einen Apfel fallen und den Mond die Erde umkreisen.",
       "Ta sama siła sprawia, że jabłko spada, a Księżyc krąży wokół Ziemi.",
-    ),
-    T(
-      "The Principia set out the laws of motion and universal gravitation, one maths for earth and sky.",
-      "Die Principia legten die Bewegungsgesetze und die allgemeine Gravitation fest, eine Mathematik fuer Erde und Himmel.",
-      "Principia ustaliły prawa ruchu i powszechnego ciążenia, jedną matematykę dla Ziemi i nieba.",
     ),
   ),
   ev(
@@ -509,11 +408,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "People can buy shares in a trading fleet.",
       "Menschen koennen Anteile an einer Handelsflotte kaufen.",
       "Ludzie mogą kupować udziały we flocie handlowej.",
-    ),
-    T(
-      "The VOC was among the first companies to sell tradable shares, an early step toward stock markets.",
-      "Die VOC war eine der ersten Firmen mit handelbaren Aktien, ein frueher Schritt zur Boerse.",
-      "VOC była jedną z pierwszych firm sprzedających akcje, wczesnym krokiem do giełd.",
     ),
     "stocks",
   ),
@@ -532,11 +426,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Tausende Bauleute errichten ein Grabmal aus weissem Marmor.",
       "Tysiące budowniczych wznosi grobowiec z białego marmuru.",
     ),
-    T(
-      "Built over about two decades with workers and materials from across Asia, it shows the wealth of the Mughal court.",
-      "In etwa zwei Jahrzehnten mit Arbeitern und Material aus ganz Asien gebaut, zeigt es den Reichtum des Mogulhofs.",
-      "Budowany przez około dwie dekady z robotnikami i materiałami z całej Azji, pokazuje bogactwo dworu Mogołów.",
-    ),
     "mughals",
   ),
   ev(
@@ -554,11 +443,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Es herrscht Frieden und Staedte wie Edo werden gross.",
       "Nastaje pokój, a miasta takie jak Edo rosną.",
     ),
-    T(
-      "About 250 years of stability brought a merchant class, rising literacy and tightly limited foreign trade.",
-      "Rund 250 Jahre Stabilitaet brachten Kaufmannsstand, steigende Lesefaehigkeit und streng begrenzten Aussenhandel.",
-      "Około 250 lat stabilności przyniosło klasę kupiecką, rosnącą piśmienność i silnie ograniczony handel zagraniczny.",
-    ),
   ),
   ev(
     "usa1776",
@@ -574,11 +458,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Thirteen colonies say they will rule themselves.",
       "Dreizehn Kolonien sagen, sie regieren sich selbst.",
       "Trzynaście kolonii oświadcza, że będą rządzić się same.",
-    ),
-    T(
-      "The Declaration drew on Enlightenment ideas of natural rights and inspired later independence movements.",
-      "Die Erklaerung stuetzte sich auf Ideen der Aufklaerung ueber Naturrechte und inspirierte spaetere Unabhaengigkeitsbewegungen.",
-      "Deklaracja czerpała z oświeceniowych idei praw naturalnych i zainspirowała późniejsze ruchy niepodległościowe.",
     ),
     "democracy",
   ),
@@ -598,11 +477,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Stephensons Rocket zeigt, dass Zuege schnell sein koennen.",
       "Rakieta Stephensona pokazuje, że pociągi mogą być szybkie.",
     ),
-    T(
-      "The Rocket won the Rainhill trials and railways soon cut the cost and time of moving goods and people.",
-      "Die Rocket gewann die Rainhill-Trials und Eisenbahnen senkten bald Kosten und Zeit fuer Waren und Menschen.",
-      "Rocket wygrała próby w Rainhill, a koleje wkrótce obniżyły koszt i czas transportu towarów i ludzi.",
-    ),
     "tools",
   ),
   ev(
@@ -615,11 +489,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Soldiers and others rise up against the East India Company.",
       "Soldaten und andere erheben sich gegen die Ostindien-Kompanie.",
       "Żołnierze i inni powstają przeciw Kompanii Wschodnioindyjskiej.",
-    ),
-    T(
-      "After the revolt, the British Crown took direct control of India from the Company in 1858.",
-      "Nach dem Aufstand uebernahm die britische Krone 1858 die direkte Herrschaft von der Kompanie.",
-      "Po powstaniu w 1858 roku brytyjska Korona przejęła rządy w Indiach od Kompanii.",
     ),
     "britishinindia",
   ),
@@ -638,11 +507,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Japan baut sehr schnell Eisenbahnen und Schulen.",
       "Japonia bardzo szybko buduje koleje i szkoły.",
     ),
-    T(
-      "The Meiji government ended feudal rule and copied Western industry, law and education in a few decades.",
-      "Die Meiji-Regierung beendete die Feudalherrschaft und uebernahm in wenigen Jahrzehnten westliche Industrie, Recht und Bildung.",
-      "Rząd Meiji zakończył rządy feudalne i w kilkadziesiąt lat przejął zachodni przemysł, prawo i oświatę.",
-    ),
   ),
   ev(
     "suez",
@@ -654,11 +518,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Ships can sail from Europe to Asia without going around Africa.",
       "Schiffe koennen von Europa nach Asien fahren, ohne Afrika zu umrunden.",
       "Statki mogą płynąć z Europy do Azji bez opływania Afryki.",
-    ),
-    T(
-      "The canal cut the sea route between Europe and India by thousands of kilometres.",
-      "Der Kanal verkuerzte den Seeweg zwischen Europa und Indien um Tausende Kilometer.",
-      "Kanał skrócił morską drogę między Europą a Indiami o tysiące kilometrów.",
     ),
   ),
   ev(
@@ -676,11 +535,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Zwei Bahnlinien treffen sich in Utah und verbinden Ost und West.",
       "Dwie linie kolejowe spotykają się w Utah i łączą wschód z zachodem.",
     ),
-    T(
-      "The railroad cut a cross-country trip from months to about a week and opened huge markets.",
-      "Die Bahn verkuerzte die Reise quer durchs Land von Monaten auf etwa eine Woche und oeffnete riesige Maerkte.",
-      "Kolej skróciła podróż przez cały kraj z miesięcy do około tygodnia i otworzyła ogromne rynki.",
-    ),
   ),
   ev(
     "edison",
@@ -696,11 +550,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "A glowing bulb lights a room for hours.",
       "Eine leuchtende Birne erhellt einen Raum stundenlang.",
       "Świecąca żarówka oświetla pokój przez wiele godzin.",
-    ),
-    T(
-      "Edison's team made a practical bulb and a power system around it, while Tesla's alternating current later won out for long-distance power.",
-      "Edisons Team baute eine praktische Birne samt Stromsystem, Teslas Wechselstrom setzte sich spaeter fuer weite Strecken durch.",
-      "Zespół Edisona zbudował praktyczną żarówkę i system zasilania, a prąd zmienny Tesli wygrał później w przesyle na duże odległości.",
     ),
   ),
   ev(
@@ -718,11 +567,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Ein Arzt findet einen Weg, Menschen vor einem gefaehrlichen Keim zu schuetzen.",
       "Lekarz znajduje sposób, by chronić ludzi przed groźnym zarazkiem.",
     ),
-    T(
-      "Pasteur's germ theory and vaccines launched modern medicine and public hygiene.",
-      "Pasteurs Keimtheorie und Impfstoffe begruendeten die moderne Medizin und Hygiene.",
-      "Teoria zarazków i szczepionki Pasteura dały początek współczesnej medycynie i higienie.",
-    ),
   ),
   // 20th century
   ev(
@@ -736,11 +580,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Ein kleines Flugzeug bleibt zwoelf Sekunden in der Luft.",
       "Mały samolot utrzymuje się w powietrzu przez dwanaście sekund.",
     ),
-    T(
-      "The first controlled, powered flight at Kitty Hawk lasted 12 seconds and began the age of aviation.",
-      "Der erste gesteuerte Motorflug bei Kitty Hawk dauerte 12 Sekunden und leitete das Zeitalter der Luftfahrt ein.",
-      "Pierwszy sterowany lot z napędem w Kitty Hawk trwał 12 sekund i zapoczątkował epokę lotnictwa.",
-    ),
   ),
   ev(
     "penicillin",
@@ -753,11 +592,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Schimmel auf einer Schale toetet Keime in seiner Naehe.",
       "Pleśń na szalce zabija zarazki wokół siebie.",
     ),
-    T(
-      "Alexander Fleming noticed that Penicillium mould stopped bacteria growing, leading to the first antibiotics.",
-      "Alexander Fleming bemerkte, dass Penicillium-Schimmel Bakterien am Wachsen hindert, was zu den ersten Antibiotika fuehrte.",
-      "Alexander Fleming zauważył, że pleśń Penicillium hamuje rozwój bakterii, co doprowadziło do pierwszych antybiotyków.",
-    ),
   ),
   ev(
     "ww2",
@@ -769,11 +603,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "A huge war touches almost every country.",
       "Ein riesiger Krieg erfasst fast jedes Land.",
       "Ogromna wojna dotyka niemal każdego kraju.",
-    ),
-    T(
-      "The war ended with Germany divided and Europe rebuilding with help such as the Marshall Plan.",
-      "Der Krieg endete mit einem geteilten Deutschland und einem Europa, das mit Hilfen wie dem Marshallplan wieder aufbaute.",
-      "Wojna zakończyła się podziałem Niemiec i odbudową Europy z pomocą, takiej jak plan Marshalla.",
     ),
     "ww2",
   ),
@@ -788,11 +617,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Forscher lernen, die Kraft in Atomen freizusetzen, und die Welt sieht, wie gefaehrlich sie ist.",
       "Naukowcy uczą się uwalniać moc atomu, a świat widzi, jak jest groźna.",
     ),
-    T(
-      "Nuclear fission, discovered in 1938, led to weapons that ended the war and to nuclear power and arms control debates.",
-      "Die 1938 entdeckte Kernspaltung fuehrte zu Waffen, die den Krieg beendeten, sowie zu Kernkraft und Debatten um Ruestungskontrolle.",
-      "Rozszczepienie jądra odkryte w 1938 roku doprowadziło do broni, która zakończyła wojnę, oraz do energetyki jądrowej i sporów o kontrolę zbrojeń.",
-    ),
     "ww2",
   ),
   ev(
@@ -805,11 +629,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "After a long struggle, India raises its own flag.",
       "Nach langem Kampf hisst Indien seine eigene Flagge.",
       "Po długiej walce Indie podnoszą własną flagę.",
-    ),
-    T(
-      "Independence on 15 August 1947 came with the Partition into India and Pakistan and mass migration.",
-      "Die Unabhaengigkeit am 15. August 1947 kam mit der Teilung in Indien und Pakistan und massenhafter Flucht.",
-      "Niepodległość 15 sierpnia 1947 roku nastąpiła wraz z podziałem na Indie i Pakistan oraz masowymi migracjami.",
     ),
     "independence",
   ),
@@ -828,11 +647,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Nach einem langen Buergerkrieg entsteht eine neue Regierung.",
       "Po długiej wojnie domowej powstaje nowy rząd.",
     ),
-    T(
-      "The Communist Party took power in 1949, and economic reforms from 1978 later opened China to markets.",
-      "Die Kommunistische Partei kam 1949 an die Macht, Wirtschaftsreformen ab 1978 oeffneten China spaeter fuer Maerkte.",
-      "Partia Komunistyczna przejęła władzę w 1949 roku, a reformy gospodarcze od 1978 roku otworzyły Chiny na rynek.",
-    ),
     "communism",
   ),
   ev(
@@ -846,11 +660,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Siebzehn afrikanische Laender werden in einem Jahr unabhaengig.",
       "Siedemnaście krajów afrykańskich uzyskuje niepodległość w jednym roku.",
     ),
-    T(
-      "Seventeen African states gained independence in 1960 as European empires withdrew.",
-      "Siebzehn afrikanische Staaten wurden 1960 unabhaengig, als sich die europaeischen Kolonialreiche zurueckzogen.",
-      "Siedemnaście państw afrykańskich uzyskało niepodległość w 1960 roku, gdy imperia europejskie się wycofywały.",
-    ),
   ),
   ev(
     "moon",
@@ -862,11 +671,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Two astronauts step out onto the Moon's dusty ground.",
       "Zwei Astronauten steigen auf den staubigen Mondboden.",
       "Dwóch astronautów schodzi na zakurzoną powierzchnię Księżyca.",
-    ),
-    T(
-      "Apollo 11 landed on 20 July 1969, the peak of a space race between the USA and the Soviet Union.",
-      "Apollo 11 landete am 20. Juli 1969, Hoehepunkt des Wettlaufs zwischen den USA und der Sowjetunion.",
-      "Apollo 11 wylądował 20 lipca 1969 roku, w szczycie wyścigu kosmicznego między USA a Związkiem Radzieckim.",
     ),
   ),
   ev(
@@ -880,11 +684,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Familien in Deutschland koennen wieder zwischen Ost und West wechseln.",
       "Rodziny w Niemczech znów mogą przechodzić między wschodem a zachodem.",
     ),
-    T(
-      "The fall on 9 November 1989 led to German reunification in 1990 and the end of the Cold War order.",
-      "Der Fall am 9. November 1989 fuehrte 1990 zur deutschen Einheit und zum Ende der Kalten-Kriegs-Ordnung.",
-      "Upadek 9 listopada 1989 roku doprowadził do zjednoczenia Niemiec w 1990 roku i końca porządku zimnej wojny.",
-    ),
   ),
   ev(
     "ww1",
@@ -896,11 +695,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Countries that had promised to help each other are pulled into a huge war.",
       "Laender, die sich Hilfe versprochen hatten, werden in einen riesigen Krieg gezogen.",
       "Kraje, które obiecały sobie pomoc, zostają wciągnięte w ogromną wojnę.",
-    ),
-    T(
-      "A web of alliances turned one assassination in Sarajevo into a war involving most of Europe and many colonies.",
-      "Ein Netz aus Buendnissen machte aus einem Attentat in Sarajevo einen Krieg, der fast ganz Europa und viele Kolonien erfasste.",
-      "Sieć sojuszy zamieniła jeden zamach w Sarajewie w wojnę obejmującą większość Europy i wiele kolonii.",
     ),
     "ww1",
   ),
@@ -915,11 +709,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Ein Anwalt kehrt aus Suedafrika mit dem Plan zurueck, friedlich zu protestieren.",
       "Prawnik wraca z Afryki Południowej z planem pokojowego protestu.",
     ),
-    T(
-      "Gandhi brought his method of nonviolent resistance, tested in South Africa, into India's freedom movement.",
-      "Gandhi brachte seine in Suedafrika erprobte Methode des gewaltlosen Widerstands in Indiens Freiheitsbewegung ein.",
-      "Gandhi wniósł do indyjskiego ruchu wolnościowego metodę biernego oporu wypróbowaną w Afryce Południowej.",
-    ),
     "independence",
   ),
   ev(
@@ -932,11 +721,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "The Tsar loses his throne and a new kind of government begins.",
       "Der Zar verliert den Thron und eine neue Art von Regierung beginnt.",
       "Car traci tron i zaczyna się nowy rodzaj rządów.",
-    ),
-    T(
-      "Revolutions in 1917 ended the Tsarist empire and led to the Soviet Union, a communist state.",
-      "Die Revolutionen von 1917 beendeten das Zarenreich und fuehrten zur Sowjetunion, einem kommunistischen Staat.",
-      "Rewolucje 1917 roku zakończyły imperium carskie i doprowadziły do powstania Związku Radzieckiego, państwa komunistycznego.",
     ),
     "communism",
   ),
@@ -955,11 +739,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Ein sehr altes Reich wird durch ein neues Land ersetzt, die Tuerkei.",
       "Bardzo stare imperium zostaje zastąpione nowym krajem, Turcją.",
     ),
-    T(
-      "The sultanate was abolished in 1922 and Turkey became a republic in 1923, reshaping the Middle East map.",
-      "Das Sultanat wurde 1922 abgeschafft und die Tuerkei 1923 Republik, was die Landkarte des Nahen Ostens veraenderte.",
-      "Sułtanat zniesiono w 1922 roku, a Turcja została republiką w 1923, co zmieniło mapę Bliskiego Wschodu.",
-    ),
   ),
   ev(
     "holocaust",
@@ -971,11 +750,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "During the war, the Nazi government hurt and killed millions of people, especially Jewish families. We remember so it never happens again.",
       "Im Krieg verletzte und toetete die Nazi-Regierung Millionen Menschen, vor allem juedische Familien. Wir erinnern uns, damit es nie wieder geschieht.",
       "W czasie wojny rząd nazistowski krzywdził i zabijał miliony ludzi, zwłaszcza żydowskie rodziny. Pamiętamy, by to się nigdy nie powtórzyło.",
-    ),
-    T(
-      "The Nazi regime systematically murdered about six million Jews and millions of others, a genocide that shaped modern human rights law.",
-      "Das NS-Regime ermordete systematisch rund sechs Millionen Juden und Millionen weitere Menschen, ein Voelkermord, der das moderne Menschenrecht praegte.",
-      "Reżim nazistowski systematycznie zamordował około sześciu milionów Żydów i miliony innych osób, ludobójstwo, które ukształtowało współczesne prawa człowieka.",
     ),
     "ww2",
   ),
@@ -990,11 +764,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Waehrend Europa im Krieg ist, bittet Gandhi die Briten, Indien zu verlassen.",
       "Gdy Europa jest w stanie wojny, Gandhi prosi Brytyjczyków o opuszczenie Indii.",
     ),
-    T(
-      "In August 1942 Congress called for immediate British withdrawal, leading to mass arrests, while Subhas Chandra Bose sought foreign allies for independence.",
-      "Im August 1942 forderte der Kongress den sofortigen Abzug der Briten, es folgten Massenverhaftungen, waehrend Subhas Chandra Bose im Ausland Verbuendete suchte.",
-      "W sierpniu 1942 Kongres wezwał do natychmiastowego wycofania Brytyjczyków, co skutkowało masowymi aresztowaniami, a Subhas Chandra Bose szukał sojuszników za granicą.",
-    ),
     "independence",
   ),
   ev(
@@ -1007,11 +776,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Many families in Bengal cannot get enough food during the war.",
       "Viele Familien in Bengalen bekommen waehrend des Krieges nicht genug zu essen.",
       "Wiele rodzin w Bengalu nie ma dość jedzenia w czasie wojny.",
-    ),
-    T(
-      "An estimated 2 to 3 million people died, as war disruption, high prices and poor policy choices cut food supplies.",
-      "Schaetzungsweise 2 bis 3 Millionen Menschen starben, weil Kriegsfolgen, hohe Preise und politische Fehlentscheidungen die Versorgung kappten.",
-      "Szacuje się, że zmarło 2 do 3 milionów ludzi, gdy zakłócenia wojenne, wysokie ceny i błędne decyzje polityczne ograniczyły dostawy żywności.",
     ),
     "britishinindia",
   ),
@@ -1029,11 +793,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "America sends money, food and machines to help broken cities in Europe.",
       "Amerika schickt Geld, Essen und Maschinen, um zerstoerte Staedte in Europa zu unterstuetzen.",
       "Ameryka wysyła pieniądze, żywność i maszyny, by pomóc zniszczonym miastom Europy.",
-    ),
-    T(
-      "The US sent roughly 13 billion dollars of aid to Western Europe from 1948, helping West Germany and others recover.",
-      "Die USA schickten ab 1948 rund 13 Milliarden Dollar Hilfe nach Westeuropa und halfen Westdeutschland und anderen beim Wiederaufbau.",
-      "USA wysłały od 1948 roku około 13 miliardów dolarów pomocy do Europy Zachodniej, wspierając odbudowę Niemiec Zachodnich i innych krajów.",
     ),
     "rebuilding",
   ),
@@ -1053,11 +812,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Ein Forscher in der Schweiz verknuepft Seiten, damit jeder sie lesen kann.",
       "Naukowiec w Szwajcarii łączy strony, aby każdy mógł je czytać.",
     ),
-    T(
-      "Tim Berners-Lee proposed the web at CERN, built on the internet, and CERN made the technology free to use in 1993.",
-      "Tim Berners-Lee schlug das Web am CERN vor, aufbauend auf dem Internet, und das CERN gab die Technik 1993 frei.",
-      "Tim Berners-Lee zaproponował sieć w CERN, na bazie internetu, a w 1993 roku CERN udostępnił technologię za darmo.",
-    ),
     "internet",
   ),
   ev(
@@ -1074,11 +828,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Many countries start using the same money.",
       "Viele Laender nutzen auf einmal dasselbe Geld.",
       "Wiele krajów zaczyna używać tych samych pieniędzy.",
-    ),
-    T(
-      "Twelve countries replaced their national cash with the euro in 2002, run by the European Central Bank.",
-      "Zwoelf Laender ersetzten 2002 ihr Bargeld durch den Euro, gesteuert von der Europaeischen Zentralbank.",
-      "Dwanaście krajów w 2002 roku zastąpiło własną gotówkę euro, którym zarządza Europejski Bank Centralny.",
     ),
     "rates",
   ),
@@ -1097,11 +846,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "In Kenia bezahlen sich Menschen mit einfachen Handys.",
       "W Kenii ludzie płacą sobie prostymi telefonami.",
     ),
-    T(
-      "Mobile money let people without bank accounts save and pay, and it spread across many countries.",
-      "Mobiles Geld liess Menschen ohne Bankkonto sparen und zahlen und verbreitete sich in vielen Laendern.",
-      "Mobilne pieniądze pozwoliły osobom bez konta bankowego oszczędzać i płacić, a usługa rozprzestrzeniła się w wielu krajach.",
-    ),
     "banks",
   ),
   ev(
@@ -1118,11 +862,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "A phone with a touch screen fits the internet in a pocket.",
       "Ein Handy mit Touchscreen steckt das Internet in die Tasche.",
       "Telefon z ekranem dotykowym mieści internet w kieszeni.",
-    ),
-    T(
-      "The first iPhone popularised touch screens and app stores, putting computing in billions of pockets.",
-      "Das erste iPhone machte Touchscreens und App-Stores populaer und brachte Computer in Milliarden Taschen.",
-      "Pierwszy iPhone spopularyzował ekrany dotykowe i sklepy z aplikacjami, wkładając komputery do miliardów kieszeni.",
     ),
     "computers",
   ),
@@ -1141,11 +880,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Zuege sausen schneller als Autos zwischen grossen Staedten.",
       "Pociągi mkną między dużymi miastami szybciej niż samochody.",
     ),
-    T(
-      "China's high speed network grew from nothing in 2008 to the world's largest within about a decade.",
-      "Chinas Hochgeschwindigkeitsnetz wuchs von null im Jahr 2008 in rund einem Jahrzehnt zum weltweit groessten.",
-      "Chińska sieć szybkich kolei wyrosła z zera w 2008 roku do największej na świecie w około dekadę.",
-    ),
   ),
   ev(
     "upi",
@@ -1161,11 +895,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "People pay with a quick scan on their phone.",
       "Menschen zahlen mit einem schnellen Scan auf dem Handy.",
       "Ludzie płacą szybkim skanem w telefonie.",
-    ),
-    T(
-      "UPI links bank accounts so anyone can send money instantly, and it now handles billions of payments per month.",
-      "UPI verknuepft Bankkonten, damit jeder sofort Geld senden kann, und wickelt heute Milliarden Zahlungen pro Monat ab.",
-      "UPI łączy konta bankowe, dzięki czemu każdy może natychmiast przesłać pieniądze, i obsługuje dziś miliardy płatności miesięcznie.",
     ),
     "money",
   ),
@@ -1183,11 +912,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Computers can now write and answer questions in plain words.",
       "Computer koennen jetzt in einfachen Worten schreiben und Fragen beantworten.",
       "Komputery potrafią teraz pisać i odpowiadać na pytania prostymi słowami.",
-    ),
-    T(
-      "Large language models trained on vast text became widely available in 2022, raising new questions about work and learning.",
-      "Grosse Sprachmodelle, trainiert mit riesigen Textmengen, wurden 2022 breit verfuegbar und werfen neue Fragen zu Arbeit und Lernen auf.",
-      "Duże modele językowe wytrenowane na ogromnych zbiorach tekstu stały się w 2022 roku powszechnie dostępne, rodząc nowe pytania o pracę i naukę.",
     ),
     "ai",
   ),

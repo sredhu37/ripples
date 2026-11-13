@@ -288,68 +288,6 @@ p {
   margin-top: 14px;
 }
 
-/* Age Group Selection */
-.age-group-field {
-  width: 100%;
-  margin: 12px 0 16px;
-}
-
-.age-pill-row {
-  display: flex;
-  gap: 12px;
-  width: 100%;
-}
-
-@media (max-width: 480px) {
-  .age-pill-row {
-    flex-direction: column;
-    gap: 8px;
-  }
-}
-
-.age-pill-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 4px;
-  min-height: 54px;
-  padding: 10px 14px;
-  border-radius: 14px;
-  border: 2px solid var(--grey);
-  background: var(--white);
-  color: var(--ink);
-  font: inherit;
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.15s ease;
-  box-shadow: 0 3px 0 #cad2d4;
-}
-
-.age-pill-btn:hover {
-  border-color: var(--teal);
-}
-
-.age-pill-btn.active {
-  border: 2.5px solid var(--teal-dark);
-  background: #eef7f8;
-  box-shadow: 0 3px 0 var(--teal-dark);
-}
-
-.age-pill-label {
-  font-weight: 800;
-  font-size: 0.95rem;
-  color: var(--teal-dark);
-}
-
-.age-pill-desc {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: #4b6368;
-  line-height: 1.25;
-}
-
 /* Parent Panel Lesson Selection */
 .parent-screen {
   align-items: center;

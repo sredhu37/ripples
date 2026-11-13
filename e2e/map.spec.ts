@@ -8,6 +8,8 @@ test("map: a new child names herself and sees the trail", async ({ page }) => {
   // First visit: the name screen.
   const name = page.getByRole("textbox");
   await expect(name).toBeVisible();
+  // One age group: the name screen has no age choice.
+  await expect(page.getByText(/age group|junior|senior/i)).toHaveCount(0);
   await step();
   await name.fill("Ava");
   await step();

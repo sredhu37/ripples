@@ -77,12 +77,6 @@ describe("i18n core", () => {
       "lessonSelectionHelp",
       "lessonEnabled",
       "lessonDisabled",
-      "ageGroupTitle",
-      "ageGroupHelp",
-      "ageJunior",
-      "ageSenior",
-      "ageJuniorDesc",
-      "ageSeniorDesc",
     ] as const;
 
     for (const key of keys) {

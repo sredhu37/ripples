@@ -14,7 +14,6 @@ import {
   emptyProgress,
   loadProgress,
   saveProgress,
-  setAgeGroup,
   toggleLesson,
   type Lang,
   type Progress,
@@ -59,7 +58,7 @@ export function App() {
       <NameScreen
         lang={progress.lang}
         onLang={setLang}
-        onDone={(name, ageGroup) => setProgress((p) => ({ ...p, name: cleanName(name), ageGroup }))}
+        onDone={(name) => setProgress((p) => ({ ...p, name: cleanName(name) }))}
       />
     );
   }
@@ -77,7 +76,6 @@ export function App() {
         onClose={() => setScreen({ kind: "map" })}
         onLang={setLang}
         onToggleLesson={(id, enabled) => setProgress((p) => toggleLesson(p, id, enabled))}
-        onAgeGroup={(age) => setProgress((p) => setAgeGroup(p, age))}
       />
     );
   }
@@ -86,7 +84,6 @@ export function App() {
     return (
       <TimelineScreen
         lang={progress.lang}
-        ageGroup={progress.ageGroup ?? "junior"}
         onLang={setLang}
         onClose={() => setScreen({ kind: "map" })}
       />
@@ -104,7 +101,7 @@ export function App() {
   }
 
   if (screen.kind === "lesson") {
-    const lesson = getLesson(screen.id, progress.ageGroup);
+    const lesson = getLesson(screen.id);
     const meta = LESSONS.find((l) => l.id === screen.id);
     if (lesson && meta) {
       return (
@@ -117,7 +114,6 @@ export function App() {
           onBadge={() => awardBadge(screen.id)}
           onExit={() => setScreen({ kind: "map" })}
           onLang={setLang}
-          ageGroup={progress.ageGroup ?? "junior"}
         />
       );
     }

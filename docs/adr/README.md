@@ -10,4 +10,5 @@ One file per decision, named `NNNN-short-title.md`. Keep each to: context, decis
 - [0006-multilingual-i18n-cultural-localization.md](0006-multilingual-i18n-cultural-localization.md): Multilingual i18n Architecture and Cultural Localization (EN-India, DE-Germany, PL-Poland)
 - [0007-group-1-business-owner-and-equity-lessons.md](0007-group-1-business-owner-and-equity-lessons.md): Group 1 Entrepreneurship, Ownership, and Equity Lessons
 - [0008-parent-lesson-selection-and-curriculum-controls.md](0008-parent-lesson-selection-and-curriculum-controls.md): Parent Lesson Selection and Curriculum Controls
-- [0009-dual-age-group-architecture-and-content-resolution.md](0009-dual-age-group-architecture-and-content-resolution.md): Dual Age Group Architecture and Content Resolution
+- [0009-dual-age-group-architecture-and-content-resolution.md](0009-dual-age-group-architecture-and-content-resolution.md): Dual Age Group Architecture and Content Resolution (superseded by 0010)
+- [0010-single-age-group.md](0010-single-age-group.md): Single age group

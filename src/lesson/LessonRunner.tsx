@@ -5,7 +5,7 @@ import { Otto } from "../components/Otto";
 import { SpeechBubble } from "../components/SpeechBubble";
 import { t } from "../i18n";
 import { getLessonTitle, type LessonMeta } from "../lessons";
-import type { AgeGroup, Lang } from "../progress";
+import type { Lang } from "../progress";
 import { MeanwhileCard } from "../components/MeanwhileCard";
 import { getMeanwhile } from "../timeline/meanwhile";
 import { sfx } from "../sound";
@@ -20,7 +20,6 @@ interface Props {
   onBadge: () => void;
   onExit: () => void;
   onLang?: (l: Lang) => void;
-  ageGroup?: AgeGroup;
 }
 
 type Phase =
@@ -32,16 +31,7 @@ type Phase =
   | { k: "meanwhile" }
   | { k: "dad" };
 
-export function LessonRunner({
-  lesson,
-  meta,
-  lang,
-  alreadyDone,
-  onBadge,
-  onExit,
-  onLang,
-  ageGroup = "junior",
-}: Props) {
+export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit, onLang }: Props) {
   const [phase, setPhase] = useState<Phase>({ k: "story", i: 0 });
   const [toyCompleted, setToyCompleted] = useState(false);
   const wasDone = useRef(alreadyDone);
@@ -177,7 +167,7 @@ export function LessonRunner({
 
       {phase.k === "meanwhile" && getMeanwhile(meta.id) && (
         <section className="lesson-body">
-          <MeanwhileCard meanwhile={getMeanwhile(meta.id)!} lang={lang} ageGroup={ageGroup} />
+          <MeanwhileCard meanwhile={getMeanwhile(meta.id)!} lang={lang} />
           <div className="row nav">
             <button type="button" className="btn" onClick={() => setPhase({ k: "dad" })}>
               {t(lang, "next")}

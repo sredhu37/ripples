@@ -15,8 +15,7 @@ function allTexts(): { where: string; text: Text }[] {
   for (const e of TIMELINE_EVENTS) {
     out.push(
       { where: `${e.id} title`, text: e.title },
-      { where: `${e.id} junior`, text: e.summary.junior },
-      { where: `${e.id} senior`, text: e.summary.senior },
+      { where: `${e.id} summary`, text: e.summary },
       { where: `${e.id} year`, text: e.year },
     );
   }
@@ -62,11 +61,10 @@ describe("world timeline data", () => {
         expect(text[l].trim(), `${where} ${l}`).not.toBe("");
     }
     for (const e of TIMELINE_EVENTS) {
-      for (const text of [e.title, e.summary.junior, e.summary.senior]) {
+      for (const text of [e.title, e.summary]) {
         expect(text.de, e.id).not.toBe(text.en);
         expect(text.pl, e.id).not.toBe(text.en);
       }
-      expect(e.summary.senior.en, e.id).not.toBe(e.summary.junior.en);
     }
   });
 

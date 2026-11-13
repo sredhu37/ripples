@@ -30,10 +30,7 @@ export interface TimelineEvent {
   year: Text;
   region: TimelineRegion;
   title: Text;
-  summary: {
-    junior: Text;
-    senior: Text;
-  };
+  summary: Text;
   lessonId?: string;
   keyFigure?: string;
 }

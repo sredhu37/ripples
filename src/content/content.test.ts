@@ -2,7 +2,6 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { getLesson, hasLesson } from "./index";
-import { ALL_SENIOR_LESSONS } from "./senior";
 import { LESSONS } from "../lessons";
 import type { Lesson, Text } from "../lesson/types";
 import type { Lang } from "../progress";
@@ -331,60 +330,8 @@ describe("content count helpers", () => {
   });
 });
 
-/*
- * Count rules from docs/AGE_10_STANDARD.md. That document is the Senior tier (ages 10-14) standard,
- * so the word caps apply to senior content only. "No Bartek" is a rule for all Polish content (both tiers).
- * Junior content is covered by docs/writing-lessons.md (190 character lines), not by these caps.
- */
-const juniorLessons: Lesson[] = LESSONS.filter((m) => hasLesson(m.id)).map((m) => getLesson(m.id)!);
-const allLessons: Lesson[] = [...juniorLessons, ...ALL_SENIOR_LESSONS];
-
-function sentenceViolations(l: Lesson): string[] {
-  const out: string[] = [];
-  l.story.forEach((b, i) =>
-    (b.lines ?? [b.text]).forEach((line, j) =>
-      LANGS.forEach((lang) =>
-        sentences(line[lang]).forEach((s) => {
-          const n = words(s).length;
-          if (n > 15) out.push(`${l.id} story ${i + 1} line ${j + 1} ${lang} (${n} words): ${s}`);
-        }),
-      ),
-    ),
-  );
-  return out;
-}
-
-function promptViolations(l: Lesson): string[] {
-  const out: string[] = [];
-  l.questions.forEach((q, i) =>
-    LANGS.forEach((lang) => {
-      const n = words(q.prompt[lang]).length;
-      if (n > 20) out.push(`${l.id} q${i + 1} ${lang} (${n} words): ${q.prompt[lang]}`);
-    }),
-  );
-  return out;
-}
-
-function optionViolations(l: Lesson): string[] {
-  const out: string[] = [];
-  l.questions.forEach((q, i) => {
-    if (q.kind !== "choice") return;
-    q.options.forEach((o, k) =>
-      LANGS.forEach((lang) => {
-        const n = words(o.text[lang]).length;
-        if (n >= 15)
-          out.push(`${l.id} q${i + 1} option ${k + 1} ${lang} (${n} words): ${o.text[lang]}`);
-      }),
-    );
-  });
-  return out;
-}
-
-function labelViolations(l: Lesson): string[] {
-  return diagramLabels(l)
-    .filter((x) => words(x.text).length > 4)
-    .map((x) => `${l.id} ${x.where} ${x.lang} (${words(x.text).length} words): ${x.text}`);
-}
+/* "No Bartek" is a rule for all Polish content. */
+const allLessons: Lesson[] = LESSONS.filter((m) => hasLesson(m.id)).map((m) => getLesson(m.id)!);
 
 describe("content counts", () => {
   it("never uses the name Bartek in Polish content, diagrams included", () => {
@@ -395,24 +342,5 @@ describe("content counts", () => {
         if (x.text.includes("Bartek")) hits.push(`${l.id} ${x.where}: ${x.text}`);
     }
     expect(hits).toEqual([]);
-  }, 120_000);
-
-  it("keeps senior question prompts at 20 words or fewer", () => {
-    expect(ALL_SENIOR_LESSONS.flatMap(promptViolations)).toEqual([]);
-  });
-
-  // Skipped until existing lessons are fixed: measured on 2026-11-11, senior content had
-  // 1095 long sentences, 159 long options and 1588 long diagram labels, far above one ticket's
-  // budget. The parent ticket splits the fixes per lesson. Remove .skip once a rule reaches zero.
-  it.skip("keeps senior story sentences at 15 words or fewer", () => {
-    expect(ALL_SENIOR_LESSONS.flatMap(sentenceViolations)).toEqual([]);
-  });
-
-  it.skip("keeps senior answer options under 15 words", () => {
-    expect(ALL_SENIOR_LESSONS.flatMap(optionViolations)).toEqual([]);
-  });
-
-  it.skip("keeps senior diagram labels at 4 words or fewer", () => {
-    expect(ALL_SENIOR_LESSONS.flatMap(labelViolations)).toEqual([]);
   }, 120_000);
 });
