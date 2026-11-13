@@ -1,9 +1,12 @@
-name: demo-video
+name: pr-checks
 
-# Runs every Playwright spec with video, then posts the evidence:
-# step screenshots and demo.mp4 on the `evidence` branch under pr-<n>/,
-# and one PR comment (found by the <!-- evidence --> marker) updated in place.
-# See docs/factory.md, sections Evidence and CI tools.
+# Every check that runs on a pull request, one job per required check of the main ruleset:
+# ci, lint, audit, lighthouse, spec-rule, demo. Job names are the check names; keep them.
+# factory-review.yml starts when this workflow completes on a factory PR.
+#
+# demo posts the evidence: step screenshots and demo.mp4 on the `evidence` branch under
+# pr-<n>/, and one PR comment (found by the <!-- evidence --> marker) updated in place.
+# See docs/factory.md, sections CI tools and Evidence.
 
 on:
   pull_request:
@@ -11,13 +14,98 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: demo-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
-
 jobs:
+  ci:
+    name: ci
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run format:check
+
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm audit
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      # Config in lighthouserc.json: vite preview on port 4733, 3 runs, speed and accessibility limits.
+      # Shared runners are noisy: a median can land over a limit with no app change. One retry;
+      # a real slowdown fails both tries.
+      - run: |
+          if npx --yes @lhci/cli@0.16.0 autorun; then exit 0; fi
+          echo "::warning::Lighthouse failed once, retrying (runner noise check)"
+          rm -rf .lighthouseci
+          npx --yes @lhci/cli@0.16.0 autorun
+      - name: Show median numbers in the job summary
+        if: always()
+        run: |
+          node -e '
+            const fs = require("fs");
+            const dir = ".lighthouseci";
+            const lhrs = fs.readdirSync(dir).filter((f) => /^lhr-.*\.json$/.test(f)).map((f) => JSON.parse(fs.readFileSync(`${dir}/${f}`, "utf8")));
+            const median = (xs) => xs.sort((a, b) => a - b)[Math.floor((xs.length - 1) / 2)];
+            const m = (id) => median(lhrs.map((r) => r.audits[id].numericValue));
+            const failing = [...new Set(lhrs.flatMap((r) => r.categories.accessibility.auditRefs.map((a) => r.audits[a.id]).filter((a) => a.score !== null && a.score < 1).map((a) => a.id)))];
+            const lines = [
+              `Lighthouse median of ${lhrs.length} runs`,
+              "",
+              `| Metric | Median | Limit |`,
+              `|---|---|---|`,
+              `| LCP | ${Math.round(m("largest-contentful-paint"))} ms | 2500 ms |`,
+              `| CLS | ${m("cumulative-layout-shift").toFixed(3)} | 0.1 |`,
+              `| TBT | ${Math.round(m("total-blocking-time"))} ms | 200 ms |`,
+              "",
+              `Failing accessibility audits: ${failing.length ? failing.join(", ") : "none"}`,
+            ];
+            console.log(lines.join("\n"));
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join("\n") + "\n");
+          '
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+          include-hidden-files: true
+          if-no-files-found: ignore
+
   spec-rule:
     runs-on: ubuntu-latest
+    concurrency:
+      group: spec-rule-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v7
         with:
@@ -34,6 +122,9 @@ jobs:
 
   demo:
     runs-on: ubuntu-latest
+    concurrency:
+      group: demo-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
     permissions:
       contents: write # push to the evidence branch
       pull-requests: write # create or update the evidence comment
