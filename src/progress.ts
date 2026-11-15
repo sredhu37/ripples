@@ -113,11 +113,13 @@ function checksum(s: string): string {
 }
 
 export function exportCode(p: Progress, order: string[]): string {
-  const mask = order.reduce((m, id, i) => (p.badges.includes(id) ? m + Math.pow(2, i) : m), 0);
-  const payload: { n: string; l: Lang; b: number; d?: string[] } = {
+  // BigInt: numbers lose bits above 2^53, which a curriculum of 54+ lessons reaches.
+  const mask = order.reduce((m, id, i) => (p.badges.includes(id) ? m | (1n << BigInt(i)) : m), 0n);
+  // Small masks stay a JSON number, so codes made before this change look the same.
+  const payload: { n: string; l: Lang; b: number | string; d?: string[] } = {
     n: p.name,
     l: p.lang,
-    b: mask,
+    b: mask <= BigInt(Number.MAX_SAFE_INTEGER) ? Number(mask) : mask.toString(),
   };
   if (p.disabledLessons && p.disabledLessons.length > 0) {
     payload.d = p.disabledLessons;
@@ -137,7 +139,11 @@ export function importCode(code: string, order: string[]): Progress | null {
       b?: unknown;
       d?: unknown;
     };
-    if (typeof d.n !== "string" || typeof d.b !== "number") return null;
+    if (typeof d.n !== "string") return null;
+    let mask: bigint;
+    if (typeof d.b === "number" && Number.isSafeInteger(d.b) && d.b >= 0) mask = BigInt(d.b);
+    else if (typeof d.b === "string" && /^\d{1,30}$/.test(d.b)) mask = BigInt(d.b);
+    else return null;
     const rawLang = d.l;
     const lang: Lang = rawLang === "de" ? "de" : rawLang === "pl" ? "pl" : "en";
     const disabledLessons = Array.isArray(d.d)
@@ -147,7 +153,7 @@ export function importCode(code: string, order: string[]): Progress | null {
       name: cleanName(d.n),
       lang,
       muted: false,
-      badges: order.filter((_, i) => Math.floor((d.b as number) / Math.pow(2, i)) % 2 === 1),
+      badges: order.filter((_, i) => ((mask >> BigInt(i)) & 1n) === 1n),
       disabledLessons,
     };
   } catch {

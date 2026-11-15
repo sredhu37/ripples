@@ -275,6 +275,7 @@ const SAVED_LESSON_ORDER = [
   "humanedge",
   "supply_demand",
   "scarcity_prices",
+  "bailouts",
 ];
 
 describe("lesson order", () => {

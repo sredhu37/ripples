@@ -115,6 +115,25 @@ describe("save and restore code", () => {
     expect(restored).toEqual({ ...p, muted: false });
   });
 
+  it("round-trips every badge of a 55 lesson curriculum, past 2^53", () => {
+    const longOrder = Array.from({ length: 55 }, (_, i) => `lesson_${i}`);
+    const p: Progress = { ...emptyProgress(), name: "Mia", badges: [...longOrder] };
+    expect(importCode(exportCode(p, longOrder), longOrder)).toEqual(p);
+    const odd: Progress = { ...p, badges: ["lesson_0", "lesson_53", "lesson_54"] };
+    expect(importCode(exportCode(odd, longOrder), longOrder)).toEqual(odd);
+  });
+
+  it("rejects a badge mask that is not a number or digits", () => {
+    const body = btoa(JSON.stringify({ n: "Mia", l: "en", b: "abc" }))
+      .replace(/=+$/, "")
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_");
+    let h = 5381;
+    for (const ch of body) h = ((h * 33) ^ (ch.codePointAt(0) ?? 0)) >>> 0;
+    const sum = h.toString(36).padStart(4, "0").slice(0, 4);
+    expect(importCode(`RIP1.${body}.${sum}`, order)).toBeNull();
+  });
+
   it("rejects a code with a changed character", () => {
     const code = exportCode({ ...emptyProgress(), name: "Mia" }, order);
     const broken = code.replace(/\.(.)/, (_m, c: string) => "." + (c === "A" ? "B" : "A"));

@@ -268,6 +268,14 @@ export const LESSONS: LessonMeta[] = [
     id: "scarcity_prices",
     title: { en: "Salaries and Assets", de: "Gehaelter und Vermoegen", pl: "Płace i aktywa" },
   },
+  {
+    id: "bailouts",
+    title: {
+      en: "Bank bailouts",
+      de: "Bankenrettung",
+      pl: "Ratowanie banków",
+    },
+  },
 ];
 
 export const LESSON_ORDER = LESSONS.map((l) => l.id);
@@ -349,6 +357,7 @@ export const CURRICULUM_GROUPS: LessonGroup[] = [
       "capitalism",
       "communism",
       "powertriangle",
+      "bailouts",
     ],
   },
   {
