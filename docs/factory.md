@@ -214,6 +214,8 @@ merge ──► pages.yml: build ──► deploy ──► live-check
 
 GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`. Hermes is Sunny's cockpit (ask it about the factory), not the engine.
 
+[WORKFLOWS.md](WORKFLOWS.md) is the generated map of every workflow file, its trigger and what it starts next. `npm run workflows:map` regenerates it; the `workflows-map` job of `pr-checks.yml` fails when it differs. A new workflow needs a `# map-does:` header comment (and `# map-next:` for a link the script cannot see).
+
 | Workflow              | Runs on                                                                               | Does                                                                                                 |
 | --------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `factory-build.yml`   | `issues: labeled` (`factory:ready`), `issues: closed` (unblocks), `workflow_dispatch` | pickup, label swap, build agent, opens PR                                                            |
