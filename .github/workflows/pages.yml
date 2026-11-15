@@ -1,5 +1,8 @@
 name: Deploy to GitHub Pages
 
+# map-does: Builds and deploys the site, runs the live check, opens a revert PR when the live site is broken.
+# map-next: `pr-checks.yml` (the revert PR)
+
 # Spec: docs/factory.md, section Deploy and live check.
 # build -> deploy -> live-check. Pass: tag live-good moves to this commit.
 # Fail: rollback-build + rollback-deploy put tag live-good back on the live site,

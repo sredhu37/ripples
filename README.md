@@ -26,6 +26,14 @@ npm test         # progress and save-code tests
 npm run build    # type check + production build into dist/
 ```
 
+## Software Factory
+
+Issues are built, checked, reviewed and merged by GitHub Actions workflows and AI agents. Sunny sets `factory:ready` and approves what the gate cannot merge on its own. The diagram below is kept in step with the workflows by the `flow-rule` check.
+
+![Flow of the Ripples software factory, from factory:triage to the pages deploy](docs/factory-flow.svg)
+
+Detail for every step: [docs/factory.md](docs/factory.md).
+
 ## Privacy
 
 No accounts, no tracking, no server. The child's name, language and badges stay in the browser on the device. Parents can save and restore progress with a code (gear icon, behind a small maths question). Never put names or photos in this repository: it is public.

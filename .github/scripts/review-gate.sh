@@ -11,7 +11,7 @@
 #        MAX_ROUNDS       default 5
 #        CODEQL_WAIT      seconds to wait for CodeQL once every other check is green (default 600);
 #                         CodeQL is a dynamic workflow, so no workflow_run fires when it finishes
-#        REQUIRED_CHECKS  default "ci lint audit lighthouse demo spec-rule CodeQL" (the main ruleset)
+#        REQUIRED_CHECKS  default "ci lint audit lighthouse demo spec-rule flow-rule CodeQL" (the main ruleset)
 # Output: key=value lines on stdout: go, reason, pr, sha, issue, round. Also appended to
 #         GITHUB_OUTPUT when it is set. Exit 0 for every decision; non-zero only on API errors.
 #
@@ -25,7 +25,7 @@ event_sha=${2:-}
 event=${EVENT:-workflow_run}
 max_rounds=${MAX_ROUNDS:-5}
 codeql_wait=${CODEQL_WAIT:-600}
-required=${REQUIRED_CHECKS:-ci lint audit lighthouse demo spec-rule CodeQL}
+required=${REQUIRED_CHECKS:-ci lint audit lighthouse demo spec-rule flow-rule CodeQL}
 
 repo=${REPO:-${GITHUB_REPOSITORY:-}}
 if [ -z "$repo" ]; then

@@ -6,7 +6,7 @@
 #        <wait-seconds>  how long to wait for running or missing checks (default 0: look once)
 # Env:   GH_TOKEN         token with checks: read (GITHUB_TOKEN or FACTORY_TOKEN)
 #        REPO             owner/name, defaults to GITHUB_REPOSITORY, then to the current gh repo
-#        REQUIRED_CHECKS  default "ci lint audit lighthouse demo spec-rule CodeQL" (the main ruleset)
+#        REQUIRED_CHECKS  default "ci lint audit lighthouse demo spec-rule flow-rule CodeQL" (the main ruleset)
 #        POLL_SECONDS     seconds between looks (default 30)
 # Output: state=green|red|pending and detail=<text> on stdout. Exit 0 for every state;
 #         non-zero only on API errors. A red check ends the wait at once.
@@ -15,7 +15,7 @@ set -euo pipefail
 sha=${1:?usage: checks-green.sh <sha> [<wait-seconds>]}
 wait_for=${2:-0}
 poll=${POLL_SECONDS:-30}
-required=${REQUIRED_CHECKS:-ci lint audit lighthouse demo spec-rule CodeQL}
+required=${REQUIRED_CHECKS:-ci lint audit lighthouse demo spec-rule flow-rule CodeQL}
 
 if ! [[ "$sha" =~ ^[0-9a-f]{40}$ ]]; then
   echo "checks-green: '$sha' is not a commit sha" >&2

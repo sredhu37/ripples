@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 1020" width="1040" height="1020">
+  <defs>
+    <style>
+      .box { fill: #f8fafc; stroke: #334155; stroke-width: 1.5; }
+      .side { fill: #f1f5f9; stroke: #64748b; stroke-width: 1.5; stroke-dasharray: 4 4; }
+      .line { stroke: #334155; stroke-width: 1.5; fill: none; }
+      .fail { stroke: #dc2626; stroke-width: 1.5; fill: none; }
+      .pass { stroke: #16a34a; stroke-width: 1.5; fill: none; }
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #0f172a; }
+      .head { font-weight: 600; font-size: 14px; }
+      .title { font-weight: 700; font-size: 18px; }
+      .small { font-size: 12px; fill: #475569; }
+      .fail-text { font-size: 12px; fill: #dc2626; font-weight: 600; }
+      .pass-text { font-size: 12px; fill: #16a34a; font-weight: 600; }
+    </style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#334155"/>
+    </marker>
+    <marker id="af" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626"/>
+    </marker>
+    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a"/>
+    </marker>
+  </defs>
+
+  <!-- title -->
+  <text x="50" y="45" class="title">Ripples Software Factory</text>
+
+  <!-- 1 triage -->
+  <rect class="box" x="250" y="20" width="400" height="50" rx="8"/>
+  <text x="450" y="43" text-anchor="middle" class="head">Issue: factory:triage</text>
+  <text x="450" y="59" text-anchor="middle" class="small">Sunny triages: drops to factory:ready, backlog or wontfix</text>
+
+  <path class="line" d="M450 70 V100" marker-end="url(#a)"/>
+
+  <!-- 2 ready -->
+  <rect class="box" x="250" y="100" width="400" height="50" rx="8"/>
+  <text x="450" y="123" text-anchor="middle" class="head">Sunny sets factory:ready</text>
+  <text x="450" y="139" text-anchor="middle" class="small">factory-build.yml starts on label; sweep catches missed ones</text>
+
+  <path class="line" d="M450 150 V180" marker-end="url(#a)"/>
+
+  <!-- 3 build -->
+  <rect class="box" x="250" y="180" width="400" height="70" rx="8"/>
+  <text x="450" y="205" text-anchor="middle" class="head">factory-build.yml</text>
+  <text x="450" y="223" text-anchor="middle" class="small">pickup, label factory:in-progress, Claude build agent</text>
+  <text x="450" y="239" text-anchor="middle" class="small">opens or updates PR, factory-pr-link sets factory:in-review</text>
+
+  <path class="line" d="M450 250 V280" marker-end="url(#a)"/>
+
+  <!-- 4 checks -->
+  <rect class="box" x="250" y="280" width="400" height="86" rx="8"/>
+  <text x="450" y="303" text-anchor="middle" class="head">pr-checks.yml</text>
+  <text x="450" y="322" text-anchor="middle" class="small">ci, lint, audit, lighthouse, demo, spec-rule, flow-rule</text>
+  <text x="450" y="338" text-anchor="middle" class="small">workflows-map and CodeQL (default setup)</text>
+  <text x="450" y="354" text-anchor="middle" class="small">a red check goes back to build, no review round used</text>
+
+  <!-- red check loop: pr-checks back to factory-build -->
+  <path class="fail" d="M250 323 H140 V230 H250" marker-end="url(#af)"/>
+  <text x="132" y="270" text-anchor="end" class="fail-text">FAIL</text>
+  <text x="132" y="286" text-anchor="end" class="small">red check</text>
+  <text x="132" y="300" text-anchor="end" class="small">(no round used)</text>
+
+  <path class="line" d="M450 366 V396" marker-end="url(#a)"/>
+
+  <!-- 5 review -->
+  <rect class="box" x="250" y="396" width="400" height="70" rx="8"/>
+  <text x="450" y="421" text-anchor="middle" class="head">factory-review.yml</text>
+  <text x="450" y="439" text-anchor="middle" class="small">4 review agents in parallel: ux-ui, security, content, code</text>
+  <text x="450" y="455" text-anchor="middle" class="small">one review-summary comment per round</text>
+
+  <!-- fail loop: factory-review back to factory-build -->
+  <path class="fail" d="M650 431 H780 V220 H650" marker-end="url(#af)"/>
+  <text x="788" y="325" class="fail-text">FAIL</text>
+  <text x="788" y="342" class="small">fix round</text>
+  <text x="788" y="357" class="small">(max 5)</text>
+
+  <path class="pass" d="M450 466 V510" marker-end="url(#ap)"/>
+  <text x="458" y="492" class="pass-text">PASS</text>
+
+  <!-- 6 gate -->
+  <rect class="box" x="250" y="510" width="400" height="50" rx="8"/>
+  <text x="450" y="533" text-anchor="middle" class="head">factory-gate.yml</text>
+  <text x="450" y="549" text-anchor="middle" class="small">risky-file list, gate agent: MERGE or HUMAN</text>
+
+  <!-- gate split: to bot merge or to needs human -->
+  <path class="line" d="M350 560 L240 610" marker-end="url(#a)"/>
+  <text x="280" y="582" class="small">MERGE</text>
+
+  <path class="line" d="M550 560 L660 610" marker-end="url(#a)"/>
+  <text x="610" y="582" class="small">HUMAN</text>
+
+  <!-- 7a bot merge -->
+  <rect class="box" x="60" y="610" width="360" height="80" rx="8"/>
+  <text x="240" y="633" text-anchor="middle" class="head">Bot squash merge</text>
+  <text x="240" y="652" text-anchor="middle" class="small">sredhu37-bot, FACTORY_TOKEN</text>
+  <text x="240" y="668" text-anchor="middle" class="small">issue: factory:done, board: Done</text>
+
+  <!-- 7b needs human -->
+  <rect class="box" x="480" y="610" width="360" height="80" rx="8"/>
+  <text x="660" y="633" text-anchor="middle" class="head">Needs human: factory:human</text>
+  <text x="660" y="652" text-anchor="middle" class="small">Telegram to Sunny, evidence video</text>
+  <text x="660" y="668" text-anchor="middle" class="small">Sunny approves: bot merges</text>
+  <text x="660" y="684" text-anchor="middle" class="small">Sunny comments: fix round, back to factory-build.yml</text>
+
+  <!-- human approves: arrow into Bot squash merge -->
+  <path class="pass" d="M480 650 H420" marker-end="url(#ap)"/>
+  <text x="450" y="642" text-anchor="middle" class="pass-text small">approve</text>
+
+  <!-- human comments: fix round arrow back up to factory-build.yml -->
+  <path class="line" d="M840 650 H910 V195 H650" marker-end="url(#a)"/>
+  <text x="918" y="415" class="head">Sunny comments</text>
+  <text x="918" y="432" class="small">fix round</text>
+  <text x="918" y="447" class="small">(via relay)</text>
+
+  <!-- bot merge to pages -->
+  <path class="line" d="M240 690 V715 H450 V740" marker-end="url(#a)"/>
+  <text x="345" y="710" text-anchor="middle" class="small">bot squash merges to main</text>
+
+  <!-- 8 deploy -->
+  <rect class="box" x="250" y="740" width="400" height="70" rx="8"/>
+  <text x="450" y="765" text-anchor="middle" class="head">pages.yml</text>
+  <text x="450" y="783" text-anchor="middle" class="small">build, deploy to GitHub Pages, live check</text>
+  <text x="450" y="799" text-anchor="middle" class="small">broken live check opens revert PR, alerts Telegram</text>
+
+  <path class="line" d="M450 810 V840" marker-end="url(#a)"/>
+
+  <!-- 9 live -->
+  <text x="450" y="860" text-anchor="middle" class="head">Live on GitHub Pages</text>
+
+  <!-- side paths -->
+  <rect class="side" x="60" y="880" width="900" height="120" rx="8"/>
+  <text x="80" y="903" class="head">Side paths</text>
+  <text x="80" y="924" class="small">factory-sync.yml: keeps board #2 in step with the factory: labels (one label per issue, close sets factory:done)</text>
+  <text x="80" y="942" class="small">factory-sweep.yml: hourly, restarts paused factory:ready issues, flags stuck builds, reconciles the board</text>
+  <text x="80" y="960" class="small">evidence-cleanup.yml: on PR close, cleans up the evidence branch and squashes commits</text>
+  <text x="80" y="978" class="small">review suggestions: new issues in factory:triage, back to the top of this flow</text>
+</svg>

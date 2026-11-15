@@ -1,5 +1,7 @@
 name: evidence-cleanup
 
+# map-does: Deletes the merged PR's folder from the evidence branch and squashes the branch.
+
 # After a PR is merged, delete its pr-<n>/ folder from the `evidence` branch
 # and rewrite the branch to a single commit, so old screenshots do not pile up.
 # Force-push is allowed: only main is protected.

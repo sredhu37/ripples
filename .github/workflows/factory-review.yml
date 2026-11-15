@@ -1,5 +1,9 @@
 name: factory-review
 
+# map-does: Review. Four review agents in parallel on a factory PR once pr-checks is done, suggestions issue, round counter. PASS goes to the gate, FAIL back to build.
+# map-next: `factory-build.yml` (FAIL: fix round, max 5)
+# map-next: `factory-gate.yml` (PASS: to the gate)
+
 # The factory's review station. Spec: docs/factory.md, sections Review, Build (fix rounds),
 # Engine, Identity secrets and permissions.
 #

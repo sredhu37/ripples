@@ -1,5 +1,7 @@
 name: factory-sync
 
+# map-does: Keeps board #2 in step with the factory: labels of an issue; closed and reopened issues get their label.
+
 # Keeps board #2 in step with the factory: labels. Spec: docs/factory.md, section Labels and board.
 #
 #   issues labeled factory:X    -> remove every other factory: label (one label per issue), card to X's column
