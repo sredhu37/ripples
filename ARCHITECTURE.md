@@ -26,13 +26,13 @@ flowchart LR
 - **Sound and speech** (`src/sound.ts`, `src/speech.ts`): synthesized effects and read-aloud.
 - **Offline** (`public/sw.js`): caches app files after the first visit.
 - **End-to-end specs** (`e2e/`, its own npm package with Playwright): one spec per screen, each a test and a demo recording. The `demo` job of `pr-checks.yml` runs them on every pull request and posts the evidence comment; `scripts/check-spec-changed.mjs` fails a PR that changes `*.tsx` or `*.css` without changing a spec.
-- **Factory** (`.claude/agents/`, `.github/gate-paths.txt`): agent prompts and the risky file list for the software factory, see [docs/factory.md](docs/factory.md).
+- **Factory** (`.claude/agents/`, `.github/gate-paths.txt`, `.github/workflows/`): agent prompts, the risky file list for the software factory, and GitHub Actions workflows locked to the `factory` environment on `main`. See [docs/factory.md](docs/factory.md).
 
 ## Key decisions
 
 See [docs/design.md](docs/design.md) and [docs/adr](docs/adr).
 
-How work moves from an issue to the live site (agents, review, gate, deploy): [docs/factory.md](docs/factory.md). The factory is specified, not yet built.
+How work moves from an issue to the live site (agents, review, gate, deploy): [docs/factory.md](docs/factory.md). Secrets are locked to the `factory` environment restricted to `main`; workflow edits by the build agent push via an isolated step outside the agent workspace.
 
 ## How to run and test
 

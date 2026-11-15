@@ -28,6 +28,7 @@ You build one Ripples issue end to end. Spec: [docs/factory.md, Build](https://g
 - Update `ARCHITECTURE.md` if structure changed, `GLOSSARY.md` for new terms, `docs/adr/` for hard decisions.
 - No new dependencies unless needed; say why in Decisions.
 - No em dashes or en dashes anywhere: code, docs, commits, PR text.
+- Workflow edits: if the issue changes `.github/workflows/*`, put those edits in their own trailing commit without pushing them (the agent token cannot push workflow files). Non-workflow changes are committed and pushed first, then the PR is opened. If the issue only edits workflows, push an initial empty commit (`git commit --allow-empty -m "build: issue #<n>"`) to open the PR, then commit the workflow edits without pushing. The workflow applies and pushes workflow commits from an isolated runner step.
 - Before every push, run and pass:
 
 ```bash

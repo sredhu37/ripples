@@ -254,14 +254,25 @@ Shared scripts in `.github/scripts/`, for every factory workflow:
 
 ## Identity, secrets and permissions
 
-([#113](https://github.com/sredhu37/ripples/issues/113), [#126](https://github.com/sredhu37/ripples/issues/126))
+([#113](https://github.com/sredhu37/ripples/issues/113), [#126](https://github.com/sredhu37/ripples/issues/126), [#194](https://github.com/sredhu37/ripples/issues/194), ADR 0011)
 
-| Actor                 | Identity                                                                                                                     | Used for                                                   |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| Agent code            | `claude[bot]` via the Claude GitHub App, Sunny as co-author                                                                  | commits and PR on the build branch                         |
-| Factory plumbing      | machine account `sredhu37-bot`, classic token `FACTORY_TOKEN` (`public_repo`, `project`, 1-year expiry; no `workflow` scope) | board moves, gate merge (so `pages.yml` fires), revert PRs |
-| Label swaps, comments | `GITHUB_TOKEN`                                                                                                               | no new workflow runs, so no loops                          |
-| Notifications         | Telegram factory bot, `TELEGRAM_TOKEN` + chat id                                                                             | "Needs human", rollbacks, triage reminder                  |
+| Actor                 | Identity                                                                                                            | Used for                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Agent code            | `claude[bot]` via the Claude GitHub App, Sunny as co-author                                                         | commits and PR on the build branch                                             |
+| Factory plumbing      | machine account `sredhu37-bot`, classic token `FACTORY_TOKEN` (`public_repo`, `project`, `workflow`, 1-year expiry) | board moves, gate merge (so `pages.yml` fires), revert PRs, workflow push step |
+| Label swaps, comments | `GITHUB_TOKEN`                                                                                                      | no new workflow runs, so no loops                                              |
+| Notifications         | Telegram factory bot, `TELEGRAM_TOKEN` + chat id                                                                    | "Needs human", rollbacks, triage reminder                                      |
+
+**Environment secrets locked to main:** All factory secrets (`FACTORY_TOKEN`, `CLAUDE_CODE_OAUTH_TOKEN`, `TELEGRAM_TOKEN`, `TELEGRAM_CHAT_ID`) are stored in the `factory` GitHub Environment. The environment has a custom deployment branch policy restricted to `main`. Non-main branches receive empty values for all environment secrets, preventing secret exfiltration from unreviewed PR workflows. Repository-level secrets are empty.
+
+**Workflow edits and the push step outside the agent:** When a task modifies `.github/workflows/*`:
+
+1. The build agent creates workflow edits in a separate trailing commit on the PR branch without pushing it.
+2. The agent opens or updates the PR with the non-workflow commits first (or an initial commit if only workflows changed).
+3. The runner exports unpushed workflow commits as a `git format-patch` artifact.
+4. A separate runner job `push-workflows` (no agent, clean checkout, `core.hooksPath=/dev/null`, running in the `factory` environment) applies the patches via `git am --3way` and pushes with `FACTORY_TOKEN`.
+5. The agent never receives `FACTORY_TOKEN` or workflow push permissions.
+6. The PR touches `.github/**`, which is listed in `.github/gate-paths.txt`. The gate evaluates to `HUMAN`, requiring Sunny's manual review and approval before merging.
 
 **Trusted input:** every agent step sets `include_comments_by_actor` to `sredhu37`, `sredhu37-bot`, `claude[bot]`, `github-actions[bot]`. Other comments stay visible on GitHub but never reach an agent.
 
@@ -306,11 +317,12 @@ Normal merges are silent.
 
 Steps only a human can do. Filed as one `factory:human` ticket.
 
-1. Create the machine account `sredhu37-bot` (own email, 2FA), invite it to ripples and to board #2, create its classic token, store it as `FACTORY_TOKEN`.
-2. Create the Telegram factory bot in BotFather; store `TELEGRAM_TOKEN` and the chat id.
-3. Run `claude setup-token`; store it as `CLAUDE_CODE_OAUTH_TOKEN`. Install the Claude GitHub App on ripples.
-4. Board #2: add the "Needs human" column (red, description "The factory stopped. Answer, review or merge to move it on."); turn off the 4 board workflows listed under [Labels and board](#labels-and-board).
-5. Turn on CodeQL default setup.
+1. Create the machine account `sredhu37-bot` (own email, 2FA), invite it to ripples and to board #2, create its classic token with `public_repo`, `project`, and `workflow` scopes.
+2. Create GitHub Environment `factory` restricted to branch `main`. Store all 4 secrets (`FACTORY_TOKEN`, `CLAUDE_CODE_OAUTH_TOKEN`, `TELEGRAM_TOKEN`, `TELEGRAM_CHAT_ID`) as environment secrets under `factory`. Repository secrets must remain empty.
+3. Create the Telegram factory bot in BotFather; store `TELEGRAM_TOKEN` and the chat id in environment secrets.
+4. Run `claude setup-token`; store it as `CLAUDE_CODE_OAUTH_TOKEN` in environment secrets. Install the Claude GitHub App on ripples.
+5. Board #2: add the "Needs human" column (red, description "The factory stopped. Answer, review or merge to move it on."); turn off the 4 board workflows listed under [Labels and board](#labels-and-board).
+6. Turn on CodeQL default setup.
 
 ## Implementation defaults
 
