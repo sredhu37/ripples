@@ -20,7 +20,8 @@
 #        RISKY_OUT   gate mode: file for the risky hits, "<file><TAB><pattern>" per line
 #        CHECK_WAIT  seconds to wait for running checks (default 600 gate, 1200 approve)
 # Output: key=value lines on stdout: go, reason, mode, pr, sha, kind, issue, title, and risky
-#         (gate mode, count of hits), tell (approve mode: worth a note on the PR when go=false).
+#         (gate mode, count of hits), tell (approve mode: worth a note on the PR when go=false),
+#         early (approve mode: the approval came while the factory still has the PR).
 #         Also appended to GITHUB_OUTPUT when it is set.
 #         Exit 0 for every decision; non-zero only on API errors.
 set -euo pipefail
@@ -118,7 +119,14 @@ case "$mode" in
     ;;
   approve)
     if [ "$kind" = "factory" ]; then
-      [ "$label" = "factory:human" ] || skip "#$issue has '$label', not factory:human: the factory still has the PR"
+      if [ "$label" != "factory:human" ]; then
+        # An approval before the gate decides does not count: say so, do not stay silent.
+        if [ "$label" = "factory:in-review" ] && bash "$here/early-approval.sh" "$pr" | grep -qx 'early=true'; then
+          tell=true
+          emit early true
+        fi
+        skip "#$issue has '$label', not factory:human: the factory still has the PR"
+      fi
     elif [ "$kind" != "revert" ]; then
       skip "branch $ref by $author is neither a factory PR nor a revert PR"
     fi
