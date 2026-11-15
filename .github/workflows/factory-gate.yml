@@ -128,6 +128,7 @@ jobs:
       go: ${{ steps.check.outputs.go }}
       reason: ${{ steps.check.outputs.reason }}
       tell: ${{ steps.check.outputs.tell }}
+      early: ${{ steps.check.outputs.early }}
       mode: ${{ steps.check.outputs.mode }}
       pr: ${{ steps.check.outputs.pr }}
       sha: ${{ steps.check.outputs.sha }}
@@ -345,10 +346,18 @@ jobs:
           path: ${{ runner.temp }}/gate
           merge-multiple: true
 
+      # Read before the gate comment is posted, so any approval found came earlier.
+      - name: Early approval
+        id: early
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash .github/scripts/early-approval.sh "$PR" | tee -a "$GITHUB_OUTPUT"
+
       - name: Gate comment (risks, decision, reason)
         id: decide
         env:
           GH_TOKEN: ${{ github.token }}
+          EARLY_APPROVAL: ${{ steps.early.outputs.early }}
           AGENT_RESULT: ${{ needs.agent.result }}
         run: |
           set -euo pipefail
@@ -394,6 +403,7 @@ jobs:
           DECISION: ${{ steps.decide.outputs.decision }}
           GATE_REASON: ${{ steps.decide.outputs.reason }}
           MERGE_REASON: ${{ steps.merge.outputs.reason }}
+          EARLY: ${{ steps.early.outputs.early }}
         run: |
           set -euo pipefail
           .github/scripts/label-set.sh "$ISSUE" factory:human
@@ -404,6 +414,9 @@ jobs:
           Approve the PR to merge it once the cause is fixed. Run: $RUN_URL"
           else
             reason="gate HUMAN, $GATE_REASON"
+            if [ "$EARLY" = "true" ]; then
+              reason="$reason. Your approval came before the gate comment: approve again to merge"
+            fi
           fi
           echo "reason=$reason" >> "$GITHUB_OUTPUT"
       - name: Board to Needs human
@@ -470,9 +483,12 @@ jobs:
           MERGED: ${{ steps.merge.outputs.merged }}
           MERGE_REASON: ${{ steps.merge.outputs.reason }}
           CHECK_REASON: ${{ needs.check.outputs.reason }}
+          EARLY: ${{ needs.check.outputs.early }}
         run: |
           set -euo pipefail
-          if [ "$MERGED" = "true" ]; then
+          if [ "$EARLY" = "true" ]; then
+            body="Approval noted, but the factory still has the PR. Approve again after the gate comment. Run: $RUN_URL"
+          elif [ "$MERGED" = "true" ]; then
             body="Merged by sredhu37-bot after $SUNNY's approval of \`${SHA:0:7}\`: $MERGE_REASON. Run: $RUN_URL"
           else
             why=${MERGE_REASON:-$CHECK_REASON}
