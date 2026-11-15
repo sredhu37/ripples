@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1010" width="900" height="1010" role="img" aria-labelledby="t d">
+  <title id="t">Ripples software factory flow</title>
+  <desc id="d">An issue moves from factory:triage to factory:ready, is built by factory-build, checked by pr-checks, reviewed by factory-review (FAIL goes back to build), then factory-gate either merges it or asks Sunny. A merge to main is deployed by pages with a live check and rollback.</desc>
+  <style>
+    text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 14px; fill: #1f2328; }
+    .small { font-size: 12px; }
+    .head { font-weight: 600; }
+    .box { fill: #f6f8fa; stroke: #57606a; stroke-width: 1.5; }
+    .side { fill: none; stroke: #57606a; stroke-width: 1.5; stroke-dasharray: 5 4; }
+    .line { fill: none; stroke: #57606a; stroke-width: 1.5; }
+    .head-fill { fill: #57606a; }
+    .pass { stroke: #1a7f37; fill: none; stroke-width: 1.5; }
+    .pass-fill { fill: #1a7f37; }
+    .pass-text { fill: #1a7f37; font-weight: 600; }
+    .fail { stroke: #cf222e; fill: none; stroke-width: 1.5; }
+    .fail-fill { fill: #cf222e; }
+    .fail-text { fill: #cf222e; font-weight: 600; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e6edf3; }
+      .box { fill: #161b22; stroke: #8b949e; }
+      .side, .line { stroke: #8b949e; }
+      .head-fill { fill: #8b949e; }
+      .pass { stroke: #3fb950; }
+      .pass-fill { fill: #3fb950; }
+      .pass-text { fill: #3fb950; }
+      .fail { stroke: #ff7b72; }
+      .fail-fill { fill: #ff7b72; }
+      .fail-text { fill: #ff7b72; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="head-fill"/></marker>
+    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="pass-fill"/></marker>
+    <marker id="af" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fail-fill"/></marker>
+  </defs>
+
+  <!-- 1 triage -->
+  <rect class="box" x="250" y="20" width="400" height="50" rx="8"/>
+  <text x="450" y="42" text-anchor="middle" class="head">Issue: factory:triage</text>
+  <text x="450" y="59" text-anchor="middle" class="small">/triage writes the agent brief</text>
+  <path class="line" d="M450 70 V100" marker-end="url(#a)"/>
+
+  <!-- 2 ready -->
+  <rect class="box" x="250" y="100" width="400" height="50" rx="8"/>
+  <text x="450" y="122" text-anchor="middle" class="head">Sunny sets factory:ready</text>
+  <text x="450" y="139" text-anchor="middle" class="small">factory-sweep.yml restarts paused ready issues</text>
+  <path class="line" d="M450 150 V180" marker-end="url(#a)"/>
+
+  <!-- 3 build -->
+  <rect class="box" x="250" y="180" width="400" height="70" rx="8"/>
+  <text x="450" y="203" text-anchor="middle" class="head">factory-build.yml</text>
+  <text x="450" y="222" text-anchor="middle" class="small">build agent opens the PR on factory/issue-n</text>
+  <text x="450" y="238" text-anchor="middle" class="small">issue: factory:in-review (also factory-pr-link.yml)</text>
+  <path class="line" d="M450 250 V280" marker-end="url(#a)"/>
+
+  <!-- 4 checks -->
+  <rect class="box" x="250" y="280" width="400" height="86" rx="8"/>
+  <text x="450" y="303" text-anchor="middle" class="head">pr-checks.yml</text>
+  <text x="450" y="322" text-anchor="middle" class="small">ci, lint, audit, lighthouse, demo, spec-rule, flow-rule</text>
+  <text x="450" y="338" text-anchor="middle" class="small">and CodeQL (default setup)</text>
+  <text x="450" y="354" text-anchor="middle" class="small">a red check goes back to build, no review round used</text>
+  <path class="line" d="M450 366 V396" marker-end="url(#a)"/>
+
+  <!-- 5 review -->
+  <rect class="box" x="250" y="396" width="400" height="70" rx="8"/>
+  <text x="450" y="419" text-anchor="middle" class="head">factory-review.yml</text>
+  <text x="450" y="438" text-anchor="middle" class="small">agents: code-quality, security, ux-ui, content</text>
+  <text x="450" y="454" text-anchor="middle" class="small">improvements become factory:triage issues</text>
+
+  <!-- FAIL loop back to build -->
+  <path class="fail" d="M650 431 H790 V215 H650" marker-end="url(#af)"/>
+  <text x="798" y="330" class="fail-text">FAIL</text>
+  <text x="798" y="347" class="small">fix round</text>
+  <text x="798" y="362" class="small">(max 5)</text>
+
+  <!-- PASS to gate -->
+  <path class="pass" d="M450 466 V510" marker-end="url(#ap)"/>
+  <text x="462" y="493" class="pass-text">PASS</text>
+
+  <!-- 6 gate -->
+  <rect class="box" x="250" y="510" width="400" height="50" rx="8"/>
+  <text x="450" y="532" text-anchor="middle" class="head">factory-gate.yml</text>
+  <text x="450" y="549" text-anchor="middle" class="small">risky list, gate agent, required checks green</text>
+
+  <!-- MERGE / HUMAN -->
+  <path class="line" d="M350 560 L240 610" marker-end="url(#a)"/>
+  <text x="270" y="580" text-anchor="end" class="head">MERGE</text>
+  <path class="line" d="M550 560 L660 610" marker-end="url(#a)"/>
+  <text x="630" y="580" class="head">HUMAN</text>
+
+  <rect class="box" x="60" y="610" width="360" height="80" rx="8"/>
+  <text x="240" y="633" text-anchor="middle" class="head">Bot squash merge</text>
+  <text x="240" y="652" text-anchor="middle" class="small">sredhu37-bot, FACTORY_TOKEN</text>
+  <text x="240" y="668" text-anchor="middle" class="small">issue: factory:done, board: Done</text>
+
+  <rect class="box" x="480" y="610" width="360" height="80" rx="8"/>
+  <text x="660" y="633" text-anchor="middle" class="head">Needs human: factory:human</text>
+  <text x="660" y="652" text-anchor="middle" class="small">Telegram to Sunny, evidence video</text>
+  <text x="660" y="668" text-anchor="middle" class="small">Sunny approves: bot merges</text>
+  <text x="660" y="684" text-anchor="middle" class="small">Sunny comments: fix round, back to factory-build.yml</text>
+
+  <path class="line" d="M240 690 V710 H350 V740" marker-end="url(#a)"/>
+  <path class="line" d="M660 690 V710 H550 V740" marker-end="url(#a)"/>
+
+  <!-- 7 pages -->
+  <rect class="box" x="250" y="740" width="400" height="100" rx="8"/>
+  <text x="450" y="763" text-anchor="middle" class="head">push to main: pages.yml</text>
+  <text x="450" y="782" text-anchor="middle" class="small">build, deploy, live check (version.txt, Lighthouse)</text>
+  <text x="450" y="800" text-anchor="middle" class="pass-text small">ok: tag live-good moves</text>
+  <text x="450" y="818" text-anchor="middle" class="fail-text small">broken: rollback to live-good, revert PR, Telegram</text>
+
+  <!-- side paths -->
+  <rect class="side" x="60" y="880" width="780" height="110" rx="8"/>
+  <text x="80" y="903" class="head">Side paths</text>
+  <text x="80" y="926" class="small">factory-sync.yml: keeps board #2 in step with the factory: labels (one label per issue, close sets factory:done)</text>
+  <text x="80" y="946" class="small">factory-sweep.yml: hourly, restarts paused factory:ready issues, flags stuck builds, reconciles the board</text>
+  <text x="80" y="966" class="small">review suggestions: new issues in factory:triage, back to the top of this flow</text>
+</svg>
