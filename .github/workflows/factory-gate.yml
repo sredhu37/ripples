@@ -1,6 +1,7 @@
 name: factory-gate
 
 # map-does: Gate. Risky-file list, gate agent, then squash merge or factory:human. Also relays Sunny's approvals and comments on a PR in Needs human.
+# map-next: `factory-build.yml` (fix round on human comment or change request)
 # map-next: `pages.yml` (the squash merge to main)
 
 # The factory's gate station and Sunny's answers on a PR in Needs human. Spec: docs/factory.md,

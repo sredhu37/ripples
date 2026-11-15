@@ -106,12 +106,29 @@ export function readWorkflows(dir = workflowsDir) {
 export function buildMarkdown(workflows) {
   const rows = workflows.map((w) => {
     const trigger = w.events.flatMap(describeEvent).join("<br>");
-    const next = new Set(w.dispatches.map((f) => `\`${f}\``));
-    for (const other of workflows) {
-      if (other.after.includes(w.name)) next.add(`\`${other.file}\``);
+    const nextMap = new Map();
+    for (const f of w.dispatches) {
+      if (f !== w.file) {
+        nextMap.set(f, `\`${f}\``);
+      }
     }
-    for (const note of w.notes) next.add(note);
-    return `| \`${w.file}\` | ${trigger} | ${w.does || "(add a `# map-does:` header comment)"} | ${[...next].join("<br>") || "nothing"} |`;
+    for (const other of workflows) {
+      if (other.file !== w.file && other.after.includes(w.name)) {
+        nextMap.set(other.file, `\`${other.file}\``);
+      }
+    }
+    for (const note of w.notes) {
+      const match = note.match(/^`([\w.-]+\.ya?ml)`/);
+      if (match) {
+        if (match[1] !== w.file) {
+          nextMap.set(match[1], note);
+        }
+      } else {
+        nextMap.set(note, note);
+      }
+    }
+    const nextText = [...nextMap.values()].join("<br>") || "nothing";
+    return `| \`${w.file}\` | ${trigger} | ${w.does || "(add a `# map-does:` header comment)"} | ${nextText} |`;
   });
   return [
     "# Workflows",

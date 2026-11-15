@@ -1,6 +1,7 @@
 name: factory-sweep
 
 # map-does: Safety net. Restarts paused factory:ready issues, flags stuck builds, reconciles the board, sends the Monday triage reminder.
+# map-next: `factory-build.yml` (restarts paused ready issues)
 
 # The factory's safety net. Spec: docs/factory.md, sections Build, Triage, Labels and board, Engine.
 #

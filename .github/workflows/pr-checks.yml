@@ -1,9 +1,9 @@
 name: pr-checks
 
-# map-does: Every PR check, one job per required check of the main ruleset, plus the workflow map check.
+# map-does: Every PR check, one job per required check of the main ruleset, plus the workflow map and flow diagram checks.
 
 # Every check that runs on a pull request, one job per required check of the main ruleset:
-# ci, lint, audit, lighthouse, spec-rule, demo. Job names are the check names; keep them.
+# ci, lint, audit, lighthouse, spec-rule, flow-rule, demo. Job names are the check names; keep them.
 # factory-review.yml starts when this workflow completes on a factory PR.
 #
 # demo posts the evidence: step screenshots and demo.mp4 on the `evidence` branch under
@@ -130,6 +130,27 @@ jobs:
         run: npx vitest run --root scripts
       - name: Specs present (a *.tsx or *.css change needs an e2e/*.spec.ts change)
         run: node scripts/check-spec-changed.mjs "origin/${{ github.base_ref }}"
+
+  flow-rule:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: flow-rule-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Unit test of the flow rule
+        run: npx vitest run --root scripts check-flow-changed
+      - name: Flow diagram current (a workflow or script change needs a docs/factory-flow.svg change)
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: node scripts/check-flow-changed.mjs "origin/${{ github.base_ref }}"
 
   demo:
     runs-on: ubuntu-latest

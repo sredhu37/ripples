@@ -15,6 +15,7 @@ A change is done only when all of these hold:
 2. For a UI change: specs for the changed screens pass and the evidence comment is on the pull request.
 3. `ARCHITECTURE.md` is updated if structure changed. New terms go in `GLOSSARY.md`, hard decisions in `docs/adr/`.
 4. The pull request description has four headings: What changed, Decisions, Verified, Left.
+5. A change to `.github/workflows/**` or `.github/scripts/**` also changes `docs/factory-flow.svg`, or the pull request description has a line `Diagram: unchanged, <reason>` (check `flow-rule`).
 
 ## Style
 

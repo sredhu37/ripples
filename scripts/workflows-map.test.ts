@@ -58,6 +58,37 @@ describe("buildMarkdown", () => {
     expect(md).toContain("| `a.yml` |  | does a | `b.yml` |");
     expect(md).toContain("`a.yml`<br>note");
   });
+
+  it("omits self-dispatches from starts next", () => {
+    const md = buildMarkdown([
+      {
+        file: "a.yml",
+        name: "a",
+        does: "does a",
+        notes: [],
+        dispatches: ["a.yml"],
+        events: [],
+        after: [],
+      },
+    ]);
+    expect(md).toContain("| `a.yml` |  | does a | nothing |");
+  });
+
+  it("overrides a bare dispatch with an annotated note", () => {
+    const md = buildMarkdown([
+      {
+        file: "a.yml",
+        name: "a",
+        does: "does a",
+        notes: ["`b.yml` (special condition)"],
+        dispatches: ["b.yml"],
+        events: [],
+        after: [],
+      },
+    ]);
+    expect(md).toContain("| `a.yml` |  | does a | `b.yml` (special condition) |");
+    expect(md).not.toContain("`b.yml`<br>`b.yml`");
+  });
 });
 
 describe("missingInSvg", () => {
