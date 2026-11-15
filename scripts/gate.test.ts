@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
+  EARLY_APPROVAL_NOTE,
   analysisText,
   gateComment,
   gateMarker,
@@ -189,6 +190,21 @@ describe("analysisText", () => {
   it("drops only the last json block", () => {
     const t = 'a\n```json\n{"x":1}\n```\nb\n```json\n{"decision":"MERGE"}\n```';
     expect(analysisText(t)).toBe('a\n```json\n{"x":1}\n```\nb');
+  });
+});
+
+describe("gateComment early approval", () => {
+  const sha = "a".repeat(40);
+  const risky = [{ file: ".github/x.yml", pattern: ".github/**" }];
+
+  it("adds the note on HUMAN when the approval came early", () => {
+    const g = gateComment({ sha, pr: "1", risky, earlyApproval: true });
+    expect(g.comment).toContain(EARLY_APPROVAL_NOTE);
+  });
+
+  it("has no note without an early approval", () => {
+    const g = gateComment({ sha, pr: "1", risky });
+    expect(g.comment).not.toContain(EARLY_APPROVAL_NOTE);
   });
 });
 

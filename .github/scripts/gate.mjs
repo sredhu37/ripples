@@ -133,14 +133,24 @@ export function gateMarker(sha) {
   return `<!-- factory-gate sha=${sha} -->`;
 }
 
+export const EARLY_APPROVAL_NOTE =
+  "Your approval came before this gate comment. Read the risks above and approve again to merge.";
+
 /**
  * The gate decision and the comment. Risky files win over the agent (the agent does not run
  * then); a missing agent result is HUMAN.
  * @param {{ sha: string, pr: string, risky?: { file: string, pattern: string }[],
  *   result?: { ok: boolean, decision: string, reason: string, analysis: string, error: string | null } | null,
- *   runUrl?: string }} input
+ *   runUrl?: string, earlyApproval?: boolean }} input
  */
-export function gateComment({ sha, pr, risky = [], result = null, runUrl = "" }) {
+export function gateComment({
+  sha,
+  pr,
+  risky = [],
+  result = null,
+  runUrl = "",
+  earlyApproval = false,
+}) {
   const short = String(sha).slice(0, 7);
   let decision;
   let reason;
@@ -179,6 +189,7 @@ export function gateComment({ sha, pr, risky = [], result = null, runUrl = "" })
       : `Next: Needs human. Sunny approves the PR to merge it (an approving review on \`${short}\`, sredhu37-bot merges), or comments to start a fix round.`,
     "",
   );
+  if (decision === "HUMAN" && earlyApproval) out.push(EARLY_APPROVAL_NOTE, "");
   const agentNote = risky.length
     ? ""
     : `The gate agent ran with ${TOOLS} only: no Bash, no Edit, no Write, no push. `;
@@ -261,6 +272,7 @@ function cli(argv) {
       risky: readRisky(env.RISKY_FILE),
       result: result && typeof result.decision === "string" ? result : null,
       runUrl: env.RUN_URL,
+      earlyApproval: env.EARLY_APPROVAL === "true",
     });
     writeFileSync(outFile, g.comment);
     console.log(`decision=${g.decision}`);
