@@ -34,6 +34,7 @@ import { lesson as dictatorship } from "./dictatorship";
 import { lesson as capitalism } from "./capitalism";
 import { lesson as communism } from "./communism";
 import { lesson as powertriangle } from "./powertriangle";
+import { lesson as centralbanks } from "./centralbanks";
 import { lesson as mughals } from "./mughals";
 import { lesson as spicetrade } from "./spicetrade";
 import { lesson as britishinindia } from "./britishinindia";
@@ -109,6 +110,7 @@ const ALL: Record<string, Lesson | undefined> = {
   humanedge,
   supply_demand,
   scarcity_prices,
+  centralbanks,
 };
 
 import { EVENT_SOURCES, MEANWHILE, meanwhileEvents } from "../timeline/meanwhile";
