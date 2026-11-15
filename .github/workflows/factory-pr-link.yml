@@ -1,5 +1,7 @@
 name: factory-pr-link
 
+# map-does: Puts the issue of a hand-opened PR with `Closes #n` in review.
+
 # A PR opened by hand that closes an issue puts the issue in review.
 # Spec: docs/factory.md, section Labels and board. Script: .github/scripts/pr-in-review.sh.
 #

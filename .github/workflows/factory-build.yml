@@ -1,5 +1,8 @@
 name: factory-build
 
+# map-does: Build agent. Picks a factory:ready issue (label swap), builds it, opens or updates the PR; also runs fix rounds. When an issue closes it dispatches the next unblocked one.
+# map-next: `pr-checks.yml` (the PR it pushes)
+
 # The factory's build station. Spec: docs/factory.md, sections Build, Engine,
 # Identity secrets and permissions, Labels and board.
 #

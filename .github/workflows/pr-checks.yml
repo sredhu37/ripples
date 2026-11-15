@@ -1,5 +1,7 @@
 name: pr-checks
 
+# map-does: Every PR check, one job per required check of the main ruleset, plus the workflow map check.
+
 # Every check that runs on a pull request, one job per required check of the main ruleset:
 # ci, lint, audit, lighthouse, spec-rule, demo. Job names are the check names; keep them.
 # factory-review.yml starts when this workflow completes on a factory PR.
@@ -28,6 +30,15 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+
+  workflows-map:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: npm run workflows:check
 
   lint:
     runs-on: ubuntu-latest
