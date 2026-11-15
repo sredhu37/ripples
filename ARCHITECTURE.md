@@ -25,7 +25,7 @@ flowchart LR
 - **World timeline** (`src/timeline/`, `src/components/TimelineScreen.tsx`): static event data (7 eras, 6 tracks: India, Europe, Americas, East Asia, Africa and Middle East, Science) with trilingual titles and one summary each. Opened from the globe button on the map header. Events can name a `lessonId` they relate to. Group 5 lessons also get a "Meanwhile around the world" card (`src/timeline/meanwhile.ts`, `src/components/MeanwhileCard.tsx`) shown after the real life card: a year slider over a per-lesson window, one latest event per track, one intro text. Each event shown is also appended to the lesson's fact card with a source. Tested in `src/timeline/timeline.test.ts` and `src/components/TimelineScreen.test.tsx`.
 - **Sound and speech** (`src/sound.ts`, `src/speech.ts`): synthesized effects and read-aloud.
 - **Offline** (`public/sw.js`): caches app files after the first visit.
-- **End-to-end specs** (`e2e/`, its own npm package with Playwright): one spec per screen, each a test and a demo recording. `demo.yml` runs them on every pull request and posts the evidence comment; `scripts/check-spec-changed.mjs` fails a PR that changes `*.tsx` or `*.css` without changing a spec.
+- **End-to-end specs** (`e2e/`, its own npm package with Playwright): one spec per screen, each a test and a demo recording. The `demo` job of `pr-checks.yml` runs them on every pull request and posts the evidence comment; `scripts/check-spec-changed.mjs` fails a PR that changes `*.tsx` or `*.css` without changing a spec.
 - **Factory** (`.claude/agents/`, `.github/gate-paths.txt`): agent prompts and the risky file list for the software factory, see [docs/factory.md](docs/factory.md).
 
 ## Key decisions

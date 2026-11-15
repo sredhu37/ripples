@@ -5,7 +5,7 @@ description: Use after building or changing a feature, to record a video of it r
 
 # Demo
 
-Show the change you just made with the Playwright specs in `e2e/`. The same specs run in CI (`.github/workflows/demo.yml`) and post the evidence comment on the pull request. Spec: `docs/factory.md`, sections Evidence and CI tools.
+Show the change you just made with the Playwright specs in `e2e/`. The same specs run in CI (`.github/workflows/pr-checks.yml`, job `demo`) and post the evidence comment on the pull request. Spec: `docs/factory.md`, sections Evidence and CI tools.
 
 ## Layout
 

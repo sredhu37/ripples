@@ -3,7 +3,7 @@ name: factory-review
 # The factory's review station. Spec: docs/factory.md, sections Review, Build (fix rounds),
 # Engine, Identity secrets and permissions.
 #
-#   workflow_run (a CI workflow finished on a factory PR), or workflow_dispatch (pr, manual run)
+#   workflow_run (pr-checks finished on a factory PR), or workflow_dispatch (pr, manual run)
 #     gate:     factory PR (factory/issue-<n>, by claude[bot]), head still current, every required
 #               check green, no summary for this head yet, round <= 5 (.github/scripts/review-gate.sh)
 #     review:   ux-ui, security, content, code-quality in parallel; prompts and rules from main;
@@ -24,7 +24,7 @@ name: factory-review
 
 on:
   workflow_run:
-    workflows: [ci, Lint, Lighthouse, demo-video]
+    workflows: [pr-checks]
     types: [completed]
   workflow_dispatch:
     inputs:

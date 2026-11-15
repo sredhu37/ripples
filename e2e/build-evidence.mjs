@@ -87,7 +87,7 @@ function makeVideo(videos, file) {
   );
 }
 
-/** Replaced in demo.yml with the evidence branch commit, once it is pushed. */
+/** Replaced in pr-checks.yml (job demo) with the evidence branch commit, once it is pushed. */
 export const EVIDENCE_SHA = "__EVIDENCE_SHA__";
 
 export function commentBody({

@@ -87,6 +87,8 @@ triage ─► ready ─► in-progress ─► in-review ─► done
 
 Deterministic checks run before any review agent. A failure goes straight back to the build agent and uses no review round.
 
+All of them except CodeQL run in one workflow, `pr-checks.yml`, one job per required check of the `main` ruleset: `ci`, `lint`, `audit`, `lighthouse`, `spec-rule`, `demo`. The job names are the check names, so renaming a job breaks the ruleset and `checks-green.sh`.
+
 | Check                   | Tool                                                                | Default settings                                                                                                 |
 | ----------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | Tests, types, build     | `npm run test`, `npm run typecheck`, `npm run build`                | as today                                                                                                         |
@@ -185,7 +187,7 @@ review passed ──► any changed file on the risky list? ──yes──► f
 - The **evidence branch** `evidence` holds `pr-<n>/step-*.png` and `pr-<n>/demo.mp4` (the spec videos joined with ffmpeg; Playwright draws the pointer and outlines each clicked element). One **evidence comment** per PR, updated in place, shows the screenshots inline, links the walkthrough video through jsDelivr (GitHub strips video players from comments and serves raw `.mp4` as a download; jsDelivr serves it as `video/mp4`, so the browser's own player can pause and rewind), and links the full video artifact (90-day retention).
 - Review agents and the gate agent read the PNGs. Sunny watches on HUMAN PRs.
 - After merge, CI deletes `pr-<n>/` and rewrites `evidence` to a single commit.
-- `demo.yml` is fixed first: it fails on every PR today (job-level `if` uses `hashFiles`).
+- The `demo` job in `pr-checks.yml` records and posts the evidence.
 
 ## Deploy and live check
 
@@ -215,13 +217,13 @@ GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`
 | Workflow              | Runs on                                                                               | Does                                                                                                 |
 | --------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `factory-build.yml`   | `issues: labeled` (`factory:ready`), `issues: closed` (unblocks), `workflow_dispatch` | pickup, label swap, build agent, opens PR                                                            |
-| `factory-review.yml`  | `workflow_run` (CI workflows done on a factory PR), `workflow_dispatch`               | 4 review agents in parallel, suggestions issue, fix round, round counter                             |
+| `factory-review.yml`  | `workflow_run` (`pr-checks` done on a factory PR), `workflow_dispatch`                | 4 review agents in parallel, suggestions issue, fix round, round counter                             |
 | `factory-gate.yml`    | `workflow_dispatch` (`pr`, `mode`); `pull_request_review`, `issue_comment` (relay)    | risky list, gate agent, merge with `FACTORY_TOKEN` or `factory:human`; Sunny's approval and comments |
 | `factory-sweep.yml`   | hourly at :07; Monday 09:00 Europe/Berlin; `workflow_dispatch` (`task`, `dry_run`)    | restart paused `factory:ready` tickets, flag stuck builds, board reconcile; triage reminder          |
 | `factory-sync.yml`    | `issues: labeled, unlabeled, closed, reopened`                                        | keeps one `factory:` label (the newest); card to its column; close sets `factory:done`               |
 | `factory-pr-link.yml` | `pull_request_target: opened, reopened, ready_for_review`                             | a hand-opened PR with `Closes #n` puts #n in `factory:in-review`, card In review                     |
 | `pages.yml`           | push to main                                                                          | build, deploy, live check, rollback                                                                  |
-| `demo.yml` (fixed)    | `pull_request`                                                                        | specs, evidence branch, evidence comment                                                             |
+| `pr-checks.yml`       | `pull_request`                                                                        | jobs `ci`, `lint`, `audit`, `lighthouse`, `spec-rule`, `demo` (specs, evidence branch and comment)   |
 
 Shared scripts in `.github/scripts/`, for every factory workflow:
 
@@ -293,12 +295,12 @@ Normal merges are silent.
 
 ([#115](https://github.com/sredhu37/ripples/issues/115), [#117](https://github.com/sredhu37/ripples/issues/117), [#114](https://github.com/sredhu37/ripples/issues/114), [#113](https://github.com/sredhu37/ripples/issues/113))
 
-| Ports to the template                                        | Stays in ripples (and web repos)               |
-| ------------------------------------------------------------ | ---------------------------------------------- |
-| ux-ui, security, code-quality agents and the finding format  | content agent and its rule docs                |
-| the 6 `factory:` labels (board optional)                     | oxlint, oxfmt, Lighthouse, Playwright evidence |
-| the 4-heading PR summary, fixed `demo.yml` and `/demo` skill | ripples' risky list entries                    |
-| the workflows                                                | Pro token (template uses an API key)           |
+| Ports to the template                                       | Stays in ripples (and web repos)               |
+| ----------------------------------------------------------- | ---------------------------------------------- |
+| ux-ui, security, code-quality agents and the finding format | content agent and its rule docs                |
+| the 6 `factory:` labels (board optional)                    | oxlint, oxfmt, Lighthouse, Playwright evidence |
+| the 4-heading PR summary, `pr-checks.yml` and `/demo` skill | ripples' risky list entries                    |
+| the workflows                                               | Pro token (template uses an API key)           |
 
 ## Sunny's setup checklist
 
