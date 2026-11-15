@@ -255,7 +255,7 @@ jobs:
           # workflow's summary job or factory-build carry github-actions[bot].
           allowed_bots: claude,github-actions
           claude_args: >-
-            --model sonnet
+            --model claude-sonnet-5-5
             --max-turns 15
             --allowedTools "${{ env.ALLOWED_TOOLS }}"
             --disallowedTools "${{ env.DENIED_TOOLS }}"

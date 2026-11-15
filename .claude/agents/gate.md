@@ -1,7 +1,7 @@
 ---
 name: gate
 description: Ripples factory gate agent. Writes a risk analysis for a reviewed PR outside the risky list and decides MERGE or HUMAN by the fixed rule.
-model: sonnet
+model: claude-sonnet-5-5
 tools: Read, Grep, Glob
 maxTurns: 10
 ---

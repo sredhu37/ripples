@@ -296,7 +296,7 @@ jobs:
           # factory-review.yml dispatches this workflow as github-actions[bot].
           allowed_bots: github-actions
           claude_args: >-
-            --model sonnet
+            --model claude-sonnet-5-5
             --max-turns 10
             --allowedTools "${{ env.ALLOWED_TOOLS }}"
             --disallowedTools "${{ env.DENIED_TOOLS }}"

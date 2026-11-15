@@ -1,7 +1,7 @@
 ---
 name: ux-ui
 description: Ripples factory review agent for UX and UI. Checks friction, confusing screens, Ripples UX rules and what tools cannot see in WCAG.
-model: sonnet
+model: claude-sonnet-5-5
 tools: Read, Grep, Glob, WebFetch, WebSearch
 maxTurns: 15
 ---

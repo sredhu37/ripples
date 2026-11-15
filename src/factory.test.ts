@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import gatePaths from "../.github/gate-paths.txt?raw";
+import demoSkill from "../.claude/skills/demo/SKILL.md?raw";
 
 // The risky list from docs/factory.md, section Gate.
 const SPEC_RISKY_LIST = [
@@ -76,7 +77,16 @@ describe(".claude/agents", () => {
       for (const key of ["name", "description", "model", "tools"]) {
         expect(fields[key], key).toBeTruthy();
       }
+      expect(fields.model).toBe("claude-sonnet-5-5");
       expect(path.endsWith(`/${fields.name}.md`)).toBe(true);
     });
   }
+});
+
+describe(".claude/skills/demo", () => {
+  it("pins model to claude-haiku-5-5 with context fork", () => {
+    const fields = frontmatter(demoSkill);
+    expect(fields.model).toBe("claude-haiku-5-5");
+    expect(fields.context).toBe("fork");
+  });
 });

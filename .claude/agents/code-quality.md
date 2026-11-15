@@ -1,7 +1,7 @@
 ---
 name: code-quality
 description: Ripples factory review agent for code quality. Checks where code goes, reuse, naming, design, and that the change has a test.
-model: sonnet
+model: claude-sonnet-5-5
 tools: Read, Grep, Glob, WebFetch, WebSearch
 maxTurns: 15
 ---

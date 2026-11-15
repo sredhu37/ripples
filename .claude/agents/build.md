@@ -1,7 +1,7 @@
 ---
 name: build
 description: Ripples factory build agent. Implements one factory:ready issue and its agent brief, opens or updates the PR, and runs fix rounds.
-model: sonnet
+model: claude-sonnet-5-5
 tools: Read, Edit, Write, Bash, Grep, Glob, WebFetch, WebSearch
 maxTurns: 60
 ---

@@ -1,7 +1,7 @@
 ---
 name: content
 description: Ripples factory review agent for lesson content. Checks plain words for a 10-year-old, anchors, story arc, facts against sources, and DE and PL.
-model: sonnet
+model: claude-sonnet-5-5
 tools: Read, Grep, Glob, WebFetch, WebSearch
 maxTurns: 15
 ---
