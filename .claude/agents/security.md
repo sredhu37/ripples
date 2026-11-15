@@ -1,7 +1,7 @@
 ---
 name: security
 description: Ripples factory review agent for security. Checks private data in client code, unsafe input handling, prompt injection and app logic holes.
-model: sonnet
+model: claude-sonnet-5-5
 tools: Read, Grep, Glob, WebFetch, WebSearch
 maxTurns: 15
 ---

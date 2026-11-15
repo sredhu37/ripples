@@ -254,7 +254,19 @@ Shared scripts in `.github/scripts/`, for every factory workflow:
 | `gate-merge.sh`        | squash-merges a PR if its head is unchanged and checks are green                               | `FACTORY_TOKEN` (no agent)                  |
 | `pr-needs-human.sh`    | Telegram "Needs human" for a PR with the evidence video link                                   | `TELEGRAM_TOKEN` + chat id                  |
 
-**Claude account:** 2-week pilot on Sunny's Pro token (`CLAUDE_CODE_OAUTH_TOKEN`), Sonnet. Measure tokens per issue and how often Sunny is locked out, then choose an API key with a spend cap, a bigger plan, or Pro. Switch to an API key before porting to `repo-template`.
+**Claude account:** 2-week pilot on Sunny's Pro token (`CLAUDE_CODE_OAUTH_TOKEN`), Claude Sonnet 5.5. Measure tokens per issue and how often Sunny is locked out, then choose an API key with a spend cap, a bigger plan, or Pro. Switch to an API key before porting to `repo-template`.
+
+## Models
+
+([#190](https://github.com/sredhu37/ripples/issues/190))
+
+Exact model IDs pinned across factory agents, workflows and skills:
+
+| Where                                                                                            | Model               |
+| ------------------------------------------------------------------------------------------------ | ------------------- |
+| `.claude/agents/build.md`, `gate.md`, `code-quality.md`, `security.md`, `ux-ui.md`, `content.md` | `claude-sonnet-5-5` |
+| `--model` in `claude_args` of `factory-build.yml`, `factory-gate.yml`, `factory-review.yml`      | `claude-sonnet-5-5` |
+| `.claude/skills/demo/SKILL.md` (with `context: fork`)                                            | `claude-haiku-5-5`  |
 
 ## Identity, secrets and permissions
 

@@ -1,6 +1,8 @@
 ---
 name: demo
 description: Use after building or changing a feature, to record a video of it running locally so the user can review it fast.
+model: claude-haiku-5-5
+context: fork
 ---
 
 # Demo
