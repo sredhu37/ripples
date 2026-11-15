@@ -158,6 +158,7 @@ jobs:
     needs: [live-check, rollback-build, rollback-deploy]
     if: always() && needs.live-check.result == 'failure'
     runs-on: ubuntu-latest
+    environment: factory
     permissions:
       contents: read
     env:

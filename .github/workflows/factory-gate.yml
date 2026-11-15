@@ -172,6 +172,7 @@ jobs:
     if: needs.check.outputs.go == 'true' && needs.check.outputs.mode == 'gate' && needs.check.outputs.risky == '0'
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    environment: factory
     permissions:
       contents: read # checkouts; the agent gets this read-only token, no OIDC, so no push
       pull-requests: read # PR text and comments
@@ -320,6 +321,7 @@ jobs:
     if: always() && needs.check.outputs.go == 'true' && needs.check.outputs.mode == 'gate'
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    environment: factory
     permissions:
       contents: read # scripts
       issues: write # labels
@@ -424,6 +426,7 @@ jobs:
     if: needs.check.outputs.mode == 'approve' && (needs.check.outputs.go == 'true' || needs.check.outputs.tell == 'true')
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    environment: factory
     permissions:
       contents: read # scripts
       issues: write # labels

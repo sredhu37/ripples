@@ -43,6 +43,7 @@ jobs:
     if: github.event.schedule == '7 * * * *' || inputs.task == 'sweep' || inputs.task == 'all'
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    environment: factory
     # Two sweeps at once could dispatch the same issue twice.
     concurrency:
       group: factory-sweep-restart
@@ -137,6 +138,7 @@ jobs:
       (github.event.schedule == '7 * * * *' || inputs.task == 'reconcile' || inputs.task == 'all')
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    environment: factory
     concurrency:
       group: factory-board-reconcile
       cancel-in-progress: false
@@ -160,6 +162,7 @@ jobs:
       inputs.task == 'reminder' || inputs.task == 'all'
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    environment: factory
     permissions:
       contents: read # scripts
       issues: read # count factory:triage issues
