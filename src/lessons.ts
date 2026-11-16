@@ -269,6 +269,10 @@ export const LESSONS: LessonMeta[] = [
     title: { en: "Salaries and Assets", de: "Gehaelter und Vermoegen", pl: "Płace i aktywa" },
   },
   {
+    id: "centralbanks",
+    title: { en: "Central Banks", de: "Zentralbanken", pl: "Banki centralne" },
+  },
+  {
     id: "bailouts",
     title: {
       en: "Bank bailouts",
@@ -357,6 +361,7 @@ export const CURRICULUM_GROUPS: LessonGroup[] = [
       "capitalism",
       "communism",
       "powertriangle",
+      "centralbanks",
       "bailouts",
     ],
   },
