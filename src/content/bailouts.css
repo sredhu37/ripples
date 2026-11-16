@@ -1,0 +1,70 @@
+.bo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.bo-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  min-height: 130px;
+}
+
+.bo-domino {
+  width: 28px;
+  height: 80px;
+  border-radius: 6px;
+  border: 3px solid var(--ink);
+  background: #fff;
+  transform-origin: bottom right;
+  transition: transform 0.35s ease;
+}
+
+.bo-domino-bank {
+  background: #e3a91a;
+}
+
+.bo-domino-shop {
+  background: #7fb8d6;
+}
+
+.bo-fallen {
+  transform: rotate(80deg) translateX(10px);
+}
+
+.bo-wall {
+  width: 12px;
+  height: 120px;
+  border-radius: 4px;
+  background: #4a7a8c;
+  border: 3px solid var(--ink);
+}
+
+.bo-legend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.bo-status {
+  margin: 0;
+  text-align: center;
+  font-weight: 800;
+}
+
+.bo-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bo-domino {
+    transition: none;
+  }
+}

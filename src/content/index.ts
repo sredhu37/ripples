@@ -53,6 +53,7 @@ import { lesson as jobs } from "./jobs";
 import { lesson as humanedge } from "./humanedge";
 import { lesson as supply_demand } from "./supply_demand";
 import { lesson as scarcity_prices } from "./scarcity_prices";
+import { lesson as bailouts } from "./bailouts";
 import type { Lesson } from "../lesson/types";
 
 const ALL: Record<string, Lesson | undefined> = {
@@ -111,6 +112,7 @@ const ALL: Record<string, Lesson | undefined> = {
   supply_demand,
   scarcity_prices,
   centralbanks,
+  bailouts,
 };
 
 import { EVENT_SOURCES, MEANWHILE, meanwhileEvents } from "../timeline/meanwhile";

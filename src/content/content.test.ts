@@ -276,6 +276,7 @@ const SAVED_LESSON_ORDER = [
   "supply_demand",
   "scarcity_prices",
   "centralbanks",
+  "bailouts",
 ];
 
 describe("lesson order", () => {

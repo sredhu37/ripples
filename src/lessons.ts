@@ -272,6 +272,14 @@ export const LESSONS: LessonMeta[] = [
     id: "centralbanks",
     title: { en: "Central Banks", de: "Zentralbanken", pl: "Banki centralne" },
   },
+  {
+    id: "bailouts",
+    title: {
+      en: "Bank bailouts",
+      de: "Bankenrettung",
+      pl: "Ratowanie banków",
+    },
+  },
 ];
 
 export const LESSON_ORDER = LESSONS.map((l) => l.id);
@@ -354,6 +362,7 @@ export const CURRICULUM_GROUPS: LessonGroup[] = [
       "communism",
       "powertriangle",
       "centralbanks",
+      "bailouts",
     ],
   },
   {
