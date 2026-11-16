@@ -61,12 +61,6 @@
   background: #d9a15a;
 }
 
-.currencies-status {
-  margin: 0;
-  text-align: center;
-  font-weight: 800;
-}
-
 .currencies-actions {
   display: flex;
   justify-content: center;

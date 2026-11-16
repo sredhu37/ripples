@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckButton, Stage, ToyButton } from "../lesson/toolkit";
+import { ActionPrompt, CheckButton, Stage, ToyButton } from "../lesson/toolkit";
 import type { Lang } from "../progress";
 import { isFinished, nextStep, type VaultStep } from "./currencies.logic";
 import "./currencies.css";
@@ -98,9 +98,9 @@ export function VaultSwapToy({ lang, mode = "toy", onDone, onAnswer }: Props) {
           </div>
         </div>
       </Stage>
-      <p className="currencies-status" role="status">
+      <ActionPrompt lang={lang}>
         {step === null ? L(lang, DONE) : L(lang, PROMPTS[step])}
-      </p>
+      </ActionPrompt>
       <div className="currencies-actions">
         {step !== null ? (
           <ToyButton onClick={press} hint>
