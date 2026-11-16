@@ -20,6 +20,7 @@ test("centralbanks: say no to the mayor, then lend only against collateral", asy
   for (let i = 0; i < 3; i++) await page.getByRole("button", { name: "Say no" }).click();
   await expect(page.getByText("Bread: 10")).toBeVisible();
   await step();
+  await page.getByRole("button", { name: "Next: the loan window" }).click();
 
   // Round 2: the quiz unlocks only after every bank has an answer.
   const lend = page.getByRole("button", { name: "Lend coins" });

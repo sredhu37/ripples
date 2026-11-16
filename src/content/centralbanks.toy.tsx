@@ -25,7 +25,6 @@ function ShieldRound({ lang, onDone }: { lang: Lang; onDone: () => void }) {
   const answer = (print: boolean) => {
     if (print) setPrinted(printed + 1);
     setAsked(asked + 1);
-    if (asked + 1 >= ROUNDS) onDone();
   };
   return (
     <Stage
@@ -75,6 +74,16 @@ function ShieldRound({ lang, onDone }: { lang: Lang; onDone: () => void }) {
                 lang,
               )}
         </p>
+      )}
+      {asked >= ROUNDS && (
+        <ToyButton onClick={onDone} hint>
+          {alt(
+            "Next: the loan window",
+            "Weiter: der Kredit-Schalter",
+            "Dalej: okienko pożyczek",
+            lang,
+          )}
+        </ToyButton>
       )}
     </Stage>
   );
