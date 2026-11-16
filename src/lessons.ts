@@ -280,6 +280,10 @@ export const LESSONS: LessonMeta[] = [
       pl: "Ratowanie banków",
     },
   },
+  {
+    id: "currencies",
+    title: { en: "Currencies", de: "Währungen", pl: "Waluty" },
+  },
 ];
 
 export const LESSON_ORDER = LESSONS.map((l) => l.id);
@@ -336,6 +340,7 @@ export const CURRICULUM_GROUPS: LessonGroup[] = [
       "supplydemand",
       "commodities",
       "gold",
+      "currencies",
       "stocks",
       "bonds",
       "stocksvsbonds",
