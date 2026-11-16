@@ -153,9 +153,19 @@ export const lesson: Lesson = {
           "Bo wszyscy w mieście go przyjmują.",
         ),
         T(
+          "Bea takes a note because she trusts the next seller will take it too.",
+          "Bea nimmt einen Schein, weil sie glaubt, dass der nächste Verkäufer ihn auch nimmt.",
+          "Bea bierze banknot, bo wierzy, że następny sprzedawca też go weźmie.",
+        ),
+        T(
           "Money that works because people trust it is called *fiat money*.",
           "Geld, das funktioniert, weil Menschen ihm vertrauen, heißt *Fiatgeld*.",
           "Pieniądze, które działają, bo ludzie im ufają, to *pieniądz fiducjarny*.",
+        ),
+        T(
+          "The central bank is the big bank that looks after a country's money, like the vault.",
+          "Die Zentralbank ist die große Bank, die auf das Geld eines Landes aufpasst, wie der Tresor.",
+          "Bank centralny to wielki bank, który dba o pieniądze kraju, jak skarbiec.",
         ),
         T(
           "The central bank works to keep prices steady. That keeps the note's worth steady.",
@@ -253,14 +263,14 @@ export const lesson: Lesson = {
   ),
   realLife: {
     title: {
-      en: "The promise on a rupee note",
-      de: "Der Euro",
+      en: "The euro in Germany",
+      de: "Der Euro in Deutschland",
       pl: "Euro w Niemczech",
     },
     body: {
-      en: 'Look at a rupee note. It says: "I promise to pay the bearer the sum of ... rupees." The Reserve Bank of India makes that promise.',
+      en: "In Germany people pay with the euro. It started in 1999. The European Central Bank keeps prices steady.",
       de: "In Deutschland bezahlen wir mit dem Euro. Seit 1999 gibt es ihn. Die Europäische Zentralbank sorgt dafür, dass die Preise stabil bleiben.",
-      pl: "Nasz sąsiad, Niemcy, płaci euro. Euro powstało w 1999 roku. Europejski Bank Centralny dba o stabilne ceny.",
+      pl: "W Niemczech płacimy euro. Euro powstało w 1999 roku. Europejski Bank Centralny dba o stabilne ceny.",
     },
   },
   factCard: {
@@ -352,9 +362,9 @@ export const lesson: Lesson = {
         pl: "Stabilność cen to niska i stała inflacja, a nie ceny, które nigdy się nie zmieniają. Opowieść mówi, że bank centralny dba o stabilne ceny.",
       },
       {
-        en: "Finn, Bea, Sam and the vault are made up.",
-        de: "Finn, Bea, Sam und der Tresor sind erfunden.",
-        pl: "Finn, Bea, Sam i skarbiec są wymyśleni.",
+        en: "Finn, Bea and the vault are made up.",
+        de: "Finn, Bea und der Tresor sind erfunden.",
+        pl: "Finn, Bea i skarbiec są wymyśleni.",
       },
     ],
   },
