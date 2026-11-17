@@ -285,6 +285,14 @@ export const LESSONS: LessonMeta[] = [
     title: { en: "Currencies", de: "Währungen", pl: "Waluty" },
   },
   {
+    id: "deficit",
+    title: {
+      en: "Deficits and national debt",
+      de: "Defizit und Staatsschulden",
+      pl: "Deficyt i dług publiczny",
+    },
+  },
+  {
     id: "fx",
     title: { en: "Exchange rates", de: "Wechselkurse", pl: "Kursy walut" },
   },
@@ -373,6 +381,7 @@ export const CURRICULUM_GROUPS: LessonGroup[] = [
       "powertriangle",
       "centralbanks",
       "bailouts",
+      "deficit",
     ],
   },
   {
