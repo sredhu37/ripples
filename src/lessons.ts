@@ -284,6 +284,10 @@ export const LESSONS: LessonMeta[] = [
     id: "currencies",
     title: { en: "Currencies", de: "Währungen", pl: "Waluty" },
   },
+  {
+    id: "fx",
+    title: { en: "Exchange rates", de: "Wechselkurse", pl: "Kursy walut" },
+  },
 ];
 
 export const LESSON_ORDER = LESSONS.map((l) => l.id);
@@ -341,6 +345,7 @@ export const CURRICULUM_GROUPS: LessonGroup[] = [
       "commodities",
       "gold",
       "currencies",
+      "fx",
       "stocks",
       "bonds",
       "stocksvsbonds",

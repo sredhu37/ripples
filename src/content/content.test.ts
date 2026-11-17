@@ -278,6 +278,7 @@ const SAVED_LESSON_ORDER = [
   "centralbanks",
   "bailouts",
   "currencies",
+  "fx",
 ];
 
 describe("lesson order", () => {
