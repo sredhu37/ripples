@@ -284,6 +284,14 @@ export const LESSONS: LessonMeta[] = [
     id: "currencies",
     title: { en: "Currencies", de: "Währungen", pl: "Waluty" },
   },
+  {
+    id: "deficit",
+    title: {
+      en: "Deficits and national debt",
+      de: "Defizit und Staatsschulden",
+      pl: "Deficyt i dług publiczny",
+    },
+  },
 ];
 
 export const LESSON_ORDER = LESSONS.map((l) => l.id);
@@ -368,6 +376,7 @@ export const CURRICULUM_GROUPS: LessonGroup[] = [
       "powertriangle",
       "centralbanks",
       "bailouts",
+      "deficit",
     ],
   },
   {
