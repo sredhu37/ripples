@@ -23,6 +23,7 @@ name: factory-gate
 #                   pages.yml revert PR), every required check green (waits up to 20 minutes)
 #                   -> squash merge as sredhu37-bot, factory:done, board Done
 #     mode fix      Sunny commented, or requested changes, on a factory PR in factory:human
+#                   (in factory:in-review only a comment containing @build counts)
 #                   -> factory-build.yml fix round (issue, pr, human=<source>); the PR comes
 #                      back to factory:human, and the round does not count toward 5
 #

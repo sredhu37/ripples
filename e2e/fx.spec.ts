@@ -1,13 +1,14 @@
 import { expect, test } from "@playwright/test";
-import { LESSON_ORDER } from "../src/lessons";
 import { LABEL, seedProgress, steps } from "./evidence";
 
 test("fx: the same coins afford the toy on day 1 and come up short on day 2", async ({ page }) => {
   const step = await steps(page, "fx-toy");
-  await seedProgress(page, { lang: "en", badges: LESSON_ORDER.filter((id) => id !== "fx") });
+  await seedProgress(page, { lang: "en", badges: ["fx"] });
   await page.goto("./");
 
-  const stop = page.locator(".trail .stop-next button.place");
+  // A done stop holds still; the next stop nudges forever, so Playwright never sees it as stable.
+  const stop = page.locator(".trail .stop-done button.place");
+  await expect(stop).toHaveCount(1);
   await stop.scrollIntoViewIfNeeded();
   await stop.click();
   await expect(page.locator(".lesson-title")).toBeVisible();

@@ -18,7 +18,7 @@ name: factory-build
 #     finish:  as above, but a fix round that pushed no new commit -> factory:human
 #     A factory:ready issue whose branch already has an open PR (a paused fix round) runs as a fix round.
 #   workflow_dispatch with pr and human (Sunny's comment on a PR in Needs human, dispatched by factory-gate.yml)
-#     pickup:  the issue keeps factory:human; human is review:<id> or comment:<id> by sredhu37 on the PR
+#     pickup:  the issue keeps factory:human (or factory:in-review, for a comment with @build); human is review:<id> or comment:<id> by sredhu37 on the PR
 #     build:   same branch and PR; the prompt adds Sunny's comment: a question gets a reply, a change a commit
 #     finish:  always back to factory:human, board Needs human, Telegram (once HUMAN, stays HUMAN);
 #              no review round runs and none is counted
@@ -136,8 +136,9 @@ jobs:
           fi
           if [ -n "$HUMAN" ]; then
             # Fix round from Sunny's comment (factory-gate): the issue stays factory:human.
-            if [ "$human_label" != "true" ]; then
-              echo "::notice::#$ISSUE skipped: a fix round from Sunny's comment needs factory:human"
+            # factory:in-review is allowed too: factory-gate only dispatches it for a comment with @build.
+            if [ "$human_label" != "true" ] && [ "$in_review" != "true" ]; then
+              echo "::notice::#$ISSUE skipped: a fix round from Sunny's comment needs factory:human or factory:in-review"
               exit 0
             fi
             ready=false
