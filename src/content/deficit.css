@@ -1,0 +1,100 @@
+.deficit {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.deficit-year {
+  margin: 0 0 6px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.deficit-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.deficit-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.deficit-row-name {
+  flex: 0 0 90px;
+  text-align: right;
+  font-weight: 700;
+}
+
+.deficit-track {
+  display: flex;
+  flex: 1;
+  min-height: 34px;
+  border-radius: 10px;
+  border: 3px solid var(--ink);
+  background: #fff;
+  overflow: hidden;
+}
+
+.deficit-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border-right: 2px solid var(--ink);
+  transition: width 0.3s ease;
+}
+
+.deficit-seg:last-child {
+  border-right: none;
+}
+
+.deficit-seg-pot {
+  background: #a9d18e;
+}
+
+.deficit-seg-interest {
+  background: #f08a2e;
+}
+
+.deficit-seg-spend {
+  background: #7fb8d6;
+}
+
+.deficit-seg-gap {
+  background: #e06343;
+  color: #fff;
+}
+
+.deficit-seg-debt {
+  background: #8e6bbf;
+  color: #fff;
+}
+
+.deficit-empty {
+  align-self: center;
+  padding-left: 10px;
+  font-weight: 700;
+}
+
+.deficit-note,
+.deficit-status {
+  margin: 6px 0 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.deficit-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.deficit-actions {
+  display: flex;
+  justify-content: center;
+}
