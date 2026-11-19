@@ -175,14 +175,14 @@ export const lesson: Lesson = {
           "Ale co, jeśli wielu oszczędzających przyjdzie dokładnie tego samego dnia?",
         ),
         T(
-          "Some of the coins are with Bea, so the bank cannot give everything back at once.",
+          "Some of the coins are with Bea. So the bank cannot give everything back at once.",
           "Ein Teil der Münzen ist bei Bea. Die Bank kann nicht alles auf einmal zurückgeben.",
           "Część monet ma Bea, więc bank nie może oddać wszystkiego od razu.",
         ),
         T(
-          "When many savers want their coins back at the same time, it is called a *bank run*.",
+          "When many savers want their coins back at once, it is called a *bank run*.",
           "Wenn viele Sparer gleichzeitig ihre Münzen zurückwollen, nennt man das einen *Ansturm auf die Bank*.",
-          "Kiedy wielu klientów chce wypłacić monety w tym samym czasie, to zjawisko nazywa się *paniką bankową*.",
+          "Kiedy wielu klientów chce wypłacić monety naraz, to nazywa się *paniką bankową*.",
         ),
       ],
       RunDiagram,
@@ -197,7 +197,7 @@ export const lesson: Lesson = {
         ),
         T(
           "This is called *deposit protection*. If a bank ever fails, savers still get their money back, up to a limit.",
-          "Das heißt *Einlagensicherung*. Wenn eine Bank einmal pleitegeht, bekommen die Sparer ihr Geld trotzdem zurück, bis zu einer Grenze.",
+          "Das heißt *Einlagensicherung*. Wenn eine Bank pleitegeht, bekommen die Sparer ihr Geld trotzdem zurück, bis zu einer Grenze.",
           "Nazywa się to *ochroną depozytów*. Gdyby bank upadł, oszczędzający i tak odzyskają pieniądze, do określonego limitu.",
         ),
         T(
@@ -277,9 +277,9 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "Set the bank so Bea gets her oven AND a bank run still works. Test it with Bank run. Then press Check.",
-        "Stelle die Bank so ein, dass Bea ihren Ofen bekommt UND ein Ansturm trotzdem klappt. Teste es mit Ansturm. Drücke dann Prüfen.",
-        "Ustaw bank tak, aby Bea dostała piec ORAZ aby bank wytrzymał panikę bankową. Przetestuj to przyciskiem Panika bankowa, a potem naciśnij Sprawdź.",
+        "Set the bank so Bea gets her oven AND a bank run still works. Try Bank run, then press Check.",
+        "Stelle die Bank so ein, dass Bea ihren Ofen bekommt UND ein Ansturm klappt. Teste mit Ansturm, dann Prüfen.",
+        "Ustaw bank tak, aby Bea dostała piec ORAZ bank wytrzymał panikę bankową. Przetestuj to przyciskiem Panika bankowa, potem naciśnij Sprawdź.",
       ),
       Widget: BalanceWidget,
       hint: T(

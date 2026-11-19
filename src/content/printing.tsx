@@ -40,7 +40,7 @@ export const lesson: Lesson = {
           "Miasto potrzebuje nowego mostu na rzece.",
         ),
         T(
-          "But there is a problem. The town chest is empty, so there are no coins left to pay for the bridge.",
+          "But there is a problem. The town chest is empty. There are no coins left to pay for the bridge.",
           "Aber es gibt ein Problem. Die Stadtkasse ist leer, also sind keine Münzen mehr da, um die Brücke zu bezahlen.",
           "Lecz pojawił się problem. Miejska skrzynia jest pusta, więc nie ma monet, by zapłacić za most.",
         ),
@@ -55,7 +55,7 @@ export const lesson: Lesson = {
           "Wtedy Moss wpada na pomysł. Ma prasę do monet. To maszyna, która wytłacza nowe monety.",
         ),
         T(
-          "He thinks: I will make lots and lots of new coins, and then the whole town will be rich!",
+          "He thinks: I will make lots of new coins. Then the whole town will be rich!",
           "Er denkt: Ich mache ganz viele neue Münzen, und dann ist die ganze Stadt reich!",
           "Myśli: Zrobię mnóstwo nowych monet i całe miasto będzie bogate!",
         ),
@@ -193,9 +193,9 @@ export const lesson: Lesson = {
           "W prawdziwym życiu specjalny bank dba o pieniądze w kraju. Nazywa się to *bank centralny*.",
         ),
         T(
-          "Its main job is to keep prices steady, so that your coins buy about the same tomorrow.",
-          "Ihre wichtigste Aufgabe ist es, die Preise stabil zu halten, damit deine Münzen morgen ungefähr so viel kaufen wie heute.",
-          "Jego głównym zadaniem jest dbanie o stabilność cen, aby twoje monety jutro kupiły mniej więcej tyle samo co dziś.",
+          "Its main job is to keep prices steady. That way, your coins buy about the same tomorrow.",
+          "Ihre wichtigste Aufgabe ist es, die Preise stabil zu halten. So kaufen deine Münzen morgen ungefähr so viel wie heute.",
+          "Jego głównym zadaniem jest dbanie o stabilność cen. Dzięki temu twoje monety jutro kupią mniej więcej tyle samo co dziś.",
         ),
       ],
       FineDiagram,

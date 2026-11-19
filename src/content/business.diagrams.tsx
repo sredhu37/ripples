@@ -571,7 +571,7 @@ export function OwnerRiskSummaryDiagram({ lang, step }: DiagramProps) {
           ✓ {txt("Guaranteed wage", "Sicherer Lohn", "Pewna wypłata", lang)}
         </text>
         <text x="110" y="175" textAnchor="middle" fontSize="12" fill="#047857">
-          ✓ {txt("No risk on rainy days", "Kein Risiko bei Regen", "Brak ryzyka w deszcz", lang)}
+          ✓ {txt("No risk in rain", "Kein Risiko bei Regen", "Brak ryzyka w deszcz", lang)}
         </text>
       </Pop>
 

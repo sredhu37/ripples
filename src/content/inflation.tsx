@@ -106,8 +106,8 @@ export const lesson: Lesson = {
           "Ale sprzedawca może przygotować tylko ograniczoną ilość lodów.",
         ),
         T(
-          "When lots of people want something and there is only so much of it, the seller can ask for more coins.",
-          "Wenn viele Leute etwas wollen und es nur so viel davon gibt, kann der Verkäufer mehr Münzen verlangen.",
+          "Lots of people want something, but there is only so much of it. So the seller can ask for more coins.",
+          "Viele Leute wollen etwas, aber es gibt nur so viel davon. Dann kann der Verkäufer mehr Münzen verlangen.",
           "Kiedy wielu ludzi czegoś pragnie, a towaru jest mało, sprzedawca może poprosić o więcej monet.",
         ),
       ],
@@ -243,9 +243,9 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "At the start, 10 coins buy 10 scoops. Set the time machine so that 10 coins buy only half as many. Press Check when you see it.",
-        "Am Anfang kaufen 10 Münzen 10 Kugeln. Stelle die Zeitmaschine so ein, dass 10 Münzen nur halb so viele kaufen. Drücke Prüfen, wenn du es siehst.",
-        "Na początku 10 monet kupuje 10 gałek. Ustaw maszynę czasu tak, aby 10 monet kupowało tylko połowę z tego. Naciśnij Sprawdź, gdy to zobaczysz.",
+        "At the start, 10 coins buy 10 scoops. Set the time machine so they buy half as many. Press Check.",
+        "Am Anfang kaufen 10 Münzen 10 Kugeln. Stelle die Zeitmaschine so ein, dass sie halb so viele kaufen. Drücke Prüfen.",
+        "Na początku 10 monet kupuje 10 gałek. Ustaw maszynę czasu tak, aby kupowało tylko połowę. Naciśnij Sprawdź.",
       ),
       Widget: HalfScoopsWidget,
       hint: T(
@@ -257,9 +257,9 @@ export const lesson: Lesson = {
     {
       kind: "choice",
       prompt: T(
-        "The bank gives Finn 2 coins of interest for every 100 coins he saves. But prices rise by 5 coins out of 100. After a year, what is true?",
-        "Die Bank gibt Finn für je 100 gesparte Münzen 2 Münzen Zinsen. Aber die Preise steigen um 5 von 100. Was stimmt nach einem Jahr?",
-        "Bank daje Finnowi 2 monety odsetek za każde 100 zaoszczędzonych monet. Lecz ceny rosną o 5 na 100. Co jest prawdą po roku?",
+        "Finn earns 2 coins interest per 100 saved. Prices rise 5 coins per 100. What is true after a year?",
+        "Finn bekommt für 100 gesparte Münzen 2 Zinsen. Die Preise steigen um 5 von 100. Was stimmt nach einem Jahr?",
+        "Finn dostaje 2 monety odsetek za każde 100 zaoszczędzonych. Ceny rosną o 5 na 100. Co jest prawdą po roku?",
       ),
       options: [
         {
