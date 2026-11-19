@@ -1,0 +1,19 @@
+# Served by web/Dockerfile. The official nginx image runs envsubst over this file at start,
+# so ${BACKEND_URL} comes from the container's environment (see web/.env.example).
+server {
+    listen 8080;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # The browser calls /api on the same origin. nginx forwards it to the backend.
+    location /api/ {
+        proxy_pass ${BACKEND_URL};
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}

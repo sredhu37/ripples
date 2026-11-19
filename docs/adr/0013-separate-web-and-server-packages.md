@@ -13,7 +13,7 @@ The app and the API lived in one npm package. The backend image needs only the A
 1. `web/` (React, Vite, `web/e2e/`) and `server/` (Hono API) each have their own `package.json` and `package-lock.json`. They share no code.
 2. The repo root keeps docs, CI, `scripts/` and the repo-wide tools (oxlint, oxfmt). Its `package.json` forwards `test`, `typecheck`, `build` and `dev` to the two packages.
 3. The API serves the built app only when `DIST_DIR` is set. The backend image does not set it, so it serves `/api` only.
-4. Each Docker image builds from the repo root and copies only its own folder.
+4. Each package has its own Dockerfile and builds from its own folder. The frontend image forwards `/api` to `BACKEND_URL`.
 
 ## Consequences
 
