@@ -3,10 +3,10 @@ import type { DiagramProps } from "../lesson/types";
 export function MughalPavilionDiagram({ lang, step }: DiagramProps) {
   const label =
     lang === "pl"
-      ? "Pawilon z czerwonego piaskowca i ogrody"
+      ? "Pawilon z czerwonego piaskowca"
       : lang === "de"
-        ? "Roter Sandstein-Pavillon und Gärten"
-        : "Red Sandstone Pavilion and Gardens";
+        ? "Roter Sandstein-Pavillon"
+        : "Red Sandstone Pavilion";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Mughal Pavilion Architecture">
@@ -46,17 +46,17 @@ export function MughalPavilionDiagram({ lang, step }: DiagramProps) {
 export function AkbarThroneDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Cesarz Akbar w Fatehpur Sikri"
+      ? "Akbar w Fatehpur Sikri"
       : lang === "de"
-        ? "Kaiser Akbar in Fatehpur Sikri"
-        : "Emperor Akbar at Fatehpur Sikri";
+        ? "Akbar in Fatehpur Sikri"
+        : "Akbar at Fatehpur Sikri";
 
   const sub =
     lang === "pl"
-      ? "Mądrość i uważne słuchanie prowadzą sprawiedliwego władcę"
+      ? "Sprawiedliwy władca słucha"
       : lang === "de"
-        ? "Weisheit und Zuhören leiten einen gerechten Herrscher"
-        : "Wisdom and listening guide a fair ruler";
+        ? "Gerechte Herrscher hören zu"
+        : "Fair rulers listen";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Emperor Akbar Seeking Wisdom">
@@ -94,8 +94,8 @@ export function IbadatKhanaDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Ibadat Chana: Dom Mądrości"
       : lang === "de"
-        ? "Ibadat Khana: Das Haus der Weisheit"
-        : "Ibadat Khana: The House of Wisdom";
+        ? "Ibadat Khana: Weisheitshaus"
+        : "Ibadat Khana: Wisdom House";
 
   const tableLabel =
     lang === "pl" ? "Wspólny dialog" : lang === "de" ? "Gemeinsamer Dialog" : "Shared Dialogue";
@@ -107,10 +107,10 @@ export function IbadatKhanaDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Uczeni wszystkich wyznań dyskutują o etyce i sprawiedliwości"
+      ? "Uczeni wszystkich wyznań"
       : lang === "de"
-        ? "Gelehrte aller Glaubensrichtungen im Ethik-Dialog"
-        : "Scholars of all faiths discussing ethics";
+        ? "Gelehrte aller Glaubensrichtungen"
+        : "Scholars of all faiths";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Ibadat Khana Dialogue Table">
@@ -170,10 +170,10 @@ export function GrandTrunkRoadDiagram({ lang, step }: DiagramProps) {
     lang === "pl" ? "Przełęcz Peszawaru" : lang === "de" ? "Peshawar-Pass" : "Peshawar Pass";
   const sub =
     lang === "pl"
-      ? "Karawany, karawanseraje, studnie i bezpieczny szlak handlowy"
+      ? "Karawany, karawanseraje, studnie"
       : lang === "de"
-        ? "Karawanen, Rasthäuser, Brunnen und sichere Wege"
-        : "Caravans, rest stops, wells, and secure travel";
+        ? "Karawanen, Rasthäuser, Brunnen"
+        : "Caravans, rest stops, wells";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="The Grand Trunk Road">
@@ -210,7 +210,7 @@ export function GrandTrunkRoadDiagram({ lang, step }: DiagramProps) {
 export function CulturalSynthesisDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Synteza: Różnorodne tradycje łączą się"
+      ? "Synteza: tradycje się łączą"
       : lang === "de"
         ? "Verschmelzung: Traditionen vereinen sich"
         : "Synthesis: Diverse Traditions Unite";
@@ -228,10 +228,10 @@ export function CulturalSynthesisDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Tolerancja i otwartość przyniosły trwały dobrobyt milionom ludzi"
+      ? "Tolerancja daje trwały dobrobyt"
       : lang === "de"
-        ? "Toleranz brachte Millionen Menschen Wohlstand"
-        : "Tolerance built lasting prosperity for millions";
+        ? "Toleranz bringt dauerhaften Wohlstand"
+        : "Tolerance builds lasting prosperity";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Cultural Synthesis">

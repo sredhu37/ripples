@@ -3,20 +3,20 @@ import type { DiagramProps } from "../lesson/types";
 export function CompetingFleetsDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Europa w 1914 roku: Wyścig zbrojeń"
+      ? "Europa 1914: wyścig zbrojeń"
       : lang === "de"
-        ? "Europa im Jahr 1914: Das Wettruezten"
-        : "Europe in 1914: The Arms Race";
+        ? "Europa 1914: Wettruesten"
+        : "Europe 1914: Arms Race";
 
   const ships = lang === "pl" ? "Pancerniki" : lang === "de" ? "Schlachtschiffe" : "Battleships";
   const artillery = lang === "pl" ? "Artyleria" : lang === "de" ? "Artillerie" : "Artillery";
 
   const sub =
     lang === "pl"
-      ? "Państwa budowały potężną broń, wierząc, że siła zapewnia bezpieczeństwo"
+      ? "Broń miała dać bezpieczeństwo"
       : lang === "de"
-        ? "Staaten bauten riesige Waffen im Glauben, Staerke bedeute Sicherheit"
-        : "Nations built massive weapons, believing strength meant safety";
+        ? "Waffen versprachen Sicherheit"
+        : "Weapons promised safety";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Competing Fleets and Armies">
@@ -82,10 +82,10 @@ export function AllianceBlocksDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Tajne pakty o wzajemnej obronie stworzyły pułapkę wzajemnych powiązań"
+      ? "Tajne pakty łączyły państwa"
       : lang === "de"
-        ? "Geheime Vertraege bildeten ein Netz gegenseitiger Abhaengigkeiten"
-        : "Secret mutual defense treaties formed an interconnected trap";
+        ? "Geheime Vertraege verbanden Staaten"
+        : "Secret treaties linked nations";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Two Rigid Alliance Blocs">
@@ -161,14 +161,14 @@ export function DominoTumbleDiagram({ lang, step }: DiagramProps) {
       ? "Kaskada domina (sierpień 1914)"
       : lang === "de"
         ? "Die Domino-Kettenreaktion (August 1914)"
-        : "The Domino Cascade (August 1914)";
+        : "Domino Cascade: August 1914";
 
   const sub =
     lang === "pl"
-      ? "Jedna iskra uruchomiła kolejowe plany mobilizacyjne w całej Europie"
+      ? "Jedna iskra, Europa mobilizuje"
       : lang === "de"
-        ? "Ein Funke loeste Eisenbahn-Mobilmachungen in ganz Europa aus"
-        : "One spark caused railway mobilization orders across Europe";
+        ? "Ein Funke, Europa mobilisiert"
+        : "One spark, Europe mobilizes";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Domino Chain Reaction">
@@ -259,10 +259,10 @@ export function RuinedBridgeArmisticeDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Działa umilkły, pozostawiając zrujnowane pola i tęsknotę za trwałym pokojem"
+      ? "Ciche działa, puste pola"
       : lang === "de"
-        ? "Die Waffen schwiegen, zurueck blieben zerstoerte Felder und Sehnsucht nach Frieden"
-        : "The guns fell silent, leaving empty fields and a yearning for peace";
+        ? "Stille Waffen, leere Felder"
+        : "Silent guns, empty fields";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="11 November 1918 Armistice">
@@ -299,16 +299,16 @@ export function LeagueOfNationsGenevaDiagram({ lang, step }: DiagramProps) {
       ? "Liga Narodów w Genewie"
       : lang === "de"
         ? "Der Voelkerbund in Genf"
-        : "The League of Nations (Voelkerbund)";
+        : "The League of Nations";
 
   const tableLabel = lang === "pl" ? "Genewa" : lang === "de" ? "Genf" : "Geneva";
 
   const sub =
     lang === "pl"
-      ? "Zastąpienie tajnych pułapek wojskowych otwartym dialogiem dyplomatycznym"
+      ? "Rozmowy zamiast tajnych paktów"
       : lang === "de"
-        ? "Gespraeche am Verhandlungstisch statt geheimer Abhaengigkeiten"
-        : "Replacing secret military traps with open dialogue";
+        ? "Gespraeche statt Geheimbuendnisse"
+        : "Open talks, not traps";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="League of Nations in Geneva">
