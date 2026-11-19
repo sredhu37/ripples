@@ -57,6 +57,7 @@ import { lesson as bailouts } from "./bailouts";
 import { lesson as currencies } from "./currencies";
 import { lesson as deficit } from "./deficit";
 import { lesson as fx } from "./fx";
+import { lesson as gdp } from "./gdp";
 import type { Lesson } from "../lesson/types";
 
 const ALL: Record<string, Lesson | undefined> = {
@@ -119,6 +120,7 @@ const ALL: Record<string, Lesson | undefined> = {
   currencies,
   deficit,
   fx,
+  gdp,
 };
 
 import { EVENT_SOURCES, MEANWHILE, meanwhileEvents } from "../timeline/meanwhile";

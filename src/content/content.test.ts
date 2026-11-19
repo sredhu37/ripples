@@ -280,6 +280,7 @@ const SAVED_LESSON_ORDER = [
   "currencies",
   "deficit",
   "fx",
+  "gdp",
 ];
 
 describe("lesson order", () => {
