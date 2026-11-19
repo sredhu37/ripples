@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CheckButton, Slider, Stage, ToyButton } from "../lesson/toolkit";
 import type { Lang } from "../progress";
 import { IceCreamCart, RainCloudIcon, SunIcon } from "./business.diagrams";
@@ -18,10 +18,6 @@ export function BusinessCartToy({ lang, onDone, isWidget, onWidgetAnswer }: Busi
   const [weather, setWeather] = useState<"sunny" | "rainy">("sunny");
   const [hasHelper, setHasHelper] = useState<boolean>(true);
   const [scoops, setScoops] = useState<number>(20);
-
-  useEffect(() => {
-    onDone?.();
-  }, [onDone]);
 
   // If rainy, scoops sold is always 0.
   const actualScoops = weather === "sunny" ? scoops : 0;
