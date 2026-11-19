@@ -34,7 +34,7 @@ for (const id of LESSON_IDS) {
       await step();
 
       // Walk the story until the toy shows up.
-      const toy = page.locator(".lesson-body .stage-wrap");
+      const toy = page.locator(".lesson-body .stage-wrap").first();
       const next = page.getByRole("button", { name: LABEL.next[lang], exact: true });
       let clicks = 0;
       while ((await toy.count()) === 0) {
@@ -47,7 +47,7 @@ for (const id of LESSON_IDS) {
 
       // Toy screen: the quiz stays locked until the child plays.
       await expect(toy).toBeVisible();
-      await expect(page.locator(".lesson-body .row.nav .btn")).toBeDisabled();
+      await expect(page.locator(".lesson-body .row.nav .btn:not(.btn-toy)")).toBeDisabled();
       expect(clicks).toBeGreaterThan(1);
     });
   }
