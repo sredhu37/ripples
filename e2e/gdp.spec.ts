@@ -42,6 +42,7 @@ test("gdp: selling moves the bar, giving bread away leaves it still", async ({ p
   await page.getByRole("button", { name: "Give the bread away" }).click();
   await expect(page.getByText("GDP of the town: 10 coins")).toBeVisible();
   await expect(page.getByRole("status")).toContainText("Bread given away");
+  await expect(page.getByRole("button", { name: "Sell the bread again" })).toBeVisible();
 
   // More bread given away: the bar stays where it was.
   await bread.fill("9");

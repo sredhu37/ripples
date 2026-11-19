@@ -57,9 +57,9 @@ export const lesson: Lesson = {
           "Sam sprzedaje 2 pary butów po 4 monety. To też 8 monet.",
         ),
         T(
-          "So Finn made 6 coins, Bea made 8 and Sam made 8.",
-          "Also hat Finn 6 Münzen gemacht, Bea 8 und Sam 8.",
-          "Finn zrobił więc 6 monet, Bea 8 i Sam 8.",
+          "So Finn's fish are worth 6 coins, Bea's bread 8 and Sam's shoes 8.",
+          "Finns Fische sind also 6 Münzen wert, Beas Brot 8 und Sams Schuhe 8.",
+          "Ryby Finna są więc warte 6 monet, chleb Bei 8 i buty Sama 8.",
         ),
       ],
       ThreeMakersDiagram,
@@ -257,7 +257,7 @@ export const lesson: Lesson = {
       "W Polsce PKB liczy GUS",
     ),
     body: T(
-      "In India, the National Statistics Office prepares the national accounts. It is part of the Ministry of Statistics. GDP is one of the numbers in these accounts.",
+      "In India, the National Statistics Office prepares the national accounts. It is part of the Ministry of Statistics.",
       "Das Statistische Bundesamt (Destatis) berechnet das Bruttoinlandsprodukt. Es tut das jedes Vierteljahr neu. Das ist dieselbe Summe wie in Ripple Town.",
       "Główny Urząd Statystyczny (GUS) publikuje szacunki PKB. Najpierw podaje szybki szacunek. Później poprawia go dokładniejszymi danymi.",
     ),

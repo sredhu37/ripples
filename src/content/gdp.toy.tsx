@@ -103,7 +103,9 @@ export function GdpToy({ lang, mode = "toy", onDone, onAnswer }: Props) {
           onChange={changeBread}
         />
         <ToyButton pressed={give} onClick={() => setGive(!give)}>
-          {L(lang, "Give the bread away", "Brot verschenken", "Rozdaj chleb")}
+          {give
+            ? L(lang, "Sell the bread again", "Brot wieder verkaufen", "Sprzedaj chleb znowu")
+            : L(lang, "Give the bread away", "Brot verschenken", "Rozdaj chleb")}
         </ToyButton>
         <p className="gdp-status" role="status">
           {give
