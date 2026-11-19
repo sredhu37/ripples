@@ -298,8 +298,8 @@ export const lesson: Lesson = {
           "To jest bank dla banków. Nazywa się *bank centralny*.",
         ),
         T(
-          "The central bank also looks after the money of the whole country, even the printing of the notes.",
-          "Die Zentralbank kümmert sich auch um das Geld des ganzen Landes, sogar um das Drucken der Scheine.",
+          "The central bank also looks after the money of the whole country. It even prints the notes.",
+          "Die Zentralbank kümmert sich auch um das Geld des ganzen Landes. Sie druckt sogar die Scheine.",
           "Bank centralny dba również o pieniądze w całym kraju, a nawet o drukowanie banknotów.",
         ),
       ],
@@ -324,7 +324,7 @@ export const lesson: Lesson = {
           "Wszystkie inne banki uważnie obserwują tę stopę.",
         ),
         T(
-          "When the key rate moves, the interest rates for loans and for saving usually move the same way.",
+          "When the key rate moves, interest on loans and saving usually moves too.",
           "Wenn sich der Leitzins bewegt, ziehen die Zinsen für Kredite und fürs Sparen meistens mit.",
           "Gdy główna stopa się zmienia, oprocentowanie kredytów i oszczędności zazwyczaj podąża w tę samą stronę.",
         ),
@@ -394,8 +394,8 @@ export const lesson: Lesson = {
           "Jest jednak pewien haczyk: stopy procentowe działają powoli.",
         ),
         T(
-          "After the central bank turns the dial, it can take many months until people in town feel it.",
-          "Wenn die Zentralbank am Regler dreht, kann es viele Monate dauern, bis die Leute in der Stadt es spüren.",
+          "The central bank turns the dial. It can take many months until people feel it.",
+          "Die Zentralbank dreht am Regler. Es kann viele Monate dauern, bis die Leute in der Stadt es spüren.",
           "Gdy bank centralny przestawia wskaźnik, może minąć wiele miesięcy, zanim mieszkańcy to odczują.",
         ),
         T(
@@ -482,8 +482,8 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "The town is too hot. Set the key rate so it becomes just right. Wait and watch the gauge, then press Check.",
-        "Die Stadt ist zu heiß. Stelle den Leitzins so ein, dass sie genau richtig wird. Warte und schau auf die Anzeige. Drücke dann Prüfen.",
+        "The town is too hot. Make it just right with the key rate. Wait, watch the gauge, press Check.",
+        "Die Stadt ist zu heiß. Mach sie mit dem Leitzins genau richtig. Warte, schau auf die Anzeige, drücke Prüfen.",
         "Miasto jest zbyt rozgrzane. Ustaw stopę tak, aby było w sam raz. Poczekaj i obserwuj wskaźnik, a potem naciśnij Sprawdź.",
       ),
       Widget: CoolDownWidget,

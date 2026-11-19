@@ -63,7 +63,7 @@ export const lesson: Lesson = {
           "W sobotę park miejski był pełen słońca i bawiących się dzieci.",
         ),
         T(
-          "To scoop quickly, Finn hired his friend Leo as an *employee* for 2 coins an hour.",
+          "Finn hired his friend Leo as a scooping *employee* for 2 coins an hour.",
           "Damit es schnell geht, stellte Finn Leo als *Angestellten* für 2 Münzen pro Stunde ein.",
           "Aby szybko nakładać lody, Finn zatrudnił Leo jako *pracownika* za 2 monety na godzinę.",
         ),
@@ -124,7 +124,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "Even with zero sales, Finn still had to pay Leo his promised 4 coins of wages.",
+          "Even with zero sales, Finn still had to pay Leo his 4 coins of wages.",
           "Trotz null Verkäufen musste Finn Leo seinen versprochenen Lohn von 4 Münzen zahlen.",
           "Mimo braku sprzedaży Finn musiał wypłacić Leo obiecane 4 monety pensji.",
         ),
@@ -145,7 +145,7 @@ export const lesson: Lesson = {
           "Pewny *pracownik* otrzymuje stałą pensję w słońcu i deszczu.",
         ),
         T(
-          "An *owner* carries the risk of a *loss*, but enjoys the *profit* when things go well!",
+          "An *owner* carries the risk of a *loss*. But when things go well, he enjoys the *profit*!",
           "Ein *Inhaber* trägt das Risiko für einen *Verlust*, genießt aber den *Gewinn*!",
           "Śmiały *właściciel* ponosi ryzyko na wypadek *straty*, lecz zatrzymuje *zysk*, gdy świeci słońce!",
         ),
@@ -188,7 +188,7 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "Leo is an employee with guaranteed pay, while Finn is the owner who carries the risk of loss.",
+            "Leo is an employee with guaranteed pay, but Finn the owner takes the risk.",
             "Leo ist Angestellter mit festem Lohn, während Finn als Inhaber das Verlustrisiko trägt.",
             "Leo jest pracownikiem z pewną pensją, a Finn jako właściciel ponosi ryzyko straty.",
           ),
@@ -211,7 +211,7 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "Set the cart to a sunny day with helper Leo and sell enough scoops to make at least 10 coins of profit!",
+        "Set the cart to a sunny day with helper Leo. Sell scoops to make at least 10 coins of profit!",
         "Stelle den Wagen auf einen sonnigen Tag mit Helfer Leo und verkaufe genug Kugeln für mindestens 10 Münzen Gewinn!",
         "Ustaw wózek na słoneczny dzień z pomocnikiem Leo i sprzedaj dość gałek, by osiągnąć co najmniej 10 monet zysku!",
       ),
