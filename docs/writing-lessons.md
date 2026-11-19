@@ -32,7 +32,7 @@ Prefer `animatedBeat(lines, Diagram, mood?)` from `src/lesson/toolkit.tsx` over 
 9. **Fact card:** at least 5 claims, each with an https source you actually opened and that supports the claim: official or institutional sources first (ECB, Bundesbank, Destatis, BMF, Bundesregierung, Verbraucherzentrale, Fed or Bank of England explainers, university or encyclopedia pages). For every simplification the lesson makes, add a line in `simplified` saying what was simplified and why it is fair. If a source cannot be opened or does not say it, replace it. Do not cite from memory. English only.
 10. **No product or brand advice.** Never name a specific bank or financial product as a recommendation. Nothing the child could read as investment advice.
 11. **Physical anchor:** before any technical or economic concept, anchor it in an everyday object or kid activity (pizza slices, sneaker drops, lemonade, a gaming PC build, dominoes, a light switch). Use direct, concrete, everyday words in all three languages.
-12. **Length caps:**
+12. **Length caps** (CI checks all four in `src/content/content.test.ts`; lessons on `LEGACY_LESSON_IDS` are exempt until rewritten):
     - Story sentences: at most 15 words.
     - Diagram labels and badges: at most 4 words each, in every language. Icons and arrows carry the meaning; a diagram must lower reading effort, not add to it.
     - Question prompts: at most 20 words, clear and conversational.

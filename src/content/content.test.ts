@@ -339,6 +339,126 @@ describe("content count helpers", () => {
 /* "No Bartek" is a rule for all Polish content. */
 const allLessons: Lesson[] = LESSONS.filter((m) => hasLesson(m.id)).map((m) => getLesson(m.id)!);
 
+function sentenceViolations(l: Lesson): string[] {
+  const out: string[] = [];
+  l.story.forEach((b, i) =>
+    (b.lines ?? [b.text]).forEach((line, j) =>
+      LANGS.forEach((lang) =>
+        sentences(line[lang]).forEach((s) => {
+          const n = words(s).length;
+          if (n > 15) out.push(`${l.id} story ${i + 1} line ${j + 1} ${lang} (${n} words): ${s}`);
+        }),
+      ),
+    ),
+  );
+  return out;
+}
+
+function promptViolations(l: Lesson): string[] {
+  const out: string[] = [];
+  l.questions.forEach((q, i) =>
+    LANGS.forEach((lang) => {
+      const n = words(q.prompt[lang]).length;
+      if (n > 20) out.push(`${l.id} q${i + 1} ${lang} (${n} words): ${q.prompt[lang]}`);
+    }),
+  );
+  return out;
+}
+
+function optionViolations(l: Lesson): string[] {
+  const out: string[] = [];
+  l.questions.forEach((q, i) => {
+    if (q.kind !== "choice") return;
+    q.options.forEach((o, k) =>
+      LANGS.forEach((lang) => {
+        const n = words(o.text[lang]).length;
+        if (n >= 15)
+          out.push(`${l.id} q${i + 1} option ${k + 1} ${lang} (${n} words): ${o.text[lang]}`);
+      }),
+    );
+  });
+  return out;
+}
+
+function labelViolations(l: Lesson): string[] {
+  return diagramLabels(l)
+    .filter((x) => words(x.text).length > 4)
+    .map((x) => `${l.id} ${x.where} ${x.lang} (${words(x.text).length} words): ${x.text}`);
+}
+
+function capViolations(l: Lesson): string[] {
+  return [
+    ...sentenceViolations(l),
+    ...promptViolations(l),
+    ...optionViolations(l),
+    ...labelViolations(l),
+  ];
+}
+
+/*
+ * Length caps from docs/writing-lessons.md rule 12. Lessons on this list broke a cap when the
+ * tests were added (#227) and are exempt until they are rewritten (#187). Remove an id when its
+ * lesson is clean: a clean lesson on the list fails the test below. Delete the list when empty.
+ */
+const LEGACY_LESSON_IDS: string[] = [
+  "work",
+  "savings",
+  "business",
+  "equity",
+  "loans",
+  "banks",
+  "interest",
+  "taxes",
+  "inflation",
+  "printing",
+  "rates",
+  "profit",
+  "sales",
+  "ticketsize",
+  "marketshare",
+  "competition",
+  "marketing",
+  "hiring",
+  "scale",
+  "supplydemand",
+  "commodities",
+  "gold",
+  "stocks",
+  "bonds",
+  "stocksvsbonds",
+  "derivatives",
+  "philanthropy",
+  "whygovernment",
+  "elections",
+  "democracy",
+  "monarchy",
+  "dictatorship",
+  "capitalism",
+  "communism",
+  "powertriangle",
+  "mughals",
+  "spicetrade",
+  "britishinindia",
+  "independence",
+  "ww1",
+  "ww2",
+  "rebuilding",
+  "whyhistory",
+  "tools",
+  "massproduction",
+  "computers",
+  "internet",
+  "automation",
+  "ai",
+  "jobs",
+  "humanedge",
+  "supply_demand",
+  "scarcity_prices",
+  "currencies",
+];
+const legacyIds = new Set(LEGACY_LESSON_IDS);
+const cappedLessons = allLessons.filter((l) => !legacyIds.has(l.id));
+
 describe("content counts", () => {
   it("never uses the name Bartek in Polish content, diagrams included", () => {
     const hits: string[] = [];
@@ -349,4 +469,81 @@ describe("content counts", () => {
     }
     expect(hits).toEqual([]);
   }, 120_000);
+});
+
+describe("length caps", () => {
+  it("keeps story sentences at 15 words or fewer", () => {
+    expect(cappedLessons.flatMap(sentenceViolations)).toEqual([]);
+  });
+
+  it("keeps question prompts at 20 words or fewer", () => {
+    expect(cappedLessons.flatMap(promptViolations)).toEqual([]);
+  });
+
+  it("keeps answer options under 15 words", () => {
+    expect(cappedLessons.flatMap(optionViolations)).toEqual([]);
+  });
+
+  it("keeps diagram labels at 4 words or fewer", () => {
+    expect(cappedLessons.flatMap(labelViolations)).toEqual([]);
+  }, 120_000);
+
+  it("keeps a lesson on the legacy list only while it breaks a cap", () => {
+    const known = new Set(allLessons.map((l) => l.id));
+    expect(
+      LEGACY_LESSON_IDS.filter((id) => !known.has(id)),
+      "legacy ids that are not lessons",
+    ).toEqual([]);
+    const clean = allLessons
+      .filter((l) => legacyIds.has(l.id) && capViolations(l).length === 0)
+      .map((l) => l.id);
+    expect(clean, "clean lessons still on the legacy list: remove their ids").toEqual([]);
+  }, 120_000);
+});
+
+describe("length cap checks", () => {
+  const sixteen =
+    "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen.";
+  const twentyOne =
+    "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty twenty-one?";
+  const fifteen =
+    "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen";
+  const fiveWords = "one two three four five";
+  const t = (en: string): Text => ({ en, de: en, pl: en });
+  function fake(over: { line?: string; prompt?: string; option?: string; label?: string }): Lesson {
+    const Diagram = () =>
+      createElement("svg", null, createElement("text", null, over.label ?? "ok"));
+    return {
+      id: "fake",
+      story: [{ text: t("ok"), lines: [t(over.line ?? "ok"), t("ok")], Diagram }],
+      questions: [
+        {
+          kind: "choice",
+          prompt: t(over.prompt ?? "ok"),
+          hint: t("ok"),
+          options: [{ text: t(over.option ?? "ok"), correct: true }],
+        },
+      ],
+    } as unknown as Lesson;
+  }
+
+  it("passes a lesson inside every cap", () => {
+    expect(capViolations(fake({}))).toEqual([]);
+  });
+
+  it("fails a 16-word sentence, once per language", () => {
+    expect(sentenceViolations(fake({ line: sixteen }))).toHaveLength(3);
+  });
+
+  it("fails a 21-word prompt, once per language", () => {
+    expect(promptViolations(fake({ prompt: twentyOne }))).toHaveLength(3);
+  });
+
+  it("fails a 15-word option, once per language", () => {
+    expect(optionViolations(fake({ option: fifteen }))).toHaveLength(3);
+  });
+
+  it("fails a 5-word diagram label, once per language", () => {
+    expect(labelViolations(fake({ label: fiveWords }))).toHaveLength(3);
+  });
 });
