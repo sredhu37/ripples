@@ -292,6 +292,10 @@ export const LESSONS: LessonMeta[] = [
       pl: "Deficyt i dług publiczny",
     },
   },
+  {
+    id: "fx",
+    title: { en: "Exchange rates", de: "Wechselkurse", pl: "Kursy walut" },
+  },
 ];
 
 export const LESSON_ORDER = LESSONS.map((l) => l.id);
@@ -349,6 +353,7 @@ export const CURRICULUM_GROUPS: LessonGroup[] = [
       "commodities",
       "gold",
       "currencies",
+      "fx",
       "stocks",
       "bonds",
       "stocksvsbonds",
