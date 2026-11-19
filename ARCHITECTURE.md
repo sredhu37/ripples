@@ -62,7 +62,7 @@ Each folder below has its own `package.json` and lockfile. No code is shared bet
 | `server/` | The Hono API, migrations, unit tests                                       | hono, pg, node-pg-migrate, tsx |
 | repo root | Docs, CI, `scripts/` (CI tools and their tests), lint and format           | oxlint, oxfmt, vitest          |
 
-The root `package.json` only forwards commands (`npm test`, `npm run build`, `npm run dev`) to `web/` and `server/`. Each package has its own Dockerfile and builds from its own folder: `docker build web/` and `docker build server/`. The frontend image is nginx serving the built app and forwarding `/api` to `BACKEND_URL`; the backend image needs `DATABASE_URL`. Both variables are listed in the `.env.example` next to each Dockerfile. Decision: [ADR 0013](docs/adr/0013-separate-web-and-server-packages.md).
+The root `package.json` only forwards commands (`npm test`, `npm run build`, `npm run dev`) to `web/` and `server/`. Each package has its own Dockerfile and builds from its own folder: `docker build web/` and `docker build server/`. The frontend image is nginx serving the built app (gzip; hashed files in `assets/` cached for one week, everything else revalidated on each visit) and forwarding `/api` to `BACKEND_URL`; the backend image needs `DATABASE_URL`. Both variables are listed in the `.env.example` next to each Dockerfile. Decision: [ADR 0013](docs/adr/0013-separate-web-and-server-packages.md).
 
 ## How to run and test
 
