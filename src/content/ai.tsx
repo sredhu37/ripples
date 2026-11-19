@@ -30,12 +30,12 @@ export const lesson: Lesson = {
           "Przez dziesięciolecia programy komputerowe wykonywały wyłącznie sztywne instrukcje krok po kroku napisane przez ludzi.",
         ),
         T(
-          "A programmer had to write an explicit rule for every single scenario the computer might encounter.",
+          "A programmer had to write a rule for every situation the computer might meet.",
           "Programmierer mussten fuer jeden denkbaren Fall eine feste Regel wie Wenn-Dann formulieren.",
           "Programista musiał zapisać wyraźną regułę dla każdej pojedynczej sytuacji, na jaką mógł natrafić komputer.",
         ),
         T(
-          "If an unforeseen situation arose, the traditional software broke down or gave up with an error.",
+          "If an unforeseen situation arose, old software broke or gave an error.",
           "Tauchte eine unerwartete Situation auf, brach die klassische Software mit einem Fehler ab.",
           "Gdy pojawiła się nieprzewidziana sytuacja, tradycyjne oprogramowanie zawieszało się lub wyświetlało błąd.",
         ),
@@ -55,7 +55,7 @@ export const lesson: Lesson = {
           "Zamiast pisać tysiące sztywnych reguł, naukowcy dostarczają algorytmom ogromne zbiory przykładów.",
         ),
         T(
-          "By studying thousands of photos, the computer figures out its own mathematical guide to identify things.",
+          "The computer studies thousands of photos. It figures out its own math guide to identify things.",
           "Durch das Betrachten vieler Fotos lernt der Computer selbststaendig, Dinge zu unterscheiden.",
           "Analizując tysiące zdjęć, komputer samodzielnie buduje matematyczny przewodnik do rozpoznawania obiektów.",
         ),
@@ -70,14 +70,14 @@ export const lesson: Lesson = {
           "Ta technika statystyczna nosi nazwę *rozpoznawania wzorców*.",
         ),
         T(
-          "To tell an apple from a pear, the model measures curves, color gradients, and pixel distributions.",
+          "To tell an apple from a pear, the model checks curves, colors, and pixels.",
           "Um einen Apfel von einer Birne zu unterscheiden, vergleicht das Modell Rundung und Farbtone.",
           "Aby odróżnić jabłko od gruszki, model mierzy zaokrąglenia, odcienie kolorów i układ pikseli.",
         ),
         T(
-          "When fed enough clean examples, the model correctly sorts new fruits it has never seen before.",
+          "With enough clean examples, the model correctly sorts new fruits it has never seen.",
           "Mit genuegend guten Trainingsdaten sortiert das Modell auch neue Fruechte treffsicher ein.",
-          "Gdy otrzyma wystarczająco dużo czystych danych, model trafnie rozpoznaje nowe owoce, których nigdy wcześniej nie widział.",
+          "Gdy dostanie dość czystych danych, model trafnie rozpoznaje nowe owoce, których jeszcze nie widział.",
         ),
       ],
       PatternScatterFeatureDiagram,
@@ -140,8 +140,8 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "It learns mathematical patterns from examples instead of needing humans to code every single rule",
-            "Es lernt Muster aus vielen Beispielen, statt jede einzelne Regel vom Menschen vorgeschrieben zu bekommen",
+            "It learns patterns from examples instead of needing humans to code every single rule",
+            "Es lernt Muster aus Beispielen, statt dass Menschen jede einzelne Regel vorschreiben",
             "Uczy się wzorców na podstawie przykładów, zamiast wymagać ręcznego pisania każdej reguły przez człowieka",
           ),
           correct: true,

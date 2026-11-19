@@ -6,14 +6,14 @@ export function AbacusGearsDiagram({ lang, step }: DiagramProps) {
       ? "Wczesne narzędzia liczące: liczydło"
       : lang === "de"
         ? "Fruehe Rechenhilfen: Der Abakus"
-        : "Early Counting Tools: The Abacus";
+        : "Counting Tools: The Abacus";
 
   const sub =
     lang === "pl"
-      ? "Zanim powstały ekrany, ludzie liczyli za pomocą koralików na prętach i mechanicznych kół zębatych"
+      ? "Liczenie: koraliki, koła zębate"
       : lang === "de"
-        ? "Lange vor Bildschirmen rechneten Menschen mit Perlen und Zahnraedern"
-        : "Before screens existed, humans calculated numbers with beads and mechanical gears";
+        ? "Rechnen mit Perlen, Zahnraedern"
+        : "Counting with beads, gears";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Counting Abacus and Gears">
@@ -62,8 +62,8 @@ export function AdaLovelaceEngineDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Ada Lovelace: pierwszy algorytm"
       : lang === "de"
-        ? "Ada Lovelace: Der erste Algorithmus"
-        : "Ada Lovelace: The First Algorithm";
+        ? "Ada Lovelace: Erster Algorithmus"
+        : "Ada Lovelace: First Algorithm";
 
   const step1 = lang === "pl" ? "1. Wczytaj" : lang === "de" ? "1. Laden" : "1. Load";
   const step2 = lang === "pl" ? "2. Dodaj" : lang === "de" ? "2. Addieren" : "2. Add";
@@ -71,10 +71,10 @@ export function AdaLovelaceEngineDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Lovelace zrozumiała, że maszyny mogą przetwarzać liczby, nuty i idee według ściśle określonych reguł"
+      ? "Maszyny wykonują zapisane reguły"
       : lang === "de"
-        ? "Lovelace erkannte, dass Maschinen Regeln fuer Zahlen, Noten und Ideen ausfuehren koennen"
-        : "Lovelace realized machines could follow rules to manipulate numbers, music, and ideas";
+        ? "Maschinen folgen geschriebenen Regeln"
+        : "Machines follow written rules";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Ada Lovelace and Algorithms">
@@ -137,17 +137,17 @@ export function AdaLovelaceEngineDiagram({ lang, step }: DiagramProps) {
 export function KonradZuseZ3Diagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Konrad Zuse: komputer Z3 (Berlin, 1941)"
+      ? "Zuse Z3 (Berlin, 1941)"
       : lang === "de"
-        ? "Konrad Zuse Z3 (Berlin, 1941)"
-        : "Konrad Zuse Z3 (Berlin, 1941)";
+        ? "Zuse Z3 (Berlin, 1941)"
+        : "Zuse Z3 (Berlin, 1941)";
 
   const sub =
     lang === "pl"
-      ? "Tysiące klikających przekaźników telefonicznych stworzyło pierwszy programowalny komputer"
+      ? "Tysiące przekaźników telefonicznych"
       : lang === "de"
-        ? "Tausende klackende Telefonrelais bildeten den ersten programmierbaren Rechner der Welt"
-        : "Thousands of clicking telephone relays formed the world first programmable computer";
+        ? "Tausende Telefonrelais"
+        : "Thousands of telephone relays";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Konrad Zuse Z3 Computer">
@@ -207,10 +207,10 @@ export function TransistorSwitchesDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Miliardy mikroskopijnych przełączników włączają się i wyłączają miliony razy na sekundę"
+      ? "Miliardy maleńkich przełączników"
       : lang === "de"
-        ? "Milliarden mikroskopischer Schalter schalten millionenfach pro Sekunde um"
-        : "Billions of microscopic switches turn on and off millions of times per second";
+        ? "Milliarden winziger Schalter"
+        : "Billions of tiny switches";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Microscopic Transistor Switches">
@@ -280,10 +280,10 @@ export function TransistorSwitchesDiagram({ lang, step }: DiagramProps) {
 export function DigitalPixelsAudioDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Piksele, dźwięki i gry z zer i jedynek"
+      ? "Tylko zera i jedynki"
       : lang === "de"
-        ? "Pixel, Musik und Spiele aus 0 und 1"
-        : "Pixels, Songs, and Games from 0s and 1s";
+        ? "Nur Nullen und Einsen"
+        : "Just 0s and 1s";
 
   const screenLabel =
     lang === "pl" ? "0110 1100 = Ekran" : lang === "de" ? "0110 1100 = Bild" : "0110 1100 = Screen";
@@ -298,10 +298,10 @@ export function DigitalPixelsAudioDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Każdy film, gra wideo i wiadomość w telefonie powstają z prostych bitów binarnych"
+      ? "Bity tworzą filmy, gry"
       : lang === "de"
-        ? "Jedes Video, Computerspiel und jede Nachricht wird aus einfachen Bits erzeugt"
-        : "Every movie, video game, and message is painted using simple binary bits";
+        ? "Bits machen Videos, Spiele"
+        : "Bits make movies, games";
 
   return (
     <svg

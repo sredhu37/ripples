@@ -3,20 +3,20 @@ import type { DiagramProps } from "../lesson/types";
 export function IsolatedTapesDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Odosobnione komputery przed powstaniem sieci"
+      ? "Komputery przed siecią"
       : lang === "de"
-        ? "Isolierte Computer vor dem Netzwerk"
-        : "Isolated Computers Before the Network";
+        ? "Computer vor dem Netzwerk"
+        : "Computers Before the Network";
 
   const roomA = lang === "pl" ? "Pokój A" : lang === "de" ? "Raum A" : "Room A";
   const roomB = lang === "pl" ? "Pokój B" : lang === "de" ? "Raum B" : "Room B";
 
   const sub =
     lang === "pl"
-      ? "Komputery nie mogły się ze sobą komunikować bez ludzi przenoszących ciężkie szpule z taśmą magnetyczną"
+      ? "Ludzie noszą szpule taśm"
       : lang === "de"
-        ? "Computer konnten nicht sprechen, ohne dass Menschen Magnetbaender trugen"
-        : "Computers could not talk to each other without humans carrying magnetic tape reels";
+        ? "Menschen tragen Magnetbänder"
+        : "Humans carry tape reels";
 
   return (
     <svg
@@ -78,11 +78,7 @@ export function IsolatedTapesDiagram({ lang, step }: DiagramProps) {
 
 export function PacketSlicingDiagram({ lang, step }: DiagramProps) {
   const title =
-    lang === "pl"
-      ? "Komutacja pakietów: dzielenie wiadomości"
-      : lang === "de"
-        ? "Paketvermittlung: Die Nachricht zerlegen"
-        : "Packet Switching: Slicing the Message";
+    lang === "pl" ? "Komutacja pakietów" : lang === "de" ? "Paketvermittlung" : "Packet Switching";
 
   const p1 = lang === "pl" ? "Pakiet 1/3" : lang === "de" ? "Paket 1/3" : "Packet 1/3";
   const p2 = lang === "pl" ? "Pakiet 2/3" : lang === "de" ? "Paket 2/3" : "Packet 2/3";
@@ -90,10 +86,10 @@ export function PacketSlicingDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Wiadomości są dzielone na ponumerowane paczki cyfrowe, które podróżują niezależnie"
+      ? "Ponumerowane paczki podróżują osobno"
       : lang === "de"
-        ? "Nachrichten werden in nummerierte Paeckchen zerlegt, die getrennt reisen"
-        : "Messages are sliced into numbered digital parcels that travel independently";
+        ? "Nummerierte Päckchen reisen getrennt"
+        : "Numbered parcels travel separately";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Packet Switching Envelopes">
@@ -187,10 +183,10 @@ export function PacketSlicingDiagram({ lang, step }: DiagramProps) {
 export function NetworkRoutersDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Rozproszony routing po wielu ścieżkach"
+      ? "Routing wieloma ścieżkami"
       : lang === "de"
-        ? "Verteiltes Routing ueber mehrere Wege"
-        : "Distributed Routing Across Multiple Paths";
+        ? "Routing über viele Wege"
+        : "Routing Across Many Paths";
 
   const senderLabel = lang === "pl" ? "Nadawca" : lang === "de" ? "Sender" : "Sender";
   const receiverLabel = lang === "pl" ? "Odbiorca" : lang === "de" ? "Empfaenger" : "Receiver";
@@ -200,10 +196,10 @@ export function NetworkRoutersDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Jeśli jedna trasa jest przeciążona lub uszkodzona, pakiety automatycznie omijają przeszkodę"
+      ? "Zablokowane? Pakiety omijają"
       : lang === "de"
-        ? "Ist eine Leitung blockiert, weichen Pakete automatisch auf freie Wege aus"
-        : "If one route gets congested or damaged, packets automatically reroute safely";
+        ? "Blockiert? Pakete weichen aus"
+        : "Blocked? Packets reroute";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Routers and Distributed Network">
@@ -270,17 +266,17 @@ export function NetworkRoutersDiagram({ lang, step }: DiagramProps) {
 export function TimBernersLeeWebDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Tim Berners-Lee: World Wide Web (CERN, 1989)"
+      ? "Tim Berners-Lee, CERN 1989"
       : lang === "de"
-        ? "Tim Berners-Lee: Das World Wide Web (CERN, 1989)"
-        : "Tim Berners-Lee: The World Wide Web (CERN, 1989)";
+        ? "Tim Berners-Lee, CERN 1989"
+        : "Tim Berners-Lee, CERN 1989";
 
   const projTitle =
     lang === "pl"
       ? "Projekt World Wide Web"
       : lang === "de"
-        ? "Das World Wide Web Projekt"
-        : "The World Wide Web Project";
+        ? "Das World Wide Web"
+        : "The World Wide Web";
 
   const link1 =
     lang === "pl"
@@ -298,10 +294,10 @@ export function TimBernersLeeWebDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Hiperłącza połączyły biblioteki świata w jedną wspólną sieć wiedzy"
+      ? "Hiperłącza łączą wiedzę świata"
       : lang === "de"
-        ? "Hyperlinks verbanden Bibliotheken der Welt zu einem Netz des Wissens"
-        : "Hyperlinks connected the world libraries into one shared web of knowledge";
+        ? "Hyperlinks verbinden das Wissen"
+        : "Hyperlinks connect world knowledge";
 
   return (
     <svg
@@ -366,20 +362,20 @@ export function TimBernersLeeWebDiagram({ lang, step }: DiagramProps) {
 export function UnderseaFiberCablesDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Impulsy światła na dnie oceanów"
+      ? "Światło na dnie oceanów"
       : lang === "de"
         ? "Lichtblitze auf dem Meeresgrund"
-        : "Light Pulses Under the Ocean Floors";
+        : "Light Under the Ocean";
 
   const americaLabel = lang === "pl" ? "Ameryka" : lang === "de" ? "Amerika" : "America";
   const europeLabel = lang === "pl" ? "Europa" : lang === "de" ? "Europa" : "Europe";
 
   const sub =
     lang === "pl"
-      ? "Kable światłowodowe przesyłają błyski lasera po dnie oceanu w setne części sekundy"
+      ? "Błyski lasera przez oceany"
       : lang === "de"
-        ? "Glasfaserkabel senden Laserpulse im Bruchteil einer Sekunde ueber Ozeane"
-        : "Glass fiber cables flash laser pulses across ocean beds in hundredths of a second";
+        ? "Laserpulse queren die Ozeane"
+        : "Laser flashes cross oceans";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Undersea Fiber Optic Cables">

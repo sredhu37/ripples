@@ -5,8 +5,8 @@ export function TimelineStoneToAiDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Wielki łuk ludzkich narzędzi"
       : lang === "de"
-        ? "Der grosse Bogen menschlicher Werkzeuge"
-        : "The Great Arc of Human Tools";
+        ? "Werkzeuge durch die Zeit"
+        : "Human Tools Through Time";
 
   const axeLabel = lang === "pl" ? "Kamienny topór" : lang === "de" ? "Faustkeil" : "Stone Axe";
 
@@ -19,10 +19,10 @@ export function TimelineStoneToAiDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Przez tysiące lat ludzie nieustannie tworzyli narzędzia, by poszerzać swoje możliwości"
+      ? "Ludzie wciąż tworzą narzędzia"
       : lang === "de"
-        ? "Seit Jahrtausenden erfinden Menschen Werkzeuge, um ihre Faehigkeiten zu erweitern"
-        : "Across thousands of years, humans have continually invented tools to expand capability";
+        ? "Menschen erfinden immer Werkzeuge"
+        : "Humans keep inventing tools";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Timeline from Stone to AI">
@@ -76,7 +76,7 @@ export function TimelineStoneToAiDiagram({ lang, step }: DiagramProps) {
 export function MachineSpeedComparisonDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Szybkość kontra refleksja i mądrość"
+      ? "Szybkość kontra mądrość"
       : lang === "de"
         ? "Geschwindigkeit vs Nachdenken"
         : "Speed vs Thoughtful Reflection";
@@ -103,10 +103,10 @@ export function MachineSpeedComparisonDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Komputery dają czystą szybkość, lecz to ludzie wnoszą sumienie, osąd i poczucie sensu"
+      ? "Szybkie komputery, mądrzy ludzie"
       : lang === "de"
-        ? "Computer bieten Rechenkraft, doch Menschen schenken Gewissen, Urteilskraft und Sinn"
-        : "Computers provide raw speed, but humans supply conscience, judgment, and purpose";
+        ? "Schnelle Computer, weise Menschen"
+        : "Fast computers, wise humans";
 
   return (
     <svg
@@ -184,15 +184,15 @@ export function HeartEmpathyCompassionDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Empatia: Wyjątkowy ludzki dar"
       : lang === "de"
-        ? "Mitgefuehl: Die einzigartige menschliche Gabe"
-        : "Empathy: The Uniquely Human Gift";
+        ? "Mitgefuehl: Menschliche Gabe"
+        : "Empathy: A Human Gift";
 
   const sub =
     lang === "pl"
-      ? "Żaden algorytm nie potrafi szczerze pocieszyć płaczącego przyjaciela ani poczuć czułości"
+      ? "Algorytm nie pocieszy przyjaciela"
       : lang === "de"
-        ? "Kein Algorithmus kann weinende Freunde troesten oder echte Zuneigung empfinden"
-        : "No algorithm can genuinely comfort a crying friend or feel real human tenderness";
+        ? "Algorithmen koennen nicht troesten"
+        : "Algorithms cannot comfort friends";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Empathy and Human Care">
@@ -244,10 +244,10 @@ export function CreativeTeamCollaborationDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Wspólna praca z przyjaciółmi nad pomysłowymi rozwiązaniami to unikalna ludzka supermoc"
+      ? "Współpraca to nasza supermoc"
       : lang === "de"
-        ? "Gemeinsam mit Freunden fantasievolle Loesungen zu bauen, ist unsere Superkraft"
-        : "Collaborating with friends to build imaginative solutions is a uniquely human superpower";
+        ? "Teamgeist ist unsere Superkraft"
+        : "Teamwork is our superpower";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Creative Human Collaboration">
@@ -293,10 +293,10 @@ export function AmplifiedHumanValuesFutureDiagram({ lang, step }: DiagramProps) 
 
   const sub =
     lang === "pl"
-      ? "Gdy kierujemy się empatią i etyką, nasze narzędzia budują sprawiedliwszy i zdrowszy świat"
+      ? "Dobroć kieruje naszymi narzędziami"
       : lang === "de"
-        ? "Wenn wir von Mitgefuehl und Ethik geleitet werden, schaffen unsere Werkzeuge eine bessere Welt"
-        : "When guided by kindness and ethics, our tools can build a fairer, healthier world";
+        ? "Guete lenkt unsere Werkzeuge"
+        : "Kindness steers our tools";
 
   return (
     <svg

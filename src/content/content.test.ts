@@ -401,17 +401,6 @@ function capViolations(l: Lesson): string[] {
  * lesson is clean: a clean lesson on the list fails the test below. Delete the list when empty.
  */
 const LEGACY_LESSON_IDS: string[] = [
-  "tools",
-  "massproduction",
-  "computers",
-  "internet",
-  "automation",
-  "ai",
-  "jobs",
-  "humanedge",
-  "supply_demand",
-  "scarcity_prices",
-  "currencies",
 ];
 const legacyIds = new Set(LEGACY_LESSON_IDS);
 const cappedLessons = allLessons.filter((l) => !legacyIds.has(l.id));
