@@ -10,10 +10,10 @@ export function MagnifyingGlassArchiveDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Badanie autentycznych listów, traktatów i pamiętników z przeszłości"
+      ? "Prawdziwe listy, traktaty, pamiętniki"
       : lang === "de"
-        ? "Erforschung echter Briefe, Urkunden und Tagebuecher aus der Vergangenheit"
-        : "Examining genuine letters, treaties, and diaries from the past";
+        ? "Echte Briefe, Urkunden, Tagebuecher"
+        : "Real letters and diaries";
 
   return (
     <svg
@@ -78,10 +78,10 @@ export function MagnifyingGlassArchiveDiagram({ lang, step }: DiagramProps) {
 export function PrimarySourcesTapestryDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Źródła pierwotne: Głosy z przeszłości"
+      ? "Źródła pierwotne: dawne głosy"
       : lang === "de"
-        ? "Primaerquellen: Stimmen der Geschichte"
-        : "Primary Evidence: Voices from History";
+        ? "Primaerquellen: Stimmen von frueher"
+        : "Primary Sources: Old Voices";
 
   const lettersLabel = lang === "pl" ? "Listy" : lang === "de" ? "Briefe" : "Letters";
   const lettersSub = lang === "pl" ? "Odręczne" : lang === "de" ? "Handschriftlich" : "Handwritten";
@@ -94,10 +94,10 @@ export function PrimarySourcesTapestryDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Historia opiera się na weryfikowalnych dowodach, a nie na pogłoskach"
+      ? "Fakty wymagają dowodów"
       : lang === "de"
-        ? "Geschichte stuetzt sich auf pruefbare Belege statt auf Geruechte"
-        : "History relies on verifiable evidence rather than hearsay";
+        ? "Fakten brauchen echte Belege"
+        : "Facts need real evidence";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Primary Evidence Clues">
@@ -162,10 +162,10 @@ export function MemorialStolpersteineDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Uczciwe spojrzenie w przeszłość wzmacnia wartości demokratyczne"
+      ? "Uczciwa pamięć chroni demokrację"
       : lang === "de"
-        ? "Ehrliche Erinnerung staerkt unsere demokratischen Werte"
-        : "Facing the past honestly makes democratic values resilient";
+        ? "Ehrliches Erinnern schuetzt Demokratie"
+        : "Honest memory protects democracy";
 
   return (
     <svg
@@ -218,17 +218,17 @@ export function MemorialStolpersteineDiagram({ lang, step }: DiagramProps) {
 export function CompassFutureCompassDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Historia to kompas na przyszłość"
+      ? "Historia: kompas na jutro"
       : lang === "de"
-        ? "Geschichte als Kompass fuer die Zukunft"
-        : "History is a Compass for the Future";
+        ? "Geschichte: Kompass fuer morgen"
+        : "History: a Compass Forward";
 
   const sub =
     lang === "pl"
-      ? "Wiedza o tym, skąd przychodzimy, pomaga nam mądrze wybierać dalszą drogę"
+      ? "Znasz przeszłość, wybierasz mądrze"
       : lang === "de"
-        ? "Zu wissen, woher wir kommen, hilft uns, kluge Entscheidungen zu treffen"
-        : "Knowing where we came from helps us choose wise paths forward";
+        ? "Vergangenes kennen, klug waehlen"
+        : "Past helps us choose";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="The Compass for the Future">
@@ -264,15 +264,15 @@ export function InterlockingGenerationsDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Pokolenia budujące wspólne jutro"
       : lang === "de"
-        ? "Generationen bauen ein gemeinsames Morgen"
-        : "Generations Building a Shared Tomorrow";
+        ? "Generationen bauen Morgen"
+        : "Generations Build Tomorrow";
 
   const sub =
     lang === "pl"
-      ? "Przyszłość należy do ciekawych świata, pełnych empatii umysłów!"
+      ? "Ciekawi, życzliwi budują jutro!"
       : lang === "de"
-        ? "Die Zukunft gehoert neugierigen, mitfuehlenden Koepfen!"
-        : "The future belongs to curious, compassionate minds!";
+        ? "Neugierige Koepfe gestalten morgen!"
+        : "Curious minds shape tomorrow!";
 
   return (
     <svg

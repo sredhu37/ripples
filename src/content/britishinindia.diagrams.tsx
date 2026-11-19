@@ -5,10 +5,10 @@ export function CharteredSealDiagram({ lang, step }: DiagramProps) {
     lang === "pl" ? "PRZYWILEJ 1600" : lang === "de" ? "FREIBRIEF 1600" : "1600 CHARTER";
   const sub =
     lang === "pl"
-      ? "Prywatna spółka z królewskim monopolem na handel zamorski"
+      ? "Prywatna spółka, monopol handlowy"
       : lang === "de"
-        ? "Eine private Gesellschaft mit koeniglichem Handelsmonopol"
-        : "A private company granted monopoly trading rights";
+        ? "Privatfirma mit Handelsmonopol"
+        : "Private company, trade monopoly";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Royal Chartered Company Seal">
@@ -50,10 +50,10 @@ export function CompanyFortressDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Prywatne wojsko i bastiony chroniące magazyny korporacji"
+      ? "Prywatna armia chroni magazyny"
       : lang === "de"
-        ? "Privatarmeen und Mauern schuetzten Lagerhaeuser der Kompanie"
-        : "Private armies and walls protecting company warehouses";
+        ? "Privatarmee bewacht Lagerhaeuser"
+        : "Private army guards warehouses";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Company Armed Fortress">
@@ -103,10 +103,10 @@ export function VillageHandloomDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Tkactwo słynnego na cały świat delikatnego muślinu"
+      ? "Tkanie delikatnego muślinu"
       : lang === "de"
-        ? "Herstellung des weltbekannten feinen Musselins"
-        : "Weaving world-renowned fine muslin fabrics";
+        ? "Feiner Musselin, handgewebt"
+        : "Weaving fine muslin cloth";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Indian Artisan Handloom">
@@ -145,17 +145,17 @@ export function VillageHandloomDiagram({ lang, step }: DiagramProps) {
 export function IndustrialLoomManchesterDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Przemysłowa tkalnia parowa w Manchesterze"
+      ? "Parowa tkalnia w Manchesterze"
       : lang === "de"
         ? "Industrielle Dampf-Webfabrik"
         : "Industrial Steam Loom Factory";
 
   const sub =
     lang === "pl"
-      ? "Masowa produkcja taniej tkaniny zasilana parą węglową"
+      ? "Para tanio produkuje tkaniny"
       : lang === "de"
-        ? "Massenproduktion billiger Stoffe durch Kohledampf"
-        : "Mass-producing cheap cloth powered by coal steam";
+        ? "Dampf macht billigen Stoff"
+        : "Steam makes cheap cloth";
 
   return (
     <svg
@@ -197,20 +197,20 @@ export function IndustrialLoomManchesterDiagram({ lang, step }: DiagramProps) {
 export function RailwayExportPortDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Kolej zbudowana do wywozu surowców"
+      ? "Kolej do wywozu surowców"
       : lang === "de"
         ? "Eisenbahnen fuer den Rohstoffexport"
-        : "Railways Built for Raw Resource Export";
+        : "Railways built for export";
 
   const cotton = lang === "pl" ? "Bawełna" : lang === "de" ? "Rohbaumwolle" : "Raw Cotton";
   const tea = lang === "pl" ? "Herbata" : lang === "de" ? "Teeblaetter" : "Tea Leaves";
 
   const sub =
     lang === "pl"
-      ? "Wywóz bogactw naturalnych przez porty oceaniczne"
+      ? "Bogactwa wypływają przez porty"
       : lang === "de"
-        ? "Verschiffung von Rohstoffen ueber Seehaefen"
-        : "Shipping natural wealth out through ocean ports";
+        ? "Rohstoffe verlassen die Haefen"
+        : "Wealth leaves through ports";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Railway Line to Ocean Harbor">

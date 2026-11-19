@@ -5,10 +5,10 @@ export function PepperCornDiagram({ lang, step }: DiagramProps) {
     lang === "pl" ? "Pieprz z Malabaru" : lang === "de" ? "Malabar-Pfeffer" : "Malabar Pepper";
   const sub =
     lang === "pl"
-      ? "Niegdyś wart tyle samo, co monety z czystego srebra!"
+      ? "Cenny jak srebro!"
       : lang === "de"
-        ? "Einst mit purem Silber aufgewogen!"
-        : "Once worth its weight in pure silver coins!";
+        ? "So kostbar wie Silber!"
+        : "As precious as silver!";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Black Pepper Sacks">
@@ -48,17 +48,17 @@ export function PepperCornDiagram({ lang, step }: DiagramProps) {
 export function SilkRoadCaravanDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Lądowy Jedwabny Szlak (12 miesięcy)"
+      ? "Jedwabny Szlak: 12 miesięcy"
       : lang === "de"
-        ? "Die Seidenstraße über Land (12 Monate)"
-        : "The Overland Silk Road (12 Months)";
+        ? "Seidenstraße: 12 Monate"
+        : "Silk Road: 12 Months";
 
   const sub =
     lang === "pl"
-      ? "Przełęcze górskie, burze piaskowe i dziesiątki rogatek celnych"
+      ? "Góry, pustynie, rogatki celne"
       : lang === "de"
-        ? "Gebirgspässe, Wüstenstürme und Dutzende Zollstationen"
-        : "Mountain passes, desert storms, and dozens of toll gates";
+        ? "Berge, Wüsten, Zollstationen"
+        : "Mountains, deserts, toll gates";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Silk Road Overland Caravan">
@@ -98,19 +98,19 @@ export function SilkRoadCaravanDiagram({ lang, step }: DiagramProps) {
 export function MonsoonWindDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Wiatry monsunowe na Morzu Arabskim"
+      ? "Monsun na Morzu Arabskim"
       : lang === "de"
-        ? "Monsunwinde über dem Arabischen Meer"
-        : "Monsoon Winds Across the Arabian Sea";
+        ? "Monsun: Arabisches Meer"
+        : "Monsoon: Arabian Sea";
 
   const windLabel = lang === "pl" ? "Wiatr letni" : lang === "de" ? "Sommerwind" : "Summer Wind";
 
   const sub =
     lang === "pl"
-      ? "Sezonowe wiatry niosły karawele przez otwarty ocean"
+      ? "Wiatry pchają karawele"
       : lang === "de"
-        ? "Saisonale Winde trugen Segelschiffe über das Meer"
-        : "Seasonal winds blew ocean caravels across the open sea";
+        ? "Monsunwinde treiben Segelschiffe"
+        : "Seasonal winds push caravels";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Monsoon Wind Sailing">
@@ -146,11 +146,7 @@ export function MonsoonWindDiagram({ lang, step }: DiagramProps) {
 
 export function CaravelShipDiagram({ lang, step }: DiagramProps) {
   const sub =
-    lang === "pl"
-      ? "Przewozi 50 worków pieprzu bezpośrednio do portu"
-      : lang === "de"
-        ? "Transportiert 50 Säcke Pfeffer direkt in den Hafen"
-        : "Carrying 50 sacks of pepper directly to port";
+    lang === "pl" ? "50 worków pieprzu" : lang === "de" ? "50 Säcke Pfeffer" : "50 sacks of pepper";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Ocean Caravel Ship">
@@ -186,10 +182,10 @@ export function CaravelShipDiagram({ lang, step }: DiagramProps) {
 export function SpeicherstadtWarehouseDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Spichlerze portowe: Magazyny przypraw i korzeni"
+      ? "Spichlerze pełne przypraw"
       : lang === "de"
-        ? "Hamburger Speicherstadt: Gewürzspeicher Europas"
-        : "Hamburg's Speicherstadt: Spice Warehouse of Europe";
+        ? "Speicherstadt: Gewürzlager Europas"
+        : "Hamburg's spice warehouse";
 
   return (
     <svg
