@@ -292,6 +292,10 @@ export const LESSONS: LessonMeta[] = [
       pl: "Deficyt i dług publiczny",
     },
   },
+  {
+    id: "gdp",
+    title: { en: "GDP", de: "Bruttoinlandsprodukt", pl: "PKB" },
+  },
 ];
 
 export const LESSON_ORDER = LESSONS.map((l) => l.id);
@@ -377,6 +381,7 @@ export const CURRICULUM_GROUPS: LessonGroup[] = [
       "centralbanks",
       "bailouts",
       "deficit",
+      "gdp",
     ],
   },
   {

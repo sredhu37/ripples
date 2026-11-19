@@ -279,6 +279,7 @@ const SAVED_LESSON_ORDER = [
   "bailouts",
   "currencies",
   "deficit",
+  "gdp",
 ];
 
 describe("lesson order", () => {
