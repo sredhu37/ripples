@@ -3,10 +3,10 @@ import type { DiagramProps } from "../lesson/types";
 export function HistoricalVanishedTradesDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Zawody z przeszłości: Latarnicy i telefonistki"
+      ? "Zawody z przeszłości"
       : lang === "de"
-        ? "Berufe von gestern: Laternenanzuender & Vermittlung"
-        : "Jobs of Yesterday: Lamplighters & Operators";
+        ? "Berufe von gestern"
+        : "Jobs of Yesterday";
 
   const lamplighterLabel =
     lang === "pl" ? "Latarnik" : lang === "de" ? "Laternenanzuender" : "Lamplighter";
@@ -16,10 +16,10 @@ export function HistoricalVanishedTradesDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Miliony ludzi pracowały niegdyś przy ręcznym zapalaniu latarni gazowych i łączeniu kabli telefonicznych"
+      ? "Zapalanie latarni, łączenie kabli"
       : lang === "de"
-        ? "Millionen arbeiteten einst beim Anzuenden von Gaslaternen und Stecken von Telefonkabeln"
-        : "Millions once worked lighting gas lamps by hand and plugging telephone cords";
+        ? "Laternen anzünden, Kabel stecken"
+        : "Lighting lamps, plugging cords";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Historical Vanished Trades">
@@ -91,10 +91,10 @@ export function ElectricSwitchboardAutomatedDiagram({ lang, step }: DiagramProps
 
   const sub =
     lang === "pl"
-      ? "Zegary automatyczne włączały światła, a obwody cyfrowe zastąpiły centrale ręczne"
+      ? "Zegary i obwody cyfrowe"
       : lang === "de"
-        ? "Automatische Zeitschaltuhren und digitale Schaltungen machten Handarbeit ueberfluessig"
-        : "Automatic timers turned lights on instantly and digital circuits replaced cord switchboards";
+        ? "Zeitschaltuhren und digitale Schaltungen"
+        : "Automatic timers, digital circuits";
 
   return (
     <svg
@@ -171,10 +171,10 @@ export function NewTechCareersWindCyberDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Czysta energia, inżynieria oprogramowania i ochrona zdrowia stworzyły miliony wartościowych miejsc pracy"
+      ? "Czysta energia, oprogramowanie, zdrowie"
       : lang === "de"
-        ? "Erneuerbare Energien, Software und Pflege schufen Millionen neue Arbeitsplaetze"
-        : "Clean energy, software engineering, and healthcare created millions of rewarding jobs";
+        ? "Erneuerbare Energien, Software, Pflege"
+        : "Clean energy, software, healthcare";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Modern Emerging Professions">
@@ -253,10 +253,10 @@ export function TransitionCareerShiftDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Dzięki szkoleniom zawodowym pracownicy stają się specjalistami do spraw robotyki i oprogramowania"
+      ? "Mechanicy zostają specjalistami robotyki"
       : lang === "de"
-        ? "Durch Schulungen werden Mechaniker zu Fachkraeften fuer Robotik und Software"
-        : "Through vocational training, mechanics become robotics and software technicians";
+        ? "Mechaniker werden Robotik-Fachkräfte"
+        : "Mechanics become robotics technicians";
 
   return (
     <svg
@@ -333,17 +333,17 @@ export function TransitionCareerShiftDiagram({ lang, step }: DiagramProps) {
 export function LifelongLearningCuriosityDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Uczenie się przez całe życie to Twoja supermoc"
+      ? "Nauka to Twoja supermoc"
       : lang === "de"
-        ? "Lebenslanges Lernen ist deine Superkraft"
-        : "Lifelong Learning is Your Superpower";
+        ? "Lernen ist deine Superkraft"
+        : "Learning Is Your Superpower";
 
   const sub =
     lang === "pl"
-      ? "Ciekawość świata, empatia i ciągła nauka przygotowują każdego z nas na wyzwania przyszłości"
+      ? "Ciekawość, empatia, ciągła nauka"
       : lang === "de"
-        ? "Neugier, Empathie und staendiges Dazulernen bereiten jeden auf die Zukunft vor"
-        : "Curiosity, empathy, and continuous learning prepare every student for the future";
+        ? "Neugier, Empathie, ständiges Lernen"
+        : "Curiosity, empathy, continuous learning";
 
   return (
     <svg

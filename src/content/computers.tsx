@@ -37,7 +37,7 @@ export const lesson: Lesson = {
         T(
           "Inventors built brass clockwork calculators with cogs, but each could only perform basic arithmetic.",
           "Erfinder bauten Rechenmaschinen aus Messing mit Zahnraedern, die aber nur einfache Rechnungen schafften.",
-          "Wynalazcy konstruowali mosiężne maszyny liczące z kołami zębatymi, lecz potrafiły one wykonywać tylko proste działania arytmetyczne.",
+          "Wynalazcy konstruowali mosiężne maszyny liczące z kołami zębatymi. Potrafiły jednak tylko proste działania.",
         ),
       ],
       AbacusGearsDiagram,
@@ -50,9 +50,9 @@ export const lesson: Lesson = {
           "W latach czterdziestych XIX wieku angielska matematyczka Ada Lovelace badała mechaniczną maszynę Charlesa Babbage'a.",
         ),
         T(
-          "She realized paper cards with punched holes could feed the machine a sequence of clear instructions.",
+          "She realized paper cards with punched holes could feed the machine clear instructions.",
           "Sie erkannte, dass Lochkarten aus Papier der Maschine eine Folge von klaren Befehlen geben konnten.",
-          "Zrozumiała, że papierowe karty z dziurkowanymi otworami mogą przekazywać maszynie ciąg precyzyjnych instrukcji krok po kroku.",
+          "Zrozumiała, że papierowe karty z dziurkami mogą dawać maszynie precyzyjne instrukcje krok po kroku.",
         ),
         T(
           "Lovelace wrote the world's very first computer *algorithm*, becoming the first computer programmer.",
@@ -66,7 +66,7 @@ export const lesson: Lesson = {
       [
         T(
           "In 1941 in Berlin, inventor Konrad Zuse built the Z3 in his parents' living room.",
-          "Im Jahr 1941 baute der Erfinder Konrad Zuse in Berlin die Z3 im Wohnzimmer seiner Eltern.",
+          "1941 baute der Erfinder Konrad Zuse in Berlin die Z3 im Wohnzimmer seiner Eltern.",
           "W 1941 roku w Berlinie wynalazca Konrad Zuse skonstruował maszynę Z3 w salonie swoich rodziców.",
         ),
         T(
@@ -105,7 +105,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "Computers do not think like humans; they simply flip billions of binary switches at blinding speed.",
+          "Computers do not think like humans. They simply flip billions of binary switches at blinding speed.",
           "Computer denken nicht wie Menschen; sie schalten lediglich Milliarden Schalter blitzschnell um.",
           "Komputery nie myślą jak ludzie; po prostu przełączają miliardy binarnych styków z zawrotną prędkością.",
         ),

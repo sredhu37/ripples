@@ -395,27 +395,6 @@ function capViolations(l: Lesson): string[] {
   ];
 }
 
-/*
- * Length caps from docs/writing-lessons.md rule 12. Lessons on this list broke a cap when the
- * tests were added (#227) and are exempt until they are rewritten (#187). Remove an id when its
- * lesson is clean: a clean lesson on the list fails the test below. Delete the list when empty.
- */
-const LEGACY_LESSON_IDS: string[] = [
-  "tools",
-  "massproduction",
-  "computers",
-  "internet",
-  "automation",
-  "ai",
-  "jobs",
-  "humanedge",
-  "supply_demand",
-  "scarcity_prices",
-  "currencies",
-];
-const legacyIds = new Set(LEGACY_LESSON_IDS);
-const cappedLessons = allLessons.filter((l) => !legacyIds.has(l.id));
-
 describe("content counts", () => {
   it("never uses the name Bartek in Polish content, diagrams included", () => {
     const hits: string[] = [];
@@ -430,31 +409,19 @@ describe("content counts", () => {
 
 describe("length caps", () => {
   it("keeps story sentences at 15 words or fewer", () => {
-    expect(cappedLessons.flatMap(sentenceViolations)).toEqual([]);
+    expect(allLessons.flatMap(sentenceViolations)).toEqual([]);
   });
 
   it("keeps question prompts at 20 words or fewer", () => {
-    expect(cappedLessons.flatMap(promptViolations)).toEqual([]);
+    expect(allLessons.flatMap(promptViolations)).toEqual([]);
   });
 
   it("keeps answer options under 15 words", () => {
-    expect(cappedLessons.flatMap(optionViolations)).toEqual([]);
+    expect(allLessons.flatMap(optionViolations)).toEqual([]);
   });
 
   it("keeps diagram labels at 4 words or fewer", () => {
-    expect(cappedLessons.flatMap(labelViolations)).toEqual([]);
-  }, 120_000);
-
-  it("keeps a lesson on the legacy list only while it breaks a cap", () => {
-    const known = new Set(allLessons.map((l) => l.id));
-    expect(
-      LEGACY_LESSON_IDS.filter((id) => !known.has(id)),
-      "legacy ids that are not lessons",
-    ).toEqual([]);
-    const clean = allLessons
-      .filter((l) => legacyIds.has(l.id) && capViolations(l).length === 0)
-      .map((l) => l.id);
-    expect(clean, "clean lessons still on the legacy list: remove their ids").toEqual([]);
+    expect(allLessons.flatMap(labelViolations)).toEqual([]);
   }, 120_000);
 });
 

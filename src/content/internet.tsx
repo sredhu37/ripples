@@ -30,9 +30,9 @@ export const lesson: Lesson = {
           "Przez dziesięciolecia komputery były gigantycznymi maszynami zamkniętymi w osobnych salach piwnicznych.",
         ),
         T(
-          "If a scientist in London wanted data from Paris, someone had to mail a heavy tape reel in a box.",
+          "A scientist in London wanted data from Paris. Someone had to mail a heavy tape reel in a box.",
           "Wollte ein Forscher in London Daten aus Paris, musste jemand schwere Magnetbaender per Post schicken.",
-          "Gdy naukowiec w Londynie potrzebował danych z Paryża, ktoś musiał wysłać pocztą ciężką szpulę taśmy magnetycznej.",
+          "Naukowiec z Londynu chciał dane z Paryża. Ktoś musiał wysłać pocztą ciężką szpulę z taśmą.",
         ),
         T(
           "Transferring records took days, and researchers could not collaborate on discoveries in real time.",
@@ -50,7 +50,7 @@ export const lesson: Lesson = {
           "W latach sześćdziesiątych XX wieku informatycy wymyślili pomysłową technikę zwaną *komutacją pakietów*.",
         ),
         T(
-          "Instead of sending an entire giant file at once, computers slice messages into small digital parcels.",
+          "Computers slice a giant file into small digital parcels instead of sending it whole.",
           "Statt eine riesige Datei auf einmal zu senden, zerlegen Rechner Nachrichten in kleine digitale Paeckchen.",
           "Zamiast przesyłać ogromny plik w całości, komputery dzielą wiadomości na małe paczki cyfrowe zwane pakietami.",
         ),
@@ -86,8 +86,8 @@ export const lesson: Lesson = {
       [
         T(
           "In 1989 at CERN in Switzerland, British scientist Tim Berners-Lee invented the *World Wide Web*.",
-          "1989 erfand der britische Forscher Tim Berners-Lee am CERN in der Schweiz das *World Wide Web*.",
-          "W 1989 roku w instytucie CERN w Szwajcarii brytyjski fizyk Tim Berners-Lee stworzył *World Wide Web*.",
+          "1989 erfand der Brite Tim Berners-Lee am CERN in der Schweiz das *World Wide Web*.",
+          "W 1989 roku w CERN w Szwajcarii brytyjski fizyk Tim Berners-Lee stworzył *World Wide Web*.",
         ),
         T(
           "He created web addresses, browsers, and clickable hyperlinks that link documents together.",
@@ -95,9 +95,9 @@ export const lesson: Lesson = {
           "Stworzył adresy internetowe, przeglądarki i klikalne hiperłącza, które łączą ze sobą dokumenty na całym świecie.",
         ),
         T(
-          "Now anyone could click a highlighted word to jump instantly to an article on another continent.",
-          "Nun konnte jeder auf ein blaues Wort klicken, um sofort einen Text auf einem anderen Kontinent zu oeffnen.",
-          "Od tej pory każdy mógł kliknąć wyróżnione słowo, by błyskawicznie przejść do artykułu na innym kontynencie.",
+          "Now anyone could click a highlighted word to jump to an article on another continent.",
+          "Nun konnte jeder auf ein blaues Wort klicken. Sofort öffnete sich ein Text auf einem anderen Kontinent.",
+          "Teraz każdy mógł kliknąć wyróżnione słowo i błyskawicznie przejść do artykułu na innym kontynencie.",
         ),
       ],
       TimBernersLeeWebDiagram,
@@ -110,12 +110,12 @@ export const lesson: Lesson = {
           "Dziś setki podmorskich kabli *światłowodowych* ciągnie się po dnie oceanów, łącząc wszystkie kontynenty.",
         ),
         T(
-          "Inside these glass strands, pulses of laser light carry billions of voice calls and video streams.",
+          "Inside the glass strands, pulses of laser light carry billions of calls and videos.",
           "In den duennen Glasfaeden tragen Laser-Lichtblitze Milliarden von Anrufen und Videostreams.",
           "Wewnątrz tych szklanych włókien impulsy światła laserowego przenoszą miliardy rozmów i filmów wideo.",
         ),
         T(
-          "The internet connects the human family, allowing friends across the globe to learn and talk together.",
+          "The internet connects the human family. Friends across the globe can learn and talk together.",
           "Das Internet verbindet die Menschheit, sodass Freunde rund um den Globus gemeinsam lernen koennen.",
           "Internet łączy rodzinę ludzką, umożliwiając przyjaciołom z całego globu wspólną naukę i rozmowę bez granic.",
         ),
@@ -140,8 +140,8 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "It breaks data into small numbered packets that travel independently and reassemble at the end",
-            "Sie zerlegt Daten in kleine nummerierte Pakete, die getrennt reisen und am Ziel zusammengesetzt werden",
+            "It breaks data into numbered packets that travel separately and rejoin at the end",
+            "Sie zerlegt Daten in nummerierte Pakete, die getrennt reisen und sich am Ziel zusammenfügen",
             "Dzieli dane na małe, ponumerowane pakiety, które podróżują osobno i składają się u celu",
           ),
           correct: true,

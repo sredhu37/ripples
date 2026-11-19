@@ -3,10 +3,10 @@ import type { DiagramProps } from "../lesson/types";
 export function RigidRulesIfElseDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Tradycyjne reguły: Jeżeli to, wtedy tamto"
+      ? "Jeżeli to, wtedy tamto"
       : lang === "de"
         ? "Klassische Regeln: Wenn-Dann"
-        : "Traditional Rules: If This, Then That";
+        : "If This, Then That";
 
   const condition =
     lang === "pl" ? "Kolor = Czerwony?" : lang === "de" ? "Farbe = Rot?" : "Color = Red?";
@@ -17,10 +17,10 @@ export function RigidRulesIfElseDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Klasyczne programy wykonywały wyłącznie sztywne instrukcje napisane wprost przez człowieka"
+      ? "Człowiek napisał każdą regułę"
       : lang === "de"
-        ? "Klassische Software gehorchte nur starren Regeln, die Menschen programmiert hatten"
-        : "Classical software only obeyed rigid lines written directly by human programmers";
+        ? "Menschen schrieben jede Regel"
+        : "Humans wrote every rule";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Classical Rules Flowchart">
@@ -75,10 +75,10 @@ export function RigidRulesIfElseDiagram({ lang, step }: DiagramProps) {
 export function TrainingExamplesDatasetDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Uczenie się wzorców na oznaczonych przykładach"
+      ? "Uczenie na przykładach"
       : lang === "de"
-        ? "Lernen von Mustern aus Beispielen"
-        : "Learning Patterns from Labeled Examples";
+        ? "Muster aus Beispielen lernen"
+        : "Learning from Labeled Examples";
 
   const appleLabel = lang === "pl" ? "Jabłko" : lang === "de" ? "Apfel" : "Apple";
 
@@ -86,10 +86,10 @@ export function TrainingExamplesDatasetDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Algorytm bada tysiące zdjęć, aby samodzielnie odkryć cechy rozpoznawcze"
+      ? "Analiza tysięcy zdjęć"
       : lang === "de"
-        ? "Der Algorithmus prueft tausende Bilder, um Erkennungsmerkmale zu finden"
-        : "The algorithm inspects thousands of pictures to discover distinguishing clues";
+        ? "Tausende Fotos genau ansehen"
+        : "Studying thousands of photos";
 
   return (
     <svg
@@ -194,10 +194,10 @@ export function PatternScatterFeatureDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Granice matematyczne rozdzielają kształty, barwy i słowa w przestrzeni danych"
+      ? "Matematyka rozdziela grupy"
       : lang === "de"
-        ? "Mathematische Grenzen trennen Formen, Farben und Woerter im Datenraum"
-        : "Mathematical boundaries separate shapes, colors, and words in high dimensional space";
+        ? "Mathe trennt die Gruppen"
+        : "Math separates the groups";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Feature Pattern Recognition">
@@ -264,10 +264,10 @@ export function PatternScatterFeatureDiagram({ lang, step }: DiagramProps) {
 export function ScientificAssistantScansDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Pomocnik w nauce, medycynie i językach"
+      ? "Nauka, medycyna i języki"
       : lang === "de"
-        ? "Helfer fuer Wissenschaft, Medizin und Sprache"
-        : "Helper for Science, Medicine, and Language";
+        ? "Wissenschaft, Medizin und Sprache"
+        : "Science, Medicine, and Language";
 
   const exoplanetLabel =
     lang === "pl"
@@ -291,10 +291,10 @@ export function ScientificAssistantScansDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Sztuczna inteligencja działa jak potężne szkło powiększające dla lekarzy i badaczy"
+      ? "Szkło powiększające dla badaczy"
       : lang === "de"
-        ? "KI wirkt wie eine Lupe, die Forschern und Aerzten hilft"
-        : "AI acts as a powerful magnifying glass helping human doctors and scientists";
+        ? "KI ist eine Lupe"
+        : "AI: a magnifying glass";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="AI Assisting Scientific Scans">
@@ -366,10 +366,10 @@ export function ScientificAssistantScansDiagram({ lang, step }: DiagramProps) {
 export function MathematicalCalculatorNoFeelingsDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Sprytny kalkulator wzorców: Bez świadomości"
+      ? "Kalkulator wzorców, bez świadomości"
       : lang === "de"
         ? "Musterrechner: Kein Bewusstsein"
-        : "Clever Pattern Calculator: No Sentience";
+        : "Pattern Calculator: No Feelings";
 
   const statsLabel =
     lang === "pl"
@@ -380,10 +380,10 @@ export function MathematicalCalculatorNoFeelingsDiagram({ lang, step }: DiagramP
 
   const sub =
     lang === "pl"
-      ? "Sztuczna inteligencja nie ma uczuć ani świadomości: to po prostu wspaniałe narzędzie stworzone przez człowieka"
+      ? "Narzędzie stworzone przez ludzi"
       : lang === "de"
-        ? "KI hat keine Gefuehle oder Bewusstsein: Sie ist ein wunderbares menschliches Werkzeug"
-        : "AI has no feelings, consciousness, or conscience: it is a wonderful human-built tool";
+        ? "Ein Werkzeug von Menschen"
+        : "A wonderful human-built tool";
 
   return (
     <svg

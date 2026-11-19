@@ -163,8 +163,8 @@ export const lesson: Lesson = {
           "Pieniądze, które działają, bo ludzie im ufają, to *pieniądz fiducjarny*.",
         ),
         T(
-          "The central bank is the big bank that looks after a country's money, like the vault.",
-          "Die Zentralbank ist die große Bank, die auf das Geld eines Landes aufpasst, wie der Tresor.",
+          "The central bank is the big bank that looks after a country's money. It is like the vault.",
+          "Die Zentralbank ist die große Bank, die auf das Geld eines Landes aufpasst. Sie ist wie der Tresor.",
           "Bank centralny to wielki bank, który dba o pieniądze kraju, jak skarbiec.",
         ),
         T(
