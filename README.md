@@ -8,22 +8,118 @@ Each lesson is a short story, then a toy the child can play with, then three que
 
 Live site: https://sredhu37.github.io/ripples/ (add it to the iPad home screen; it works offline after the first visit).
 
-## Status
+## Prerequisites
 
-| Group                                               | Lessons       | State                                                                     |
-| --------------------------------------------------- | ------------- | ------------------------------------------------------------------------- |
-| Money and Work                                      | 10            | All 10 lessons written (EN and DE), fact cards waiting for Sunny's review |
-| Business, Markets, Governments, History, Technology | to be planned | Not started                                                               |
+| Tool                     | Version | Used for                                     |
+| ------------------------ | ------- | -------------------------------------------- |
+| Node.js (via nvm)        | 26      | App, API, tests (version pinned in `.nvmrc`) |
+| PostgreSQL (with `psql`) | 17      | The API's database, running on your machine  |
+| Git                      | any     | Clone and worktrees                          |
 
-The full list of design decisions is in [docs/design.md](docs/design.md).
-
-## Getting started
+macOS (Homebrew):
 
 ```bash
-npm install
-npm run dev      # http://localhost:5173/ripples/
-npm test         # progress and save-code tests
-npm run build    # type check + production build into dist/
+# nvm
+brew install nvm
+mkdir -p ~/.nvm
+cat >> ~/.zshrc <<'EOF'
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+EOF
+source ~/.zshrc
+
+# Node 26 (reads .nvmrc)
+nvm install
+nvm alias default 26
+
+# PostgreSQL 17 (keg-only, so add it to PATH), started now and at login
+brew install postgresql@17
+echo 'export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+brew services start postgresql@17
+```
+
+Linux or without Homebrew: install nvm with its [install script](https://github.com/nvm-sh/nvm#installing-and-updating) and run `nvm install`. Install PostgreSQL 17 from your package manager or the [PostgreSQL downloads](https://www.postgresql.org/download/) page.
+
+Check:
+
+```bash
+node -v             # v26.x
+psql --version      # psql (PostgreSQL) 17.x
+pg_isready          # accepting connections
+```
+
+## Running locally
+
+### 1. Install dependencies
+
+```bash
+nvm use             # reads .nvmrc, selects Node 26
+npm ci
+```
+
+### 2. Environment variables
+
+None are needed for local development. There is no `.env` file: the app does not load one. The defaults are:
+
+| Variable       | Default in dev                                      | Notes                                                                            |
+| -------------- | --------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `DATABASE_URL` | `postgres://ripples:ripples@localhost:5432/ripples` | The database from step 3. Required in production. Neon needs `?sslmode=require`. |
+| `PORT`         | `8080`                                              | API port. Vite proxies `/api` to it, so change `vite.config.ts` too.             |
+| `NODE_ENV`     | unset                                               | `production` makes the API serve the built app from `dist/`.                     |
+| `DIST_DIR`     | `dist`                                              | Folder the API serves in production.                                             |
+
+One exception: `npm run migrate` has no default, so pass the URL yourself (next step).
+
+### 3. Database
+
+Create the `ripples` user and database once. On macOS, Homebrew makes your own macOS user a Postgres superuser, so no `sudo` is needed:
+
+```bash
+psql postgres -c "CREATE ROLE ripples LOGIN PASSWORD 'ripples'"
+createdb -O ripples ripples
+DATABASE_URL=postgres://ripples:ripples@localhost:5432/ripples npm run migrate
+```
+
+On Linux, run the first two commands as the `postgres` user: `sudo -u postgres psql -c "..."` and `sudo -u postgres createdb -O ripples ripples`.
+
+There are no tables yet, so `migrate` prints `No migrations to run!`. Other commands:
+
+```bash
+psql postgres://ripples:ripples@localhost:5432/ripples   # shell
+brew services stop postgresql@17                           # stop Postgres (data stays)
+dropdb ripples && dropuser ripples                         # delete the database and user
+```
+
+The API starts even when Postgres is down. `/api/health` then returns 503.
+
+### 4. Start the backend and the frontend
+
+Both together (Ctrl-C stops both):
+
+```bash
+npm run dev
+```
+
+Or in two terminals:
+
+```bash
+npm run dev:api     # API on http://localhost:8080 (tsx watch, restarts on change)
+npm run dev:web     # app on http://localhost:5173 (Vite, hot reload)
+```
+
+Open http://localhost:5173/. Check the API with `curl http://localhost:8080/api/health` (`{"status":"ok"}`). The same call through Vite, `http://localhost:5173/api/health`, also works.
+
+### 5. Test and build
+
+```bash
+npm test            # unit tests; the real-Postgres health test also runs when DATABASE_URL is set:
+                    #   DATABASE_URL=postgres://ripples:ripples@localhost:5432/ripples npm test
+npm run lint
+npm run typecheck
+npm run build       # app to dist/, API to dist-server/
+npm start           # production twin: one process on :8080 serves the app and /api
+                    #   (needs DATABASE_URL set, because NODE_ENV=production has no default)
 ```
 
 ## Software Factory
