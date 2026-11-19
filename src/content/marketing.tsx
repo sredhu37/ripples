@@ -78,7 +78,7 @@ export const lesson: Lesson = {
         ),
         T(
           "Telling people truthfully what you built and how it helps them is called *marketing*.",
-          "Den Leuten ehrlich zu sagen, was man gebaut hat und wie es hilft, nennt man *Marketing*.",
+          "Man sagt den Leuten ehrlich, was man gebaut hat und wie es hilft. Das nennt man *Marketing*.",
           "Mówienie ludziom prawdy o tym, co stworzyłeś i jak może im to pomóc, nazywamy *marketingiem*.",
         ),
       ],
@@ -87,7 +87,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "Next, Sam gives a test pair of boots to Captain Coral to wear on the boat deck.",
+          "Next, Sam gives Captain Coral a test pair of boots to wear on deck.",
           "Dann schenkt Sam Kapitän Coral ein Probepaar für das nasse Schiffsdeck.",
           "Następnie Sam daje parę próbnych butów Kapitanowi Coralowi, by nosił je na mokrym pokładzie.",
         ),
@@ -229,9 +229,9 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "Sam has 2 coins. Placing the Harbor Poster costs 2 coins and informs 4 eager sailors. Activate the Harbor Poster to spread the word!",
-        "Sam hat 2 Münzen. Das Hafenschild kostet 2 Münzen und informiert 4 Seeleute. Aktiviere das Hafenschild, um die Nachricht zu verbreiten!",
-        "Sam ma 2 monety. Umieszczenie szyldu w porcie kosztuje 2 monety i informuje 4 marynarzy. Aktywuj szyld portowy, aby roznieść wieść!",
+        "Sam has 2 coins. The Harbor Poster costs 2 coins and reaches 4 sailors. Activate it now!",
+        "Sam hat 2 Münzen. Das Hafenschild kostet 2 Münzen und informiert 4 Seeleute. Aktiviere es jetzt!",
+        "Sam ma 2 monety. Szyld w porcie kosztuje 2 monety i informuje 4 marynarzy. Aktywuj go teraz!",
       ),
       Widget,
       hint: T(

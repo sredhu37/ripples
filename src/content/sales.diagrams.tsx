@@ -136,17 +136,13 @@ export function NoSalesDiagram({ lang, step }: DiagramProps) {
         ? "Lagernde Fische bringen null Münzen"
         : "Stored fish make zero coins";
   const invZero =
-    lang === "pl"
-      ? "Towar w skrzynce = 0 monet"
-      : lang === "de"
-        ? "Lager = 0 Münzen"
-        : "Inventory = 0 coins";
+    lang === "pl" ? "Zapas = 0 monet" : lang === "de" ? "Lager = 0 Münzen" : "Inventory = 0 coins";
   const mustSell =
     lang === "pl"
-      ? "Towar musi zostać sprzedany, by dać zysk"
+      ? "Sprzedaj, by zarobić"
       : lang === "de"
-        ? "Waren bringen erst Geld beim Verkauf"
-        : "Goods must be sold to bring money";
+        ? "Verkaufen bringt Geld"
+        : "Sell to earn coins";
 
   return (
     <DiagramCanvas label={label}>
@@ -312,14 +308,14 @@ export function BusinessSalesGoalDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Od każdego zadowolonego klienta"
       : lang === "de"
-        ? "Von allen zufriedenen Kundinnen und Kunden"
+        ? "Von allen zufriedenen Kunden"
         : "From every happy customer";
   const subLine2 =
     lang === "pl"
-      ? "Większa sprzedaż pomaga naprawiać łódź i sieci"
+      ? "Sprzedaż płaci za naprawy"
       : lang === "de"
-        ? "Mehr Umsatz hilft beim Boot-Unterhalt"
-        : "More sales help pay for boat repairs";
+        ? "Umsatz bezahlt Boot-Reparaturen"
+        : "Sales pay for repairs";
 
   return (
     <DiagramCanvas label={label}>

@@ -401,14 +401,6 @@ function capViolations(l: Lesson): string[] {
  * lesson is clean: a clean lesson on the list fails the test below. Delete the list when empty.
  */
 const LEGACY_LESSON_IDS: string[] = [
-  "profit",
-  "sales",
-  "ticketsize",
-  "marketshare",
-  "competition",
-  "marketing",
-  "hiring",
-  "scale",
   "supplydemand",
   "commodities",
   "gold",

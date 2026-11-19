@@ -96,7 +96,7 @@ export function EmptyShopDiagram({ lang, step }: DiagramProps) {
         : "Zero shoppers visit";
   const nobodyKnows =
     lang === "pl"
-      ? "Nikt nie wie o ich istnieniu!"
+      ? "Nikt ich nie zna!"
       : lang === "de"
         ? "Niemand weiß davon!"
         : "Nobody knows they exist!";
@@ -156,7 +156,7 @@ export function HarborSignDiagram({ lang, step }: DiagramProps) {
       ? "Suche stopy na morzu!"
       : lang === "de"
         ? "Trockene Füße auf See!"
-        : "Keep feet dry at sea!";
+        : "Dry feet at sea!";
   const line1 =
     lang === "pl" ? "Mówienie ludziom" : lang === "de" ? "Weitersagen" : "Telling people";
   const line2 =
@@ -319,7 +319,7 @@ export function BusyWorkshopDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Wiadomość obiegła całe miasto!"
       : lang === "de"
-        ? "Die Botschaft hat sich verbreitet!"
+        ? "Die Botschaft verbreitet sich!"
         : "Word spread across town!";
   const goodFoundBuyers =
     lang === "pl"
@@ -405,20 +405,20 @@ export function TruthfulMarketingDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Złota zasada marketingu"
       : lang === "de"
-        ? "Die goldene Regel des Marketings"
-        : "The Golden Rule of Marketing";
+        ? "Die goldene Marketing-Regel"
+        : "Marketing's Golden Rule";
   const rule1 =
     lang === "pl"
-      ? "Uczciwa reklama mówi klientom, co produkt naprawdę potrafi"
+      ? "Reklama mówi prawdę"
       : lang === "de"
-        ? "Ehrliche Werbung sagt Kunden, was ein Produkt wirklich kann"
-        : "Truthful ads tell customers what a product really does";
+        ? "Werbung sagt die Wahrheit"
+        : "Ads tell the truth";
   const rule2 =
     lang === "pl"
-      ? "Fałszywe obietnice niszczą zaufanie i są zakazane przez prawo"
+      ? "Fałszywe obietnice niszczą zaufanie"
       : lang === "de"
-        ? "Falsche Versprechen zerstören Vertrauen und sind verboten"
-        : "False promises destroy trust and are forbidden by law";
+        ? "Falsche Versprechen zerstören Vertrauen"
+        : "False promises break trust";
   const badge =
     lang === "pl"
       ? "Uczciwość buduje trwałe zaufanie!"
