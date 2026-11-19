@@ -16,10 +16,10 @@ export function HarborWallDiagram({ lang, step }: DiagramProps) {
   const mayorLabel = lang === "pl" ? "Burmistrz" : lang === "de" ? "Bürgermeister" : "Mayor";
   const costSub =
     lang === "pl"
-      ? "Kosztuje 100 monet, by chronić łodzie i miasteczko przed falami"
+      ? "100 monet przeciw falom"
       : lang === "de"
-        ? "Kostet 100 Münzen, um das Dorf vor Wellen zu schützen"
-        : "Costs 100 coins to protect the entire town from waves";
+        ? "100 Münzen gegen Wellen"
+        : "100 coins stop waves";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -71,18 +71,18 @@ export function BondScrollDiagram({ lang, step }: DiagramProps) {
         : "The Loan Scroll with Coupons";
   const title =
     lang === "pl"
-      ? "Obligacja ratusza: 100 monet wartości nominalnej"
+      ? "Obligacja ratusza: 100 monet"
       : lang === "de"
         ? "Rathaus-Anleihe: 100 Münzen Nennwert"
-        : "Town Hall Bond: 100 Coins Principal";
+        : "Town Bond: 100 Coins";
   const couponLabel = lang === "pl" ? "Kupon" : lang === "de" ? "Kupon" : "Coupon";
   const coinsLabel = lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "Coins";
   const subtext =
     lang === "pl"
-      ? "Oderwij jeden kupon w każde Święto Plonów, by odebrać odsetki!"
+      ? "Co rok: jeden kupon"
       : lang === "de"
-        ? "Reiße jeden Erntetag einen Kupon ab, um Zinsen einzulösen!"
-        : "Tear off one coupon every Harvest Day to collect interest!";
+        ? "Jedes Jahr: ein Kupon"
+        : "Each year: one coupon";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -173,22 +173,22 @@ export function CouponPayoutDiagram({ lang, step }: DiagramProps) {
         : "Tearing Off Coupon";
   const title =
     lang === "pl"
-      ? "Wypłata kuponu w Święto Plonów"
+      ? "Kupon w Święto Plonów"
       : lang === "de"
         ? "Kupon-Auszahlung am Erntetag"
         : "Harvest Day Coupon Payout";
   const payoutMsg =
     lang === "pl"
-      ? "Ratusz wypłaca 5 monet gwarantowanych odsetek"
+      ? "5 monet stałych odsetek"
       : lang === "de"
-        ? "Das Rathaus zahlt 5 Münzen feste Zinsen"
-        : "Town Hall pays 5 coins fixed interest";
+        ? "5 Münzen feste Zinsen"
+        : "5 coins fixed interest";
   const maturityMsg =
     lang === "pl"
-      ? "W 3. roku (termin wykupu) ratusz zwraca całe 100 monet kapitału"
+      ? "Wykup: zwrot 100 monet"
       : lang === "de"
-        ? "Am Ende (Laufzeit) zahlt das Rathaus die 100 Münzen Nennwert zurück"
-        : "At year 3 (maturity), Town Hall returns the full 100 coins principal";
+        ? "Laufzeitende: 100 Münzen zurück"
+        : "Maturity: 100 coins back";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -232,16 +232,16 @@ export function ZinsWippeDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Huśtawka cenowa obligacji (Zins-Wippe)"
       : lang === "de"
-        ? "Die Zins-Wippe (Zins und Kurs)"
-        : "The Interest Seesaw (Rates vs Price)";
+        ? "Zins-Wippe: Zins und Kurs"
+        : "Rates vs Price Seesaw";
   const rateLabel = lang === "pl" ? "Stopy: 8%" : lang === "de" ? "Zins: 8%" : "Rates: 8%";
   const priceLabel = lang === "pl" ? "Cena: 85m" : lang === "de" ? "Kurs: 85M" : "Price: 85c";
   const ruleMsg =
     lang === "pl"
-      ? "Gdy stopy procentowe rosną, ceny starych obligacji spadają!"
+      ? "Stopy rosną, ceny spadają"
       : lang === "de"
-        ? "Wenn Zinsen steigen, sinken die Kurse bestehender Anleihen!"
-        : "When bank interest goes up, old bond prices tilt down!";
+        ? "Zins hoch, Kurs runter"
+        : "Rates up, price down";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -300,19 +300,19 @@ export function SovereignBondDiagram({ lang, step }: DiagramProps) {
       ? "Obligacje Skarbowe Rzeczypospolitej Polskiej"
       : lang === "de"
         ? "Deutsche Bundesanleihen"
-        : "Government of India Sovereign Bonds (G-Secs)";
+        : "Government of India Bonds";
   const subtitle =
     lang === "pl"
-      ? "Finansują linie kolejowe, szpitale i infrastrukturę publiczną"
+      ? "Finansują koleje, szpitale, szkoły"
       : lang === "de"
-        ? "Finanzieren Schienen, Schulen und grüne Infrastruktur"
-        : "Trusted worldwide to build railways, schools, and energy infrastructure";
+        ? "Finanzieren Schienen und Schulen"
+        : "Funds railways and schools";
   const guarantee =
     lang === "pl"
-      ? "Gwarantowane przez Skarb Państwa z podatków"
+      ? "Gwarantowane przez Skarb Państwa"
       : lang === "de"
         ? "Garantiert durch deutsches Steueraufkommen"
-        : "Backed by sovereign tax revenues and fiscal law";
+        : "Backed by tax money";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>

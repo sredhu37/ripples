@@ -87,7 +87,7 @@ export const lesson: Lesson = {
         T(
           "Maya divides the profit equally across all ten shares, paying three coins per share.",
           "Maya teilt den Gewinn gleichmäßig auf alle zehn Aktien auf: drei Münzen pro Aktie.",
-          "Maya dzieli zysk równo na wszystkie dziesięć akcji, wypłacając po trzy monety na każdą z nich.",
+          "Maya dzieli zysk równo na dziesięć akcji. Każda akcja dostaje po trzy monety.",
         ),
         T(
           "This profit distribution is called a *dividend*.",
