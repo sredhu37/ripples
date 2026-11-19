@@ -1,6 +1,6 @@
 // Offline support. App files are cached on first load and refreshed in the
 // background, so the app opens without internet after one visit.
-const CACHE = "ripples-v3";
+const CACHE = "ripples-v4";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -20,7 +20,14 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   const req = event.request;
-  if (req.method !== "GET" || new URL(req.url).origin !== self.location.origin) return;
+  const url = new URL(req.url);
+  // The API answers from the network only: cached progress or health would be stale.
+  if (
+    req.method !== "GET" ||
+    url.origin !== self.location.origin ||
+    url.pathname.startsWith("/api/")
+  )
+    return;
   event.respondWith(
     caches.open(CACHE).then(async (cache) => {
       const cached = await cache.match(req);

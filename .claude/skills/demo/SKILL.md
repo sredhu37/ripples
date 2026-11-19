@@ -14,7 +14,7 @@ Show the change you just made with the Playwright specs in `e2e/`. The same spec
 - `e2e/` is its own npm package (`e2e/package.json`, `e2e/package-lock.json`). Install with `cd e2e && npm ci && npx playwright install chromium`.
 - One spec per screen: `map.spec.ts` (trail), `lesson.spec.ts`, `facts.spec.ts` (fact cards behind the parent maths gate), `parents.spec.ts` (parent panel behind the gate), `timeline.spec.ts`.
 - `evidence.ts` holds the helpers: `steps(page, name)` (pause 800 ms, then save `test-results/<name>/step-<k>.png`), `seedProgress` (saved progress in localStorage), `passParentGate` and the i18n labels the specs click.
-- `playwright.config.ts` builds the app and serves it with `vite preview` on port 4744 under `/ripples/`. Video is on for every test.
+- `playwright.config.ts` builds the app and serves it with `vite preview` on port 4744 at `/`. Video is on for every test.
 
 ## Steps
 

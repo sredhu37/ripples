@@ -21,7 +21,7 @@ The full list of design decisions is in [docs/design.md](docs/design.md).
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173/ripples/
+npm run dev      # http://localhost:5173/ (app) and http://localhost:8080/api/health (API)
 npm test         # progress and save-code tests
 npm run build    # type check + production build into dist/
 ```
