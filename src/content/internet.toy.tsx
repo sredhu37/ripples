@@ -32,9 +32,10 @@ interface InternetToyProps {
 }
 
 export function InternetToy({ lang, mode = "toy", onDone }: InternetToyProps) {
-  const [north, setNorth] = useState(mode !== "quiz");
-  const [central, setCentral] = useState(mode !== "quiz");
-  const [south, setSouth] = useState(mode !== "quiz");
+  // Start unsolved (the quiz start): a solved start completes the toy and unlocks the quiz on load.
+  const [north, setNorth] = useState(false);
+  const [central, setCentral] = useState(false);
+  const [south, setSouth] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
 
   const { deliveredCount, isComplete, latencyMs, assembledMessage } = calcPacketRouting(

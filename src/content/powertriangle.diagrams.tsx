@@ -161,17 +161,17 @@ export function FlowArrowsDiagram({ lang, step }: DiagramProps) {
 export function ImbalanceFailureDiagram({ lang, step }: DiagramProps) {
   const mainTitle =
     lang === "pl"
-      ? "Co się dzieje, gdy jeden róg dominuje?"
+      ? "Jeden róg dominuje"
       : lang === "de"
-        ? "Was passiert bei Vorherrschaft einer Ecke?"
-        : "What Happens When One Corner Dominates?";
+        ? "Eine Ecke herrscht allein"
+        : "One Corner Dominates";
 
   const gTitle = lang === "pl" ? "Państwo 100%" : lang === "de" ? "Staat 100%" : "Gov 100%";
   const g1 = lang === "pl" ? "Autorytaryzm:" : lang === "de" ? "Autoritär:" : "Authoritarian:";
   const g2 =
     lang === "pl" ? "Utrata wolności" : lang === "de" ? "Freiheiten weg" : "Liberties crushed";
   const g3 =
-    lang === "pl" ? "Zanik inicjatywy" : lang === "de" ? "Keine Initiative" : "Initative lost";
+    lang === "pl" ? "Zanik inicjatywy" : lang === "de" ? "Keine Initiative" : "Initiative lost";
 
   const bTitle =
     lang === "pl" ? "Biznes 100%" : lang === "de" ? "Wirtschaft 100%" : "Business 100%";
@@ -195,10 +195,10 @@ export function ImbalanceFailureDiagram({ lang, step }: DiagramProps) {
 
   const footer =
     lang === "pl"
-      ? "Całkowita dominacja jednego bieguna prowadzi do kryzysu całego społeczeństwa!"
+      ? "Równowaga się załamuje"
       : lang === "de"
-        ? "Totale Vorherrschaft einer einzelnen Ecke zerstört das Gleichgewicht!"
-        : "Total domination by any single corner causes structural breakdown!";
+        ? "Gleichgewicht bricht zusammen"
+        : "Balance breaks down";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">
@@ -267,10 +267,10 @@ export function EquilibriumDiagram({ lang, step }: DiagramProps) {
 
   const footer =
     lang === "pl"
-      ? "Dynamiczna równowaga daje wolność, dobrobyt i stabilne usługi publiczne"
+      ? "Równowaga daje wolność, dobrobyt"
       : lang === "de"
-        ? "Dynamische Balance schafft Freiheit, Wohlstand und verlässliche Dienste"
-        : "Dynamic balance creates freedom, prosperity, and reliable public services";
+        ? "Balance schafft Freiheit, Wohlstand"
+        : "Balance means freedom, prosperity";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">
@@ -318,10 +318,10 @@ export function HarmonyDiagram({ lang, step }: DiagramProps) {
 
   const footer =
     lang === "pl"
-      ? "Każdy biegun pilnuje pozostałych, by nikt nie sprawował władzy absolutnej"
+      ? "Każdy pilnuje pozostałych"
       : lang === "de"
-        ? "Jede Seite kontrolliert die anderen, damit niemand absolute Macht anhäuft"
-        : "Each checks the others so no single corner holds unchecked power";
+        ? "Jeder kontrolliert die anderen"
+        : "Everyone checks the others";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">

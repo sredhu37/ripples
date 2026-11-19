@@ -110,7 +110,7 @@ export const lesson: Lesson = {
           "Mosty, gospodarstwa rolne i zabytkowe miasta zamieniły się pod ostrzałem w ruinę.",
         ),
         T(
-          "On the eleventh hour of the eleventh day of November 1918, an armistice silenced the guns.",
+          "On 11 November 1918, at 11 o'clock, an armistice silenced the guns.",
           "Am elften Tag des elften Monats 1918 brachte ein Waffenstillstand die Waffen zum Schweigen.",
           "Jedenastego dnia jedenastego miesiąca 1918 roku o godzinie jedenastej zawieszenie broni uciszyło działa.",
         ),

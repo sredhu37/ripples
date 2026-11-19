@@ -25,19 +25,19 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "A hundred years ago, cities employed thousands of people to walk streets every evening lighting gas lanterns.",
+          "A hundred years ago, cities employed people to light gas lanterns every evening.",
           "Vor hundert Jahren beschaeftigten Staedte tausende Menschen, um abends Strassenlaternen von Hand anzuenden.",
-          "Sto lat temu miasta zatrudniały tysiące ludzi, którzy każdego wieczoru przemierzali ulice, ręcznie zapalając latarnie gazowe.",
+          "Sto lat temu miasta zatrudniały tysiące ludzi do zapalania latarni gazowych każdego wieczoru.",
         ),
         T(
-          "Telephone exchanges were filled with operators plugging cords into wooden boards by hand all day long.",
+          "Telephone exchanges were full of operators plugging cords into wooden boards by hand.",
           "In Telefonzentralen steckten hunderte Vermittlerinnen den ganzen Tag Verbindungskabel in Stecktafeln.",
           "W centralach telefonicznych setki telefonistek przez cały dzień ręcznie wciskały kable w drewniane pulpity łączeniowe.",
         ),
         T(
-          "At bowling alleys, young pin-setters hurried down the lane after each roll to set pins back upright.",
+          "At bowling alleys, young pin-setters stood the fallen pins up after each roll.",
           "Auf Kegelbahnen stellten fleissige Helfer nach jedem Wurf die umgefallenen Holzkegel muehsam wieder auf.",
-          "Na torach kręglarskich pomocnicy zbiegali po każdym rzucie na koniec toru, by mozolnie ustawiać przewrócone kręgle.",
+          "Na torach kręglarskich pomocnicy po każdym rzucie mozolnie ustawiali przewrócone kręgle.",
         ),
       ],
       HistoricalVanishedTradesDiagram,
@@ -67,12 +67,12 @@ export const lesson: Lesson = {
         T(
           "Technology has never eliminated human work: it continuously creates jobs our ancestors never imagined.",
           "Technik hat menschliche Arbeit nie abgeschafft: Sie schafft staendig Berufe, die frueher undenkbar waren.",
-          "Technologia nigdy nie zlikwidowała ludzkiej pracy: nieustannie tworzy zawody, o których nasi przodkowie nawet nie śnili.",
+          "Technologia nigdy nie zlikwidowała ludzkiej pracy. Stale tworzy zawody, o jakich nasi przodkowie nie śnili.",
         ),
         T(
-          "No one in 1900 could have worked as an aerospace engineer, a web designer, or a mobile app developer.",
+          "In 1900 nobody could be an aerospace engineer, a web designer, or an app developer.",
           "Um 1900 konnte niemand als Luftfahrtingenieur, Webdesigner oder Smartphone-Entwickler arbeiten.",
-          "W 1900 roku nikt nie mógł pracować jako inżynier lotniczy, projektant stron WWW czy twórca aplikacji na smartfony.",
+          "W 1900 roku nie było jeszcze inżynierów lotniczych, projektantów stron WWW ani twórców aplikacji.",
         ),
         T(
           "Each invention unlocks hundreds of new specializations, services, and creative fields.",
@@ -87,7 +87,7 @@ export const lesson: Lesson = {
         T(
           "Today, growing fields like clean energy and environmental engineering offer thousands of *green jobs*.",
           "Heute bieten erneuerbare Energien und Umweltschutz tausende neue *Zukunftsberufe*.",
-          "Dziś dynamicznie rosnące dziedziny, takie jak czysta energia i ochrona środowiska, oferują tysiące *zielonych miejsc pracy*.",
+          "Dziś czysta energia i ochrona środowiska oferują tysiące *zielonych miejsc pracy*.",
         ),
         T(
           "Wind turbine technicians climb high towers, and battery chemists engineer cleaner electric buses.",
@@ -107,12 +107,12 @@ export const lesson: Lesson = {
         T(
           "The greatest skill you can build for the future is a mindset of *lifelong learning*.",
           "Die wertvollste Faehigkeit fuer deine Zukunft ist die Freude an *lebenslanges Lernen*.",
-          "Najwspanialszą umiejętnością, jaką możesz w sobie rozwinąć na przyszłość, jest postawa *uczenia się przez całe życie*.",
+          "Najwspanialszą umiejętnością na przyszłość jest postawa *uczenia się przez całe życie*.",
         ),
         T(
           "Curiosity, adaptability, and learning how to learn matter more than memorizing any single tool.",
           "Neugier und die Bereitschaft, Neues zu probieren, zaehlen weit mehr als starres Auswendiglernen.",
-          "Ciekawość świata, elastyczność i umiejętność zdobywania wiedzy liczą się o wiele bardziej niż pamięciowa nauka jednego narzędzia.",
+          "Ciekawość świata, elastyczność i umiejętność uczenia się liczą się bardziej niż wkuwanie jednego narzędzia.",
         ),
         T(
           "By exploring new ideas, you can comfortably master whatever tools the future brings.",

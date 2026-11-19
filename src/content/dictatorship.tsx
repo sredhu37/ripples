@@ -31,7 +31,7 @@ export const lesson: Lesson = {
         ),
         T(
           "A *dictatorship* is a system where one leader or small group rules with unchecked power.",
-          "Eine *Diktatur* ist ein System, in dem ein Anführer oder eine kleine Gruppe mit unkontrollierter Macht herrscht.",
+          "Eine *Diktatur* ist ein System mit unkontrollierter Macht. Ein Anführer oder eine kleine Gruppe herrscht allein.",
           "*Dyktatura* to ustrój, w którym jeden przywódca lub wąska grupa rządzi bez żadnej kontroli.",
         ),
         T(
@@ -75,12 +75,12 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "Because nobody was allowed to speak the truth, the small leak flooded the cellars for weeks.",
+          "Nobody was allowed to speak the truth. So the small leak flooded the cellars for weeks.",
           "Weil niemand die Wahrheit sagen durfte, überschwemmte das Leck wochenlang die Keller.",
           "Ponieważ nikomu nie wolno było mówić prawdy, mały wyciek tygodniami zalewał piwnice.",
         ),
         T(
-          "Otto explains: 'Freedom of speech is not just an idea, it is a practical tool to fix mistakes.'",
+          "Otto explains: 'Freedom of speech is not just an idea. It is a practical tool to fix mistakes.'",
           "Otto erklärt: 'Meinungsfreiheit ist nicht nur eine Idee, sondern ein Werkzeug um Fehler zu beheben.'",
           "Otto wyjaśnia: 'Wolność słowa to nie tylko wzniosła idea, to praktyczne narzędzie do naprawiania błędów.'",
         ),
@@ -110,7 +110,7 @@ export const lesson: Lesson = {
           "Należą do nich niezawisłe sądy, wolna prasa oraz prawa konstytucyjne, których nikt nie może odebrać.",
         ),
         T(
-          "Protecting every person's dignity and freedom ensures that power serves the people, not the other way around.",
+          "Every person's dignity and freedom are protected. So power serves the people, not the other way around.",
           "Der Schutz von Würde und Freiheit sichert, dass Macht dem Volk dient und nicht umgekehrt.",
           "Ochrona godności i wolności każdego człowieka gwarantuje, że władza służy ludziom, a nie ludzie władzy.",
         ),
@@ -150,9 +150,9 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "Power is unchecked, people cannot speak up about mistakes, and bad leaders cannot be voted out",
+            "Power is unchecked, people fear speaking up, and bad leaders cannot be voted out",
             "Macht ist unkontrolliert, Menschen dürfen Fehler nicht ansprechen und schlechte Anführer nicht abwählen",
-            "Władza jest poza kontrolą, ludzie boją się mówić o błędach, a złych przywódców nie da się odwołać w wyborach",
+            "Władza jest bez kontroli, ludzie boją się mówić, a złych przywódców nie można odwołać",
           ),
           correct: true,
         },
@@ -187,7 +187,7 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "It allows citizens and the press to point out broken pipes and errors without fear",
+            "It lets citizens and the press point out broken pipes and errors without fear",
             "Sie erlaubt Bürgern und der Presse, auf kaputte Rohre und Fehler ohne Angst hinzuweisen",
             "Pozwala obywatelom i prasie bez lęku wskazywać awarie, błędy i niegospodarność",
           ),

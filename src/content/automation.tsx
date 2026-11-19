@@ -70,14 +70,14 @@ export const lesson: Lesson = {
           "Roboty podążają za precyzyjnymi współrzędnymi matematycznymi, by spawać łączenia z dokładnością do ułamka milimetra.",
         ),
         T(
-          "They apply smooth coats of car paint in sealed booths where human lungs would be harmed.",
+          "They spray smooth car paint in sealed booths where human lungs would be harmed.",
           "Sie lackieren Autokarosserien in versiegelten Kammern, in denen Menschenluft schaedlich waere.",
           "Nakładają gładkie warstwy lakieru w szczelnych komorach, gdzie opary chemiczne byłyby szkodliwe dla ludzkich płuc.",
         ),
         T(
-          "A robot never loses focus, never slips on an oily floor, and never suffers back strain.",
+          "A robot never loses focus or slips on an oily floor. It never gets a sore back.",
           "Ein Roboter ermuedet nicht, rutscht nicht aus und leidet nie unter Rueckenschmerzen.",
-          "Robot nigdy nie traci skupienia, nie ślizga się na zaolejonej posadzce i nie cierpi na bóle pleców.",
+          "Robot nigdy nie traci skupienia ani nie ślizga się na zaolejonej posadzce. Robotowi nigdy nie boli kręgosłup.",
         ),
       ],
       PrecisionWeldingDiagram,
@@ -95,7 +95,7 @@ export const lesson: Lesson = {
           "Niewidoczne wiązki światła tworzą barierę ochronną wokół ruchomego ramienia mechanicznego.",
         ),
         T(
-          "If a maintenance engineer steps across the line, the machine shuts off in a split second.",
+          "If a maintenance engineer steps across the line, the machine stops at once.",
           "Tritt eine Wartungskraft ueber die Begrenzung, schaltet die Anlage im Bruchteil einer Sekunde ab.",
           "Jeśli technik lub pracownik przekroczy tę linię, maszyna wyłącza się w ułamku sekundy.",
         ),
@@ -177,7 +177,7 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "It halts the machinery in a split second if a person interrupts the invisible light beams",
+            "It stops the machine at once if a person blocks the invisible light beams",
             "Es stoppt die Maschine sofort, sobald ein Mensch die unsichtbaren Lichtschranken unterbricht",
             "Zatrzymuje maszynę w ułamku sekundy, gdy człowiek przetnie niewidzialne wiązki światła",
           ),

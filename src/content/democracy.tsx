@@ -25,9 +25,9 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "Moss was elected council chair, but winning an election does not mean you can do whatever you want.",
-          "Moss wurde zum Ratsvorsitzenden gewählt, aber eine Wahl zu gewinnen bedeutet nicht, dass man tun kann, was man will.",
-          "Moss został wybrany przewodniczącym rady, ale wygrana w wyborach nie oznacza, że można robić wszystko, na co ma się ochotę.",
+          "Moss was elected council chair. But winning an election does not mean you can do whatever you want.",
+          "Moss wurde zum Ratsvorsitzenden gewählt. Aber eine Wahl zu gewinnen heißt nicht, dass man tun darf, was man will.",
+          "Moss został wybrany przewodniczącym rady. Ale wygrana w wyborach nie oznacza, że można robić wszystko, na co ma się ochotę.",
         ),
         T(
           "Ripple Town wrote down a shared Town Charter that sets fair rules for everyone.",
@@ -35,8 +35,8 @@ export const lesson: Lesson = {
           "Mieszkańcy Ripple Town spisali wspólny Statut Miasteczka, który ustala sprawiedliwe reguły dla każdego.",
         ),
         T(
-          "The Charter guarantees that everyone has the right to speak up and that laws apply equally to all.",
-          "Die Satzung garantiert, dass jeder das Recht hat seine Meinung zu sagen und Gesetze für alle gleich gelten.",
+          "The Charter guarantees that everyone has the right to speak up. Laws apply equally to all.",
+          "Die Satzung garantiert jedem das Recht, seine Meinung zu sagen. Gesetze gelten für alle gleich.",
           "Statut gwarantuje, że każdy ma prawo zabrać głos, a prawo obowiązuje wszystkich w równym stopniu.",
         ),
         T(
@@ -60,7 +60,7 @@ export const lesson: Lesson = {
           "W demokracji rządzący nie mogą po prostu wydawać rozkazów, nie słuchając głosu obywateli.",
         ),
         T(
-          "Citizens gathered at an open town hall: 'The school roof leaks, and bakers need grain storage!'",
+          "Citizens met at an open town hall. 'The school roof leaks, and bakers need grain storage!'",
           "Die Bürger versammelten sich: 'Das Schuldach ist undicht und Bäcker brauchen einen Kornspeicher!'",
           "Mieszkańcy zebrali się na rynku: 'Dach szkoły przecieka, a piekarze potrzebują spichlerza na zboże!'",
         ),
@@ -80,13 +80,13 @@ export const lesson: Lesson = {
           "Zamiast kłócić się bez końca, rada wynegocjowała rozsądny kompromis.",
         ),
         T(
-          "A compromise means every group gives up a little bit so that everyone gets what they truly need.",
-          "Ein Kompromiss bedeutet, dass jede Gruppe ein wenig nachgibt, damit jeder bekommt, was er wirklich braucht.",
-          "Kompromis oznacza, że każda ze stron ustępuje odrobinę, aby każdy otrzymał to, co jest mu naprawdę niezbędne.",
+          "A compromise means every group gives up a little. That way everyone gets what they truly need.",
+          "Ein Kompromiss bedeutet, dass jede Gruppe ein wenig nachgibt. So bekommt jeder, was er wirklich braucht.",
+          "Kompromis oznacza, że każda ze stron trochę ustępuje. Dzięki temu każdy dostaje to, czego naprawdę potrzebuje.",
         ),
         T(
-          "They agreed to repair the school roof, build a shared grain store, and put a modest clock on the hall.",
-          "Sie einigten sich darauf, das Schuldach zu reparieren, einen Speicher zu bauen und eine Uhr anzubringen.",
+          "They agreed to repair the school roof and build a shared grain store. They also put a modest clock on the hall.",
+          "Sie einigten sich darauf, das Schuldach zu reparieren und einen Speicher zu bauen. Außerdem bekam die Halle eine schlichte Uhr.",
           "Zgodzili się naprawić dach szkoły, postawić spichlerz i umieścić skromny zegar na ścianie ratusza.",
         ),
         T(
@@ -112,12 +112,12 @@ export const lesson: Lesson = {
         T(
           "Second: The rule of law, meaning rules and courts protect everyone, including minorities.",
           "Zweitens: Die Rechtsstaatlichkeit, was bedeutet, dass Regeln und Gerichte jeden schützen.",
-          "Po drugie: Rządy prawa, co oznacza, że ustawy i niezawisłe sądy chronią każdego obywatela, w tym mniejszości.",
+          "Po drugie: Rządy prawa. To znaczy, że ustawy i niezawisłe sądy chronią każdego obywatela, także mniejszości.",
         ),
         T(
-          "Third: Peaceful error correction: if leaders break their promises, citizens can vote them out next time.",
+          "Third: Peaceful error correction. If leaders break their promises, citizens can vote them out next time.",
           "Drittens: Friedliche Fehlerkorrektur: Wenn Anführer Wort brechen, können Bürger sie abwählen.",
-          "Po trzecie: Pokojowa korekta błędów: jeśli rządzący łamią obietnice, obywatele mogą ich odwołać w kolejnych wyborach.",
+          "Po trzecie: Pokojowa korekta błędów. Jeśli rządzący łamią obietnice, obywatele mogą ich odwołać w kolejnych wyborach.",
         ),
       ],
       PillarsDiagram,
@@ -126,7 +126,7 @@ export const lesson: Lesson = {
       [
         T(
           "Because every citizen has a voice, people trust the shared rules and work together peacefully.",
-          "Weil jeder Bürger eine Stimme hat, vertrauen die Menschen den gemeinsamen Regeln und arbeiten friedlich zusammen.",
+          "Weil jeder Bürger eine Stimme hat, vertrauen die Menschen den gemeinsamen Regeln. Sie arbeiten friedlich zusammen.",
           "Ponieważ każdy obywatel ma prawo głosu, ludzie ufają wspólnym zasadom i współpracują w pokoju.",
         ),
         T(
@@ -161,7 +161,7 @@ export const lesson: Lesson = {
         {
           text: T(
             "Citizens participate in decisions, follow shared laws, and resolve disputes through debate and voting",
-            "Bürger wirken an Entscheidungen mit, befolgen gemeinsame Gesetze und lösen Streit durch Debatte und Wahl",
+            "Bürger entscheiden mit, befolgen gemeinsame Gesetze und lösen Streit durch Debatte und Wahl",
             "Obywatele współdecydują o wspólnych sprawach, przestrzegają praw i rozwiązują spory poprzez debatę i głosowanie",
           ),
           correct: true,
@@ -177,7 +177,7 @@ export const lesson: Lesson = {
           text: T(
             "There are no rules and everyone does whatever they want",
             "Es gibt keine Regeln und jeder macht, was er will",
-            "Nie ma żadnych praw ani zasad i każdy robi tylko to, na co ma ochotę",
+            "Nie ma żadnych zasad i każdy robi tylko to, na co ma ochotę",
           ),
         },
       ],

@@ -130,7 +130,7 @@ export const lesson: Lesson = {
           "W całych Indiach zbudowano gęstą sieć kolejową ze stalowymi torami i parowozami.",
         ),
         T(
-          "The main tracks ran from inland cotton fields and coal mines straight to harbor export docks.",
+          "The main tracks ran from inland cotton fields and coal mines to export docks.",
           "Die Hauptstrecken fuehrten von Baumwollfeldern und Minen direkt zu den Ausfuhrhaefen.",
           "Główne trasy wiodły z plantacji bawełny i kopalń prosto do doków morskich portów wywozowych.",
         ),

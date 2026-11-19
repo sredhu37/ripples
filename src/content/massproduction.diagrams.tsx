@@ -10,10 +10,10 @@ export function ArtisanWorkshopDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Każda część była ręcznie wycinana i piłowana, by pasować tylko do jednego przedmiotu"
+      ? "Ręcznie piłowane, jedna sztuka"
       : lang === "de"
-        ? "Jedes Teil wurde einzeln von Hand gefeilt und passte nur in dieses eine Stueck"
-        : "Each piece was cut and filed by hand to fit only that single item";
+        ? "Handgefeilt für ein Stück"
+        : "Hand-filed for one item";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Artisan Workshop">
@@ -59,10 +59,10 @@ export function ArtisanWorkshopDiagram({ lang, step }: DiagramProps) {
 export function LuxuryPriceTagDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Wyroby rzemieślnicze były towarem luksusowym"
+      ? "Wyroby rzemieślnicze: luksus"
       : lang === "de"
-        ? "Handgefertigte Waren waren seltene Luxusgueter"
-        : "Handmade Goods Were Rare Luxuries";
+        ? "Handgefertigte Waren: seltener Luxus"
+        : "Handmade Goods: Rare Luxuries";
 
   const coinsLabel = lang === "pl" ? "500 monet" : lang === "de" ? "500 Muenzen" : "500 Coins";
   const wageLabel =
@@ -70,10 +70,10 @@ export function LuxuryPriceTagDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Ponieważ praca trwała tygodniami, zwykłe rodziny nie mogły sobie pozwolić na podstawowe urządzenia"
+      ? "Wolna praca, wysokie ceny"
       : lang === "de"
-        ? "Weil Handarbeit Wochen dauerte, konnten sich Familien solche Waren nicht leisten"
-        : "Because craft took weeks, ordinary families could not afford basic machines";
+        ? "Langsame Arbeit, hohe Preise"
+        : "Slow work, high prices";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="High Costs of Handmade Goods">
@@ -128,10 +128,10 @@ export function InterchangeableGearsDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Każda część wykonana w identycznym wymiarze: każde koło zębate pasuje do każdego zegara czy roweru"
+      ? "Każda zębatka pasuje wszędzie"
       : lang === "de"
-        ? "Jedes Teil exakt genormt: Jedes Zahnrad passt in jedes Fahrrad oder jede Uhr"
-        : "Every part made to the exact same size: any gear fits any clock or bicycle";
+        ? "Jedes Zahnrad passt überall"
+        : "Any gear fits anywhere";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Interchangeable Parts">
@@ -174,7 +174,7 @@ export function InterchangeableGearsDiagram({ lang, step }: DiagramProps) {
 export function MovingConveyorAssemblyDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Ruchoma linia montażowa (taśma produkcyjna)"
+      ? "Ruchoma linia montażowa"
       : lang === "de"
         ? "Das bewegliche Fliessband"
         : "The Moving Assembly Line";
@@ -185,10 +185,10 @@ export function MovingConveyorAssemblyDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Taśma dostarczała części bezpośrednio do rąk robotników, dziesięciokrotnie przyspieszając produkcję"
+      ? "Części jadą do robotników"
       : lang === "de"
-        ? "Das Band brachte Bauteile direkt zum Arbeiter und verzehnfachte die Ausbeute"
-        : "Conveyor belts brought parts directly to workers, multiplying production tenfold";
+        ? "Teile kommen zum Arbeiter"
+        : "Parts come to workers";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Moving Assembly Line">
@@ -267,10 +267,10 @@ export function MovingConveyorAssemblyDiagram({ lang, step }: DiagramProps) {
 export function BicyclesForEveryoneDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Przystępne cenowo rowery dla każdej rodziny"
+      ? "Rowery dla każdej rodziny"
       : lang === "de"
-        ? "Erschwingliche Fahrraeder fuer jede Familie"
-        : "Affordable Bicycles for Every Family";
+        ? "Fahrräder für jede Familie"
+        : "Bicycles for Every Family";
 
   const priceLabel = lang === "pl" ? "50 monet" : lang === "de" ? "50 Muenzen" : "50 Coins";
   const badgeLabel =
@@ -278,10 +278,10 @@ export function BicyclesForEveryoneDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Niższe koszty zamieniły dobra luksusowe w codzienne narzędzia zwykłych domów"
+      ? "Luksus staje się codziennością"
       : lang === "de"
-        ? "Guenstige Preise machten Luxusgueter zu alltaeglichen Helfern fuer normale Haushalte"
-        : "Lower costs turned luxury goods into everyday tools for ordinary households";
+        ? "Luxus wird zum Alltag"
+        : "Luxury becomes everyday tools";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Affordable Goods for All">
