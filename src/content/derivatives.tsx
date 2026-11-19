@@ -35,14 +35,14 @@ export const lesson: Lesson = {
           "Każdy worek kosztuje Mayę trzy monety w postaci paliwa, nasion i ciężkiej pracy.",
         ),
         T(
-          "Maya worries that autumn floods elsewhere will flood the market and crash wheat to one coin.",
-          "Maya sorgt sich, dass Überschwemmungen anderswo den Markt überschwemmen und den Preis auf eine Münze drücken.",
-          "Maya martwi się, że urodzaj lub powódź w innych krainach zaleje rynek tanim ziarnem i zbije cenę do jednej monety.",
+          "Maya worries about autumn floods elsewhere. They could flood the market and crash wheat to one coin.",
+          "Maya sorgt sich vor Überschwemmungen anderswo. Sie könnten den Markt fluten und den Preis auf eine Münze drücken.",
+          "Maya boi się urodzaju lub powodzi w innych krainach. Rynek zaleje tanie ziarno, a cena spadnie do jednej monety.",
         ),
         T(
           "Meanwhile, Baker Bea fears summer heatwaves will spike wheat to eight coins, ruining her bakery.",
-          "Gleichzeitig fürchtet Bäckerin Bea eine Hitzewelle, die den Weizen auf acht Münzen treibt und ihre Bäckerei ruiniert.",
-          "Tymczasem piekarka Bea obawia się, że letnia susza wywinduje ceny pszenicy do ośmiu monet, rujnując jej piekarnię.",
+          "Gleichzeitig fürchtet Bäckerin Bea eine Hitzewelle. Die könnte den Weizen auf acht Münzen treiben und ihre Bäckerei ruinieren.",
+          "Tymczasem piekarka Bea obawia się letniej suszy. Pszenica mogłaby zdrożeć do ośmiu monet i zrujnować jej piekarnię.",
         ),
       ],
       SpringWorriesDiagram,
@@ -50,9 +50,9 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "Maya and Bea meet at the harbor table in spring before any seeds have even sprouted.",
+          "Maya and Bea meet at the harbor table in spring, before any seed sprouts.",
           "Maya und Bea treffen sich im Frühling am Hafentisch, noch bevor ein einziger Halm sprießt.",
-          "Maya i Bea spotykają się wiosną przy portowym stole, zanim z ziemi wykiełkuje choćby jedno źdźbło.",
+          "Maya i Bea spotykają się wiosną przy portowym stole, zanim cokolwiek wykiełkuje.",
         ),
         T(
           "They sign an agreement: in autumn, Maya will deliver fifty sacks at four coins each.",
@@ -61,7 +61,7 @@ export const lesson: Lesson = {
         ),
         T(
           "Bea promises to buy all fifty sacks at exactly four coins, whatever the weather does.",
-          "Bea verspricht, alle fünfzig Säcke für genau vier Münzen zu kaufen, wie auch immer das Wetter wird.",
+          "Bea verspricht, alle fünfzig Säcke für genau vier Münzen zu kaufen, bei jedem Wetter.",
           "Bea zobowiązuje się kupić wszystkie pięćdziesiąt worków dokładnie po cztery monety, bez względu na pogodę.",
         ),
         T(
@@ -90,9 +90,9 @@ export const lesson: Lesson = {
           "Inne piekarnie wpadają w panikę i wygaszają piece, bo mąka stała się za droga.",
         ),
         T(
-          "Bea smiles and shows her signed contract, buying flour at four coins to bake school bread.",
-          "Bea lächelt, zeigt ihren Vertrag vor und kauft Mehl zu vier Münzen, um Schulbrote zu backen.",
-          "Bea uśmiecha się spokojnie, pokazuje podpisany kontrakt i kupuje mąkę po cztery monety, by piec chleb dla szkół.",
+          "Bea smiles and shows her signed contract. She buys flour at four coins to bake school bread.",
+          "Bea lächelt und zeigt ihren Vertrag. Sie kauft Mehl zu vier Münzen und backt Schulbrote.",
+          "Bea uśmiecha się i pokazuje podpisany kontrakt. Kupuje mąkę po cztery monety i piecze chleb dla szkół.",
         ),
       ],
       DroughtWithContractDiagram,
@@ -115,7 +115,7 @@ export const lesson: Lesson = {
           "Niezabezpieczeni rolnicy straciliby po dwie monety na każdym worku i zbankrutowali.",
         ),
         T(
-          "With the price lock contract, Maya delivers at four coins and earns her honest one-coin profit.",
+          "With the price lock contract, Maya still delivers at four coins. She earns her honest one-coin profit.",
           "Mit dem Festpreisvertrag liefert Maya zu vier Münzen und sichert ihren ehrlichen Gewinn.",
           "Dzięki kontraktowi blokującemu cenę Maya sprzedaje pszenicę po cztery monety i zachowuje swój uczciwy zysk.",
         ),
@@ -132,7 +132,7 @@ export const lesson: Lesson = {
         T(
           "Lufthansa locks jet fuel prices months ahead so holiday ticket prices stay predictable.",
           "Die Lufthansa sichert Treibstoffpreise Monate im Voraus, damit Urlaubsflüge planbar bleiben.",
-          "Linie lotnicze blokują ceny paliwa lotniczego na wiele miesięcy w przód, by ceny biletów wakacyjnych były stabilne.",
+          "Linie lotnicze blokują ceny paliwa lotniczego na wiele miesięcy w przód. Dzięki temu ceny biletów wakacyjnych są stabilne.",
         ),
         T(
           "Derivatives help real businesses protect jobs and keep production running smoothly.",
@@ -202,7 +202,7 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "A financial contract whose value is derived from an underlying real asset like wheat or fuel",
+            "A contract whose value comes from a real thing, like wheat or fuel",
             "Ein Vertrag, dessen Wert von einem realen Basiswert wie Weizen oder Treibstoff abhängt",
             "Umowa finansowa, której wartość pochodzi od rzeczywistego dobra, takiego jak pszenica czy paliwo",
           ),

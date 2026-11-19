@@ -60,7 +60,7 @@ export const lesson: Lesson = {
           "Na dole pergaminu znajdują się trzy odrywane odcinki zwane *kuponami*.",
         ),
         T(
-          "On every annual Harvest Day, Sam tears off one coupon and receives five coins of interest.",
+          "Every year on Harvest Day, Sam tears off one coupon. He gets five coins of interest.",
           "An jedem jährlichen Erntetag reißt Sam einen Kupon ab und erhält fünf Münzen Zinsen.",
           "W każde doroczne Święto Plonów Sam odrywa jeden kupon i otrzymuje pięć monet odsetek.",
         ),
@@ -105,19 +105,19 @@ export const lesson: Lesson = {
           "Istniejące obligacje mogą być sprzedawane innym mieszkańcom na giełdzie miejskiej.",
         ),
         T(
-          "When the Town Bank raises interest rates on new accounts to eight percent, old bonds look weak.",
+          "The Town Bank raises interest on new accounts to eight percent. Old bonds look weak.",
           "Erhöht die Bank den Zins auf Neuanlagen auf acht Prozent, wirken alte Anleihen unattraktiv.",
-          "Gdy Bank Miejski podnosi oprocentowanie nowych lokat do ośmiu procent, stare obligacje stają się mniej atrakcyjne.",
+          "Bank Miejski podnosi oprocentowanie nowych lokat do ośmiu procent. Stare obligacje wyglądają słabo.",
         ),
         T(
-          "Nobody wants to pay one hundred coins for an old paper that only pays five coins.",
+          "Nobody pays one hundred coins for an old paper that pays only five coins.",
           "Niemand zahlt hundert Münzen für ein altes Papier, das nur fünf Münzen Zinsen abwirft.",
-          "Nikt nie chce zapłacić stu monet za stary papier, który daje tylko pięć monet odsetek rocznie.",
+          "Nikt nie chce płacić stu monet za stary papier, który daje tylko pięć monet rocznie.",
         ),
         T(
           "To sell, the price tag must tilt down to eighty-five coins: this is *die Zins-Wippe*.",
           "Um zu verkaufen, muss der Preis auf fünfundachtzig Münzen sinken: das ist *die Zins-Wippe*.",
-          "Aby znaleźć nabywcę, cena obligacji musi spaść do osiemdziesięciu pięciu monet: tak działa *huśtawka stóp i cen (Zins-Wippe)*.",
+          "Aby sprzedać obligację, cena musi spaść do osiemdziesięciu pięciu monet. Tak działa *huśtawka stóp i cen (Zins-Wippe)*.",
         ),
       ],
       ZinsWippeDiagram,
@@ -165,7 +165,7 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "A bond is a loan that pays fixed interest, while a stock is part-ownership of a business",
+            "A bond is a fixed-interest loan; a stock is part-ownership of a business",
             "Eine Anleihe ist ein Kredit mit festen Zinsen, während eine Aktie Miteigentum bedeutet",
             "Obligacja to pożyczka ze stałymi odsetkami, podczas gdy akcja to współwłasność przedsiębiorstwa",
           ),
@@ -202,7 +202,7 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "The price falls like a seesaw because buyers can get higher interest on new accounts",
+            "The price falls like a seesaw, because new accounts pay more interest",
             "Der Preis sinkt wie auf einer Wippe, weil Neuanlagen höhere Zinsen bieten",
             "Cena spada jak na huśtawce, ponieważ inwestorzy mogą zdobyć wyższe odsetki na nowych lokatach",
           ),

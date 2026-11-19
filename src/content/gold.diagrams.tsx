@@ -9,10 +9,10 @@ export function GoldVaultDiagram({ lang, step }: DiagramProps) {
         : "Harbor Gold Vault";
   const conclusion =
     lang === "pl"
-      ? "Trwałe, rzadkie i nigdy nie rdzewieje"
+      ? "Trwałe, rzadkie, nie rdzewieje"
       : lang === "de"
-        ? "Langlebig, selten und rostet nie"
-        : "Durable, Rare, and Never Rusts";
+        ? "Langlebig, selten, rostet nie"
+        : "Durable, rare, never rusts";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -71,10 +71,10 @@ export function SunnyCalmDiagram({ lang, step }: DiagramProps) {
   const shipsCoins = lang === "pl" ? "+8 monet" : lang === "de" ? "+8 Münzen" : "+8 Coins";
   const conclusion =
     lang === "pl"
-      ? "Monety tworzą narzędzia i wypiekają chleb"
+      ? "Monety kupują narzędzia, chleb"
       : lang === "de"
-        ? "Münzen bauen Werkzeuge und backen Brot"
-        : "Coins build real tools and bake bread";
+        ? "Münzen kaufen Werkzeug, Brot"
+        : "Coins buy tools, bread";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -153,10 +153,10 @@ export function StormyCrisisDiagram({ lang, step }: DiagramProps) {
         : "Values swing wildly";
   const conclusion =
     lang === "pl"
-      ? "Ludzie szukają bezpiecznej przystani dla oszczędności"
+      ? "Ludzie chronią swoje oszczędności"
       : lang === "de"
-        ? "Menschen suchen Sicherheit für Erspartes"
-        : "People seek safety for their savings";
+        ? "Menschen schützen ihr Erspartes"
+        : "People protect their savings";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -217,13 +217,13 @@ export function SafeHarborDiagram({ lang, step }: DiagramProps) {
       ? "Złoto jako bezpieczna przystań"
       : lang === "de"
         ? "Gold als sicherer Hafen"
-        : "Gold as a Safe Harbor";
+        : "Gold: a Safe Harbor";
   const conclusion =
     lang === "pl"
-      ? "Wartości zabezpieczone w złocie chronią siłę nabywczą"
+      ? "Złoto chroni siłę nabywczą"
       : lang === "de"
-        ? "In Gold gesicherte Werte behalten ihre Kaufkraft"
-        : "Coins stored in gold preserve their purchasing power";
+        ? "Gold erhält die Kaufkraft"
+        : "Gold keeps buying power";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -275,16 +275,16 @@ export function CentralBankVaultDiagram({ lang, step }: DiagramProps) {
         : "National Gold Reserves";
   const subtitle =
     lang === "pl"
-      ? "Setki ton złota gwarantują zaufanie do państwa"
+      ? "Setki ton złota"
       : lang === "de"
-        ? "Über 3.300 Tonnen Gold sichern nationales Vertrauen"
-        : "Over 3,300 tonnes of gold backing national trust";
+        ? "Über 3.300 Tonnen Gold"
+        : "3,300+ tonnes of gold";
   const conclusion =
     lang === "pl"
-      ? "Ponadczasowa kotwica, gdy waluty tracą na wartości"
+      ? "Kotwica, gdy waluty słabną"
       : lang === "de"
-        ? "Ein zeitloser Anker, wenn Währungen schwanken"
-        : "A timeless anchor when other currencies wobble";
+        ? "Anker, wenn Währungen schwanken"
+        : "Anchor when currencies wobble";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>

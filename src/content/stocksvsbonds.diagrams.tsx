@@ -9,10 +9,10 @@ export function ExpeditionShipDiagram({ lang, step }: DiagramProps) {
         : "Expedition Ship In Dock";
   const subtext =
     lang === "pl"
-      ? "Wielka wyprawa morska: finansowana z akcji i obligacji"
+      ? "Wyprawa: akcje i obligacje"
       : lang === "de"
-        ? "Die große Seereise: Finanziert durch Aktien & Anleihen"
-        : "The Great Ocean Voyage: Funded by Stocks & Bonds";
+        ? "Seereise: Aktien & Anleihen"
+        : "Voyage: Stocks & Bonds";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -54,8 +54,8 @@ export function EquityVsDebtDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Dwa sposoby sfinansowania statku"
       : lang === "de"
-        ? "Zwei Wege, das Schiff zu finanzieren"
-        : "Two Ways to Fund the Ship";
+        ? "Zwei Wege zur Finanzierung"
+        : "Two Ways to Fund";
 
   const finnTitle =
     lang === "pl"
@@ -97,10 +97,10 @@ export function EquityVsDebtDiagram({ lang, step }: DiagramProps) {
 
   const subtext =
     lang === "pl"
-      ? "Jeden ma udział w skarbach; drugi ma prawną obietnicę"
+      ? "Finn: udział. Bea: obietnica"
       : lang === "de"
-        ? "Einer teilt den Schatz; die andere hat eine feste Zusage"
-        : "One shares in treasure; the other gets a legal promise";
+        ? "Finn: Anteil. Bea: Zusage"
+        : "Finn: share. Bea: promise";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -175,10 +175,10 @@ export function GrandTreasureDiagram({ lang, step }: DiagramProps) {
         : "Grand Treasure Outcome";
   const title =
     lang === "pl"
-      ? "Wielki skarb: przywieziono 100 monet!"
+      ? "Skarb: przywieziono 100 monet!"
       : lang === "de"
-        ? "Großer Schatz: 100 Münzen erlöst!"
-        : "Grand Treasure: 100 Coins Brought Back!";
+        ? "Schatz: 100 Münzen erlöst!"
+        : "Treasure: 100 Coins Back!";
   const finnRole =
     lang === "pl"
       ? "Finn (Akcjonariusz)"
@@ -195,10 +195,10 @@ export function GrandTreasureDiagram({ lang, step }: DiagramProps) {
   const beaPayout = lang === "pl" ? "5 monet" : lang === "de" ? "5 Münzen" : "5 Coins";
   const subtext =
     lang === "pl"
-      ? "Akcjonariusze zgarniają olbrzymie zyski, gdy interes kwitnie!"
+      ? "Akcjonariusze dostają olbrzymie zyski"
       : lang === "de"
-        ? "Aktionäre erzielen riesige Gewinne, wenn das Geschäft boomt!"
-        : "Stockholders enjoy massive windfalls when the business thrives!";
+        ? "Aktionäre bekommen riesige Gewinne"
+        : "Stockholders get big profits";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -268,10 +268,10 @@ export function ShipwreckPriorityDiagram({ lang, step }: DiagramProps) {
         : "Creditor Priority in Scrape";
   const title =
     lang === "pl"
-      ? "Katastrofa: uratowano tylko 4 monety!"
+      ? "Katastrofa: tylko 4 monety!"
       : lang === "de"
-        ? "Schiffbruch: Nur 4 Münzen gerettet!"
-        : "Shipwreck: Only 4 Coins Salvaged!";
+        ? "Schiffbruch: Nur 4 Münzen!"
+        : "Shipwreck: Only 4 Coins!";
   const finnRole =
     lang === "pl"
       ? "Finn (Akcjonariusz)"
@@ -288,10 +288,10 @@ export function ShipwreckPriorityDiagram({ lang, step }: DiagramProps) {
   const beaPayout = lang === "pl" ? "4 monety" : lang === "de" ? "4 Münzen" : "4 Coins";
   const subtext =
     lang === "pl"
-      ? "Pierwszeństwo spłaty: Wierzyciele otrzymują spłatę, zanim właściciele dostaną choć grosz!"
+      ? "Wierzyciele dostają pieniądze pierwsi"
       : lang === "de"
-        ? "Gesetzlicher Vorrang: Gläubiger werden bedient, bevor Miteigentümer einen Cent sehen!"
-        : "Legal Priority: Creditors are repaid before co-owners get a cent!";
+        ? "Gläubiger werden zuerst bezahlt"
+        : "Lenders are paid first";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -361,18 +361,18 @@ export function PortfolioBalanceDiagram({ lang, step }: DiagramProps) {
         : "Balanced Portfolio";
   const title =
     lang === "pl"
-      ? "Mądra równowaga: Wzrost i Bezpieczeństwo"
+      ? "Mądra mieszanka: wzrost, bezpieczeństwo"
       : lang === "de"
-        ? "Die kluge Mischung: Wachstum & Sicherheit"
-        : "The Prudent Blend: Growth & Safety";
+        ? "Kluge Mischung: Wachstum & Sicherheit"
+        : "Wise Mix: Growth & Safety";
   const stocksLabel = lang === "pl" ? "Akcje" : lang === "de" ? "Aktien" : "Stocks";
   const bondsLabel = lang === "pl" ? "Obligacje" : lang === "de" ? "Anleihen" : "Bonds";
   const subtext =
     lang === "pl"
-      ? "Akcje dla przyszłego wzrostu, obligacje dla spokojnego snu"
+      ? "Akcje rosną, obligacje chronią"
       : lang === "de"
-        ? "Aktien für künftiges Wachstum, Anleihen für ruhigen Schlaf"
-        : "Stocks for future growth, bonds for steady peace of mind";
+        ? "Aktien wachsen, Anleihen schützen"
+        : "Stocks grow, bonds protect";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>

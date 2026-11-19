@@ -66,7 +66,7 @@ export const lesson: Lesson = {
         ),
         T(
           "When price is too high, supply is bigger than demand, causing waste.",
-          "Wenn der Preis zu hoch ist, ist das Angebot größer als die Nachfrage, was zu Verschwendung führt.",
+          "Ist der Preis zu hoch, ist das Angebot größer als die Nachfrage. Das führt zu Verschwendung.",
           "Gdy cena jest zbyt wysoka, podaż przewyższa popyt, co prowadzi do marnotrawstwa.",
         ),
       ],
@@ -232,7 +232,7 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "Finn has 4 fresh fish. Set the price slider to 3 coins so all 4 fish find buyers at a fair balance.",
+        "Finn has 4 fresh fish. Set the price slider to 3 coins so all 4 fish find buyers.",
         "Finn hat 4 frische Fische. Stelle den Preisschieber auf 3 Münzen, damit alle 4 Fische im Gleichgewicht verkauft werden.",
         "Finn ma 4 świeże ryby. Ustaw suwak na 3 monety, aby wszystkie 4 ryby znalazły nabywców w równowadze rynkowej.",
       ),
