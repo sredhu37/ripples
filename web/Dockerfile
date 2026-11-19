@@ -8,10 +8,6 @@ RUN npm ci
 COPY web/ ./
 RUN npm run build
 
-FROM nginx:1.31.9-trixie@sha256:84f7876d21d154885f99554d7ae325d8c2213f9169726ea7ab60642f2573a787 AS runtime
+FROM nginx/nginx-unprivileged:alpine3.24-perl@sha256:d3411ed56e3a0ecfdc485e584e6c8365d60ce95950e4e8cfc9c26b90e02f116f AS runtime
 
 COPY --from=builder /app/dist /usr/share/nginx/html
-
-USER nginx
-
-CMD ["nginx", "-g", "daemon off;"]

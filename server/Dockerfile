@@ -10,7 +10,7 @@ RUN npm run build && npm prune --omit=dev
 
 FROM gcr.io/distroless/nodejs26-debian13:nonroot@sha256:1d736cf8b5716c07a245301f92717143215d248fd55771ee1936ef4b3302e531 AS runtime
 WORKDIR /app
-ENV NODE_ENV=production
+# ENV NODE_ENV=production
 
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/node_modules ./node_modules
