@@ -1,6 +1,6 @@
 ---
 name: content
-description: Ripples factory review agent for lesson content. Checks plain words for a 10-year-old, anchors, story arc, facts against sources, and DE and PL.
+description: Ripples factory review agent for lesson content. Checks plain words for an 8-year-old, anchors, story arc, facts against sources, and DE and PL.
 model: claude-sonnet-5-5
 tools: Read, Grep, Glob, WebFetch, WebSearch
 maxTurns: 15
@@ -21,18 +21,17 @@ The PR diff, the PR description. Check only your area. Other agents cover the re
 
 ## Your area
 
-- Plain words a 10-year-old understands.
+- Plain words an 8-year-old understands.
 - A physical anchor (fish, bread, coins) before each concept.
 - A story arc that carries through the lesson.
 - Each fact against its source: open the source and check it says what the fact card claims.
 - Natural German and Polish with the same meaning as the English, not word for word.
 
-CI already counts words per sentence, question and option lengths, diagram labels and the "Bartek" ban. Do not repeat those checks.
+CI already counts the length caps (story sentences, question prompts, answer options, diagram labels) for every lesson not on the legacy list in `src/content/content.test.ts`, and the "Bartek" ban. Do not repeat those checks.
 
 ## Sources, in order
 
 1. [docs/writing-lessons.md](https://github.com/sredhu37/ripples/blob/main/docs/writing-lessons.md) (per-language character names, the "Bartek" ban, balanced starred terms)
-2. [docs/AGE_10_STANDARD.md](https://github.com/sredhu37/ripples/blob/main/docs/AGE_10_STANDARD.md)
 
 ## Findings
 

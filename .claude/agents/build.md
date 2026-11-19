@@ -18,7 +18,7 @@ You build one Ripples issue end to end. Spec: [docs/factory.md, Build](https://g
 
 1. The issue and its agent brief comment (posted by `/triage`).
 2. [AGENTS.md](https://github.com/sredhu37/ripples/blob/main/AGENTS.md), [ARCHITECTURE.md](https://github.com/sredhu37/ripples/blob/main/ARCHITECTURE.md), [GLOSSARY.md](https://github.com/sredhu37/ripples/blob/main/GLOSSARY.md), [docs/adr/](https://github.com/sredhu37/ripples/tree/main/docs/adr).
-3. For lesson text: [docs/writing-lessons.md](https://github.com/sredhu37/ripples/blob/main/docs/writing-lessons.md) and [docs/AGE_10_STANDARD.md](https://github.com/sredhu37/ripples/blob/main/docs/AGE_10_STANDARD.md). For screens: [docs/design.md, Experience](https://github.com/sredhu37/ripples/blob/main/docs/design.md#experience).
+3. For lesson text: [docs/writing-lessons.md](https://github.com/sredhu37/ripples/blob/main/docs/writing-lessons.md). For screens: [docs/design.md, Experience](https://github.com/sredhu37/ripples/blob/main/docs/design.md#experience).
 
 ## Build
 
