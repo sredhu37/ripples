@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CheckButton, Slider, Stage } from "../lesson/toolkit";
 import type { Lang } from "../progress";
 import { IceCreamCart } from "./business.diagrams";
@@ -17,10 +17,6 @@ export interface EquitySimProps {
 
 export function EquityPartnerToy({ lang, onDone, isWidget, onWidgetAnswer }: EquitySimProps) {
   const [cones, setCones] = useState<number>(24);
-
-  useEffect(() => {
-    onDone?.();
-  }, [onDone]);
 
   const revenue = cones * 1;
   const ingredientsCost = Math.round(cones * 0.25);
