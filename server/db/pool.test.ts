@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
-import { checkDatabase, createPool, IDLE_TIMEOUT_MS } from "./db.js";
+import { checkDatabase, createPool, IDLE_TIMEOUT_MS } from "./pool.js";
 
 describe("createPool", () => {
   it("closes idle connections within 60 seconds so Neon can scale to zero", () => {
