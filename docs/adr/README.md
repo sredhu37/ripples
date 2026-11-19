@@ -13,3 +13,4 @@ One file per decision, named `NNNN-short-title.md`. Keep each to: context, decis
 - [0009-dual-age-group-architecture-and-content-resolution.md](0009-dual-age-group-architecture-and-content-resolution.md): Dual Age Group Architecture and Content Resolution (superseded by 0010)
 - [0010-single-age-group.md](0010-single-age-group.md): Single age group
 - [0011-factory-workflow-changes-environment-secrets.md](0011-factory-workflow-changes-environment-secrets.md): Factory workflow changes and environment secrets
+- [0012-hosted-ripples-backend-accounts-payments.md](0012-hosted-ripples-backend-accounts-payments.md): Hosted Ripples: repos, backend, database, accounts and payments
