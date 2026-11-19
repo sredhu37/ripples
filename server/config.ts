@@ -7,8 +7,8 @@ export interface Config {
   port: number;
   databaseUrl: string;
   production: boolean;
-  /** Folder with the built app (`npm run build`). */
-  distDir: string;
+  /** Folder with the built app. When set, the API serves it at `/`. Unset: API only. */
+  distDir: string | undefined;
 }
 
 export function loadConfig(env: NodeJS.ProcessEnv): Config {
@@ -25,5 +25,10 @@ export function loadConfig(env: NodeJS.ProcessEnv): Config {
     databaseUrl = DEV_DATABASE_URL;
   }
 
-  return { port, databaseUrl, production, distDir: resolve(env.DIST_DIR || "dist") };
+  return {
+    port,
+    databaseUrl,
+    production,
+    distDir: env.DIST_DIR ? resolve(env.DIST_DIR) : undefined,
+  };
 }

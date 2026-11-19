@@ -1,6 +1,6 @@
 // CI rule "Specs present" (docs/factory.md, CI tools): a pull request that
-// changes a *.tsx or *.css file must also change at least one e2e/*.spec.ts.
-// Lesson content (src/content/**) is exempt: the lesson spec runs changed
+// changes a *.tsx or *.css file must also change at least one web/e2e/*.spec.ts.
+// Lesson content (web/src/content/**) is exempt: the lesson spec runs changed
 // lessons by id. Unit tests (*.test.tsx) are not UI and are exempt too.
 //
 // Usage: node scripts/check-spec-changed.mjs <base-ref>
@@ -10,8 +10,8 @@ import { execFileSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 
 const UI_FILE = /\.(tsx|css)$/;
-const EXEMPT = [/^src\/content\//, /\.test\.tsx$/];
-const SPEC_FILE = /^e2e\/[^/]+\.spec\.ts$/;
+const EXEMPT = [/^web\/src\/content\//, /\.test\.tsx$/];
+const SPEC_FILE = /^web\/e2e\/[^/]+\.spec\.ts$/;
 
 /**
  * Decides whether a set of changed files passes the rule.
@@ -21,7 +21,10 @@ const SPEC_FILE = /^e2e\/[^/]+\.spec\.ts$/;
 export function checkSpecChanged(files) {
   const ui = files.filter((f) => UI_FILE.test(f) && !EXEMPT.some((re) => re.test(f)));
   if (ui.length === 0) {
-    return { ok: true, message: "No *.tsx or *.css change outside src/content/: no spec needed." };
+    return {
+      ok: true,
+      message: "No *.tsx or *.css change outside web/src/content/: no spec needed.",
+    };
   }
   const specs = files.filter((f) => SPEC_FILE.test(f));
   if (specs.length > 0) {
@@ -30,7 +33,7 @@ export function checkSpecChanged(files) {
   return {
     ok: false,
     message: [
-      "This change touches UI files but no e2e/*.spec.ts:",
+      "This change touches UI files but no web/e2e/*.spec.ts:",
       ...ui.map((f) => `  ${f}`),
       "Update or add the spec for each changed screen (map, lesson, facts, parents, timeline).",
       "See docs/factory.md, sections Evidence and CI tools.",

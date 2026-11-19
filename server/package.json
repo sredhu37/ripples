@@ -1,0 +1,28 @@
+{
+  "name": "ripples-server",
+  "version": "0.1.0",
+  "private": true,
+  "license": "SEE LICENSE IN LICENSING.md",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch index.ts",
+    "build": "npm run typecheck && tsc -p tsconfig.build.json",
+    "start": "NODE_ENV=production DIST_DIR=../web/dist node dist/index.js",
+    "migrate": "node-pg-migrate -m migrations up",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.1.9",
+    "hono": "^4.13.19",
+    "node-pg-migrate": "7.6.1",
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/pg": "^8.23.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}

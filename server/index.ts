@@ -12,10 +12,10 @@ try {
 }
 
 const pool = createPool(config.databaseUrl);
-const app = createApp({ db: pool, distDir: config.production ? config.distDir : undefined });
+const app = createApp({ db: pool, distDir: config.distDir });
 
 const server = serve({ fetch: app.fetch, port: config.port }, (info) => {
-  const mode = config.production ? `serving the app from ${config.distDir}` : "API only (dev)";
+  const mode = config.distDir ? `serving the app from ${config.distDir}` : "API only";
   console.log(`Ripples API listening on port ${info.port}, ${mode}`);
 });
 

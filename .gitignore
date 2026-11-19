@@ -5,6 +5,5 @@ node_modules/
 .DS_Store
 .claude/worktrees/
 dist/
-dist-server/
 .worktrees/
 .lighthouseci/

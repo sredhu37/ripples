@@ -99,9 +99,9 @@ All of them except CodeQL run in one workflow, `pr-checks.yml`, one job per requ
 | Secrets                 | GitHub secret scanning + push protection                            | already on                                                                                                                                                                    |
 | Speed                   | Lighthouse CI (`@lhci/cli`), median of 3 runs, one retry on failure | fail on LCP > 2.5 s, CLS > 0.1, TBT > 200 ms                                                                                                                                  |
 | Accessibility basics    | Lighthouse accessibility audits                                     | any failed audit fails                                                                                                                                                        |
-| Lesson content counts   | `src/content/content.test.ts`                                       | max 15 words per sentence; question max 20 words, options under 15; diagram labels max 4 words (lessons on `LEGACY_LESSON_IDS` are exempt until rewritten, #187); no "Bartek" |
-| Save-code order         | new test on `src/lessons.ts`                                        | an existing lesson id never changes position                                                                                                                                  |
-| Specs present           | CI rule                                                             | a change to `*.tsx` or `*.css` must change at least one `e2e/*.spec.ts`                                                                                                       |
+| Lesson content counts   | `web/src/content/content.test.ts`                                   | max 15 words per sentence; question max 20 words, options under 15; diagram labels max 4 words (lessons on `LEGACY_LESSON_IDS` are exempt until rewritten, #187); no "Bartek" |
+| Save-code order         | new test on `web/src/lessons.ts`                                    | an existing lesson id never changes position                                                                                                                                  |
+| Specs present           | CI rule                                                             | a change to `*.tsx` or `*.css` must change at least one `web/e2e/*.spec.ts`                                                                                                   |
 | Flow diagram current    | CI rule `flow-rule` (`scripts/check-flow-changed.mjs`)              | a change to `.github/workflows/**` or `.github/scripts/**` must change `docs/factory-flow.svg`, or the PR body has a line `Diagram: unchanged, <reason>`                      |
 | Specs pass              | Playwright (all specs, video on)                                    | see [Evidence](#evidence)                                                                                                                                                     |
 
@@ -126,7 +126,7 @@ Four review agents, all on every PR and all again after every fix round. They ru
 ```
 FAIL | SUGGESTION
 Problem: "Start over" deletes progress with no confirm
-Where:   src/lesson/LessonRunner.tsx:84
+Where:   web/src/lesson/LessonRunner.tsx:84
 Fix:     ask "Start this lesson again?" Yes/No
 Rule:    Nielsen, error prevention (link to the exact section)
 ```
@@ -148,7 +148,7 @@ review passed ──► any changed file on the risky list? ──yes──► f
 
 **Risky list** (`.github/gate-paths.txt`, one pattern per line; the file is on its own list):
 
-`src/progress.ts`, `public/sw.js`, `public/manifest.webmanifest`, `package.json`, `package-lock.json`, `vite.config.ts`, `.github/**`, `AGENTS.md`, `CLAUDE.md`, `.claude/**`, `ARCHITECTURE.md`, `docs/**`, `LICENSE`, `LICENSE-CONTENT.txt`, `LICENSING.md`.
+`web/src/progress.ts`, `web/public/sw.js`, `web/public/manifest.webmanifest`, `package.json`, `package-lock.json`, `web/package.json`, `web/package-lock.json`, `server/package.json`, `server/package-lock.json`, `web/vite.config.ts`, `.github/**`, `AGENTS.md`, `CLAUDE.md`, `.claude/**`, `ARCHITECTURE.md`, `docs/**`, `LICENSE`, `LICENSE-CONTENT.txt`, `LICENSING.md`.
 
 **Gate agent** (PRs outside the risky list):
 
@@ -184,8 +184,8 @@ review passed ──► any changed file on the risky list? ──yes──► f
 
 ([#117](https://github.com/sredhu37/ripples/issues/117))
 
-- One Playwright **spec** per screen (`e2e/`; ripples has 5 screens: map, lesson, facts, parents, timeline). Each spec is a test and records the demo.
-- The lesson spec takes lesson ids. CI passes the ids from changed `src/content/<id>.*` files and runs them in EN, DE and PL. A change only in `src/content/**` needs no spec edit.
+- One Playwright **spec** per screen (`web/e2e/`; ripples has 5 screens: map, lesson, facts, parents, timeline). Each spec is a test and records the demo.
+- The lesson spec takes lesson ids. CI passes the ids from changed `web/src/content/<id>.*` files and runs them in EN, DE and PL. A change only in `web/src/content/**` needs no spec edit.
 - Every PR runs all specs with video on. Each step saves a screenshot.
 - The **evidence branch** `evidence` holds `pr-<n>/step-*.png` and `pr-<n>/demo.mp4` (the spec videos joined with ffmpeg; Playwright draws the pointer and outlines each clicked element). One **evidence comment** per PR, updated in place, shows the screenshots inline, links the walkthrough video through jsDelivr (GitHub strips video players from comments and serves raw `.mp4` as a download; jsDelivr serves it as `video/mp4`, so the browser's own player can pause and rewind), and links the full video artifact (90-day retention).
 - Review agents and the gate agent read the PNGs. Sunny watches on HUMAN PRs.

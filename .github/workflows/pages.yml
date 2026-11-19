@@ -40,14 +40,18 @@ jobs:
         with:
           node-version: 26
           cache: npm
+          cache-dependency-path: web/package-lock.json
       - run: npm ci
+        working-directory: web
       - run: npm test
+        working-directory: web
       - run: npm run build
+        working-directory: web
       - name: Write version.txt (the live check waits for this commit id)
-        run: printf '%s\n' "$GITHUB_SHA" > dist/version.txt
+        run: printf '%s\n' "$GITHUB_SHA" > web/dist/version.txt
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: dist
+          path: web/dist
 
   deploy:
     needs: build
@@ -123,15 +127,18 @@ jobs:
         with:
           node-version: 26
           cache: npm
+          cache-dependency-path: web/package-lock.json
       - run: npm ci
+        working-directory: web
       - run: npm run build
+        working-directory: web
       - name: Write version.txt for the live-good commit
-        run: git rev-parse HEAD > dist/version.txt
+        run: git rev-parse HEAD > web/dist/version.txt
       # Own artifact name: this run already holds the "github-pages" artifact of the failed deploy.
       - uses: actions/upload-pages-artifact@v5
         with:
           name: github-pages-rollback
-          path: dist
+          path: web/dist
 
   # Separate job from the upload: deploy-pages finds artifacts by listing them, which can miss
   # an artifact uploaded a moment earlier in the same job (actions/deploy-pages#451).
