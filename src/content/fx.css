@@ -1,0 +1,64 @@
+.fx-toy {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.fx-days {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.fx-scene {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 12px;
+  flex-wrap: wrap;
+  min-height: 130px;
+}
+
+.fx-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 100px;
+  font-weight: 800;
+}
+
+.fx-rate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 14px;
+  border-radius: 14px;
+  border: 3px solid var(--ink);
+  background: #fff;
+  font-weight: 800;
+}
+
+.fx-rate-label {
+  font-size: 0.85em;
+}
+
+.fx-toy-car {
+  width: 80px;
+  height: 40px;
+  border-radius: 12px;
+  border: 3px solid var(--ink);
+  background: #e8863a;
+}
+
+.fx-bought .fx-toy-car {
+  outline: 4px solid #2e8b57;
+}
+
+.fx-actions {
+  display: flex;
+  justify-content: center;
+  min-height: 48px;
+}

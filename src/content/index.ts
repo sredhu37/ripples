@@ -56,6 +56,7 @@ import { lesson as scarcity_prices } from "./scarcity_prices";
 import { lesson as bailouts } from "./bailouts";
 import { lesson as currencies } from "./currencies";
 import { lesson as deficit } from "./deficit";
+import { lesson as fx } from "./fx";
 import { lesson as gdp } from "./gdp";
 import type { Lesson } from "../lesson/types";
 
@@ -118,6 +119,7 @@ const ALL: Record<string, Lesson | undefined> = {
   bailouts,
   currencies,
   deficit,
+  fx,
   gdp,
 };
 

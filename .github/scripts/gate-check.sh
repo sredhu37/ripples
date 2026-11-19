@@ -13,6 +13,7 @@
 #            green (waits up to CHECK_WAIT seconds while checks run).
 #   fix      Sunny's comment: <source> is review:<id> or comment:<id> by sredhu37 on this PR, a
 #            factory PR whose issue has factory:human. The workflow then starts a fix round.
+#            While the issue has factory:in-review, only a comment containing @build counts.
 # Env:   GH_TOKEN    token with pull-requests, issues, checks and statuses read (GITHUB_TOKEN)
 #        REPO        owner/name, defaults to GITHUB_REPOSITORY, then to the current gh repo
 #        SUNNY       the account whose review or comment counts (default sredhu37)
@@ -146,7 +147,10 @@ case "$mode" in
     ;;
   fix)
     [ "$kind" = "factory" ] || skip "branch $ref by $author is not a factory PR"
-    [ "$label" = "factory:human" ] || skip "#$issue has '$label', not factory:human"
+    case "$label" in
+      factory:human | factory:in-review) ;;
+      *) skip "#$issue has '$label', not factory:human or factory:in-review" ;;
+    esac
     if [[ "$source" =~ ^review:([0-9]+)$ ]]; then
       who=$(gh api "repos/$repo/pulls/$pr/reviews/${BASH_REMATCH[1]}" --jq '[.user.login, .state] | @tsv')
       IFS=$'\t' read -r login review_state <<< "$who"
@@ -160,6 +164,12 @@ case "$mode" in
       IFS=$'\t' read -r login issue_url <<< "$who"
       [ "$login" = "$sunny" ] || skip "comment $source is by $login, not $sunny"
       [ "${issue_url##*/}" = "$pr" ] || skip "comment $source is not on PR #$pr"
+      if [ "$label" = "factory:in-review" ]; then
+        # The factory still has the PR: a comment only talks to the build agent when it says @build.
+        body=$(gh api "repos/$repo/issues/comments/${BASH_REMATCH[1]}" --jq '.body // ""')
+        mention='(^|[^[:alnum:]_@])@build([^[:alnum:]_-]|$)'
+        [[ "$body" =~ $mention ]] || skip "#$issue has factory:in-review and comment $source does not mention @build"
+      fi
     else
       skip "source '$source' is not review:<id> or comment:<id>"
     fi
@@ -196,5 +206,5 @@ emit go true
 case "$mode" in
   gate) emit reason "review passed and every required check is green for ${sha:0:7}" ;;
   approve) emit reason "$sunny approved ${sha:0:7} and every required check is green" ;;
-  fix) emit reason "$sunny's $source on a PR in Needs human" ;;
+  fix) emit reason "$sunny's $source on a PR with $label" ;;
 esac

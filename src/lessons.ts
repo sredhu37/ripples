@@ -293,6 +293,10 @@ export const LESSONS: LessonMeta[] = [
     },
   },
   {
+    id: "fx",
+    title: { en: "Exchange rates", de: "Wechselkurse", pl: "Kursy walut" },
+  },
+  {
     id: "gdp",
     title: { en: "GDP", de: "Bruttoinlandsprodukt", pl: "PKB" },
   },
@@ -353,6 +357,7 @@ export const CURRICULUM_GROUPS: LessonGroup[] = [
       "commodities",
       "gold",
       "currencies",
+      "fx",
       "stocks",
       "bonds",
       "stocksvsbonds",
