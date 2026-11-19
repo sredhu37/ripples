@@ -6,7 +6,7 @@ A web app that explains how the real world works (money, taxes, governments, his
 
 Each lesson is a short story, then a toy the child can play with, then three questions. A badge is earned when all three are right. Wrong answers get a hint, never a red cross.
 
-Live site: https://sredhu37.github.io/ripples/ (add it to the iPad home screen; it works offline after the first visit).
+Live site: https://sredhu37.github.io/ripples/ (add it to the iPad home screen).
 
 ## Status
 

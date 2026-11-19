@@ -4,7 +4,6 @@
 # Lines starting with "#" and blank lines are ignored.
 # This file is on its own list.
 src/progress.ts
-public/sw.js
 public/manifest.webmanifest
 package.json
 package-lock.json

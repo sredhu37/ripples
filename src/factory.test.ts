@@ -5,7 +5,6 @@ import demoSkill from "../.claude/skills/demo/SKILL.md?raw";
 // The risky list from docs/factory.md, section Gate.
 const SPEC_RISKY_LIST = [
   "src/progress.ts",
-  "public/sw.js",
   "public/manifest.webmanifest",
   "package.json",
   "package-lock.json",

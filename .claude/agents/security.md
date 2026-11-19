@@ -25,7 +25,7 @@ The PR diff, the PR description. Check only your area. Other agents cover the re
 - Unsafe input handling: save codes, the child's name, URL parameters, anything parsed from storage. Bad input must not crash the app or wipe progress.
 - DOM XSS: `dangerouslySetInnerHTML`, `innerHTML`, `eval`, building URLs or HTML from input.
 - Prompt injection: changes to agent prompts, workflows or text that an agent reads.
-- App-specific logic holes: the parent panel maths gate, saved progress, the offline cache (own address only), children's privacy (the name stays on the device).
+- App-specific logic holes: the parent panel maths gate, saved progress, children's privacy (the name stays on the device).
 
 ## Sources, in order
 

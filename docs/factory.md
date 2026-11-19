@@ -148,11 +148,11 @@ review passed ──► any changed file on the risky list? ──yes──► f
 
 **Risky list** (`.github/gate-paths.txt`, one pattern per line; the file is on its own list):
 
-`src/progress.ts`, `public/sw.js`, `public/manifest.webmanifest`, `package.json`, `package-lock.json`, `vite.config.ts`, `.github/**`, `AGENTS.md`, `CLAUDE.md`, `.claude/**`, `ARCHITECTURE.md`, `docs/**`, `LICENSE`, `LICENSE-CONTENT.txt`, `LICENSING.md`.
+`src/progress.ts`, `public/manifest.webmanifest`, `package.json`, `package-lock.json`, `vite.config.ts`, `.github/**`, `AGENTS.md`, `CLAUDE.md`, `.claude/**`, `ARCHITECTURE.md`, `docs/**`, `LICENSE`, `LICENSE-CONTENT.txt`, `LICENSING.md`.
 
 **Gate agent** (PRs outside the risky list):
 
-- Writes an open risk analysis. Per risk: what breaks, who notices, how likely, can it be undone fast. Starts from Ripples' weak spots: offline cache (own address only), saved progress, 3 languages, parent panel, children's privacy.
+- Writes an open risk analysis. Per risk: what breaks, who notices, how likely, can it be undone fast. Starts from Ripples' weak spots: saved progress, 3 languages, parent panel, children's privacy.
 - Fixed rule. HUMAN if any of:
   - a risk is likely and a child would notice;
   - a risk cannot be undone by merging a fix;
