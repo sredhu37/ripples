@@ -25,7 +25,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "In the sixteenth century, the Mughal dynasty built a vast and flourishing realm across South Asia.",
+          "In the sixteenth century, the Mughal dynasty built a vast, flourishing realm in South Asia.",
           "Im sechzehnten Jahrhundert errichtete die Mogul-Dynastie ein grosses, bluehendes Reich in Suedasien.",
           "W szesnastym wieku dynastia Mogołów zbudowała rozległe i kwitnące państwo w Azji Południowej.",
         ),
@@ -75,7 +75,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "In the royal city of Fatehpur Sikri, Akbar constructed the *Ibadat Khana*, the House of Wisdom.",
+          "In Fatehpur Sikri, Akbar built the *Ibadat Khana*, the House of Wisdom.",
           "In der Residenzstadt Fatehpur Sikri baute Akbar das *Ibadat Khana*, das Haus der Weisheit.",
           "W stolicy Fatehpur Sikri Akbar wzniósł *Ibadat Chana*, czyli Dom Mądrości.",
         ),
@@ -140,7 +140,7 @@ export const lesson: Lesson = {
           "Poeci, muzycy i malarze wymieniali się doświadczeniami, tworząc nowe melodie i subtelne miniatury.",
         ),
         T(
-          "History teaches us that societies flourish when they open their doors and listen to one another.",
+          "History shows that societies flourish when they open their doors and listen to each other.",
           "Die Geschichte lehrt uns: Gesellschaften bluehen auf, wenn sie ihre Tueren oeffnen und einander zuhoeren.",
           "Historia uczy nas, że społeczeństwa rozkwitają, gdy otwierają drzwi i z uwagą słuchają się nawzajem.",
         ),
