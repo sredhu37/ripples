@@ -123,9 +123,9 @@ export const lesson: Lesson = {
           "Monety, które wszyscy wrzucają do garnka, mają swoją nazwę. Nazywają się *podatki*.",
         ),
         T(
-          "Moss pays from the pot for what the whole town needs: the road, the school, the fire brigade and the park.",
-          "Moss bezahlt aus dem Topf, was die ganze Stadt braucht: die Straße, die Schule, die Feuerwehr und den Park.",
-          "Moss płaci z garnka za to, czego potrzebuje całe miasteczko: drogę, szkołę, straż pożarną i park.",
+          "Moss pays from the pot for what the whole town needs. That is the road, the school, the fire brigade and the park.",
+          "Moss bezahlt aus dem Topf, was die ganze Stadt braucht. Das sind die Straße, die Schule, die Feuerwehr und der Park.",
+          "Moss płaci z garnka za to, czego potrzebuje całe miasteczko. To droga, szkoła, straż pożarna i park.",
         ),
       ],
       PotDiagram,
@@ -178,7 +178,7 @@ export const lesson: Lesson = {
           "Teraz Moss ma trudne zadanie. Musi zdecydować, ile monet każdy powinien wpłacić.",
         ),
         T(
-          "If the pot is too small, there is not enough for the road and the school.",
+          "A pot that is too small cannot pay for the road and the school.",
           "Ist der Topf zu klein, reicht es nicht für die Straße und die Schule.",
           "Jeśli garnek jest za mały, nie wystarczy na drogę ani na szkołę.",
         ),
@@ -209,8 +209,8 @@ export const lesson: Lesson = {
           "Mieszkańcy miasteczka *głosują*. Głosować oznacza wybierać wspólnie, na przykład wrzucając kartkę do urny.",
         ),
         T(
-          "They vote for the mayor and for the council, a group of townspeople who decide together. The mayor and the council choose the taxes.",
-          "Sie wählen den Bürgermeister und den Rat, eine Gruppe von Leuten aus der Stadt, die gemeinsam entscheiden. Bürgermeister und Rat bestimmen die Steuern.",
+          "They vote for the mayor and for the council. The council is a group of townspeople who decide together. The mayor and the council choose the taxes.",
+          "Sie wählen den Bürgermeister und den Rat. Der Rat ist eine Gruppe von Leuten aus der Stadt, die gemeinsam entscheiden. Bürgermeister und Rat bestimmen die Steuern.",
           "Głosują na burmistrza oraz na radę miasta, czyli grupę mieszkańców decydujących wspólnie. Burmistrz i rada ustalają podatki.",
         ),
         T(
@@ -265,8 +265,8 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "Set the tax so the town can pay for the road and the school, and everyone still keeps at least 7 coins. Then press Check.",
-        "Stelle die Steuer so ein, dass die Stadt die Straße und die Schule bezahlen kann und jeder trotzdem mindestens 7 Münzen behält. Drücke dann Prüfen.",
+        "Set the tax to pay for the road and the school. Everyone must keep at least 7 coins. Press Check.",
+        "Stelle die Steuer so ein, dass Straße und Schule bezahlt sind. Jeder muss mindestens 7 Münzen behalten. Drücke Prüfen.",
         "Ustaw podatek tak, aby miasteczko mogło opłacić drogę i szkołę, a każdy zachował co najmniej 7 monet. Następnie naciśnij Sprawdź.",
       ),
       Widget: BudgetWidget,

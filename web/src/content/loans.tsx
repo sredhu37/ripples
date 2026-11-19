@@ -174,7 +174,7 @@ export const lesson: Lesson = {
           "Powód drugi: Bea może nie zdołać zapłacić. To *ryzyko* dla Pim. Oznacza to, że sprawy mogą pójść nie tak.",
         ),
         T(
-          "Reason three: Pim could have used her coins herself, for example to buy a warm coat.",
+          "Reason three: Pim could have spent her coins on a warm coat.",
           "Grund drei: Pim hätte ihre Münzen selbst nutzen können, zum Beispiel für einen warmen Mantel.",
           "Powód trzeci: Pim mogła sama wydać swoje monety, na przykład na ciepły płaszcz.",
         ),
@@ -207,7 +207,7 @@ export const lesson: Lesson = {
       [
         T(
           "Careful! Bea must pay back every week, even in a week when bread sells badly.",
-          "Vorsicht! Bea muss jede Woche zurückzahlen, auch in einer Woche, in der sich das Brot schlecht verkauft.",
+          "Vorsicht! Bea muss jede Woche zurückzahlen, auch wenn sich das Brot schlecht verkauft.",
           "Ostrożnie! Bea musi spłacać co tydzień, nawet gdy chleb sprzedaje się słabiej.",
         ),
         T(
@@ -279,9 +279,9 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "Bea needs exactly 40 coins for the oven. Set the coins and the weeks so that her bread sales (8 coins a week) can pay each weekly payment. Then press Check.",
-        "Bea braucht genau 40 Münzen für den Ofen. Stelle Münzen und Wochen so ein, dass ihr Brotverkauf (8 Münzen pro Woche) jede Wochenzahlung bezahlen kann. Drücke dann Prüfen.",
-        "Bea potrzebuje dokładnie 40 monet na piec. Ustaw monety i tygodnie tak, aby zarobek ze sprzedaży chleba (8 monet tygodniowo) pokrywał ratę. Następnie naciśnij Sprawdź.",
+        "Bea needs exactly 40 coins and earns 8 a week. Set coins and weeks so she can pay. Press Check.",
+        "Bea braucht genau 40 Münzen und verdient 8 pro Woche. Wähle Münzen und Wochen, die sie zahlen kann. Drücke Prüfen.",
+        "Bea potrzebuje dokładnie 40 monet i zarabia 8 tygodniowo. Ustaw monety i tygodnie tak, by rata się zmieściła. Naciśnij Sprawdź.",
       ),
       Widget: PayWeeklyWidget,
       hint: T(

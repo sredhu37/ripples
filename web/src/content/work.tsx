@@ -162,7 +162,7 @@ export const lesson: Lesson = {
           "Drugim powodem jest to, ile osób potrafi wykonywać daną pracę. Zobaczmy naprawiaczy łodzi. Sprawiają, że zepsute łodzie znów pływają.",
         ),
         T(
-          "If only a few people can fix boats, the town pays more coins to each one of them.",
+          "Only a few people can fix boats. Then the town pays each of them more coins.",
           "Wenn nur wenige Leute Boote reparieren können, zahlt die Stadt jedem von ihnen mehr Münzen.",
           "Jeśli tylko nieliczni potrafią naprawiać łodzie, miasto płaci każdemu z nich więcej monet.",
         ),
@@ -230,9 +230,9 @@ export const lesson: Lesson = {
     {
       kind: "choice",
       prompt: T(
-        "Sam spent three years learning to make shoes. Tim's job took one afternoon to learn. Which job usually pays more per hour?",
-        "Sam hat drei Jahre lang gelernt, Schuhe zu machen. Tims Beruf hat man an einem Nachmittag gelernt. Welcher Beruf zahlt meistens mehr pro Stunde?",
-        "Sam uczył się robić buty przez trzy lata. Zawodu Tima można nauczyć się w jedno popołudnie. Który zawód zazwyczaj przynosi większy zarobek na godzinę?",
+        "Sam spent three years learning to make shoes. Tim's job took an afternoon to learn. Which pays more per hour?",
+        "Sam lernte drei Jahre, Schuhe zu machen. Tims Beruf lernt man an einem Nachmittag. Welcher zahlt meist mehr pro Stunde?",
+        "Sam uczył się robić buty trzy lata. Tim uczył się pracy jedno popołudnie. Który zawód zwykle płaci więcej na godzinę?",
       ),
       options: [
         {
@@ -267,9 +267,9 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "Boat fixers only get 1 coin an hour right now. Move the sliders so that boat fixing pays more. Then press Check.",
-        "Wer Boote repariert, bekommt gerade nur 1 Münze pro Stunde. Verschiebe die Regler so, dass die Arbeit mehr Lohn bringt. Drücke dann Prüfen.",
-        "Naprawiacze łodzi dostają teraz tylko 1 monetę na godzinę. Przesuń suwaki, aby naprawa łodzi przynosiła większy zarobek. Następnie naciśnij Sprawdź.",
+        "Boat fixers get only 1 coin an hour. Move the sliders so boat fixing pays more. Then press Check.",
+        "Wer Boote repariert, bekommt gerade nur 1 Münze pro Stunde. Verschiebe die Regler, damit der Lohn steigt. Drücke dann Prüfen.",
+        "Naprawiacze łodzi dostają teraz tylko 1 monetę na godzinę. Przesuń suwaki, aby zarobek był większy. Naciśnij Sprawdź.",
       ),
       Widget: PayMoreWidget,
       hint: T(
@@ -281,8 +281,8 @@ export const lesson: Lesson = {
     {
       kind: "choice",
       prompt: T(
-        "Suddenly the whole town needs its boats fixed. But there are still only 3 boat fixers. What happens to their pay?",
-        "Plötzlich will die ganze Stadt ihre Boote repariert haben. Aber es gibt immer noch nur 3 Leute, die Boote reparieren. Was passiert mit ihrem Lohn?",
+        "Suddenly the whole town needs boats fixed. But there are still only 3 boat fixers. What happens to their pay?",
+        "Plötzlich will die ganze Stadt Boote reparieren lassen. Es gibt aber nur 3 Leute dafür. Was passiert mit ihrem Lohn?",
         "Nagle całe miasto potrzebuje naprawy swoich łodzi. Ale nadal jest tylko 3 naprawiaczy. Co stanie się z ich płacą?",
       ),
       options: [

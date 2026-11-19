@@ -120,7 +120,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "Or Pip can save. You already know it: when you save, you keep coins for later instead of spending them.",
+          "Or Pip can save. You know this already. When you save, you keep coins for later instead of spending them.",
           "Oder Pip spart. Das weißt du schon: Wer spart, hebt Münzen für später auf, statt sie auszugeben.",
           "Albo Pip może oszczędzać. Już to wiesz: kiedy oszczędzasz, zachowujesz monety na później, zamiast je wydawać.",
         ),
@@ -130,7 +130,7 @@ export const lesson: Lesson = {
           "Oszczędzanie to wybór: słodycze teraz albo rower później.",
         ),
         T(
-          "Pip decides: 3 coins go into the piggy bank, and 1 coin is for a sweet. Pip does this every week.",
+          "Pip decides: 3 coins go into the piggy bank. 1 coin is for a sweet. Pip does this every week.",
           "Pip entscheidet: 3 Münzen kommen ins Sparschwein, und 1 Münze ist zum Naschen. Das macht Pip jede Woche.",
           "Pip postanawia: 3 monety wędrują do skarbonki, a 1 moneta na słodycz. Pip robi tak co tydzień.",
         ),
@@ -223,7 +223,7 @@ export const lesson: Lesson = {
           "Co tydzień Pip wrzuca do niego 1 monetę, którą wcześniej wydawał na łakocie.",
         ),
         T(
-          "Now Pip has two reasons to save: a goal to reach, and coins ready for surprises.",
+          "Now Pip has two reasons to save: a goal to reach and coins for surprises.",
           "Jetzt hat Pip zwei Gründe zum Sparen: ein Ziel und Münzen für Überraschungen.",
           "Teraz Pip ma dwa powody do oszczędzania: cel oraz rezerwę na niespodzianki.",
         ),
@@ -279,9 +279,9 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "Pip wants the bike within 4 weeks and still wants 1 coin for sweets each week. Set the coins for the bike, then press Check.",
-        "Pip will das Fahrrad in höchstens 4 Wochen und trotzdem jede Woche 1 Münze zum Naschen. Stelle die Münzen fürs Fahrrad ein und drücke dann Prüfen.",
-        "Pip chce kupić rower w ciągu 4 tygodni i wciąż mieć 1 monetę tygodniowo na słodycze. Ustaw monety na rower i naciśnij Sprawdź.",
+        "Pip wants the bike in 4 weeks and 1 coin for sweets weekly. Set the bike coins, press Check.",
+        "Pip will das Fahrrad in 4 Wochen und jede Woche 1 Münze zum Naschen. Stelle die Münzen ein, dann Prüfen.",
+        "Pip chce kupić rower w 4 tygodnie i mieć co tydzień 1 monetę na słodycze. Ustaw monety, potem naciśnij Sprawdź.",
       ),
       Widget: BikeInFourWidget,
       hint: T(

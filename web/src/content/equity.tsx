@@ -28,7 +28,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "On Monday morning, Finn had to sit at his desk in school for reading and numbers.",
+          "On Monday morning, Finn sat at his desk in school for reading and numbers.",
           "Am Montagmorgen saß Finn in der Schule und übte Lesen und Rechnen.",
           "W poniedziałek rano Finn musiał siedzieć w ławce szkolnej i uczyć się czytania.",
         ),
@@ -78,7 +78,7 @@ export const lesson: Lesson = {
           "Klienci uwielbiali lody, lecz wszyscy pytali o ciepłe, chrupiące gofry.",
         ),
         T(
-          "A cast-iron waffle press cost 10 coins, but Finn had already spent his savings on the cart.",
+          "A cast-iron waffle press cost 10 coins. But Finn had spent his savings on the cart.",
           "Ein Waffeleisen kostete 10 Münzen, doch Finns Ersparnisse steckten im Wagen.",
           "Gofrownica kosztowała 10 monet, lecz Finn wydał już oszczędności na wózek.",
         ),
@@ -104,7 +104,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "In exchange for her 10 coins, Mira received a 50% *share* in the ice cream cart.",
+          "For her 10 coins, Mira got a 50% *share* of the ice cream cart.",
           "Für ihre 10 Münzen erhielt Mira einen 50%-igen *Anteil* am Eiswagen.",
           "W zamian za 10 monet Mira otrzymała 50% *udział* w całym wózku z lodami.",
         ),
@@ -134,9 +134,9 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "Every Friday, after paying Leo his wages and buying cream, Finn and Mira split the profit.",
+          "Every Friday, after paying Leo and buying cream, Finn and Mira split the profit.",
           "Jeden Freitag, nach Abzug von Leos Lohn und Zutaten, teilen Finn und Mira den Gewinn.",
-          "W każdy piątek, po opłaceniu pensji Leo i śmietanki, Finn i Mira dzielą zysk po równo.",
+          "Co piątek, po opłaceniu pensji Leo i śmietanki, Finn i Mira dzielą zysk po równo.",
         ),
         T(
           "Both partners earn rewarding coins together as proud co-owners of a growing *asset*!",
@@ -164,8 +164,8 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "It is a valuable tool that earns income even when the owner is not working hands-on.",
-            "Er ist ein wertvolles Werkzeug, das Geld einbringt, auch ohne dass der Inhaber selbst arbeitet.",
+            "It is a valuable tool that earns money while the owner does not work.",
+            "Er ist ein wertvolles Werkzeug, das Geld einbringt, auch wenn der Inhaber nicht arbeitet.",
             "To wartościowe narzędzie, które przynosi dochód, nawet gdy właściciel nie pracuje osobiście.",
           ),
           correct: true,
@@ -194,7 +194,7 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "She bought an equity share in the business, making her a co-owner entitled to split the profits.",
+            "She bought an equity share, so she co-owns the business and shares profits.",
             "Sie hat einen Geschäftsanteil gekauft und ist als Mitinhaberin am Gewinn beteiligt.",
             "Wykupiła udział w firmie, stając się współwłaścicielką uprawnioną do podziału zysków.",
           ),

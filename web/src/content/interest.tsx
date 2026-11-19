@@ -118,9 +118,9 @@ export const lesson: Lesson = {
           "Pozostałe 2 monety bank zatrzymuje dla siebie.",
         ),
         T(
-          "Those 2 coins pay for the bank's work, and for loans that are never paid back.",
+          "Those 2 coins pay for the bank's work and for loans never paid back.",
           "Mit diesen 2 Münzen bezahlt die Bank ihre Arbeit und auch Geld, das nie zurückkommt.",
-          "Te 2 monety pokrywają koszty pracy banku oraz straty z pożyczek, które nigdy nie zostaną spłacone.",
+          "Te 2 monety pokrywają pracę banku i pożyczki, których nikt nie spłaci.",
         ),
       ],
       SplitDiagram,
@@ -160,9 +160,9 @@ export const lesson: Lesson = {
           "Odsetki działają także przy pożyczkach. Im wyższe odsetki, tym więcej Finn musi oddać.",
         ),
         T(
-          "For 100 coins, Finn pays back 105 coins at 5 percent, but 110 coins at 10 percent.",
-          "Für 100 Münzen zahlt Finn bei 5 Prozent 105 Münzen zurück, bei 10 Prozent aber 110 Münzen.",
-          "Za 100 monet Finn oddaje 105 monet przy 5 procentach, ale 110 monet przy 10 procentach.",
+          "For 100 coins, Finn pays back 105 at 5 percent. At 10 percent, he pays back 110.",
+          "Für 100 Münzen zahlt Finn bei 5 Prozent 105 zurück. Bei 10 Prozent sind es 110.",
+          "Za 100 monet Finn oddaje 105 przy 5 procentach. Przy 10 procentach oddaje 110.",
         ),
         T(
           "If Finn pays back nothing for 10 years, the interest grows too. At 10 percent he would owe 259 coins!",
@@ -211,9 +211,9 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "Bea plants 100 coins in the money garden. Set the interest and the years so she ends with 150 to 170 coins. Then press Check.",
-        "Bea pflanzt 100 Münzen in den Geldgarten. Stelle Zinsen und Jahre so ein, dass sie am Ende 150 bis 170 Münzen hat. Drücke dann Prüfen.",
-        "Bea sadzi 100 monet w ogrodzie pieniędzy. Ustaw odsetki i lata tak, aby zakończyła z kwotą od 150 do 170 monet. Następnie naciśnij Sprawdź.",
+        "Bea plants 100 coins. Set the interest and years so she ends with 150 to 170 coins. Press Check.",
+        "Bea pflanzt 100 Münzen. Stelle Zinsen und Jahre so ein, dass sie 150 bis 170 Münzen hat. Drücke Prüfen.",
+        "Bea sadzi 100 monet. Ustaw odsetki i lata tak, aby miała od 150 do 170 monet. Naciśnij Sprawdź.",
       ),
       Widget: GardenWidget,
       hint: T(
