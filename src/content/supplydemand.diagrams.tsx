@@ -243,10 +243,10 @@ export function EquilibriumDiagram({ lang, step }: DiagramProps) {
   const demandWord = lang === "pl" ? "Popyt" : lang === "de" ? "Nachfrage" : "Demand";
   const clearedMsg =
     lang === "pl"
-      ? "Rynek w równowadze: zero odpadów, nikt nie jest głodny"
+      ? "Zero odpadów, nikt głodny"
       : lang === "de"
-        ? "Markt geraeumt: Kein Mangel, kein Abfall"
-        : "Market Cleared: No Waste, No Hunger";
+        ? "Kein Abfall, kein Mangel"
+        : "No Waste, No Hunger";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -316,16 +316,16 @@ export function MarketHarmonyDiagram({ lang, step }: DiagramProps) {
     lang === "pl" ? "Harmonia rynkowa" : lang === "de" ? "Markt-Harmonie" : "Market Harmony";
   const balanceTitle =
     lang === "pl"
-      ? "Podaż i popyt w równowadze"
+      ? "Podaż i popyt: równowaga"
       : lang === "de"
         ? "Angebot & Nachfrage im Gleichgewicht"
         : "Supply & Demand in Balance";
   const guideSubtitle =
     lang === "pl"
-      ? "Ceny kierują towary tam, gdzie ludzie ich potrzebują"
+      ? "Ceny kierują towary"
       : lang === "de"
-        ? "Preise lenken Waren dorthin, wo sie gebraucht werden"
-        : "Prices guide goods where people need them";
+        ? "Preise lenken Waren"
+        : "Prices guide goods";
   const selfBalancing =
     lang === "pl"
       ? "Samoregulujący się rynek"

@@ -5,10 +5,10 @@ export function CiderPressDiagram({ lang, step }: DiagramProps) {
     lang === "pl" ? "Tłocznia cydru Mayi" : lang === "de" ? "Mayas Mosterei" : "Maya's Cider Mill";
   const buildingCost =
     lang === "pl"
-      ? "Budowa tłoczni cydru kosztuje 100 monet"
+      ? "Tłocznia kosztuje 100 monet"
       : lang === "de"
-        ? "Der Bau der Mosterei kostet 100 Münzen"
-        : "Building the cider mill costs 100 coins";
+        ? "Mosterei kostet 100 Münzen"
+        : "Mill costs 100 coins";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -54,16 +54,16 @@ export function ShareTilesDiagram({ lang, step }: DiagramProps) {
     lang === "pl" ? "10 certyfikatów akcji" : lang === "de" ? "10 Anteilssteine" : "10 Share Tiles";
   const title =
     lang === "pl"
-      ? "Firma podzielona na 10 certyfikatów akcji"
+      ? "Firma: 10 certyfikatów akcji"
       : lang === "de"
-        ? "Betrieb in 10 Anteile aufgeteilt"
-        : "Company Divided into 10 Share Tiles";
+        ? "Betrieb: 10 Anteile"
+        : "Mill: 10 Share Tiles";
   const ownership =
     lang === "pl"
-      ? "Posiadasz 2 certyfikaty akcji (20% współwłasności tłoczni!)"
+      ? "2 akcje: 20% współwłasności"
       : lang === "de"
-        ? "Dir gehören 2 Anteile (20% Miteigentümer der Mühle!)"
-        : "You own 2 share tiles (20% co-owner of the mill!)";
+        ? "2 Anteile: 20% Miteigentümer"
+        : "2 tiles: 20% owner";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -114,22 +114,22 @@ export function DividendFlowDiagram({ lang, step }: DiagramProps) {
         : "Dividend Distribution";
   const title =
     lang === "pl"
-      ? "Zysk ze zbiorów: 30 monet"
+      ? "Zbiory: 30 monet zysku"
       : lang === "de"
         ? "Erntegewinn: 30 Münzen"
         : "Harvest Profit: 30 Coins";
   const payout =
     lang === "pl"
-      ? "Każda akcja otrzymuje 3 monety dywidendy (dostajesz 6 monet!)"
+      ? "Dostajesz 6 monet"
       : lang === "de"
-        ? "Jeder Anteil erhält 3 Münzen Dividende (Du bekommst 6 Münzen!)"
-        : "Each tile receives 3 coins dividend (You get 6 coins!)";
+        ? "Du bekommst 6 Münzen"
+        : "You get 6 coins";
   const source =
     lang === "pl"
-      ? "Wypłacana z realnych zysków ze sprzedaży smacznego cydru"
+      ? "Z realnych zysków firmy"
       : lang === "de"
-        ? "Gezahlt aus echten Gewinnen durch Mostverkauf"
-        : "Paid from real profits earned by selling sweet cider";
+        ? "Aus echten Gewinnen bezahlt"
+        : "Paid from real profits";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -183,10 +183,10 @@ export function SharePriceFluctuationDiagram({ lang, step }: DiagramProps) {
         : "Share Price Swings";
   const title =
     lang === "pl"
-      ? "Cena rynkowa: wielki sukces cydru korzennego!"
+      ? "Cena rynkowa: cydr hitem!"
       : lang === "de"
         ? "Marktpreis: Beliebter Gewürzmost!"
-        : "Market Price: Popular Spiced Cider!";
+        : "Market Price: Cider Hit!";
   const costLabel =
     lang === "pl" ? "Cena początkowa" : lang === "de" ? "Ursprungspreis" : "Original Cost";
   const costValue = lang === "pl" ? "10 monet" : lang === "de" ? "10 Münzen" : "10 Coins";
@@ -195,10 +195,10 @@ export function SharePriceFluctuationDiagram({ lang, step }: DiagramProps) {
   const bidsValue = lang === "pl" ? "16 monet!" : lang === "de" ? "16 Münzen!" : "16 Coins!";
   const conclusion =
     lang === "pl"
-      ? "Sprzedaj z zyskiem lub zatrzymaj dla przyszłych dywidend"
+      ? "Sprzedaj lub zatrzymaj akcję"
       : lang === "de"
-        ? "Mit Kursgewinn verkaufen oder für Dividenden halten"
-        : "Sell for a capital gain, or keep for future dividends";
+        ? "Verkaufen oder behalten"
+        : "Sell or keep holding";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -262,13 +262,13 @@ export function StockExchangeDiagram({ lang, step }: DiagramProps) {
       ? "Giełda Papierów Wartościowych (GPW)"
       : lang === "de"
         ? "Die Wertpapierbörse (Frankfurt / Xetra)"
-        : "The Stock Exchange (NSE / BSE)";
+        : "Stock Exchange (NSE / BSE)";
   const subtitle =
     lang === "pl"
-      ? "Miejsce, gdzie miliony ludzi współposiadają wspaniałe firmy"
+      ? "Miliony ludzi współposiadają firmy"
       : lang === "de"
-        ? "Wo Millionen Menschen Anteile großer Firmen besitzen"
-        : "Where millions of people co-own great companies";
+        ? "Wo Millionen Firmen-Anteile besitzen"
+        : "Where millions co-own companies";
 
   const company1 = lang === "pl" ? "Orlen" : lang === "de" ? "Siemens" : "Tata";
   const company2 = lang === "pl" ? "CD Projekt" : lang === "de" ? "SAP" : "Infosys";
@@ -276,10 +276,10 @@ export function StockExchangeDiagram({ lang, step }: DiagramProps) {
 
   const conclusion =
     lang === "pl"
-      ? "Akcjonariusze mają udział w zyskach i rozwoju gospodarki"
+      ? "Akcjonariusze dzielą się zyskiem"
       : lang === "de"
-        ? "Aktionäre teilen Gewinne und wirtschaftliches Wachstum"
-        : "Shareholders share in company profits and economic growth";
+        ? "Aktionäre teilen den Gewinn"
+        : "Shareholders share the profits";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
