@@ -2,28 +2,19 @@
 
 A web app that explains how the real world works (money, taxes, governments, history, technology) to an 8-year-old, with Otto the otter as guide. English and German.
 
-[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-Ko--fi-FF5E5B?logo=kofi&logoColor=white)](https://ko-fi.com/sunnyredhu)
+[![Buy me a coffee](<https://img.shields.io/badge/Buy%20me%20a%20coffee-Ko--fi-FF5E5B?logo=kofi&logoColor=white>)](https://ko-fi.com/sunnyredhu)
 
 Each lesson is a short story, then a toy the child can play with, then three questions. A badge is earned when all three are right. Wrong answers get a hint, never a red cross.
 
 Live site: https://sredhu37.github.io/ripples/ (add it to the iPad home screen; it works offline after the first visit).
 
-## Status
-
-| Group                                               | Lessons       | State                                                                     |
-| --------------------------------------------------- | ------------- | ------------------------------------------------------------------------- |
-| Money and Work                                      | 10            | All 10 lessons written (EN and DE), fact cards waiting for Sunny's review |
-| Business, Markets, Governments, History, Technology | to be planned | Not started                                                               |
-
-The full list of design decisions is in [docs/design.md](docs/design.md).
-
 ## Prerequisites
 
-| Tool                | Version | Used for                               |
-| ------------------- | ------- | -------------------------------------- |
-| Node.js (via nvm)   | 24      | App, API, tests (CI also runs Node 24) |
-| Docker with Compose | recent  | Local Postgres 17 from `compose.yaml`  |
-| Git                 | any     | Clone and worktrees                    |
+| Tool                | Version | Used for                                |
+| ------------------- | ------- | --------------------------------------- |
+| Node.js (via nvm)   | 24      | App, API, tests (CI also runs Node 24)  |
+| Docker with Compose | recent  | Local Postgres 17 from `compose.yaml` |
+| Git                 | any     | Clone and worktrees                     |
 
 macOS (Homebrew):
 
@@ -72,12 +63,12 @@ npm ci
 
 None are needed for local development. There is no `.env` file: the app does not load one. The defaults are:
 
-| Variable       | Default in dev                                      | Notes                                                                          |
-| -------------- | --------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Variable         | Default in dev                                        | Notes                                                                              |
+| ---------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | `DATABASE_URL` | `postgres://ripples:ripples@localhost:5432/ripples` | Matches `compose.yaml`. Required in production. Neon needs `?sslmode=require`. |
 | `PORT`         | `8080`                                              | API port. Vite proxies `/api` to it, so change `vite.config.ts` too.           |
-| `NODE_ENV`     | unset                                               | `production` makes the API serve the built app from `dist/`.                   |
-| `DIST_DIR`     | `dist`                                              | Folder the API serves in production.                                           |
+| `NODE_ENV`     | unset                                                 | `production` makes the API serve the built app from `dist/`.                   |
+| `DIST_DIR`     | `dist`                                              | Folder the API serves in production.                                               |
 
 One exception: `npm run migrate` has no default, so pass the URL yourself (next step).
 
