@@ -2,7 +2,7 @@
 
 A web app that explains how the real world works (money, taxes, governments, history, technology) to an 8-year-old, with Otto the otter as guide. English and German.
 
-[![Buy me a coffee](<https://img.shields.io/badge/Buy%20me%20a%20coffee-Ko--fi-FF5E5B?logo=kofi&logoColor=white>)](https://ko-fi.com/sunnyredhu)
+[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-Ko--fi-FF5E5B?logo=kofi&logoColor=white)](https://ko-fi.com/sunnyredhu)
 
 Each lesson is a short story, then a toy the child can play with, then three questions. A badge is earned when all three are right. Wrong answers get a hint, never a red cross.
 
@@ -10,11 +10,11 @@ Live site: https://sredhu37.github.io/ripples/ (add it to the iPad home screen; 
 
 ## Prerequisites
 
-| Tool                | Version | Used for                                |
-| ------------------- | ------- | --------------------------------------- |
-| Node.js (via nvm)   | 24      | App, API, tests (CI also runs Node 24)  |
-| Docker with Compose | recent  | Local Postgres 17 from `compose.yaml` |
-| Git                 | any     | Clone and worktrees                     |
+| Tool                     | Version | Used for                                     |
+| ------------------------ | ------- | -------------------------------------------- |
+| Node.js (via nvm)        | 26      | App, API, tests (version pinned in `.nvmrc`) |
+| PostgreSQL (with `psql`) | 17      | The API's database, running on your machine  |
+| Git                      | any     | Clone and worktrees                          |
 
 macOS (Homebrew):
 
@@ -28,34 +28,33 @@ export NVM_DIR="$HOME/.nvm"
 EOF
 source ~/.zshrc
 
-# Node 24
-nvm install 24
-nvm alias default 24
+# Node 26 (reads .nvmrc)
+nvm install
+nvm alias default 26
 
-# Docker (pick one: Docker Desktop or OrbStack), includes `docker compose`
-brew install --cask docker-desktop   # or: brew install --cask orbstack
-
-# Optional: psql client to look inside the database (Postgres itself runs in Docker)
-brew install libpq && brew link --force libpq
+# PostgreSQL 17 (keg-only, so add it to PATH), started now and at login
+brew install postgresql@17
+echo 'export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+brew services start postgresql@17
 ```
 
-Linux or without Homebrew: install nvm with its [install script](https://github.com/nvm-sh/nvm#installing-and-updating), then `nvm install 24`, and install Docker Engine with the Compose plugin from the [Docker docs](https://docs.docker.com/engine/install/).
+Linux or without Homebrew: install nvm with its [install script](https://github.com/nvm-sh/nvm#installing-and-updating) and run `nvm install`. Install PostgreSQL 17 from your package manager or the [PostgreSQL downloads](https://www.postgresql.org/download/) page.
 
 Check:
 
 ```bash
-node -v             # v24.x
-docker compose version
+node -v             # v26.x
+psql --version      # psql (PostgreSQL) 17.x
+pg_isready          # accepting connections
 ```
-
-You do not install Postgres on the host. `compose.yaml` runs Postgres 17 in a container. If you prefer a host install instead, use `brew install postgresql@17`, create a `ripples` user and database, and set `DATABASE_URL` (below).
 
 ## Running locally
 
 ### 1. Install dependencies
 
 ```bash
-nvm use 24
+nvm use             # reads .nvmrc, selects Node 26
 npm ci
 ```
 
@@ -63,30 +62,33 @@ npm ci
 
 None are needed for local development. There is no `.env` file: the app does not load one. The defaults are:
 
-| Variable         | Default in dev                                        | Notes                                                                              |
-| ---------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `DATABASE_URL` | `postgres://ripples:ripples@localhost:5432/ripples` | Matches `compose.yaml`. Required in production. Neon needs `?sslmode=require`. |
-| `PORT`         | `8080`                                              | API port. Vite proxies `/api` to it, so change `vite.config.ts` too.           |
-| `NODE_ENV`     | unset                                                 | `production` makes the API serve the built app from `dist/`.                   |
-| `DIST_DIR`     | `dist`                                              | Folder the API serves in production.                                               |
+| Variable       | Default in dev                                      | Notes                                                                            |
+| -------------- | --------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `DATABASE_URL` | `postgres://ripples:ripples@localhost:5432/ripples` | The database from step 3. Required in production. Neon needs `?sslmode=require`. |
+| `PORT`         | `8080`                                              | API port. Vite proxies `/api` to it, so change `vite.config.ts` too.             |
+| `NODE_ENV`     | unset                                               | `production` makes the API serve the built app from `dist/`.                     |
+| `DIST_DIR`     | `dist`                                              | Folder the API serves in production.                                             |
 
 One exception: `npm run migrate` has no default, so pass the URL yourself (next step).
 
 ### 3. Database
 
+Create the `ripples` user and database once. On macOS, Homebrew makes your own macOS user a Postgres superuser, so no `sudo` is needed:
+
 ```bash
-docker compose up -d --wait     # start Postgres on 127.0.0.1:5432, waits until healthy
+psql postgres -c "CREATE ROLE ripples LOGIN PASSWORD 'ripples'"
+createdb -O ripples ripples
 DATABASE_URL=postgres://ripples:ripples@localhost:5432/ripples npm run migrate
 ```
+
+On Linux, run the first two commands as the `postgres` user: `sudo -u postgres psql -c "..."` and `sudo -u postgres createdb -O ripples ripples`.
 
 There are no tables yet, so `migrate` prints `No migrations to run!`. Other commands:
 
 ```bash
-docker compose ps                                              # status
-docker compose logs -f postgres                                # logs
-psql postgres://ripples:ripples@localhost:5432/ripples         # shell (needs the psql client)
-docker compose down                                            # stop, keep data
-docker compose down -v                                         # stop and delete all data
+psql postgres://ripples:ripples@localhost:5432/ripples   # shell
+brew services stop postgresql@17                           # stop Postgres (data stays)
+dropdb ripples && dropuser ripples                         # delete the database and user
 ```
 
 The API starts even when Postgres is down. `/api/health` then returns 503.
