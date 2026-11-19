@@ -1,6 +1,6 @@
 import { defineConfig } from "@playwright/test";
 
-// The app is served under /ripples/ (vite.config.ts `base`).
+// The app is served at the root (vite.config.ts `base`).
 const PORT = 4744;
 
 export default defineConfig({
@@ -10,7 +10,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   reporter: process.env.CI ? [["list"], ["github"]] : "list",
   use: {
-    baseURL: `http://localhost:${PORT}/ripples/`,
+    baseURL: `http://localhost:${PORT}/`,
     // The walkthrough video shows a pointer moving to every click and outlines the clicked element.
     video: {
       mode: "on",
@@ -37,7 +37,7 @@ export default defineConfig({
   projects: [{ name: "chromium", use: { browserName: "chromium" } }],
   webServer: {
     command: `npm run build && npm run preview -- --port ${PORT} --strictPort`,
-    url: `http://localhost:${PORT}/ripples/`,
+    url: `http://localhost:${PORT}/`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
     cwd: "..",

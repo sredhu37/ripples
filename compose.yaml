@@ -1,0 +1,23 @@
+# Local Postgres for development: `docker compose up -d`.
+# Matches DEV_DATABASE_URL in server/config.ts:
+#   postgres://ripples:ripples@localhost:5432/ripples
+# The image major version should match the Neon project (check it in the Neon console).
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: ripples
+      POSTGRES_PASSWORD: ripples
+      POSTGRES_DB: ripples
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - ripples-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ripples -d ripples"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  ripples-pgdata:
