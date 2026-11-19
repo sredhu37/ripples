@@ -34,7 +34,7 @@ export function WellDiagram({ lang, step }: DiagramProps) {
       {step >= 2 && (
         <text x="70" y="150" fontSize="14" fill="#666">
           {lang === "pl"
-            ? "Wioska rośnie i przybywa mieszkańców"
+            ? "Wioska rośnie"
             : lang === "en"
               ? "Village grew bigger"
               : "Dorf wurde größer"}
@@ -43,16 +43,16 @@ export function WellDiagram({ lang, step }: DiagramProps) {
       {step >= 3 && (
         <text x="70" y="180" fontSize="14" fill="#e74c3c">
           {lang === "pl"
-            ? "Wozy zderzają się na wąskich drogach"
+            ? "Wozy zderzają się"
             : lang === "en"
-              ? "Carts bump into each other"
+              ? "Carts crash on tracks"
               : "Kutschen stoßen zusammen"}
         </text>
       )}
       {step >= 4 && (
         <text x="70" y="210" fontSize="14" fill="#e74c3c">
           {lang === "pl"
-            ? "Woda w studni mętnieje i brakuje opieki"
+            ? "Woda w studni mętnieje"
             : lang === "en"
               ? "Well water turns brown"
               : "Brunnenwasser wird braun"}
@@ -75,7 +75,7 @@ export function ProblemDiagram({ lang, step }: DiagramProps) {
       <rect x="50" y="50" width="540" height="180" fill="#fff5f5" rx="10" />
       <text x="70" y="90" fontSize="16" fill="#c0392b">
         {lang === "pl"
-          ? "Wspólna przestrzeń popada w ruinę"
+          ? "Wspólne miejsca niszczeją"
           : lang === "en"
             ? "Shared Spaces Falling Apart"
             : "Gemeinsame Räume verfallen"}
@@ -83,19 +83,19 @@ export function ProblemDiagram({ lang, step }: DiagramProps) {
       {step >= 1 && (
         <text x="70" y="120" fontSize="14" fill="#666">
           {lang === "pl"
-            ? "Każdy dba tylko o własny próg"
+            ? "Każdy pilnuje swojego progu"
             : lang === "en"
-              ? "Everyone cares for own doorstep"
-              : "Jeder sorgt für die eigene Haustür"}
+              ? "Everyone fixes own doorstep"
+              : "Jeder pflegt seine Haustür"}
         </text>
       )}
       {step >= 2 && (
         <text x="70" y="150" fontSize="14" fill="#e74c3c">
           {lang === "pl"
-            ? "Nikt nie naprawia wspólnej drogi"
+            ? "Nikt nie naprawia drogi"
             : lang === "en"
-              ? "Nobody fixes the shared road"
-              : "Niemand repariert die gemeinsame Straße"}
+              ? "Nobody fixes shared roads"
+              : "Niemand repariert gemeinsame Straßen"}
         </text>
       )}
       {step >= 3 && (
@@ -103,7 +103,7 @@ export function ProblemDiagram({ lang, step }: DiagramProps) {
           {lang === "pl"
             ? "Pęknięte kamienie wspólnej studni"
             : lang === "en"
-              ? "Cracked stones at the well"
+              ? "Cracked well stones"
               : "Rissige Steine am Brunnen"}
         </text>
       )}
@@ -136,16 +136,16 @@ export function CouncilDiagram({ lang, step }: DiagramProps) {
       {step >= 2 && (
         <text x="70" y="150" fontSize="14" fill="#2ecc71">
           {lang === "pl"
-            ? "Potrzebujemy planu dla wspólnych dóbr"
+            ? "Plan dla wspólnych dóbr"
             : lang === "en"
-              ? "Need a plan for shared spaces"
-              : "Brauchen einen Plan für gemeinsame Räume"}
+              ? "Plan for shared spaces"
+              : "Plan für gemeinsame Räume"}
         </text>
       )}
       {step >= 3 && (
         <text x="70" y="180" fontSize="14" fill="#2ecc71">
           {lang === "pl"
-            ? "Wspólne zasady ruchu na drogach"
+            ? "Zasady ruchu na drogach"
             : lang === "en"
               ? "Agree on traffic rules"
               : "Verkehrsregeln vereinbaren"}
@@ -171,16 +171,16 @@ export function PotDiagram({ lang, step }: DiagramProps) {
       {step >= 1 && (
         <text x="70" y="120" fontSize="14" fill="#666">
           {lang === "pl"
-            ? "Każda rodzina dorzuca monety do kasy"
+            ? "Rodziny dorzucają monety"
             : lang === "en"
               ? "Every family contributes coins"
-              : "Jede Familie steuert Münzen bei"}
+              : "Familien geben Münzen"}
         </text>
       )}
       {step >= 2 && (
         <text x="70" y="150" fontSize="14" fill="#27ae60">
           {lang === "pl"
-            ? "Opłacenie mularza do remontu studni"
+            ? "Mularz naprawia studnię"
             : lang === "en"
               ? "Pay a town mason"
               : "Einen Dorfmaurer bezahlen"}
@@ -189,10 +189,10 @@ export function PotDiagram({ lang, step }: DiagramProps) {
       {step >= 3 && (
         <text x="70" y="180" fontSize="14" fill="#27ae60">
           {lang === "pl"
-            ? "Czysta woda i bezpieczne mosty dla wszystkich"
+            ? "Czysta woda, bezpieczne mosty"
             : lang === "en"
-              ? "Clean well and safe bridges"
-              : "Sauberer Brunnen und sichere Brücken"}
+              ? "Clean well, safe bridges"
+              : "Sauberer Brunnen, sichere Brücken"}
         </text>
       )}
     </DiagramCanvas>
@@ -231,14 +231,14 @@ export function RulesDiagram({ lang, step }: DiagramProps) {
           {lang === "pl"
             ? "Uniknięcie tragedii wspólnego pastwiska"
             : lang === "en"
-              ? "Tragedy of the commons avoided"
+              ? "Tragedy of commons avoided"
               : "Tragik der Allmende vermieden"}
         </text>
       )}
       {step >= 3 && (
         <text x="70" y="180" fontSize="14" fill="#27ae60">
           {lang === "pl"
-            ? "Władza dba o dobra, których nikt sam nie zbuduje"
+            ? "Rząd organizuje dobra publiczne"
             : lang === "en"
               ? "Government organizes public goods"
               : "Regierung organisiert öffentliche Güter"}

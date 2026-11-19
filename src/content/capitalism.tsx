@@ -25,22 +25,22 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "In Ripple Town's market square, Bea owns her brick oven and Finn owns his fishing boat.",
+          "In Ripple Town's market square, Bea owns her brick oven. Finn owns his fishing boat.",
           "Auf dem Marktplatz von Ripple Town besitzt Bea ihren gemauerten Ofen und Finn sein Fischerboot.",
-          "Na rynku w Ripple Town Bea jest właścicielką ceglanego pieca, a Finn ma własną łódź rybacką.",
+          "Na rynku w Ripple Town Bea jest właścicielką ceglanego pieca. Finn ma własną łódź rybacką.",
         ),
         T(
-          "An economic system where individuals and private businesses own tools, shops, and land is called *capitalism*.",
+          "In an economic system, people and private businesses own tools, shops, and land. It is called *capitalism*.",
           "Ein Wirtschaftssystem, in dem Einzelpersonen und Betriebe Werkzeuge, Läden und Land besitzen, heißt *Kapitalismus*.",
-          "Ustrój gospodarczy, w którym osoby prywatne i firmy są właścicielami narzędzi, warsztatów i ziemi, nazywamy *kapitalizmem*.",
+          "W ustroju gospodarczym osoby prywatne i firmy są właścicielami narzędzi, warsztatów i ziemi. Nazywamy go *kapitalizmem*.",
         ),
         T(
-          "Because Bea owns her bakery and keeps her earnings, she works hard to invent tasty sesame rolls.",
-          "Weil Bea ihre Bäckerei besitzt und ihren Erlös behält, strengt sie sich an neue Sesambrötchen zu erfinden.",
-          "Ponieważ Bea jest właścicielką piekarni i zachowuje swój dochód, chętnie wstaje o świcie i tworzy pyszne bułki sezamowe.",
+          "Bea owns her bakery and keeps her earnings. So she works hard to invent tasty sesame rolls.",
+          "Bea besitzt ihre Bäckerei und behält ihren Erlös. Deshalb strengt sie sich an, neue Sesambrötchen zu erfinden.",
+          "Bea jest właścicielką piekarni i zachowuje swój dochód. Dlatego chętnie wstaje o świcie i tworzy pyszne bułki sezamowe.",
         ),
         T(
-          "Private ownership creates a powerful incentive to work diligently, take care of tools, and invent new ideas.",
+          "Private ownership is a strong reason to work hard. Owners care for their tools and invent new ideas.",
           "Privateigentum schafft einen starken Anreiz fleißig zu arbeiten, Werkzeuge zu pflegen und Neues zu erfinden.",
           "Własność prywatna tworzy silną motywację do sumiennej pracy, dbania o narzędzia i rozwijania nowych pomysłów.",
         ),
@@ -60,9 +60,9 @@ export const lesson: Lesson = {
           "Tę uczciwą rywalizację firm o względy kupujących nazywamy *konkurencją*.",
         ),
         T(
-          "Neither Bea nor Leo can charge unfair high prices, because customers would just go to the other shop.",
+          "Neither Bea nor Leo can charge unfair high prices. Customers would just go to the other shop.",
           "Weder Bea noch Leo können überteuerte Preise verlangen, weil Kunden sonst zum anderen Laden gehen.",
-          "Ani Bea, ani Leo nie mogą żądać wygórowanych cen, bo klienci poszliby po prostu do konkurencji.",
+          "Ani Bea, ani Leo nie mogą żądać wygórowanych cen. Klienci poszliby po prostu do konkurencji.",
         ),
         T(
           "Competition gives people choices, encourages quality, and keeps prices fair.",
@@ -80,8 +80,8 @@ export const lesson: Lesson = {
           "Jednak całkowicie wolny rynek bez żadnych zasad mógłby prowadzić do poważnych problemów.",
         ),
         T(
-          "A business might try to pay unfair wages or dump dirty oven ash straight into the town river.",
-          "Ein Betrieb könnte versuchen, unfaire Löhne zu zahlen oder Ofenasche direkt in den Fluss zu kippen.",
+          "A business might pay unfair wages. It might dump dirty oven ash straight into the town river.",
+          "Ein Betrieb könnte unfaire Löhne zahlen. Oder er kippt Ofenasche direkt in den Fluss.",
           "Przedsiębiorca mógłby próbować płacić głodowe pensje albo zrzucać gorący popiół z pieca prosto do rzeki.",
         ),
         T(
@@ -115,9 +115,9 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "When everyone has the opportunity to build and innovate under fair rules, the entire community shares in prosperity.",
-          "Wenn jeder die Möglichkeit hat unter fairen Regeln aufzubauen und Neues zu erfinden, teilt das ganze Dorf den Wohlstand.",
-          "Gdy każdy ma szansę tworzyć i rozwijać firmę na jasnych zasadach, cała społeczność uczestniczy w dobrobycie.",
+          "Everyone can build and invent under fair rules. Then the whole community shares in prosperity.",
+          "Jeder kann unter fairen Regeln aufbauen und Neues erfinden. Dann teilt das ganze Dorf den Wohlstand.",
+          "Każdy ma szansę tworzyć i rozwijać firmę na jasnych zasadach. Wtedy cała społeczność uczestniczy w dobrobycie.",
         ),
         T(
           "Freedom to create combined with social responsibility creates a balance where everyone can flourish.",
@@ -145,9 +145,9 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "Private individuals own tools, workshops, and businesses, and decide what to produce based on markets",
-            "Private Personen besitzen Werkzeuge, Werkstätten und Betriebe und entscheiden nach dem Markt was produziert wird",
-            "Prywatni ludzie posiadają narzędzia, warsztaty i firmy, decydując o produkcji na podstawie popytu i podaży",
+            "Private people own tools, workshops, and businesses, and markets decide what to make",
+            "Private Personen besitzen Werkzeuge, Werkstätten und Betriebe, und der Markt entscheidet, was hergestellt wird",
+            "Prywatne osoby mają narzędzia, warsztaty i firmy, a rynek decyduje, co produkować",
           ),
           correct: true,
         },
@@ -182,7 +182,7 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "It combines the efficiency and freedom of markets with social protections, fair wages, and environmental rules",
+            "It combines free, efficient markets with social protection, fair wages, and environmental rules",
             "Es verbindet Freiheit und Effizienz von Märkten mit sozialer Absicherung, fairen Löhnen und Umweltregeln",
             "Łączy wolność i efektywność rynku z osłoną socjalną, prawami pracowniczymi i ochroną środowiska",
           ),

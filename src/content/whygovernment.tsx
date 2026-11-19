@@ -42,7 +42,7 @@ export const lesson: Lesson = {
         T(
           "The town's shared drinking well cracked because nobody felt responsible for fixing shared stones.",
           "Der gemeinsame Dorfbrunnen bekam Risse, weil sich niemand für die gemeinsamen Steine verantwortlich fühlte.",
-          "Wspólna studnia ze świeżą wodą pękła, bo nikt nie czuł się odpowiedzialny za naprawę wspólnych kamieni.",
+          "Wspólna studnia pękła. Nikt nie czuł się odpowiedzialny za naprawę jej kamieni.",
         ),
       ],
       WellDiagram,
@@ -135,9 +135,9 @@ export const lesson: Lesson = {
           "Zjawisko to nazywamy *tragedią wspólnego pastwiska* lub *błędem koordynacji*.",
         ),
         T(
-          "A *government* is the group of people chosen to organize shared *rules*, resolve disputes, and maintain *public goods* that no single family can build alone.",
-          "Eine *Regierung* ist die Gruppe von Menschen, die gewählt wird, um gemeinsame *Regeln* zu organisieren, Streitigkeiten zu lösen und *öffentliche Güter* zu erhalten, die keine Familie allein bauen kann.",
-          "A *rząd* lub *władza samorządowa* to grupa ludzi wybrana do ustalania *reguł*, rozstrzygania sporów i dbania o *dobra publiczne*, których żadna rodzina nie zbudowałaby w pojedynkę.",
+          "A *government* is a group of people chosen to organize shared *rules*. It settles disputes and cares for *public goods*. No single family can build those alone.",
+          "Eine *Regierung* sind gewählte Menschen, die gemeinsame *Regeln* organisieren. Sie löst Streit und kümmert sich um *öffentliche Güter*. Keine Familie kann sie allein bauen.",
+          "A *rząd* lub *władza samorządowa* to grupa ludzi wybrana do ustalania *reguł*. Rozstrzyga spory i dba o *dobra publiczne*, których żadna rodzina nie zbuduje sama.",
         ),
       ],
       RulesDiagram,
@@ -160,8 +160,8 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "To coordinate shared rules and maintain public goods that no single family can build alone",
-            "Um gemeinsame Regeln zu koordinieren und öffentliche Güter zu erhalten, die keine Familie allein bauen kann",
+            "To organize shared rules and look after public goods no family can build alone",
+            "Um Regeln aufzustellen und öffentliche Güter zu pflegen, die keine Familie allein baut",
             "Aby ustalać wspólne reguły i utrzymywać dobra publiczne, których żadna rodzina nie stworzy sama",
           ),
           correct: true,

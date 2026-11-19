@@ -401,14 +401,6 @@ function capViolations(l: Lesson): string[] {
  * lesson is clean: a clean lesson on the list fails the test below. Delete the list when empty.
  */
 const LEGACY_LESSON_IDS: string[] = [
-  "whygovernment",
-  "elections",
-  "democracy",
-  "monarchy",
-  "dictatorship",
-  "capitalism",
-  "communism",
-  "powertriangle",
   "mughals",
   "spicetrade",
   "britishinindia",

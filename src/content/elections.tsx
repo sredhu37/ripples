@@ -30,14 +30,14 @@ export const lesson: Lesson = {
           "Ripple Town miało w tym sezonie wystarczająco dużo solidnego drewna tylko na jeden wielki projekt.",
         ),
         T(
-          "Moss wanted to build a stone and timber harbor pier so fishing boats could dock safely.",
+          "Moss wanted to build a stone and timber harbor pier. Then fishing boats could dock safely.",
           "Moss wollte einen Hafenanleger aus Stein und Holz bauen, damit Fischerboote sicher anlegen können.",
           "Moss chciał zbudować mocny pomost rybacki z kamienia i bali, aby łodzie mogły bezpiecznie cumować.",
         ),
         T(
-          "Pip wanted to build a shaded market pavilion where families could sell crafts and children could play.",
+          "Pip wanted to build a shaded market pavilion. Families could sell crafts there, and children could play.",
           "Pip wollte einen schattigen Marktpavillon bauen, in dem Familien Handwerk verkaufen und Kinder spielen können.",
-          "Pip wolał postawić zadaszony pawilon targowy, gdzie rodziny mogłyby sprzedawać wyroby, a dzieci bawić się w cieniu.",
+          "Pip wolał postawić zadaszony pawilon targowy. Rodziny mogłyby tam sprzedawać wyroby, a dzieci bawić się w cieniu.",
         ),
         T(
           "Both ideas were wonderful, but the town had limited resources and had to choose.",
@@ -86,7 +86,7 @@ export const lesson: Lesson = {
         ),
         T(
           "Secret voting protects everyone so people can vote their conscience without fear of pressure.",
-          "Die geheime Wahl schützt jeden, damit man ohne Angst vor Druck nach seinem Gewissen wählen kann.",
+          "Die geheime Wahl schützt jeden. So kann man ohne Angst vor Druck nach seinem Gewissen wählen.",
           "Tajność głosowania chroni każdego, pozwalając decydować zgodnie z własnym sumieniem bez obawy o naciski.",
         ),
         T(
@@ -135,7 +135,7 @@ export const lesson: Lesson = {
           "Trzy złote zasady wyborów to: równość głosów, tajność głosowania oraz wolność od przymusu.",
         ),
         T(
-          "If leaders do a poor job, citizens can peacefully choose someone else at the next election.",
+          "Leaders may do a poor job. Then citizens can peacefully choose someone else at the next election.",
           "Wenn Anführer schlechte Arbeit leisten, können die Bürger bei der nächsten Wahl friedlich andere wählen.",
           "Jeśli rządzący zawodzą zaufanie, obywatele mogą pokojowo wybrać kogoś innego w kolejnych wyborach.",
         ),

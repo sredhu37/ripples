@@ -90,7 +90,7 @@ export function SilencedFeedbackDiagram({ lang, step }: DiagramProps) {
       ? "Strach przed złymi wieściami"
       : lang === "de"
         ? "Angst vor schlechten Nachrichten"
-        : "Afraid to speak bad news";
+        : "Afraid to speak up";
   const silenceLine2 =
     lang === "pl"
       ? "Zablokowany obieg informacji"
@@ -137,7 +137,7 @@ export function SilencedFeedbackDiagram({ lang, step }: DiagramProps) {
 export function ContrastDiagram({ lang, step }: DiagramProps) {
   const mainTitle =
     lang === "pl"
-      ? "Obieg informacji a naprawianie problemów"
+      ? "Informacja i naprawa problemów"
       : lang === "de"
         ? "Rückmeldung und Problemlösung"
         : "Feedback and Problem Solving";
@@ -194,10 +194,10 @@ export function ContrastDiagram({ lang, step }: DiagramProps) {
 
   const footer =
     lang === "pl"
-      ? "Wolność słowa to praktyczne narzędzie naprawiania błędów, nie tylko ideał"
+      ? "Wolność słowa naprawia błędy"
       : lang === "de"
-        ? "Meinungsfreiheit ist ein praktisches Werkzeug zur Fehlerkorrektur, nicht nur ein Ideal"
-        : "Freedom of speech is a practical error-correction tool, not just an ideal";
+        ? "Meinungsfreiheit behebt Fehler"
+        : "Free speech fixes mistakes";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">
@@ -278,10 +278,10 @@ export function SafeguardsDiagram({ lang, step }: DiagramProps) {
 
   const footer =
     lang === "pl"
-      ? "Prawo musi wiecznie chronić godność człowieka i prawa obywatelskie!"
+      ? "Godność i prawa chronione"
       : lang === "de"
-        ? "Regeln müssen Menschenwürde und Grundrechte für immer schützen!"
-        : "Rules must protect human dignity and basic rights forever!";
+        ? "Regeln schützen Würde, Grundrechte"
+        : "Rules protect dignity, rights";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">
