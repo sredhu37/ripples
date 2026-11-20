@@ -32,10 +32,10 @@ export const lesson: Lesson = {
         T(
           "Master artisans measured and filed each metal cog to fit only one specific clock case.",
           "Meister feilten jedes Zahnrad passgenau zurecht, sodass es nur in dieses eine Gehaeuse passte.",
-          "Mistrzowie mierzyli i piłowali każde metalowe koło zębate tak, by pasowało tylko do jednej, konkretnej obudowy zegara.",
+          "Mistrzowie piłowali każde koło zębate tak, by pasowało tylko do jednej obudowy zegara.",
         ),
         T(
-          "If a part broke years later, a blacksmith had to custom-forge a unique replacement from scratch.",
+          "If a part broke years later, a blacksmith had to forge a unique replacement.",
           "Ging spaeter ein Teil kaputt, musste ein Schmied ein einzelnes Ersatzteil muehsam neu anfertigen.",
           "Jeśli część pękła po latach, kowal musiał od podstaw wykuwać unikalny zamiennik na specjalne zamówienie.",
         ),
@@ -55,7 +55,7 @@ export const lesson: Lesson = {
           "Tylko arystokraci i zamożni kupcy mogli pozwolić sobie na posiadanie takich wyrobów w domu.",
         ),
         T(
-          "Ordinary families had to wash clothes by hand and walk long miles on foot every single day.",
+          "Ordinary families washed clothes by hand and walked long miles every single day.",
           "Einfache Familien mussten ihre Kleidung mit der Hand waschen und weite Strecken zu Fuss gehen.",
           "Zwykłe rodziny musiały prać ubrania ręcznie w balii i pokonywać wiele kilometrów każdego dnia pieszo.",
         ),
@@ -75,7 +75,7 @@ export const lesson: Lesson = {
           "Zamiast unikalnych pojedynczych sztuk, precyzyjne maszyny tłoczyły tysiące identycznych elementów.",
         ),
         T(
-          "Any gear or bolt could fit into any machine on the bench without filing or trimming.",
+          "Any gear or bolt could fit any machine on the bench without filing.",
           "Jedes Zahnrad und jede Schraube passte nun ohne Feilen in jede Maschine auf der Werkbank.",
           "Każde koło zębate lub śruba pasowały do dowolnej maszyny na stole warsztatowym bez piłowania.",
         ),
@@ -92,7 +92,7 @@ export const lesson: Lesson = {
         T(
           "Instead of workers walking around collecting parts, a motorized conveyor belt brought work to them.",
           "Statt dass Arbeiter durch die Halle liefen, brachte ein Foerderband die Teile direkt zu ihnen.",
-          "Zamiast pracowników krążących po hali po śruby i ramy, taśmociąg dostarczał części prosto w ich ręce.",
+          "Zamiast pracowników krążących po hali po śruby, taśmociąg dostarczał części prosto do ich rąk.",
         ),
         T(
           "Each worker mastered one specific task, completing complex assemblies in minutes instead of days.",
@@ -177,7 +177,7 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "It sped up production so factories made ten times more goods in the same time",
+            "It sped up production so factories made ten times more in the same time",
             "Es beschleunigte die Arbeit, sodass Fabriken zehnmal mehr Waren in derselben Zeit bauten",
             "Przyspieszyła produkcję, dzięki czemu fabryki wytwarzały dziesięć razy więcej towarów w tym samym czasie",
           ),

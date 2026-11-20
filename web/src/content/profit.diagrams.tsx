@@ -358,7 +358,7 @@ export function LossDiagram({ lang, step }: DiagramProps) {
       ? "Bea musi dopłacić"
       : lang === "de"
         ? "Bea muss draufzahlen"
-        : "Bea must pay from jar";
+        : "Bea pays from jar";
 
   return (
     <DiagramCanvas label={label}>
@@ -434,16 +434,16 @@ export function HealthyBusinessDiagram({ lang, step }: DiagramProps) {
         : "Sales - Costs = Profit";
   const line1 =
     lang === "pl"
-      ? "Pokrywa czynsz piekarni i składniki"
+      ? "Pokrywa czynsz i składniki"
       : lang === "de"
-        ? "Zahlt Miete und Zutaten der Bäckerei"
-        : "Covers bakery rent and ingredients";
+        ? "Zahlt Miete und Zutaten"
+        : "Covers rent and ingredients";
   const line2 =
     lang === "pl"
-      ? "Zostawia oszczędności dla Bei i rodziny"
+      ? "Oszczędności dla rodziny Bei"
       : lang === "de"
-        ? "Bringt Ersparnisse für Bea und Familie"
-        : "Leaves savings for Bea and family";
+        ? "Ersparnisse für Beas Familie"
+        : "Savings for Bea's family";
 
   return (
     <DiagramCanvas label={label}>

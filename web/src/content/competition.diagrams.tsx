@@ -18,10 +18,10 @@ export function SoleBakerDiagram({ lang, step }: DiagramProps) {
         : "Cold, plain bread";
   const pipNote =
     lang === "pl"
-      ? "Brak innej piekarni w mieście"
+      ? "Brak innej piekarni"
       : lang === "de"
         ? "Keine andere Bäckerei"
-        : "No other baker in town";
+        : "No other baker";
 
   return (
     <DiagramCanvas label={label}>
@@ -71,7 +71,7 @@ export function NewBakerArrivesDiagram({ lang, step }: DiagramProps) {
       ? "Świeżo upieczone z pieca"
       : lang === "de"
         ? "Frisch aus dem Ofen"
-        : "Fresh out of the oven";
+        : "Fresh from the oven";
 
   return (
     <DiagramCanvas label={label}>
@@ -177,10 +177,10 @@ export function BeaImprovesDiagram({ lang, step }: DiagramProps) {
         : "Honey-Raisin Bread!";
   const breadSub =
     lang === "pl"
-      ? "Chrupiący i ciepły z darmową degustacją"
+      ? "Ciepły chleb, darmowa degustacja"
       : lang === "de"
         ? "Knusprig warm mit Gratis-Probe"
-        : "Crisp warm crust and free tasting";
+        : "Warm crust, free tasting";
   const tryLine1 = lang === "pl" ? "Więcej starań" : lang === "de" ? "Mehr Mühe" : "Trying harder";
   const tryLine2 =
     lang === "pl" ? "to konkurencja!" : lang === "de" ? "ist Wettbewerb!" : "is competition!";
@@ -253,9 +253,9 @@ export function BothBakeriesBusyDiagram({ lang, step }: DiagramProps) {
         : "5 happy customers";
   const townBenefit =
     lang === "pl"
-      ? "Całe miasto ma lepszy chleb!"
+      ? "Lepszy chleb dla miasta!"
       : lang === "de"
-        ? "Die Stadt hat besseres Brot!"
+        ? "Besseres Brot für alle!"
         : "Town gets better bread!";
 
   return (
@@ -336,16 +336,16 @@ export function CompetitionBenefitsAllDiagram({ lang, step }: DiagramProps) {
         : "Why Competition Helps Everyone";
   const point1 =
     lang === "pl"
-      ? "Lepsza jakość: piekarnie pieką cieplejsze i smaczniejsze wypieki"
+      ? "Lepsza jakość, smaczniejszy chleb"
       : lang === "de"
-        ? "Bessere Qualität: Läden backen frischer und leckerer"
-        : "Better quality: shops bake warmer, tastier food";
+        ? "Bessere Qualität, frischeres Brot"
+        : "Better quality, tastier bread";
   const point2 =
     lang === "pl"
-      ? "Uczciwe ceny: sprzedawcy nie mogą narzucać wygórowanych cen"
+      ? "Uczciwe ceny dla klientów"
       : lang === "de"
-        ? "Faire Preise: Niemand kann übertriebene Preise verlangen"
-        : "Fair prices: competitors cannot overcharge customers";
+        ? "Faire Preise für alle"
+        : "Fair prices: no overcharging";
   const badge =
     lang === "pl"
       ? "Uczciwa konkurencja wygrywa!"

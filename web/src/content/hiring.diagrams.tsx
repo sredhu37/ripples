@@ -164,13 +164,13 @@ export function SunnyDayBusyDiagram({ lang, step }: DiagramProps) {
   const coinsLabel = lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "coins";
   const salesLine =
     lang === "pl"
-      ? `Sprzedaż (8 bochenków): +32 ${coinsLabel}`
+      ? `Sprzedaż: +32 ${coinsLabel}`
       : lang === "de"
-        ? `Umsatz (8 Brote): +32 ${coinsLabel}`
-        : `Sales (8 loaves): +32 ${coinsLabel}`;
+        ? `Umsatz: +32 ${coinsLabel}`
+        : `Sales: +32 ${coinsLabel}`;
   const costsLine =
     lang === "pl"
-      ? `Mąka i drewno: -16 ${coinsLabel}`
+      ? `Mąka, drewno: -16 ${coinsLabel}`
       : lang === "de"
         ? `Mehl & Holz: -16 ${coinsLabel}`
         : `Flour & wood: -16 ${coinsLabel}`;
@@ -293,13 +293,13 @@ export function StormyDayQuietDiagram({ lang, step }: DiagramProps) {
   const coinsLabel = lang === "pl" ? "monet" : lang === "de" ? "Münzen" : "coins";
   const salesLine =
     lang === "pl"
-      ? `Sprzedaż (2 bochenki): +8 ${coinsLabel}`
+      ? `Sprzedaż: +8 ${coinsLabel}`
       : lang === "de"
-        ? `Umsatz (2 Brote): +8 ${coinsLabel}`
-        : `Sales (2 loaves): +8 ${coinsLabel}`;
+        ? `Umsatz: +8 ${coinsLabel}`
+        : `Sales: +8 ${coinsLabel}`;
   const costsLine =
     lang === "pl"
-      ? `Mąka i drewno: -4 ${coinsLabel}`
+      ? `Mąka, drewno: -4 ${coinsLabel}`
       : lang === "de"
         ? `Mehl & Holz: -4 ${coinsLabel}`
         : `Flour & wood: -4 ${coinsLabel}`;
@@ -310,17 +310,9 @@ export function StormyDayQuietDiagram({ lang, step }: DiagramProps) {
         ? `Leos Gehalt: -5 ${coinsLabel}`
         : `Leo's wage: -5 ${coinsLabel}`;
   const lossLine =
-    lang === "pl"
-      ? `Wynik netto: -1 ${coinsLabel} (strata)`
-      : lang === "de"
-        ? `Reingewinn: -1 ${coinsLabel} (Verlust)`
-        : `Net profit: -1 ${coinsLabel} (Loss)`;
+    lang === "pl" ? `Strata: -1 moneta` : lang === "de" ? `Verlust: -1 Münze` : `Net loss: -1 coin`;
   const wageNotCovered =
-    lang === "pl"
-      ? "Sprzedaż nie pokrywa płacy"
-      : lang === "de"
-        ? "Umsatz deckt Lohn nicht"
-        : "Sales do not cover wage";
+    lang === "pl" ? "Płaca nie pokryta" : lang === "de" ? "Lohn nicht gedeckt" : "Wage not covered";
 
   return (
     <DiagramCanvas label={label}>
@@ -406,7 +398,7 @@ export function RiskAndWageDiagram({ lang, step }: DiagramProps) {
       ? "Leo przepracował całą zmianę"
       : lang === "de"
         ? "Leo hat voll gearbeitet"
-        : "Leo worked his full shift";
+        : "Leo worked all day";
   const mustPay =
     lang === "pl"
       ? "Płaca musi zostać wypłacona!"
@@ -415,13 +407,13 @@ export function RiskAndWageDiagram({ lang, step }: DiagramProps) {
         : "Wage must be paid!";
   const workerPaidTime =
     lang === "pl"
-      ? "Pracownik otrzymuje płacę za czas,"
+      ? "Płaca za czas pracy,"
       : lang === "de"
-        ? "Arbeiter erhalten Lohn für Zeit,"
-        : "A worker is paid for time,";
+        ? "Lohn für die Zeit,"
+        : "Pay is for time,";
   const notForTraffic =
     lang === "pl"
-      ? "a nie za ruch klientów na ulicy."
+      ? "nie za ruch klientów."
       : lang === "de"
         ? "nicht nach Kundenandrang."
         : "not for shop sales.";
@@ -433,10 +425,10 @@ export function RiskAndWageDiagram({ lang, step }: DiagramProps) {
         : "This is business risk.";
   const relyOnWage =
     lang === "pl"
-      ? "Pracownicy polegają na swojej pensji"
+      ? "Pracownicy liczą na pensję"
       : lang === "de"
-        ? "Arbeiter verlassen sich darauf"
-        : "Workers rely on their wage";
+        ? "Arbeiter brauchen ihren Lohn"
+        : "Workers need their wage";
 
   return (
     <DiagramCanvas label={label}>
@@ -530,16 +522,16 @@ export function EmergencyReserveDiagram({ lang, step }: DiagramProps) {
         : "The Emergency Reserve Jar";
   const sunnyRule =
     lang === "pl"
-      ? "W słoneczne dni: odkładaj dodatkowe zyski na rezerwę"
+      ? "Słoneczny dzień: odkładaj monety"
       : lang === "de"
-        ? "An sonnigen Tagen: Extragewinne zur Seite legen"
-        : "On sunny days: save extra profits into the reserve";
+        ? "Sonniger Tag: Münzen sparen"
+        : "Sunny day: save coins";
   const stormyRule =
     lang === "pl"
-      ? "W burzowe dni: płać pensje z rezerwy, aby zachować spokój"
+      ? "Burzowy dzień: użyj rezerwy"
       : lang === "de"
-        ? "An Regentagen: Gehälter aus Rücklagen zahlen"
-        : "On stormy days: pay wages from the reserve to stay safe";
+        ? "Regentag: Rücklage nutzen"
+        : "Stormy day: use reserve";
   const badge =
     lang === "pl"
       ? "Rezerwy chronią firmę!"

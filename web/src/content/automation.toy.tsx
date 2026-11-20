@@ -33,9 +33,10 @@ interface AutomationToyProps {
 }
 
 export function AutomationToy({ lang, mode = "toy", onDone }: AutomationToyProps) {
-  const [speed, setSpeed] = useState(mode === "quiz" ? 3 : 2);
-  const [hasSensors, setHasSensors] = useState(mode !== "quiz");
-  const [hasCurtain, setHasCurtain] = useState(mode !== "quiz");
+  // Start unsolved (the quiz start): a solved start completes the toy and unlocks the quiz on load.
+  const [speed, setSpeed] = useState(3);
+  const [hasSensors, setHasSensors] = useState(false);
+  const [hasCurtain, setHasCurtain] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
 
   const { throughput, safetyScore, isOptimal, status } = calcAutomationSafety(

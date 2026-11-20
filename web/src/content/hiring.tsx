@@ -32,12 +32,12 @@ export const lesson: Lesson = {
           "Piekarnia Bei stała się bardzo popularna w Ripple Town.",
         ),
         T(
-          "Working alone from dawn to dusk, she can bake only 4 loaves of bread each day.",
+          "Working alone all day, she can bake only 4 loaves of bread.",
           "Ganz allein von früh bis spät kann sie täglich nur 4 Laibe Brot backen.",
           "Pracując sama od świtu do zmierzchu, jest w stanie upiec zaledwie 4 bochenki dziennie.",
         ),
         T(
-          "A long line of hungry villagers waits outside, but Bea has run out of time and hands.",
+          "A long line of hungry villagers waits outside. But Bea has run out of time and hands.",
           "Draußen wartet eine lange Schlange, doch Bea fehlen Zeit und helfende Hände.",
           "Na zewnątrz czeka długa kolejka głodnych mieszkańców, ale Bei brakuje czasu i rąk do pracy.",
         ),
@@ -52,12 +52,12 @@ export const lesson: Lesson = {
           "Bea postanawia *zatrudnić* Leo jako pomocnika piekarza.",
         ),
         T(
-          "With Leo kneading dough and tending the oven, the bakery can produce 8 loaves a day.",
+          "Leo kneads the dough and tends the oven. Now the bakery makes 8 loaves a day.",
           "Weil Leo Teig knetet und den Ofen hütet, schafft die Backstube 8 Brote am Tag.",
           "Gdy Leo wyrabia ciasto i pilnuje pieca, piekarnia może wyprodukować 8 bochenków dziennie.",
         ),
         T(
-          "Bea promises to pay Leo a guaranteed daily *wage* of 5 coins for his hard work.",
+          "Bea promises to pay Leo a guaranteed *wage* of 5 coins every day.",
           "Bea verspricht Leo ein garantiertes tägliches *Gehalt* von 5 Münzen für seine Arbeit.",
           "Bea obiecuje wypłacać Leo gwarantowaną stałą dzienną *płacę* w wysokości 5 monet za jego pracę.",
         ),
@@ -77,9 +77,9 @@ export const lesson: Lesson = {
           "Bea zbiera 32 monety ze sprzedaży.",
         ),
         T(
-          "After paying 16 coins for flour and 5 coins for Leo's wage, Bea keeps 11 coins profit!",
-          "Nach 16 Münzen für Mehl und 5 Münzen für Leos Lohn bleiben Bea 11 Münzen Reingewinn!",
-          "Po opłaceniu 16 monet za mąkę i 5 monet płacy Leo, Bei zostaje 11 monet czystego zysku!",
+          "Bea pays 16 coins for flour and 5 coins for Leo's wage. She keeps 11 coins profit!",
+          "Bea zahlt 16 Münzen für Mehl und 5 Münzen für Leos Lohn. Ihr bleiben 11 Münzen Reingewinn!",
+          "Bea płaci 16 monet za mąkę i 5 monet za płacę Leo. Zostaje jej 11 monet czystego zysku!",
         ),
       ],
       SunnyDayBusyDiagram,
@@ -112,7 +112,7 @@ export const lesson: Lesson = {
           "Mimo że sprzedaż była znikoma, Leo przepracował pełne godziny w gorącej piekarni.",
         ),
         T(
-          "A worker is paid for their labor, not for how many people walked down the street.",
+          "A worker is paid for their work, not for how many people walked past.",
           "Ein Angestellter bekommt Lohn für seine Arbeit, nicht für den Kundenandrang auf der Straße.",
           "Pracownik otrzymuje wynagrodzenie za wykonaną pracę, a nie za to, ilu przechodniów spacerowało po ulicy.",
         ),
@@ -229,7 +229,7 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "On a stormy day, sales were low, but Leo worked his full shift. Honor Leo's guaranteed wage from the reserve jar.",
+        "Sales were low in the storm, but Leo worked a full shift. Pay his wage from the reserve jar.",
         "Am stürmischen Tag war der Verkauf schwach, doch Leo hat voll gearbeitet. Zahle Leos garantierten Lohn aus der Rücklage.",
         "W burzowy dzień sprzedaż była niska, ale Leo przepracował całą zmianę. Wypłać gwarantowaną płacę Leo z rezerwy.",
       ),

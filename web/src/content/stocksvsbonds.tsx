@@ -65,9 +65,9 @@ export const lesson: Lesson = {
           "Bea działa jako pożyczkodawczyni, zapewniając wyprawie *kapitał dłużny*.",
         ),
         T(
-          "Bea gets no voting power and no extra windfalls, but holds a fixed promise of five coins.",
+          "Bea gets no voting power and no extra windfalls. She holds a fixed promise of five coins.",
           "Bea hat kein Mitspracherecht, hält aber eine feste Zusage über fünf Münzen Zinsen.",
-          "Bea nie decyduje o rejsie ani nie liczy na niespodziewane bogactwa, lecz ma pewną obietnicę pięciu monet odsetek.",
+          "Bea nie decyduje o rejsie ani nie liczy na niespodziewane bogactwa. Ma za to pewną obietnicę pięciu monet odsetek.",
         ),
       ],
       EquityVsDebtDiagram,
@@ -117,7 +117,7 @@ export const lesson: Lesson = {
         T(
           "Bea receives all four salvaged coins, while Finn receives zero coins and loses his investment.",
           "Bea erhält alle vier geretteten Münzen, während Finn leer ausgeht und sein Geld verliert.",
-          "Bea otrzymuje wszystkie cztery ocalone monety, podczas gdy Finn dostaje zero i traci całą swoją inwestycję.",
+          "Bea otrzymuje wszystkie cztery ocalone monety. Finn dostaje zero i traci całą swoją inwestycję.",
         ),
       ],
       ShipwreckPriorityDiagram,

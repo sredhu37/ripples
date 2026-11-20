@@ -55,16 +55,16 @@ export function TimberDiagram({ lang, step }: DiagramProps) {
 export function DebateDiagram({ lang, step }: DiagramProps) {
   const mossQuote =
     lang === "pl"
-      ? '"Kutry rybackie potrzebują bezpiecznego pomostu!"'
+      ? '"Kutry potrzebują bezpiecznego pomostu!"'
       : lang === "de"
         ? '"Fischerboote brauchen sicheren Anleger!"'
-        : '"Fishing boats need a safe pier!"';
+        : '"Boats need safe piers!"';
   const pipQuote =
     lang === "pl"
-      ? '"Rodziny potrzebują zacienionego pawilonu na targu!"'
+      ? '"Rodziny potrzebują zacienionego pawilonu!"'
       : lang === "de"
         ? '"Familien brauchen schattige Marktstände!"'
-        : '"Families need shaded market stalls!"';
+        : '"Families need shaded stalls!"';
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">
@@ -162,10 +162,10 @@ export function CountDiagram({ lang, step }: DiagramProps) {
     lang === "pl" ? "Głosy na pawilon" : lang === "de" ? "Pavillon-Stimmen" : "Pavilion Votes";
   const outcomeText =
     lang === "pl"
-      ? "Pomost rybacki wygrywa: wynik uszanowany!"
+      ? "Pomost wygrywa: wynik uszanowany"
       : lang === "de"
         ? "Hafenanleger gewinnt: Entscheidung respektiert!"
-        : "Harbor Pier Wins: Decision Respected!";
+        : "Pier wins: result respected";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">
@@ -218,10 +218,10 @@ export function PrinciplesDiagram({ lang, step }: DiagramProps) {
 
   const subtext =
     lang === "pl"
-      ? "Pokojowe rozstrzyganie sporów i wspólny szacunek"
+      ? "Pokojowe decyzje, wspólny szacunek"
       : lang === "de"
-        ? "Friedliche Entscheidungen und gemeinsamer Respekt"
-        : "Peaceful error correction and shared respect";
+        ? "Friedliche Entscheidungen, gemeinsamer Respekt"
+        : "Peaceful choices, shared respect";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">

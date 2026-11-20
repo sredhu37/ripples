@@ -9,10 +9,10 @@ export function SpringWorriesDiagram({ lang, step }: DiagramProps) {
         : "Spring Planning Worries";
   const title =
     lang === "pl"
-      ? "Wiosenne siewy: dwa wielkie zmartwienia"
+      ? "Wiosna: dwa wielkie zmartwienia"
       : lang === "de"
         ? "Frühjahrsaussaat: Zwei große Sorgen"
-        : "Spring Planting: Two Big Worries";
+        : "Spring: Two Big Worries";
 
   const mayaTitle =
     lang === "pl" ? "Rolniczka Maya" : lang === "de" ? "Bäuerin Maya" : "Farmer Maya";
@@ -24,7 +24,7 @@ export function SpringWorriesDiagram({ lang, step }: DiagramProps) {
         : "Cost: 3c per sack";
   const mayaFear =
     lang === "pl"
-      ? "Boi się powodzi (Cena = 1m)"
+      ? "Boi się powodzi (1m)"
       : lang === "de"
         ? "Fürchtet Flut (Preis = 1c)"
         : "Fears Flood (Price = 1c)";
@@ -34,17 +34,17 @@ export function SpringWorriesDiagram({ lang, step }: DiagramProps) {
     lang === "pl" ? "Potrzebuje 50 worków" : lang === "de" ? "Braucht 50 Säcke" : "Needs 50 sacks";
   const beaFear =
     lang === "pl"
-      ? "Boi się suszy (Cena = 8m)"
+      ? "Boi się suszy (8m)"
       : lang === "de"
         ? "Fürchtet Dürre (Preis = 8c)"
         : "Fears Drought (Price = 8c)";
 
   const subtext =
     lang === "pl"
-      ? "Oboje pragną pewności, zanim nadejdzie jesień"
+      ? "Oboje chcą pewności"
       : lang === "de"
-        ? "Beide wollen Sicherheit vor dem Herbst"
-        : "Both want certainty before autumn arrives";
+        ? "Beide wollen Sicherheit"
+        : "Both want certainty";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -119,34 +119,30 @@ export function HandshakeContractDiagram({ lang, step }: DiagramProps) {
         : "The Forward Contract";
   const title =
     lang === "pl"
-      ? "Umowa blokująca cenę (Pochodna / Deriwatyw)"
+      ? "Umowa blokująca cenę (Derywatyw)"
       : lang === "de"
         ? "Die Preisabsicherung (Derivat)"
-        : "The Price Lock Agreement (Derivative)";
+        : "Price Lock Agreement (Derivative)";
   const header =
     lang === "pl"
-      ? "KONTRAKT NA JESIENNĄ DOSTAWĘ PSZENICY"
+      ? "KONTRAKT NA DOSTAWĘ PSZENICY"
       : lang === "de"
         ? "LIEFERVERTRAG FÜR HERBSTWEIZEN"
         : "AUTUMN WHEAT DELIVERY CONTRACT";
   const terms =
-    lang === "pl"
-      ? "50 worków zablokowanych po 4 monety każdy"
-      : lang === "de"
-        ? "50 Säcke gesichert zu je 4 Münzen"
-        : "50 Sacks locked at 4 Coins each";
+    lang === "pl" ? "4 monety za worek" : lang === "de" ? "4 Münzen pro Sack" : "4 Coins per sack";
   const signed =
     lang === "pl"
-      ? "Podpisano wiosną przez Mayę i Beę"
+      ? "Podpisali Maya i Bea"
       : lang === "de"
-        ? "Im Frühjahr unterzeichnet von Maya & Bea"
-        : "Signed in Spring by Maya & Bea";
+        ? "Unterzeichnet von Maya & Bea"
+        : "Signed by Maya & Bea";
   const subtext =
     lang === "pl"
-      ? "Wartość wynika z pszenicy: oboje śpią spokojnie bez względu na pogodę!"
+      ? "Wartość wynika z pszenicy"
       : lang === "de"
-        ? "Wert leitet sich vom Weizen ab: Beide schlafen ruhig bei jedem Wetter!"
-        : "Value derived from wheat: both sleep peacefully through storms!";
+        ? "Wert stammt vom Weizen"
+        : "Value derived from wheat";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -200,10 +196,10 @@ export function DroughtWithContractDiagram({ lang, step }: DiagramProps) {
         : "Drought With Protection";
   const title =
     lang === "pl"
-      ? "Jesienna susza: wolny rynek wystrzelił do 8 monet!"
+      ? "Susza: pszenica 8 monet!"
       : lang === "de"
-        ? "Herbst-Dürre: Freier Markt schießt auf 8 Münzen!"
-        : "Autumn Drought: Open Market Spikes to 8 Coins!";
+        ? "Dürre: Weizen 8 Münzen!"
+        : "Drought: Wheat 8 Coins!";
   const shieldLabel =
     lang === "pl"
       ? "Kontrakt gwarantuje 4 monety"
@@ -212,10 +208,10 @@ export function DroughtWithContractDiagram({ lang, step }: DiagramProps) {
         : "Contract Honors 4 Coins";
   const subtext =
     lang === "pl"
-      ? "Bea kupuje mąkę w normalnej cenie i piecze chleb dla dzieci!"
+      ? "Bea nadal piecze chleb!"
       : lang === "de"
-        ? "Bea kauft Mehl bezahlbar ein und Kinder bekommen ihr Schulbrot!"
-        : "Bea buys affordable flour and children get school lunches!";
+        ? "Bea backt weiter Brot!"
+        : "Bea still bakes bread!";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -258,10 +254,10 @@ export function FloodWithContractDiagram({ lang, step }: DiagramProps) {
         : "Flood With Protection";
   const title =
     lang === "pl"
-      ? "Jesienna powódź: wolny rynek załamał się do 1 monety!"
+      ? "Powódź: pszenica 1 moneta!"
       : lang === "de"
-        ? "Herbst-Flut: Freier Markt stürzt auf 1 Münze ab!"
-        : "Autumn Flood: Open Market Crashes to 1 Coin!";
+        ? "Flut: Weizen 1 Münze!"
+        : "Flood: Wheat 1 Coin!";
   const guaranteeLabel =
     lang === "pl"
       ? "Kontrakt gwarantuje 4 monety"
@@ -270,10 +266,10 @@ export function FloodWithContractDiagram({ lang, step }: DiagramProps) {
         : "Contract Guarantees 4 Coins";
   const subtext =
     lang === "pl"
-      ? "Maya pokrywa swój koszt 3 monet i bezpiecznie zarabia 1 monetę!"
+      ? "Zysk Mayi: 1 moneta"
       : lang === "de"
-        ? "Maya deckt ihre Kosten von 3 Münzen und sichert 1 Münze Gewinn!"
-        : "Maya covers her 3-coin cost and earns 1 coin profit safely!";
+        ? "Mayas Gewinn: 1 Münze"
+        : "Maya's profit: 1 coin";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -316,22 +312,22 @@ export function EurexExchangeDiagram({ lang, step }: DiagramProps) {
         : "Global Derivatives Exchange";
   const title =
     lang === "pl"
-      ? "Regulowane giełdy pochodnych (GPW & TGE)"
+      ? "Giełdy pochodnych (GPW & TGE)"
       : lang === "de"
         ? "Regulierte Terminbörsen (Eurex & EEX)"
-        : "Regulated Derivatives Exchanges (NSE & MCX)";
+        : "Derivatives Exchanges (NSE & MCX)";
   const subtitle =
     lang === "pl"
-      ? "Linie lotnicze zabezpieczają paliwo, piekarnie zboże, a elektrownie prąd"
+      ? "Blokują paliwo, zboże, prąd"
       : lang === "de"
-        ? "Airlines sichern Kerosin, Bäckereien Getreide, Stadtwerke Energie"
-        : "Airlines lock jet fuel, bakeries lock grain, power grids lock energy";
+        ? "Sichern Kerosin, Getreide, Energie"
+        : "Lock fuel, grain, energy";
   const subtext =
     lang === "pl"
-      ? "Zabezpieczanie ryzyka usuwa szoki cenowe, chroniąc stabilność gospodarki"
+      ? "Zabezpieczanie łagodzi szoki cenowe"
       : lang === "de"
-        ? "Absicherung federt Preisschocks ab und hält die Wirtschaft stabil"
-        : "Hedging removes price shocks so our economy stays stable";
+        ? "Absicherung dämpft Preisschocks"
+        : "Hedging calms price shocks";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>

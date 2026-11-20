@@ -34,8 +34,9 @@ interface MassProductionToyProps {
 }
 
 export function MassProductionToy({ lang, mode = "toy", onDone }: MassProductionToyProps) {
-  const [prodMode, setProdMode] = useState<ProductionMode>(mode === "quiz" ? "craft" : "assembly");
-  const [stage, setStage] = useState(mode === "quiz" ? 0 : 3);
+  // Start unsolved (the quiz start): a solved start completes the toy and unlocks the quiz on load.
+  const [prodMode, setProdMode] = useState<ProductionMode>("craft");
+  const [stage, setStage] = useState(0);
   const [showFeedback, setShowFeedback] = useState(false);
 
   const { bikesProduced, costPerBike, hoursSpent, isAffordable, status } = calcAssemblyThroughput(

@@ -3,17 +3,17 @@ import type { DiagramProps } from "../lesson/types";
 export function DangerousFoundryLaborDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Ciężka i niebezpieczna praca fizyczna"
+      ? "Ciężka i niebezpieczna praca"
       : lang === "de"
         ? "Schwere und gefaehrliche Handarbeit"
-        : "Heavy and Hazardous Physical Labor";
+        : "Heavy and Dangerous Work";
 
   const sub =
     lang === "pl"
-      ? "Pracownicy znosili skrajne gorąco, dźwiganie ciężarów i toksyczne opary we wczesnych fabrykach"
+      ? "Upał, dźwiganie, toksyczne opary"
       : lang === "de"
-        ? "Arbeiter litten unter Hitze, schwerem Heben und giftigen Daempfen in fruehen Fabriken"
-        : "Workers endured extreme heat, heavy lifting, and toxic fumes in early factories";
+        ? "Hitze, Heben, giftige Dämpfe"
+        : "Heat, lifting, toxic fumes";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Dangerous Heavy Manual Work">
@@ -71,10 +71,10 @@ export function RoboticArmActuatorDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Silniki elektryczne i przekładnie obracają się z dokładnością poniżej milimetra w każdym kierunku"
+      ? "Precyzja w każdym kierunku"
       : lang === "de"
-        ? "Elektromotoren drehen sich mit Millimeter-Praezision in jede Richtung"
-        : "Electric motors and gears rotate with sub-millimeter precision in any direction";
+        ? "Millimeter-Präzision in jede Richtung"
+        : "Millimeter precision, every direction";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Jointed Robotic Arm">
@@ -140,17 +140,17 @@ export function RoboticArmActuatorDiagram({ lang, step }: DiagramProps) {
 export function PrecisionWeldingDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Niestrudzona precyzja na linii montażowej"
+      ? "Niestrudzona precyzja na linii"
       : lang === "de"
         ? "Ermuedungsfreie Praezision am Band"
-        : "Tireless Precision on the Line";
+        : "Tireless Precision at Work";
 
   const sub =
     lang === "pl"
-      ? "Roboty wykonują gorące, powtarzalne spawy tysiące razy bez najmniejszego zmęczenia"
+      ? "Tysiące gorących spawów"
       : lang === "de"
-        ? "Roboter fuehren heisse Schweissarbeiten tausende Male ohne Ermuedung aus"
-        : "Robots perform hot, repetitive welds thousands of times without growing tired";
+        ? "Tausende heiße Schweißnähte"
+        : "Thousands of hot welds";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Precision Welding Cell">
@@ -197,10 +197,10 @@ export function SafetySensorsCurtainDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Gdy człowiek przekroczy linię wiązek światła, maszyna zatrzymuje się w ułamku sekundy"
+      ? "Przerwana wiązka zatrzymuje maszynę"
       : lang === "de"
-        ? "Tritt ein Mensch durch das Lichtgitter, stoppt die Maschine sofort"
-        : "If a person steps across the light curtain, the machine halts in a split second";
+        ? "Strahl unterbrochen, Maschine stoppt"
+        : "Beam broken, machine stops";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Infrared Safety Curtain">
@@ -255,10 +255,10 @@ export function HumanSupervisorSafeDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Ludzie rozwiązują twórcze problemy i dbają o jakość, podczas gdy maszyny wykonują ciężką pracę"
+      ? "Ludzie myślą, maszyny dźwigają"
       : lang === "de"
-        ? "Menschen loesen kreative Aufgaben, waehrend Maschinen die schwere Arbeit tun"
-        : "Humans solve creative problems and ensure quality while machines do the heavy lifting";
+        ? "Menschen denken, Maschinen heben"
+        : "Humans think, machines lift";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Human Supervisor and Design">

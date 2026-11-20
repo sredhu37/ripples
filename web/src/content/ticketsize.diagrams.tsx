@@ -187,17 +187,17 @@ export function EqualEarningsDiagram({ lang, step }: DiagramProps) {
   const beaRole = lang === "pl" ? "Piekarka" : lang === "de" ? "Bäckerei" : "Baker";
   const beaCalc =
     lang === "pl"
-      ? "30 bułek x 1 moneta"
+      ? "30 bułek × 1 moneta"
       : lang === "de"
-        ? "30 Brötchen x 1 Münze"
-        : "30 rolls x 1 coin";
+        ? "30 Brötchen × 1 Münze"
+        : "30 rolls × 1 coin";
   const samRole = lang === "pl" ? "Szewc" : lang === "de" ? "Schuhmacher" : "Shoemaker";
   const samCalc =
     lang === "pl"
-      ? "1 para butów x 30 monet"
+      ? "1 para × 30 monet"
       : lang === "de"
-        ? "1 Stiefel x 30 Münzen"
-        : "1 boot x 30 coins";
+        ? "1 Stiefel × 30 Münzen"
+        : "1 boot × 30 coins";
   const coinsBadge = lang === "pl" ? "30 monet" : lang === "de" ? "30 Münzen" : "30 coins";
 
   return (
@@ -274,25 +274,21 @@ export function TicketSizeConceptDiagram({ lang, step }: DiagramProps) {
         ? "Preis eines einzelnen Verkaufs"
         : "Price of one sale";
   const subLeft2 =
-    lang === "pl"
-      ? "Niska (1 moneta) lub wysoka (30)"
-      : lang === "de"
-        ? "Klein (1 Münze) oder Groß (30)"
-        : "Small (1 coin) or Big (30)";
+    lang === "pl" ? "Niska lub wysoka" : lang === "de" ? "Klein oder groß" : "Small or big";
 
   const titleRight = lang === "pl" ? "Wolumen (Menge)" : lang === "de" ? "Menge" : "Volume";
   const subRight1 =
     lang === "pl"
       ? "Ile sztuk zostało sprzedanych"
       : lang === "de"
-        ? "Wie viele Stücke verkauft werden"
+        ? "Wie viele Stücke verkauft"
         : "How many items sold";
   const subRight2 =
     lang === "pl"
-      ? "Duża liczba kontra mała liczba"
+      ? "Dużo lub mało sztuk"
       : lang === "de"
         ? "Viele Stücke oder wenige"
-        : "High count vs low count";
+        : "Many or few items";
 
   const formula =
     lang === "pl"
@@ -381,16 +377,16 @@ export function BusinessChoiceDiagram({ lang, step }: DiagramProps) {
         : "Choosing Your Way";
   const line1 =
     lang === "pl"
-      ? "Wiele małych sprzedaży wymaga rzeszy klientów co godzinę"
+      ? "Małe sprzedaże: wielu klientów"
       : lang === "de"
-        ? "Viele kleine Verkäufe brauchen viele Kundinnen und Kunden"
-        : "Many small sales need lots of customers every hour";
+        ? "Kleine Verkäufe: viele Kunden"
+        : "Small sales: many buyers";
   const line2 =
     lang === "pl"
-      ? "Drogie produkty wymagają cierpliwości, kunsztu i wysokiej jakości"
+      ? "Duże sprzedaże: cierpliwość, kunszt"
       : lang === "de"
-        ? "Große Preise brauchen Geduld, Handwerk und hohe Qualität"
-        : "Big sales need patient craftsmanship and high quality";
+        ? "Große Verkäufe: Geduld, Können"
+        : "Big sales: skill, patience";
   const outcome =
     lang === "pl"
       ? "Oba sposoby działają!"

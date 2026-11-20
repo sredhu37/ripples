@@ -277,7 +277,7 @@ export const lesson: Lesson = {
           "A teraz odwrotna sytuacja: producent zabawek tworzy dziesięć tysięcy robotów-żabek.",
         ),
         T(
-          "After a week, only three children have bought one, and huge cardboard boxes fill the aisles.",
+          "After a week, only three children have bought one. Huge cardboard boxes fill the aisles.",
           "Nach einer Woche haben erst drei Kinder einen Frosch gekauft, Kisten stapeln sich.",
           "Po tygodniu tylko troje dzieci kupiło żabkę, a wielkie kartony zagracają alejki.",
         ),
@@ -287,7 +287,7 @@ export const lesson: Lesson = {
           "Gdy *podaż* znacznie przewyższa *popyt*, w sklepie powstaje niesprzedana *nadwyżka*.",
         ),
         T(
-          "To free up shelf space and recover cash, the owner slashes prices with a discount sticker.",
+          "To make room and get cash, the owner slashes prices with a discount sticker.",
           "Um Platz zu schaffen und Geld zu retten, senkt der Ladenbesitzer die Preise drastisch.",
           "Aby zwolnić miejsce na półkach i odzyskać gotówkę, właściciel obniża ceny wyprzedażą.",
         ),

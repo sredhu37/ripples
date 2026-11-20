@@ -6,14 +6,14 @@ export function RadioPropagandaDiagram({ lang, step }: DiagramProps) {
       ? "Narodziny dyktatury autorytarnej"
       : lang === "de"
         ? "Der Aufstieg der Diktatur"
-        : "The Rise of Authoritarian Dictatorship";
+        : "The Rise of Dictatorship";
 
   const sub =
     lang === "pl"
-      ? "Cenzura wolnej prasy i nadawanie wyłącznie propagandy państwowej"
+      ? "Cenzura i sama propaganda"
       : lang === "de"
-        ? "Zensur freier Zeitungen und Verbreitung staatlicher Propaganda"
-        : "Censoring free newspapers and broadcasting only state propaganda";
+        ? "Zensur und nur Propaganda"
+        : "Censored news, only propaganda";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Loudspeaker and Propaganda">
@@ -48,17 +48,17 @@ export function RadioPropagandaDiagram({ lang, step }: DiagramProps) {
 export function TotalDevastationRubbleDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Całkowite zniszczenie: 1939 do 1945"
+      ? "Zniszczenie: 1939 do 1945"
       : lang === "de"
-        ? "Totale Zerstoerung: 1939 bis 1945"
-        : "Total Devastation: 1939 to 1945";
+        ? "Zerstoerung: 1939 bis 1945"
+        : "Devastation: 1939 to 1945";
 
   const sub =
     lang === "pl"
-      ? "Wojny napastnicze zrujnowały całe miasta i ludzkie życia"
+      ? "Miasta w gruzach"
       : lang === "de"
-        ? "Angriffskriege legten Staedte in Truemmer und zerstoerten Leben"
-        : "Wars of aggression left entire cities and lives shattered";
+        ? "Staedte in Truemmern"
+        : "Cities and lives shattered";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Devastation of World War 2">
@@ -91,17 +91,17 @@ export function TotalDevastationRubbleDiagram({ lang, step }: DiagramProps) {
 export function WhiteRoseLeafletDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Odwaga cywilna: Biała Róża (Die Weisse Rose)"
+      ? "Odwaga cywilna: Biała Róża"
       : lang === "de"
         ? "Zivilcourage: Die Weisse Rose"
-        : "Civil Courage: The White Rose (Die Weisse Rose)";
+        : "Civil Courage: White Rose";
 
   const sub =
     lang === "pl"
-      ? "Hans i Sophie Scholl pokojowo stanęli w obronie prawdy i godności"
+      ? "Hans i Sophie Scholl"
       : lang === "de"
-        ? "Hans und Sophie Scholl standen friedlich fuer die Wahrheit ein"
-        : "Hans and Sophie Scholl stood up peacefully for truth";
+        ? "Hans und Sophie Scholl"
+        : "Hans and Sophie Scholl";
 
   return (
     <svg
@@ -153,17 +153,17 @@ export function WhiteRoseLeafletDiagram({ lang, step }: DiagramProps) {
 export function UnitedNationsGlobeDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "San Francisco 1945: Narody Zjednoczone"
+      ? "1945: Narody Zjednoczone"
       : lang === "de"
-        ? "San Francisco 1945: Die Vereinten Nationen"
-        : "San Francisco 1945: The United Nations";
+        ? "1945: Vereinte Nationen"
+        : "1945: The United Nations";
 
   const sub =
     lang === "pl"
-      ? "„Nigdy więcej” zjednoczyło narody na całym świecie"
+      ? "„Nigdy więcej” dla świata"
       : lang === "de"
-        ? '"Nie wieder" vereinte Nationen auf der ganzen Welt'
-        : '"Never again" united nations across the globe';
+        ? '"Nie wieder" weltweit'
+        : '"Never again" worldwide';
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="The United Nations Founding">
@@ -203,24 +203,24 @@ export function UnitedNationsGlobeDiagram({ lang, step }: DiagramProps) {
 export function GrundgesetzArticle1Diagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Konstytucja: Godność człowieka jako fundament"
+      ? "Konstytucja: godność to fundament"
       : lang === "de"
         ? "Deutsches Grundgesetz: Artikel 1"
-        : "German Basic Law: Article 1 (Grundgesetz)";
+        : "Basic Law: Article 1";
 
   const quote =
     lang === "pl"
       ? "„Godność człowieka jest nienaruszalna”"
       : lang === "de"
-        ? '"Die Wuerde des Menschen ist unantastbar"'
-        : '"Human dignity shall be inviolable"';
+        ? '"Die Wuerde ist unantastbar"'
+        : '"Human dignity is inviolable"';
 
   const sub =
     lang === "pl"
-      ? "Art. 30 Konstytucji RP oraz Art. 1 Grundgesetz: Źródło wolności i praw"
+      ? "Z niej wynikają prawa"
       : lang === "de"
-        ? "Die Menschenwuerde ist oberstes Verfassungsprinzip"
-        : "Human dignity shall be inviolable";
+        ? "Menschenwuerde kommt zuerst"
+        : "Rights start with dignity";
 
   return (
     <svg

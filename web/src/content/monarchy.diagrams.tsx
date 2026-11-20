@@ -183,10 +183,10 @@ export function ComparisonDiagram({ lang, step }: DiagramProps) {
 
   const footer =
     lang === "pl"
-      ? "Większość współczesnych monarchii powierza stanowienie prawa parlamentom"
+      ? "Wybrany parlament stanowi prawo"
       : lang === "de"
-        ? "Die meisten modernen Monarchien legen die Gesetzgebung ins Parlament"
-        : "Most modern monarchies place real lawmaking power in elected parliaments";
+        ? "Gewähltes Parlament macht Gesetze"
+        : "Elected parliament makes laws";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">
@@ -255,10 +255,10 @@ export function ModernRoleDiagram({ lang, step }: DiagramProps) {
 
   const note =
     lang === "pl"
-      ? "Wysoka stabilność: Tradycja połączona z głosem obywateli!"
+      ? "Stabilnie: tradycja i wybory"
       : lang === "de"
-        ? "Hohe Stabilität: Tradition kombiniert mit demokratischer Wahl!"
-        : "High Stability: Tradition combined with democratic votes!";
+        ? "Stabil: Tradition plus Wahlen"
+        : "Stable: tradition plus votes";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">

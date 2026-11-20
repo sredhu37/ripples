@@ -119,7 +119,7 @@ export const lesson: Lesson = {
         T(
           "The factory cannot make one-of-a-kind boots, but Sam crafts them with pride for 12 coins.",
           "Die Fabrik kann keine Unikate bauen, aber Sam fertigt sie mit Stolz für 12 Münzen.",
-          "Fabryka nie potrafi robić unikatów, lecz Sam z dumą tworzy je na zamówienie za 12 monet.",
+          "Fabryka nie potrafi robić unikatów. Sam z dumą tworzy je na zamówienie za 12 monet.",
         ),
       ],
       MossCustomOrderDiagram,

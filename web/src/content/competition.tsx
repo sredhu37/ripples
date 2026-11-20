@@ -124,7 +124,7 @@ export const lesson: Lesson = {
         T(
           "Both bakeries are busy, and both bakers earn enough coins to thrive.",
           "Beide Bäckereien haben gut zu tun und verdienen genug Münzen zum Leben.",
-          "Obie piekarnie mają pełne ręce roboty i oboje piekarze zarabiają wystarczająco dużo, by rozwijać swój fach.",
+          "Obie piekarnie mają pełne ręce roboty. Oboje piekarze zarabiają wystarczająco dużo, by rozwijać swój fach.",
         ),
       ],
       BothBakeriesBusyDiagram,

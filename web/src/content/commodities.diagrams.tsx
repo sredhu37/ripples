@@ -14,7 +14,7 @@ export function GrainSiloDiagram({ lang, step }: DiagramProps) {
         ? "Dorf-Getreidesilo"
         : "Town Grain Silo";
   const mayaName =
-    lang === "pl" ? "Rolniczka Maya" : lang === "de" ? "Baeuerin Maya" : "Farmer Maya";
+    lang === "pl" ? "Rolniczka Maya" : lang === "de" ? "Bäuerin Maya" : "Farmer Maya";
   const tomName = lang === "pl" ? "Rolnik Tom" : lang === "de" ? "Bauer Tom" : "Farmer Tom";
   const conclusion =
     lang === "pl"
@@ -84,10 +84,10 @@ export function IdenticalWheatDiagram({ lang, step }: DiagramProps) {
     lang === "pl" ? "Worek pszenicy" : lang === "de" ? "Sack Weizen" : "Sack of Wheat";
   const noBrandNote =
     lang === "pl"
-      ? "Żadnych marek ani ozdobnych opakowań"
+      ? "Bez marek i opakowań"
       : lang === "de"
-        ? "Keine Marken oder Spezialverpackung noetig"
-        : "No brands or special wrappers needed";
+        ? "Keine Marken, keine Verpackung"
+        : "No brands, no wrappers";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -145,17 +145,17 @@ export function IdenticalWheatDiagram({ lang, step }: DiagramProps) {
 
 export function WeatherDroughtDiagram({ lang, step }: DiagramProps) {
   const ariaLabel =
-    lang === "pl" ? "Niedobór przez suszę" : lang === "de" ? "Duerre-Mangel" : "Drought Scarcity";
+    lang === "pl" ? "Niedobór przez suszę" : lang === "de" ? "Dürre-Mangel" : "Drought Scarcity";
   const title =
     lang === "pl"
       ? "Letnia susza: 20 worków"
       : lang === "de"
-        ? "Sommerduerre: 20 Saecke"
+        ? "Sommerdürre: 20 Säcke"
         : "Summer Drought: 20 Sacks";
-  const priceTag = lang === "pl" ? "8 monet" : lang === "de" ? "8 Muenzen" : "8 Coins";
+  const priceTag = lang === "pl" ? "8 monet" : lang === "de" ? "8 Münzen" : "8 Coins";
   const conclusion =
     lang === "pl"
-      ? "Ogromny niedobór = gwałtowny wzrost cen"
+      ? "Niedobór = gwałtowny wzrost cen"
       : lang === "de"
         ? "Starke Knappheit = Steigender Preis"
         : "Severe Scarcity = Skyrocketing Price";
@@ -224,15 +224,15 @@ export function SuperHarvestDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Urodzajne zbiory: 90 worków"
       : lang === "de"
-        ? "Rekordernte: 90 Saecke"
+        ? "Rekordernte: 90 Säcke"
         : "Bumper Harvest: 90 Sacks";
-  const priceTag = lang === "pl" ? "2 monety" : lang === "de" ? "2 Muenzen" : "2 Coins";
+  const priceTag = lang === "pl" ? "2 monety" : lang === "de" ? "2 Münzen" : "2 Coins";
   const conclusion =
     lang === "pl"
-      ? "Obfita podaż = tania mąka dla wszystkich"
+      ? "Obfita podaż = tania mąka"
       : lang === "de"
-        ? "Reichliches Angebot = Bezahlbares Mehl fuer alle"
-        : "Abundant Supply = Affordable Flour for All";
+        ? "Reichliches Angebot = Günstiges Mehl"
+        : "Big Supply = Cheap Flour";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -286,29 +286,29 @@ export function SuperHarvestDiagram({ lang, step }: DiagramProps) {
 
 export function CentralExchangeDiagram({ lang, step }: DiagramProps) {
   const ariaLabel =
-    lang === "pl" ? "Giełda towarowa" : lang === "de" ? "Warenboerse" : "Commodity Exchange";
+    lang === "pl" ? "Giełda towarowa" : lang === "de" ? "Warenbörse" : "Commodity Exchange";
   const title =
     lang === "pl"
       ? "Centralna Giełda Towarowa"
       : lang === "de"
-        ? "Die zentrale Warenboerse"
+        ? "Die zentrale Warenbörse"
         : "The Central Commodity Exchange";
   const subtitle =
     lang === "pl"
-      ? "Zboże, metale i drewno handlowane hurtowo"
+      ? "Zboże, metale i drewno"
       : lang === "de"
-        ? "Getreide, Metalle und Holz in grossen Mengen gehandelt"
-        : "Grain, metals, and timber traded in bulk";
+        ? "Getreide, Metalle und Holz"
+        : "Grain, metals, and timber";
   const wheatSilo = lang === "pl" ? "Silos zboża" : lang === "de" ? "Weizensilo" : "Wheat Silo";
   const copperDepot =
     lang === "pl" ? "Skład miedzi" : lang === "de" ? "Kupferdepot" : "Copper Depot";
   const timberYard = lang === "pl" ? "Plac drewna" : lang === "de" ? "Holzplatz" : "Timber Yard";
   const conclusion =
     lang === "pl"
-      ? "Jedna cena rynkowa dla ustandaryzowanych surowców"
+      ? "Jedna cena za surowiec"
       : lang === "de"
-        ? "Ein Marktpreis fuer standardisierte Grundstoffe"
-        : "One market price for standard raw building blocks";
+        ? "Ein Preis pro Rohstoff"
+        : "One price per commodity";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>

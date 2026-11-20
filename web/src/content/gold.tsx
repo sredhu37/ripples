@@ -40,7 +40,7 @@ export const lesson: Lesson = {
           "Złoto to zostało wydobyte setki lat temu i przetrwało niezliczone morskie wyprawy.",
         ),
         T(
-          "Because gold does not rust, burn, or decay, it acts as a permanent *store of value*.",
+          "Gold does not rust, burn, or decay. That makes it a permanent *store of value*.",
           "Weil Gold nicht rostet, verbrennt oder zerfällt, dient es als dauerhafter *Wertspeicher*.",
           "Ponieważ złoto nie rdzewieje, nie pali się ani nie niszczeje, służy jako trwały *magazyn wartości*.",
         ),
@@ -105,8 +105,8 @@ export const lesson: Lesson = {
           "Ludzie wymieniają część oszczędności na złoto, szukając *bezpiecznej przystani*.",
         ),
         T(
-          "Because there is only a limited amount of gold in the world, demand lifts its price.",
-          "Weil es auf der Welt nur eine begrenzte Menge Gold gibt, hebt die Nachfrage den Preis.",
+          "There is only a limited amount of gold in the world. So demand lifts its price.",
+          "Es gibt auf der Welt nur eine begrenzte Menge Gold. Darum hebt die Nachfrage den Preis.",
           "Ponieważ ilość złota na świecie jest ograniczona, rosnący popyt podbija jego cenę.",
         ),
         T(
