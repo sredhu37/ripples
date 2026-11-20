@@ -35,7 +35,13 @@ async function mount(onLoggedIn = (_email: string) => {}) {
   document.body.appendChild(container);
   await act(async () => {
     createRoot(container).render(
-      <LoginScreen lang="en" onLang={() => {}} onLoggedIn={onLoggedIn} onClose={() => {}} />,
+      <LoginScreen
+        lang="en"
+        onLang={() => {}}
+        onLoggedIn={onLoggedIn}
+        onClose={() => {}}
+        onLegal={() => {}}
+      />,
     );
   });
   return container;

@@ -99,6 +99,9 @@ const en: Dict = {
   profileAs: "Logged in as {email}",
   profileSoon: "Kid profiles are coming soon.",
   logout: "Log out",
+  legalImpressum: "Legal notice",
+  legalPrivacy: "Privacy policy",
+  legalTerms: "Terms",
 };
 
 const de: Dict = {
@@ -199,6 +202,9 @@ const de: Dict = {
   profileAs: "Angemeldet als {email}",
   profileSoon: "Kinderprofile kommen bald.",
   logout: "Abmelden",
+  legalImpressum: "Impressum",
+  legalPrivacy: "Datenschutz",
+  legalTerms: "Nutzungsbedingungen",
 };
 
 const pl: Dict = {
@@ -296,6 +302,9 @@ const pl: Dict = {
   profileAs: "Zalogowano jako {email}",
   profileSoon: "Profile dzieci pojawią się wkrótce.",
   logout: "Wyloguj się",
+  legalImpressum: "Dane prawne",
+  legalPrivacy: "Prywatność",
+  legalTerms: "Regulamin",
 };
 
 const dicts: Record<Lang, Dict> = { en, de, pl };

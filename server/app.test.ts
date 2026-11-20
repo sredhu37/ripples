@@ -28,6 +28,32 @@ describe("GET /api/health", () => {
   });
 });
 
+describe("GET /api/legal", () => {
+  it("serves the Impressum details it was given", async () => {
+    const legal = {
+      name: "Test Person",
+      address: ["Test Street 1", "00000 Testtown"],
+      email: "legal@example.com",
+      phone: null,
+      vatId: null,
+    };
+    const res = await createApp({ db: { query: async () => ({}) }, legal }).request("/api/legal");
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual(legal);
+  });
+
+  it("answers with empty fields when nothing is configured", async () => {
+    const res = await createApp({ db: { query: async () => ({}) } }).request("/api/legal");
+    expect(await res.json()).toEqual({
+      name: null,
+      address: [],
+      email: null,
+      phone: null,
+      vatId: null,
+    });
+  });
+});
+
 // Needs a running Postgres: `docker compose up -d`, then
 // DATABASE_URL=postgres://ripples:ripples@localhost:5432/ripples npm test
 describe.skipIf(!process.env.DATABASE_URL)("GET /api/health with a real Postgres", () => {

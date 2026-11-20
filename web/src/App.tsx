@@ -3,6 +3,8 @@ import { getSessionEmail } from "./auth";
 import { FactCards } from "./components/FactCards";
 import { LoginScreen } from "./components/LoginScreen";
 import { ProfileScreen } from "./components/ProfileScreen";
+import { LegalScreen } from "./components/LegalScreen";
+import type { LegalPage } from "./legal/texts";
 import { getLesson } from "./content";
 import { LessonRunner } from "./lesson/LessonRunner";
 import { LESSONS } from "./lessons";
@@ -31,7 +33,8 @@ type Screen =
   | { kind: "login" }
   | { kind: "profile"; email: string }
   | { kind: "facts" }
-  | { kind: "timeline" };
+  | { kind: "timeline" }
+  | { kind: "legal"; page: LegalPage; back: Screen };
 
 export function App() {
   const [progress, setProgress] = useState<Progress>(() => loadProgress(window.localStorage));
@@ -98,6 +101,7 @@ export function App() {
         onLang={setLang}
         onLoggedIn={(email) => setScreen({ kind: "profile", email })}
         onClose={() => setScreen({ kind: "parents" })}
+        onLegal={(page) => setScreen({ kind: "legal", page, back: screen })}
       />
     );
   }
@@ -110,6 +114,20 @@ export function App() {
         onLang={setLang}
         onLoggedOut={() => setScreen({ kind: "login" })}
         onClose={() => setScreen({ kind: "map" })}
+        onLegal={(page) => setScreen({ kind: "legal", page, back: screen })}
+      />
+    );
+  }
+
+  if (screen.kind === "legal") {
+    const { back } = screen;
+    return (
+      <LegalScreen
+        lang={progress.lang}
+        page={screen.page}
+        onLang={setLang}
+        onPage={(page) => setScreen({ kind: "legal", page, back })}
+        onClose={() => setScreen(back)}
       />
     );
   }

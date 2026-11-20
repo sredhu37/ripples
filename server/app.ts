@@ -1,8 +1,9 @@
 import { extname } from "node:path";
 import { Hono } from "hono";
 import { serveStatic } from "@hono/node-server/serve-static";
-import type { HealthResponse } from "./apiTypes.js";
+import type { HealthResponse, LegalResponse } from "./apiTypes.js";
 import type { Auth } from "./auth.js";
+import type { LegalDetails } from "./config.js";
 import { checkDatabase, type Queryable } from "./db/pool.js";
 import type { Transactional } from "./db/profiles.js";
 import { profileRoutes } from "./profileRoutes.js";
@@ -18,15 +19,23 @@ export interface AppOptions {
   healthTimeoutMs?: number;
   /** The login library. Its routes live under `/api/auth/`. Without it they answer 404. */
   auth?: Auth;
+  /** Impressum details from the environment. Served at `/api/legal`. */
+  legal?: LegalDetails;
 }
 
-export function createApp({ db, distDir, healthTimeoutMs = 2_000, auth }: AppOptions): Hono {
+export function createApp({ db, distDir, healthTimeoutMs = 2_000, auth, legal }: AppOptions): Hono {
   const app = new Hono();
 
   app.get("/api/health", async (c) => {
     const ok = await checkDatabase(db, healthTimeoutMs);
     return c.json<HealthResponse>({ status: ok ? "ok" : "error" }, ok ? 200 : 503);
   });
+
+  app.get("/api/legal", (c) =>
+    c.json<LegalResponse>(
+      legal ?? { name: null, address: [], email: null, phone: null, vatId: null },
+    ),
+  );
 
   if (auth) {
     app.on(["GET", "POST"], "/api/auth/*", (c) => auth.handler(c.req.raw));

@@ -97,6 +97,9 @@ describe("i18n core", () => {
       "profileAs",
       "profileSoon",
       "logout",
+      "legalImpressum",
+      "legalPrivacy",
+      "legalTerms",
     ] as const;
 
     for (const key of keys) {

@@ -294,6 +294,52 @@ p {
   align-items: center;
 }
 
+.legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  justify-content: center;
+}
+
+.legal-links button,
+.legal-tabs button {
+  background: none;
+  border: none;
+  color: var(--teal-dark);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  min-height: 44px;
+  padding: 0 0.25rem;
+}
+
+.legal-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+
+.legal-tabs button[aria-current="page"] {
+  text-decoration: none;
+  border-bottom: 3px solid var(--teal-dark);
+}
+
+.legal-text {
+  max-height: 60vh;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.legal-text h3 {
+  margin: 1rem 0 0.25rem;
+}
+
+.legal-updated {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
 .login-hint {
   color: var(--teal-dark);
   font-weight: 600;

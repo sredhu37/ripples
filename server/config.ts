@@ -3,6 +3,16 @@ import { resolve } from "node:path";
 /** Matches the user, password and database in compose.yaml. Used in dev only. */
 export const DEV_DATABASE_URL = "postgres://ripples:ripples@localhost:5432/ripples";
 
+/** Impressum details. Read from the environment at deploy time, never written into the repo (public). */
+export interface LegalDetails {
+  name: string | null;
+  /** Lines of the postal address. */
+  address: string[];
+  email: string | null;
+  phone: string | null;
+  vatId: string | null;
+}
+
 export interface Config {
   port: number;
   databaseUrl: string;
@@ -17,10 +27,26 @@ export interface Config {
   resendApiKey?: string;
   /** Sender of the login email, e.g. `Ripples <login@example.com>`. Required with `resendApiKey`. */
   emailFrom?: string;
+  legal: LegalDetails;
 }
 
 /** Dev only. Never used in production: `loadConfig` demands a real secret there. */
 export const DEV_AUTH_SECRET = "dev-only-secret-do-not-use-in-production";
+
+/** Address lines are separated by a real newline, a literal backslash-n, or `;`. */
+function loadLegal(env: NodeJS.ProcessEnv): LegalDetails {
+  const one = (v: string | undefined) => v?.trim() || null;
+  return {
+    name: one(env.LEGAL_NAME),
+    address: (env.LEGAL_ADDRESS ?? "")
+      .split(/\r?\n|\\n|;/)
+      .map((line) => line.trim())
+      .filter(Boolean),
+    email: one(env.LEGAL_EMAIL),
+    phone: one(env.LEGAL_PHONE),
+    vatId: one(env.LEGAL_VAT_ID),
+  };
+}
 
 export function loadConfig(env: NodeJS.ProcessEnv): Config {
   const production = env.NODE_ENV === "production";
@@ -60,5 +86,6 @@ export function loadConfig(env: NodeJS.ProcessEnv): Config {
     baseUrl: env.BETTER_AUTH_URL || undefined,
     resendApiKey,
     emailFrom,
+    legal: loadLegal(env),
   };
 }
