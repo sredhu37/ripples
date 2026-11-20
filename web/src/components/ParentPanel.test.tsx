@@ -34,6 +34,7 @@ describe("ParentPanel", () => {
           onRestore={() => {}}
           onReset={() => {}}
           onFacts={() => {}}
+          onAccount={() => {}}
           onClose={() => {}}
           onToggleLesson={onToggle}
         />,
@@ -103,6 +104,7 @@ describe("ParentPanel", () => {
           onRestore={() => {}}
           onReset={() => {}}
           onFacts={() => {}}
+          onAccount={() => {}}
           onClose={() => {}}
           onToggleLesson={onToggle}
         />,
@@ -246,6 +248,7 @@ describe("One age group", () => {
           onRestore={() => {}}
           onReset={() => {}}
           onFacts={() => {}}
+          onAccount={() => {}}
           onClose={() => {}}
           onToggleLesson={() => {}}
         />,

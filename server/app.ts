@@ -2,6 +2,7 @@ import { extname } from "node:path";
 import { Hono } from "hono";
 import { serveStatic } from "@hono/node-server/serve-static";
 import type { HealthResponse } from "./apiTypes.js";
+import type { Auth } from "./auth.js";
 import { checkDatabase, type Queryable } from "./db/pool.js";
 
 export interface AppOptions {
@@ -9,15 +10,19 @@ export interface AppOptions {
   /** Folder with the built app. When set, the API serves it at `/`. */
   distDir?: string;
   healthTimeoutMs?: number;
+  /** The login library. Its routes live under `/api/auth/`. Without it they answer 404. */
+  auth?: Auth;
 }
 
-export function createApp({ db, distDir, healthTimeoutMs = 2_000 }: AppOptions): Hono {
+export function createApp({ db, distDir, healthTimeoutMs = 2_000, auth }: AppOptions): Hono {
   const app = new Hono();
 
   app.get("/api/health", async (c) => {
     const ok = await checkDatabase(db, healthTimeoutMs);
     return c.json<HealthResponse>({ status: ok ? "ok" : "error" }, ok ? 200 : 503);
   });
+
+  if (auth) app.on(["GET", "POST"], "/api/auth/*", (c) => auth.handler(c.req.raw));
 
   // An unknown API path is a JSON 404, never the app's index.html.
   app.all("/api/*", (c) => c.json({ error: "not_found" }, 404));

@@ -288,6 +288,22 @@ p {
   margin-top: 14px;
 }
 
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-hint {
+  color: var(--teal-dark);
+  font-weight: 600;
+}
+
+.login-error {
+  color: #b3261e;
+  font-weight: 700;
+}
+
 /* Parent Panel Lesson Selection */
 .parent-screen {
   align-items: center;

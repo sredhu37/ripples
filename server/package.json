@@ -9,11 +9,13 @@
     "build": "npm run typecheck && tsc -p tsconfig.build.json",
     "start": "NODE_ENV=production DIST_DIR=../web/dist node dist/index.js",
     "migrate": "node-pg-migrate -m db/migrations up",
+    "migrate:create": "node-pg-migrate -m db/migrations --migration-filename-format utc --migration-file-language sql create",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@hono/node-server": "^2.1.9",
+    "better-auth": "^1.7.26",
     "hono": "^4.13.19",
     "node-pg-migrate": "7.6.1",
     "pg": "^8.23.1"

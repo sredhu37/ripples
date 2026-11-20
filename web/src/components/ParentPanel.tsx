@@ -15,6 +15,7 @@ interface Props {
   onRestore: (p: Progress) => void;
   onReset: () => void;
   onFacts: () => void;
+  onAccount: () => void;
   onClose: () => void;
   onLang?: (l: Lang) => void;
   onToggleLesson: (lessonId: string, enabled: boolean) => void;
@@ -30,6 +31,7 @@ export function ParentPanel({
   onRestore,
   onReset,
   onFacts,
+  onAccount,
   onClose,
   onLang,
   onToggleLesson,
@@ -89,6 +91,12 @@ export function ParentPanel({
           <h2>{t(lang, "parents")}</h2>
           {onLang && <LangSwitch lang={lang} onLang={onLang} />}
         </div>
+
+        <h2>{t(lang, "accountTitle")}</h2>
+        <p>{t(lang, "accountHelp")}</p>
+        <button className="btn" type="button" onClick={onAccount}>
+          {t(lang, "accountGo")}
+        </button>
 
         <h2>{t(lang, "lessonSelectionTitle")}</h2>
         <p>{t(lang, "lessonSelectionHelp")}</p>

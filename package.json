@@ -12,6 +12,7 @@
     "build": "npm run build --prefix web && npm run build --prefix server",
     "start": "npm start --prefix server",
     "migrate": "npm run migrate --prefix server",
+    "migrate:create": "npm run migrate:create --prefix server --",
     "test": "npm test --prefix web && npm test --prefix server && vitest run --root scripts",
     "typecheck": "npm run typecheck --prefix web && npm run typecheck --prefix server",
     "lint": "oxlint",

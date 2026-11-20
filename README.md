@@ -62,12 +62,16 @@ npm run install:all # npm ci in the root, web/ and server/
 
 None are needed for local development. There is no `.env` file: the app does not load one. The defaults are:
 
-| Variable       | Default in dev                                      | Notes                                                                            |
-| -------------- | --------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `DATABASE_URL` | `postgres://ripples:ripples@localhost:5432/ripples` | The database from step 3. Required in production. Neon needs `?sslmode=require`. |
-| `PORT`         | `8080`                                              | API port. Vite proxies `/api` to it, so change `web/vite.config.ts` too.         |
-| `NODE_ENV`     | unset                                               | `production` makes `DATABASE_URL` required.                                      |
-| `DIST_DIR`     | unset                                               | Built app the API serves at `/`. Unset: the API serves `/api` only.              |
+| Variable             | Default in dev                                      | Notes                                                                                                                      |
+| -------------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `DATABASE_URL`       | `postgres://ripples:ripples@localhost:5432/ripples` | The database from step 3. Required in production. Neon needs `?sslmode=require`.                                           |
+| `PORT`               | `8080`                                              | API port. Vite proxies `/api` to it, so change `web/vite.config.ts` too.                                                   |
+| `NODE_ENV`           | unset                                               | `production` makes `DATABASE_URL` required.                                                                                |
+| `DIST_DIR`           | unset                                               | Built app the API serves at `/`. Unset: the API serves `/api` only.                                                        |
+| `BETTER_AUTH_SECRET` | a fixed dev value                                   | Signs login cookies. Required in production, at least 32 characters.                                                       |
+| `BETTER_AUTH_URL`    | derived from each request                           | Public address of the API, e.g. `https://ripples.example`.                                                                 |
+| `RESEND_API_KEY`     | unset (Self-host mode)                              | Set: login codes are emailed with Resend. Unset: they are written to the API log, and the API prints a warning at startup. |
+| `EMAIL_FROM`         | unset                                               | Sender of the login email. Required when `RESEND_API_KEY` is set.                                                          |
 
 One exception: `npm run migrate` has no default, so pass the URL yourself (next step).
 
@@ -83,7 +87,7 @@ DATABASE_URL=postgres://ripples:ripples@localhost:5432/ripples npm run migrate
 
 On Linux, run the first two commands as the `postgres` user: `sudo -u postgres psql -c "..."` and `sudo -u postgres createdb -O ripples ripples`.
 
-`migrate` creates the tables on the first run and prints `No migrations to run!` on later runs. Migrations are a separate command, not part of API startup. The migration tests create and drop a throwaway database, so the role needs `CREATEDB` (`psql postgres -c "ALTER ROLE ripples CREATEDB"`). Other commands:
+`migrate` creates the tables on the first run and prints `No migrations to run!` on later runs. Migrations are a separate command, not part of API startup. Create a new one with `npm run migrate:create <name>`: it names the file `YYYYMMDDHHmmssSSS_<name>.sql` (UTC), which is the 17-digit prefix node-pg-migrate reads as a date; do not make up the prefix by hand. The migration tests create and drop a throwaway database, so the role needs `CREATEDB` (`psql postgres -c "ALTER ROLE ripples CREATEDB"`). Other commands:
 
 ```bash
 psql postgres://ripples:ripples@localhost:5432/ripples   # shell
