@@ -40,9 +40,9 @@ export const lesson: Lesson = {
           "Ustrój gospodarczy, w którym państwo posiada wszystkie narzędzia i odgórnie planuje produkcję, nazywamy *komunizmem*.",
         ),
         T(
-          "A Central Planning Desk in the capital was created to decide what gets produced and distributed.",
+          "A Central Planning Desk was set up in the capital. It would decide what gets made and shared.",
           "Eine zentrale Planungsstelle in der Hauptstadt sollte entscheiden, was hergestellt und verteilt wird.",
-          "W stolicy powołano Centralne Biuro Planowania, które miało z góry decydować o produkcji i podziale dóbr.",
+          "W stolicy powołano Centralne Biuro Planowania. Miało z góry decydować o produkcji i podziale dóbr.",
         ),
       ],
       CentralDeskDiagram,
@@ -50,7 +50,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "The central desk planned to treat everyone equally: every district gets 33 coats and 33 shoes.",
+          "The central desk wanted to treat everyone equally. Every district would get 33 coats and 33 shoes.",
           "Das Planungsbüro wollte alle gleich behandeln: Jeder Bezirk sollte 33 Mäntel und 33 Schuhe bekommen.",
           "Planiści postanowili potraktować wszystkich równo: każdy okręg otrzyma po 33 płaszcze i 33 pary butów.",
         ),
@@ -87,7 +87,7 @@ export const lesson: Lesson = {
         T(
           "Empty store shelves and long waiting lines formed because quotas did not match real needs.",
           "Leere Regale und lange Warteschlangen entstanden, weil Quoten nicht zum echten Bedarf passten.",
-          "Sklepy świeciły pustkami, a przed drzwiami wiły się kolejki, bo urzędowe plany nie pasowały do rzeczywistości.",
+          "Sklepy świeciły pustkami, a przed drzwiami wiły się kolejki. Urzędowe plany nie pasowały do rzeczywistości.",
         ),
         T(
           "Without private ownership, workers also lost the motivation to invent new products.",
@@ -105,7 +105,7 @@ export const lesson: Lesson = {
           "W gospodarce rynkowej sygnały cenowe i wybory klientów pokazują wytwórcom, co warto produkować.",
         ),
         T(
-          "In a planned economy, a single office tries to guess millions of details, leading to chronic shortages.",
+          "In a planned economy, one office tries to guess millions of details. That leads to shortages again and again.",
           "In einer Planwirtschaft versucht ein einziges Büro Millionen Details zu erraten, was zu Mangel führt.",
           "W gospodarce planowej jedno biuro próbuje odgadnąć miliony szczegółów, co prowadzi do chronicznych braków.",
         ),
@@ -120,12 +120,12 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "Without prices and voluntary trade, planners lack the signals needed to know what people really value.",
-          "Ohne Preise und freiwilligen Handel fehlen Planern die Signale um zu wissen, was Menschen wirklich schätzen.",
-          "Bez cen i dobrowolnego handlu planiści nie mają pojęcia, czego ludzie w danej chwili naprawdę potrzebują.",
+          "Without prices and voluntary trade, planners get no signals. They cannot know what people really value.",
+          "Ohne Preise und freiwilligen Handel fehlen Planern die Signale. So wissen sie nicht, was Menschen wirklich schätzen.",
+          "Bez cen i dobrowolnego handlu planiści nie dostają żadnych sygnałów. Nie wiedzą, czego ludzie naprawdę potrzebują.",
         ),
         T(
-          "Economic systems that trust people to make their own choices adapt faster and serve daily needs better.",
+          "Economies that let people choose for themselves adapt faster. They also serve daily needs better.",
           "Wirtschaftssysteme, die Menschen eigene Entscheidungen zutrauen, passen sich schneller an und versorgen den Alltag besser.",
           "Gospodarki, które pozwalają ludziom na swobodne wybory, reagują błyskawicznie i lepiej służą codziennym potrzebom.",
         ),
@@ -150,7 +150,7 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "The state or community owns all factories and tools, and a central desk decides production quotas",
+            "The state or community owns all factories, and a central desk sets quotas",
             "Der Staat besitzt alle Fabriken und Werkzeuge, und ein zentrales Büro bestimmt Produktionsquoten",
             "Państwo posiada wszystkie fabryki i warsztaty, a urzędnicy w stolicy wyznaczają odgórne limity produkcji",
           ),
@@ -187,8 +187,8 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "Because a distant central office cannot know the daily changing needs and tastes of millions of people",
-            "Weil ein fernes Zentralbüro die täglichen Bedürfnisse und Wünsche von Millionen Menschen nicht kennen kann",
+            "Because a distant office cannot know the changing needs and tastes of millions",
+            "Weil ein fernes Büro die wechselnden Bedürfnisse und Wünsche von Millionen nicht kennen kann",
             "Ponieważ odległe biuro nie zna codziennych, zmieniających się potrzeb i gustów milionów mieszkańców",
           ),
           correct: true,

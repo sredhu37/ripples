@@ -9,7 +9,8 @@ interface WhyGovernmentToyProps {
 }
 
 export function WhyGovernmentToy({ lang, mode = "toy", onDone }: WhyGovernmentToyProps) {
-  const [rulesLevel, setRulesLevel] = useState(50);
+  // Start in the "no rules" zone: the balanced zone (40 to 60) completes the toy and the quiz.
+  const [rulesLevel, setRulesLevel] = useState(10);
   const [showQuizResult, setShowQuizResult] = useState(false);
   const [quizCorrect, setQuizCorrect] = useState(false);
 

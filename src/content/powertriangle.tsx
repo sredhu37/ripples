@@ -50,24 +50,24 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "These three corners do not work in isolation; they are connected by continuous flows of cooperation.",
+          "These three corners do not work alone. They are connected by flows of cooperation.",
           "Diese drei Ecken arbeiten nicht isoliert; sie sind durch ständige Ströme der Zusammenarbeit verbunden.",
           "Te trzy rogi nie działają w odosobnieniu; łączy je nieustanny obieg współpracy.",
         ),
         T(
-          "Pip works for Bea, earns wages, buys fresh bread, and votes in elections to choose Moss.",
+          "Pip works for Bea, earns wages, and buys fresh bread. Pip also votes in elections to choose Moss.",
           "Pip arbeitet für Bea, verdient Lohn, kauft frisches Brot und wählt Moss bei der Wahl.",
-          "Pip pracuje u Bei, otrzymuje pensję, kupuje chleb i bierze udział w wyborach, by wybrać Mossa.",
+          "Pip pracuje u Bei, dostaje pensję i kupuje chleb. Pip też głosuje w wyborach, żeby wybrać Mossa.",
         ),
         T(
-          "Bea pays taxes into the town treasury and relies on Moss for paved roads, clean water, and honest courts.",
-          "Bea zahlt Steuern in die Dorfkasse und verlässt sich auf befestigte Straßen, sauberes Wasser und Gerichte.",
-          "Bea płaci podatki do wspólnej kasy i liczy na utwardzone drogi, czystą wodę oraz uczciwe sądy.",
+          "Bea pays taxes into the town treasury. She relies on Moss for paved roads, clean water, and honest courts.",
+          "Bea zahlt Steuern in die Dorfkasse. Sie verlässt sich auf befestigte Straßen, sauberes Wasser und Gerichte.",
+          "Bea płaci podatki do wspólnej kasy. Liczy na utwardzone drogi, czystą wodę oraz uczciwe sądy.",
         ),
         T(
-          "Moss creates fair laws that protect Pip from unsafe workshops and keep Bea from forming an unfair monopoly.",
+          "Moss makes fair laws. They protect Pip from unsafe workshops and stop Bea from forming a monopoly.",
           "Moss schafft faire Gesetze, die Pip vor unsicheren Betrieben schützen und Monopole verhindern.",
-          "Moss tworzy sprawiedliwe prawo, które chroni Pipa w pracy i nie pozwala Bei na stworzenie monopolu.",
+          "Moss tworzy sprawiedliwe prawo. Chroni ono Pipa w pracy i nie pozwala Bei na stworzenie monopolu.",
         ),
       ],
       FlowArrowsDiagram,
@@ -75,9 +75,9 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "Otto pulls one corner of the table away: 'Look what happens if any single corner dominates unchecked.'",
+          "Otto pulls one corner of the table away. 'Look what happens if one corner dominates unchecked.'",
           "Otto zieht an einer Tischecke: 'Schaut, was passiert, wenn eine einzelne Ecke die Kontrolle übernimmt.'",
-          "Otto unosi jeden róg stołu: 'Zobaczcie, co się stanie, gdy jeden biegun zdominuje pozostałe bez żadnej kontroli.'",
+          "Otto unosi jeden róg stołu. 'Zobaczcie, co się stanie, gdy jeden biegun zdominuje pozostałe bez żadnej kontroli.'",
         ),
         T(
           "If Government takes complete control, personal freedom and private creativity vanish.",
@@ -121,13 +121,13 @@ export const lesson: Lesson = {
       [
         T(
           "When citizens actively participate, businesses innovate responsibly, and governments protect rights, the community thrives.",
-          "Wenn Bürger sich aktiv beteiligen, Unternehmen verantwortlich handeln und der Staat Rechte schützt, blüht die Gemeinschaft auf.",
+          "Bürger beteiligen sich aktiv, Unternehmen handeln verantwortlich, und der Staat schützt Rechte. Dann blüht die Gemeinschaft auf.",
           "Gdy obywatele są aktywni, firmy działają odpowiedzialnie, a państwo strzeże praw, cała społeczność rozkwita.",
         ),
         T(
-          "No single group has all the answers, but together in balance they build a peaceful, prosperous world.",
-          "Keine Gruppe allein hat alle Antworten, aber gemeinsam im Gleichgewicht bauen sie eine friedliche, gerechte Welt.",
-          "Żadna grupa nie ma monopolu na mądrość, lecz wspólnie w równowadze tworzą bezpieczny i sprawiedliwy świat.",
+          "No single group has all the answers. Together, in balance, they build a peaceful, prosperous world.",
+          "Keine Gruppe allein hat alle Antworten. Aber gemeinsam im Gleichgewicht bauen sie eine friedliche, gerechte Welt.",
+          "Żadna grupa nie ma monopolu na mądrość. Razem, w równowadze, tworzą bezpieczny i sprawiedliwy świat.",
         ),
       ],
       HarmonyDiagram,

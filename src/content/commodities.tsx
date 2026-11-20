@@ -232,9 +232,9 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "A summer drought made wheat scarce. Set the weather to Normal Rain so the silo fills to 50 sacks at 4 coins.",
+        "A summer drought made wheat scarce. Choose Normal Rain so the silo reaches 50 sacks at 4 coins.",
         "Eine Sommerdürre hat Weizen knapp gemacht. Schalte auf normalen Regen um, damit das Silo 50 Säcke zu 4 Münzen füllt.",
-        "Letnia susza spowodowała brak pszenicy. Ustaw pogodę na normalny deszcz, aby silos napełnił się do 50 worków przy cenie 4 monet.",
+        "Letnia susza sprawiła, że pszenicy brakuje. Wybierz normalny deszcz, by silos miał 50 worków przy cenie 4 monet.",
       ),
       Widget,
       hint: T(

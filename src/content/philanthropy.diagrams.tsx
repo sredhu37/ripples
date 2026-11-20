@@ -11,10 +11,10 @@ export function SavingsChestDiagram({ lang, step }: DiagramProps) {
     lang === "pl" ? "1 000 złotych monet" : lang === "de" ? "1.000 Goldmünzen" : "1,000 Gold Coins";
   const subtext =
     lang === "pl"
-      ? "Oszczędności z całego życia uczciwej żeglugi"
+      ? "Oszczędności z całego życia"
       : lang === "de"
-        ? "Ersparnisse aus einem langen Leben auf See"
-        : "Saved across a lifetime of honest sailing";
+        ? "Ein Leben lang gespart"
+        : "Saved over a lifetime";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -58,10 +58,10 @@ export function SpendingVsPreservingDiagram({ lang, step }: DiagramProps) {
         : "Handouts vs Foundation";
   const title =
     lang === "pl"
-      ? "Dwie drogi dzielenia się majątkiem"
+      ? "Dwa sposoby pomagania"
       : lang === "de"
         ? "Zwei Wege zu helfen"
-        : "Two Ways to Give Back";
+        : "Two Ways to Give";
 
   const handoutTitle =
     lang === "pl"
@@ -91,10 +91,10 @@ export function SpendingVsPreservingDiagram({ lang, step }: DiagramProps) {
 
   const subtext =
     lang === "pl"
-      ? "Chroń pień drzewa: zbieraj tylko owoce, nie ścinaj pnia"
+      ? "Chroń pień, zbieraj owoce"
       : lang === "de"
-        ? "Schütze den Stamm; ernte nur die reifen Äpfel"
-        : "Protect the tree trunk; harvest only the apples";
+        ? "Stamm schützen, Äpfel ernten"
+        : "Protect trunk, pick apples";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -169,16 +169,16 @@ export function EndowmentTreeDiagram({ lang, step }: DiagramProps) {
         : "The Endowment Tree";
   const capitalLabel =
     lang === "pl"
-      ? "Kapitał żelazny fundacji: 1 000 monet"
+      ? "Kapitał żelazny: 1 000 monet"
       : lang === "de"
         ? "Stiftungsvermögen: 1.000 Münzen Kapital"
-        : "Endowment Vault: 1,000 Coins Capital";
+        : "Endowment Vault: 1,000 Coins";
   const fruitLabel =
     lang === "pl"
-      ? "Każdego roku rośnie 40 monet świeżych owoców zysku!"
+      ? "40 monet zysku rocznie"
       : lang === "de"
-        ? "Jedes Jahr wachsen 40 Münzen frische Erträge!"
-        : "Every year, 40 coins of fresh fruit grow naturally!";
+        ? "40 Münzen wachsen jährlich"
+        : "40 coins grow yearly";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -214,7 +214,7 @@ export function PerpetualCommunityDiagram({ lang, step }: DiagramProps) {
         : "Perpetual Community Benefit";
   const title =
     lang === "pl"
-      ? "Fundacja Portowa w Ripple Town"
+      ? "Fundacja Portowa Ripple Town"
       : lang === "de"
         ? "Die Ripple-Hafen-Stiftung"
         : "The Ripple Harbor Foundation";
@@ -234,10 +234,10 @@ export function PerpetualCommunityDiagram({ lang, step }: DiagramProps) {
 
   const subtext =
     lang === "pl"
-      ? "Służy kolejnym pokoleniom dzieci przez całe stulecia!"
+      ? "Służy dzieciom przez stulecia"
       : lang === "de"
-        ? "Hilft Generation um Generation über Jahrhunderte!"
-        : "Helping generation after generation for centuries to come!";
+        ? "Hilft Generationen über Jahrhunderte"
+        : "Helping children for centuries";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>
@@ -303,16 +303,16 @@ export function GermanFoundationsDiagram({ lang, step }: DiagramProps) {
         : "Charitable Trusts & Foundations";
   const subtitle =
     lang === "pl"
-      ? "Kapitał żelazny na zawsze wspiera naukę, zdrowie i kulturę"
+      ? "Wspierają naukę, zdrowie, kulturę"
       : lang === "de"
-        ? "Bosch, Bertelsmann und Zeiss im Dienst von Wissenschaft & Kultur"
-        : "Tata Trusts, Bosch, and Premji Foundation funding education & society";
+        ? "Bosch, Bertelsmann und Zeiss"
+        : "Tata Trusts, Bosch, Premji";
   const subtext =
     lang === "pl"
-      ? "Kapitał żelazny jest chroniony; zyski służą dobru wspólnemu na wieki"
+      ? "Kapitał chroniony, zyski pomagają"
       : lang === "de"
-        ? "Vermögen auf ewig geschützt; Erträge fließen dem Gemeinwohl zu"
-        : "Capital preserved forever; annual earnings dedicated to the common good";
+        ? "Vermögen bleibt, Erträge helfen"
+        : "Capital stays, earnings help";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label={ariaLabel}>

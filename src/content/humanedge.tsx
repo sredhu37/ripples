@@ -31,7 +31,7 @@ export const lesson: Lesson = {
         ),
         T(
           "Every generation invents new technology to protect families, explore nature, and cure diseases.",
-          "Jede Generation baut neue Technik, um Familien zu schuetzen, die Natur zu erforschen und Not zu lindern.",
+          "Jede Generation baut neue Technik. Sie schuetzt Familien, erforscht die Natur und lindert Not.",
           "Każde pokolenie tworzy nowe technologie, by chronić rodziny, badać przyrodę i leczyć choroby.",
         ),
         T(
@@ -47,7 +47,7 @@ export const lesson: Lesson = {
         T(
           "Computers can calculate billions of numbers every second without ever tiring or needing a break.",
           "Computer koennen Milliarden Zahlen in einer Sekunde berechnen, ohne je muede zu werden.",
-          "Komputery potrafią przeliczać miliardy liczb w każdej sekundzie, nigdy się nie męcząc ani nie potrzebując przerwy.",
+          "Komputery potrafią przeliczać miliardy liczb w każdej sekundzie. Nigdy się nie męczą ani nie potrzebują przerwy.",
         ),
         T(
           "They remember entire encyclopedias and spot tiny mathematical patterns across vast oceans of data.",
@@ -55,9 +55,9 @@ export const lesson: Lesson = {
           "Pamiętają całe biblioteki i odnajdują subtelne wzorce statystyczne w bezkresnych oceanach danych.",
         ),
         T(
-          "Yet raw computational speed alone cannot decide what is fair, good, or meaningful for human life.",
+          "Yet speed alone cannot decide what is fair, good, or meaningful for people.",
           "Doch blosse Rechengeschwindigkeit allein kann nicht entscheiden, was gerecht oder gut fuer Menschen ist.",
-          "Jednak czysta szybkość obliczeń nie potrafi sama zdecydować, co jest sprawiedliwe, dobre i wartościowe dla ludzkiego życia.",
+          "Jednak sama szybkość obliczeń nie zdecyduje, co jest sprawiedliwe, dobre i wartościowe dla ludzi.",
         ),
       ],
       MachineSpeedComparisonDiagram,
@@ -65,12 +65,12 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "A computer algorithm cannot shed a tear of joy, feel remorse, or love another living being.",
+          "A computer algorithm cannot cry happy tears, feel sorry, or love another living being.",
           "Ein Computeralgorithmus kann weder Freudentraenen weinen, noch Reue empfinden oder jemanden lieben.",
           "Algorytm komputerowy nie uroni łzy radości, nie odczuje skruchy ani nie pokocha drugiej żywej istoty.",
         ),
         T(
-          "It cannot wrap a warm blanket around a shivering child or understand the bittersweet sadness of goodbye.",
+          "It cannot wrap a warm blanket around a shivering child. It cannot feel the sadness of goodbye.",
           "Er kann kein frierendes Kind troestend in den Arm nehmen oder den Abschiedsschmerz verstehen.",
           "Nie potrafi otulić ciepłym kocem marznącego dziecka ani zrozumieć słodko-gorzkiego smutku pożegnania.",
         ),
@@ -90,13 +90,13 @@ export const lesson: Lesson = {
           "Ludzkie dary, takie jak *empatia*, *kreatywność*, odwaga etyczna i radosna współpraca, należą wyłącznie do nas.",
         ),
         T(
-          "We can imagine brand new worlds, write poetry that moves hearts, and forgive each other's mistakes.",
+          "We can imagine new worlds, write poems that move hearts, and forgive each other's mistakes.",
           "Wir koennen neue Welten erfinden, beruehrende Lieder dichten und einander Fehler verzeihen.",
           "Potrafimy wyobrażać sobie nowe światy, pisać wiersze poruszające serca i wybaczać sobie nawzajem błędy.",
         ),
         T(
-          "When we sit down together to solve a community challenge, our shared imagination has no limit.",
-          "Wenn wir uns gemeinsam an einen Tisch setzen, um Probleme zu loesen, kennt unsere Fantasie keine Grenze.",
+          "When we sit down together to solve a problem, our shared imagination has no limit.",
+          "Wenn wir gemeinsam Probleme loesen, kennt unsere Fantasie keine Grenze.",
           "Gdy siadamy razem, by rozwiązać problem naszej społeczności, nasza wspólna wyobraźnia nie ma granic.",
         ),
       ],
@@ -115,9 +115,9 @@ export const lesson: Lesson = {
           "Łącząc genialne maszyny z dobrocią, sprawiedliwością i troską, możemy podnieść jakość życia każdego człowieka.",
         ),
         T(
-          "The greatest adventure in human history is just beginning, and you are here to help guide it.",
+          "The greatest adventure in human history is just beginning. You are here to help guide it.",
           "Das groesste Abenteuer der Menschheit faengt gerade erst an, und du gestaltest es mit.",
-          "Najwspanialsza przygoda w dziejach ludzkości dopiero się zaczyna, a Ty jesteś tutaj, by pomóc nadać jej mądry kierunek.",
+          "Najwspanialsza przygoda w dziejach ludzkości dopiero się zaczyna. Ty jesteś tutaj, by pomóc nadać jej mądry kierunek.",
         ),
       ],
       AmplifiedHumanValuesFutureDiagram,
@@ -177,8 +177,8 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "Guide them with human values, compassion, and fairness to lift up communities and protect nature",
-            "Sie mit menschlichen Werten, Mitgefuehl und Fairness lenken, um Menschen zu helfen und die Natur zu schuetzen",
+            "Guide them with human values, compassion, and fairness to help people and nature",
+            "Sie mit Mitgefuehl und Fairness lenken, um Menschen und Natur zu schuetzen",
             "Prowadzić je ludzkimi wartościami, współczuciem i sprawiedliwością, by wspierać wspólnotę i chronić przyrodę",
           ),
           correct: true,

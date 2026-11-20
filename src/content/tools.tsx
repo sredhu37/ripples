@@ -25,14 +25,14 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "For thousands of years, every stone cut, field plowed, and wall built was limited by muscle power.",
+          "For thousands of years, people built and farmed with muscle power alone.",
           "Jahrtausende lang war jeder gehauene Stein und jeder gepfluegte Acker durch Muskelkraft begrenzt.",
           "Przez tysiące lat każdy ociosany kamień, zaorane pole i wzniesiony mur były ograniczone siłą mięśni.",
         ),
         T(
-          "Farmers pushed heavy wooden plows by hand or hitched oxen and horses to pull through thick clay.",
+          "Farmers pushed heavy wooden plows by hand. Or they hitched oxen and horses to pull them through thick clay.",
           "Bauern schoben schwere Holzpfluege von Hand oder spannten Ochsen und Pferde vor das Gespann.",
-          "Rolnicy pchali ciężkie drewniane pługi własnymi rękami lub zaprzęgali woły i konie do pracy w gliniastej ziemi.",
+          "Rolnicy pchali ciężkie drewniane pługi rękami. Albo zaprzęgali woły i konie do ciągnięcia w gliniastej ziemi.",
         ),
         T(
           "Even with animals, work was slow and exhausting. When muscles grew tired, all work had to stop.",
@@ -45,19 +45,19 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "Clever builders learned to capture wind for sailing ships and water currents to turn mill wheels.",
+          "Clever builders caught the wind with sails. They used river currents to turn mill wheels.",
           "Kluge Baumeister nutzten den Wind fuer Segelschiffe und Wasserstroeme fuer Muehlraeder.",
-          "Pomysłowi rzemieślnicy nauczyli się łapać wiatr w żagle statków i wykorzystywać nurt rzek do obracania kół młyńskich.",
+          "Pomysłowi rzemieślnicy łapali wiatr w żagle statków. Nurt rzek obracał koła młyńskie.",
         ),
         T(
           "Waterwheels ground grain into flour and sawed timber, but they depended completely on the weather.",
           "Wasserraeder mahlten Korn zu Mehl und saegten Holz, doch sie hingen voellig vom Wetter ab.",
-          "Koła wodne mieliły ziarno na mąkę i przecierały drewno, lecz ich praca zależała całkowicie od pogody.",
+          "Koła wodne mieliły ziarno na mąkę i przecierały drewno. Ale zależały całkowicie od pogody.",
         ),
         T(
-          "In freezing winters rivers iced over, and during dry summers water levels dropped to a trickle.",
-          "Im eisigen Winter fror der Fluss zu, und im trockenen Sommer floss oft nur ein kleines Rinnsal.",
-          "W mroźne zimy rzeki zamarzały pod grubą warstwą lodu, a w upalne lata zamieniały się w wyschnięte koryta.",
+          "In freezing winters rivers iced over. In dry summers they shrank to a trickle.",
+          "Im eisigen Winter fror der Fluss zu. Im trockenen Sommer floss oft nur ein kleines Rinnsal.",
+          "W mroźne zimy rzeki zamarzały pod lodem. W upalne lata zamieniały się w wyschnięte koryta.",
         ),
       ],
       WindWaterMillDiagram,
@@ -70,12 +70,12 @@ export const lesson: Lesson = {
           "Wynalazcy zauważyli, że podgrzewanie wody w zamkniętym zbiorniku wytwarza ogromne ciśnienie rozprężania.",
         ),
         T(
-          "When water boils into steam, it expands to take up over one thousand times more volume than liquid.",
+          "When water boils into steam, it expands. Steam takes up over a thousand times more space.",
           "Wenn Wasser zu Dampf kocht, dehnt es sich auf das ueber tausendfache Volumen aus.",
-          "Gdy woda wrze i zmienia się w parę, jej objętość rośnie ponadtysiąckrotnie w porównaniu z cieczą.",
+          "Gdy woda wrze, zmienia się w parę i rozpręża się. Para zajmuje ponad tysiąc razy więcej miejsca niż woda.",
         ),
         T(
-          "Thomas Newcomen built an early *steam engine* to pump flooding water out of deep coal mines.",
+          "Thomas Newcomen built an early *steam engine* to pump water out of deep coal mines.",
           "Thomas Newcomen baute eine fruehe *Dampfmaschine*, um Grubenwasser aus Bergwerken zu pumpen.",
           "Thomas Newcomen skonstruował wczesną *maszynę parową*, by wypompowywać wodę zalewającą kopalnie węgla.",
         ),
@@ -92,12 +92,12 @@ export const lesson: Lesson = {
         T(
           "Instead of only pumping up and down, Watt designed gears to produce continuous *rotary motion*.",
           "Statt nur auf und ab zu pumpen, erzeugte Watts Maschine eine gleichmaessige *Drehbewegung*.",
-          "Zamiast jedynie ruchu posuwistego w górę i w dół, Watt zaprojektował przekładnie dające ciągły *ruch obrotowy*.",
+          "Zamiast ruchu w górę i w dół, Watt dodał przekładnie dające ciągły *ruch obrotowy*.",
         ),
         T(
-          "Now a steam engine could turn spinning wheels and factory shafts day and night without stopping.",
+          "Now a steam engine could turn factory wheels day and night without stopping.",
           "Nun konnte eine Dampfmaschine Spinnraeder und Fabrikwellen Tag und Nacht zuverlaessig drehen.",
-          "Od tej pory maszyna parowa mogła napędzać wrzeciona tkackie i wały fabryczne dzień i noc bez wytchnienia.",
+          "Od tej pory maszyna parowa mogła napędzać wrzeciona i wały fabryczne dzień i noc.",
         ),
       ],
       JamesWattEngineDiagram,

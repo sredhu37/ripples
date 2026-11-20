@@ -25,9 +25,9 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "In 1945, after years of war, cities, factories, and railway bridges across Europe lay in ruins.",
+          "In 1945, after years of war, Europe lay in ruins. Cities, factories, and railway bridges were broken.",
           "Im Jahr 1945 lagen Staedte, Fabriken und Eisenbahnbruecken quer durch Europa in Truemmern.",
-          "W 1945 roku, po latach wyniszczającej wojny, miasta, fabryki i mosty kolejowe w całej Europie leżały w gruzach.",
+          "W 1945 roku, po latach wojny, Europa leżała w gruzach. Miasta, fabryki i mosty kolejowe były zniszczone.",
         ),
         T(
           "Families had lost their homes, and children needed warm clothes, shelter, and school books.",
@@ -60,13 +60,13 @@ export const lesson: Lesson = {
           "Wraz z ekonomistą Jeanem Monnetem zaproponował połączenie francuskiej i niemieckiej produkcji węgla i stali.",
         ),
         T(
-          "Coal was the essential fuel for home heating, and steel was the essential metal for building trains.",
-          "Kohle war der Brennstoff zum Heizen und Stahl das Metall zum Bau von Zuegen und Bruecken.",
-          "Węgiel był niezbędny do ogrzewania domów, a stal stanowiła podstawowy surowiec do odbudowy kolei i mostów.",
+          "Coal was the fuel that heated homes. Steel was the metal for building trains.",
+          "Kohle war der Brennstoff zum Heizen. Stahl war das Metall fuer Zuege und Bruecken.",
+          "Węgiel ogrzewał domy. Ze stali budowano pociągi i mosty.",
         ),
         T(
           "Because neither country could build weapons without coal and steel, pooling them made war impossible.",
-          "Da man ohne Kohle und Stahl keine Waffen schmieden kann, machte das Teilen einen Krieg unmoeglich.",
+          "Ohne Kohle und Stahl kann man keine Waffen bauen. Teilen machte Krieg unmoeglich.",
           "Ponieważ bez węgla i stali nie można produkować broni, wspólne zarządzanie nimi czyniło wojnę niemożliwą.",
         ),
       ],
@@ -85,7 +85,7 @@ export const lesson: Lesson = {
           "Utworzyły one Europejską Wspólnotę Węgla i Stali (*EWWiS*), zarządzaną przez wspólny organ nadzorczy.",
         ),
         T(
-          "For the first time in history, sovereign nations handed control of their heavy industries to a common European body.",
+          "For the first time ever, countries shared their heavy industries. One European group was in charge.",
           "Erstmals uebertrugen souveraene Staaten die Kontrolle ihrer Schluesselindustrie an eine europaeische Behoerde.",
           "Po raz pierwszy w historii suwerenne kraje przekazały kontrolę nad strategicznym przemysłem wspólnej instytucji.",
         ),
@@ -110,9 +110,9 @@ export const lesson: Lesson = {
           "Nowe pociągi towarowe przewoziły rury wodociągowe, cegły i lekarstwa do odbudowujących się miast.",
         ),
         T(
-          "In 1963, Charles de Gaulle and Konrad Adenauer signed the Elysee Treaty of friendship and *reconciliation*.",
+          "In 1963, Charles de Gaulle and Konrad Adenauer signed a treaty of friendship and *reconciliation*.",
           "1963 unterzeichneten Charles de Gaulle und Konrad Adenauer den Elysee-Vertrag der *Versoehnung*.",
-          "W 1963 roku Charles de Gaulle i Konrad Adenauer podpisali Traktat Elizejski o przyjaźni i *pojednaniu*.",
+          "W 1963 roku de Gaulle i Adenauer podpisali Traktat Elizejski o przyjaźni i *pojednaniu*.",
         ),
         T(
           "Former bitter battlefield enemies pledged to become trusted lifelong friends and partners.",
@@ -130,8 +130,8 @@ export const lesson: Lesson = {
           "Ten solidny fundament współpracy przekształcił się w nowoczesną *Unię Europejską*.",
         ),
         T(
-          "Today, the EU unites twenty-seven democratic nations in an area of shared peace, freedom, and law.",
-          "Heute vereint die EU siebenundzwanzig Demokratien in einem Raum des Friedens, des Rechts und der Freiheit.",
+          "Today, the EU unites twenty-seven democratic nations. They share peace, freedom, and law.",
+          "Heute vereint die EU siebenundzwanzig Demokratien. Sie teilen Frieden, Recht und Freiheit.",
           "Dziś Unia Europejska łączy dwadzieścia siedem demokratycznych państw w przestrzeni wolności, prawa i pokoju.",
         ),
         T(

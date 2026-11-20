@@ -86,10 +86,10 @@ export function CompetitionDiagram({ lang, step }: DiagramProps) {
 
   const note =
     lang === "pl"
-      ? "Konkurencja daje klientom wybór, wysoką jakość i uczciwe ceny!"
+      ? "Wybór, jakość, uczciwe ceny"
       : lang === "de"
-        ? "Wettbewerb bietet Kunden Auswahl, Qualität und faire Preise!"
-        : "Competition gives customers variety, quality, and fair prices!";
+        ? "Auswahl, Qualität, faire Preise"
+        : "Choice, quality, fair prices";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">
@@ -188,10 +188,10 @@ export function RulesBalanceDiagram({ lang, step }: DiagramProps) {
 
   const footer =
     lang === "pl"
-      ? "Wolność tworzy dobrobyt, a sprawiedliwe reguły chronią ludzi i środowisko"
+      ? "Wolność tworzy, reguły chronią"
       : lang === "de"
-        ? "Freiheit schafft Wohlstand, und faire Regeln schützen Arbeiter und Gemeingüter"
-        : "Freedom creates prosperity, and fair rules protect workers and public goods";
+        ? "Freiheit schafft, Regeln schützen"
+        : "Freedom builds, rules protect";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">
@@ -247,10 +247,10 @@ export function SummaryDiagram({ lang, step }: DiagramProps) {
 
   const note =
     lang === "pl"
-      ? "Przedsiębiorczość działa najlepiej w połączeniu ze sprawiedliwymi regułami!"
+      ? "Rynek potrzebuje uczciwych reguł"
       : lang === "de"
-        ? "Freie Wirtschaft funktioniert am besten mit starken und fairen Regeln!"
-        : "Free enterprise works best with strong and fair community rules!";
+        ? "Märkte brauchen faire Regeln"
+        : "Markets need fair rules";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">

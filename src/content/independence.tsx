@@ -80,7 +80,7 @@ export const lesson: Lesson = {
           "W 1930 roku władze kolonialne surowo zabroniły zbierania naturalnej soli morskiej i nałożyły podatek solny.",
         ),
         T(
-          "Gandhi walked two hundred and forty miles on dusty roads to the coastal village of Dandi.",
+          "Gandhi walked two hundred and forty dusty miles to the coastal village of Dandi.",
           "Gandhi marschierte zweihundertvierzig Meilen zu Fuss an die Kueste nach Dandi.",
           "Gandhi przeszedł pieszo dwieście czterdzieści mil pylistymi drogami aż do nadmorskiej wsi Dandi.",
         ),
@@ -140,9 +140,9 @@ export const lesson: Lesson = {
           "Konstytucja zniosła dyskryminację, zagwarantowała równość wobec prawa i powszechne prawo głosu.",
         ),
         T(
-          "The peaceful journey inspired civil rights leaders around the globe, from Martin Luther King to Nelson Mandela.",
+          "The peaceful journey inspired civil rights leaders around the globe. Martin Luther King and Nelson Mandela were among them.",
           "Dieser friedliche Weg inspirierte Buergerrechtler weltweit, von Martin Luther King bis Nelson Mandela.",
-          "Ta droga pokojowego oporu zainspirowała ruchy praw obywatelskich na całym świecie, od Martina Luthera Kinga po Nelsona Mandelę.",
+          "Ta droga pokojowego oporu zainspirowała na całym świecie obrońców praw obywatelskich. Byli wśród nich Martin Luther King i Nelson Mandela.",
         ),
       ],
       ConstitutionAssemblyDiagram,

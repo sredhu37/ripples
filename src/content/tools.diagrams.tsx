@@ -3,17 +3,17 @@ import type { DiagramProps } from "../lesson/types";
 export function MusclePlowDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Dawna siła mięśni ludzi i zwierząt"
+      ? "Siła ludzi i zwierząt"
       : lang === "de"
-        ? "Fruehe Muskelkraft von Mensch und Tier"
-        : "Early Human and Animal Muscle Power";
+        ? "Muskelkraft: Mensch und Tier"
+        : "Human and Animal Power";
 
   const sub =
     lang === "pl"
-      ? "Każde zaorane pole zależało wyłącznie od siły fizycznej mięśni"
+      ? "Mięśnie robiły całą pracę"
       : lang === "de"
-        ? "Jeder Acker hing vollstaendig von koerperlicher Muskelkraft ab"
-        : "Every field plowed depended entirely on physical muscle strength";
+        ? "Muskeln erledigten jede Arbeit"
+        : "Muscles did every job";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Muscle and Animal Power">
@@ -74,10 +74,10 @@ export function WindWaterMillDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Czysta energia, lecz rzeki zamarzały zimą, a wiatr cichł latem"
+      ? "Rzeki zamarzały, wiatr cichł"
       : lang === "de"
-        ? "Saubere Kraft, doch Wasser fror im Winter und Wind schlief im Sommer ein"
-        : "Clean power, but water froze in winter and winds ceased in summer";
+        ? "Fluss gefroren, Wind weg"
+        : "Rivers froze, winds stopped";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Windmill and Waterwheel">
@@ -130,17 +130,17 @@ export function BoilingKettlePistonDiagram({ lang, step }: DiagramProps) {
       ? "Rozprężająca siła pary"
       : lang === "de"
         ? "Die Dehnkraft des Wasserdampfs"
-        : "The Expanding Force of Steam";
+        : "The Force of Steam";
 
   const boilLabel =
     lang === "pl" ? "Wrząca woda" : lang === "de" ? "Kochendes Wasser" : "Boiling Water";
 
   const sub =
     lang === "pl"
-      ? "Rozprężająca się para unosi tłok z potężną siłą mechaniczną"
+      ? "Para unosi tłok"
       : lang === "de"
-        ? "Aufsteigender Dampf drueckt den Kolben mit grosser Kraft empor"
-        : "Expanding steam pushes the piston upwards with mighty mechanical pressure";
+        ? "Dampf hebt den Kolben"
+        : "Steam lifts the piston";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Steam Pressure and Piston">
@@ -204,15 +204,15 @@ export function JamesWattEngineDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Maszyna parowa Jamesa Watta"
       : lang === "de"
-        ? "James Watts Dampfmaschine mit Rotationskraft"
-        : "James Watt Rotary Steam Engine";
+        ? "James Watts Dampfmaschine"
+        : "James Watt's Steam Engine";
 
   const sub =
     lang === "pl"
-      ? "Zamiana posuwistego ruchu tłoka w ciągły ruch obrotowy"
+      ? "Pompowanie staje się obrotem"
       : lang === "de"
-        ? "Umwandlung von Hubbewegungen in dauerhafte Drehkraft"
-        : "Converting reciprocal up and down motion into continuous rotation";
+        ? "Pumpen wird zum Drehen"
+        : "Pumping becomes spinning";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="James Watt Steam Engine">
@@ -273,14 +273,14 @@ export function SteamLocomotiveTrainDiagram({ lang, step }: DiagramProps) {
       ? "Żelazny koń: Parowozy"
       : lang === "de"
         ? "Das Dampfross: Eisenbahnlokomotiven"
-        : "The Iron Horse: Steam Locomotives";
+        : "Iron Horse: Steam Locomotives";
 
   const sub =
     lang === "pl"
-      ? "Przewożenie ton towarów i pasażerów przez kontynenty w kilka godzin"
+      ? "Towary i ludzie, szybko"
       : lang === "de"
-        ? "Transport von Fracht und Passagieren quer ueber Kontinente"
-        : "Carrying tons of cargo and passengers across mountain ranges and continents";
+        ? "Fracht und Menschen, schnell"
+        : "Cargo and people, fast";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Steam Locomotive">
