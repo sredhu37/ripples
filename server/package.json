@@ -8,7 +8,7 @@
     "dev": "tsx watch index.ts",
     "build": "npm run typecheck && tsc -p tsconfig.build.json",
     "start": "NODE_ENV=production DIST_DIR=../web/dist node dist/index.js",
-    "migrate": "node-pg-migrate -m migrations up",
+    "migrate": "node-pg-migrate -m db/migrations up",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },

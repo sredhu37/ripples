@@ -2,7 +2,7 @@ import { extname } from "node:path";
 import { Hono } from "hono";
 import { serveStatic } from "@hono/node-server/serve-static";
 import type { HealthResponse } from "./apiTypes.js";
-import { checkDatabase, type Queryable } from "./db.js";
+import { checkDatabase, type Queryable } from "./db/pool.js";
 
 export interface AppOptions {
   db: Queryable;
