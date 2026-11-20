@@ -27,9 +27,19 @@ old_labels=$(gh api "repos/$repo/issues/$issue/labels" --jq '.[].name | select(s
 
 gh api -X POST "repos/$repo/issues/$issue/labels" -f "labels[]=$label" > /dev/null
 
+# A second run can remove the same old label between the read above and here (factory-build and
+# factory-pr-link both set in-review when a PR opens). A 404 means the label is already gone: fine.
 for old in $old_labels; do
   if [ "$old" != "$label" ]; then
-    gh api -X DELETE "repos/$repo/issues/$issue/labels/$old" > /dev/null
+    if ! err=$(gh api -X DELETE "repos/$repo/issues/$issue/labels/$old" 2>&1 > /dev/null); then
+      case "$err" in
+        *"HTTP 404"*) echo "label-set: $old was already removed from #$issue" ;;
+        *)
+          echo "$err" >&2
+          exit 1
+          ;;
+      esac
+    fi
   fi
 done
 
