@@ -18,7 +18,7 @@ Ripples ran as a static app on GitHub Pages: lessons in code, one child's progre
 6. **API in TypeScript on Node**, in this repo, sharing types with the app.
 7. **One parent account per family, with kid profiles.** Kids never log in. A profile stores a nickname and progress.
 8. **Parent login by 6-digit email code** (Better Auth Email OTP, Resend), with long sessions.
-9. **Stripe first** for subscriptions. India's provider (Stripe UPI or Razorpay through Sunny's Indian business) waits on a tax advisor's answer about Indian OIDAR GST registration.
+9. **Stripe for the rest of the world, Razorpay for India.** Stripe (German account) handles EUR subscriptions everywhere except India. India pays INR through Razorpay via Sunny's Indian business, with the region rule `IN` vs everyone else. Stripe UPI is not available for the German account ("UPI is not supported for your business type"), so Stripe-only for India was dropped (#222).
 10. **Free month without card.** After 30 days lessons pause until payment; profiles and progress are kept.
 11. **Self-host runs the same image.** No Stripe key turns billing off; no email sender prints the login code to the API log. Save codes and the GitHub Pages deploy are retired, with a one-time import of localStorage progress into a kid profile.
 
@@ -28,4 +28,4 @@ Ripples ran as a static app on GitHub Pages: lessons in code, one child's progre
 - The save code, `src/progress.ts` localStorage storage and `pages.yml` are replaced in the build tickets that follow #210.
 - Kids' nicknames are personal data of children: the privacy policy must cover them before launch.
 - Neon's free plan has no spending notifications and suspends compute until next month when the 100 CU-hours run out, so production needs its own usage alert.
-- Two payment integrations may be needed if the tax answer keeps Razorpay for India.
+- Two payment integrations are needed (Stripe and Razorpay) behind one provider-neutral subscription status.
