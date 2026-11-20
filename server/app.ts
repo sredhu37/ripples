@@ -4,8 +4,14 @@ import { serveStatic } from "@hono/node-server/serve-static";
 import type { HealthResponse } from "./apiTypes.js";
 import type { Auth } from "./auth.js";
 import { checkDatabase, type Queryable } from "./db/pool.js";
+import type { Transactional } from "./db/profiles.js";
+import { profileRoutes } from "./profileRoutes.js";
+
+const isTransactional = (db: Queryable): db is Queryable & Transactional =>
+  "connect" in db && typeof db.connect === "function";
 
 export interface AppOptions {
+  /** With `auth`, a pool (the profile routes need transactions). */
   db: Queryable;
   /** Folder with the built app. When set, the API serves it at `/`. */
   distDir?: string;
@@ -22,7 +28,10 @@ export function createApp({ db, distDir, healthTimeoutMs = 2_000, auth }: AppOpt
     return c.json<HealthResponse>({ status: ok ? "ok" : "error" }, ok ? 200 : 503);
   });
 
-  if (auth) app.on(["GET", "POST"], "/api/auth/*", (c) => auth.handler(c.req.raw));
+  if (auth) {
+    app.on(["GET", "POST"], "/api/auth/*", (c) => auth.handler(c.req.raw));
+    if (isTransactional(db)) app.route("/api", profileRoutes(auth, db));
+  }
 
   // An unknown API path is a JSON 404, never the app's index.html.
   app.all("/api/*", (c) => c.json({ error: "not_found" }, 404));
