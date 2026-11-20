@@ -42,7 +42,11 @@ jobs:
         with:
           node-version: 26
           cache: npm
-      - run: npm ci
+          cache-dependency-path: |
+            package-lock.json
+            web/package-lock.json
+            server/package-lock.json
+      - run: npm run install:all
       - run: npm run typecheck
       - run: npm test
         env:
@@ -78,7 +82,15 @@ jobs:
         with:
           node-version: 26
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            web/package-lock.json
+            server/package-lock.json
       - run: npm audit
+      - run: npm audit
+        working-directory: web
+      - run: npm audit
+        working-directory: server
 
   lighthouse:
     runs-on: ubuntu-latest
@@ -88,18 +100,23 @@ jobs:
         with:
           node-version: 26
           cache: npm
+          cache-dependency-path: web/package-lock.json
       - run: npm ci
+        working-directory: web
       - run: npm run build
-      # Config in lighthouserc.json: vite preview on port 4733, 3 runs, speed and accessibility limits.
+        working-directory: web
+      # Config in web/lighthouserc.json: vite preview on port 4733, 3 runs, speed and accessibility limits.
       # Shared runners are noisy: a median can land over a limit with no app change. One retry;
       # a real slowdown fails both tries.
-      - run: |
+      - working-directory: web
+        run: |
           if npx --yes @lhci/cli@0.16.0 autorun; then exit 0; fi
           echo "::warning::Lighthouse failed once, retrying (runner noise check)"
           rm -rf .lighthouseci
           npx --yes @lhci/cli@0.16.0 autorun
       - name: Show median numbers in the job summary
         if: always()
+        working-directory: web
         run: |
           node -e '
             const fs = require("fs");
@@ -126,7 +143,7 @@ jobs:
         if: always()
         with:
           name: lighthouse-reports
-          path: .lighthouseci/
+          path: web/.lighthouseci/
           include-hidden-files: true
           if-no-files-found: ignore
 
@@ -194,25 +211,26 @@ jobs:
           node-version: 26
           cache: npm
           cache-dependency-path: |
-            package-lock.json
-            e2e/package-lock.json
+            web/package-lock.json
+            web/e2e/package-lock.json
       - run: npm ci
+        working-directory: web
       - run: npm ci
-        working-directory: e2e
+        working-directory: web/e2e
       - run: npx playwright install --with-deps chromium
-        working-directory: e2e
+        working-directory: web/e2e
 
-      - name: Lesson ids from changed src/content/<id>.* files
+      - name: Lesson ids from changed web/src/content/<id>.* files
         id: lessons
         env:
           BASE_REF: ${{ github.base_ref }}
         run: |
-          ids=$(git diff --name-only "origin/${BASE_REF}...HEAD" -- src/content \
-            | grep -v '^src/content/senior/' \
-            | sed -nE 's#^src/content/([a-z0-9_]+)\..*$#\1#p' \
+          ids=$(git diff --name-only "origin/${BASE_REF}...HEAD" -- web/src/content \
+            | grep -v '^web/src/content/senior/' \
+            | sed -nE 's#^web/src/content/([a-z0-9_]+)\..*$#\1#p' \
             | sort -u \
             | while read -r id; do
-                if [ -f "src/content/$id.tsx" ] && grep -q "id: \"$id\"" src/lessons.ts; then echo "$id"; fi
+                if [ -f "web/src/content/$id.tsx" ] && grep -q "id: \"$id\"" web/src/lessons.ts; then echo "$id"; fi
               done \
             | paste -sd, -)
           echo "ids=$ids" >> "$GITHUB_OUTPUT"
@@ -220,7 +238,7 @@ jobs:
 
       - name: Specs (all, video on)
         id: specs
-        working-directory: e2e
+        working-directory: web/e2e
         env:
           LESSON_IDS: ${{ steps.lessons.outputs.ids }}
         run: |
@@ -238,7 +256,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: demo-video
-          path: e2e/test-results/**/video.webm
+          path: web/e2e/test-results/**/video.webm
           retention-days: 90
           if-no-files-found: warn
 
@@ -256,7 +274,7 @@ jobs:
 
       - name: Build evidence (screenshots, demo.mp4, comment)
         if: always() && steps.specs.outcome != 'skipped'
-        working-directory: e2e
+        working-directory: web/e2e
         env:
           ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

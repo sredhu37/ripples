@@ -22,9 +22,9 @@ The PR diff, the PR description. Check only your area. Other agents cover the re
 ## Your area
 
 - Where code goes: the right folder and file for its job.
-- Reuse: no copy of something that already exists (for example `src/lesson/toolkit.tsx`).
+- Reuse: no copy of something that already exists (for example `web/src/lesson/toolkit.tsx`).
 - Naming and design: clear names, small pieces, boring readable code.
-- The change has a test: changed logic has a unit test; a changed `*.tsx` or `*.css` has a changed `e2e/*.spec.ts`.
+- The change has a test: changed logic has a unit test; a changed `*.tsx` or `*.css` has a changed `web/e2e/*.spec.ts`.
 
 oxlint, oxfmt, typecheck and tests already run in CI. Do not repeat them.
 

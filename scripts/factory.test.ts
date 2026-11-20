@@ -4,12 +4,16 @@ import demoSkill from "../.claude/skills/demo/SKILL.md?raw";
 
 // The risky list from docs/factory.md, section Gate.
 const SPEC_RISKY_LIST = [
-  "src/progress.ts",
-  "public/sw.js",
-  "public/manifest.webmanifest",
+  "web/src/progress.ts",
+  "web/public/sw.js",
+  "web/public/manifest.webmanifest",
   "package.json",
   "package-lock.json",
-  "vite.config.ts",
+  "web/package.json",
+  "web/package-lock.json",
+  "server/package.json",
+  "server/package-lock.json",
+  "web/vite.config.ts",
   ".github/**",
   "AGENTS.md",
   "CLAUDE.md",

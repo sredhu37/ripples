@@ -3,12 +3,16 @@
 # Format: one pattern per line, relative to the repo root. "*" matches inside one folder, "**" matches any depth.
 # Lines starting with "#" and blank lines are ignored.
 # This file is on its own list.
-src/progress.ts
-public/sw.js
-public/manifest.webmanifest
+web/src/progress.ts
+web/public/sw.js
+web/public/manifest.webmanifest
 package.json
 package-lock.json
-vite.config.ts
+web/package.json
+web/package-lock.json
+server/package.json
+server/package-lock.json
+web/vite.config.ts
 .github/**
 .github/gate-paths.txt
 AGENTS.md

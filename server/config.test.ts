@@ -17,6 +17,11 @@ describe("loadConfig", () => {
     expect(loadConfig({ NODE_ENV: "production", DATABASE_URL: url }).databaseUrl).toBe(url);
   });
 
+  it("serves the app only when DIST_DIR is set", () => {
+    expect(loadConfig({}).distDir).toBeUndefined();
+    expect(loadConfig({ DIST_DIR: "../web/dist" }).distDir).toMatch(/web[\\/]dist$/);
+  });
+
   it("reads PORT and rejects a bad one", () => {
     expect(loadConfig({ PORT: "3000" }).port).toBe(3000);
     expect(() => loadConfig({ PORT: "abc" })).toThrow("PORT");

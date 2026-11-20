@@ -24,8 +24,8 @@ The PR diff, the PR description, the review findings and the evidence screenshot
 
 Write an open risk analysis. Start from Ripples' weak spots:
 
-- Offline cache: `public/sw.js` caches the app's own address only.
-- Saved progress: badges, name, language and the save code (`src/progress.ts`, lesson ids in `src/lessons.ts`).
+- Offline cache: `web/public/sw.js` caches the app's own address only.
+- Saved progress: badges, name, language and the save code (`web/src/progress.ts`, lesson ids in `web/src/lessons.ts`).
 - 3 languages: EN, DE and PL must all work.
 - Parent panel: behind the maths gate.
 - Children's privacy: the child's name stays on the device; no outside addresses.

@@ -11,7 +11,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "types": ["node"],
-    "rootDir": ".."
+    "rootDir": "."
   },
-  "include": ["./**/*.ts"]
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

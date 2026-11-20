@@ -228,7 +228,7 @@ jobs:
         with:
           node-version: 26
           cache: npm
-      - run: npm ci
+      - run: npm run install:all
 
       - name: Branch factory/issue-<n> (continues a paused run's branch if it exists)
         run: |
@@ -325,7 +325,7 @@ jobs:
           Follow the build agent instructions below; they come from main.
 
           Already done for you:
-          - The repo is checked out from main, dependencies are installed (npm ci).
+          - The repo is checked out from main, dependencies are installed (npm run install:all).
           - You are on branch $BRANCH. If it already has commits, an earlier run was paused; continue from them.
 
           How to finish:
