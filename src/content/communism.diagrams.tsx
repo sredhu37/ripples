@@ -97,10 +97,10 @@ export function KnowledgeProblemDiagram({ lang, step }: DiagramProps) {
 
   const footer =
     lang === "pl"
-      ? "Skutek: W górach ludzie marzną, w przystani płaszcze leżą bezużytecznie!"
+      ? "Góry marzną, płaszcze leżą"
       : lang === "de"
-        ? "Ergebnis: Das Gebirge friert, der Hafen hat ungenutzte Mäntel!"
-        : "Result: Mountain freezes, Harbor has unneeded coats!";
+        ? "Gebirge friert, Mäntel ungenutzt"
+        : "Mountain freezes, coats unused";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">
@@ -176,14 +176,14 @@ export function ShortagesQueuesDiagram({ lang, step }: DiagramProps) {
       ? "Godziny stania w ogonkach"
       : lang === "de"
         ? "Stundenlanges Anstehen"
-        : "Hours spent waiting in line";
+        : "Hours of waiting";
 
   const footer =
     lang === "pl"
-      ? "Bez sygnałów cenowych planiści nie potrafią dopasować podaży do potrzeb"
+      ? "Ludzie chcą czego innego"
       : lang === "de"
-        ? "Ohne Preissignale und Kundenwünsche scheitert die Bedarfsdeckung"
-        : "Without price signals and customer feedback, planners cannot match supply to real needs";
+        ? "Angebot verfehlt den Bedarf"
+        : "Supply misses real needs";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">
@@ -292,10 +292,10 @@ export function CoreDifferenceDiagram({ lang, step }: DiagramProps) {
 
   const footer =
     lang === "pl"
-      ? "Wiedza jest rozproszona wśród milionów ludzi, a nie skupiona w jednym urzędzie"
+      ? "Miliony wiedzą różne rzeczy"
       : lang === "de"
-        ? "Wissen ist unter Millionen Bürgern verteilt, nicht in einer Behörde gebündelt"
-        : "Information is scattered among millions of people, not held in one office";
+        ? "Millionen wissen Verschiedenes"
+        : "Millions know different things";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">

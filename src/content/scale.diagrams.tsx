@@ -19,10 +19,10 @@ export function SamWorkshopDiagram({ lang, step }: DiagramProps) {
         : "Artisan Workshop";
   const customMade =
     lang === "pl"
-      ? "Szyte na miarę, para po parze"
+      ? "Szyte para po parze"
       : lang === "de"
         ? "Maßgefertigt, Paar für Paar"
-        : "Custom made, one pair at a time";
+        : "Custom-made, pair by pair";
   const highFlex =
     lang === "pl" ? "Duża elastyczność" : lang === "de" ? "Hohe Flexibilität" : "High flexibility";
   const personalFit =
@@ -180,7 +180,7 @@ export function ScaleDiscountDiagram({ lang, step }: DiagramProps) {
         : "Wholesale bulk discounts";
   const smallShopTitle =
     lang === "pl"
-      ? "Mały warsztat: 1 płat skóry"
+      ? "Mały warsztat: 1 płat"
       : lang === "de"
         ? "Kleiner Laden: 1 Leder"
         : "Small Shop: 1 Sheet";
@@ -206,15 +206,15 @@ export function ScaleDiscountDiagram({ lang, step }: DiagramProps) {
         : "1 coin per sheet!";
   const boatloadDiscount =
     lang === "pl"
-      ? "Rabat hurtowy za cały ładunek statku"
+      ? "Rabat za cały ładunek"
       : lang === "de"
         ? "Schiffsladung mit Mengenrabatt"
         : "Wholesale boatload discount";
   const scaleAdvantage =
     lang === "pl"
-      ? "Tą przewagą jest efekt skali!"
+      ? "To jest efekt skali!"
       : lang === "de"
-        ? "Dieser Vorteil ist der Größenvorteil!"
+        ? "Das ist der Größenvorteil!"
         : "This advantage is scale!";
 
   return (
@@ -303,7 +303,7 @@ export function MayaBulkOrderDiagram({ lang, step }: DiagramProps) {
         : "For all orchard workers";
   const fastDelivery =
     lang === "pl"
-      ? "Fabryka dostarcza szybko i tanio"
+      ? "Fabryka: szybko i tanio"
       : lang === "de"
         ? "Fabrik liefert günstig"
         : "Factory delivers quickly";
@@ -382,22 +382,22 @@ export function MossCustomOrderDiagram({ lang, step }: DiagramProps) {
         : "Mayor Moss orders custom boots";
   const customOrderTitle =
     lang === "pl"
-      ? "Zamówienie na miarę: specjalny krój"
+      ? "Zamówienie na miarę"
       : lang === "de"
         ? "Maßanfertigung: Feine Passform"
         : "Custom Order: Special Fit";
   const carvedInitials =
     lang === "pl"
-      ? "Grawerowane inicjały i miękka skóra"
+      ? "Inicjały i miękka skóra"
       : lang === "de"
-        ? "Verzierte Initialen und feines Leder"
-        : "Carved initials and soft calf leather";
+        ? "Gravierte Initialen, weiches Leder"
+        : "Carved initials, soft leather";
   const handCrafted =
     lang === "pl"
       ? "Sam tworzy je ręcznie"
       : lang === "de"
-        ? "Sam fertigt es von Hand"
-        : "Sam crafts it by hand";
+        ? "Von Sam handgefertigt"
+        : "Handmade by Sam";
   const uniqueCraft =
     lang === "pl" ? "Unikatowe rękodzieło" : lang === "de" ? "Unikat-Handwerk" : "Unique Craft";
   const artisanCare =
@@ -469,22 +469,22 @@ export function BothThriveDiagram({ lang, step }: DiagramProps) {
         : "Both businesses serve essential roles";
   const bothTitle =
     lang === "pl"
-      ? "Małe rzemiosło i wielka fabryka"
+      ? "Rzemiosło i fabryka"
       : lang === "de"
         ? "Kleinbetrieb und Großfabrik"
-        : "Small Business and Large Factory";
+        : "Small shop, big factory";
   const smallPerks =
     lang === "pl"
-      ? "Małe warsztaty oferują osobistą opiekę, naprawy i indywidualne projekty"
+      ? "Opieka, naprawy, unikaty"
       : lang === "de"
-        ? "Kleinbetriebe bieten persönlichen Service, Reparatur und Maßarbeit"
-        : "Small shops provide personal care, repairs, and custom fit";
+        ? "Service, Reparatur, Maßarbeit"
+        : "Care, repairs, custom fit";
   const factoryPerks =
     lang === "pl"
-      ? "Fabryki dostarczają masowe towary codziennego użytku w przystępnych cenach"
+      ? "Duże ilości, niskie ceny"
       : lang === "de"
-        ? "Fabriken liefern verlässliche Großmengen zu günstigen Preisen"
-        : "Factories provide reliable bulk items at affordable prices";
+        ? "Großmengen, günstige Preise"
+        : "Bulk goods, low prices";
   const prosperityBadge =
     lang === "pl"
       ? "Razem budują dobrobyt!"

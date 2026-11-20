@@ -112,7 +112,7 @@ export const lesson: Lesson = {
           "Cena pojedynczego zakupu to *wartość transakcji* (cena jednostkowa).",
         ),
         T(
-          "Bea had a small ticket size of 1 coin; Sam had a big ticket size of 30 coins.",
+          "Bea had a small ticket size of 1 coin. Sam had a big ticket size of 30 coins.",
           "Bea hatte eine kleine Ticketgröße von 1 Münze; Sam eine große von 30 Münzen.",
           "Bea miała małą wartość transakcji (1 moneta), a Sam dużą (30 monet).",
         ),
@@ -197,9 +197,9 @@ export const lesson: Lesson = {
     {
       kind: "choice",
       prompt: T(
-        "Bea sells 20 rolls for 2 coins each. Sam sells 2 pairs of boots for 20 coins each. Who has higher sales?",
+        "Bea sells 20 rolls at 2 coins each. Sam sells 2 boots at 20 coins each. Who has higher sales?",
         "Bea verkauft 20 Brötchen für je 2 Münzen. Sam verkauft 2 Stiefel für je 20 Münzen. Wer hat mehr Umsatz?",
-        "Bea sprzedaje 20 bułek po 2 monety każda. Sam sprzedaje 2 pary butów po 20 monet każda. Kto osiągnął wyższy przychód?",
+        "Bea sprzedaje 20 bułek po 2 monety. Sam sprzedaje 2 pary butów po 20 monet. Kto ma wyższy przychód?",
       ),
       options: [
         {

@@ -51,7 +51,7 @@ export const lesson: Lesson = {
       [
         T(
           "Long ago, Castle Island had an absolute king named Jasper who held total power alone.",
-          "Vor langer Zeit hatte die Schlossinsel einen König namens Jasper, der die gesamte Macht allein besaß.",
+          "Vor langer Zeit hatte die Schlossinsel einen König namens Jasper. Er besaß die gesamte Macht allein.",
           "Dawno temu Wyspą Zamkową rządził król Jasper, który skupiał w swoich rękach pełnię władzy.",
         ),
         T(
@@ -60,12 +60,12 @@ export const lesson: Lesson = {
           "Gdy król Jasper rządził mądrze i odpowiedzialnie, wyspa rozkwitała, a kamienne mosty były naprawiane.",
         ),
         T(
-          "But when his son Prince Leo inherited the crown, Leo cared only about hunting fancy peacocks.",
-          "Doch als sein Sohn Prinz Leo die Krone erbte, kümmerte er sich nur noch um die Jagd nach Pfauen.",
-          "Gdy jednak koronę odziedziczył jego syn, książę Leo, dbał on wyłącznie o polowania na rzadkie pawie.",
+          "Later, his son Prince Leo inherited the crown. But Leo cared only about hunting fancy peacocks.",
+          "Sein Sohn Prinz Leo erbte die Krone. Doch er kümmerte sich nur noch um die Jagd nach Pfauen.",
+          "Potem koronę odziedziczył jego syn, książę Leo. Lecz dbał tylko o polowania na rzadkie pawie.",
         ),
         T(
-          "The town roads cracked and taxes spiked, but citizens had no vote to change their leader.",
+          "The town roads cracked and taxes spiked. But citizens had no vote to change their leader.",
           "Die Dorfstraßen bekamen Risse und Steuern stiegen, aber Bürger durften ihren Anführer nicht abwählen.",
           "Drogi niszczały, a podatki rosły, lecz mieszkańcy nie mieli prawa głosu, by zmienić swojego władcę.",
         ),
@@ -85,7 +85,7 @@ export const lesson: Lesson = {
           "*Monarchia absolutna* daje jednemu człowiekowi pełną władzę bez wyborów i bez sądów mogących go powstrzymać.",
         ),
         T(
-          "A *constitutional monarchy* keeps the king or queen as a symbol of unity, while an elected parliament governs.",
+          "A *constitutional monarchy* keeps the king or queen as a symbol of unity. An elected parliament governs.",
           "Eine *konstitutionelle Monarchie* behält den Monarchen als Symbol, während ein gewähltes Parlament regiert.",
           "*Monarchia konstytucyjna* pozostawia monarchę jako symbol jedności, podczas gdy krajem rządzi wybrany parlament.",
         ),
@@ -187,7 +187,7 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "In a constitutional monarchy, real lawmaking power belongs to an elected parliament bound by laws",
+            "In a constitutional monarchy, real lawmaking power belongs to an elected parliament",
             "In einer konstitutionellen Monarchie liegt die Gesetzgebung bei einem gewählten Parlament unter Gesetzen",
             "W monarchii konstytucyjnej rzeczywista władza ustawodawcza należy do wybranego parlamentu związanego prawem",
           ),

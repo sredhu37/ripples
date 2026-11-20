@@ -242,10 +242,10 @@ export function PillarsDiagram({ lang, step }: DiagramProps) {
 
   const subtext =
     lang === "pl"
-      ? "Władza należy do obywateli dzięki instytucjom i regularnym wyborom"
+      ? "Władza należy do obywateli"
       : lang === "de"
-        ? "Macht bleibt bei den Bürgern durch Institutionen und regelmäßige Wahlen"
-        : "Power stays with the citizens through institutions and regular elections";
+        ? "Macht bleibt bei Bürgern"
+        : "Power stays with citizens";
 
   return (
     <svg viewBox="0 0 400 200" className="w-full h-full">

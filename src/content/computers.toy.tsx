@@ -31,11 +31,12 @@ interface ComputersToyProps {
 }
 
 export function ComputersToy({ lang, mode = "toy", onDone }: ComputersToyProps) {
+  // Start unsolved (all bits off): a start that matches the target completes the toy on load.
   const target = mode === "quiz" ? 10 : 5;
   const [b3, setB3] = useState(false);
-  const [b2, setB2] = useState(mode !== "quiz");
+  const [b2, setB2] = useState(false);
   const [b1, setB1] = useState(false);
-  const [b0, setB0] = useState(mode !== "quiz");
+  const [b0, setB0] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
 
   const { decimal, binary, isMatch } = calcBinaryLogic(b3, b2, b1, b0, target);

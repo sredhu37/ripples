@@ -30,9 +30,9 @@ export const lesson: Lesson = {
           "Stary kapitan Coral zaoszczędził tysiąc monet podczas swojej wieloletniej służby na morzu.",
         ),
         T(
-          "Coral wants to help Ripple Town children learn to read books and swim safely for centuries.",
-          "Coral möchte den Kindern von Ripple Town helfen, über Jahrhunderte sicher lesen und schwimmen zu lernen.",
-          "Coral pragnie pomóc dzieciom z Ripple Town uczyć się czytać książki i bezpiecznie pływać przez całe stulecia.",
+          "Coral wants to help Ripple Town children learn to read and swim safely. The help should last for centuries.",
+          "Coral möchte den Kindern von Ripple Town helfen, sicher lesen und schwimmen zu lernen. Diese Hilfe soll Jahrhunderte dauern.",
+          "Coral chce pomóc dzieciom z Ripple Town nauczyć się czytać i bezpiecznie pływać. Ta pomoc ma trwać całe stulecia.",
         ),
         T(
           "Coral wonders how best to use this treasure to create lasting good.",
@@ -50,7 +50,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "If Coral hands out the one thousand coins as cash gifts today, the coins vanish in two years.",
+          "Imagine Coral gives away the one thousand coins as cash gifts today. In two years, they are gone.",
           "Verteilt Coral die eintausend Münzen heute als Bargeldgeschenke, sind sie in zwei Jahren weg.",
           "Gdyby Coral rozdał tysiąc monet jako prezenty gotówkowe dzisiaj, monety zniknęłyby w dwa lata.",
         ),
@@ -232,7 +232,7 @@ export const lesson: Lesson = {
     {
       kind: "widget",
       prompt: T(
-        "The foundation earned 40 coins in annual bond interest. Allocate 20 coins to the Library and 20 to the Swim Dock.",
+        "The foundation earned 40 coins in bond interest. Give 20 coins each to the Library and the Swim Dock.",
         "Die Stiftung erwirtschaftete 40 Münzen Zinsen. Teile 20 Münzen der Bücherei und 20 dem Schwimmsteg zu.",
         "Fundacja zarobiła 40 monet z rocznych odsetek. Przydziel 20 monet Bibliotece i 20 monet Przystani Pływackiej.",
       ),

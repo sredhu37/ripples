@@ -39,16 +39,16 @@ export function FruitMarketIntroDiagram({ lang, step }: DiagramProps) {
         : "10 villagers buy fruit every morning";
   const title =
     lang === "pl"
-      ? "Targ owocowy w Ripple Town"
+      ? "Targ owocowy Ripple Town"
       : lang === "de"
-        ? "Der Obstmarkt in Ripple Town"
-        : "The Ripple Town Fruit Market";
+        ? "Obstmarkt Ripple Town"
+        : "Ripple Town Fruit Market";
   const badge =
     lang === "pl"
-      ? "Łącznie 10 klientów kupujących owoce"
+      ? "10 kupujących owoce"
       : lang === "de"
         ? "Insgesamt 10 Obst-Käufer"
-        : "10 fruit shoppers in total";
+        : "10 fruit shoppers";
 
   return (
     <DiagramCanvas label={label}>
@@ -106,14 +106,10 @@ export function FinnGreenApplesDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "7 klientów wybiera Finna"
       : lang === "de"
-        ? "7 Leute kaufen bei Finn"
+        ? "7 Leute bei Finn"
         : "7 customers choose Finn";
   const ratioText =
-    lang === "pl"
-      ? "7 z 10 kupujących"
-      : lang === "de"
-        ? "7 von 10 Käufern"
-        : "7 out of 10 shoppers";
+    lang === "pl" ? "7 z 10 kupujących" : lang === "de" ? "7 von 10 Käufern" : "7 of 10 shoppers";
 
   return (
     <DiagramCanvas label={label}>
@@ -168,14 +164,10 @@ export function ClaraRedApplesDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "3 klientów wybiera Clarę"
       : lang === "de"
-        ? "3 Leute kaufen bei Clara"
+        ? "3 Leute bei Clara"
         : "3 customers choose Clara";
   const ratioText =
-    lang === "pl"
-      ? "3 z 10 kupujących"
-      : lang === "de"
-        ? "3 von 10 Käufern"
-        : "3 out of 10 shoppers";
+    lang === "pl" ? "3 z 10 kupujących" : lang === "de" ? "3 von 10 Käufern" : "3 of 10 shoppers";
 
   return (
     <DiagramCanvas label={label}>
@@ -228,23 +220,15 @@ export function MarketSharePieDiagram({ lang, step }: DiagramProps) {
   const marketTitle =
     lang === "pl" ? "Rynek owoców" : lang === "de" ? "Der Obstmarkt" : "The Fruit Market";
   const finnLegend =
-    lang === "pl"
-      ? "Finn: 70% (7 z 10)"
-      : lang === "de"
-        ? "Finn: 70% (7 von 10)"
-        : "Finn: 70% (7 of 10)";
+    lang === "pl" ? "Finn: 70% (7/10)" : lang === "de" ? "Finn: 70% (7/10)" : "Finn: 70% (7/10)";
   const claraLegend =
-    lang === "pl"
-      ? "Clara: 30% (3 z 10)"
-      : lang === "de"
-        ? "Clara: 30% (3 von 10)"
-        : "Clara: 30% (3 of 10)";
+    lang === "pl" ? "Clara: 30% (3/10)" : lang === "de" ? "Clara: 30% (3/10)" : "Clara: 30% (3/10)";
   const sliceCaption =
     lang === "pl"
-      ? "Kawałek tortu każdego sprzedawcy to jego udział w rynku"
+      ? "Kawałek: udział w rynku"
       : lang === "de"
-        ? "Das Stück vom Kuchen ist der Marktanteil"
-        : "Each seller's slice is their market share";
+        ? "Jedes Stück: Marktanteil"
+        : "Each slice: market share";
 
   return (
     <DiagramCanvas label={label}>
@@ -369,19 +353,19 @@ export function MarketDynamicsDiagram({ lang, step }: DiagramProps) {
         : "Understanding Market Share";
   const line1 =
     lang === "pl"
-      ? "Rynek to wszyscy klienci kupujący dany produkt"
+      ? "Rynek: wszyscy kupujący"
       : lang === "de"
-        ? "Ein Markt umfasst alle Kunden für ein Produkt"
-        : "A market is all the customers buying that product";
+        ? "Markt: alle Käufer"
+        : "Market: all the buyers";
   const line2 =
     lang === "pl"
-      ? "Lepszy smak, niższa cena lub miła obsługa zdobywają większy udział"
+      ? "Lepsza oferta, większy udział"
       : lang === "de"
-        ? "Besserer Geschmack, guter Preis oder Service bringen mehr Anteil"
-        : "Better taste, lower price, or nicer stalls win more share";
+        ? "Besseres Angebot, mehr Anteil"
+        : "Better offer, bigger share";
   const decisionBadge =
     lang === "pl"
-      ? "To klienci decydują o sukcesie!"
+      ? "Klienci wybierają zwycięzców!"
       : lang === "de"
         ? "Die Kundschaft entscheidet!"
         : "Customers decide the winners!";

@@ -90,10 +90,10 @@ function TalentScarcityDiagram({ step }: { step: number }) {
             strokeWidth="2"
           />
           <text x="200" y="80" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#155e75">
-            Five Clinics Want One Master Surgeon
+            Five Clinics, One Surgeon
           </text>
           <text x="200" y="105" textAnchor="middle" fontSize="11" fill="#334155">
-            Clinics bid higher compensation to attract the scarce specialist
+            Clinics bid higher pay
           </text>
           <rect
             x="70"
@@ -251,12 +251,12 @@ export const lesson: Lesson = {
           "Czy zastanawiałeś się kiedyś, dlaczego różne zawody oferują tak różne wypłaty?",
         ),
         T(
-          "Anyone can learn to carry a light box from one room to another in just ten minutes.",
+          "Anyone can learn to carry a light box in just ten minutes.",
           "Jeder kann in zehn Minuten lernen, eine leichte Kiste von A nach B zu tragen.",
           "Każdy może w dziesięć minut nauczyć się przenosić lekkie pudełko z pokoju do pokoju.",
         ),
         T(
-          "Because hundreds of people can do simple tasks, those skills are abundant and pay modest wages.",
+          "Hundreds of people can do simple tasks. So those skills are abundant and pay modest wages.",
           "Weil viele das koennen, sind solche Faehigkeiten reichlich vorhanden und bringen Grundlohn.",
           "Ponieważ setki osób potrafią to robić, takie umiejętności są powszechne i dają podstawową płacę.",
         ),
@@ -306,7 +306,7 @@ export const lesson: Lesson = {
           "Kamyki rzeczne leżą wszędzie w nieskończonych ilościach, więc nikt za nie nie płaci.",
         ),
         T(
-          "All the gold ever mined in human history could fit into a single cube about twenty-two meters wide.",
+          "All the gold ever mined by humans fits in one cube. The cube is about twenty-two meters wide.",
           "Alles jemals gefoerderte Gold der Menschheit passt in einen Wuerfel von nur 22 Metern Kantenlaenge.",
           "Całe złoto wydobyte w dziejach ludzkości zmieściłoby się w sześcianie o boku zaledwie 22 metrów.",
         ),
@@ -356,7 +356,7 @@ export const lesson: Lesson = {
           "Zamiast konkurować przy prostych zadaniach, skup się na zdobywaniu *rzadkich umiejętności*.",
         ),
         T(
-          "When your knowledge is hard to replace and truly useful, your future will be bright and secure.",
+          "When your knowledge is hard to replace and useful, your future is bright and secure.",
           "Wenn dein Koennen schwer ersetzbar und nuetzlich ist, wird deine Zukunft sicher und erfolgreich.",
           "Gdy twoja wiedza jest trudna do zastąpienia i naprawdę przydatna, twoja przyszłość będzie bezpieczna.",
         ),
@@ -381,7 +381,7 @@ export const lesson: Lesson = {
       options: [
         {
           text: T(
-            "Their specialized skills require years of difficult study and are scarce in the job market",
+            "Their specialized skills take years of study and are scarce in the job market",
             "Ihre Spezialfaehigkeiten erfordern jahrelange Ausbildung und sind auf dem Arbeitsmarkt knapp",
             "Ich specjalistyczne umiejętności wymagają lat trudnej nauki i są rzadkie na rynku pracy",
           ),

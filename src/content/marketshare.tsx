@@ -87,8 +87,8 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "If we draw the 10 fruit buyers as a pie, Finn has a big slice and Clara has a small slice.",
-          "Wenn wir die 10 Käufer als Kuchen zeichnen, hat Finn ein großes Stück und Clara ein kleines.",
+          "Draw the 10 fruit buyers as a pie. Finn gets a big slice and Clara a small slice.",
+          "Zeichne die 10 Käufer als Kuchen. Finn hat ein großes Stück und Clara ein kleines.",
           "Gdybyśmy narysowali 10 kupujących jako tort, Finn miałby duży kawałek, a Clara mały.",
         ),
         T(

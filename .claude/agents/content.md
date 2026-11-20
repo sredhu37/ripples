@@ -27,7 +27,7 @@ The PR diff, the PR description. Check only your area. Other agents cover the re
 - Each fact against its source: open the source and check it says what the fact card claims.
 - Natural German and Polish with the same meaning as the English, not word for word.
 
-CI already counts the length caps (story sentences, question prompts, answer options, diagram labels) for every lesson not on the legacy list in `src/content/content.test.ts`, and the "Bartek" ban. Do not repeat those checks.
+CI already counts the length caps (story sentences, question prompts, answer options, diagram labels) for every lesson in `src/content/content.test.ts`, and the "Bartek" ban. Do not repeat those checks.
 
 ## Sources, in order
 

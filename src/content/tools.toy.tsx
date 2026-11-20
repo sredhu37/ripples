@@ -25,9 +25,10 @@ interface ToolsToyProps {
 }
 
 export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
-  const [source, setSource] = useState<PowerSource>(mode === "quiz" ? "muscle" : "steam");
-  const [hasCoal, setHasCoal] = useState(mode !== "quiz");
-  const [hasWater, setHasWater] = useState(mode !== "quiz");
+  // Start unsolved (the quiz start): a solved start completes the toy and unlocks the quiz on load.
+  const [source, setSource] = useState<PowerSource>("muscle");
+  const [hasCoal, setHasCoal] = useState(false);
+  const [hasWater, setHasWater] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
 
   const { power, isContinuous, status } = calcSteamPower(source, hasCoal, hasWater);

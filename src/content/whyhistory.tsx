@@ -30,12 +30,12 @@ export const lesson: Lesson = {
           "Dlaczego poświęcamy czas na poznawanie wydarzeń, które miały miejsce dziesiątki, setki lub tysiące lat temu?",
         ),
         T(
-          "Because every bridge, law, book, and freedom we enjoy today was built by the generations before us.",
+          "Every bridge, law, book, and freedom we enjoy today was built by earlier generations.",
           "Weil jede Bruecke, jedes Gesetz und jede Freiheit von frueheren Generationen geschaffen wurde.",
-          "Ponieważ każdy most, każde prawo, książka i wolność, z których dziś korzystamy, zostały zbudowane przez pokolenia przed nami.",
+          "Każdy most, prawo, książka i każda wolność, które znamy, powstały dzięki dawnym pokoleniom.",
         ),
         T(
-          "History is not a dusty list of dry dates and dead kings to memorize for an exam.",
+          "History is not a dusty list of dry dates and dead kings.",
           "Geschichte ist keine verstaubte Liste aus trockenen Jahreszahlen fuer eine Pruefung.",
           "Historia nie jest zakurzoną listą suchych dat i dawnych królów do zapamiętania na sprawdzian.",
         ),
@@ -55,7 +55,7 @@ export const lesson: Lesson = {
           "Gdy historycy badają przeszłość, poszukują autentycznych *źródeł pierwotnych*.",
         ),
         T(
-          "A primary source is direct evidence created at the time: handwritten diaries, stone seals, letters, and tools.",
+          "A primary source is direct evidence made at the time. Think of diaries, stone seals, letters, and tools.",
           "Eine Primaerquelle ist ein direktes Zeugnis aus der Zeit: Tagebuecher, Urkunden, Briefe und Werkzeuge.",
           "Źródło pierwotne to bezpośrednie świadectwo z epoki: ręcznie pisane pamiętniki, pieczęcie, listy i narzędzia.",
         ),
@@ -87,10 +87,10 @@ export const lesson: Lesson = {
         T(
           "By remembering injustice, societies ensure they never repeat the dark choices of authoritarian pasts.",
           "Indem wir uns an Unrecht erinnern, stellen wir sicher, Fehler der Vergangenheit niemals zu wiederholen.",
-          "Pamiętając o krzywdach i niesprawiedliwości, dbamy o to, by nigdy nie powtórzyć wyborów z czasów tyranii.",
+          "Pamiętamy o krzywdach i niesprawiedliwości. Dzięki temu nie powtarzamy wyborów z czasów tyranii.",
         ),
         T(
-          "True courage means learning from the past rather than hiding or pretending it did not happen.",
+          "True courage means learning from the past. It does not mean hiding it.",
           "Wahrer Mut bedeutet, aus der Geschichte zu lernen, statt wegzuschauen oder sie zu verschweigen.",
           "Prawdziwa odwaga polega na wyciąganiu wniosków z przeszłości zamiast jej przemilczania.",
         ),
@@ -130,7 +130,7 @@ export const lesson: Lesson = {
           "Teraz pochodnia ludzkiej historii trafia w Twoje dociekliwe, pełne energii ręce.",
         ),
         T(
-          "Every kind word you speak, fair rule you respect, and idea you build ripples forward in time.",
+          "Every kind word, fair rule, and good idea ripples forward in time.",
           "Jedes freundliche Wort, jede faire Regel und jede gute Idee schlaegt Wellen in die Zukunft.",
           "Każde dobre słowo, sprawiedliwa zasada, którą szanujesz, i pomysł, który tworzysz, zataczają fale w przyszłość.",
         ),

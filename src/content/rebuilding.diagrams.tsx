@@ -2,21 +2,17 @@ import type { DiagramProps } from "../lesson/types";
 
 export function RuinsOfEuropeDiagram({ lang, step }: DiagramProps) {
   const title =
-    lang === "pl"
-      ? "Europa w 1945 roku: Potrzeba odbudowy"
-      : lang === "de"
-        ? "Europa im Jahr 1945: Notwendigkeit des Wiederaufbaus"
-        : "Europe in 1945: The Need for Rebuilding";
+    lang === "pl" ? "Europa w 1945 roku" : lang === "de" ? "Europa im Jahr 1945" : "Europe in 1945";
 
   const brokenLink =
     lang === "pl" ? "Przerwany szlak" : lang === "de" ? "Zerstoerte Verbindung" : "Broken Link";
 
   const sub =
     lang === "pl"
-      ? "Fabryki w ruinie i rodziny tęskniące za dachem nad głową i chlebem"
+      ? "Zniszczone fabryki, bezdomne rodziny"
       : lang === "de"
-        ? "Fabriken in Truemmern und Familien in Sehnsucht nach Obdach und Brot"
-        : "Factories in ruins and families longing for shelter and bread";
+        ? "Zerstoerte Fabriken, obdachlose Familien"
+        : "Ruined factories, homeless families";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Europe in 1945">
@@ -52,10 +48,10 @@ export function RuinsOfEuropeDiagram({ lang, step }: DiagramProps) {
 export function SchumanDeclarationDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "9 maja 1950: Deklaracja Schumana"
+      ? "Deklaracja Schumana, 1950"
       : lang === "de"
-        ? "9. Mai 1950: Die Schuman-Erklaerung"
-        : "9 May 1950: The Schuman Declaration";
+        ? "Schuman-Erklaerung, 1950"
+        : "Schuman Declaration, 1950";
 
   const poolTitle =
     lang === "pl"
@@ -66,24 +62,24 @@ export function SchumanDeclarationDiagram({ lang, step }: DiagramProps) {
 
   const quote1 =
     lang === "pl"
-      ? "„Wojna między Francją a Niemcami"
+      ? "„Wojna między Francją"
       : lang === "de"
-        ? '"Krieg zwischen Frankreich und Deutschland'
-        : '"War between France and Germany';
+        ? '"Krieg zwischen Frankreich'
+        : '"War between France';
 
   const quote2 =
     lang === "pl"
-      ? "stanie się materialnie niemożliwa”"
+      ? "a Niemcami niemożliwa”"
       : lang === "de"
-        ? 'wird materiell unmoeglich"'
-        : 'becomes materially impossible"';
+        ? 'und Deutschland unmoeglich"'
+        : 'and Germany impossible"';
 
   const sub =
     lang === "pl"
-      ? "Narodziny europejskiej integracji gospodarczej i pokoju"
+      ? "Początek jedności europejskiej"
       : lang === "de"
-        ? "Die Geburtsstunde der europaeischen Einigung"
-        : "The birth of European economic integration";
+        ? "Beginn der europaeischen Einigung"
+        : "Start of European unity";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="The Schuman Declaration 1950">
@@ -132,10 +128,10 @@ export function SchumanDeclarationDiagram({ lang, step }: DiagramProps) {
 export function CoalAndSteelVatsDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Europejska Wspólnota Węgla i Stali (EWWiS)"
+      ? "Wspólnota Węgla i Stali"
       : lang === "de"
         ? "Montanunion (EGKS)"
-        : "The Coal and Steel Community (EGKS)";
+        : "Coal and Steel Community";
 
   const coalTitle =
     lang === "pl" ? "Węgiel z Zagłębia" : lang === "de" ? "Ruhrkohle" : "Rhine Coal";
@@ -153,10 +149,10 @@ export function CoalAndSteelVatsDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Wspólne zasoby zarządzane razem pod prawem europejskim"
+      ? "Wspólne zasoby, wspólne prawo"
       : lang === "de"
-        ? "Gemeinsame Ressourcen unter europaeischem Recht"
-        : "Shared resources governed jointly under European law";
+        ? "Gemeinsame Ressourcen, gemeinsames Recht"
+        : "Shared resources, shared rules";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="European Coal and Steel Pool">
@@ -202,17 +198,17 @@ export function CoalAndSteelVatsDiagram({ lang, step }: DiagramProps) {
 export function RebuiltRailwayBridgeDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Odbudowany Most Pokoju przez Ren"
+      ? "Odbudowany Most Pokoju"
       : lang === "de"
         ? "Die wiederaufgebaute Friedensbruecke"
-        : "The Rebuilt Peace Bridge Across the Rhine";
+        : "The Rebuilt Peace Bridge";
 
   const sub =
     lang === "pl"
-      ? "Szybkie pociągi wiozące studentów, towary i przyjaciół przez otwarte granice"
+      ? "Pociągi jadą przez granice"
       : lang === "de"
-        ? "Schnelle Zuege verbinden Nachbarn und Freunde ueber offene Grenzen"
-        : "Fast trains carrying students, goods, and friends across borders";
+        ? "Zuege fahren ueber Grenzen"
+        : "Trains cross open borders";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Rebuilt Peace Bridge">
@@ -257,10 +253,10 @@ export function EuropeanUnionStarsDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Siedemdziesiąt lat nieprzerwanego pokoju dzięki demokratycznej wspólnocie"
+      ? "Siedemdziesiąt lat pokoju"
       : lang === "de"
-        ? "Siebzig Jahre dauerhafter Frieden durch demokratische Gemeinschaft"
-        : "Seventy years of unbroken peace through shared democratic union";
+        ? "Siebzig Jahre Frieden"
+        : "Seventy years of peace";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Circle of Gold Stars">

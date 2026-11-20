@@ -3,17 +3,17 @@ import type { DiagramProps } from "../lesson/types";
 export function SaltCrystalDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Bryłka naturalnej soli morskiej"
+      ? "Bryłka soli morskiej"
       : lang === "de"
-        ? "Ein natuerlicher Brocken Meersalz"
-        : "A Natural Lump of Ocean Salt";
+        ? "Ein Brocken Meersalz"
+        : "Lump of sea salt";
 
   const sub =
     lang === "pl"
-      ? "Darowana przez ocean, lecz obłożona wysokim podatkiem przez władców"
+      ? "Dar oceanu, obłożony podatkiem"
       : lang === "de"
-        ? "Vom Meer geschenkt, aber von Herrschern schwer besteuert"
-        : "Freely given by the sea, but heavily taxed by rulers";
+        ? "Geschenk des Meeres, besteuert"
+        : "Sea's gift, but taxed";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Natural Sea Salt Crystal">
@@ -42,17 +42,17 @@ export function SaltCrystalDiagram({ lang, step }: DiagramProps) {
 export function DandiMarchCoastDiagram({ lang, step }: DiagramProps) {
   const title =
     lang === "pl"
-      ? "Marsz do Dandi na dystansie 240 mil"
+      ? "240 mil do Dandi"
       : lang === "de"
         ? "Der 240-Meilen-Marsch nach Dandi"
-        : "The 240-Mile March to Dandi";
+        : "240-Mile March to Dandi";
 
   const sub =
     lang === "pl"
-      ? "Pokojowy marsz w białych szatach przeciw niesprawiedliwemu podatkowi"
+      ? "Pokojowy marsz, niesprawiedliwy podatek"
       : lang === "de"
-        ? "Friedlicher Marsch im weissen Gewand gegen eine ungerechte Steuer"
-        : "Walking peacefully in white robes to defy an unjust tax";
+        ? "Friedlicher Marsch, ungerechte Steuer"
+        : "Peaceful march, unfair tax";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="The 240-Mile Dandi March">
@@ -93,15 +93,15 @@ export function CharkhaSpinningWheelDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Kołowrotek Charkha: Symbol samowystarczalności"
       : lang === "de"
-        ? "Das Charkha: Symbol der Selbstbestimmung"
-        : "The Charkha: Symbol of Self-Reliance";
+        ? "Charkha: Symbol der Selbstbestimmung"
+        : "Charkha: Symbol of Self-Reliance";
 
   const sub =
     lang === "pl"
-      ? "Przędzenie własnej nici z godnością i cierpliwością"
+      ? "Własna nić, cierpliwość, godność"
       : lang === "de"
-        ? "Selbstgesponnenes Garn mit Wuerde und Geduld"
-        : "Spinning homespun thread with dignity and patience";
+        ? "Eigenes Garn, Geduld, Wuerde"
+        : "Homespun thread, patience, dignity";
 
   return (
     <svg
@@ -151,10 +151,10 @@ export function CharkhaSpinningWheelDiagram({ lang, step }: DiagramProps) {
 export function TriColorAshokaDiagram({ lang, step }: DiagramProps) {
   const sub =
     lang === "pl"
-      ? "15 sierpnia 1947: Niepodległość i wolność"
+      ? "15 sierpnia 1947: Niepodległość"
       : lang === "de"
-        ? "15. August 1947: Unabhaengigkeit und Freiheit"
-        : "15 August 1947: Independence and Freedom";
+        ? "15. August 1947: Unabhaengigkeit"
+        : "15 August 1947: Independence";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="Tricolor and Ashoka Chakra">
@@ -205,10 +205,10 @@ export function ConstitutionAssemblyDiagram({ lang, step }: DiagramProps) {
 
   const sub =
     lang === "pl"
-      ? "Opracowana pod przewodnictwem dra B. R. Ambedkara w celu zapewnienia równych praw"
+      ? "Ambedkar: równe prawa"
       : lang === "de"
-        ? "Unter Dr. B. R. Ambedkar fuer gleiche Rechte vor dem Gesetz erarbeitet"
-        : "Framed by Dr. B. R. Ambedkar for equal rights under law";
+        ? "Ambedkar: gleiche Rechte"
+        : "Ambedkar: equal rights";
 
   return (
     <svg viewBox="0 0 400 240" className="diagram-svg" aria-label="The Constitutional Assembly">

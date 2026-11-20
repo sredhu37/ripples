@@ -27,7 +27,7 @@ export const lesson: Lesson = {
         T(
           "Long ago, European cooks had no refrigerators, and food was often plain and bland.",
           "Vor langer Zeit gab es in Europa keine Kuehlschraenke, und das Essen war oft fade.",
-          "Dawno temu w europejskich kuchniach nie było lodówek, a jedzenie bywało mdłe i szybko się psuło.",
+          "Dawno temu w europejskich kuchniach nie było lodówek. Jedzenie bywało mdłe i szybko się psuło.",
         ),
         T(
           "Dried black peppercorns, cloves, and nutmeg preserved meats and added wonderful flavors.",
@@ -40,7 +40,7 @@ export const lesson: Lesson = {
           "Ponieważ przyprawy rosły tylko w odległych, tropikalnych krainach, były rzadkim i kosztownym luksusem.",
         ),
         T(
-          "A small pouch of black pepper could be traded for fine wool garments or silver coins.",
+          "A small pouch of black pepper could be traded for fine wool or silver coins.",
           "Ein kleiner Beutel schwarzer Pfeffer konnte gegen feine Wolle oder Silbermuenzen getauscht werden.",
           "Niewielki mieszek czarnego pieprzu można było wymienić na bele wełny lub monety z czystego srebra.",
         ),
@@ -50,7 +50,7 @@ export const lesson: Lesson = {
     animatedBeat(
       [
         T(
-          "For centuries, spices had to travel overland across the Silk Road on the backs of camels.",
+          "For centuries, spices had to travel the Silk Road overland on camels.",
           "Jahrhundertelang mussten Gewuerze auf Kamelruecken ueber die Seidenstrasse reisen.",
           "Przez stulecia przyprawy wędrowały lądem wzdłuż Jedwabnego Szlaku na grzbietach wielbłądów.",
         ),
@@ -60,12 +60,12 @@ export const lesson: Lesson = {
           "Podróż trwała ponad rok i wiodła przez mroźne przełęcze górskie oraz bezkresne pustynie.",
         ),
         T(
-          "At every city and bridge along the route, local rulers demanded road tolls and protection fees.",
+          "At every city and bridge, rulers demanded road tolls and protection fees.",
           "In jeder Stadt und an jeder Bruecke verlangten Herrscher Wegzoelle und Schutzgebuehren.",
           "W każdym napotkanym mieście i na każdym moście lokalni władcy żądali wysokich ceł i opłat.",
         ),
         T(
-          "By the time a sack of pepper reached Venice or Hamburg, its price had multiplied twenty times.",
+          "A sack of pepper finally reached Venice or Hamburg. By then, its price had multiplied twenty times.",
           "Bis ein Sack Pfeffer Venedig oder Hamburg erreichte, hatte sich sein Preis vervielfacht.",
           "Zanim wór pieprzu dotarł do Wenecji, Hamburga czy Gdańska, jego cena rosła dwudziestokrotnie.",
         ),
@@ -92,7 +92,7 @@ export const lesson: Lesson = {
         T(
           "By catching these wind patterns, ocean caravels could travel between continents in a few months.",
           "Wer diesen Wind nutzte, konnte mit Segelschiffen Ozeane in wenigen Monaten ueberqueren.",
-          "Łapiąc te wiatry w żagle, oceaniczne karawele mogły przebyć tę samą trasę w zaledwie kilka miesięcy.",
+          "Łapiąc te wiatry w żagle, karawele mogły przebyć tę samą trasę w kilka miesięcy.",
         ),
       ],
       MonsoonWindDiagram,
@@ -112,7 +112,7 @@ export const lesson: Lesson = {
         T(
           "Monarchs granted these companies a royal *monopoly*, meaning no other merchant could trade in spices.",
           "Herrscher gaben diesen Gesellschaften ein koenigliches *Monopol*, das den Handel allein ihnen vorbehielt.",
-          "Władcy nadali tym kompaniom królewski *monopol*, co oznaczało, że nikt inny nie miał prawa handlować przyprawami.",
+          "Władcy dali tym kompaniom królewski *monopol*. Nikt inny nie mógł handlować przyprawami.",
         ),
         T(
           "Armed company fleets built stone fortresses along the coasts to control the shipping lanes.",
