@@ -2,7 +2,6 @@ name: factory-gate
 
 # map-does: Gate. Risky-file list, gate agent, then squash merge or factory:human. Also relays Sunny's approvals and comments on a PR in Needs human.
 # map-next: `factory-build.yml` (fix round on human comment or change request)
-# map-next: `pages.yml` (the squash merge to main)
 
 # The factory's gate station and Sunny's answers on a PR in Needs human. Spec: docs/factory.md,
 # sections Gate, Notifications, Identity secrets and permissions.
@@ -16,11 +15,11 @@ name: factory-gate
 #                10 turns, read-only GITHUB_TOKEN; final json {decision, reason}; invalid = HUMAN
 #       decide:  one gate comment <!-- factory-gate sha=<sha> --> with risks, decision, reason
 #                MERGE -> head unchanged + checks green -> squash merge as sredhu37-bot
-#                         (FACTORY_TOKEN, so pages.yml runs), factory:done, board Done
+#                         (FACTORY_TOKEN, so the merge starts push workflows), factory:done, board Done
 #                HUMAN -> factory:human, board Needs human, Telegram (reason, PR, evidence video)
 #     mode approve  Sunny approved: his latest approving or blocking review is APPROVED on the
 #                   current head of a PR in Needs human (factory PR with factory:human, or a
-#                   pages.yml revert PR), every required check green (waits up to 20 minutes)
+#                   revert PR), every required check green (waits up to 20 minutes)
 #                   -> squash merge as sredhu37-bot, factory:done, board Done
 #     mode fix      Sunny commented, or requested changes, on a factory PR in factory:human
 #                   (in factory:in-review only a comment containing @build counts)
@@ -372,7 +371,7 @@ jobs:
           url=$(gh api -X POST "repos/$GITHUB_REPOSITORY/issues/$PR/comments" -F "body=@$RUNNER_TEMP/comment.md" --jq .html_url)
           echo "::notice::Gate comment: $url"
 
-      # The bot's merge starts pages.yml; a GITHUB_TOKEN merge would start no push workflow.
+      # The bot's merge starts push workflows; a GITHUB_TOKEN merge would start no push workflow.
       - name: Merge as sredhu37-bot
         id: merge
         if: steps.decide.outputs.decision == 'MERGE'
