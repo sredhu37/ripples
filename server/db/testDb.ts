@@ -51,6 +51,10 @@ export async function createTestDatabase(adminUrl: string): Promise<TestDatabase
       return pool;
     },
     async drop() {
+      // pool.end() resolves before the sockets close, so the FORCE drop below can kill an idle
+      // connection first. The pool then emits "error" (57P01). With no listener that is an
+      // unhandled error and fails the Vitest run. The database is going away, so ignore it.
+      for (const pool of pools) pool.on("error", () => {});
       await Promise.all(pools.map((pool) => pool.end()));
       await admin.query(`DROP DATABASE IF EXISTS ${name} WITH (FORCE)`);
       await admin.end();
