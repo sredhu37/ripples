@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { sendLoginCode, verifyLoginCode } from "../auth";
 import { t } from "../i18n";
 import type { Lang } from "../progress";
+import type { LegalPage } from "../legal/texts";
 import { LangSwitch } from "./LangSwitch";
+import { LegalLinks } from "./LegalLinks";
 
 /** Seconds before the parent may ask for another code. The API allows 3 sends a minute. */
 export const RESEND_COOLDOWN_S = 30;
@@ -12,6 +14,7 @@ interface Props {
   onLang: (l: Lang) => void;
   onLoggedIn: (email: string) => void;
   onClose: () => void;
+  onLegal: (page: LegalPage) => void;
 }
 
 type Failure = "wrong" | "too_many" | "failed" | null;
@@ -23,7 +26,7 @@ const FAILURE_TEXT = {
 } as const;
 
 /** Parent login in two steps: email, then the 6-digit Login code. */
-export function LoginScreen({ lang, onLang, onLoggedIn, onClose }: Props) {
+export function LoginScreen({ lang, onLang, onLoggedIn, onClose, onLegal }: Props) {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [step, setStep] = useState<"email" | "code">("email");
@@ -152,6 +155,7 @@ export function LoginScreen({ lang, onLang, onLoggedIn, onClose }: Props) {
           </button>
         </form>
       )}
+      <LegalLinks lang={lang} onOpen={onLegal} />
     </main>
   );
 }

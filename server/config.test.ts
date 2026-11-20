@@ -10,6 +10,23 @@ describe("loadConfig", () => {
     expect(config).toMatchObject({ port: 8080, databaseUrl: DEV_DATABASE_URL, production: false });
   });
 
+  it("reads the Impressum details from LEGAL_* and splits the address into lines", () => {
+    const legal = loadConfig({
+      LEGAL_NAME: " Test Person ",
+      LEGAL_ADDRESS: "Test Street 1;00000 Testtown",
+      LEGAL_EMAIL: "legal@example.com",
+    }).legal;
+    expect(legal).toEqual({
+      name: "Test Person",
+      address: ["Test Street 1", "00000 Testtown"],
+      email: "legal@example.com",
+      phone: null,
+      vatId: null,
+    });
+    expect(loadConfig({ LEGAL_ADDRESS: "A\nB" }).legal.address).toEqual(["A", "B"]);
+    expect(loadConfig({}).legal.address).toEqual([]);
+  });
+
   it("refuses to start in production without DATABASE_URL", () => {
     expect(() => loadConfig({ NODE_ENV: "production" })).toThrow("DATABASE_URL is required");
   });

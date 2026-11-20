@@ -3,6 +3,15 @@ export interface HealthResponse {
   status: "ok" | "error";
 }
 
+/** The Impressum details. A field is null or empty when the deploy did not set it. */
+export interface LegalResponse {
+  name: string | null;
+  address: string[];
+  email: string | null;
+  phone: string | null;
+  vatId: string | null;
+}
+
 export type ProfileLang = "en" | "de" | "pl";
 
 /** A Kid profile with its progress. */

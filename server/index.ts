@@ -37,6 +37,7 @@ const app = createApp({
   db: pool,
   auth,
   distDir: config.distDir,
+  legal: config.legal,
 });
 
 const server = serve({ fetch: app.fetch, port: config.port }, (info) => {
