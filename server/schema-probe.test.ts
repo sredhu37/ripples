@@ -8,7 +8,9 @@ import { emailOTP } from "better-auth/plugins";
 import { expect, it } from "vitest";
 
 const sql = readFileSync(
-  fileURLToPath(new URL("./db/migrations/1700000000001_create-auth-tables.sql", import.meta.url)),
+  fileURLToPath(
+    new URL("./db/migrations/20261120083116000_create-auth-tables.sql", import.meta.url),
+  ),
   "utf8",
 );
 
