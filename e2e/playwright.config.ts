@@ -8,6 +8,10 @@ export default defineConfig({
   outputDir: "test-results",
   timeout: 120_000,
   forbidOnly: !!process.env.CI,
+  // The lesson spec makes one test per changed lesson and language. Run them side by side:
+  // slowMo and the pauses are waiting, not CPU, so 4 workers fit the 4 vCPU CI runner.
+  fullyParallel: true,
+  workers: process.env.CI ? 4 : undefined,
   reporter: process.env.CI ? [["list"], ["github"]] : "list",
   use: {
     baseURL: `http://localhost:${PORT}/`,
