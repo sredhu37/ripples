@@ -1,52 +1,67 @@
 // @vitest-environment node
-import { fileURLToPath } from "node:url";
-import { runner } from "node-pg-migrate";
 import pg from "pg";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { ensureFamily } from "./family.js";
+import { assertLocalDatabaseUrl, createTestDatabase, type TestDatabase } from "./testDb.js";
 
 const adminUrl = process.env.DATABASE_URL;
-const migrationsDir = fileURLToPath(new URL("./migrations", import.meta.url));
 
-function migrate(databaseUrl: string) {
-  return runner({
-    databaseUrl,
-    dir: migrationsDir,
-    direction: "up",
-    migrationsTable: "pgmigrations",
-    log: () => {},
+describe("the test database helper", () => {
+  it("refuses a host that is not local", () => {
+    expect(() => assertLocalDatabaseUrl("postgres://u:p@db.example.com:5432/x")).toThrow(
+      "db.example.com",
+    );
+    expect(() =>
+      assertLocalDatabaseUrl("postgres://u:p@ep-1.neon.tech/x?sslmode=require"),
+    ).toThrow();
+    assertLocalDatabaseUrl("postgres://u:p@localhost:5432/x");
+    assertLocalDatabaseUrl("postgres://u:p@127.0.0.1:5432/x");
   });
-}
+
+  it("refuses before it connects", async () => {
+    await expect(createTestDatabase("postgres://u:p@db.example.com:5432/x")).rejects.toThrow(
+      "Refusing",
+    );
+  });
+});
 
 // Needs a running Postgres whose user may create databases (see README).
 // Each run migrates a throwaway database, so it never touches your dev data.
 describe.skipIf(!adminUrl)("migrations on a real Postgres", () => {
-  const dbName = `ripples_test_${process.pid}_${Date.now()}`;
-  let testUrl = "";
-  let admin: pg.Client;
+  let testDb: TestDatabase;
   let db: pg.Client;
 
   beforeAll(async () => {
-    admin = new pg.Client({ connectionString: adminUrl });
-    await admin.connect();
-    await admin.query(`CREATE DATABASE ${dbName}`);
-    const url = new URL(adminUrl!);
-    url.pathname = `/${dbName}`;
-    testUrl = url.toString();
+    testDb = await createTestDatabase(adminUrl!);
   });
 
   afterAll(async () => {
     await db?.end();
-    await admin.query(`DROP DATABASE IF EXISTS ${dbName} WITH (FORCE)`);
-    await admin.end();
+    await testDb.drop();
   });
 
   it("applies on an empty database and does nothing on a second run", async () => {
-    const first = await migrate(testUrl);
+    const first = (await testDb.migrate()) as unknown[];
     expect(first.length).toBeGreaterThan(0);
-    expect(await migrate(testUrl)).toEqual([]);
-    db = new pg.Client({ connectionString: testUrl });
+    expect(await testDb.migrate()).toEqual([]);
+    db = new pg.Client({ connectionString: testDb.url });
     await db.connect();
+  });
+
+  it("adds avatar to kid_profile, with a default for new rows", async () => {
+    const { rows: fam } = await db.query(
+      "INSERT INTO family (free_month_ends_at) VALUES (now()) RETURNING id",
+    );
+    const { rows } = await db.query(
+      "INSERT INTO kid_profile (family_id, nickname) VALUES ($1, 'Mia') RETURNING avatar",
+      [fam[0].id],
+    );
+    expect(rows[0].avatar).toBe("Finn");
+    await expect(
+      db.query("INSERT INTO kid_profile (family_id, nickname, avatar) VALUES ($1, 'A', '')", [
+        fam[0].id,
+      ]),
+    ).rejects.toThrow();
   });
 
   it("creates the family, kid_profile and subscription tables", async () => {
@@ -126,5 +141,29 @@ describe.skipIf(!adminUrl)("migrations on a real Postgres", () => {
     await db.query(`DELETE FROM "user" WHERE id = 'user-2'`);
     const after = await db.query(`SELECT 1 FROM family WHERE parent_user_id = 'user-2'`);
     expect(after.rows).toEqual([]);
+  });
+});
+
+describe.skipIf(!adminUrl)("the avatar migration on a database that holds data", () => {
+  it("gives an existing profile an avatar the app can draw, and a second run does nothing", async () => {
+    const testDb = await createTestDatabase(adminUrl!);
+    try {
+      await testDb.migrate(2);
+      const db = new pg.Client({ connectionString: testDb.url });
+      await db.connect();
+      const { rows: fam } = await db.query(
+        "INSERT INTO family (free_month_ends_at) VALUES (now()) RETURNING id",
+      );
+      await db.query("INSERT INTO kid_profile (family_id, nickname) VALUES ($1, 'Old')", [
+        fam[0].id,
+      ]);
+      expect(((await testDb.migrate()) as unknown[]).length).toBe(1);
+      expect(await testDb.migrate()).toEqual([]);
+      const { rows } = await db.query("SELECT avatar FROM kid_profile WHERE nickname = 'Old'");
+      expect(rows[0].avatar).toBe("Finn");
+      await db.end();
+    } finally {
+      await testDb.drop();
+    }
   });
 });
