@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createApp } from "./app.js";
-import { createPool } from "./db.js";
+import { createPool } from "./db/pool.js";
 
 describe("GET /api/health", () => {
   it("returns 503 when the database is unreachable", async () => {

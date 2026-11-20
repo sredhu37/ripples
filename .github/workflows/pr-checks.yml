@@ -20,23 +20,22 @@ jobs:
   ci:
     name: ci
     runs-on: ubuntu-latest
-    # Postgres for the API tests. Off for now: server/app.test.ts skips its "200 with a real Postgres"
-    # test when DATABASE_URL is unset. To turn it on, uncomment this block and the env line of the
-    # "npm test" step. The schema tickets (#214 onward) need it for migration tests.
-    # services:
-    #   postgres:
-    #     image: postgres:17
-    #     env:
-    #       POSTGRES_USER: ripples
-    #       POSTGRES_PASSWORD: ripples
-    #       POSTGRES_DB: ripples
-    #     ports:
-    #       - 5432:5432
-    #     options: >-
-    #       --health-cmd "pg_isready -U ripples -d ripples"
-    #       --health-interval 5s
-    #       --health-timeout 3s
-    #       --health-retries 10
+    # Postgres for the API and migration tests. Without DATABASE_URL those tests are skipped.
+    # POSTGRES_USER is the superuser of the container, so it may create the throwaway test database.
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: ripples
+          POSTGRES_PASSWORD: ripples
+          POSTGRES_DB: ripples
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ripples -d ripples"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -46,8 +45,8 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm test
-        # env:
-        #   DATABASE_URL: postgres://ripples:ripples@localhost:5432/ripples
+        env:
+          DATABASE_URL: postgres://ripples:ripples@localhost:5432/ripples
       - run: npm run build
 
   workflows-map:

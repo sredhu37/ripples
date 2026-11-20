@@ -1,7 +1,7 @@
 import { serve } from "@hono/node-server";
 import { createApp } from "./app.js";
 import { loadConfig, type Config } from "./config.js";
-import { createPool } from "./db.js";
+import { createPool } from "./db/pool.js";
 
 let config: Config;
 try {

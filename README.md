@@ -83,7 +83,7 @@ DATABASE_URL=postgres://ripples:ripples@localhost:5432/ripples npm run migrate
 
 On Linux, run the first two commands as the `postgres` user: `sudo -u postgres psql -c "..."` and `sudo -u postgres createdb -O ripples ripples`.
 
-There are no tables yet, so `migrate` prints `No migrations to run!`. Other commands:
+`migrate` creates the tables on the first run and prints `No migrations to run!` on later runs. Migrations are a separate command, not part of API startup. The migration tests create and drop a throwaway database, so the role needs `CREATEDB` (`psql postgres -c "ALTER ROLE ripples CREATEDB"`). Other commands:
 
 ```bash
 psql postgres://ripples:ripples@localhost:5432/ripples   # shell
