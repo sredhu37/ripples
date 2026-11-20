@@ -6,8 +6,6 @@ A web app that explains how the real world works (money, taxes, governments, his
 
 Each lesson is a short story, then a toy the child can play with, then three questions. A badge is earned when all three are right. Wrong answers get a hint, never a red cross.
 
-Live site: https://sredhu37.github.io/ripples/ (add it to the iPad home screen; it works offline after the first visit).
-
 ## Prerequisites
 
 | Tool                     | Version | Used for                                     |
@@ -130,7 +128,7 @@ npm start           # production twin: one process on :8080 serves the app and /
 
 Issues are built, checked, reviewed and merged by GitHub Actions workflows and AI agents. Sunny sets `factory:ready` and approves what the gate cannot merge on its own. The diagram below is kept in step with the workflows by the `flow-rule` check.
 
-![Flow of the Ripples software factory, from factory:triage to the pages deploy](docs/factory-flow.svg)
+![Flow of the Ripples software factory, from factory:triage to the merge](docs/factory-flow.svg)
 
 Detail for every step: [docs/factory.md](docs/factory.md).
 

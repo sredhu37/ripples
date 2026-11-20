@@ -4,7 +4,7 @@
 #
 # Usage: gate-merge.sh <pr> <sha>
 # Env:   GH_TOKEN  FACTORY_TOKEN (sredhu37-bot): a merge by GITHUB_TOKEN starts no push
-#                  workflow, so pages.yml would not deploy. Never in a step that runs an agent.
+#                  workflow. Never in a step that runs an agent.
 #        REPO      owner/name, defaults to GITHUB_REPOSITORY, then to the current gh repo
 #        DRY_RUN   1: check everything, do not merge
 # Output: merged=true|false and reason=<text> on stdout (also GITHUB_OUTPUT when set).

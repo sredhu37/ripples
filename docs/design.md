@@ -74,7 +74,7 @@ UX rules (the ux-ui review agent checks these first):
 ## Technology and hosting
 
 - React, TypeScript and Vite. Output is static files.
-- Public GitHub repo `sredhu37/ripples`, deployed by GitHub Action to GitHub Pages at `/ripples/`. No personal names in the repo.
+- Public GitHub repo `sredhu37/ripples`. No personal names in the repo.
 - Progress is saved in browser storage on the device (name, language, mute, badges). Parents get a Save/Restore code (`RIP1.<payload>.<checksum>`) behind a maths gate. No server.
 - Offline: a small service worker caches the app after the first visit.
 - Tablet first (iPad), also works on phone and Mac. Touch targets are at least 60 px.
