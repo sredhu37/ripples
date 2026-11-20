@@ -55,7 +55,7 @@ pg_isready          # accepting connections
 
 ```bash
 nvm use             # reads .nvmrc, selects Node 26
-npm ci
+npm run install:all # npm ci in the root, web/ and server/
 ```
 
 ### 2. Environment variables
@@ -65,9 +65,9 @@ None are needed for local development. There is no `.env` file: the app does not
 | Variable             | Default in dev                                      | Notes                                                                                                                      |
 | -------------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `DATABASE_URL`       | `postgres://ripples:ripples@localhost:5432/ripples` | The database from step 3. Required in production. Neon needs `?sslmode=require`.                                           |
-| `PORT`               | `8080`                                              | API port. Vite proxies `/api` to it, so change `vite.config.ts` too.                                                       |
-| `NODE_ENV`           | unset                                               | `production` makes the API serve the built app from `dist/`.                                                               |
-| `DIST_DIR`           | `dist`                                              | Folder the API serves in production.                                                                                       |
+| `PORT`               | `8080`                                              | API port. Vite proxies `/api` to it, so change `web/vite.config.ts` too.                                                   |
+| `NODE_ENV`           | unset                                               | `production` makes `DATABASE_URL` required.                                                                                |
+| `DIST_DIR`           | unset                                               | Built app the API serves at `/`. Unset: the API serves `/api` only.                                                        |
 | `BETTER_AUTH_SECRET` | a fixed dev value                                   | Signs login cookies. Required in production, at least 32 characters.                                                       |
 | `BETTER_AUTH_URL`    | derived from each request                           | Public address of the API, e.g. `https://ripples.example`.                                                                 |
 | `RESEND_API_KEY`     | unset (Self-host mode)                              | Set: login codes are emailed with Resend. Unset: they are written to the API log, and the API prints a warning at startup. |
@@ -121,8 +121,8 @@ npm test            # unit tests; the real-Postgres health test also runs when D
                     #   DATABASE_URL=postgres://ripples:ripples@localhost:5432/ripples npm test
 npm run lint
 npm run typecheck
-npm run build       # app to dist/, API to dist-server/
-npm start           # production twin: one process on :8080 serves the app and /api
+npm run build       # app to web/dist/, API to server/dist/
+npm start           # production twin: one process on :8080 serves the app and /api (run build first)
                     #   (needs DATABASE_URL set, because NODE_ENV=production has no default)
 ```
 

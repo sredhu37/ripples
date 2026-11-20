@@ -36,11 +36,11 @@ const auth = createAuth({
 const app = createApp({
   db: pool,
   auth,
-  distDir: config.production ? config.distDir : undefined,
+  distDir: config.distDir,
 });
 
 const server = serve({ fetch: app.fetch, port: config.port }, (info) => {
-  const mode = config.production ? `serving the app from ${config.distDir}` : "API only (dev)";
+  const mode = config.distDir ? `serving the app from ${config.distDir}` : "API only";
   console.log(`Ripples API listening on port ${info.port}, ${mode}`);
 });
 

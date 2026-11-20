@@ -100,14 +100,14 @@ describe("matchRisky", () => {
   it("finds risky files with the matching pattern", () => {
     expect(
       matchRisky(patterns, [
-        "src/content/l3.en.ts",
+        "web/src/content/l3.en.ts",
         ".github/workflows/factory-gate.yml",
-        "src/progress.ts",
+        "web/src/progress.ts",
         "docs/factory.md",
       ]),
     ).toEqual([
       { file: ".github/workflows/factory-gate.yml", pattern: ".github/**" },
-      { file: "src/progress.ts", pattern: "src/progress.ts" },
+      { file: "web/src/progress.ts", pattern: "web/src/progress.ts" },
       { file: "docs/factory.md", pattern: "docs/**" },
     ]);
   });
@@ -119,9 +119,9 @@ describe("matchRisky", () => {
   it("a low-risk PR has no hits", () => {
     expect(
       matchRisky(patterns, [
-        "src/content/l3.en.ts",
-        "src/lesson/Toy.tsx",
-        "e2e/lesson.spec.ts",
+        "web/src/content/l3.en.ts",
+        "web/src/lesson/Toy.tsx",
+        "web/e2e/lesson.spec.ts",
         "README.md",
         "",
       ]),
@@ -131,8 +131,8 @@ describe("matchRisky", () => {
   it("near misses do not match", () => {
     expect(
       matchRisky(patterns, [
-        "src/progress.test.ts",
-        "public/sw.js.map",
+        "web/src/progress.test.ts",
+        "web/public/sw.js.map",
         "AGENTS.md.bak",
         "mydocs/x",
       ]),

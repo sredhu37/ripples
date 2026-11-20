@@ -23,7 +23,7 @@ You build one Ripples issue end to end. Spec: [docs/factory.md, Build](https://g
 ## Build
 
 - Do what the issue and brief ask, no more. Small, boring, readable changes.
-- A change to any `*.tsx` or `*.css` file must change at least one `e2e/*.spec.ts`. A change only in `src/content/**` needs no spec edit.
+- A change to any `*.tsx` or `*.css` file must change at least one `web/e2e/*.spec.ts`. A change only in `web/src/content/**` needs no spec edit.
 - Add or update unit tests for changed logic.
 - Update `ARCHITECTURE.md` if structure changed, `GLOSSARY.md` for new terms, `docs/adr/` for hard decisions.
 - No new dependencies unless needed; say why in Decisions.

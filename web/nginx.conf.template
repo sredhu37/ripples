@@ -1,0 +1,43 @@
+# Served by web/Dockerfile. The official nginx image runs envsubst over this file at start,
+# so ${BACKEND_URL} comes from the container's environment (see web/.env.example).
+server {
+    listen 8080;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # Compress text files before sending. The main JS file is about 3x smaller.
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_comp_level 5;
+    gzip_types text/css text/plain text/javascript application/javascript application/json
+               application/manifest+json image/svg+xml;
+
+    # The browser calls /api on the same origin. nginx forwards it to the backend.
+    location /api/ {
+        proxy_pass ${BACKEND_URL};
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Vite puts a hash in these file names, so a changed file gets a new name.
+    # Safe to reuse for one week without asking.
+    location /assets/ {
+        add_header Cache-Control "public, max-age=604800, immutable";
+        try_files $uri =404;
+    }
+
+    # index.html, sw.js, the manifest and icons keep their names. "no-cache" means the browser
+    # asks nginx first (a cheap 304 when nothing changed), so a new deploy shows up at once.
+    location / {
+        add_header Cache-Control "no-cache";
+        try_files $uri $uri/ =404;
+    }
+
+    # nginx's file type list has no entry for .webmanifest, so set it here.
+    location = /manifest.webmanifest {
+        default_type application/manifest+json;
+        add_header Cache-Control "no-cache";
+    }
+}

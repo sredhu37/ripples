@@ -7,8 +7,8 @@ export interface Config {
   port: number;
   databaseUrl: string;
   production: boolean;
-  /** Folder with the built app (`npm run build`). */
-  distDir: string;
+  /** Folder with the built app. When set, the API serves it at `/`. Unset: API only. */
+  distDir: string | undefined;
   /** Signs session cookies. Required in production. */
   authSecret: string;
   /** Public address of the API (`BETTER_AUTH_URL`). */
@@ -55,7 +55,7 @@ export function loadConfig(env: NodeJS.ProcessEnv): Config {
     port,
     databaseUrl,
     production,
-    distDir: resolve(env.DIST_DIR || "dist"),
+    distDir: env.DIST_DIR ? resolve(env.DIST_DIR) : undefined,
     authSecret,
     baseUrl: env.BETTER_AUTH_URL || undefined,
     resendApiKey,
