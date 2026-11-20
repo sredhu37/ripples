@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
+import { getSessionEmail } from "./auth";
 import { FactCards } from "./components/FactCards";
+import { LoginScreen } from "./components/LoginScreen";
+import { ProfileScreen } from "./components/ProfileScreen";
 import { getLesson } from "./content";
 import { LessonRunner } from "./lesson/LessonRunner";
 import { LESSONS } from "./lessons";
@@ -25,6 +28,8 @@ type Screen =
   | { kind: "map" }
   | { kind: "lesson"; id: string }
   | { kind: "parents" }
+  | { kind: "login" }
+  | { kind: "profile"; email: string }
   | { kind: "facts" }
   | { kind: "timeline" };
 
@@ -69,6 +74,12 @@ export function App() {
         progress={progress}
         onRestore={setProgress}
         onFacts={() => setScreen({ kind: "facts" })}
+        onAccount={() =>
+          // A parent who is already logged in goes straight to the profile screen.
+          void getSessionEmail().then((email) =>
+            setScreen(email ? { kind: "profile", email } : { kind: "login" }),
+          )
+        }
         onReset={() => {
           setProgress(emptyProgress());
           setScreen({ kind: "map" });
@@ -76,6 +87,29 @@ export function App() {
         onClose={() => setScreen({ kind: "map" })}
         onLang={setLang}
         onToggleLesson={(id, enabled) => setProgress((p) => toggleLesson(p, id, enabled))}
+      />
+    );
+  }
+
+  if (screen.kind === "login") {
+    return (
+      <LoginScreen
+        lang={progress.lang}
+        onLang={setLang}
+        onLoggedIn={(email) => setScreen({ kind: "profile", email })}
+        onClose={() => setScreen({ kind: "parents" })}
+      />
+    );
+  }
+
+  if (screen.kind === "profile") {
+    return (
+      <ProfileScreen
+        lang={progress.lang}
+        email={screen.email}
+        onLang={setLang}
+        onLoggedOut={() => setScreen({ kind: "login" })}
+        onClose={() => setScreen({ kind: "map" })}
       />
     );
   }

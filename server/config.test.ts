@@ -2,6 +2,8 @@
 import { describe, expect, it } from "vitest";
 import { DEV_DATABASE_URL, loadConfig } from "./config.js";
 
+const SECRET = "x".repeat(32);
+
 describe("loadConfig", () => {
   it("uses the local compose database and port 8080 in dev", () => {
     const config = loadConfig({});
@@ -14,7 +16,21 @@ describe("loadConfig", () => {
 
   it("passes DATABASE_URL through unchanged, including TLS parameters", () => {
     const url = "postgres://user:pw@ep-x.eu-central-1.aws.neon.tech/db?sslmode=require";
-    expect(loadConfig({ NODE_ENV: "production", DATABASE_URL: url }).databaseUrl).toBe(url);
+    const env = { NODE_ENV: "production", DATABASE_URL: url, BETTER_AUTH_SECRET: SECRET };
+    expect(loadConfig(env).databaseUrl).toBe(url);
+  });
+
+  it("refuses to start in production without a long BETTER_AUTH_SECRET", () => {
+    const env = { NODE_ENV: "production", DATABASE_URL: "postgres://x/y" };
+    expect(() => loadConfig(env)).toThrow("BETTER_AUTH_SECRET is required");
+    expect(() => loadConfig({ ...env, BETTER_AUTH_SECRET: "short" })).toThrow("32 characters");
+  });
+
+  it("is in Self-host mode without RESEND_API_KEY and needs EMAIL_FROM with it", () => {
+    expect(loadConfig({}).resendApiKey).toBeUndefined();
+    expect(() => loadConfig({ RESEND_API_KEY: "re_x" })).toThrow("EMAIL_FROM");
+    const config = loadConfig({ RESEND_API_KEY: "re_x", EMAIL_FROM: "Ripples <a@b.c>" });
+    expect(config).toMatchObject({ resendApiKey: "re_x", emailFrom: "Ripples <a@b.c>" });
   });
 
   it("reads PORT and rejects a bad one", () => {

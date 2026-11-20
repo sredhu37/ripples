@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import { runner } from "node-pg-migrate";
 import pg from "pg";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { ensureFamily } from "./family.js";
 
 const adminUrl = process.env.DATABASE_URL;
 const migrationsDir = fileURLToPath(new URL("./migrations", import.meta.url));
@@ -83,6 +84,9 @@ describe.skipIf(!adminUrl)("migrations on a real Postgres", () => {
   });
 
   it("allows one parent account per family", async () => {
+    await db.query(
+      `INSERT INTO "user" (id, name, email, "emailVerified") VALUES ('user-1', '', 'a@example.com', true)`,
+    );
     const add = () =>
       db.query("INSERT INTO family (free_month_ends_at, parent_user_id) VALUES (now(), 'user-1')");
     await add();
@@ -106,5 +110,21 @@ describe.skipIf(!adminUrl)("migrations on a real Postgres", () => {
       const { rows } = await db.query(`SELECT 1 FROM ${table} WHERE family_id = $1`, [id]);
       expect(rows).toEqual([]);
     }
+  });
+
+  it("creates the family on the first login only, and deletes it with the user", async () => {
+    await db.query(
+      `INSERT INTO "user" (id, name, email, "emailVerified") VALUES ('user-2', '', 'b@example.com', true)`,
+    );
+    await ensureFamily(db, "user-2");
+    await ensureFamily(db, "user-2");
+    const { rows } = await db.query(
+      `SELECT free_month_ends_at - created_at AS free_for FROM family WHERE parent_user_id = 'user-2'`,
+    );
+    expect(rows).toHaveLength(1);
+    expect(rows[0].free_for.days).toBe(30);
+    await db.query(`DELETE FROM "user" WHERE id = 'user-2'`);
+    const after = await db.query(`SELECT 1 FROM family WHERE parent_user_id = 'user-2'`);
+    expect(after.rows).toEqual([]);
   });
 });
