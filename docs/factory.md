@@ -14,24 +14,23 @@ Source: map [#109](https://github.com/sredhu37/ripples/issues/109). Every decisi
 ## The line
 
 ```
-new issue ──► TRIAGE ──► READY ──► BUILD ──► CI TOOLS ──► REVIEW ──► GATE ──► main ──► LIVE CHECK
-              (Sunny +   factory:  build     tests,       4 agents   risky     deploy    renders?
-               /triage)  ready     agent     lint, ...    FAIL/      list or   (Pages)   errors?
-                                     ▲                     SUGGEST.   gate                   │
-                                     └──── FAIL: fix round (max 5) ◄──┘ agent            broken:
-                                                                         │               redeploy
-                                                     HUMAN ──► Sunny (Needs human)        live-good
+new issue ──► TRIAGE ──► READY ──► BUILD ──► CI TOOLS ──► REVIEW ──► GATE ──► main
+              (Sunny +   factory:  build     tests,       4 agents   risky
+               /triage)  ready     agent     lint, ...    FAIL/      list or
+                                     ▲                     SUGGEST.   gate
+                                     └──── FAIL: fix round (max 5) ◄──┘ agent
+                                                                         │
+                                                     HUMAN ──► Sunny (Needs human)
 ```
 
-| Station    | Who                         | Trigger                    | Output                                                               |
-| ---------- | --------------------------- | -------------------------- | -------------------------------------------------------------------- |
-| Triage     | Sunny with `/triage`        | issue has `factory:triage` | `factory:ready` + agent brief, `factory:human`, `wontfix`, or parked |
-| Ready      | waiting                     | `factory:ready` added      | build starts when no build runs and all blockers are closed          |
-| Build      | build agent                 | pickup                     | PR with the 4-heading summary, specs, `Closes #n`                    |
-| CI tools   | GitHub Actions              | PR opened or pushed        | pass, or straight back to build (no round used)                      |
-| Review     | 4 review agents             | CI green                   | findings: FAIL or SUGGESTION                                         |
-| Gate       | risky list, then gate agent | review passed              | MERGE or HUMAN                                                       |
-| Live check | Lighthouse on the live URL  | deploy finished            | tag `live-good` moves, or rollback                                   |
+| Station  | Who                         | Trigger                    | Output                                                               |
+| -------- | --------------------------- | -------------------------- | -------------------------------------------------------------------- |
+| Triage   | Sunny with `/triage`        | issue has `factory:triage` | `factory:ready` + agent brief, `factory:human`, `wontfix`, or parked |
+| Ready    | waiting                     | `factory:ready` added      | build starts when no build runs and all blockers are closed          |
+| Build    | build agent                 | pickup                     | PR with the 4-heading summary, specs, `Closes #n`                    |
+| CI tools | GitHub Actions              | PR opened or pushed        | pass, or straight back to build (no round used)                      |
+| Review   | 4 review agents             | CI green                   | findings: FAIL or SUGGESTION                                         |
+| Gate     | risky list, then gate agent | review passed              | MERGE or HUMAN                                                       |
 
 ## Labels and board
 
@@ -167,14 +166,14 @@ review passed ──► any changed file on the risky list? ──yes──► f
 - Risky list: the PR's changed files, old names of renamed files too, against `.github/gate-paths.txt` from main (`gate.mjs match`: `*` inside one folder, `**` any depth, anything else an exact path). One hit is HUMAN; the gate agent does not run.
 - Gate agent: `.claude/agents/gate.md` from main, Sonnet, 10 turns, `Read`, `Grep`, `Glob` only, a read-only `GITHUB_TOKEN`. It gets the diff, the PR description, the review summary and the evidence screenshots. Its final json `{decision, reason}` decides; a missing or invalid block is HUMAN.
 - One gate comment per head, marker `<!-- factory-gate sha=<sha> -->`: risks (risky files, or the agent's analysis), decision, reason.
-- MERGE: the head must be unchanged and every check green, then `sredhu37-bot` squash-merges with `FACTORY_TOKEN` (a `GITHUB_TOKEN` merge starts no push workflow, so `pages.yml` would not deploy). `Closes #n` closes the issue; the gate sets `factory:done` and moves the card to Done. A refused merge is HUMAN.
+- MERGE: the head must be unchanged and every check green, then `sredhu37-bot` squash-merges with `FACTORY_TOKEN` (a `GITHUB_TOKEN` merge starts no push workflow). `Closes #n` closes the issue; the gate sets `factory:done` and moves the card to Done. A refused merge is HUMAN.
 - HUMAN: `factory:human`, card to Needs human, Telegram: `Needs human: PR #n "title"`, the reason, the PR link and the evidence video link (the first `/demo.mp4` link in the evidence comment, or the PR link).
 
 **Ruleset on main:** PR only, every CI check green, no force-push, Sunny on the bypass list.
 
-**Sunny's review:** Sunny's approving review is the approval (changed 12.11.2026; before, pressing Merge was the approval, [#116](https://github.com/sredhu37/ripples/issues/116), [#141](https://github.com/sredhu37/ripples/issues/141)). It applies to every PR in Needs human: risky-list PRs, gate HUMAN PRs and the revert PRs from `pages.yml`.
+**Sunny's review:** Sunny's approving review is the approval (changed 12.11.2026; before, pressing Merge was the approval, [#116](https://github.com/sredhu37/ripples/issues/116), [#141](https://github.com/sredhu37/ripples/issues/141)). It applies to every PR in Needs human: risky-list PRs, gate HUMAN PRs and revert PRs.
 
-- **Approve:** when `sredhu37` approves the PR's current head (the review's commit is the head; an approval of an older commit does not count) and every required check (`ci`, `lint`, `audit`, `lighthouse`, `demo`, `spec-rule`, `flow-rule`, `CodeQL`) is green, `sredhu37-bot` squash-merges it with `FACTORY_TOKEN`, so `pages.yml` deploys. Checks still running: the run waits up to 20 minutes. Still not green, or the head moved: no merge, a PR comment says why; approve again, or rerun `factory-gate.yml` with `pr` and mode `approve`.
+- **Approve:** when `sredhu37` approves the PR's current head (the review's commit is the head; an approval of an older commit does not count) and every required check (`ci`, `lint`, `audit`, `lighthouse`, `demo`, `spec-rule`, `flow-rule`, `CodeQL`) is green, `sredhu37-bot` squash-merges it with `FACTORY_TOKEN`. Checks still running: the run waits up to 20 minutes. Still not green, or the head moved: no merge, a PR comment says why; approve again, or rerun `factory-gate.yml` with `pr` and mode `approve`.
 - **Early approval:** an approval given while the issue is still `factory:in-review` does not count, because the gate stops at HUMAN to show Sunny its risk comment first. The approve run does not stay silent: it posts "Approval noted, but the factory still has the PR. Approve again after the gate comment." When the gate then says HUMAN and Sunny's latest review is an APPROVED from before the gate comment, the gate comment says "Your approval came before this gate comment. Read the risks above and approve again to merge." and the Telegram reason says the same in one line. A new approval merges ([#191](https://github.com/sredhu37/ripples/issues/191)).
 - **Comment or request changes:** a comment, a comment review or a "Request changes" review from `sredhu37` on a factory PR in `factory:human` starts a fix round: `factory-build.yml` with `issue`, `pr` and `human=<review|comment>:<id>`. A question gets a reply instead of a code change. After the round the PR returns to Sunny with a Telegram message, not to the gate (once HUMAN, stays HUMAN). These rounds do not count toward the 5-round limit.
 - **`@build` while the factory has the PR:** a comment by `sredhu37` that contains `@build` on a factory PR in `factory:in-review` also starts a fix round, so Sunny can talk to the build agent without waiting for the gate. Without `@build` the comment is ignored in that state. The round ends like any Sunny round: the issue goes to `factory:human` and the PR returns to Sunny.
@@ -192,25 +191,6 @@ review passed ──► any changed file on the risky list? ──yes──► f
 - After merge, CI deletes `pr-<n>/` and rewrites `evidence` to a single commit.
 - The `demo` job in `pr-checks.yml` records and posts the evidence.
 
-## Deploy and live check
-
-([#116](https://github.com/sredhu37/ripples/issues/116), [#113](https://github.com/sredhu37/ripples/issues/113))
-
-```
-merge ──► pages.yml: build ──► deploy ──► live-check
-                                            │ wait until version.txt shows the new commit
-                                            │ Lighthouse on the live URL: renders? console errors?
-                                            ├─ ok ──────► move tag live-good to this commit
-                                            └─ broken ──► same run: build tag live-good, deploy
-                                                          + open revert PR for main
-                                                          + Telegram to Sunny
-```
-
-- The live site serves the last uploaded build (`build_type: workflow`), not the main branch, so a rollback needs no merge.
-- The live check has no speed limits (live network varies; speed is checked before merge).
-- The revert PR is opened with `FACTORY_TOKEN`, so its checks run without an approval click. It waits for Sunny: his approval on its latest commit merges it (see Gate, Sunny's review).
-- At setup, `live-good` is placed once on the current main.
-
 ## Engine
 
 ([#113](https://github.com/sredhu37/ripples/issues/113), research [#111](https://github.com/sredhu37/ripples/issues/111))
@@ -227,7 +207,6 @@ GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`
 | `factory-sweep.yml`   | hourly at :07; Monday 09:00 Europe/Berlin; `workflow_dispatch` (`task`, `dry_run`)    | restart paused `factory:ready` tickets, flag stuck builds, board reconcile; triage reminder                     |
 | `factory-sync.yml`    | `issues: labeled, unlabeled, closed, reopened`                                        | keeps one `factory:` label (the newest); card to its column; close sets `factory:done`                          |
 | `factory-pr-link.yml` | `pull_request_target: opened, reopened, ready_for_review`                             | a hand-opened PR with `Closes #n` puts #n in `factory:in-review`, card In review                                |
-| `pages.yml`           | push to main                                                                          | build, deploy, live check, rollback                                                                             |
 | `pr-checks.yml`       | `pull_request`                                                                        | jobs `ci`, `lint`, `audit`, `lighthouse`, `spec-rule`, `flow-rule`, `demo` (specs, evidence branch and comment) |
 
 Shared scripts in `.github/scripts/`, for every factory workflow:
@@ -273,12 +252,12 @@ Exact model IDs pinned across factory agents, workflows and skills:
 
 ([#113](https://github.com/sredhu37/ripples/issues/113), [#126](https://github.com/sredhu37/ripples/issues/126), [#194](https://github.com/sredhu37/ripples/issues/194), ADR 0011)
 
-| Actor                 | Identity                                                                                                            | Used for                                                                       |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| Agent code            | `claude[bot]` via the Claude GitHub App, Sunny as co-author                                                         | commits and PR on the build branch                                             |
-| Factory plumbing      | machine account `sredhu37-bot`, classic token `FACTORY_TOKEN` (`public_repo`, `project`, `workflow`, 1-year expiry) | board moves, gate merge (so `pages.yml` fires), revert PRs, workflow push step |
-| Label swaps, comments | `GITHUB_TOKEN`                                                                                                      | no new workflow runs, so no loops                                              |
-| Notifications         | Telegram factory bot, `TELEGRAM_TOKEN` + chat id                                                                    | "Needs human", rollbacks, triage reminder                                      |
+| Actor                 | Identity                                                                                                            | Used for                                    |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| Agent code            | `claude[bot]` via the Claude GitHub App, Sunny as co-author                                                         | commits and PR on the build branch          |
+| Factory plumbing      | machine account `sredhu37-bot`, classic token `FACTORY_TOKEN` (`public_repo`, `project`, `workflow`, 1-year expiry) | board moves, gate merge, workflow push step |
+| Label swaps, comments | `GITHUB_TOKEN`                                                                                                      | no new workflow runs, so no loops           |
+| Notifications         | Telegram factory bot, `TELEGRAM_TOKEN` + chat id                                                                    | "Needs human", triage reminder              |
 
 **Environment secrets locked to main:** All factory secrets (`FACTORY_TOKEN`, `CLAUDE_CODE_OAUTH_TOKEN`, `TELEGRAM_TOKEN`, `TELEGRAM_CHAT_ID`) are stored in the `factory` GitHub Environment. The environment has a custom deployment branch policy restricted to `main`. Non-main branches receive empty values for all environment secrets, preventing secret exfiltration from unreviewed PR workflows. Repository-level secrets are empty.
 
@@ -312,9 +291,9 @@ Exact model IDs pinned across factory agents, workflows and skills:
 The factory bot messages Sunny only when he has to act or should know:
 
 ```
-Needs human: PR #130 "Lesson 4 toy"       Live site rolled back to live-good    Triage: 23 waiting
-reason: gate HUMAN, new screen            broken: #131                          (oldest 9 days)
-[video] link to PR                       revert PR #132 waits for your approval link to board
+Needs human: PR #130 "Lesson 4 toy"       Triage: 23 waiting
+reason: gate HUMAN, new screen            (oldest 9 days)
+[video] link to PR                        link to board
 ```
 
 Normal merges are silent.
@@ -351,7 +330,6 @@ Choices the agent made, not decided in a grilling round. Check these.
 | Turn caps               | build 60, each review agent 15, gate 10                                                                               | #126              |
 | Job timeout             | 30 minutes per agent job                                                                                              | #126              |
 | Spec run time           | revisit if the full run exceeds 10 minutes                                                                            | #117              |
-| Live check wait         | poll `version.txt` with a cache-busting query; Pages caches for 10 minutes                                            | #116              |
 | `npm audit`             | default level, which fails on any known hole, including low severity                                                  | new while writing |
 | Lighthouse in PR CI     | runs against the built app served by `vite preview`                                                                   | new while writing |
 | Suggestions issue title | `Suggestions from PR #<n>: <PR title>`                                                                                | new while writing |

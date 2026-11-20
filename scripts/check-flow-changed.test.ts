@@ -3,9 +3,9 @@ import { checkFlowChanged } from "./check-flow-changed.mjs";
 
 describe("checkFlowChanged", () => {
   it("fails when a workflow changes without the diagram", () => {
-    const result = checkFlowChanged([".github/workflows/pages.yml", "README.md"]);
+    const result = checkFlowChanged([".github/workflows/pr-checks.yml", "README.md"]);
     expect(result.ok).toBe(false);
-    expect(result.message).toContain(".github/workflows/pages.yml");
+    expect(result.message).toContain(".github/workflows/pr-checks.yml");
   });
 
   it("fails when only a script changes", () => {
@@ -13,18 +13,20 @@ describe("checkFlowChanged", () => {
   });
 
   it("passes when the diagram changes too", () => {
-    const files = [".github/workflows/pages.yml", "docs/factory-flow.svg"];
+    const files = [".github/workflows/pr-checks.yml", "docs/factory-flow.svg"];
     expect(checkFlowChanged(files).ok).toBe(true);
   });
 
   it("passes with a Diagram: unchanged line and a reason", () => {
     const body = "## Decisions\n\nDiagram: unchanged, only a timeout changed\n";
-    expect(checkFlowChanged([".github/workflows/pages.yml"], body).ok).toBe(true);
+    expect(checkFlowChanged([".github/workflows/pr-checks.yml"], body).ok).toBe(true);
   });
 
   it("fails when the unchanged line has no reason", () => {
-    expect(checkFlowChanged([".github/workflows/pages.yml"], "Diagram: unchanged,").ok).toBe(false);
-    expect(checkFlowChanged([".github/workflows/pages.yml"], "Diagram: unchanged, ").ok).toBe(
+    expect(checkFlowChanged([".github/workflows/pr-checks.yml"], "Diagram: unchanged,").ok).toBe(
+      false,
+    );
+    expect(checkFlowChanged([".github/workflows/pr-checks.yml"], "Diagram: unchanged, ").ok).toBe(
       false,
     );
   });

@@ -118,20 +118,12 @@
   <text x="918" y="502" class="small">factory:in-review:</text>
   <text x="918" y="517" class="small">also a fix round</text>
 
-  <!-- bot merge to pages -->
-  <path class="line" d="M240 690 V715 H450 V740" marker-end="url(#a)"/>
-  <text x="345" y="710" text-anchor="middle" class="small">bot squash merges to main</text>
+  <!-- bot merge to main -->
+  <path class="line" d="M240 690 V760" marker-end="url(#a)"/>
+  <text x="250" y="725" class="small">bot squash merges to main</text>
 
-  <!-- 8 deploy -->
-  <rect class="box" x="250" y="740" width="400" height="70" rx="8"/>
-  <text x="450" y="765" text-anchor="middle" class="head">pages.yml</text>
-  <text x="450" y="783" text-anchor="middle" class="small">build, deploy to GitHub Pages, live check</text>
-  <text x="450" y="799" text-anchor="middle" class="small">broken live check opens revert PR, alerts Telegram</text>
-
-  <path class="line" d="M450 810 V840" marker-end="url(#a)"/>
-
-  <!-- 9 live -->
-  <text x="450" y="860" text-anchor="middle" class="head">Live on GitHub Pages</text>
+  <!-- 8 end -->
+  <text x="240" y="785" text-anchor="middle" class="head">Merged to main</text>
 
   <!-- side paths -->
   <rect class="side" x="60" y="880" width="900" height="120" rx="8"/>
