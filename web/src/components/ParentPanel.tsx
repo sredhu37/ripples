@@ -6,6 +6,7 @@ import {
   getGroupTitle,
   getLessonTitle,
 } from "../lessons";
+import { NO_LESSONS } from "../features";
 import { t } from "../i18n";
 import { exportCode, importCode, type Progress, type Lang } from "../progress";
 import { LangSwitch } from "./LangSwitch";
@@ -19,6 +20,8 @@ interface Props {
   onClose: () => void;
   onLang?: (l: Lang) => void;
   onToggleLesson: (lessonId: string, enabled: boolean) => void;
+  /** Paused lessons (see `features.ts`): left out of the lesson list. Default: none. */
+  paused?: ReadonlySet<string>;
 }
 
 function makeGate() {
@@ -35,6 +38,7 @@ export function ParentPanel({
   onClose,
   onLang,
   onToggleLesson,
+  paused = NO_LESSONS,
 }: Props) {
   const lang = progress.lang;
   const [gate] = useState(makeGate);
@@ -102,7 +106,10 @@ export function ParentPanel({
         <p>{t(lang, "lessonSelectionHelp")}</p>
         <div className="curriculum-groups">
           {CURRICULUM_GROUPS.map((group) => {
-            const groupLessons = LESSONS.filter((l) => group.lessonIds.includes(l.id));
+            const groupLessons = LESSONS.filter(
+              (l) => group.lessonIds.includes(l.id) && !paused.has(l.id),
+            );
+            if (groupLessons.length === 0) return null;
             const disabledCount = groupLessons.filter((l) =>
               progress.disabledLessons?.includes(l.id),
             ).length;

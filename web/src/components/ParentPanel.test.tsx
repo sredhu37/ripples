@@ -147,6 +147,54 @@ describe("ParentPanel", () => {
   });
 });
 
+describe("MapScreen and ParentPanel with a Paused lesson", () => {
+  it("leaves the lesson out everywhere but keeps its badge in progress", async () => {
+    const container = document.createElement("div");
+    document.body.appendChild(container);
+    const root = createRoot(container);
+    const progress: Progress = { ...emptyProgress(), name: "Child", badges: ["loans"] };
+    const paused = new Set(["loans"]);
+
+    await act(async () => {
+      root.render(
+        <MapScreen
+          progress={progress}
+          paused={paused}
+          returning={false}
+          onLang={() => {}}
+          onToggleMute={() => {}}
+          onOpenLesson={() => {}}
+          onParents={() => {}}
+          onTimeline={() => {}}
+        />,
+      );
+    });
+    expect(container.querySelectorAll(".trail .stop").length).toBe(LESSONS.length - 1);
+    expect(container.querySelectorAll(".shelf-row .medal").length).toBe(LESSONS.length - 1);
+    expect(container.textContent).not.toContain("Loans");
+    // Trail numbers stay consecutive: "Loans" was 6, "Banks" is now 6.
+    expect(container.querySelectorAll(".trail .stop")[5].textContent).toContain("6. Banks");
+    expect(progress.badges).toEqual(["loans"]);
+
+    await act(async () => {
+      root.render(
+        <MapScreen
+          progress={progress}
+          returning={false}
+          onLang={() => {}}
+          onToggleMute={() => {}}
+          onOpenLesson={() => {}}
+          onParents={() => {}}
+          onTimeline={() => {}}
+        />,
+      );
+    });
+    expect(container.querySelectorAll(".shelf-row .medal-on").length).toBe(1);
+    root.unmount();
+    container.remove();
+  });
+});
+
 describe("MapScreen with disabled lessons", () => {
   it("hides disabled lessons from trail and renumbers remaining stops consecutively", async () => {
     const container = document.createElement("div");

@@ -1,5 +1,14 @@
 import { expect, test } from "@playwright/test";
-import { steps } from "./evidence";
+import { seedProgress, steps } from "./evidence";
+
+test("map: a Paused lesson is not on the trail and numbers stay consecutive", async ({ page }) => {
+  await seedProgress(page);
+  await page.route("**/api/features", (route) => route.fulfill({ json: { "show-loans": false } }));
+  await page.goto("./");
+  const stops = page.locator(".trail button.place");
+  await expect(page.getByText("Loans", { exact: true })).toHaveCount(0);
+  await expect(stops.nth(5)).toContainText("6. Banks");
+});
 
 test("map: a new child names herself and sees the trail", async ({ page }) => {
   const step = await steps(page, "map");

@@ -1,4 +1,5 @@
 import { hasLesson } from "../content";
+import { NO_LESSONS } from "../features";
 import { LESSONS, getLessonTitle, LESSON_ORDER } from "../lessons";
 import { t } from "../i18n";
 import { lessonState, nextLessonId, type Lang, type Progress } from "../progress";
@@ -11,6 +12,8 @@ import { SpeechBubble } from "./SpeechBubble";
 interface Props {
   progress: Progress;
   returning: boolean;
+  /** Paused lessons (see `features.ts`). Default: none. */
+  paused?: ReadonlySet<string>;
   onLang: (l: Lang) => void;
   onToggleMute: () => void;
   onOpenLesson: (id: string) => void;
@@ -21,6 +24,7 @@ interface Props {
 export function MapScreen({
   progress,
   returning,
+  paused = NO_LESSONS,
   onLang,
   onToggleMute,
   onOpenLesson,
@@ -28,8 +32,12 @@ export function MapScreen({
   onTimeline,
 }: Props) {
   const { lang, name, muted } = progress;
-  const visibleLessons = LESSONS.filter((l) => !progress.disabledLessons?.includes(l.id));
-  const next = nextLessonId(progress, LESSON_ORDER);
+  // A Paused lesson is left out like a Disabled one; its badge stays in `progress`.
+  const order = LESSON_ORDER.filter((id) => !paused.has(id));
+  const visibleLessons = LESSONS.filter(
+    (l) => !paused.has(l.id) && !progress.disabledLessons?.includes(l.id),
+  );
+  const next = nextLessonId(progress, order);
   const greeting =
     next === null ? t(lang, "allDone") : t(lang, returning ? "welcomeBack" : "welcome", { name });
   const nextLesson = LESSONS.find((l) => l.id === next);
@@ -107,7 +115,7 @@ export function MapScreen({
 
       <ol className="trail">
         {visibleLessons.map((l, i) => {
-          const state = lessonState(progress, LESSON_ORDER, l.id);
+          const state = lessonState(progress, order, l.id);
           const open = state !== "locked";
           const title = getLessonTitle(l, lang);
           return (

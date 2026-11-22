@@ -6,6 +6,7 @@ import { ProfileScreen } from "./components/ProfileScreen";
 import { LegalScreen } from "./components/LegalScreen";
 import type { LegalPage } from "./legal/texts";
 import { getLesson } from "./content";
+import { NO_LESSONS, fetchFeatures, pausedLessons } from "./features";
 import { LessonRunner } from "./lesson/LessonRunner";
 import { LESSONS } from "./lessons";
 import { LessonPlaceholder } from "./components/LessonPlaceholder";
@@ -38,6 +39,7 @@ type Screen =
 
 export function App() {
   const [progress, setProgress] = useState<Progress>(() => loadProgress(window.localStorage));
+  const [paused, setPaused] = useState<ReadonlySet<string>>(NO_LESSONS);
   const [screen, setScreen] = useState<Screen>({ kind: "map" });
   // true when the name was already saved at load time ("welcome back")
   const [returning] = useState(() => progress.name !== "");
@@ -47,6 +49,18 @@ export function App() {
     setMuted(progress.muted);
     document.documentElement.lang = progress.lang;
   }, [progress]);
+
+  // Feature flags are read once at start. No API or a failed request: no Paused lessons.
+  useEffect(() => {
+    void fetchFeatures().then((features) =>
+      setPaused(
+        pausedLessons(
+          features,
+          LESSONS.map((l) => l.id),
+        ),
+      ),
+    );
+  }, []);
 
   useEffect(() => {
     stopSpeaking();
@@ -75,6 +89,7 @@ export function App() {
     return (
       <ParentPanel
         progress={progress}
+        paused={paused}
         onRestore={setProgress}
         onFacts={() => setScreen({ kind: "facts" })}
         onAccount={() =>
@@ -146,10 +161,17 @@ export function App() {
     return (
       <FactCards
         lang={progress.lang}
+        paused={paused}
         onLang={setLang}
         onClose={() => setScreen({ kind: "parents" })}
       />
     );
+  }
+
+  // A Paused lesson opened by a stored screen or link goes back to the trail.
+  if (screen.kind === "lesson" && paused.has(screen.id)) {
+    setScreen({ kind: "map" });
+    return null;
   }
 
   if (screen.kind === "lesson") {
@@ -183,6 +205,7 @@ export function App() {
     <MapScreen
       progress={progress}
       returning={returning}
+      paused={paused}
       onLang={setLang}
       onToggleMute={() => setProgress((p) => ({ ...p, muted: !p.muted }))}
       onOpenLesson={(id) => setScreen({ kind: "lesson", id })}

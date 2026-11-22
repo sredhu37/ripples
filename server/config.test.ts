@@ -27,6 +27,22 @@ describe("loadConfig", () => {
     expect(loadConfig({}).legal.address).toEqual([]);
   });
 
+  it("reads FEATURES as a JSON object of booleans, and {} when unset or empty", () => {
+    expect(loadConfig({}).features).toEqual({});
+    expect(loadConfig({ FEATURES: "" }).features).toEqual({});
+    expect(loadConfig({ FEATURES: '{"show-loans": false, "x": true}' }).features).toEqual({
+      "show-loans": false,
+      x: true,
+    });
+  });
+
+  it("refuses to start on invalid FEATURES and names it", () => {
+    expect(() => loadConfig({ FEATURES: "{nope" })).toThrow("FEATURES");
+    expect(() => loadConfig({ FEATURES: "[]" })).toThrow("FEATURES");
+    expect(() => loadConfig({ FEATURES: '{"show-loans": "no"}' })).toThrow(/FEATURES.*show-loans/);
+    expect(() => loadConfig({ FEATURES: '{"show-loans": 0}' })).toThrow(/FEATURES.*show-loans/);
+  });
+
   it("refuses to start in production without DATABASE_URL", () => {
     expect(() => loadConfig({ NODE_ENV: "production" })).toThrow("DATABASE_URL is required");
   });
