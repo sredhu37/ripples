@@ -37,7 +37,7 @@
   <!-- 2 ready -->
   <rect class="box" x="250" y="100" width="400" height="50" rx="8"/>
   <text x="450" y="123" text-anchor="middle" class="head">Sunny sets factory:ready</text>
-  <text x="450" y="139" text-anchor="middle" class="small">hourly scan or Run now starts it (5 slots)</text>
+  <text x="450" y="139" text-anchor="middle" class="small">scan starts it now (5 slots); also on close, hourly</text>
 
   <path class="line" d="M450 150 V180" marker-end="url(#a)"/>
 
@@ -130,7 +130,7 @@
   <rect class="side" x="60" y="880" width="900" height="160" rx="8"/>
   <text x="80" y="903" class="head">Side paths</text>
   <text x="80" y="924" class="small">factory-sync.yml: keeps board #2 in step with the factory: labels (one label per issue, close sets factory:done)</text>
-  <text x="80" y="942" class="small">factory-sweep.yml: hourly scan (fills 5 slots, continues stopped tickets, max 3), reconciles the board</text>
+  <text x="80" y="942" class="small">factory-sweep.yml: scan on Ready, issue close, hourly (fills 5 slots, continues stopped tickets, max 3); board reconcile</text>
   <text x="80" y="960" class="small">evidence-cleanup.yml: on PR close, cleans up the evidence branch and squashes commits</text>
   <text x="80" y="978" class="small">review suggestions: new issues in factory:triage, back to the top of this flow</text>
   <text x="80" y="996" class="small">every workflow step runs one script: .github/scripts/&lt;workflow&gt;/ (shared/ for common ones); agent prompts: .github/prompts/ + .claude/agents/</text>

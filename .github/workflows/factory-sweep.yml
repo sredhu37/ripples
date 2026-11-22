@@ -1,11 +1,12 @@
 name: factory-sweep
 
-# map-does: The scan: starts and continues factory tickets (up to MAX_PARALLEL), reconciles the board, sends the Monday triage reminder.
+# map-does: The scan: starts and continues factory tickets (up to MAX_PARALLEL) on Sunny's Ready label, an issue close, the schedule or Run now; reconciles the board; sends the Monday triage reminder.
 # map-next: `factory-build.yml`, `factory-review.yml`, `factory-gate.yml` (the station a ticket needs)
 
 # The factory's scan and safety net. Spec: docs/factory.md, sections Scan, Triage, Labels and board.
 #
-#   hourly at :07 (off GitHub's busy top of the hour), or workflow_dispatch ("Run now")
+#   factory:ready added by a person, an issue closed (a slot frees up), hourly at :07 (GitHub runs
+#   it only about 3 times a day, so the events do the real work), or workflow_dispatch ("Run now")
 #     scan:      the only starter of factory work. Free slots = MAX_PARALLEL minus tickets with an
 #                active factory run, minus local tickets (In progress or In review, label set by
 #                Sunny) touched in the last 2 hours. Fills them In review first (rerun the missing
@@ -24,6 +25,8 @@ name: factory-sweep
 # label events from it do not). FACTORY_TOKEN only for the board, in steps that run no agent.
 
 on:
+  issues:
+    types: [labeled, closed]
   schedule:
     - cron: "7 * * * *"
     - cron: "0 9 * * 1"
@@ -51,7 +54,11 @@ permissions: {}
 
 jobs:
   scan:
-    if: github.event.schedule == '7 * * * *' || inputs.task == 'scan' || inputs.task == 'all'
+    # Sunny's factory:ready label and a closed issue (a free slot) start the scan at once: GitHub runs
+    # the hourly schedule only about 3 times a day (#321). Labels set by GITHUB_TOKEN start nothing.
+    if: >-
+      github.event.schedule == '7 * * * *' || inputs.task == 'scan' || inputs.task == 'all' ||
+      (github.event_name == 'issues' && (github.event.action == 'closed' || github.event.label.name == 'factory:ready'))
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: factory

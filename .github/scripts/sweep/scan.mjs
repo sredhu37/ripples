@@ -14,7 +14,8 @@
 //     continues  scan continues since the ticket last entered Ready by hand
 //     pr         null, or { number, checks: "green" | "red" | "pending", checksDetail,
 //                summaryForHead, reviewStatus: "success" | "failure" | "error" | "none",
-//                rounds, gateForHead, updateForHead, conflict }
+//                rounds, gateForHead, updateForHead, conflict, checksDoneAt }
+//                checksDoneAt: when the head's last check run finished (ISO time, may be empty)
 //                updateForHead: the bot's factory-update marker names the head (gate/updated.sh)
 //                conflict: GitHub says the PR conflicts with its base
 //   Tickets in other columns (Needs human, for example) come in with only number and active, so
@@ -29,6 +30,7 @@ import { fileURLToPath } from "node:url";
 export const MAX_CONTINUES = 3;
 export const MAX_ROUNDS = 5;
 export const LOCAL_ACTIVE_HOURS = 2;
+export const REVIEW_GRACE_MINUTES = 10;
 const ORDER = { review: 0, progress: 1, ready: 2 };
 
 /** Is a local ticket still being worked on: issue or PR touched in the last 2 hours? */
@@ -52,7 +54,7 @@ export function slotsUsed(tickets, now) {
  * Returns { action: "build" | "fix" | "review" | "gate" | "merge" | "wait" | "none", reason }.
  * "wait" and "none" use no slot.
  */
-export function station(ticket) {
+export function station(ticket, now = new Date().toISOString()) {
   const pr = ticket.pr;
   if (!pr) return { action: "build", reason: "In review without an open factory PR" };
   if (pr.checks === "pending")
@@ -67,8 +69,16 @@ export function station(ticket) {
       action: "merge",
       reason: `PR #${pr.number}: brought up to date with main, not merged yet`,
     };
-  if (!pr.summaryForHead || pr.reviewStatus === "none")
+  if (!pr.summaryForHead || pr.reviewStatus === "none") {
+    // The workflow_run review starts by itself seconds after CI; step in only after a quiet wait.
+    const minutes = (Date.parse(now) - Date.parse(pr.checksDoneAt || now)) / 60_000;
+    if (minutes < REVIEW_GRACE_MINUTES)
+      return {
+        action: "wait",
+        reason: `PR #${pr.number}: checks green ${Math.floor(minutes)} min ago, the review starts by itself`,
+      };
     return { action: "review", reason: `PR #${pr.number}: checks green, no review for this head` };
+  }
   if (pr.reviewStatus === "failure") {
     if (pr.rounds < MAX_ROUNDS)
       return {
@@ -154,7 +164,9 @@ export function plan(state) {
       step = { kind: "start", action: "build", reason: "Ready" };
     } else {
       const s =
-        t.column === "progress" ? { action: "build", reason: "the build stopped" } : station(t);
+        t.column === "progress"
+          ? { action: "build", reason: "the build stopped" }
+          : station(t, now);
       if (s.action === "wait" || s.action === "none") {
         skip(s.reason);
         continue;
