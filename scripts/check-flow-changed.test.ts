@@ -9,7 +9,7 @@ describe("checkFlowChanged", () => {
   });
 
   it("fails when only a script changes", () => {
-    expect(checkFlowChanged([".github/scripts/gate.mjs"]).ok).toBe(false);
+    expect(checkFlowChanged([".github/scripts/gate/gate.mjs"]).ok).toBe(false);
   });
 
   it("passes when the diagram changes too", () => {

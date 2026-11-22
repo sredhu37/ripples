@@ -1,13 +1,14 @@
 import { execFileSync } from "node:child_process";
-import { chmodSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { chmodSync, copyFileSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 // pr-in-review.sh: a PR that closes an issue puts the issue in review. gh and the two helper
-// scripts are fakes; the helpers append their arguments (and the token they got) to $LOG.
+// scripts behind the real move.sh are fakes; the helpers append their arguments (and the token they got) to $LOG.
 
-const script = join(import.meta.dirname, "../.github/scripts/pr-in-review.sh");
+const script = join(import.meta.dirname, "../.github/scripts/pr-link/pr-in-review.sh");
+const moveScript = join(import.meta.dirname, "../.github/scripts/shared/move.sh");
 
 // $PR is "state<TAB>draft<TAB>head repo<TAB>base repo", $CLOSES is one "repo<TAB>number" per line,
 // $ISSUES maps number to "state<TAB>labels" as "n=state<TAB>labels" lines.
@@ -34,7 +35,10 @@ beforeEach(() => {
     join(dir, "board-move.sh"),
     '#!/usr/bin/env bash\necho "board $* token=$GH_TOKEN" >> "$LOG"\n',
   );
-  for (const f of ["gh", "label-set.sh", "board-move.sh"]) chmodSync(join(dir, f), 0o755);
+  // The real move.sh, so its label and board calls go to the two fakes.
+  copyFileSync(moveScript, join(dir, "move.sh"));
+  for (const f of ["gh", "label-set.sh", "board-move.sh", "move.sh"])
+    chmodSync(join(dir, f), 0o755);
   writeFileSync(join(dir, "log"), "");
 });
 

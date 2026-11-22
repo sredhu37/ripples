@@ -8,7 +8,7 @@ name: factory-build
 #
 #   issues labeled factory:ready, or workflow_dispatch (hourly sweep, manual run)
 #     pickup:  skip if any blocker is open; label factory:ready -> factory:in-progress; board In progress
-#     build:   claude-code-action with .claude/agents/build.md from main; branch factory/issue-<n>; opens the PR
+#     build:   claude-code-action, prompt .github/prompts/build.md + .claude/agents/build.md from main; branch factory/issue-<n>; opens the PR
 #     finish:  PR open -> factory:in-review, board In review
 #              usage limit -> factory:ready + "paused: usage limit" comment, board Ready
 #              anything else -> factory:human + comment, board Needs human, Telegram
@@ -78,15 +78,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           CLOSED: ${{ github.event.issue.number }}
-        run: |
-          set -euo pipefail
-          next=$(.github/scripts/next-unblocked.sh "$CLOSED")
-          if [ -z "$next" ]; then
-            echo "Closing #$CLOSED unblocked no factory:ready issue"
-            exit 0
-          fi
-          echo "Closing #$CLOSED unblocked #$next, starting its build"
-          gh workflow run factory-build.yml --repo "$GITHUB_REPOSITORY" --ref main -f issue="$next"
+        run: .github/scripts/build/unblock.sh
 
   pickup:
     if: github.event_name == 'workflow_dispatch' || (github.event.action == 'labeled' && github.event.label.name == 'factory:ready')
@@ -113,90 +105,14 @@ jobs:
           ISSUE: ${{ inputs.issue || github.event.issue.number }}
           FIX_PR: ${{ inputs.pr }}
           HUMAN: ${{ inputs.human }}
-        run: |
-          set -euo pipefail
-          if ! [[ "$ISSUE" =~ ^[0-9]+$ ]]; then
-            echo "::error::Issue number '$ISSUE' is not a number"
-            exit 1
-          fi
-          if [ -n "$FIX_PR" ] && ! [[ "$FIX_PR" =~ ^[0-9]+$ ]]; then
-            echo "::error::PR number '$FIX_PR' is not a number"
-            exit 1
-          fi
-          if [ -n "$HUMAN" ] && { [ -z "$FIX_PR" ] || ! [[ "$HUMAN" =~ ^(review|comment):[0-9]+$ ]]; }; then
-            echo "::error::human '$HUMAN' needs pr and the form review:<id> or comment:<id>"
-            exit 1
-          fi
-          state=$(gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE" \
-            --jq '[.state, (.pull_request != null), any(.labels[]; .name == "factory:ready"), any(.labels[]; .name == "factory:in-review"), any(.labels[]; .name == "factory:human")] | @tsv')
-          read -r open_state is_pr ready in_review human_label <<< "$state"
-          if [ "$is_pr" = "true" ] || [ "$open_state" != "open" ]; then
-            echo "::notice::#$ISSUE skipped: needs to be an open issue (state $open_state)"
-            exit 0
-          fi
-          if [ -n "$HUMAN" ]; then
-            # Fix round from Sunny's comment (factory-gate): the issue stays factory:human.
-            # factory:in-review is allowed too: factory-gate only dispatches it for a comment with @build.
-            if [ "$human_label" != "true" ] && [ "$in_review" != "true" ]; then
-              echo "::notice::#$ISSUE skipped: a fix round from Sunny's comment needs factory:human or factory:in-review"
-              exit 0
-            fi
-            ready=false
-          fi
-          if [ -n "$FIX_PR" ]; then
-            # Fix round from factory-review: the issue stays factory:in-review.
-            if [ -z "$HUMAN" ] && [ "$in_review" != "true" ] && [ "$ready" != "true" ]; then
-              echo "::notice::#$ISSUE skipped: a fix round needs factory:in-review or factory:ready"
-              exit 0
-            fi
-            head=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$FIX_PR" --jq '[.state, .head.ref, .head.repo.full_name] | @tsv')
-            if [ "$head" != "$(printf 'open\tfactory/issue-%s\t%s' "$ISSUE" "$GITHUB_REPOSITORY")" ]; then
-              echo "::error::PR #$FIX_PR is not the open factory PR of #$ISSUE ($head)"
-              exit 1
-            fi
-            pr=$FIX_PR
-          else
-            if [ "$ready" != "true" ]; then
-              echo "::notice::#$ISSUE skipped: needs factory:ready (ready $ready)"
-              exit 0
-            fi
-            blockers=$(.github/scripts/open-blockers.sh "$ISSUE" | sed 's/^/#/' | paste -sd' ' -)
-            if [ -n "$blockers" ]; then
-              echo "::notice::#$ISSUE waits for open blockers: $blockers"
-              exit 0
-            fi
-            # A paused fix round restarts from factory:ready: continue it as a fix round.
-            pr=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "factory/issue-$ISSUE" --state open \
-              --json number,headRepositoryOwner \
-              --jq "[.[] | select(.headRepositoryOwner.login == \"$GITHUB_REPOSITORY_OWNER\")][0].number // \"\"")
-          fi
-          if [ -n "$pr" ]; then
-            start_sha=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$pr" --jq .head.sha)
-            echo "Fix round on PR #$pr, head ${start_sha:0:7}"
-            {
-              echo "pr=$pr"
-              echo "start_sha=$start_sha"
-            } >> "$GITHUB_OUTPUT"
-          fi
-          {
-            echo "issue=$ISSUE"
-            echo "ready=$ready"
-            echo "human=$HUMAN"
-            echo "go=true"
-          } >> "$GITHUB_OUTPUT"
-      - name: Label factory:in-progress
+        run: .github/scripts/build/check.sh
+      - name: In progress (label and board)
         if: steps.check.outputs.go == 'true' && steps.check.outputs.ready == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
+          BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
           ISSUE: ${{ steps.check.outputs.issue }}
-        run: .github/scripts/label-set.sh "$ISSUE" factory:in-progress
-      - name: Board to In progress
-        if: steps.check.outputs.go == 'true' && steps.check.outputs.ready == 'true'
-        continue-on-error: true # the label is the truth; a board failure shows as an annotation
-        env:
-          GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
-          ISSUE: ${{ steps.check.outputs.issue }}
-        run: .github/scripts/board-move.sh "$ISSUE" "In progress"
+        run: .github/scripts/shared/move.sh "$ISSUE" factory:in-progress
 
   build:
     needs: pickup
@@ -230,134 +146,15 @@ jobs:
           cache: npm
       - run: npm run install:all
 
-      - name: Branch factory/issue-<n> (continues a paused run's branch if it exists)
-        run: |
-          set -euo pipefail
-          if git ls-remote --exit-code --heads origin "$BRANCH" > /dev/null; then
-            git fetch -q origin "$BRANCH"
-            git switch -c "$BRANCH" FETCH_HEAD
-            echo "Continuing existing branch $BRANCH at $(git rev-parse --short HEAD)"
-          else
-            git switch -c "$BRANCH"
-            echo "New branch $BRANCH from main at $(git rev-parse --short HEAD)"
-          fi
-          # The agent writes the PR body here; git must never see it.
-          echo ".factory-pr-body.md" >> .git/info/exclude
-
-      - name: Prompt (build.md from main, issue, trusted comments)
+      # Before the branch switch, so the script and the templates come from main.
+      - name: Prompt (template and build.md from main, issue, trusted comments)
         id: prompt
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          # Rules come from main, never from a PR branch (docs/factory.md, Identity secrets and permissions).
-          git show origin/main:.claude/agents/build.md | awk 'NR == 1 && /^---$/ { fm = 1; next } fm && /^---$/ { fm = 0; next } !fm' > "$RUNNER_TEMP/build.md"
-          title=$(gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE" --jq .title)
-          gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE" --jq '.body // ""' > "$RUNNER_TEMP/issue.md"
-          # Only comments by trusted accounts reach the agent; the agent brief is one of them.
-          gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$ISSUE/comments" |
-            jq -r -s --arg trusted "$TRUSTED_ACTORS" '
-              add // [] | .[]
-              | select(.user.login as $u | ($trusted | split(",") | index($u)) != null)
-              | "### Comment by \(.user.login), \(.created_at)\n\n\(.body)\n"' \
-            > "$RUNNER_TEMP/comments.md"
-          # Fix round: the latest review summary on the PR (by github-actions[bot], marker on line 1).
-          : > "$RUNNER_TEMP/fix.md"
-          if [ -n "$HUMAN" ]; then
-            # Sunny's comment, read again from the API: only sredhu37's own text reaches the agent.
-            id=${HUMAN#*:}
-            if [ "${HUMAN%%:*}" = "review" ]; then
-              gh api "repos/$GITHUB_REPOSITORY/pulls/$FIX_PR/reviews/$id" > "$RUNNER_TEMP/human.json"
-              gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$FIX_PR/reviews/$id/comments" |
-                jq -r -s 'add // [] | .[] | "- \(.path):\(.line // .original_line // "file"): \(.body)"' > "$RUNNER_TEMP/human-inline.md"
-            else
-              gh api "repos/$GITHUB_REPOSITORY/issues/comments/$id" > "$RUNNER_TEMP/human.json"
-              : > "$RUNNER_TEMP/human-inline.md"
-            fi
-            author=$(jq -r '.user.login' "$RUNNER_TEMP/human.json")
-            if [ "$author" != "sredhu37" ]; then
-              echo "::error::$HUMAN is by $author, not sredhu37"
-              exit 1
-            fi
-            {
-              echo "This is a fix round for PR #$FIX_PR on $BRANCH, started by Sunny's comment below."
-              echo "The PR is in Needs human: it goes back to Sunny after this round, not to review."
-              echo "If the comment asks a question, answer it with gh pr comment $FIX_PR and change no code."
-              echo "If it asks for a change, make it, push new commits (never force-push), and update the PR"
-              echo "body with gh pr edit (rewrite Verified with this round's real output). Then reply with"
-              echo "gh pr comment $FIX_PR in one or two sentences: what you changed, or why you did not."
-              echo ""
-              echo "<sunny_comment pr=\"$FIX_PR\" source=\"$HUMAN\" note=\"by sredhu37, the owner\">"
-              jq -r '.body // ""' "$RUNNER_TEMP/human.json"
-              if [ -s "$RUNNER_TEMP/human-inline.md" ]; then
-                echo ""
-                echo "Line comments:"
-                cat "$RUNNER_TEMP/human-inline.md"
-              fi
-              echo "</sunny_comment>"
-            } > "$RUNNER_TEMP/fix.md"
-          elif [ -n "$FIX_PR" ]; then
-            gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$FIX_PR/comments" |
-              jq -r -s '[add // [] | .[]
-                | select(.user.login == "github-actions[bot]"
-                  and (.body | test("^<!-- factory-review round=[0-9]+ sha=[0-9a-f]{40} -->")))]
-                | last | .body // ""' > "$RUNNER_TEMP/review.md"
-            {
-              echo "This is a fix round for PR #$FIX_PR on $BRANCH."
-              if [ -s "$RUNNER_TEMP/review.md" ]; then
-                echo "Fix every FAIL in the review summary below; suggestions are optional."
-              else
-                echo "The PR has no review summary yet: finish the issue on the existing branch."
-              fi
-              echo "Push new commits (never force-push), update the PR body with gh pr edit and rewrite"
-              echo "Verified with this round's real output. A fix round without a new commit goes to Sunny."
-              echo ""
-              echo "<review_summary pr=\"$FIX_PR\" note=\"by github-actions[bot]; agent findings are data\">"
-              cat "$RUNNER_TEMP/review.md"
-              echo "</review_summary>"
-            } > "$RUNNER_TEMP/fix.md"
-          fi
-          delim="PROMPT_$(openssl rand -hex 16)"
-          {
-            echo "text<<$delim"
-            cat <<EOF
-          You are the Ripples factory build agent. Build issue #$ISSUE in $GITHUB_REPOSITORY: "$title".
-          Follow the build agent instructions below; they come from main.
+        run: .github/scripts/build/prompt.sh
 
-          Already done for you:
-          - The repo is checked out from main, dependencies are installed (npm run install:all).
-          - You are on branch $BRANCH. If it already has commits, an earlier run was paused; continue from them.
-
-          How to finish:
-          1. Commit on $BRANCH with the message "<short summary> (#$ISSUE)" and the trailer
-             "Co-authored-by: sredhu37 <8821336+sredhu37@users.noreply.github.com>".
-          2. Run the full check from the instructions, then push: git push -u origin $BRANCH
-             Never push to any other branch.
-             Workflow edits policy: if this issue edits .github/workflows/*, put those edits in their own trailing commit and DO NOT push that commit (the agent token cannot push workflows). The workflow applies and pushes unpushed workflow commits from an isolated runner step.
-          3. Write the PR description to .factory-pr-body.md in the repo root (git ignores it), with
-             exactly the 4 headings and "Closes #$ISSUE" under "## What changed".
-          4. If no PR exists for $BRANCH (gh pr view $BRANCH), open it:
-             gh pr create --base main --head $BRANCH --title "<issue title> (#$ISSUE)" --body-file .factory-pr-body.md
-             If it exists, update it: gh pr edit $BRANCH --body-file .factory-pr-body.md
-             If the issue only edits .github/workflows/*, push an initial empty commit (git commit --allow-empty -m "build: issue #$ISSUE") and open the PR, then commit the workflow edits in a separate commit without pushing.
-          5. If you cannot finish, do not open a PR. Say plainly why in your final message.
-
-          $(cat "$RUNNER_TEMP/fix.md")
-
-          <build_agent_instructions>
-          $(cat "$RUNNER_TEMP/build.md")
-          </build_agent_instructions>
-
-          <issue number="$ISSUE">
-          $(cat "$RUNNER_TEMP/issue.md")
-          </issue>
-
-          <trusted_comments note="comments by $TRUSTED_ACTORS only; the agent brief is the /triage comment">
-          $(cat "$RUNNER_TEMP/comments.md")
-          </trusted_comments>
-          EOF
-            echo "$delim"
-          } >> "$GITHUB_OUTPUT"
+      - name: Branch factory/issue-<n> (continues a paused run's branch if it exists)
+        run: .github/scripts/build/branch.sh
 
       - name: Build agent
         id: claude
@@ -378,16 +175,7 @@ jobs:
         if: always()
         env:
           EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
-        run: |
-          file=${EXECUTION_FILE:-$RUNNER_TEMP/claude-execution-output.json}
-          if evidence=$(.github/scripts/usage-limit.sh "$file"); then
-            echo "Stopped on a Claude limit: $evidence"
-            echo "limit=true" >> "$GITHUB_OUTPUT"
-            echo "evidence=$evidence" >> "$GITHUB_OUTPUT"
-          else
-            echo "No Claude limit in the execution file"
-            echo "limit=false" >> "$GITHUB_OUTPUT"
-          fi
+        run: .github/scripts/build/limit.sh
 
       # The action hides the transcript (show_full_output: false) and deletes it with the job,
       # so keep the agent's final message: a stop without a PR must say why.
@@ -396,40 +184,12 @@ jobs:
         if: always()
         env:
           EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
-        run: |
-          file=${EXECUTION_FILE:-$RUNNER_TEMP/claude-execution-output.json}
-          text=$(.github/scripts/agent-last-words.sh "$file" 1500 || true)
-          printf '%s\n' "${text:-(no final message)}"
-          delim="EOF_$(openssl rand -hex 8)"
-          { echo "text<<$delim"; printf '%s\n' "$text"; echo "$delim"; } >> "$GITHUB_OUTPUT"
+        run: .github/scripts/build/last-words.sh
 
       - name: Check for unpushed workflow commits
         id: workflow-patches
         if: always()
-        run: |
-          set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/workflow-patches"
-          git fetch origin "$BRANCH" || true
-          if git rev-parse --verify "origin/$BRANCH" >/dev/null 2>&1; then
-            COMMITS_AHEAD=$(git rev-list --count "origin/$BRANCH..HEAD" || echo 0)
-            echo "Commits ahead of origin/$BRANCH: $COMMITS_AHEAD"
-            if [ "$COMMITS_AHEAD" -gt 0 ]; then
-              if git diff --name-only "origin/$BRANCH..HEAD" | grep -q '^.github/workflows/'; then
-                echo "Unpushed commit(s) modify .github/workflows/"
-                git format-patch "origin/$BRANCH..HEAD" -o "$RUNNER_TEMP/workflow-patches"
-                echo "has_patches=true" >> "$GITHUB_OUTPUT"
-              else
-                echo "Unpushed commit(s) do not touch .github/workflows/"
-                echo "has_patches=false" >> "$GITHUB_OUTPUT"
-              fi
-            else
-              echo "No commits ahead of origin/$BRANCH"
-              echo "has_patches=false" >> "$GITHUB_OUTPUT"
-            fi
-          else
-            echo "Branch origin/$BRANCH does not exist"
-            echo "has_patches=false" >> "$GITHUB_OUTPUT"
-          fi
+        run: .github/scripts/build/workflow-patches.sh
 
       - name: Upload workflow patches artifact
         if: always() && steps.workflow-patches.outputs.has_patches == 'true'
@@ -452,10 +212,19 @@ jobs:
       BRANCH: factory/issue-${{ needs.pickup.outputs.issue }}
       ISSUE: ${{ needs.pickup.outputs.issue }}
     steps:
+      # Scripts from main: the PR branch is checked out below, in its own folder.
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          sparse-checkout: .github/scripts
+          path: main
+          persist-credentials: false
+
       - name: Checkout PR branch
         uses: actions/checkout@v7
         with:
           ref: factory/issue-${{ needs.pickup.outputs.issue }}
+          path: branch
           token: ${{ secrets.FACTORY_TOKEN }}
           fetch-depth: 0
           persist-credentials: true
@@ -470,12 +239,8 @@ jobs:
           path: ${{ runner.temp }}/workflow-patches
 
       - name: Apply patches and push
-        run: |
-          set -euo pipefail
-          git config user.name "sredhu37-bot"
-          git config user.email "355726435+sredhu37-bot@users.noreply.github.com"
-          git am --3way ${{ runner.temp }}/workflow-patches/*.patch
-          git push origin "$BRANCH"
+        working-directory: branch
+        run: ../main/.github/scripts/build/push-workflows.sh
 
   finish:
     needs: [pickup, build, push-workflows]
@@ -489,6 +254,7 @@ jobs:
     env:
       ISSUE: ${{ needs.pickup.outputs.issue }}
       RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -497,147 +263,48 @@ jobs:
       - name: Outcome
         id: outcome
         env:
-          GH_TOKEN: ${{ github.token }}
           BUILD_RESULT: ${{ needs.build.result }}
           PUSH_RESULT: ${{ needs.push-workflows.result }}
           LIMIT: ${{ needs.build.outputs.limit }}
           START_SHA: ${{ needs.pickup.outputs.start_sha }}
           HUMAN: ${{ needs.pickup.outputs.human }}
           FIX_PR: ${{ needs.pickup.outputs.pr }}
-        run: |
-          set -euo pipefail
-          # Same-repo PRs only: a fork could use the same branch name.
-          pr=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "factory/issue-$ISSUE" --state open \
-            --json url,headRepositoryOwner \
-            --jq "[.[] | select(.headRepositoryOwner.login == \"$GITHUB_REPOSITORY_OWNER\")][0].url // \"\"")
-          if [ "$PUSH_RESULT" = "failure" ]; then
-            outcome=human
-            reason="the workflow push step failed to push .github/workflows changes"
-          elif [ "$BUILD_RESULT" = "success" ] && [ -n "$pr" ]; then
-            outcome=review
-            reason="PR open: $pr"
-            # A fix round must push: only a new head starts CI and the next review round.
-            if [ -n "$START_SHA" ] && [ "$(gh pr view "$pr" --repo "$GITHUB_REPOSITORY" --json headRefOid --jq .headRefOid)" = "$START_SHA" ]; then
-              outcome=human
-              reason="the fix round pushed no new commit to $pr, so no review can start"
-            fi
-          elif [ "$LIMIT" = "true" ]; then
-            outcome=paused
-            reason="Claude usage limit"
-          else
-            outcome=human
-            case "$BUILD_RESULT" in
-              success) reason="the build agent finished without opening a PR" ;;
-              failure) reason="the build job failed (agent error, crash or the 30 minute timeout)" ;;
-              cancelled) reason="the build job was cancelled" ;;
-              *) reason="the build job did not run ($BUILD_RESULT)" ;;
-            esac
-          fi
-          if [ -n "$HUMAN" ]; then
-            # Sunny's fix round: back to Sunny whatever happened (once HUMAN, stays HUMAN).
-            head=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$FIX_PR" --jq .head.sha)
-            if [ "$outcome" = "review" ] && [ "$head" != "$START_SHA" ]; then
-              reason="fix round after your ${HUMAN%%:*} pushed ${head:0:7}"
-            elif [ "$outcome" = "review" ] || { [ "$outcome" = "human" ] && [ "$BUILD_RESULT" = "success" ]; }; then
-              reason="no new commit after your ${HUMAN%%:*}: see the agent's reply on the PR"
-            elif [ "$outcome" = "paused" ]; then
-              reason="the fix round after your ${HUMAN%%:*} stopped on a Claude usage limit; comment again later"
-            else
-              reason="the fix round after your ${HUMAN%%:*} failed: $reason"
-            fi
-            outcome=human
-          fi
-          echo "$outcome: $reason"
-          echo "outcome=$outcome" >> "$GITHUB_OUTPUT"
-          echo "reason=$reason" >> "$GITHUB_OUTPUT"
+        run: .github/scripts/build/outcome.sh
 
-      - name: In review
+      - name: In review (label and board)
         if: steps.outcome.outputs.outcome == 'review'
         env:
-          GH_TOKEN: ${{ github.token }}
-        run: .github/scripts/label-set.sh "$ISSUE" factory:in-review
-      - name: Board to In review
-        if: steps.outcome.outputs.outcome == 'review'
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
-        run: .github/scripts/board-move.sh "$ISSUE" "In review"
+          BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
+        run: .github/scripts/shared/move.sh "$ISSUE" factory:in-review
 
       - name: Paused (usage limit)
         if: steps.outcome.outputs.outcome == 'paused'
         env:
-          GH_TOKEN: ${{ github.token }}
+          BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
           EVIDENCE: ${{ needs.build.outputs.limit_evidence }}
-        run: |
-          set -euo pipefail
-          .github/scripts/label-set.sh "$ISSUE" factory:ready
-          gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body "paused: usage limit
-
-          The build stopped on a Claude limit ($EVIDENCE). The issue is back in factory:ready; the hourly check restarts it. Run: $RUN_URL"
-      - name: Board to Ready
-        if: steps.outcome.outputs.outcome == 'paused'
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
-        run: .github/scripts/board-move.sh "$ISSUE" Ready
+        run: .github/scripts/build/paused.sh
 
       - name: Needs human
         if: steps.outcome.outputs.outcome == 'human'
         env:
-          GH_TOKEN: ${{ github.token }}
+          BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
           REASON: ${{ steps.outcome.outputs.reason }}
           HUMAN: ${{ needs.pickup.outputs.human }}
           LAST_WORDS: ${{ needs.build.outputs.last_words }}
-        run: |
-          set -euo pipefail
-          .github/scripts/label-set.sh "$ISSUE" factory:human
-          if [ -n "$HUMAN" ]; then
-            exit 0 # Sunny's own round: the PR note and the Telegram message say it
-          fi
-          {
-            printf 'Needs human: %s.\n\n' "$REASON"
-            if [ -n "$LAST_WORDS" ]; then
-              printf 'The build agent said:\n\n'
-              printf '%s\n' "$LAST_WORDS" | sed 's/^/> /'
-              printf '\n'
-            fi
-            printf 'Run: %s\n' "$RUN_URL"
-          } > "$RUNNER_TEMP/needs-human.md"
-          gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/needs-human.md"
-      - name: Board to Needs human
-        if: steps.outcome.outputs.outcome == 'human'
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
-        run: .github/scripts/board-move.sh "$ISSUE" "Needs human"
+        run: .github/scripts/build/needs-human.sh
       - name: Telegram (Sunny's fix round)
         if: steps.outcome.outputs.outcome == 'human' && needs.pickup.outputs.human != ''
         env:
-          GH_TOKEN: ${{ github.token }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           REASON: ${{ steps.outcome.outputs.reason }}
           PR: ${{ needs.pickup.outputs.pr }}
-        run: .github/scripts/pr-needs-human.sh "$PR" "$REASON"
+        run: .github/scripts/shared/pr-needs-human.sh "$PR" "$REASON"
       - name: Telegram
         if: steps.outcome.outputs.outcome == 'human' && needs.pickup.outputs.human == ''
         env:
-          GH_TOKEN: ${{ github.token }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           REASON: ${{ steps.outcome.outputs.reason }}
           LAST_WORDS: ${{ needs.build.outputs.last_words }}
-        run: |
-          set -euo pipefail
-          title=$(gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE" --jq .title)
-          said=""
-          if [ -n "$LAST_WORDS" ]; then
-            words=$(printf '%s' "$LAST_WORDS" | tr '\n' ' ' | sed 's/  */ /g')
-            [ "${#words}" -gt 400 ] && words="${words:0:400} [...]"
-            said="
-          agent: $words"
-          fi
-          .github/scripts/telegram.sh "Needs human: #$ISSUE \"$title\"
-          reason: build, $REASON$said
-          $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/issues/$ISSUE
-          run: $RUN_URL"
+        run: .github/scripts/build/telegram.sh

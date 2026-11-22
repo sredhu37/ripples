@@ -7,7 +7,7 @@ import {
   plantedResult,
   summarize,
   validate,
-} from "../.github/scripts/review.mjs";
+} from "../.github/scripts/shared/review.mjs";
 
 // Shaped like the claude-code-action execution file: the Agent SDK message list.
 function execution(finalAnswer: string, extra: Record<string, unknown> = {}) {

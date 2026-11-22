@@ -86,7 +86,7 @@ triage ─► ready ─► in-progress ─► in-review ─► done
 
 Deterministic checks run before any review agent. A failure goes straight back to the build agent and uses no review round.
 
-All of them except CodeQL run in one workflow, `pr-checks.yml`, one job per required check of the `main` ruleset: `ci`, `lint`, `audit`, `lighthouse`, `spec-rule`, `flow-rule`, `demo`. The job names are the check names, so renaming a job breaks the ruleset and `checks-green.sh`.
+All of them except CodeQL run in one workflow, `pr-checks.yml`, one job per required check of the `main` ruleset: `ci`, `lint`, `audit`, `lighthouse`, `spec-rule`, `flow-rule`, `demo`. The job names are the check names, so renaming a job breaks the ruleset and `gate/checks-green.sh`.
 
 | Check                   | Tool                                                                | Default settings                                                                                                                                         |
 | ----------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -163,7 +163,7 @@ review passed ──► any changed file on the risky list? ──yes──► f
 **How `factory-gate.yml` runs it:**
 
 - `factory-review.yml` dispatches it with `pr` after a PASS. It checks: a factory PR, issue in `factory:in-review`, the head's review summary is a PASS and status `factory-review` is green, every required check is green, no gate comment for the head yet.
-- Risky list: the PR's changed files, old names of renamed files too, against `.github/gate-paths.txt` from main (`gate.mjs match`: `*` inside one folder, `**` any depth, anything else an exact path). One hit is HUMAN; the gate agent does not run.
+- Risky list: the PR's changed files, old names of renamed files too, against `.github/gate-paths.txt` from main (`gate/gate.mjs match`: `*` inside one folder, `**` any depth, anything else an exact path). One hit is HUMAN; the gate agent does not run.
 - Gate agent: `.claude/agents/gate.md` from main, Sonnet, 10 turns, `Read`, `Grep`, `Glob` only, a read-only `GITHUB_TOKEN`. It gets the diff, the PR description, the review summary and the evidence screenshots. Its final json `{decision, reason}` decides; a missing or invalid block is HUMAN.
 - One gate comment per head, marker `<!-- factory-gate sha=<sha> -->`: risks (risky files, or the agent's analysis), decision, reason.
 - MERGE: the head must be unchanged and every check green, then `sredhu37-bot` squash-merges with `FACTORY_TOKEN` (a `GITHUB_TOKEN` merge starts no push workflow). `Closes #n` closes the issue; the gate sets `factory:done` and moves the card to Done. A refused merge is HUMAN.
@@ -209,30 +209,53 @@ GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`
 | `factory-pr-link.yml` | `pull_request_target: opened, reopened, ready_for_review`                             | a hand-opened PR with `Closes #n` puts #n in `factory:in-review`, card In review                                |
 | `pr-checks.yml`       | `pull_request`                                                                        | jobs `ci`, `lint`, `audit`, `lighthouse`, `spec-rule`, `flow-rule`, `demo` (specs, evidence branch and comment) |
 
-Shared scripts in `.github/scripts/`, for every factory workflow:
+**Workflows only wire, scripts do the work** ([#311](https://github.com/sredhu37/ripples/issues/311), decision 7). A workflow holds triggers, permissions, secrets and timeouts; every `run:` step is one script call. Each script names its inputs (env) and outputs in its header and also runs from a terminal with `GH_TOKEN` and `REPO` (or `GITHUB_REPOSITORY`) set; when `GITHUB_OUTPUT` is unset the step outputs are printed.
 
-| Script                 | Does                                                                                           | Token                                       |
-| ---------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| `label-set.sh`         | gives an issue exactly one `factory:` label                                                    | `GITHUB_TOKEN`                              |
-| `board-move.sh`        | moves the issue's card to a Status column, adds the card if missing                            | `FACTORY_TOKEN` (no agent)                  |
-| `pr-in-review.sh`      | the issues a hand-opened PR closes: label `factory:in-review`, card In review                  | `GITHUB_TOKEN` + `FACTORY_TOKEN` (no agent) |
-| `telegram.sh`          | sends a factory bot message to Sunny                                                           | `TELEGRAM_TOKEN` + chat id                  |
-| `open-blockers.sh`     | lists an issue's open blockers                                                                 | `GITHUB_TOKEN`                              |
-| `next-unblocked.sh`    | oldest `factory:ready` issue a closed issue unblocked                                          | `GITHUB_TOKEN`                              |
-| `usage-limit.sh`       | did a claude-code-action run stop on a Claude limit (execution file)                           | none                                        |
-| `agent-last-words.sh`  | the agent's final message and refused tools, for a stop without a PR (issue comment, Telegram) | none                                        |
-| `build-runs-active.sh` | lists the `factory-build` runs that have not finished                                          | `GITHUB_TOKEN`                              |
-| `sweep-restart.sh`     | oldest unblocked `factory:ready` issue to restart, when no build runs                          | `GITHUB_TOKEN`                              |
-| `sweep-stuck.sh`       | `factory:in-progress` issues with no build run for over 45 minutes                             | `GITHUB_TOKEN`                              |
-| `triage-reminder.sh`   | the triage reminder text, empty when no issue waits                                            | `GITHUB_TOKEN`                              |
-| `board-reconcile.sh`   | moves every card to its label's column (`DRY_RUN=1` only prints)                               | `FACTORY_TOKEN` (no agent)                  |
-| `review-gate.sh`       | factory PR, current head, required checks green, round (max 5)                                 | `GITHUB_TOKEN`                              |
-| `review.mjs`           | parses review agent json; writes the round summary and suggestions                             | none                                        |
-| `gate-check.sh`        | should the gate act: modes gate, approve, fix; risky files                                     | `GITHUB_TOKEN`                              |
-| `gate.mjs`             | risky list matcher; parses the gate agent json; writes the gate comment                        | none                                        |
-| `checks-green.sh`      | are a commit's required checks green; waits while they run                                     | `GITHUB_TOKEN`                              |
-| `gate-merge.sh`        | squash-merges a PR if its head is unchanged and checks are green                               | `FACTORY_TOKEN` (no agent)                  |
-| `pr-needs-human.sh`    | Telegram "Needs human" for a PR with the evidence video link                                   | `TELEGRAM_TOKEN` + chat id                  |
+```
+.github/scripts/
+  shared/            used by two or more workflows
+  build/ review/ gate/ sweep/ sync/ pr-link/ checks/ evidence-cleanup/
+                     one folder per workflow (checks = pr-checks.yml)
+.github/prompts/     prompt templates per station, filled by <station>/prompt.sh
+.claude/agents/      agent rules (also Claude Code subagents in a local session)
+```
+
+- **Prompts:** an agent's prompt is a template in `.github/prompts/` (where things are, turns, how to finish) plus its rules in `.claude/agents/<agent>.md`, both from main. `shared/render.mjs` fills `${NAME}` from env or from the file in `NAME_FILE`, in one pass, so issue and PR text is never scanned for placeholders; a name without a value fails the run. The templates cannot sit in `.claude/agents/`: Claude Code reads that folder and its subfolders as subagents. `.prettierignore` keeps the formatter off them, so the agent gets the text as written.
+- **Moving a ticket:** `shared/move.sh <issue> <label>` sets the `factory:` label (`GH_TOKEN`) and moves the card to its column (`BOARD_TOKEN`, `FACTORY_TOKEN` in workflows) in one call. A failed card move only warns; the hourly reconcile puts it right.
+- The build job runs `build/prompt.sh` before it switches to the PR branch, so the script and templates come from main.
+
+| Script                       | Does                                                                                           | Token                                       |
+| ---------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| `shared/move.sh`             | label and card in one call                                                                     | `GITHUB_TOKEN` + `FACTORY_TOKEN` (no agent) |
+| `shared/label-set.sh`        | gives an issue exactly one `factory:` label                                                    | `GITHUB_TOKEN`                              |
+| `shared/board-move.sh`       | moves the issue's card to a Status column, adds the card if missing                            | `FACTORY_TOKEN` (no agent)                  |
+| `shared/render.mjs`          | fills a prompt template                                                                        | none                                        |
+| `shared/output.sh`           | writes a step output that spans lines                                                          | none                                        |
+| `shared/telegram.sh`         | sends a factory bot message to Sunny                                                           | `TELEGRAM_TOKEN` + chat id                  |
+| `shared/pr-needs-human.sh`   | Telegram "Needs human" for a PR with the evidence video link                                   | `TELEGRAM_TOKEN` + chat id                  |
+| `shared/open-blockers.sh`    | lists an issue's open blockers                                                                 | `GITHUB_TOKEN`                              |
+| `shared/usage-limit.sh`      | did a claude-code-action run stop on a Claude limit (execution file)                           | none                                        |
+| `shared/review.mjs`          | parses review agent json; writes the round summary and suggestions                             | none                                        |
+| `shared/tool-list.sh`        | an agent's tool list in the job summary                                                        | none                                        |
+| `build/check.sh`             | pickup: ready (or a fix round), open and unblocked                                             | `GITHUB_TOKEN`                              |
+| `build/prompt.sh`            | the build prompt: template, `build.md`, issue, trusted comments, fix-round text                | `GITHUB_TOKEN`                              |
+| `build/next-unblocked.sh`    | oldest `factory:ready` issue a closed issue unblocked                                          | `GITHUB_TOKEN`                              |
+| `build/agent-last-words.sh`  | the agent's final message and refused tools, for a stop without a PR (issue comment, Telegram) | none                                        |
+| `build/outcome.sh`           | review, paused or human, with the reason                                                       | `GITHUB_TOKEN`                              |
+| `review/check.sh`            | factory PR, current head, required checks green, round (max 5)                                 | `GITHUB_TOKEN`                              |
+| `review/prompt.sh`           | a review agent's prompt                                                                        | `GITHUB_TOKEN`                              |
+| `gate/check.sh`              | should the gate act: modes gate, approve, fix; risky files                                     | `GITHUB_TOKEN`                              |
+| `gate/gate.mjs`              | risky list matcher; parses the gate agent json; writes the gate comment                        | none                                        |
+| `gate/checks-green.sh`       | are a commit's required checks green; waits while they run                                     | `GITHUB_TOKEN`                              |
+| `gate/merge.sh`              | squash-merges a PR if its head is unchanged and checks are green                               | `FACTORY_TOKEN` (no agent)                  |
+| `sweep/restart.sh`           | oldest unblocked `factory:ready` issue to restart, when no build runs                          | `GITHUB_TOKEN`                              |
+| `sweep/stuck.sh`             | `factory:in-progress` issues with no build run for over 45 minutes                             | `GITHUB_TOKEN`                              |
+| `sweep/build-runs-active.sh` | lists the `factory-build` runs that have not finished                                          | `GITHUB_TOKEN`                              |
+| `sweep/board-reconcile.sh`   | moves every card to its label's column (`DRY_RUN=1` only prints)                               | `FACTORY_TOKEN` (no agent)                  |
+| `sweep/triage-reminder.sh`   | the triage reminder text, empty when no issue waits                                            | `GITHUB_TOKEN`                              |
+| `pr-link/pr-in-review.sh`    | the issues a hand-opened PR closes: label `factory:in-review`, card In review                  | `GITHUB_TOKEN` + `FACTORY_TOKEN` (no agent) |
+
+The other scripts are the steps of one workflow each (for example `build/paused.sh`, `review/suggestions.sh`, `checks/evidence-push.sh`); their headers say what they do.
 
 **Claude account:** 2-week pilot on Sunny's Pro token (`CLAUDE_CODE_OAUTH_TOKEN`), Claude Sonnet 5.5. Measure tokens per issue and how often Sunny is locked out, then choose an API key with a spend cap, a bigger plan, or Pro. Switch to an API key before porting to `repo-template`.
 

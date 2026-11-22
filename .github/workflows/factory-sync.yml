@@ -47,10 +47,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           ISSUE: ${{ github.event.issue.number }}
           ACTION: ${{ github.event.action }}
-        run: |
-          set -euo pipefail
-          if [ "$ACTION" = closed ]; then label=factory:done; else label=factory:triage; fi
-          .github/scripts/label-set.sh "$ISSUE" "$label"
+        run: .github/scripts/sync/close-reopen.sh
 
       - name: One factory label per issue
         if: github.event.action == 'labeled'
@@ -58,46 +55,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           ISSUE: ${{ github.event.issue.number }}
           ADDED: ${{ github.event.label.name }}
-        run: |
-          set -euo pipefail
-          # Read the labels now: if the added label is already gone (the build swapped it), do nothing.
-          # Only labels seen now are removed, so a label another run adds meanwhile survives.
-          labels=$(gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE/labels" --jq '.[].name | select(startswith("factory:"))')
-          if ! printf '%s\n' "$labels" | grep -qxF "$ADDED"; then
-            echo "$ADDED is no longer on #$ISSUE; nothing to remove"
-            exit 0
-          fi
-          for old in $labels; do
-            [ "$old" = "$ADDED" ] && continue
-            gh api -X DELETE "repos/$GITHUB_REPOSITORY/issues/$ISSUE/labels/$old" --silent || true
-            echo "Removed $old from #$ISSUE (kept $ADDED)"
-          done
+        run: .github/scripts/sync/one-label.sh
 
       - name: Move the card to the label's column
         env:
           GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
           LABEL_TOKEN: ${{ github.token }}
           ISSUE: ${{ github.event.issue.number }}
-        run: |
-          set -euo pipefail
-          # Read the state and label now, not from the event: another run may have swapped it since.
-          state=$(GH_TOKEN=$LABEL_TOKEN gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE" --jq .state)
-          label=$(GH_TOKEN=$LABEL_TOKEN gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE/labels" \
-            --jq '[.[].name | select(startswith("factory:"))] | first // ""')
-          if [ "$state" = closed ]; then
-            label=factory:done
-          fi
-          case "$label" in
-            factory:triage) column=Backlog ;;
-            factory:ready) column=Ready ;;
-            factory:in-progress) column="In progress" ;;
-            factory:in-review) column="In review" ;;
-            factory:human) column="Needs human" ;;
-            factory:done) column=Done ;;
-            *)
-              echo "Issue #$ISSUE has no factory: label; card left as is."
-              exit 0
-              ;;
-          esac
-          .github/scripts/board-move.sh "$ISSUE" "$column"
-          echo "Issue #$ISSUE ($label) -> $column"
+        run: .github/scripts/sync/card.sh

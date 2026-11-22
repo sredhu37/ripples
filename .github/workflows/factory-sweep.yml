@@ -64,59 +64,18 @@ jobs:
           persist-credentials: false
 
       - name: Restart a paused or missed factory:ready issue
-        run: |
-          set -euo pipefail
-          issue=$(.github/scripts/sweep-restart.sh)
-          if [ -z "$issue" ]; then
-            echo "Nothing to restart"
-            exit 0
-          fi
-          echo "::notice::Restarting #$issue: dispatching factory-build"
-          gh workflow run factory-build.yml --repo "$GITHUB_REPOSITORY" --ref main -f issue="$issue"
+        run: .github/scripts/sweep/dispatch-restart.sh
 
       - name: Find builds stuck in factory:in-progress
         id: stuck
-        run: |
-          set -euo pipefail
-          stuck=$(.github/scripts/sweep-stuck.sh)
-          if [ -z "$stuck" ]; then
-            echo "No stuck build"
-            exit 0
-          fi
-          echo "::warning::Stuck in factory:in-progress (issue, minutes): $(echo "$stuck" | paste -sd';' -)"
-          {
-            echo "issues=$(echo "$stuck" | awk '{ print $1 }' | paste -sd' ' -)"
-            echo "lines<<STUCK_EOF"
-            echo "$stuck"
-            echo "STUCK_EOF"
-          } >> "$GITHUB_OUTPUT"
+        run: .github/scripts/sweep/find-stuck.sh
 
-      - name: Stuck builds to factory:human
+      - name: Stuck builds to factory:human (label and board)
         if: steps.stuck.outputs.issues != ''
         env:
+          BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
           STUCK: ${{ steps.stuck.outputs.lines }}
-        run: |
-          set -euo pipefail
-          while read -r issue minutes; do
-            .github/scripts/label-set.sh "$issue" factory:human
-            gh issue comment "$issue" --repo "$GITHUB_REPOSITORY" --body "Needs human: the build looks stuck. The issue has been in factory:in-progress for $minutes minutes with no factory-build run that could be building it.
-
-          Sweep run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          done <<< "$STUCK"
-
-      - name: Board to Needs human
-        if: steps.stuck.outputs.issues != ''
-        continue-on-error: true # the label is the truth; the hourly reconcile retries the card
-        env:
-          GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
-          ISSUES: ${{ steps.stuck.outputs.issues }}
-        run: |
-          set -euo pipefail
-          failed=0
-          for issue in $ISSUES; do
-            .github/scripts/board-move.sh "$issue" "Needs human" || failed=1
-          done
-          exit "$failed"
+        run: .github/scripts/sweep/stuck-to-human.sh
 
       - name: Telegram
         if: steps.stuck.outputs.issues != ''
@@ -124,14 +83,7 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           STUCK: ${{ steps.stuck.outputs.lines }}
-        run: |
-          set -euo pipefail
-          while read -r issue minutes; do
-            title=$(gh api "repos/$GITHUB_REPOSITORY/issues/$issue" --jq .title)
-            .github/scripts/telegram.sh "Needs human: #$issue \"$title\"
-          reason: build stuck, $minutes min in progress with no build run
-          $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/issues/$issue"
-          done <<< "$STUCK"
+        run: .github/scripts/sweep/telegram-stuck.sh
 
   reconcile:
     needs: sweep
@@ -156,7 +108,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
-        run: .github/scripts/board-reconcile.sh
+        run: .github/scripts/sweep/board-reconcile.sh
 
   reminder:
     # Any schedule but the hourly one is the Monday cron (its timezone may change how it is named).
@@ -179,12 +131,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: |
-          set -euo pipefail
-          text=$(.github/scripts/triage-reminder.sh)
-          if [ -z "$text" ]; then
-            echo "No factory:triage issue waits, no message"
-            exit 0
-          fi
-          echo "$text"
-          .github/scripts/telegram.sh "$text"
+        run: .github/scripts/sweep/remind.sh

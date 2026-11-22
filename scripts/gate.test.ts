@@ -12,9 +12,9 @@ import {
   matchRisky,
   parseGate,
   parsePatterns,
-} from "../.github/scripts/gate.mjs";
+} from "../.github/scripts/gate/gate.mjs";
 
-const script = join(import.meta.dirname, "../.github/scripts/gate.mjs");
+const script = join(import.meta.dirname, "../.github/scripts/gate/gate.mjs");
 const repoPaths = readFileSync(join(import.meta.dirname, "../.github/gate-paths.txt"), "utf8");
 
 // Shaped like the claude-code-action execution file: the Agent SDK message list.
