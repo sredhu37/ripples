@@ -18,7 +18,7 @@ run-name: "factory-gate PR #${{ inputs.pr || github.event.pull_request.number ||
 #       decide:  one gate comment <!-- factory-gate sha=<sha> --> with risks, decision, reason
 #                MERGE -> head unchanged + checks green -> squash merge as sredhu37-bot
 #                         (FACTORY_TOKEN, so the merge starts push workflows), factory:done, board Done
-#                HUMAN -> factory:human, board Needs human, Telegram (reason, PR, evidence video)
+#                HUMAN -> factory:human, board Needs human, Slack (reason, PR, evidence video)
 #     mode approve  Sunny approved: his latest approving or blocking review is APPROVED on the
 #                   current head of a PR in Needs human (factory PR with factory:human, or a
 #                   revert PR), every required check green (waits up to 20 minutes)
@@ -310,12 +310,11 @@ jobs:
           MERGE_REASON: ${{ steps.merge.outputs.reason }}
           EARLY: ${{ steps.early.outputs.early }}
         run: .github/scripts/gate/needs-human.sh
-      - name: Telegram
+      - name: Slack
         if: steps.human.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           REASON: ${{ steps.human.outputs.reason }}
         run: .github/scripts/shared/pr-needs-human.sh "$PR" "$REASON"
 
@@ -439,12 +438,11 @@ jobs:
           DECISION: MERGE
           MERGE_REASON: ${{ steps.merge.outputs.reason }}
         run: .github/scripts/gate/needs-human.sh
-      - name: Telegram
+      - name: Slack
         if: steps.human.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           REASON: ${{ steps.human.outputs.reason }}
         run: .github/scripts/shared/pr-needs-human.sh "$PR" "$REASON"
 

@@ -16,3 +16,4 @@ One file per decision, named `NNNN-short-title.md`. Keep each to: context, decis
 - [0012-hosted-ripples-backend-accounts-payments.md](0012-hosted-ripples-backend-accounts-payments.md): Hosted Ripples: repos, backend, database, accounts and payments
 - [0013-separate-web-and-server-packages.md](0013-separate-web-and-server-packages.md): Separate web and server packages
 - [0014-feature-flags-server-setting.md](0014-feature-flags-server-setting.md): Feature flags in a server setting
+- [0015-factory-notifications-slack.md](0015-factory-notifications-slack.md): Factory notifications in Slack

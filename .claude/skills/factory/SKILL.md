@@ -18,7 +18,7 @@ Helper: `.claude/skills/factory/scripts/local.sh <command>` (run from the repo r
 
 ## Rules
 
-- Act as Sunny, and only as a person would. Never Telegram, never `sredhu37-bot`, never edit `.github/` settings.
+- Act as Sunny, and only as a person would. Never the Slack webhook, never `sredhu37-bot`, never edit `.github/` settings.
 - Tickets move only through `local.sh move <issue> <label>` (label and card in one call).
 - Local branch is `local/issue-<n>`, never `factory/issue-<n>`: the GitHub review starts by itself on `factory/` branches, and the scan treats this ticket as local and leaves it alone.
 - Merge only after Sunny says yes in this chat, for this PR.

@@ -12,12 +12,12 @@ name: factory-sweep
 #                Sunny) touched in the last 2 hours. Fills them In review first (rerun the missing
 #                station: fix round, review or gate), then In progress (continue a stopped build),
 #                then Ready (start), oldest issue first. Never Needs human. A ticket continued 3
-#                times since it last entered Ready by hand goes to factory:human with Telegram.
+#                times since it last entered Ready by hand goes to factory:human with Slack.
 #                Dispatch input issue: only that ticket, still within the slots.
 #     reconcile: put every card on board #2 back in the column of its issue's factory: label
 #                (board drags trigger nothing on a user-owned board).
 #   Monday 09:00 Europe/Berlin
-#     reminder:  Telegram with the count of open factory:triage issues, the oldest age and the
+#     reminder:  Slack with the count of open factory:triage issues, the oldest age and the
 #                board link; silent when none waits.
 #   workflow_dispatch: run one part (or all) by hand; dry_run makes scan and reconcile only print.
 #
@@ -84,8 +84,7 @@ jobs:
       - name: Start and continue tickets
         env:
           BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           ONLY_ISSUE: ${{ inputs.issue }}
           DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
         run: .github/scripts/sweep/scan.sh
@@ -131,9 +130,8 @@ jobs:
         with:
           sparse-checkout: .github/scripts
           persist-credentials: false
-      - name: Telegram when triage issues wait
+      - name: Slack when triage issues wait
         env:
           GH_TOKEN: ${{ github.token }}
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: .github/scripts/sweep/remind.sh

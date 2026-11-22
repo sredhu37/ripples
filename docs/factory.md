@@ -68,7 +68,7 @@ triage ─► ready ─► in-progress ─► in-review ─► done
 - No agent moves an issue to `factory:ready` on its own: the repo is public, so a stranger's issue must never start a build.
 - `/triage` posts an **agent brief** comment when an issue moves to ready; the build agent reads issue plus brief.
 - `/triage` adds one category label (`bug` or `enhancement`) and keeps its `.out-of-scope/` folder for wontfix reasons.
-- **Triage reminder:** the factory bot sends a Telegram message on Monday at 09:00, only when issues wait: count, age of the oldest, link to the board filtered by `factory:triage`.
+- **Triage reminder:** the factory posts to Slack `#ripples-factory` on Monday at 09:00, only when issues wait: count, age of the oldest, link to the board filtered by `factory:triage`.
 
 ## Build
 
@@ -78,7 +78,7 @@ triage ─► ready ─► in-progress ─► in-review ─► done
 - The build agent swaps the label to `factory:in-progress`, implements on a new branch, runs tests, typecheck and build, writes or updates specs, and opens the PR.
 - **PR description = the summary**, with four headings: `## What changed`, `## Decisions`, `## Verified` (real command output), `## Left`. The build agent rewrites "Verified" every fix round.
 - **Fix rounds:** any FAIL from review sends the PR back to the build agent. Maximum 5 rounds, counted from the factory's review-summary comments on the PR. Round 5 with FAILs left: `factory:human` (the agent is stuck, or the work should become its own ticket).
-- **Failures:** a Claude usage limit puts the issue back to `factory:ready` with a comment; the scan restarts it later (not counted). A job that fails or times out (out of turns, crash, the 30 minute timeout) keeps its label and gets a `stopped` comment with the agent's last words; the scan continues it on the same branch, at most 3 times, then `factory:human` and Telegram. The agent finishing without a PR (it says it cannot) and a fix round that pushed nothing set `factory:human` and send a Telegram message at once.
+- **Failures:** a Claude usage limit puts the issue back to `factory:ready` with a comment; the scan restarts it later (not counted). A job that fails or times out (out of turns, crash, the 30 minute timeout) keeps its label and gets a `stopped` comment with the agent's last words; the scan continues it on the same branch, at most 3 times, then `factory:human` and Slack. The agent finishing without a PR (it says it cannot) and a fix round that pushed nothing set `factory:human` and send a Telegram message at once.
 
 ## Scan
 
@@ -102,7 +102,7 @@ Needs human: never picked
 - **Hand-offs inside a ticket stay instant:** build to CI to review to gate, fix rounds from review, and Sunny's review or comment on a PR (`factory-gate.yml` relay). Only the start and the continue of a stopped ticket wait for the scan.
 - **Missing station (In review):** checks still running: wait. A red required check: fix round (the prompt names the red checks). Green with no review for the head: review, but only 10 minutes after the checks finished (the `workflow_run` review normally starts by itself within seconds). Review FAIL below round 5 with no fix round running: fix round. Review PASS with no gate comment for the head: gate. A head brought up to date by the factory, or a head the gate said MERGE to that is still in review: gate merge mode (a conflict: fix round). Anything else (round 5, review error) is already Sunny's.
 - **Local tickets** are left alone and only counted: In progress with the label set by a person, or In review whose open PR is not on `factory/issue-<n>`. They stop counting after 2 quiet hours.
-- **Continue cap:** every continue posts a `factory-continue` comment. After 3 since the ticket last entered Ready by hand: `factory:human`, a comment and Telegram with the build's last words. Setting `factory:ready` again gives 3 more. Starting a Ready ticket is not a continue, so usage-limit pauses never count.
+- **Continue cap:** every continue posts a `factory-continue` comment. After 3 since the ticket last entered Ready by hand: `factory:human`, a comment and a Slack message with the build's last words. Setting `factory:ready` again gives 3 more. Starting a Ready ticket is not a continue, so usage-limit pauses never count.
 
 ## Local run
 
@@ -119,7 +119,7 @@ The override for when GitHub Actions, issues or secrets are down, or Sunny wants
 ```
 
 - **Same parts as GitHub:** agent rules from `.claude/agents/` (run as Claude Code subagents), prompt templates from `.github/prompts/`, input scripts and `review.mjs` / `gate.mjs` from `.github/scripts/`, all from a worktree of `origin/main` (`.claude/worktrees/local-main`), never from the checkout it runs in. The `<local_run>` block in the build prompt overrides the GitHub-only lines (worktree, branch, workflow pushes allowed).
-- **Acts as Sunny** through his `gh` login: pushes, the PR, label and card moves (`shared/move.sh`), the merge. Never Telegram, never `sredhu37-bot`.
+- **Acts as Sunny** through his `gh` login: pushes, the PR, label and card moves (`shared/move.sh`), the merge. Never the Slack webhook, never `sredhu37-bot`.
 - **Branch `local/issue-<n>`:** `factory-review.yml` only starts on `factory/issue-<n>`, so GitHub never reviews local work by itself, and the [scan](#scan) counts the ticket as local (label set by Sunny, or In review with a PR not on `factory/`) and never continues it.
 - **The full line locally:** build, wait for CI, review, fix rounds (max 5, counted in the chat), gate. MERGE asks Sunny before merging; HUMAN asks "merge anyway, or leave it in Needs human?". `local.sh merge` brings the PR up to date with main first.
 - **Grill and triage:** `/grill-with-docs`, `/wayfinder` and `/triage` can only be started by Sunny (`disable-model-invocation`), and plugin skills cannot be overridden in settings. `/factory` reads their SKILL.md from the plugin's install path (`~/.claude/plugins/installed_plugins.json`) and follows it in the same chat; a moved file stops it with a clear error. A wayfinder-sized idea stops after the map.
@@ -216,15 +216,15 @@ review passed ──► any changed file on the risky list? ──yes──► f
   - No conflict: GitHub's update-branch merges main into the PR as `sredhu37-bot` (no agent, no tokens). A comment `<!-- factory-update sha=<new> from=<old> -->` marks the new head as the factory's update of an approved head, and `factory-gate.yml` mode `merge` waits up to 20 minutes for its checks, then merges. Review skips such a head (no new round), and Sunny need not approve again. If main moved meanwhile, merge mode brings it up to date once more.
   - Conflict: a fix round (`factory-build.yml` with `issue` and `pr`, the prompt says to merge `origin/main` and resolve). The issue goes to `factory:in-review` (also from Needs human), so the new head is reviewed and gated again; the round counts toward 5. A revert PR gets a note to resolve by hand.
   - Checks red after the update: the scan starts a fix round.
-- HUMAN: `factory:human`, card to Needs human, Telegram: `Needs human: PR #n "title"`, the reason, the PR link and the evidence video link (the first `/demo.mp4` link in the evidence comment, or the PR link).
+- HUMAN: `factory:human`, card to Needs human, Slack: `Needs human: PR #n "title"`, the reason, the PR link and the evidence video link (the first `/demo.mp4` link in the evidence comment, or the PR link).
 
 **Ruleset on main:** PR only, every CI check green, branch up to date with main (`strict_required_status_checks_policy`), no force-push, Sunny on the bypass list.
 
 **Sunny's review:** Sunny's approving review is the approval (changed 12.11.2026; before, pressing Merge was the approval, [#116](https://github.com/sredhu37/ripples/issues/116), [#141](https://github.com/sredhu37/ripples/issues/141)). It applies to every PR in Needs human: risky-list PRs, gate HUMAN PRs and revert PRs.
 
 - **Approve:** when `sredhu37` approves the PR's current head (the review's commit is the head; an approval of an older commit does not count) and every required check (`ci`, `lint`, `audit`, `lighthouse`, `demo`, `spec-rule`, `flow-rule`, `CodeQL`) is green, `sredhu37-bot` squash-merges it with `FACTORY_TOKEN`. Checks still running: the run waits up to 20 minutes. Still not green, or the head moved: no merge, a PR comment says why; approve again, or rerun `factory-gate.yml` with `pr` and mode `approve`.
-- **Early approval:** an approval given while the issue is still `factory:in-review` does not count, because the gate stops at HUMAN to show Sunny its risk comment first. The approve run does not stay silent: it posts "Approval noted, but the factory still has the PR. Approve again after the gate comment." When the gate then says HUMAN and Sunny's latest review is an APPROVED from before the gate comment, the gate comment says "Your approval came before this gate comment. Read the risks above and approve again to merge." and the Telegram reason says the same in one line. A new approval merges ([#191](https://github.com/sredhu37/ripples/issues/191)).
-- **Comment or request changes:** a comment, a comment review or a "Request changes" review from `sredhu37` on a factory PR in `factory:human` starts a fix round: `factory-build.yml` with `issue`, `pr` and `human=<review|comment>:<id>`. A question gets a reply instead of a code change. After the round the PR returns to Sunny with a Telegram message, not to the gate (once HUMAN, stays HUMAN). These rounds do not count toward the 5-round limit.
+- **Early approval:** an approval given while the issue is still `factory:in-review` does not count, because the gate stops at HUMAN to show Sunny its risk comment first. The approve run does not stay silent: it posts "Approval noted, but the factory still has the PR. Approve again after the gate comment." When the gate then says HUMAN and Sunny's latest review is an APPROVED from before the gate comment, the gate comment says "Your approval came before this gate comment. Read the risks above and approve again to merge." and the Slack reason says the same in one line. A new approval merges ([#191](https://github.com/sredhu37/ripples/issues/191)).
+- **Comment or request changes:** a comment, a comment review or a "Request changes" review from `sredhu37` on a factory PR in `factory:human` starts a fix round: `factory-build.yml` with `issue`, `pr` and `human=<review|comment>:<id>`. A question gets a reply instead of a code change. After the round the PR returns to Sunny with a Slack message, not to the gate (once HUMAN, stays HUMAN). These rounds do not count toward the 5-round limit.
 - **`@build` while the factory has the PR:** a comment by `sredhu37` that contains `@build` on a factory PR in `factory:in-review` also starts a fix round, so Sunny can talk to the build agent without waiting for the gate. Without `@build` the comment is ignored in that state. The round ends like any Sunny round: the issue goes to `factory:human` and the PR returns to Sunny.
 - **Why a relay:** `issue_comment` runs the workflow file from main, but `pull_request_review` runs the file from the PR's merge commit, so a PR that edits `factory-gate.yml` would run its own copy. The `pull_request_review` and `issue_comment` jobs therefore only dispatch `factory-gate.yml` on main (no secret, `actions: write`), and the dispatched run reads the review or comment again from the API. Merges and board moves run in jobs that check out main only and run no agent.
 
@@ -273,35 +273,35 @@ GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`
 - **Moving a ticket:** `shared/move.sh <issue> <label>` sets the `factory:` label (`GH_TOKEN`) and moves the card to its column (`BOARD_TOKEN`, `FACTORY_TOKEN` in workflows) in one call. A failed card move only warns; the hourly reconcile puts it right.
 - The build job runs `build/prompt.sh` before it switches to the PR branch, so the script and templates come from main.
 
-| Script                      | Does                                                                                           | Token                                       |
-| --------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| `shared/move.sh`            | label and card in one call                                                                     | `GITHUB_TOKEN` + `FACTORY_TOKEN` (no agent) |
-| `shared/label-set.sh`       | gives an issue exactly one `factory:` label                                                    | `GITHUB_TOKEN`                              |
-| `shared/board-move.sh`      | moves the issue's card to a Status column, adds the card if missing                            | `FACTORY_TOKEN` (no agent)                  |
-| `shared/render.mjs`         | fills a prompt template                                                                        | none                                        |
-| `shared/output.sh`          | writes a step output that spans lines                                                          | none                                        |
-| `shared/telegram.sh`        | sends a factory bot message to Sunny                                                           | `TELEGRAM_TOKEN` + chat id                  |
-| `shared/pr-needs-human.sh`  | Telegram "Needs human" for a PR with the evidence video link                                   | `TELEGRAM_TOKEN` + chat id                  |
-| `shared/open-blockers.sh`   | lists an issue's open blockers                                                                 | `GITHUB_TOKEN`                              |
-| `shared/usage-limit.sh`     | did a claude-code-action run stop on a Claude limit (execution file)                           | none                                        |
-| `shared/review.mjs`         | parses review agent json; writes the round summary and suggestions                             | none                                        |
-| `shared/tool-list.sh`       | an agent's tool list in the job summary                                                        | none                                        |
-| `build/check.sh`            | pickup: ready (or a fix round), open and unblocked                                             | `GITHUB_TOKEN`                              |
-| `build/prompt.sh`           | the build prompt: template, `build.md`, issue, trusted comments, fix-round text                | `GITHUB_TOKEN`                              |
-| `build/agent-last-words.sh` | the agent's final message and refused tools, for a stop without a PR (issue comment, Telegram) | none                                        |
-| `build/outcome.sh`          | review, paused or human, with the reason                                                       | `GITHUB_TOKEN`                              |
-| `review/check.sh`           | factory PR, current head, required checks green, round (max 5)                                 | `GITHUB_TOKEN`                              |
-| `review/prompt.sh`          | a review agent's prompt                                                                        | `GITHUB_TOKEN`                              |
-| `gate/check.sh`             | should the gate act: modes gate, approve, fix; risky files                                     | `GITHUB_TOKEN`                              |
-| `gate/gate.mjs`             | risky list matcher; parses the gate agent json; writes the gate comment                        | none                                        |
-| `gate/checks-green.sh`      | are a commit's required checks green; waits while they run                                     | `GITHUB_TOKEN`                              |
-| `gate/merge.sh`             | squash-merges a PR if its head is unchanged and checks are green                               | `FACTORY_TOKEN` (no agent)                  |
-| `sweep/scan.sh`             | the scan: collects board and runs, carries out the plan (`DRY_RUN=1` only prints)              | `GITHUB_TOKEN` + `FACTORY_TOKEN` (no agent) |
-| `sweep/scan.mjs`            | the scan's plan: slots, order, missing station, continue cap                                   | none                                        |
-| `build/stopped.sh`          | the `stopped` comment with the agent's last words                                              | `GITHUB_TOKEN`                              |
-| `sweep/board-reconcile.sh`  | moves every card to its label's column (`DRY_RUN=1` only prints)                               | `FACTORY_TOKEN` (no agent)                  |
-| `sweep/triage-reminder.sh`  | the triage reminder text, empty when no issue waits                                            | `GITHUB_TOKEN`                              |
-| `pr-link/pr-in-review.sh`   | the issues a hand-opened PR closes: label `factory:in-review`, card In review                  | `GITHUB_TOKEN` + `FACTORY_TOKEN` (no agent) |
+| Script                      | Does                                                                                        | Token                                       |
+| --------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| `shared/move.sh`            | label and card in one call                                                                  | `GITHUB_TOKEN` + `FACTORY_TOKEN` (no agent) |
+| `shared/label-set.sh`       | gives an issue exactly one `factory:` label                                                 | `GITHUB_TOKEN`                              |
+| `shared/board-move.sh`      | moves the issue's card to a Status column, adds the card if missing                         | `FACTORY_TOKEN` (no agent)                  |
+| `shared/render.mjs`         | fills a prompt template                                                                     | none                                        |
+| `shared/output.sh`          | writes a step output that spans lines                                                       | none                                        |
+| `shared/slack.sh`           | posts a factory message to Slack `#ripples-factory`                                         | `SLACK_WEBHOOK_URL`                         |
+| `shared/pr-needs-human.sh`  | Slack "Needs human" for a PR with the evidence video link                                   | `SLACK_WEBHOOK_URL`                         |
+| `shared/open-blockers.sh`   | lists an issue's open blockers                                                              | `GITHUB_TOKEN`                              |
+| `shared/usage-limit.sh`     | did a claude-code-action run stop on a Claude limit (execution file)                        | none                                        |
+| `shared/review.mjs`         | parses review agent json; writes the round summary and suggestions                          | none                                        |
+| `shared/tool-list.sh`       | an agent's tool list in the job summary                                                     | none                                        |
+| `build/check.sh`            | pickup: ready (or a fix round), open and unblocked                                          | `GITHUB_TOKEN`                              |
+| `build/prompt.sh`           | the build prompt: template, `build.md`, issue, trusted comments, fix-round text             | `GITHUB_TOKEN`                              |
+| `build/agent-last-words.sh` | the agent's final message and refused tools, for a stop without a PR (issue comment, Slack) | none                                        |
+| `build/outcome.sh`          | review, paused or human, with the reason                                                    | `GITHUB_TOKEN`                              |
+| `review/check.sh`           | factory PR, current head, required checks green, round (max 5)                              | `GITHUB_TOKEN`                              |
+| `review/prompt.sh`          | a review agent's prompt                                                                     | `GITHUB_TOKEN`                              |
+| `gate/check.sh`             | should the gate act: modes gate, approve, fix; risky files                                  | `GITHUB_TOKEN`                              |
+| `gate/gate.mjs`             | risky list matcher; parses the gate agent json; writes the gate comment                     | none                                        |
+| `gate/checks-green.sh`      | are a commit's required checks green; waits while they run                                  | `GITHUB_TOKEN`                              |
+| `gate/merge.sh`             | squash-merges a PR if its head is unchanged and checks are green                            | `FACTORY_TOKEN` (no agent)                  |
+| `sweep/scan.sh`             | the scan: collects board and runs, carries out the plan (`DRY_RUN=1` only prints)           | `GITHUB_TOKEN` + `FACTORY_TOKEN` (no agent) |
+| `sweep/scan.mjs`            | the scan's plan: slots, order, missing station, continue cap                                | none                                        |
+| `build/stopped.sh`          | the `stopped` comment with the agent's last words                                           | `GITHUB_TOKEN`                              |
+| `sweep/board-reconcile.sh`  | moves every card to its label's column (`DRY_RUN=1` only prints)                            | `FACTORY_TOKEN` (no agent)                  |
+| `sweep/triage-reminder.sh`  | the triage reminder text, empty when no issue waits                                         | `GITHUB_TOKEN`                              |
+| `pr-link/pr-in-review.sh`   | the issues a hand-opened PR closes: label `factory:in-review`, card In review               | `GITHUB_TOKEN` + `FACTORY_TOKEN` (no agent) |
 
 The other scripts are the steps of one workflow each (for example `build/paused.sh`, `review/suggestions.sh`, `checks/evidence-push.sh`); their headers say what they do.
 
@@ -328,9 +328,9 @@ Exact model IDs pinned across factory agents, workflows and skills:
 | Agent code            | `claude[bot]` via the Claude GitHub App, Sunny as co-author                                                         | commits and PR on the build branch          |
 | Factory plumbing      | machine account `sredhu37-bot`, classic token `FACTORY_TOKEN` (`public_repo`, `project`, `workflow`, 1-year expiry) | board moves, gate merge, workflow push step |
 | Label swaps, comments | `GITHUB_TOKEN`                                                                                                      | no new workflow runs, so no loops           |
-| Notifications         | Telegram factory bot, `TELEGRAM_TOKEN` + chat id                                                                    | "Needs human", triage reminder              |
+| Notifications         | Slack app "Ripples Factory", incoming webhook `SLACK_WEBHOOK_URL` (posts only to `#ripples-factory`)                | "Needs human", triage reminder              |
 
-**Environment secrets locked to main:** All factory secrets (`FACTORY_TOKEN`, `CLAUDE_CODE_OAUTH_TOKEN`, `TELEGRAM_TOKEN`, `TELEGRAM_CHAT_ID`) are stored in the `factory` GitHub Environment. The environment has a custom deployment branch policy restricted to `main`. Non-main branches receive empty values for all environment secrets, preventing secret exfiltration from unreviewed PR workflows. Repository-level secrets are empty.
+**Environment secrets locked to main:** All factory secrets (`FACTORY_TOKEN`, `CLAUDE_CODE_OAUTH_TOKEN`, `SLACK_WEBHOOK_URL`) are stored in the `factory` GitHub Environment. The environment has a custom deployment branch policy restricted to `main`. Non-main branches receive empty values for all environment secrets, preventing secret exfiltration from unreviewed PR workflows. Repository-level secrets are empty.
 
 **Workflow edits and the push step outside the agent:** When a task modifies `.github/workflows/*`:
 
@@ -357,9 +357,9 @@ Exact model IDs pinned across factory agents, workflows and skills:
 
 ## Notifications
 
-([#113](https://github.com/sredhu37/ripples/issues/113), [#124](https://github.com/sredhu37/ripples/issues/124))
+([#113](https://github.com/sredhu37/ripples/issues/113), [#124](https://github.com/sredhu37/ripples/issues/124), ADR 0015)
 
-The factory bot messages Sunny only when he has to act or should know:
+The factory bot posts to Slack `#ripples-factory` only when Sunny has to act or should know:
 
 ```
 Needs human: PR #130 "Lesson 4 toy"       Triage: 23 waiting
@@ -385,8 +385,8 @@ Normal merges are silent.
 Steps only a human can do. Filed as one `factory:human` ticket.
 
 1. Create the machine account `sredhu37-bot` (own email, 2FA), invite it to ripples and to board #2, create its classic token with `public_repo`, `project`, and `workflow` scopes.
-2. Create GitHub Environment `factory` restricted to branch `main`. Store all 4 secrets (`FACTORY_TOKEN`, `CLAUDE_CODE_OAUTH_TOKEN`, `TELEGRAM_TOKEN`, `TELEGRAM_CHAT_ID`) as environment secrets under `factory`. Repository secrets must remain empty.
-3. Create the Telegram factory bot in BotFather; store `TELEGRAM_TOKEN` and the chat id in environment secrets.
+2. Create GitHub Environment `factory` restricted to branch `main`. Store all 3 secrets (`FACTORY_TOKEN`, `CLAUDE_CODE_OAUTH_TOKEN`, `SLACK_WEBHOOK_URL`) as environment secrets under `factory`. Repository secrets must remain empty.
+3. In Slack workspace `redhu-engineering`, create the private channel `#ripples-factory` and the app "Ripples Factory" with an incoming webhook to that channel; store the webhook URL as `SLACK_WEBHOOK_URL` in environment secrets (ADR 0015).
 4. Run `claude setup-token`; store it as `CLAUDE_CODE_OAUTH_TOKEN` in environment secrets. Install the Claude GitHub App on ripples.
 5. Board #2: add the "Needs human" column (red, description "The factory stopped. Answer, review or merge to move it on."); turn off the 4 board workflows listed under [Labels and board](#labels-and-board).
 6. Turn on CodeQL default setup.

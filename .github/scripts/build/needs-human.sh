@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # The build needs Sunny: factory:human, and a comment with the reason and the agent's last words.
-# Sunny's own fix round gets no comment: the PR note and the Telegram message say it.
+# Sunny's own fix round gets no comment: the PR note and the Slack message say it.
 # Spec: docs/factory.md, section Build.
 #
 # Usage: build/needs-human.sh
@@ -9,7 +9,7 @@ set -euo pipefail
 
 "$(dirname "$0")/../shared/move.sh" "$ISSUE" factory:human
 if [ -n "${HUMAN:-}" ]; then
-  exit 0 # Sunny's own round: the PR note and the Telegram message say it
+  exit 0 # Sunny's own round: the PR note and the Slack message say it
 fi
 body=$(mktemp "${RUNNER_TEMP:-${TMPDIR:-/tmp}}/needs-human.XXXXXX")
 {
