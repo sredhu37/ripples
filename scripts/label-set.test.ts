@@ -7,7 +7,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 // label-set.sh: gives an issue exactly one factory: label. gh is a fake that logs every call to
 // $LOG, lists $OLD as the issue's factory labels, and fails a DELETE with $DELETE_ERR when set.
 
-const script = join(import.meta.dirname, "../.github/scripts/label-set.sh");
+const script = join(import.meta.dirname, "../.github/scripts/shared/label-set.sh");
 
 const fakeGh = `#!/usr/bin/env bash
 echo "$*" >> "$LOG"

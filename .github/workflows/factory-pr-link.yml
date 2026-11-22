@@ -3,7 +3,7 @@ name: factory-pr-link
 # map-does: Puts the issue of a hand-opened PR with `Closes #n` in review.
 
 # A PR opened by hand that closes an issue puts the issue in review.
-# Spec: docs/factory.md, section Labels and board. Script: .github/scripts/pr-in-review.sh.
+# Spec: docs/factory.md, section Labels and board. Script: .github/scripts/pr-link/pr-in-review.sh.
 #
 #   PR opened, reopened or ready for review, Closes #n -> #n gets factory:in-review, card In review
 #
@@ -47,4 +47,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
           PR: ${{ github.event.pull_request.number }}
-        run: .github/scripts/pr-in-review.sh "$PR"
+        run: .github/scripts/pr-link/pr-in-review.sh "$PR"
