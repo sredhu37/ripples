@@ -1,23 +1,26 @@
 name: factory-sweep
 
-# map-does: Safety net. Restarts paused factory:ready issues, flags stuck builds, reconciles the board, sends the Monday triage reminder.
-# map-next: `factory-build.yml` (restarts paused ready issues)
+# map-does: The scan: starts and continues factory tickets (up to MAX_PARALLEL), reconciles the board, sends the Monday triage reminder.
+# map-next: `factory-build.yml`, `factory-review.yml`, `factory-gate.yml` (the station a ticket needs)
 
-# The factory's safety net. Spec: docs/factory.md, sections Build, Triage, Labels and board, Engine.
+# The factory's scan and safety net. Spec: docs/factory.md, sections Scan, Triage, Labels and board.
 #
-#   hourly at :07 (off GitHub's busy top of the hour)
-#     sweep:     restart the oldest unblocked factory:ready issue when no build runs
-#                (paused by a usage limit, or its event was missed): dispatch factory-build.yml.
-#                factory:in-progress set by the factory over 45 minutes ago with no build run
-#                that could be building it: factory:human, comment, board Needs human, Telegram.
+#   hourly at :07 (off GitHub's busy top of the hour), or workflow_dispatch ("Run now")
+#     scan:      the only starter of factory work. Free slots = MAX_PARALLEL minus tickets with an
+#                active factory run, minus local tickets (In progress or In review, label set by
+#                Sunny) touched in the last 2 hours. Fills them In review first (rerun the missing
+#                station: fix round, review or gate), then In progress (continue a stopped build),
+#                then Ready (start), oldest issue first. Never Needs human. A ticket continued 3
+#                times since it last entered Ready by hand goes to factory:human with Telegram.
+#                Dispatch input issue: only that ticket, still within the slots.
 #     reconcile: put every card on board #2 back in the column of its issue's factory: label
 #                (board drags trigger nothing on a user-owned board).
 #   Monday 09:00 Europe/Berlin
 #     reminder:  Telegram with the count of open factory:triage issues, the oldest age and the
 #                board link; silent when none waits.
-#   workflow_dispatch: run one part (or all) by hand; reconcile can be a dry run.
+#   workflow_dispatch: run one part (or all) by hand; dry_run makes scan and reconcile only print.
 #
-# Tokens: GITHUB_TOKEN for reads, labels, comments and the dispatch (a dispatch starts a run,
+# Tokens: GITHUB_TOKEN for reads, labels, comments and the dispatches (a dispatch starts a run,
 # label events from it do not). FACTORY_TOKEN only for the board, in steps that run no agent.
 
 on:
@@ -32,9 +35,14 @@ on:
         required: true
         default: all
         type: choice
-        options: [all, sweep, reminder, reconcile]
+        options: [all, scan, reminder, reconcile]
+      issue:
+        description: Scan only this issue ("Run now" for one ticket); empty scans the board
+        required: false
+        default: ""
+        type: string
       dry_run:
-        description: Reconcile only prints the moves
+        description: Scan and reconcile only print what they would do
         required: false
         default: false
         type: boolean
@@ -42,52 +50,42 @@ on:
 permissions: {}
 
 jobs:
-  sweep:
-    if: github.event.schedule == '7 * * * *' || inputs.task == 'sweep' || inputs.task == 'all'
+  scan:
+    if: github.event.schedule == '7 * * * *' || inputs.task == 'scan' || inputs.task == 'all'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: factory
-    # Two sweeps at once could dispatch the same issue twice.
+    # Two scans at once could start the same ticket twice.
     concurrency:
-      group: factory-sweep-restart
+      group: factory-scan
       cancel-in-progress: false
     permissions:
       contents: read # scripts
       issues: write # labels and comments
-      actions: write # read factory-build runs, dispatch factory-build
+      pull-requests: read # factory PRs
+      checks: read # required checks of a PR head
+      statuses: read # factory-review status of a PR head
+      actions: write # read factory runs, dispatch the stations
     env:
       GH_TOKEN: ${{ github.token }}
+      MAX_PARALLEL: 5
     steps:
       - uses: actions/checkout@v7
         with:
           sparse-checkout: .github/scripts
           persist-credentials: false
-
-      - name: Restart a paused or missed factory:ready issue
-        run: .github/scripts/sweep/dispatch-restart.sh
-
-      - name: Find builds stuck in factory:in-progress
-        id: stuck
-        run: .github/scripts/sweep/find-stuck.sh
-
-      - name: Stuck builds to factory:human (label and board)
-        if: steps.stuck.outputs.issues != ''
+      - name: Start and continue tickets
         env:
           BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
-          STUCK: ${{ steps.stuck.outputs.lines }}
-        run: .github/scripts/sweep/stuck-to-human.sh
-
-      - name: Telegram
-        if: steps.stuck.outputs.issues != ''
-        env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          STUCK: ${{ steps.stuck.outputs.lines }}
-        run: .github/scripts/sweep/telegram-stuck.sh
+          ONLY_ISSUE: ${{ inputs.issue }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
+        run: .github/scripts/sweep/scan.sh
 
   reconcile:
-    needs: sweep
-    # After the sweep, so its moves are already on the board. Runs alone when the sweep is skipped.
+    needs: scan
+    # After the scan, so its moves are already on the board. Runs alone when the scan is skipped.
     if: >-
       always() &&
       (github.event.schedule == '7 * * * *' || inputs.task == 'reconcile' || inputs.task == 'all')

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# What the build run led to: review (PR open), paused (usage limit) or human, with a reason.
+# What the build run led to: review (PR open), paused (usage limit), stopped (the job failed or timed
+# out: the scan continues it) or human (the agent gave up, or nothing to review), with a reason.
 # Spec: docs/factory.md, section Build.
 #
 # Usage: build/outcome.sh
@@ -26,11 +27,15 @@ elif [ "$BUILD_RESULT" = "success" ] && [ -n "$pr" ]; then
 elif [ "$LIMIT" = "true" ]; then
   outcome=paused
   reason="Claude usage limit"
-else
+elif [ "$BUILD_RESULT" = "success" ]; then
+  # The agent ended on its own without a PR: it says why in its last words, a question for Sunny.
   outcome=human
+  reason="the build agent finished without opening a PR"
+else
+  # Out of turns, the 30 minute timeout, a crash or a cancel: the scan continues it (max 3).
+  outcome=stopped
   case "$BUILD_RESULT" in
-    success) reason="the build agent finished without opening a PR" ;;
-    failure) reason="the build job failed (agent error, crash or the 30 minute timeout)" ;;
+    failure) reason="the build job failed (out of turns, agent error, crash or the 30 minute timeout)" ;;
     cancelled) reason="the build job was cancelled" ;;
     *) reason="the build job did not run ($BUILD_RESULT)" ;;
   esac
@@ -42,8 +47,8 @@ if [ -n "$HUMAN" ]; then
     reason="fix round after your ${HUMAN%%:*} pushed ${head:0:7}"
   elif [ "$outcome" = "review" ] || { [ "$outcome" = "human" ] && [ "$BUILD_RESULT" = "success" ]; }; then
     reason="no new commit after your ${HUMAN%%:*}: see the agent's reply on the PR"
-  elif [ "$outcome" = "paused" ]; then
-    reason="the fix round after your ${HUMAN%%:*} stopped on a Claude usage limit; comment again later"
+  elif [ "$outcome" = "paused" ] || [ "$outcome" = "stopped" ]; then
+    reason="the fix round after your ${HUMAN%%:*} stopped ($reason); comment again later"
   else
     reason="the fix round after your ${HUMAN%%:*} failed: $reason"
   fi

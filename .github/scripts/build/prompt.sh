@@ -64,7 +64,15 @@ elif [ -n "$FIX_PR" ]; then
       | select(.user.login == "github-actions[bot]"
         and (.body | test("^<!-- factory-review round=[0-9]+ sha=[0-9a-f]{40} -->")))]
       | last | .body // ""' > "$tmp/review.md"
-  FIX_PR=$FIX_PR BRANCH=$BRANCH REVIEW_FILE="$tmp/review.md" \
+  # Red required checks on the head (the scan starts a fix round for them too).
+  head_sha=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$FIX_PR" --jq .head.sha)
+  checks=$("$(dirname "$0")/../gate/checks-green.sh" "$head_sha" 0)
+  if [ "$(sed -n 's/^state=//p' <<< "$checks")" = red ]; then
+    sed -n 's/^detail=//p' <<< "$checks" > "$tmp/checks.md"
+  else
+    echo "none" > "$tmp/checks.md"
+  fi
+  FIX_PR=$FIX_PR BRANCH=$BRANCH REVIEW_FILE="$tmp/review.md" CHECKS_FILE="$tmp/checks.md" \
     $render "$prompts/build-fix-review.md" > "$tmp/fix.md"
 fi
 

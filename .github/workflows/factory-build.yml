@@ -1,41 +1,43 @@
 name: factory-build
+run-name: "factory-build issue #${{ inputs.issue }}${{ inputs.pr && format(' fix PR #{0}', inputs.pr) || '' }}"
 
-# map-does: Build agent. Picks a factory:ready issue (label swap), builds it, opens or updates the PR; also runs fix rounds. When an issue closes it dispatches the next unblocked one.
+# map-does: Build agent. Builds one issue the scan (or Sunny's PR comment) hands it, opens or updates the PR; also runs fix rounds.
 # map-next: `pr-checks.yml` (the PR it pushes)
 
-# The factory's build station. Spec: docs/factory.md, sections Build, Engine,
+# The factory's build station. Spec: docs/factory.md, sections Build, Scan, Engine,
 # Identity secrets and permissions, Labels and board.
 #
-#   issues labeled factory:ready, or workflow_dispatch (hourly sweep, manual run)
-#     pickup:  skip if any blocker is open; label factory:ready -> factory:in-progress; board In progress
+#   workflow_dispatch with issue (the hourly scan, "Run now", or by hand)
+#     pickup:  the issue is factory:ready (start), factory:in-progress (a stopped build: continue)
+#              or factory:in-review without an open PR; skip if any blocker is open;
+#              label factory:in-progress, board In progress
 #     build:   claude-code-action, prompt .github/prompts/build.md + .claude/agents/build.md from main; branch factory/issue-<n>; opens the PR
 #     finish:  PR open -> factory:in-review, board In review
 #              usage limit -> factory:ready + "paused: usage limit" comment, board Ready
-#              anything else -> factory:human + comment, board Needs human, Telegram
-#   workflow_dispatch with pr (a fix round, dispatched by factory-review.yml after a FAIL)
+#              build job failed or timed out -> label stays, "stopped" comment with the agent's last
+#                words; the scan continues it (max 3)
+#              the agent finished without a PR, or a fix round pushed nothing -> factory:human +
+#                comment, board Needs human, Telegram
+#   workflow_dispatch with pr (a fix round: factory-review after a FAIL, or the scan for a red check)
 #     pickup:  the issue keeps factory:in-review; the PR must be its open factory/issue-<n> PR
-#     build:   same branch and PR; the prompt adds the latest review summary (fix every FAIL)
-#     finish:  as above, but a fix round that pushed no new commit -> factory:human
+#     build:   same branch and PR; the prompt adds the latest review summary and any red checks
 #     A factory:ready issue whose branch already has an open PR (a paused fix round) runs as a fix round.
 #   workflow_dispatch with pr and human (Sunny's comment on a PR in Needs human, dispatched by factory-gate.yml)
 #     pickup:  the issue keeps factory:human (or factory:in-review, for a comment with @build); human is review:<id> or comment:<id> by sredhu37 on the PR
 #     build:   same branch and PR; the prompt adds Sunny's comment: a question gets a reply, a change a commit
 #     finish:  always back to factory:human, board Needs human, Telegram (once HUMAN, stays HUMAN);
 #              no review round runs and none is counted
-#   issues closed
-#     unblock: dispatch this workflow for the oldest factory:ready issue the closed one was blocking
 #
-# Tokens: GITHUB_TOKEN for labels, comments and the dispatch (starts no issues runs, so no loops).
-# FACTORY_TOKEN only for board moves, in jobs that run no agent. The build agent pushes and opens
-# the PR as the Claude GitHub App (OIDC, id-token: write).
+# The run name carries the issue: the scan counts a ticket's active runs as one slot.
+#
+# Tokens: GITHUB_TOKEN for labels and comments. FACTORY_TOKEN only for board moves, in jobs that
+# run no agent. The build agent pushes and opens the PR as the Claude GitHub App (OIDC, id-token: write).
 
 on:
-  issues:
-    types: [labeled, closed]
   workflow_dispatch:
     inputs:
       issue:
-        description: Issue number to build (it must have factory:ready, or factory:in-review with pr)
+        description: Issue number to build (factory:ready or factory:in-progress; factory:in-review with pr)
         required: true
         type: string
       pr:
@@ -49,10 +51,9 @@ on:
         type: string
         default: ""
 
-# One build at a time; waiting builds queue (up to 100). Runs that cannot start a build
-# (other labels, closed issues) get their own group so they never wait behind a build.
+# One run per issue at a time; the scan caps how many issues run (MAX_PARALLEL).
 concurrency:
-  group: ${{ (github.event_name == 'workflow_dispatch' || (github.event.action == 'labeled' && github.event.label.name == 'factory:ready')) && 'factory-build' || format('factory-build-other-{0}', github.run_id) }}
+  group: factory-build-${{ inputs.issue }}
   queue: max
   cancel-in-progress: false
 
@@ -62,26 +63,7 @@ env:
   TRUSTED_ACTORS: sredhu37,sredhu37-bot,claude[bot],github-actions[bot]
 
 jobs:
-  unblock:
-    if: github.event_name == 'issues' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read # scripts
-      issues: read # dependencies
-      actions: write # workflow_dispatch
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          sparse-checkout: .github/scripts
-          persist-credentials: false
-      - name: Start the oldest ready issue this one was blocking
-        env:
-          GH_TOKEN: ${{ github.token }}
-          CLOSED: ${{ github.event.issue.number }}
-        run: .github/scripts/build/unblock.sh
-
   pickup:
-    if: github.event_name == 'workflow_dispatch' || (github.event.action == 'labeled' && github.event.label.name == 'factory:ready')
     runs-on: ubuntu-latest
     environment: factory
     permissions:
@@ -102,12 +84,12 @@ jobs:
         id: check
         env:
           GH_TOKEN: ${{ github.token }}
-          ISSUE: ${{ inputs.issue || github.event.issue.number }}
+          ISSUE: ${{ inputs.issue }}
           FIX_PR: ${{ inputs.pr }}
           HUMAN: ${{ inputs.human }}
         run: .github/scripts/build/check.sh
       - name: In progress (label and board)
-        if: steps.check.outputs.go == 'true' && steps.check.outputs.ready == 'true'
+        if: steps.check.outputs.go == 'true' && steps.check.outputs.move == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
@@ -123,6 +105,8 @@ jobs:
     permissions:
       contents: read # checkout; the agent pushes with the Claude App token, not this one
       issues: read # issue text and trusted comments for the prompt
+      checks: read # red checks of a fix round's PR head, for the prompt
+      pull-requests: read # the fix round's PR head
       id-token: write # claude-code-action exchanges OIDC for the Claude App token
     outputs:
       limit: ${{ steps.limit.outputs.limit }}
@@ -163,7 +147,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: ${{ steps.prompt.outputs.text }}
           include_comments_by_actor: ${{ env.TRUSTED_ACTORS }}
-          # The hourly sweep and the unblock job dispatch this workflow with GITHUB_TOKEN.
+          # The scan, factory-review and factory-gate dispatch this workflow with GITHUB_TOKEN.
           allowed_bots: github-actions
           claude_args: >-
             --model claude-sonnet-5-5
@@ -283,6 +267,13 @@ jobs:
           BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
           EVIDENCE: ${{ needs.build.outputs.limit_evidence }}
         run: .github/scripts/build/paused.sh
+
+      - name: Stopped (the scan continues it)
+        if: steps.outcome.outputs.outcome == 'stopped'
+        env:
+          REASON: ${{ steps.outcome.outputs.reason }}
+          LAST_WORDS: ${{ needs.build.outputs.last_words }}
+        run: .github/scripts/build/stopped.sh
 
       - name: Needs human
         if: steps.outcome.outputs.outcome == 'human'
