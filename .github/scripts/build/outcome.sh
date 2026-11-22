@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# What the build run led to: review (PR open), paused (usage limit), stopped (the job failed or timed
-# out: the scan continues it) or human (the agent gave up, or nothing to review), with a reason.
+# What the build run led to: review (PR open, or opened or pushed in this run even if the job then
+# failed), paused (usage limit), stopped (the job failed or timed out before a push: the scan
+# continues it) or human (the agent gave up, or nothing to review), with a reason.
 # Spec: docs/factory.md, section Build.
 #
 # Usage: build/outcome.sh
@@ -24,6 +25,12 @@ elif [ "$BUILD_RESULT" = "success" ] && [ -n "$pr" ]; then
     outcome=human
     reason="the fix round pushed no new commit to $pr, so no review can start"
   fi
+elif [ -n "$pr" ] && { [ -z "$START_SHA" ] ||
+  [ "$(gh pr view "$pr" --repo "$GITHUB_REPOSITORY" --json headRefOid --jq .headRefOid)" != "$START_SHA" ]; }; then
+  # The job failed, but the agent opened the PR or pushed to it in this run (for example the action
+  # fails a finished session that went over --max-turns). The pushed head goes to CI and review.
+  outcome=review
+  reason="PR open: $pr (the build job ended with $BUILD_RESULT after the push)"
 elif [ "$LIMIT" = "true" ]; then
   outcome=paused
   reason="Claude usage limit"
