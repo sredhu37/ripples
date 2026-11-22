@@ -81,16 +81,19 @@ pr_facts() {
   checks=$("$here/../gate/checks-green.sh" "$sha" 0)
   gh api --paginate "repos/$repo/issues/$pr/comments?per_page=100" > "$tmp/c-$pr.json"
   gh api "repos/$repo/commits/$sha/status" > "$tmp/s-$pr.json"
+  gh api "repos/$repo/pulls/$pr" > "$tmp/p-$pr.json"
   jq -n --argjson pr "$pr" --arg sha "$sha" --arg bot "$bot" \
     --arg checks "$(sed -n 's/^state=//p' <<< "$checks")" \
     --arg detail "$(sed -n 's/^detail=//p' <<< "$checks")" \
-    --slurpfile c "$tmp/c-$pr.json" --slurpfile s "$tmp/s-$pr.json" '
+    --slurpfile c "$tmp/c-$pr.json" --slurpfile s "$tmp/s-$pr.json" --slurpfile p "$tmp/p-$pr.json" '
     ($c | add // [] | map(select(.user.login == $bot) | (.body // "") | split("\n")[0])) as $first
     | {
         number: $pr, checks: $checks, checksDetail: $detail,
         rounds: ([$first[] | select(test("^<!-- factory-review round=[0-9]+ sha=[0-9a-f]{40} -->$"))] | length),
         summaryForHead: any($first[]; test("^<!-- factory-review round=[0-9]+ sha=" + $sha + " -->$")),
         gateForHead: any($first[]; . == "<!-- factory-gate sha=" + $sha + " -->"),
+        updateForHead: any($first[]; startswith("<!-- factory-update sha=" + $sha + " ")),
+        conflict: ($p[0].mergeable == false),
         reviewStatus: ([$s[0].statuses[] | select(.context == "factory-review") | .state] | first // "none")
       }'
 }

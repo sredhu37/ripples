@@ -23,6 +23,12 @@ run-name: "factory-gate PR #${{ inputs.pr || github.event.pull_request.number ||
 #                   current head of a PR in Needs human (factory PR with factory:human, or a
 #                   revert PR), every required check green (waits up to 20 minutes)
 #                   -> squash merge as sredhu37-bot, factory:done, board Done
+#     behind main   every merge above first checks the base (gate/merge.sh): no conflict ->
+#                   update-branch as sredhu37-bot, comment <!-- factory-update sha=<new> -->,
+#                   dispatch mode merge; conflict -> factory:in-review, factory-build.yml fix round
+#     mode merge    the factory's update of an approved head, or a head the gate said MERGE to that
+#                   is still in review; every required check green (waits up to 20 minutes)
+#                   -> squash merge as sredhu37-bot (or up to date again), factory:done, board Done
 #     mode fix      Sunny commented, or requested changes, on a factory PR in factory:human
 #                   (in factory:in-review only a comment containing @build counts)
 #                   -> factory-build.yml fix round (issue, pr, human=<source>); the PR comes
@@ -47,10 +53,10 @@ on:
         required: true
         type: string
       mode:
-        description: gate (after review PASS), approve (Sunny's approval), fix (Sunny's comment)
+        description: gate (after review PASS), approve (Sunny's approval), fix (Sunny's comment), merge (an approved head brought up to date)
         required: false
         type: choice
-        options: [gate, approve, fix]
+        options: [gate, approve, fix, merge]
         default: gate
       source:
         description: Mode fix only. review:<id> or comment:<id>, by sredhu37 on the PR
@@ -229,6 +235,7 @@ jobs:
       issues: write # labels
       pull-requests: write # the gate comment
       checks: read # re-check before the merge (with GITHUB_TOKEN in checks-green.sh)
+      actions: write # behind main: dispatch merge mode, or a fix round on a conflict
     env:
       PR: ${{ needs.check.outputs.pr }}
       SHA: ${{ needs.check.outputs.sha }}
@@ -277,6 +284,21 @@ jobs:
           BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
         run: .github/scripts/shared/move.sh "$ISSUE" factory:done
 
+      - name: Up to date with main, merge when green
+        if: steps.merge.outputs.update == 'updated'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OLD_SHA: ${{ env.SHA }}
+          NEW_SHA: ${{ steps.merge.outputs.new_sha }}
+        run: .github/scripts/gate/updated.sh
+      - name: Conflict with main, fix round
+        if: steps.merge.outputs.update == 'conflict'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
+          KIND: factory
+        run: .github/scripts/gate/conflict.sh
+
       - name: Needs human
         id: human
         if: steps.decide.outputs.decision == 'HUMAN' || steps.merge.outputs.refused == 'true'
@@ -308,6 +330,7 @@ jobs:
       issues: write # labels
       pull-requests: write # the merge note
       checks: read # re-check before the merge
+      actions: write # behind main: dispatch merge mode, or a fix round on a conflict
     env:
       PR: ${{ needs.check.outputs.pr }}
       SHA: ${{ needs.check.outputs.sha }}
@@ -333,14 +356,97 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
         run: .github/scripts/shared/move.sh "$ISSUE" factory:done
+      - name: Up to date with main, merge when green
+        if: steps.merge.outputs.update == 'updated'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OLD_SHA: ${{ env.SHA }}
+          NEW_SHA: ${{ steps.merge.outputs.new_sha }}
+        run: .github/scripts/gate/updated.sh
+      - name: Conflict with main, fix round
+        if: steps.merge.outputs.update == 'conflict'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
+          KIND: ${{ env.KIND }}
+        run: .github/scripts/gate/conflict.sh
       - name: Note on the PR
         env:
           GH_TOKEN: ${{ github.token }}
+          UPDATE: ${{ steps.merge.outputs.update }}
           MERGED: ${{ steps.merge.outputs.merged }}
           MERGE_REASON: ${{ steps.merge.outputs.reason }}
           CHECK_REASON: ${{ needs.check.outputs.reason }}
           EARLY: ${{ needs.check.outputs.early }}
         run: .github/scripts/gate/approve-note.sh
+
+  merge:
+    needs: check
+    if: needs.check.outputs.go == 'true' && needs.check.outputs.mode == 'merge'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: factory
+    permissions:
+      contents: read # scripts
+      issues: write # labels
+      pull-requests: write # notes
+      checks: read # re-check before the merge
+      actions: write # behind main again: dispatch merge mode, or a fix round on a conflict
+    env:
+      PR: ${{ needs.check.outputs.pr }}
+      SHA: ${{ needs.check.outputs.sha }}
+      ISSUE: ${{ needs.check.outputs.issue }}
+      KIND: ${{ needs.check.outputs.kind }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          sparse-checkout: .github/scripts
+          persist-credentials: false
+      # Main may have moved again while CI ran: gate/merge.sh then brings it up to date once more.
+      - name: Merge as sredhu37-bot
+        id: merge
+        env:
+          GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
+        run: .github/scripts/gate/try-merge.sh
+      - name: Done (label and board)
+        if: steps.merge.outputs.merged == 'true' && env.KIND == 'factory'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
+        run: .github/scripts/shared/move.sh "$ISSUE" factory:done
+      - name: Up to date with main, merge when green
+        if: steps.merge.outputs.update == 'updated'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OLD_SHA: ${{ env.SHA }}
+          NEW_SHA: ${{ steps.merge.outputs.new_sha }}
+        run: .github/scripts/gate/updated.sh
+      - name: Conflict with main, fix round
+        if: steps.merge.outputs.update == 'conflict'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
+          KIND: ${{ env.KIND }}
+        run: .github/scripts/gate/conflict.sh
+      - name: Needs human
+        id: human
+        if: steps.merge.outputs.refused == 'true' && env.KIND == 'factory'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
+          DECISION: MERGE
+          MERGE_REASON: ${{ steps.merge.outputs.reason }}
+        run: .github/scripts/gate/needs-human.sh
+      - name: Telegram
+        if: steps.human.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          REASON: ${{ steps.human.outputs.reason }}
+        run: .github/scripts/shared/pr-needs-human.sh "$PR" "$REASON"
 
   fix:
     needs: check

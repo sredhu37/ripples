@@ -1,15 +1,21 @@
 #!/usr/bin/env bash
-# Squash-merge a PR as the machine account, only if its head is still <sha> and every required
-# check is green. Spec: docs/factory.md, section Gate.
+# Squash-merge a PR as the machine account, only if its head is still <sha>, it is up to date with
+# its base, and every required check is green. Spec: docs/factory.md, section Gate.
+#
+# A head behind its base is never merged here (#314): with no conflict, GitHub's update-branch
+# merges the base into the PR (no agent); the new head runs CI and the caller hands it to the gate's
+# merge mode. With a conflict, nothing changes and the caller starts a fix round.
 #
 # Usage: gate/merge.sh <pr> <sha>
 # Env:   GH_TOKEN  FACTORY_TOKEN (sredhu37-bot): a merge by GITHUB_TOKEN starts no push
 #                  workflow. Never in a step that runs an agent.
 #        REPO      owner/name, defaults to GITHUB_REPOSITORY, then to the current gh repo
-#        DRY_RUN   1: check everything, do not merge
-# Output: merged=true|false and reason=<text> on stdout (also GITHUB_OUTPUT when set).
-#         Exit 0 when merged or skipped for a moved head (a new head gets its own round);
-#         exit 1 when the merge was refused, so the caller hands the PR to Sunny.
+#        DRY_RUN   1: check everything, do not update or merge
+#        MERGEABLE_WAIT  seconds to wait while GitHub computes whether the PR conflicts (default 60)
+# Output: merged=true|false, reason=<text>, and when behind update=updated|conflict (with
+#         new_sha=<sha> for updated) on stdout (also GITHUB_OUTPUT when set).
+#         Exit 0 when merged, updated, conflicting, or skipped for a moved head (a new head gets its
+#         own round); exit 1 when the merge was refused, so the caller hands the PR to Sunny.
 set -euo pipefail
 
 pr=${1:?usage: gate/merge.sh <pr> <sha>}
@@ -44,6 +50,55 @@ fi
 if [ "$head" != "$sha" ]; then
   emit merged false
   emit reason "the head moved from ${sha:0:7} to ${head:0:7}, so this decision no longer applies"
+  exit 0
+fi
+
+# Behind its base: bring it up to date first (never merge a head CI has not seen with the base).
+base=$(gh api "repos/$repo/pulls/$pr" --jq .base.ref)
+behind=$(gh api "repos/$repo/compare/$base...$sha" --jq .behind_by)
+if [ "$behind" -gt 0 ]; then
+  # mergeable is null while GitHub computes it.
+  waited=0
+  while :; do
+    mergeable=$(gh api "repos/$repo/pulls/$pr" --jq '.mergeable // "null"')
+    [ "$mergeable" != "null" ] && break
+    if [ "$waited" -ge "${MERGEABLE_WAIT:-60}" ]; then
+      emit merged false
+      emit reason "GitHub did not say within ${MERGEABLE_WAIT:-60}s whether the PR conflicts with $base"
+      exit 1
+    fi
+    sleep 5
+    waited=$((waited + 5))
+  done
+  if [ "$mergeable" = "false" ]; then
+    emit merged false
+    emit update conflict
+    emit reason "the PR is $behind commit(s) behind $base and conflicts with it"
+    exit 0
+  fi
+  if [ "${DRY_RUN:-}" = "1" ]; then
+    emit merged false
+    emit update updated
+    emit new_sha ""
+    emit reason "dry run: would bring PR #$pr up to date with $base ($behind commit(s) behind)"
+    exit 0
+  fi
+  gh api -X PUT "repos/$repo/pulls/$pr/update-branch" -f expected_head_sha="$sha" --silent
+  new_sha=$sha
+  for _ in $(seq 1 12); do
+    new_sha=$(gh api "repos/$repo/pulls/$pr" --jq .head.sha)
+    [ "$new_sha" != "$sha" ] && break
+    sleep 5
+  done
+  if [ "$new_sha" = "$sha" ]; then
+    emit merged false
+    emit reason "update-branch was accepted, but the head is still ${sha:0:7} after 60s"
+    exit 1
+  fi
+  emit merged false
+  emit update updated
+  emit new_sha "$new_sha"
+  emit reason "brought up to date with $base as ${new_sha:0:7} ($behind commit(s) behind); merges once its checks are green"
   exit 0
 fi
 

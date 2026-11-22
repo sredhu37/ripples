@@ -92,10 +92,11 @@
   <text x="610" y="582" class="small">HUMAN</text>
 
   <!-- 7a bot merge -->
-  <rect class="box" x="60" y="610" width="360" height="80" rx="8"/>
+  <rect class="box" x="60" y="610" width="360" height="84" rx="8"/>
   <text x="240" y="633" text-anchor="middle" class="head">Bot squash merge</text>
   <text x="240" y="652" text-anchor="middle" class="small">sredhu37-bot, FACTORY_TOKEN</text>
-  <text x="240" y="668" text-anchor="middle" class="small">issue: factory:done, board: Done</text>
+  <text x="240" y="668" text-anchor="middle" class="small">behind main: Update branch first; conflict: fix round</text>
+  <text x="240" y="684" text-anchor="middle" class="small">issue: factory:done, board: Done</text>
 
   <!-- 7b needs human -->
   <rect class="box" x="480" y="610" width="360" height="80" rx="8"/>

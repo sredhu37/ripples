@@ -14,12 +14,16 @@
 #   fix      Sunny's comment: <source> is review:<id> or comment:<id> by sredhu37 on this PR, a
 #            factory PR whose issue has factory:human. The workflow then starts a fix round.
 #            While the issue has factory:in-review, only a comment containing @build counts.
+#   merge    a head the factory may merge without a new review: the bot's factory-update marker
+#            names it (gate/updated.sh after update-branch), or the gate said MERGE to it and the
+#            issue is still factory:in-review. Factory PR (in-review or human) or revert PR, every
+#            required check green (waits up to CHECK_WAIT). Output approved=update|gate.
 # Env:   GH_TOKEN    token with pull-requests, issues, checks and statuses read (GITHUB_TOKEN)
 #        REPO        owner/name, defaults to GITHUB_REPOSITORY, then to the current gh repo
 #        SUNNY       the account whose review or comment counts (default sredhu37)
 #        GATE_PATHS  risky list file, checked out from main (default .github/gate-paths.txt)
 #        RISKY_OUT   gate mode: file for the risky hits, "<file><TAB><pattern>" per line
-#        CHECK_WAIT  seconds to wait for running checks (default 600 gate, 1200 approve)
+#        CHECK_WAIT  seconds to wait for running checks (default 600 gate, 1200 approve and merge)
 # Output: key=value lines on stdout: go, reason, mode, pr, sha, kind, issue, title, and risky
 #         (gate mode, count of hits), tell (approve mode: worth a note on the PR when go=false),
 #         early (approve mode: the approval came while the factory still has the PR).
@@ -27,8 +31,8 @@
 #         Exit 0 for every decision; non-zero only on API errors.
 set -euo pipefail
 
-mode=${1:?usage: gate/check.sh <gate|approve|fix> <pr> [<source>]}
-pr=${2:?usage: gate/check.sh <gate|approve|fix> <pr> [<source>]}
+mode=${1:?usage: gate/check.sh <gate|approve|fix|merge> <pr> [<source>]}
+pr=${2:?usage: gate/check.sh <gate|approve|fix|merge> <pr> [<source>]}
 source=${3:-}
 sunny=${SUNNY:-sredhu37}
 gate_paths=${GATE_PATHS:-.github/gate-paths.txt}
@@ -67,7 +71,7 @@ skip() {
 
 emit mode "$mode"
 case "$mode" in
-  gate | approve | fix) ;;
+  gate | approve | fix | merge) ;;
   *) skip "unknown mode '$mode'" ;;
 esac
 if ! [[ "$pr" =~ ^[0-9]+$ ]]; then
@@ -151,6 +155,27 @@ case "$mode" in
     fi
     emit review "$review_id"
     ;;
+  merge)
+    # A head the factory may merge without a new review: its own update-branch merge of an approved
+    # head (marker from gate/updated.sh), or a head the gate said MERGE to that is still in review.
+    [ "$kind" = "factory" ] || [ "$kind" = "revert" ] || skip "branch $ref by $author is neither a factory PR nor a revert PR"
+    if [ "$kind" = "factory" ]; then
+      case "$label" in
+        factory:in-review | factory:human) ;;
+        *) skip "#$issue has '$label', not factory:in-review or factory:human" ;;
+      esac
+    fi
+    firsts=$(gh api --paginate "repos/$repo/issues/$pr/comments" --jq '
+      .[] | select(.user.login == "github-actions[bot]") | (.body // "") | split("\n") | .[0] + "\t" + (.[1] // "")')
+    if grep -q "^<!-- factory-update sha=$sha from=[0-9a-f]\{40\} -->" <<< "$firsts"; then
+      emit approved update
+    elif [ "$kind" = "factory" ] && [ "$label" = "factory:in-review" ] &&
+      grep -qF "<!-- factory-gate sha=$sha -->"$'\t'"## Gate at \`${sha:0:7}\`: MERGE" <<< "$firsts"; then
+      emit approved gate
+    else
+      skip "${sha:0:7} is neither the factory's update of an approved head nor a head the gate said MERGE to"
+    fi
+    ;;
   fix)
     [ "$kind" = "factory" ] || skip "branch $ref by $author is not a factory PR"
     case "$label" in
@@ -186,7 +211,7 @@ esac
 # Required checks: the gate and an approval merge only a green head.
 if [ "$mode" != "fix" ]; then
   default_wait=600
-  [ "$mode" = "approve" ] && default_wait=1200
+  { [ "$mode" = "approve" ] || [ "$mode" = "merge" ]; } && default_wait=1200
   checks=$("$here/checks-green.sh" "$sha" "${CHECK_WAIT:-$default_wait}")
   checks_state=$(sed -n 's/^state=//p' <<< "$checks")
   checks_detail=$(sed -n 's/^detail=//p' <<< "$checks")
@@ -212,6 +237,7 @@ case "$mode" in
   gate) reason="review passed and every required check is green for ${sha:0:7}" ;;
   approve) reason="$sunny approved ${sha:0:7} and every required check is green" ;;
   fix) reason="$sunny's $source on a PR with $label" ;;
+  merge) reason="${sha:0:7} is approved for merge and every required check is green" ;;
 esac
 notice "$mode: $reason"
 emit go true
