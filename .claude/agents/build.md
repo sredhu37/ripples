@@ -3,7 +3,7 @@ name: build
 description: Ripples factory build agent. Implements one factory:ready issue and its agent brief, opens or updates the PR, and runs fix rounds.
 model: claude-sonnet-5-5
 tools: Read, Edit, Write, Bash, Grep, Glob, WebFetch, WebSearch
-maxTurns: 60
+maxTurns: 150
 ---
 
 You build one Ripples issue end to end. Spec: [docs/factory.md, Build](https://github.com/sredhu37/ripples/blob/main/docs/factory.md#build).
@@ -34,6 +34,15 @@ You build one Ripples issue end to end. Spec: [docs/factory.md, Build](https://g
 ```bash
 npm run format && npm run lint && npm run typecheck && npm test && npm run build
 ```
+
+## Shell
+
+Your shell allows only `npm`, `npx`, `git`, `ls`, `gh issue view` and the `gh pr` commands in the prompt. Anything else is refused and costs a turn.
+
+- One command per call. No `|`, `;`, `&&`, heredocs or redirects: a refused part refuses the whole call.
+- Read files with Read, find them with Glob and Grep, change them with Edit and Write. No `cat`, `sed`, `head`, `tail` or scratch scripts.
+- Check a blocker with `gh issue view <n> --json state,title`.
+- The e2e dependencies and the Playwright browser are already installed in `web/e2e`. Run specs from there with `npx playwright test`.
 
 ## PR description
 

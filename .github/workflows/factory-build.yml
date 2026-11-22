@@ -12,9 +12,10 @@ run-name: "factory-build issue #${{ inputs.issue }}${{ inputs.pr && format(' fix
 #              or factory:in-review without an open PR; skip if any blocker is open;
 #              label factory:in-progress, board In progress
 #     build:   claude-code-action, prompt .github/prompts/build.md + .claude/agents/build.md from main; branch factory/issue-<n>; opens the PR
-#     finish:  PR open -> factory:in-review, board In review
+#     finish:  PR open -> factory:in-review, board In review (also when the job failed after this run
+#                opened or pushed the PR)
 #              usage limit -> factory:ready + "paused: usage limit" comment, board Ready
-#              build job failed or timed out -> label stays, "stopped" comment with the agent's last
+#              build job failed or timed out before a push -> label stays, "stopped" comment with the agent's last
 #                words; the scan continues it (max 3)
 #              the agent finished without a PR, or a fix round pushed nothing -> factory:human +
 #                comment, board Needs human, Slack
@@ -128,7 +129,17 @@ jobs:
         with:
           node-version: 26
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            web/package-lock.json
+            server/package-lock.json
+            web/e2e/package-lock.json
       - run: npm run install:all
+      # The agent must change and run web/e2e specs for every *.tsx or *.css change; same setup as pr-checks.
+      - run: npm ci
+        working-directory: web/e2e
+      - run: npx playwright install --with-deps chromium
+        working-directory: web/e2e
 
       # Before the branch switch, so the script and the templates come from main.
       - name: Prompt (template and build.md from main, issue, trusted comments)
@@ -151,8 +162,8 @@ jobs:
           allowed_bots: github-actions
           claude_args: >-
             --model claude-sonnet-5-5
-            --max-turns 60
-            --allowedTools "Read,Edit,Write,Glob,Grep,WebFetch,WebSearch,Bash(npm:*),Bash(npx:*),Bash(git:*),Bash(gh pr create:*),Bash(gh pr view:*),Bash(gh pr edit:*),Bash(gh pr comment:*)"
+            --max-turns 150
+            --allowedTools "Read,Edit,Write,Glob,Grep,WebFetch,WebSearch,Bash(npm:*),Bash(npx:*),Bash(git:*),Bash(ls:*),Bash(gh issue view:*),Bash(gh pr create:*),Bash(gh pr view:*),Bash(gh pr edit:*),Bash(gh pr comment:*)"
 
       - name: Usage limit?
         id: limit

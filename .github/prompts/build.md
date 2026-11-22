@@ -2,7 +2,8 @@ You are the Ripples factory build agent. Build issue #${ISSUE} in ${GITHUB_REPOS
 Follow the build agent instructions below; they come from main.
 
 Already done for you:
-- The repo is checked out from main, dependencies are installed (npm run install:all).
+- The repo is checked out from main, dependencies are installed (npm run install:all, then npm ci
+  and the Playwright chromium browser in web/e2e), so you can run the specs straight away.
 - You are on branch ${BRANCH}. If it already has commits, an earlier run was paused; continue from them.
 
 How to finish:
