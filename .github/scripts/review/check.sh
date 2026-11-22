@@ -16,6 +16,7 @@
 #         GITHUB_OUTPUT when it is set. Exit 0 for every decision; non-zero only on API errors.
 #
 # A factory PR is open, from this repo, on branch factory/issue-<n>, opened by claude[bot].
+# A head named by the bot's <!-- factory-update sha=<sha> ... --> marker is skipped (gate merge mode).
 # Rounds are counted from review-summary comments by github-actions[bot] whose first line is
 # <!-- factory-review round=<k> sha=<sha> -->. Round = that count + 1; round 6 never runs.
 set -euo pipefail
@@ -90,6 +91,13 @@ emit round "$round"
 
 if [ "$event" != "workflow_dispatch" ] && printf '%s\n' "$summaries" | grep -qx "$sha"; then
   skip "head ${sha:0:7} already has a review summary"
+fi
+# The factory's own update-branch merge of an approved head goes straight to the gate's merge mode.
+updated=$(gh api --paginate "repos/$repo/issues/$pr/comments" --jq "
+  .[] | select(.user.login == \"github-actions[bot]\"
+    and ((.body // \"\") | startswith(\"<!-- factory-update sha=$sha \"))) | .id")
+if [ -n "$updated" ]; then
+  skip "head ${sha:0:7} is the factory's update of an approved head with main; the gate merges it"
 fi
 if [ "$round" -gt "$max_rounds" ]; then
   skip "$count review rounds used, the limit is $max_rounds"

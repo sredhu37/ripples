@@ -99,7 +99,7 @@ Needs human: never picked
 
 - **One ticket, one slot**, at every station: its 4 reviewers count as 1. Run names carry the ticket (`factory-build issue #<n>`, `factory-review factory/issue-<n>` or `PR #<m>`, `factory-gate PR #<m>`), which is how the scan counts them. A ticket waiting for CI holds no slot.
 - **Hand-offs inside a ticket stay instant:** build to CI to review to gate, fix rounds from review, and Sunny's review or comment on a PR (`factory-gate.yml` relay). Only the start and the continue of a stopped ticket wait for the scan.
-- **Missing station (In review):** checks still running: wait. A red required check: fix round (the prompt names the red checks). Green with no review for the head: review. Review FAIL below round 5 with no fix round running: fix round. Review PASS with no gate comment for the head: gate. Anything else (round 5, review error, gate decided) is already Sunny's.
+- **Missing station (In review):** checks still running: wait. A red required check: fix round (the prompt names the red checks). Green with no review for the head: review. Review FAIL below round 5 with no fix round running: fix round. Review PASS with no gate comment for the head: gate. A head brought up to date by the factory, or a head the gate said MERGE to that is still in review: gate merge mode (a conflict: fix round). Anything else (round 5, review error) is already Sunny's.
 - **Local tickets** are left alone and only counted: In progress with the label set by a person, or In review whose open PR is not on `factory/issue-<n>`. They stop counting after 2 quiet hours.
 - **Continue cap:** every continue posts a `factory-continue` comment. After 3 since the ticket last entered Ready by hand: `factory:human`, a comment and Telegram with the build's last words. Setting `factory:ready` again gives 3 more. Starting a Ready ticket is not a continue, so usage-limit pauses never count.
 
@@ -190,9 +190,13 @@ review passed ──► any changed file on the risky list? ──yes──► f
 - Gate agent: `.claude/agents/gate.md` from main, Sonnet, 10 turns, `Read`, `Grep`, `Glob` only, a read-only `GITHUB_TOKEN`. It gets the diff, the PR description, the review summary and the evidence screenshots. Its final json `{decision, reason}` decides; a missing or invalid block is HUMAN.
 - One gate comment per head, marker `<!-- factory-gate sha=<sha> -->`: risks (risky files, or the agent's analysis), decision, reason.
 - MERGE: the head must be unchanged and every check green, then `sredhu37-bot` squash-merges with `FACTORY_TOKEN` (a `GITHUB_TOKEN` merge starts no push workflow). `Closes #n` closes the issue; the gate sets `factory:done` and moves the card to Done. A refused merge is HUMAN.
+- **Up to date before merge** ([#311](https://github.com/sredhu37/ripples/issues/311), decision 6): `gate/merge.sh` never merges a head behind main, for the gate's MERGE, Sunny's approval and merge mode alike.
+  - No conflict: GitHub's update-branch merges main into the PR as `sredhu37-bot` (no agent, no tokens). A comment `<!-- factory-update sha=<new> from=<old> -->` marks the new head as the factory's update of an approved head, and `factory-gate.yml` mode `merge` waits up to 20 minutes for its checks, then merges. Review skips such a head (no new round), and Sunny need not approve again. If main moved meanwhile, merge mode brings it up to date once more.
+  - Conflict: a fix round (`factory-build.yml` with `issue` and `pr`, the prompt says to merge `origin/main` and resolve). The issue goes to `factory:in-review` (also from Needs human), so the new head is reviewed and gated again; the round counts toward 5. A revert PR gets a note to resolve by hand.
+  - Checks red after the update: the scan starts a fix round.
 - HUMAN: `factory:human`, card to Needs human, Telegram: `Needs human: PR #n "title"`, the reason, the PR link and the evidence video link (the first `/demo.mp4` link in the evidence comment, or the PR link).
 
-**Ruleset on main:** PR only, every CI check green, no force-push, Sunny on the bypass list.
+**Ruleset on main:** PR only, every CI check green, branch up to date with main (`strict_required_status_checks_policy`), no force-push, Sunny on the bypass list.
 
 **Sunny's review:** Sunny's approving review is the approval (changed 12.11.2026; before, pressing Merge was the approval, [#116](https://github.com/sredhu37/ripples/issues/116), [#141](https://github.com/sredhu37/ripples/issues/141)). It applies to every PR in Needs human: risky-list PRs, gate HUMAN PRs and revert PRs.
 

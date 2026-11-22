@@ -16,6 +16,8 @@ type Pr = {
   reviewStatus: string;
   rounds: number;
   gateForHead: boolean;
+  updateForHead?: boolean;
+  conflict?: boolean;
 };
 
 function pr(over: Partial<Pr> = {}): Pr {
@@ -57,7 +59,20 @@ describe("station (In review)", () => {
     [{ summaryForHead: true, reviewStatus: "failure", rounds: 5 }, "none"],
     [{ summaryForHead: true, reviewStatus: "error", rounds: 1 }, "none"],
     [{ summaryForHead: true, reviewStatus: "success", rounds: 1 }, "gate"],
-    [{ summaryForHead: true, reviewStatus: "success", rounds: 1, gateForHead: true }, "none"],
+    [{ summaryForHead: true, reviewStatus: "success", rounds: 1, gateForHead: true }, "merge"],
+    [
+      {
+        summaryForHead: true,
+        reviewStatus: "success",
+        rounds: 1,
+        gateForHead: true,
+        conflict: true,
+      },
+      "fix",
+    ],
+    [{ updateForHead: true }, "merge"],
+    [{ updateForHead: true, checks: "pending" }, "wait"],
+    [{ updateForHead: true, checks: "red" }, "fix"],
   ])("%j -> %s", (facts, action) => {
     expect(station(ticket(1, "review", { pr: pr(facts) })).action).toBe(action);
   });
@@ -128,6 +143,14 @@ describe("plan", () => {
       ["factory-build.yml", { issue: "1", pr: "11" }],
       ["factory-gate.yml", { pr: "12", mode: "gate" }],
     ]);
+  });
+
+  it("hands an updated head to the gate's merge mode", () => {
+    const result = run([ticket(1, "review", { pr: pr({ number: 11, updateForHead: true }) })]);
+    expect(result.actions[0]).toMatchObject({
+      workflow: "factory-gate.yml",
+      inputs: { pr: "11", mode: "merge" },
+    });
   });
 
   it("uses no slot for a ticket waiting for CI", () => {

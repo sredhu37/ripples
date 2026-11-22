@@ -14,7 +14,9 @@
 //     continues  scan continues since the ticket last entered Ready by hand
 //     pr         null, or { number, checks: "green" | "red" | "pending", checksDetail,
 //                summaryForHead, reviewStatus: "success" | "failure" | "error" | "none",
-//                rounds, gateForHead }
+//                rounds, gateForHead, updateForHead, conflict }
+//                updateForHead: the bot's factory-update marker names the head (gate/updated.sh)
+//                conflict: GitHub says the PR conflicts with its base
 //   Tickets in other columns (Needs human, for example) come in with only number and active, so
 //   their runs still use a slot.
 //
@@ -47,7 +49,7 @@ export function slotsUsed(tickets, now) {
 
 /**
  * The missing station of a factory ticket in In review.
- * Returns { action: "build" | "fix" | "review" | "gate" | "wait" | "none", reason }.
+ * Returns { action: "build" | "fix" | "review" | "gate" | "merge" | "wait" | "none", reason }.
  * "wait" and "none" use no slot.
  */
 export function station(ticket) {
@@ -59,6 +61,11 @@ export function station(ticket) {
     return {
       action: "fix",
       reason: `PR #${pr.number}: ${pr.checksDetail || "a required check is red"}`,
+    };
+  if (pr.updateForHead)
+    return {
+      action: "merge",
+      reason: `PR #${pr.number}: brought up to date with main, not merged yet`,
     };
   if (!pr.summaryForHead || pr.reviewStatus === "none")
     return { action: "review", reason: `PR #${pr.number}: checks green, no review for this head` };
@@ -80,7 +87,10 @@ export function station(ticket) {
       action: "gate",
       reason: `PR #${pr.number}: review passed, no gate decision for this head`,
     };
-  return { action: "none", reason: `PR #${pr.number}: the gate decided this head` };
+  // Still in review after the gate decided: MERGE whose merge, update or fix round did not run.
+  if (pr.conflict)
+    return { action: "fix", reason: `PR #${pr.number}: gate decided, but it conflicts with main` };
+  return { action: "merge", reason: `PR #${pr.number}: gate decided, still in review` };
 }
 
 /** The dispatch for a station: workflow file and inputs. */
@@ -95,6 +105,11 @@ export function dispatchFor(ticket, action) {
       };
     case "review":
       return { workflow: "factory-review.yml", inputs: { pr: String(ticket.pr.number) } };
+    case "merge":
+      return {
+        workflow: "factory-gate.yml",
+        inputs: { pr: String(ticket.pr.number), mode: "merge" },
+      };
     case "gate":
       return {
         workflow: "factory-gate.yml",
