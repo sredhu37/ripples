@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test";
-import { LABEL, passParentGate, seedProgress, steps } from "./evidence";
+import { LABEL, fakeFamily, openTrail, passParentGate, steps } from "./evidence";
 
 test("facts: a parent opens the fact cards behind the maths gate", async ({ page }) => {
   const step = await steps(page, "facts");
-  await seedProgress(page);
-  await page.goto("./");
+  await fakeFamily(page);
+  await openTrail(page);
   await step();
 
   await passParentGate(page, step);

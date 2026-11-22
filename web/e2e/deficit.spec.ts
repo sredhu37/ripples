@@ -1,12 +1,12 @@
 import { expect, test } from "@playwright/test";
-import { LABEL, seedProgress, steps } from "./evidence";
+import { LABEL, fakeFamily, openTrail, steps } from "./evidence";
 
 test("deficit: a gap adds to the debt, interest takes a slice, a balanced year unlocks the quiz", async ({
   page,
 }) => {
   const step = await steps(page, "deficit-toy");
-  await seedProgress(page, { lang: "en", badges: ["deficit"] });
-  await page.goto("./");
+  await fakeFamily(page, { kids: [{ lang: "en", badges: ["deficit"] }] });
+  await openTrail(page);
 
   const stop = page.locator(".trail .stop-done button.place");
   await expect(stop).toHaveCount(1);

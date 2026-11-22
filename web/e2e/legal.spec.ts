@@ -1,8 +1,8 @@
 import { expect, test } from "@playwright/test";
-import { passParentGate, seedProgress, steps } from "./evidence";
+import { fakeFamily, steps } from "./evidence";
 
-// The spec runs without an API, so /api/auth and /api/legal are answered here.
-test("legal pages: linked from login and profile, Impressum details come from the API, in EN and DE", async ({
+// The spec runs without an API, so /api/legal is answered here and the rest by fakeFamily.
+test("legal pages: linked from login, Impressum details come from the API, in EN and DE", async ({
   page,
 }) => {
   const step = await steps(page, "legal");
@@ -19,16 +19,11 @@ test("legal pages: linked from login and profile, Impressum details come from th
       }),
     }),
   );
-  await page.route("**/api/auth/**", (route) => {
-    const url = route.request().url();
-    const body = url.endsWith("/get-session") ? "null" : "{}";
-    return route.fulfill({ status: 200, contentType: "application/json", body });
-  });
 
-  await seedProgress(page);
+  // A logged-out device opens the login screen.
+  await fakeFamily(page, { loggedIn: false });
   await page.goto("./");
-  await passParentGate(page, step);
-  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(page.getByLabel("Your email")).toBeVisible();
 
   // From the login screen.
   await page.getByRole("button", { name: "Legal notice" }).click();

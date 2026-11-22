@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { LABEL, seedProgress, steps, type Lang } from "./evidence";
+import { LABEL, fakeFamily, openTrail, steps, type Lang } from "./evidence";
 
 // CI passes the ids of lessons whose src/content/<id>.* files changed.
 const fromEnv = (process.env.LESSON_IDS ?? "")
@@ -16,8 +16,8 @@ for (const id of LESSON_IDS) {
     test(`lesson: ${id} story to toy in ${lang}`, async ({ page }) => {
       const step = await steps(page, `lesson-${id}-${lang}`);
       // A badge for this lesson makes it the one "done" stop, so it is open on the trail.
-      await seedProgress(page, { lang, badges: [id] });
-      await page.goto("./");
+      await fakeFamily(page, { kids: [{ lang, badges: [id] }] });
+      await openTrail(page);
 
       const stop = page.locator(".trail .stop-done button.place");
       await expect(stop).toHaveCount(1);

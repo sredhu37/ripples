@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test";
-import { LABEL, seedProgress, steps } from "./evidence";
+import { LABEL, fakeFamily, openTrail, steps } from "./evidence";
 
 test("gdp: selling moves the bar, giving bread away leaves it still", async ({ page }) => {
   const step = await steps(page, "gdp-toy");
-  await seedProgress(page, { lang: "en", badges: ["gdp"] });
-  await page.goto("./");
+  await fakeFamily(page, { kids: [{ lang: "en", badges: ["gdp"] }] });
+  await openTrail(page);
 
   const stop = page.locator(".trail .stop-done button.place");
   await expect(stop).toHaveCount(1);

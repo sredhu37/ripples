@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test";
-import { LABEL, seedProgress, steps } from "./evidence";
+import { LABEL, fakeFamily, openTrail, steps } from "./evidence";
 
 test("centralbanks: say no to the mayor, then lend only against collateral", async ({ page }) => {
   const step = await steps(page, "centralbanks-toy");
-  await seedProgress(page, { lang: "en", badges: ["centralbanks"] });
-  await page.goto("./");
+  await fakeFamily(page, { kids: [{ lang: "en", badges: ["centralbanks"] }] });
+  await openTrail(page);
   await page.locator(".trail .stop-done button.place").click();
 
   const toy = page.locator(".lesson-body .stage-wrap");

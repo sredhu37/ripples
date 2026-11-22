@@ -36,7 +36,8 @@ export async function verifyLoginCode(email: string, otp: string): Promise<Verif
 export async function getSessionEmail(): Promise<string | null> {
   try {
     const res = await fetch("/api/auth/get-session", { credentials: "same-origin" });
-    if (!res.ok) return null;
+    // The preview server has no API and answers with the app page: that is logged out.
+    if (!res.ok || !res.headers.get("content-type")?.includes("json")) return null;
     const data = (await res.json()) as { user?: { email?: string } } | null;
     return data?.user?.email ?? null;
   } catch {

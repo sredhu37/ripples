@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test";
-import { LABEL, seedProgress, steps } from "./evidence";
+import { LABEL, fakeFamily, openTrail, steps } from "./evidence";
 
 test("timeline: eras and regions filter the world events", async ({ page }) => {
   const step = await steps(page, "timeline");
-  await seedProgress(page);
-  await page.goto("./");
+  await fakeFamily(page);
+  await openTrail(page);
   await step();
 
   await page.getByRole("button", { name: LABEL.worldTimeline.en }).click();

@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test";
-import { passParentGate, seedProgress, steps } from "./evidence";
+import { fakeFamily, openTrail, passParentGate, steps } from "./evidence";
 
 test("parents: a Paused lesson is missing from the lesson list", async ({ page }) => {
-  await seedProgress(page);
+  await fakeFamily(page);
   await page.route("**/api/features", (route) => route.fulfill({ json: { "show-loans": false } }));
-  await page.goto("./");
+  await openTrail(page);
   await passParentGate(page, async () => {});
   const group = page.locator("details.lesson-group-accordion").first();
   await group.locator("summary").click();
@@ -16,23 +16,23 @@ test("parents: a Paused lesson is missing from the lesson list", async ({ page }
   );
 });
 
-test("parents: the panel sits behind the maths gate and controls the trail", async ({ page }) => {
+test("parents: family settings sit behind the maths gate and control the trail", async ({
+  page,
+}) => {
   const step = await steps(page, "parents");
-  await seedProgress(page);
-  await page.goto("./");
+  const api = await fakeFamily(page);
+  await openTrail(page);
   const stops = page.locator(".trail button.place");
   const before = await stops.count();
   await step();
 
   await passParentGate(page, step);
 
-  // Save code is shown.
-  const code = page.getByRole("textbox", { name: "Save progress" });
-  await expect(code).toHaveValue(/^RIP1\./);
-  await code.scrollIntoViewIfNeeded();
-  await step();
-
-  // One age group: the panel has no age section.
+  // The old save, restore and reset sections are gone.
+  await expect(page.getByRole("heading", { name: "Family settings" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: /Save progress|Restore progress|Start fresh/ }),
+  ).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "Age group" })).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "Lesson selection" })).toBeVisible();
 
@@ -45,6 +45,7 @@ test("parents: the panel sits behind the maths gate and controls the trail", asy
   await group.locator("label.lesson-toggle-row").first().click();
   await expect(toggle).not.toBeChecked();
   await step();
+  await expect.poll(() => api.profiles[0].disabledLessons.length).toBe(1);
 
   // Close: the trail has one stop fewer.
   await page.getByRole("button", { name: "Close" }).click();

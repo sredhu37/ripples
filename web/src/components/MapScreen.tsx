@@ -19,6 +19,7 @@ interface Props {
   onOpenLesson: (id: string) => void;
   onParents: () => void;
   onTimeline: () => void;
+  onChangeKid: () => void;
 }
 
 export function MapScreen({
@@ -30,6 +31,7 @@ export function MapScreen({
   onOpenLesson,
   onParents,
   onTimeline,
+  onChangeKid,
 }: Props) {
   const { lang, name, muted } = progress;
   // A Paused lesson is left out like a Disabled one; its badge stays in `progress`.
@@ -47,6 +49,9 @@ export function MapScreen({
       <header className="topbar">
         <h1 className="logo">{t(lang, "appName")}</h1>
         <div className="topbar-actions">
+          <button type="button" className="btn btn-quiet" onClick={onChangeKid}>
+            {t(lang, "changeKid")}
+          </button>
           <LangSwitch lang={lang} onLang={onLang} />
           <button
             type="button"

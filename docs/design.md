@@ -75,7 +75,7 @@ UX rules (the ux-ui review agent checks these first):
 
 - React, TypeScript and Vite. Output is static files.
 - Public GitHub repo `sredhu37/ripples`. No personal names in the repo.
-- Progress is saved in browser storage on the device (name, language, mute, badges). Parents get a Save/Restore code (`RIP1.<payload>.<checksum>`) behind a maths gate. No server.
+- Progress (nickname, language, mute, badges, disabled lessons) is saved per kid profile through the API, so it follows the family to any device. Kids tap their picture on the profile picker; only parents log in. Profiles are managed in family settings behind a maths gate.
 - Offline: a small service worker caches the app after the first visit.
 - Tablet first (iPad), also works on phone and Mac. Touch targets are at least 60 px.
 

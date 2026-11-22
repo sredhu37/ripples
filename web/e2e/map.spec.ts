@@ -1,30 +1,36 @@
 import { expect, test } from "@playwright/test";
-import { seedProgress, steps } from "./evidence";
+import { GOOD_CODE, fakeFamily, openTrail, steps } from "./evidence";
 
 test("map: a Paused lesson is not on the trail and numbers stay consecutive", async ({ page }) => {
-  await seedProgress(page);
+  await fakeFamily(page);
   await page.route("**/api/features", (route) => route.fulfill({ json: { "show-loans": false } }));
-  await page.goto("./");
+  await openTrail(page);
   const stops = page.locator(".trail button.place");
   await expect(page.getByText("Loans", { exact: true })).toHaveCount(0);
   await expect(stops.nth(5)).toContainText("6. Banks");
 });
 
-test("map: a new child names herself and sees the trail", async ({ page }) => {
+test("map: a new family logs in, adds a kid and sees the trail", async ({ page }) => {
   const step = await steps(page, "map");
+  await fakeFamily(page, { loggedIn: false, kids: [] });
   await page.goto("./");
 
-  // First visit: the name screen.
-  const name = page.getByRole("textbox");
-  await expect(name).toBeVisible();
-  // One age group: the name screen has no age choice.
-  await expect(page.getByText(/age group|junior|senior/i)).toHaveCount(0);
+  // Log in. A family with no profile lands on family settings with the add form open.
+  await page.getByLabel("Your email").fill("mum@example.com");
+  await page.getByRole("button", { name: "Send my code" }).click();
+  await page.getByLabel("6-digit code").fill(GOOD_CODE);
+  await page.getByRole("button", { name: "Log in", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Family settings" })).toBeVisible();
   await step();
-  await name.fill("Ava");
-  await step();
-  await page.getByRole("button", { name: "Let's go" }).click();
 
-  // The map greets her and only the first trail stop is open.
+  await page.getByLabel("Nickname").fill("Ava");
+  await step();
+  await page.getByRole("button", { name: "Add profile" }).click();
+  await expect(page.getByRole("button", { name: "Edit Ava" })).toBeVisible();
+  await page.getByRole("button", { name: "Close" }).click();
+
+  // The picker shows Ava; one tap opens her trail.
+  await page.getByRole("button", { name: "Ava", exact: true }).click();
   await expect(page.getByRole("heading", { level: 1, name: "Ripples" })).toBeVisible();
   await expect(page.getByText("Hi Ava! Pick a place on the trail.")).toBeVisible();
   const stops = page.locator(".trail button.place");
