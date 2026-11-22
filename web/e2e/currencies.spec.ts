@@ -1,12 +1,12 @@
 import { expect, test } from "@playwright/test";
-import { LABEL, seedProgress, steps } from "./evidence";
+import { LABEL, fakeFamily, openTrail, steps } from "./evidence";
 
 test("currencies: the note still buys bread after the vault stops swapping gold", async ({
   page,
 }) => {
   const step = await steps(page, "currencies-toy");
-  await seedProgress(page, { lang: "en", badges: ["currencies"] });
-  await page.goto("./");
+  await fakeFamily(page, { kids: [{ lang: "en", badges: ["currencies"] }] });
+  await openTrail(page);
 
   const stop = page.locator(".trail .stop-done button.place");
   await expect(stop).toHaveCount(1);

@@ -1,54 +1,81 @@
-import { useCallback, useEffect, useState } from "react";
-import { getSessionEmail } from "./auth";
+import { useEffect, useState } from "react";
+import {
+  ApiError,
+  changeProfile,
+  createProfile,
+  fetchFamily,
+  removeProfile,
+  saveBadge,
+  type Profile,
+  type ProfileChanges,
+} from "./api";
+import { getSessionEmail, logOut } from "./auth";
+import { loadDeviceLang, saveDeviceLang } from "./deviceLang";
 import { FactCards } from "./components/FactCards";
+import { FamilySettings } from "./components/FamilySettings";
 import { LoginScreen } from "./components/LoginScreen";
-import { ProfileScreen } from "./components/ProfileScreen";
+import { ProfilePicker } from "./components/ProfilePicker";
 import { LegalScreen } from "./components/LegalScreen";
 import type { LegalPage } from "./legal/texts";
 import { getLesson } from "./content";
 import { NO_LESSONS, fetchFeatures, pausedLessons } from "./features";
+import { t } from "./i18n";
 import { LessonRunner } from "./lesson/LessonRunner";
 import { LESSONS } from "./lessons";
 import { LessonPlaceholder } from "./components/LessonPlaceholder";
 import { MapScreen } from "./components/MapScreen";
-import { NameScreen } from "./components/NameScreen";
 import { TimelineScreen } from "./components/TimelineScreen";
-import { ParentPanel } from "./components/ParentPanel";
-import {
-  cleanName,
-  earnBadge,
-  emptyProgress,
-  loadProgress,
-  saveProgress,
-  toggleLesson,
-  type Lang,
-  type Progress,
-} from "./progress";
+import { emptyProgress, progressFromProfile, toggleLesson, type Lang } from "./progress";
 import { setMuted } from "./sound";
 import { stopSpeaking } from "./speech";
 
 type Screen =
+  | { kind: "loading" }
+  | { kind: "login" }
+  | { kind: "picker" }
+  | { kind: "settings"; gated: boolean }
   | { kind: "map" }
   | { kind: "lesson"; id: string }
-  | { kind: "parents" }
-  | { kind: "login" }
-  | { kind: "profile"; email: string }
   | { kind: "facts" }
   | { kind: "timeline" }
   | { kind: "legal"; page: LegalPage; back: Screen };
 
 export function App() {
-  const [progress, setProgress] = useState<Progress>(() => loadProgress(window.localStorage));
+  const [deviceLang, setDeviceLang] = useState<Lang>(() => loadDeviceLang(window.localStorage));
+  // The family's profiles and the active profile: the API is the source of truth.
+  const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const [notSaved, setNotSaved] = useState(false);
   const [paused, setPaused] = useState<ReadonlySet<string>>(NO_LESSONS);
-  const [screen, setScreen] = useState<Screen>({ kind: "map" });
-  // true when the name was already saved at load time ("welcome back")
-  const [returning] = useState(() => progress.name !== "");
+  const [screen, setScreen] = useState<Screen>({ kind: "loading" });
+
+  const active = profiles.find((p) => p.id === activeId) ?? null;
+  const progress = active ? progressFromProfile(active) : { ...emptyProgress(), lang: deviceLang };
 
   useEffect(() => {
-    saveProgress(window.localStorage, progress);
     setMuted(progress.muted);
     document.documentElement.lang = progress.lang;
-  }, [progress]);
+  }, [progress.muted, progress.lang]);
+
+  /** Loads the family, then shows the picker, or family settings when there is no profile. */
+  async function enterFamily() {
+    try {
+      const family = await fetchFamily();
+      setProfiles(family);
+      setActiveId(null);
+      setScreen(family.length === 0 ? { kind: "settings", gated: false } : { kind: "picker" });
+    } catch {
+      setScreen({ kind: "login" });
+    }
+  }
+
+  // A device with a parent session opens the picker; one without opens the login screen.
+  useEffect(() => {
+    void getSessionEmail().then((email) => {
+      if (email) void enterFamily();
+      else setScreen({ kind: "login" });
+    });
+  }, []);
 
   // Feature flags are read once at start. No API or a failed request: no Paused lessons.
   useEffect(() => {
@@ -66,151 +93,217 @@ export function App() {
     stopSpeaking();
   }, [screen]);
 
-  // Ask the browser not to evict the saved progress.
-  useEffect(() => {
-    void navigator.storage?.persist?.();
-  }, []);
+  function backToLogin() {
+    setProfiles([]);
+    setActiveId(null);
+    setScreen({ kind: "login" });
+  }
 
-  const awardBadge = useCallback((id: string) => setProgress((p) => earnBadge(p, id)), []);
+  /** Saves through the API. The screen already shows the change; a failure only shows the notice. */
+  async function save(call: () => Promise<unknown>): Promise<boolean> {
+    try {
+      await call();
+      setNotSaved(false);
+      return true;
+    } catch (error) {
+      if (error instanceof ApiError && error.status === 401) backToLogin();
+      else setNotSaved(true);
+      return false;
+    }
+  }
 
-  const setLang = (lang: Lang) => setProgress((p) => ({ ...p, lang }));
+  function updateProfile(id: string, changes: ProfileChanges) {
+    setProfiles((ps) => ps.map((p) => (p.id === id ? { ...p, ...changes } : p)));
+    void save(() => changeProfile(id, changes));
+  }
 
-  if (progress.name === "") {
-    return (
-      <NameScreen
-        lang={progress.lang}
-        onLang={setLang}
-        onDone={(name) => setProgress((p) => ({ ...p, name: cleanName(name) }))}
-      />
+  function awardBadge(lessonId: string) {
+    if (!active || active.badges.includes(lessonId)) return;
+    const id = active.id;
+    setProfiles((ps) =>
+      ps.map((p) => (p.id === id ? { ...p, badges: [...p.badges, lessonId] } : p)),
     );
+    void save(() => saveBadge(id, lessonId));
   }
 
-  if (screen.kind === "parents") {
-    return (
-      <ParentPanel
-        progress={progress}
-        paused={paused}
-        onRestore={setProgress}
-        onFacts={() => setScreen({ kind: "facts" })}
-        onAccount={() =>
-          // A parent who is already logged in goes straight to the profile screen.
-          void getSessionEmail().then((email) =>
-            setScreen(email ? { kind: "profile", email } : { kind: "login" }),
-          )
-        }
-        onReset={() => {
-          setProgress(emptyProgress());
-          setScreen({ kind: "map" });
-        }}
-        onClose={() => setScreen({ kind: "map" })}
-        onLang={setLang}
-        onToggleLesson={(id, enabled) => setProgress((p) => toggleLesson(p, id, enabled))}
-      />
-    );
+  function setLang(lang: Lang) {
+    setDeviceLang(lang);
+    saveDeviceLang(window.localStorage, lang);
+    if (active) updateProfile(active.id, { lang });
   }
 
-  if (screen.kind === "login") {
-    return (
-      <LoginScreen
-        lang={progress.lang}
-        onLang={setLang}
-        onLoggedIn={(email) => setScreen({ kind: "profile", email })}
-        onClose={() => setScreen({ kind: "parents" })}
-        onLegal={(page) => setScreen({ kind: "legal", page, back: screen })}
-      />
-    );
+  function setLessonEnabled(id: string, lessonId: string, enabled: boolean) {
+    const profile = profiles.find((p) => p.id === id);
+    if (!profile) return;
+    updateProfile(id, {
+      disabledLessons: toggleLesson(progressFromProfile(profile), lessonId, enabled)
+        .disabledLessons,
+    });
   }
 
-  if (screen.kind === "profile") {
-    return (
-      <ProfileScreen
-        lang={progress.lang}
-        email={screen.email}
-        onLang={setLang}
-        onLoggedOut={() => setScreen({ kind: "login" })}
-        onClose={() => setScreen({ kind: "map" })}
-        onLegal={(page) => setScreen({ kind: "legal", page, back: screen })}
-      />
-    );
+  async function addProfile(nickname: string, avatar: string): Promise<boolean> {
+    let created: Profile | undefined;
+    const saved = await save(async () => {
+      created = await createProfile(nickname, avatar);
+    });
+    if (created) setProfiles((ps) => [...ps, created!]);
+    return saved;
   }
 
-  if (screen.kind === "legal") {
-    const { back } = screen;
-    return (
-      <LegalScreen
-        lang={progress.lang}
-        page={screen.page}
-        onLang={setLang}
-        onPage={(page) => setScreen({ kind: "legal", page, back })}
-        onClose={() => setScreen(back)}
-      />
-    );
+  function deleteProfile(id: string) {
+    setProfiles((ps) => ps.filter((p) => p.id !== id));
+    if (activeId === id) setActiveId(null);
+    void save(() => removeProfile(id));
   }
 
-  if (screen.kind === "timeline") {
-    return (
-      <TimelineScreen
-        lang={progress.lang}
-        onLang={setLang}
-        onClose={() => setScreen({ kind: "map" })}
-      />
-    );
-  }
+  function renderScreen() {
+    if (screen.kind === "loading") return null;
 
-  if (screen.kind === "facts") {
-    return (
-      <FactCards
-        lang={progress.lang}
-        paused={paused}
-        onLang={setLang}
-        onClose={() => setScreen({ kind: "parents" })}
-      />
-    );
-  }
-
-  // A Paused lesson opened by a stored screen or link goes back to the trail.
-  if (screen.kind === "lesson" && paused.has(screen.id)) {
-    setScreen({ kind: "map" });
-    return null;
-  }
-
-  if (screen.kind === "lesson") {
-    const lesson = getLesson(screen.id);
-    const meta = LESSONS.find((l) => l.id === screen.id);
-    if (lesson && meta) {
+    if (screen.kind === "login") {
       return (
-        <LessonRunner
-          key={screen.id}
-          lesson={lesson}
-          meta={meta}
+        <LoginScreen
           lang={progress.lang}
-          alreadyDone={progress.badges.includes(screen.id)}
-          onBadge={() => awardBadge(screen.id)}
-          onExit={() => setScreen({ kind: "map" })}
+          onLang={setLang}
+          onLoggedIn={() => void enterFamily()}
+          onLegal={(page) => setScreen({ kind: "legal", page, back: screen })}
+        />
+      );
+    }
+
+    if (screen.kind === "picker") {
+      return (
+        <ProfilePicker
+          lang={progress.lang}
+          profiles={profiles}
+          onLang={setLang}
+          onPick={(id) => {
+            setActiveId(id);
+            setScreen({ kind: "map" });
+          }}
+          onParents={() => setScreen({ kind: "settings", gated: true })}
+          onLegal={(page) => setScreen({ kind: "legal", page, back: screen })}
+        />
+      );
+    }
+
+    if (screen.kind === "settings") {
+      return (
+        <FamilySettings
+          lang={progress.lang}
+          profiles={profiles}
+          gated={screen.gated}
+          paused={paused}
+          onLang={setLang}
+          onAdd={addProfile}
+          onChange={updateProfile}
+          onDelete={deleteProfile}
+          onToggleLesson={setLessonEnabled}
+          onFacts={() => setScreen({ kind: "facts" })}
+          onLogout={() => void logOut().then(backToLogin)}
+          onClose={() => setScreen({ kind: activeId ? "map" : "picker" })}
+        />
+      );
+    }
+
+    if (screen.kind === "legal") {
+      const { back } = screen;
+      return (
+        <LegalScreen
+          lang={progress.lang}
+          page={screen.page}
+          onLang={setLang}
+          onPage={(page) => setScreen({ kind: "legal", page, back })}
+          onClose={() => setScreen(back)}
+        />
+      );
+    }
+
+    if (screen.kind === "timeline") {
+      return (
+        <TimelineScreen
+          lang={progress.lang}
+          onLang={setLang}
+          onClose={() => setScreen({ kind: "map" })}
+        />
+      );
+    }
+
+    if (screen.kind === "facts") {
+      return (
+        <FactCards
+          lang={progress.lang}
+          paused={paused}
+          onLang={setLang}
+          onClose={() => setScreen({ kind: "settings", gated: true })}
+        />
+      );
+    }
+
+    // The trail and lessons need an active profile.
+    if (!active) {
+      setScreen({ kind: "picker" });
+      return null;
+    }
+
+    // A Paused lesson opened by a stored screen or link goes back to the trail.
+    if (screen.kind === "lesson" && paused.has(screen.id)) {
+      setScreen({ kind: "map" });
+      return null;
+    }
+
+    if (screen.kind === "lesson") {
+      const lesson = getLesson(screen.id);
+      const meta = LESSONS.find((l) => l.id === screen.id);
+      if (lesson && meta) {
+        return (
+          <LessonRunner
+            key={screen.id}
+            lesson={lesson}
+            meta={meta}
+            lang={progress.lang}
+            alreadyDone={progress.badges.includes(screen.id)}
+            onBadge={() => awardBadge(screen.id)}
+            onExit={() => setScreen({ kind: "map" })}
+            onLang={setLang}
+          />
+        );
+      }
+      return (
+        <LessonPlaceholder
+          lessonId={screen.id}
+          progress={progress}
+          onBack={() => setScreen({ kind: "map" })}
           onLang={setLang}
         />
       );
     }
+
     return (
-      <LessonPlaceholder
-        lessonId={screen.id}
+      <MapScreen
         progress={progress}
-        onBack={() => setScreen({ kind: "map" })}
+        returning={progress.badges.length > 0}
+        paused={paused}
         onLang={setLang}
+        onToggleMute={() => updateProfile(active.id, { muted: !active.muted })}
+        onOpenLesson={(id) => setScreen({ kind: "lesson", id })}
+        onParents={() => setScreen({ kind: "settings", gated: true })}
+        onTimeline={() => setScreen({ kind: "timeline" })}
+        onChangeKid={() => {
+          setActiveId(null);
+          setScreen({ kind: "picker" });
+        }}
       />
     );
   }
 
   return (
-    <MapScreen
-      progress={progress}
-      returning={returning}
-      paused={paused}
-      onLang={setLang}
-      onToggleMute={() => setProgress((p) => ({ ...p, muted: !p.muted }))}
-      onOpenLesson={(id) => setScreen({ kind: "lesson", id })}
-      onParents={() => setScreen({ kind: "parents" })}
-      onTimeline={() => setScreen({ kind: "timeline" })}
-    />
+    <>
+      {renderScreen()}
+      {notSaved && (
+        <p role="status" className="save-notice">
+          {t(progress.lang, "notSaved")}
+        </p>
+      )}
+    </>
   );
 }

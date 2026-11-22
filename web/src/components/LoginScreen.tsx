@@ -13,7 +13,8 @@ interface Props {
   lang: Lang;
   onLang: (l: Lang) => void;
   onLoggedIn: (email: string) => void;
-  onClose: () => void;
+  /** Back button on the email step. Left out when the login screen is the start screen. */
+  onClose?: () => void;
   onLegal: (page: LegalPage) => void;
 }
 
@@ -100,9 +101,11 @@ export function LoginScreen({ lang, onLang, onLoggedIn, onClose, onLegal }: Prop
             <button className="btn" type="submit" disabled={busy || !cleanEmail}>
               {t(lang, "loginSend")}
             </button>
-            <button className="btn btn-quiet" type="button" onClick={onClose}>
-              {t(lang, "back")}
-            </button>
+            {onClose && (
+              <button className="btn btn-quiet" type="button" onClick={onClose}>
+                {t(lang, "back")}
+              </button>
+            )}
           </div>
         </form>
       ) : (

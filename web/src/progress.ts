@@ -26,6 +26,23 @@ export function emptyProgress(): Progress {
   };
 }
 
+/** The progress the trail reads, filled from a Kid profile (the nickname becomes the name). */
+export function progressFromProfile(p: {
+  nickname: string;
+  lang: Lang;
+  muted: boolean;
+  badges: string[];
+  disabledLessons: string[];
+}): Progress {
+  return {
+    name: p.nickname,
+    lang: p.lang,
+    muted: p.muted,
+    badges: p.badges,
+    disabledLessons: p.disabledLessons,
+  };
+}
+
 export function cleanName(raw: string): string {
   return raw.trim().replace(/\s+/g, " ").slice(0, MAX_NAME);
 }

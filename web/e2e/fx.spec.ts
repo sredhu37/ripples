@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test";
-import { LABEL, seedProgress, steps } from "./evidence";
+import { LABEL, fakeFamily, openTrail, steps } from "./evidence";
 
 test("fx: the same coins afford the toy on day 1 and come up short on day 2", async ({ page }) => {
   const step = await steps(page, "fx-toy");
-  await seedProgress(page, { lang: "en", badges: ["fx"] });
-  await page.goto("./");
+  await fakeFamily(page, { kids: [{ lang: "en", badges: ["fx"] }] });
+  await openTrail(page);
 
   // A done stop holds still; the next stop nudges forever, so Playwright never sees it as stable.
   const stop = page.locator(".trail .stop-done button.place");

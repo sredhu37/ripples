@@ -8,10 +8,31 @@ import {
   lessonState,
   loadProgress,
   nextLessonId,
+  progressFromProfile,
   saveProgress,
   toggleLesson,
   type Progress,
 } from "./progress";
+
+describe("progressFromProfile", () => {
+  it("turns the nickname into the name and keeps the rest", () => {
+    expect(
+      progressFromProfile({
+        nickname: "Ava",
+        lang: "de",
+        muted: true,
+        badges: ["money"],
+        disabledLessons: ["work"],
+      }),
+    ).toEqual({
+      name: "Ava",
+      lang: "de",
+      muted: true,
+      badges: ["money"],
+      disabledLessons: ["work"],
+    });
+  });
+});
 
 const order = ["money", "work", "savings", "loans"];
 
