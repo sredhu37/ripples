@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
-# Telegram "Needs human" message for a PR: title, reason, PR link, evidence GIF link.
+# Slack "Needs human" message for a PR: title, reason, PR link, evidence GIF link.
 # Spec: docs/factory.md, sections Gate and Notifications.
 #
 # Usage: shared/pr-needs-human.sh <pr> <reason>
 # Env:   GH_TOKEN          token with pull-requests and issues read (GITHUB_TOKEN)
-#        TELEGRAM_TOKEN    bot token (passed on to telegram.sh)
-#        TELEGRAM_CHAT_ID  chat id
+#        SLACK_WEBHOOK_URL incoming webhook (passed on to slack.sh)
 #        RUN_URL           optional, the workflow run
 #        REPO              owner/name, defaults to GITHUB_REPOSITORY, then to the current gh repo
 #        DRY_RUN           1: print the message, do not send it
@@ -42,4 +41,4 @@ if [ "${DRY_RUN:-}" = "1" ]; then
   printf '%s\n' "$text"
   exit 0
 fi
-"$here/telegram.sh" "$text"
+"$here/slack.sh" "$text"

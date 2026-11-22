@@ -7,7 +7,7 @@
 # Env:   GH_TOKEN          token with issues: write, pull-requests: read, checks: read, statuses: read,
 #                          actions: write (GITHUB_TOKEN in workflows)
 #        BOARD_TOKEN       project scope, for the move to Needs human (FACTORY_TOKEN); see shared/move.sh
-#        TELEGRAM_TOKEN, TELEGRAM_CHAT_ID   for the continue cap message; skipped when unset
+#        SLACK_WEBHOOK_URL for the continue cap message; skipped when unset
 #        REPO              owner/name, defaults to GITHUB_REPOSITORY, then to the current gh repo
 #        MAX_PARALLEL      slots, default 5
 #        ONLY_ISSUE        optional: consider only this issue ("Run now" for one ticket)
@@ -178,9 +178,9 @@ jq -c '.actions[]' "$tmp/plan.json" | while read -r action; do
 
 The hourly scan continues a stopped ticket at most 3 times. Set factory:ready to give it 3 more. Run: $run_url"
     echo "::warning::#$issue to Needs human: $reason"
-    if [ -n "${TELEGRAM_TOKEN:-}" ] && [ -n "${TELEGRAM_CHAT_ID:-}" ]; then
+    if [ -n "${SLACK_WEBHOOK_URL:-}" ]; then
       title=$(gh api "repos/$repo/issues/$issue" --jq .title)
-      "$shared/telegram.sh" "Needs human: #$issue $reason
+      "$shared/slack.sh" "Needs human: #$issue $reason
 \"$title\"
 ${words:+last words:
 $words
