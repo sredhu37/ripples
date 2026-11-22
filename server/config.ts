@@ -28,6 +28,8 @@ export interface Config {
   /** Sender of the login email, e.g. `Ripples <login@example.com>`. Required with `resendApiKey`. */
   emailFrom?: string;
   legal: LegalDetails;
+  /** Feature flags from `FEATURES`. `{}` when unset. Public: a flag hides things, never protects them. */
+  features: Record<string, boolean>;
 }
 
 /** Dev only. Never used in production: `loadConfig` demands a real secret there. */
@@ -46,6 +48,28 @@ function loadLegal(env: NodeJS.ProcessEnv): LegalDetails {
     phone: one(env.LEGAL_PHONE),
     vatId: one(env.LEGAL_VAT_ID),
   };
+}
+
+/** `FEATURES` is a JSON object of named booleans. Anything else stops the server from starting. */
+function loadFeatures(raw: string | undefined): Record<string, boolean> {
+  if (raw === undefined || raw.trim() === "") return {};
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    throw new Error('FEATURES must be valid JSON, for example {"show-loans": false}');
+  }
+  if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) {
+    throw new Error("FEATURES must be a JSON object of true/false values");
+  }
+  const features: Record<string, boolean> = {};
+  for (const [key, value] of Object.entries(parsed)) {
+    if (typeof value !== "boolean") {
+      throw new Error(`FEATURES: the value of "${key}" must be true or false`);
+    }
+    features[key] = value;
+  }
+  return features;
 }
 
 export function loadConfig(env: NodeJS.ProcessEnv): Config {
@@ -87,5 +111,6 @@ export function loadConfig(env: NodeJS.ProcessEnv): Config {
     resendApiKey,
     emailFrom,
     legal: loadLegal(env),
+    features: loadFeatures(env.FEATURES),
   };
 }

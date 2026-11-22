@@ -38,6 +38,7 @@ const app = createApp({
   auth,
   distDir: config.distDir,
   legal: config.legal,
+  features: config.features,
 });
 
 const server = serve({ fetch: app.fetch, port: config.port }, (info) => {

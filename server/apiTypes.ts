@@ -12,6 +12,9 @@ export interface LegalResponse {
   vatId: string | null;
 }
 
+/** The feature flags: named true/false values. Public. */
+export type FeaturesResponse = Record<string, boolean>;
+
 export type ProfileLang = "en" | "de" | "pl";
 
 /** A Kid profile with its progress. */

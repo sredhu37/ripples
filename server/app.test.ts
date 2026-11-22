@@ -54,6 +54,23 @@ describe("GET /api/legal", () => {
   });
 });
 
+describe("GET /api/features", () => {
+  it("serves the configured flags without caching", async () => {
+    const features = { "show-loans": false, "new-badge-shelf": true };
+    const res = await createApp({ db: { query: async () => ({}) }, features }).request(
+      "/api/features",
+    );
+    expect(res.status).toBe(200);
+    expect(res.headers.get("Cache-Control")).toBe("no-store");
+    expect(await res.json()).toEqual(features);
+  });
+
+  it("answers {} when nothing is configured", async () => {
+    const res = await createApp({ db: { query: async () => ({}) } }).request("/api/features");
+    expect(await res.json()).toEqual({});
+  });
+});
+
 // Needs a running Postgres: `docker compose up -d`, then
 // DATABASE_URL=postgres://ripples:ripples@localhost:5432/ripples npm test
 describe.skipIf(!process.env.DATABASE_URL)("GET /api/health with a real Postgres", () => {

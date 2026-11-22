@@ -1,7 +1,7 @@
 import { extname } from "node:path";
 import { Hono } from "hono";
 import { serveStatic } from "@hono/node-server/serve-static";
-import type { HealthResponse, LegalResponse } from "./apiTypes.js";
+import type { FeaturesResponse, HealthResponse, LegalResponse } from "./apiTypes.js";
 import type { Auth } from "./auth.js";
 import type { LegalDetails } from "./config.js";
 import { checkDatabase, type Queryable } from "./db/pool.js";
@@ -21,9 +21,18 @@ export interface AppOptions {
   auth?: Auth;
   /** Impressum details from the environment. Served at `/api/legal`. */
   legal?: LegalDetails;
+  /** Feature flags from `FEATURES`. Served at `/api/features`. */
+  features?: Record<string, boolean>;
 }
 
-export function createApp({ db, distDir, healthTimeoutMs = 2_000, auth, legal }: AppOptions): Hono {
+export function createApp({
+  db,
+  distDir,
+  healthTimeoutMs = 2_000,
+  auth,
+  legal,
+  features,
+}: AppOptions): Hono {
   const app = new Hono();
 
   app.get("/api/health", async (c) => {
@@ -36,6 +45,12 @@ export function createApp({ db, distDir, healthTimeoutMs = 2_000, auth, legal }:
       legal ?? { name: null, address: [], email: null, phone: null, vatId: null },
     ),
   );
+
+  app.get("/api/features", (c) => {
+    // A restart with a new FEATURES value must show at once.
+    c.header("Cache-Control", "no-store");
+    return c.json<FeaturesResponse>(features ?? {});
+  });
 
   if (auth) {
     app.on(["GET", "POST"], "/api/auth/*", (c) => auth.handler(c.req.raw));

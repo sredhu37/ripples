@@ -1,6 +1,21 @@
 import { expect, test } from "@playwright/test";
 import { passParentGate, seedProgress, steps } from "./evidence";
 
+test("parents: a Paused lesson is missing from the lesson list", async ({ page }) => {
+  await seedProgress(page);
+  await page.route("**/api/features", (route) => route.fulfill({ json: { "show-loans": false } }));
+  await page.goto("./");
+  await passParentGate(page, async () => {});
+  const group = page.locator("details.lesson-group-accordion").first();
+  await group.locator("summary").click();
+  await expect(group.locator("label.lesson-toggle-row").filter({ hasText: "Loans" })).toHaveCount(
+    0,
+  );
+  await expect(group.locator("label.lesson-toggle-row").filter({ hasText: "Banks" })).toHaveCount(
+    1,
+  );
+});
+
 test("parents: the panel sits behind the maths gate and controls the trail", async ({ page }) => {
   const step = await steps(page, "parents");
   await seedProgress(page);
