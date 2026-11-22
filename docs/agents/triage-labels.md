@@ -12,4 +12,4 @@ The skills speak in terms of five canonical triage roles. This file maps those r
 
 When a skill mentions a role (e.g. "apply the AFK-ready triage label"), use the corresponding label string from this table.
 
-An issue carries exactly one `factory:` label at a time: swap the old one when you apply a new one. No agent moves an issue to `factory:ready` on its own: Sunny does, or a build ticket split from a confirmed wayfinder spec gets it.
+An issue carries exactly one `factory:` label at a time: swap the old one when you apply a new one. No agent moves an issue to `factory:ready` on its own: Sunny does, a build ticket split from a confirmed wayfinder spec gets it, or `/factory` does at the end of triage in Sunny's own session, where he confirms it.

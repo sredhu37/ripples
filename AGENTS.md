@@ -49,4 +49,5 @@ Single-context: `GLOSSARY.md` and `docs/adr/` at the repo root. See `docs/agents
 - `/wayfinder`: plan work too big for one session.
 - `/triage`: sort incoming issues.
 - `/demo`: record a video of the feature just built.
+- `/factory`: run the software factory locally as Sunny: from an idea, or one station (`build <issue>`, `review <pr>`, `gate <pr>`). See `docs/factory.md`, Local run.
 - Finish a task with the pull request description (four headings, see Definition of done).
