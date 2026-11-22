@@ -16,6 +16,7 @@ type Pr = {
   reviewStatus: string;
   rounds: number;
   gateForHead: boolean;
+  checksDoneAt?: string;
   updateForHead?: boolean;
   conflict?: boolean;
 };
@@ -28,6 +29,7 @@ function pr(over: Partial<Pr> = {}): Pr {
     reviewStatus: "none",
     rounds: 0,
     gateForHead: false,
+    checksDoneAt: "2026-11-22T11:00:00Z",
     ...over,
   };
 }
@@ -74,11 +76,32 @@ describe("station (In review)", () => {
     [{ updateForHead: true, checks: "pending" }, "wait"],
     [{ updateForHead: true, checks: "red" }, "fix"],
   ])("%j -> %s", (facts, action) => {
-    expect(station(ticket(1, "review", { pr: pr(facts) })).action).toBe(action);
+    expect(station(ticket(1, "review", { pr: pr(facts) }), now).action).toBe(action);
+  });
+
+  it("leaves a missing review alone for 10 minutes after the checks finished", () => {
+    const fresh = pr({ checksDoneAt: "2026-11-22T11:52:00Z" });
+    expect(station(ticket(1, "review", { pr: fresh }), now)).toMatchObject({
+      action: "wait",
+      reason: expect.stringContaining("checks green 8 min ago"),
+    });
+    const quiet = pr({ checksDoneAt: "2026-11-22T11:50:00Z" });
+    expect(station(ticket(1, "review", { pr: quiet }), now).action).toBe("review");
+  });
+
+  it("uses no slot while a fresh green PR waits for its review", () => {
+    const result = run(
+      [
+        ticket(1, "review", { pr: pr({ checksDoneAt: "2026-11-22T11:59:00Z" }) }),
+        ticket(2, "ready"),
+      ],
+      1,
+    );
+    expect(result.actions.map((a) => a.issue)).toEqual([2]);
   });
 
   it("rebuilds an In review ticket without an open factory PR", () => {
-    expect(station(ticket(1, "review")).action).toBe("build");
+    expect(station(ticket(1, "review"), now).action).toBe("build");
   });
 });
 

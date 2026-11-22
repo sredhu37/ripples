@@ -31,6 +31,7 @@ if [ -n "$only" ] && ! [[ "$only" =~ ^[0-9]+$ ]]; then
   exit 1
 fi
 tmp=$(mktemp -d "${RUNNER_TEMP:-${TMPDIR:-/tmp}}/scan.XXXXXX")
+started=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 run_url="${GITHUB_SERVER_URL:-https://github.com}/$repo/actions/runs/${GITHUB_RUN_ID:-local}"
 
 # Open PRs of this repo: factory PRs (factory/issue-<n>) and the issues each PR closes.
@@ -46,7 +47,9 @@ for wf in factory-build.yml factory-review.yml factory-gate.yml; do
       --jq '.workflow_runs[].display_title'
   done
 done > "$tmp/runs.txt"
-jq -n --rawfile runs "$tmp/runs.txt" --slurpfile prs "$tmp/prs.json" '
+# Run names -> ticket numbers (json array) for the run titles in file $1.
+tickets_of_runs() {
+  jq -n --rawfile runs "$1" --slurpfile prs "$tmp/prs.json" '
   ($prs[0] | map(select(.isCrossRepository | not)
     | select(.headRefName | test("^factory/issue-[0-9]+$"))
     | {key: (.number | tostring), value: (.headRefName | ltrimstr("factory/issue-") | tonumber)})
@@ -54,7 +57,9 @@ jq -n --rawfile runs "$tmp/runs.txt" --slurpfile prs "$tmp/prs.json" '
   | [$runs | split("\n")[] | select(length > 0)
      | (capture("issue #(?<n>[0-9]+)") // capture("factory/issue-(?<n>[0-9]+)") | .n | tonumber)
        // (capture("PR #(?<m>[0-9]+)") | $issue_of_pr[.m])
-     | select(. != null)] | unique' > "$tmp/active.json"
+     | select(. != null)] | unique'
+}
+tickets_of_runs "$tmp/runs.txt" > "$tmp/active.json"
 
 issues_with() {
   gh api --paginate "repos/$repo/issues?state=open&labels=$1&per_page=100" \
@@ -82,13 +87,17 @@ pr_facts() {
   gh api --paginate "repos/$repo/issues/$pr/comments?per_page=100" > "$tmp/c-$pr.json"
   gh api "repos/$repo/commits/$sha/status" > "$tmp/s-$pr.json"
   gh api "repos/$repo/pulls/$pr" > "$tmp/p-$pr.json"
+  # When the head's checks last finished: the scan leaves a missing review alone for 10 minutes,
+  # while the workflow_run review normally starts by itself.
+  done_at=$(gh api --paginate "repos/$repo/commits/$sha/check-runs?per_page=100" \
+    --jq '.check_runs[].completed_at // empty' | sort | tail -n 1)
   jq -n --argjson pr "$pr" --arg sha "$sha" --arg bot "$bot" \
     --arg checks "$(sed -n 's/^state=//p' <<< "$checks")" \
-    --arg detail "$(sed -n 's/^detail=//p' <<< "$checks")" \
+    --arg detail "$(sed -n 's/^detail=//p' <<< "$checks")" --arg doneAt "$done_at" \
     --slurpfile c "$tmp/c-$pr.json" --slurpfile s "$tmp/s-$pr.json" --slurpfile p "$tmp/p-$pr.json" '
     ($c | add // [] | map(select(.user.login == $bot) | (.body // "") | split("\n")[0])) as $first
     | {
-        number: $pr, checks: $checks, checksDetail: $detail,
+        number: $pr, checks: $checks, checksDetail: $detail, checksDoneAt: $doneAt,
         rounds: ([$first[] | select(test("^<!-- factory-review round=[0-9]+ sha=[0-9a-f]{40} -->$"))] | length),
         summaryForHead: any($first[]; test("^<!-- factory-review round=[0-9]+ sha=" + $sha + " -->$")),
         gateForHead: any($first[]; . == "<!-- factory-gate sha=" + $sha + " -->"),
@@ -192,5 +201,25 @@ $words
 Continue $count of 3: $reason. The scan starts $workflow ${fields[*]}. Run: $run_url" > /dev/null
   fi
   gh workflow run "$workflow" --repo "$repo" --ref main "${args[@]}"
+  echo "$issue" >> "$tmp/dispatched.txt"
   echo "::notice::#$issue $kind: $reason ($workflow ${fields[*]})"
 done
+
+# Wait until every run this scan started shows up in the Actions API (up to 60 s), so the next scan,
+# which only starts after this one, counts them as active and never starts the same ticket twice.
+if [ -s "$tmp/dispatched.txt" ]; then
+  want=$(sort -un "$tmp/dispatched.txt" | jq -s -c .)
+  for _ in $(seq 1 12); do
+    for wf in factory-build.yml factory-review.yml factory-gate.yml; do
+      gh api "repos/$repo/actions/workflows/$wf/runs?event=workflow_dispatch&created=%3E%3D$started&per_page=100" \
+        --jq '.workflow_runs[].display_title'
+    done > "$tmp/new-runs.txt"
+    missing=$(jq -n -c --argjson want "$want" --argjson seen "$(tickets_of_runs "$tmp/new-runs.txt")" '$want - $seen')
+    if [ "$missing" = "[]" ]; then
+      echo "scan: every dispatched run is visible"
+      exit 0
+    fi
+    sleep 5
+  done
+  echo "::warning::scan: runs for $missing not visible after 60 s; the next scan may start them again"
+fi

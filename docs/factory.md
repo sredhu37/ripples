@@ -74,7 +74,7 @@ triage ─► ready ─► in-progress ─► in-review ─► done
 
 ([#113](https://github.com/sredhu37/ripples/issues/113), [#117](https://github.com/sredhu37/ripples/issues/117), [#118](https://github.com/sredhu37/ripples/issues/118))
 
-- **Starts** only from the [scan](#scan) (hourly, or Run now). Adding `factory:ready` starts nothing by itself. Up to `MAX_PARALLEL` (5) tickets run at once, one run per issue at a time (`concurrency` per issue).
+- **Starts** only from the [scan](#scan). Sunny's `factory:ready` label runs the scan at once. Up to `MAX_PARALLEL` (5) tickets run at once, one run per issue at a time (`concurrency` per issue).
 - The build agent swaps the label to `factory:in-progress`, implements on a new branch, runs tests, typecheck and build, writes or updates specs, and opens the PR.
 - **PR description = the summary**, with four headings: `## What changed`, `## Decisions`, `## Verified` (real command output), `## Left`. The build agent rewrites "Verified" every fix round.
 - **Fix rounds:** any FAIL from review sends the PR back to the build agent. Maximum 5 rounds, counted from the factory's review-summary comments on the PR. Round 5 with FAILs left: `factory:human` (the agent is stuck, or the work should become its own ticket).
@@ -84,7 +84,7 @@ triage ─► ready ─► in-progress ─► in-review ─► done
 
 ([#311](https://github.com/sredhu37/ripples/issues/311), decisions 1 to 5 and 11 to 13)
 
-The only thing that starts factory work. `factory-sweep.yml` runs it hourly at :07; "Run now" is a manual run of that workflow (task `scan`, optional `issue` for one ticket, `dry_run` to only print). Script: `sweep/scan.sh`, plan in `sweep/scan.mjs`.
+The only thing that starts factory work. `factory-sweep.yml` runs it when a person adds `factory:ready`, when an issue closes (a slot frees up), hourly at :07, and on "Run now" (a manual run: task `scan`, optional `issue` for one ticket, `dry_run` to only print). GitHub runs the hourly schedule only about 3 times a day (34 runs from 12.11 to 22.11.2026; its docs: scheduled runs "may be dropped" under load), so the events do the real work and the schedule is the safety net for stopped builds and usage-limit pauses ([#321](https://github.com/sredhu37/ripples/issues/321)). Script: `sweep/scan.sh`, plan in `sweep/scan.mjs`.
 
 ```
 free slots = MAX_PARALLEL (5)
@@ -97,9 +97,10 @@ fill them, oldest issue first in each column:
 Needs human: never picked
 ```
 
+- **No double pickup:** a ticket with an unfinished factory run is skipped (run names carry the ticket); scans never overlap (`concurrency: factory-scan`); a scan waits up to 60 s until every run it dispatched shows in the Actions API, so the next scan counts it; one build per issue at a time (`concurrency: factory-build-<issue>`).
 - **One ticket, one slot**, at every station: its 4 reviewers count as 1. Run names carry the ticket (`factory-build issue #<n>`, `factory-review factory/issue-<n>` or `PR #<m>`, `factory-gate PR #<m>`), which is how the scan counts them. A ticket waiting for CI holds no slot.
 - **Hand-offs inside a ticket stay instant:** build to CI to review to gate, fix rounds from review, and Sunny's review or comment on a PR (`factory-gate.yml` relay). Only the start and the continue of a stopped ticket wait for the scan.
-- **Missing station (In review):** checks still running: wait. A red required check: fix round (the prompt names the red checks). Green with no review for the head: review. Review FAIL below round 5 with no fix round running: fix round. Review PASS with no gate comment for the head: gate. A head brought up to date by the factory, or a head the gate said MERGE to that is still in review: gate merge mode (a conflict: fix round). Anything else (round 5, review error) is already Sunny's.
+- **Missing station (In review):** checks still running: wait. A red required check: fix round (the prompt names the red checks). Green with no review for the head: review, but only 10 minutes after the checks finished (the `workflow_run` review normally starts by itself within seconds). Review FAIL below round 5 with no fix round running: fix round. Review PASS with no gate comment for the head: gate. A head brought up to date by the factory, or a head the gate said MERGE to that is still in review: gate merge mode (a conflict: fix round). Anything else (round 5, review error) is already Sunny's.
 - **Local tickets** are left alone and only counted: In progress with the label set by a person, or In review whose open PR is not on `factory/issue-<n>`. They stop counting after 2 quiet hours.
 - **Continue cap:** every continue posts a `factory-continue` comment. After 3 since the ticket last entered Ready by hand: `factory:human`, a comment and Telegram with the build's last words. Setting `factory:ready` again gives 3 more. Starting a Ready ticket is not a continue, so usage-limit pauses never count.
 
@@ -247,15 +248,15 @@ GitHub Actions runs the factory. Agent steps use `anthropics/claude-code-action`
 
 [WORKFLOWS.md](WORKFLOWS.md) is the generated map of every workflow file, its trigger and what it starts next. `npm run workflows:map` regenerates it; the `workflows-map` job of `pr-checks.yml` fails when it differs. A new workflow needs a `# map-does:` header comment (and `# map-next:` for a link the script cannot see).
 
-| Workflow              | Runs on                                                                                     | Does                                                                                                            |
-| --------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `factory-build.yml`   | `workflow_dispatch` (scan, Run now, fix rounds from review and gate)                        | pickup, label swap, build agent, opens PR                                                                       |
-| `factory-review.yml`  | `workflow_run` (`pr-checks` done on a factory PR), `workflow_dispatch`                      | 4 review agents in parallel, suggestions issue, fix round, round counter                                        |
-| `factory-gate.yml`    | `workflow_dispatch` (`pr`, `mode`); `pull_request_review`, `issue_comment` (relay)          | risky list, gate agent, merge with `FACTORY_TOKEN` or `factory:human`; Sunny's approval and comments            |
-| `factory-sweep.yml`   | hourly at :07; Monday 09:00 Europe/Berlin; `workflow_dispatch` (`task`, `issue`, `dry_run`) | the scan (start and continue tickets), board reconcile; triage reminder                                         |
-| `factory-sync.yml`    | `issues: labeled, unlabeled, closed, reopened`                                              | keeps one `factory:` label (the newest); card to its column; close sets `factory:done`                          |
-| `factory-pr-link.yml` | `pull_request_target: opened, reopened, ready_for_review`                                   | a hand-opened PR with `Closes #n` puts #n in `factory:in-review`, card In review                                |
-| `pr-checks.yml`       | `pull_request`                                                                              | jobs `ci`, `lint`, `audit`, `lighthouse`, `spec-rule`, `flow-rule`, `demo` (specs, evidence branch and comment) |
+| Workflow              | Runs on                                                                                                                                            | Does                                                                                                            |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `factory-build.yml`   | `workflow_dispatch` (scan, Run now, fix rounds from review and gate)                                                                               | pickup, label swap, build agent, opens PR                                                                       |
+| `factory-review.yml`  | `workflow_run` (`pr-checks` done on a factory PR), `workflow_dispatch`                                                                             | 4 review agents in parallel, suggestions issue, fix round, round counter                                        |
+| `factory-gate.yml`    | `workflow_dispatch` (`pr`, `mode`); `pull_request_review`, `issue_comment` (relay)                                                                 | risky list, gate agent, merge with `FACTORY_TOKEN` or `factory:human`; Sunny's approval and comments            |
+| `factory-sweep.yml`   | `issues: labeled` (`factory:ready`), `issues: closed`; hourly at :07; Monday 09:00 Europe/Berlin; `workflow_dispatch` (`task`, `issue`, `dry_run`) | the scan (start and continue tickets), board reconcile; triage reminder                                         |
+| `factory-sync.yml`    | `issues: labeled, unlabeled, closed, reopened`                                                                                                     | keeps one `factory:` label (the newest); card to its column; close sets `factory:done`                          |
+| `factory-pr-link.yml` | `pull_request_target: opened, reopened, ready_for_review`                                                                                          | a hand-opened PR with `Closes #n` puts #n in `factory:in-review`, card In review                                |
+| `pr-checks.yml`       | `pull_request`                                                                                                                                     | jobs `ci`, `lint`, `audit`, `lighthouse`, `spec-rule`, `flow-rule`, `demo` (specs, evidence branch and comment) |
 
 **Workflows only wire, scripts do the work** ([#311](https://github.com/sredhu37/ripples/issues/311), decision 7). A workflow holds triggers, permissions, secrets and timeouts; every `run:` step is one script call. Each script names its inputs (env) and outputs in its header and also runs from a terminal with `GH_TOKEN` and `REPO` (or `GITHUB_REPOSITORY`) set; when `GITHUB_OUTPUT` is unset the step outputs are printed.
 
