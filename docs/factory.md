@@ -103,6 +103,27 @@ Needs human: never picked
 - **Local tickets** are left alone and only counted: In progress with the label set by a person, or In review whose open PR is not on `factory/issue-<n>`. They stop counting after 2 quiet hours.
 - **Continue cap:** every continue posts a `factory-continue` comment. After 3 since the ticket last entered Ready by hand: `factory:human`, a comment and Telegram with the build's last words. Setting `factory:ready` again gives 3 more. Starting a Ready ticket is not a continue, so usage-limit pauses never count.
 
+## Local run
+
+([#311](https://github.com/sredhu37/ripples/issues/311), decisions 9 and 10; [#315](https://github.com/sredhu37/ripples/issues/315))
+
+The override for when GitHub Actions, issues or secrets are down, or Sunny wants to drive a ticket himself: `/factory` in Sunny's Claude Code (skill `.claude/skills/factory/`, helper `scripts/local.sh`).
+
+```
+/factory "idea"       grill-with-docs (or wayfinder) ─► issue, Backlog ─► triage ─► Ready
+                      ─► ask: run now locally | run now on GitHub (scan for this issue) | leave in Ready
+/factory build <n>    build agent on local/issue-<n>, PR with Closes #n
+/factory review <pr>  the 4 review agents, summary shown in the chat (nothing posted)
+/factory gate <pr>    risky list, gate agent, merge only on Sunny's yes in the chat
+```
+
+- **Same parts as GitHub:** agent rules from `.claude/agents/` (run as Claude Code subagents), prompt templates from `.github/prompts/`, input scripts and `review.mjs` / `gate.mjs` from `.github/scripts/`, all from a worktree of `origin/main` (`.claude/worktrees/local-main`), never from the checkout it runs in. The `<local_run>` block in the build prompt overrides the GitHub-only lines (worktree, branch, workflow pushes allowed).
+- **Acts as Sunny** through his `gh` login: pushes, the PR, label and card moves (`shared/move.sh`), the merge. Never Telegram, never `sredhu37-bot`.
+- **Branch `local/issue-<n>`:** `factory-review.yml` only starts on `factory/issue-<n>`, so GitHub never reviews local work by itself, and the [scan](#scan) counts the ticket as local (label set by Sunny, or In review with a PR not on `factory/`) and never continues it.
+- **The full line locally:** build, wait for CI, review, fix rounds (max 5, counted in the chat), gate. MERGE asks Sunny before merging; HUMAN asks "merge anyway, or leave it in Needs human?". `local.sh merge` brings the PR up to date with main first.
+- **Grill and triage:** `/grill-with-docs`, `/wayfinder` and `/triage` can only be started by Sunny (`disable-model-invocation`), and plugin skills cannot be overridden in settings. `/factory` reads their SKILL.md from the plugin's install path (`~/.claude/plugins/installed_plugins.json`) and follows it in the same chat; a moved file stops it with a clear error. A wayfinder-sized idea stops after the map.
+- In `/factory`, triage ends in Ready (Sunny is in the chat and confirms it), unless he picks another label.
+
 ## CI tools
 
 ([#115](https://github.com/sredhu37/ripples/issues/115), [#116](https://github.com/sredhu37/ripples/issues/116), [#117](https://github.com/sredhu37/ripples/issues/117))
