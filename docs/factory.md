@@ -78,7 +78,7 @@ triage ─► ready ─► in-progress ─► in-review ─► done
 - The build agent swaps the label to `factory:in-progress`, implements on a new branch, runs tests, typecheck and build, writes or updates specs, and opens the PR.
 - **PR description = the summary**, with four headings: `## What changed`, `## Decisions`, `## Verified` (real command output), `## Left`. The build agent rewrites "Verified" every fix round.
 - **Fix rounds:** any FAIL from review sends the PR back to the build agent. Maximum 5 rounds, counted from the factory's review-summary comments on the PR. Round 5 with FAILs left: `factory:human` (the agent is stuck, or the work should become its own ticket).
-- **Failures:** a Claude usage limit puts the issue back to `factory:ready` with a comment; the scan restarts it later (not counted). A job that fails or times out (out of turns, crash, the 30 minute timeout) keeps its label and gets a `stopped` comment with the agent's last words; the scan continues it on the same branch, at most 3 times, then `factory:human` and Slack. The agent finishing without a PR (it says it cannot) and a fix round that pushed nothing set `factory:human` and send a Telegram message at once.
+- **Failures:** a Claude usage limit puts the issue back to `factory:ready` with a comment; the scan restarts it later (not counted). A job that fails after the agent opened or pushed the PR in this run (for example the action fails a finished session that went over the turn cap) counts as done: `factory:in-review`, and the pushed head goes to CI and review. A job that fails or times out before that (out of turns, crash, the 30 minute timeout) keeps its label and gets a `stopped` comment with the agent's last words; the scan continues it on the same branch, at most 3 times, then `factory:human` and Slack. The agent finishing without a PR (it says it cannot) and a fix round that pushed nothing set `factory:human` and send a Telegram message at once.
 
 ## Scan
 
@@ -351,6 +351,8 @@ Exact model IDs pinned across factory agents, workflows and skills:
 | ux-ui, security, content, code-quality | ✓         | ✗    | ✗        | ✓        | ✓       | ✗      |
 | gate                                   | ✓         | ✗    | ✗        | ✗        | ✓       | ✗      |
 
+The build agent's shell allows `npm`, `npx`, `git`, `ls`, `gh issue view` and the `gh pr` commands of its prompt, one command per call. `.claude/agents/build.md`, section Shell, tells it so, because a refused call costs a turn. The build job installs `web/e2e` and the Playwright browser before the agent starts.
+
 **Rules come from main:** workflows fetch `.claude/agents/*`, `.github/gate-paths.txt`, `docs/writing-lessons.md`, `docs/design.md`, `ARCHITECTURE.md` and `docs/adr/` from `main`, never from the PR branch.
 
 **Never:** `FACTORY_TOKEN` in an agent step. The Claude App cannot change workflow files. The action scrubs secrets from the commands agents run.
@@ -395,17 +397,17 @@ Steps only a human can do. Filed as one `factory:human` ticket.
 
 Choices the agent made, not decided in a grilling round. Check these.
 
-| Default                 | Value                                                                                                                  | Source            |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| Model                   | Sonnet for all agents during the pilot                                                                                 | #113 guardrail    |
-| Turn caps               | build 60, each review agent 15, gate 10                                                                                | #126              |
-| Job timeout             | 30 minutes per agent job                                                                                               | #126              |
-| Spec run time           | revisit if the full run exceeds 10 minutes                                                                             | #117              |
-| `npm audit`             | default level, which fails on any known hole, including low severity                                                   | new while writing |
-| Lighthouse in PR CI     | runs against the built app served by `vite preview`                                                                    | new while writing |
-| Suggestions issue title | `Suggestions from PR #<n>: <PR title>`                                                                                 | new while writing |
-| Weekly reminder         | Monday 09:00 Europe/Berlin, only when issues wait                                                                      | #124              |
-| Hourly check            | every hour, at a minute off the hour to avoid GitHub's busy top of the hour                                            | new while writing |
-| Stopped build           | continued by the scan at most 3 times since the last Ready by hand, then `factory:human` (replaces the 45 minute rule) | #311              |
-| Approval wait           | after Sunny's approval, wait up to 20 minutes for running checks, then stop with a PR comment                          | new while writing |
-| `.worktrees/`           | added to `.gitignore` in the first build ticket                                                                        | #109              |
+| Default                 | Value                                                                                                                  | Source                                           |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Model                   | Sonnet for all agents during the pilot                                                                                 | #113 guardrail                                   |
+| Turn caps               | build 150, each review agent 15, gate 10                                                                               | #126; build was 60 until the #216 builds ran out |
+| Job timeout             | 30 minutes per agent job                                                                                               | #126                                             |
+| Spec run time           | revisit if the full run exceeds 10 minutes                                                                             | #117                                             |
+| `npm audit`             | default level, which fails on any known hole, including low severity                                                   | new while writing                                |
+| Lighthouse in PR CI     | runs against the built app served by `vite preview`                                                                    | new while writing                                |
+| Suggestions issue title | `Suggestions from PR #<n>: <PR title>`                                                                                 | new while writing                                |
+| Weekly reminder         | Monday 09:00 Europe/Berlin, only when issues wait                                                                      | #124                                             |
+| Hourly check            | every hour, at a minute off the hour to avoid GitHub's busy top of the hour                                            | new while writing                                |
+| Stopped build           | continued by the scan at most 3 times since the last Ready by hand, then `factory:human` (replaces the 45 minute rule) | #311                                             |
+| Approval wait           | after Sunny's approval, wait up to 20 minutes for running checks, then stop with a PR comment                          | new while writing                                |
+| `.worktrees/`           | added to `.gitignore` in the first build ticket                                                                        | #109                                             |
