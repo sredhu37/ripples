@@ -1,4 +1,5 @@
 name: factory-review
+run-name: "factory-review ${{ inputs.pr && format('PR #{0}', inputs.pr) || github.event.workflow_run.head_branch }}"
 
 # map-does: Review. Four review agents in parallel on a factory PR once pr-checks is done, suggestions issue, round counter. PASS goes to the gate, FAIL back to build.
 # map-next: `factory-build.yml` (FAIL: fix round, max 5)
@@ -43,9 +44,10 @@ on:
         type: boolean
         default: false
 
-# One review at a time, waiting runs queue. Runs for other branches get their own group.
+# One review per PR at a time, waiting runs queue; the scan caps how many tickets run. Runs for
+# other branches get their own group. The run name carries the PR or branch, so the scan counts it.
 concurrency:
-  group: ${{ (github.event_name == 'workflow_dispatch' || startsWith(github.event.workflow_run.head_branch, 'factory/issue-')) && 'factory-review' || format('factory-review-other-{0}', github.run_id) }}
+  group: ${{ github.event_name == 'workflow_dispatch' && format('factory-review-pr-{0}', inputs.pr) || (startsWith(github.event.workflow_run.head_branch, 'factory/issue-') && format('factory-review-{0}', github.event.workflow_run.head_branch) || format('factory-review-other-{0}', github.run_id)) }}
   queue: max
   cancel-in-progress: false
 
