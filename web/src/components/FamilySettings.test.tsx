@@ -28,7 +28,7 @@ function profile(n: number, extra: Partial<Profile> = {}): Profile {
   };
 }
 
-async function render(profiles: Profile[], gated: boolean) {
+async function render(profiles: Profile[], gated: boolean, activeId: string | null = null) {
   const container = document.createElement("div");
   document.body.appendChild(container);
   const root = createRoot(container);
@@ -43,6 +43,7 @@ async function render(profiles: Profile[], gated: boolean) {
       <FamilySettings
         lang="en"
         profiles={profiles}
+        activeId={activeId}
         gated={gated}
         onLang={() => {}}
         onFacts={() => {}}
@@ -104,6 +105,22 @@ describe("FamilySettings", () => {
       (row.querySelector("input[type='checkbox']") as HTMLInputElement).click();
     });
     expect(onToggleLesson).toHaveBeenCalledWith("p2", "ww2", true);
+    done();
+  });
+
+  it("starts the lesson list on the kid whose trail opened it", async () => {
+    const { container, onToggleLesson, done } = await render([profile(1), profile(2)], false, "p2");
+    expect(container.querySelector("select")!.value).toBe("p2");
+    await act(async () => {
+      container.querySelector<HTMLInputElement>(".lesson-toggle-row input")!.click();
+    });
+    expect(onToggleLesson).toHaveBeenCalledWith("p2", CURRICULUM_GROUPS[0].lessonIds[0], false);
+    done();
+  });
+
+  it("starts the lesson list on the first kid when no kid is active", async () => {
+    const { container, done } = await render([profile(1), profile(2)], false);
+    expect(container.querySelector("select")!.value).toBe("p1");
     done();
   });
 
