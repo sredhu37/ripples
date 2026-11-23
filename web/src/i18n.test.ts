@@ -119,7 +119,7 @@ describe("i18n core", () => {
     expect(welcome).toContain("Ania");
 
     const gate = t("pl", "gateQuestion", { a: 7, b: 8 });
-    expect(gate).toBe("Dla rodziców: ile to jest 7 × 8?");
+    expect(gate).toBe("Ile to jest 7 × 8?");
   });
 
   it("formats numbers properly for Polish locale", () => {

@@ -30,8 +30,35 @@ test("facts: a parent opens the fact cards behind the maths gate", async ({ page
   await expect(page.getByRole("heading", { level: 1, name: LABEL.factCards.pl })).toBeVisible();
   await step();
 
-  // Back returns to the parent area, which asks the maths question again.
+  // Back returns to Family settings without a second maths question.
   await page.getByRole("button", { name: "Wstecz" }).click();
-  await expect(page.locator("form.panel p").first()).toContainText("×");
+  await expect(page.locator("form.panel")).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Ustawienia rodziny" })).toBeVisible();
   await step();
+});
+
+test("parents: the gate focuses the answer and is asked once per visit", async ({ page }) => {
+  await fakeFamily(page);
+  await openTrail(page);
+  await page.getByRole("button", { name: LABEL.parents.en }).click();
+  await expect(page.getByRole("textbox")).toBeFocused();
+  await expect(page.locator("form.panel p").first()).not.toContainText("For parents");
+  await page.getByRole("button", { name: "Back" }).click();
+
+  await passParentGate(page, async () => {});
+  await expect(page.getByRole("heading", { name: "Family settings" })).toBeVisible();
+  // Scroll to the bottom, then open Fact cards: the new screen starts at the top.
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.getByRole("button", { name: LABEL.factCards.en }).click();
+  await expect(page.getByRole("heading", { level: 1, name: LABEL.factCards.en })).toBeVisible();
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+
+  // Back: still no second question.
+  await page.getByRole("button", { name: "Back" }).click();
+  await expect(page.getByRole("heading", { name: "Family settings" })).toBeVisible();
+
+  // Leave to the trail: the next visit asks again.
+  await page.getByRole("button", { name: "Close" }).click();
+  await page.getByRole("button", { name: LABEL.parents.en }).click();
+  await expect(page.locator("form.panel")).toBeVisible();
 });
