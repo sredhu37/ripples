@@ -26,6 +26,10 @@ interface Props {
   onFacts: () => void;
   onLogout: () => void;
   onClose: () => void;
+  /** Opened from the picker's "Add a kid" tile: the add form starts open and focused. */
+  addKid?: boolean;
+  /** Called after a profile was saved from the "Add a kid" path. */
+  onAdded?: () => void;
 }
 
 function makeGate() {
@@ -36,12 +40,13 @@ interface FormProps {
   lang: Lang;
   initial: { nickname: string; avatar: string };
   submitLabel: string;
+  autoFocus?: boolean;
   onSubmit: (nickname: string, avatar: string) => void;
   onCancel?: () => void;
 }
 
 /** Nickname field with its hint, and the grid of villagers to pick from. */
-function ProfileForm({ lang, initial, submitLabel, onSubmit, onCancel }: FormProps) {
+function ProfileForm({ lang, initial, submitLabel, autoFocus, onSubmit, onCancel }: FormProps) {
   const [nickname, setNickname] = useState(initial.nickname);
   const [avatar, setAvatar] = useState(initial.avatar);
   const clean = cleanName(nickname);
@@ -59,6 +64,7 @@ function ProfileForm({ lang, initial, submitLabel, onSubmit, onCancel }: FormPro
         className="text-input"
         value={nickname}
         maxLength={20}
+        autoFocus={autoFocus}
         autoComplete="off"
         aria-describedby="profile-nickname-hint"
         onChange={(e) => setNickname(e.target.value)}
@@ -108,13 +114,17 @@ export function FamilySettings({
   onFacts,
   onLogout,
   onClose,
+  addKid = false,
+  onAdded,
 }: Props) {
   const [gate] = useState(makeGate);
   const [open, setOpen] = useState(!gated);
   const [answer, setAnswer] = useState("");
   const [gateWrong, setGateWrong] = useState(false);
   // "add", a profile id being edited, or nothing. With no profile yet the add form starts open.
-  const [editing, setEditing] = useState<string | null>(profiles.length === 0 ? "add" : null);
+  const [editing, setEditing] = useState<string | null>(
+    profiles.length === 0 || addKid ? "add" : null,
+  );
   const [selectedId, setSelectedId] = useState<string | null>(activeId);
 
   if (!open) {
@@ -212,9 +222,12 @@ export function FamilySettings({
             lang={lang}
             initial={{ nickname: "", avatar: defaultAvatar(profiles) }}
             submitLabel={t(lang, "addProfile")}
+            autoFocus={addKid}
             onSubmit={(nickname, avatar) =>
               void onAdd(nickname, avatar).then((saved) => {
-                if (saved) setEditing(null);
+                if (!saved) return;
+                setEditing(null);
+                if (addKid) onAdded?.();
               })
             }
             onCancel={profiles.length > 0 ? () => setEditing(null) : undefined}

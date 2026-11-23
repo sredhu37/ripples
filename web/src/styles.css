@@ -1321,12 +1321,42 @@ mark.term {
   width: 80px;
   height: 80px;
 }
+.tile-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+.tile-plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 3px dashed var(--teal);
+  color: var(--teal);
+  font-size: 2.5rem;
+  line-height: 1;
+  box-sizing: border-box;
+}
 .tile-grid-small .tile {
   min-width: 72px;
+}
+.tile-grid-small .tile-name {
+  font-size: 1rem;
 }
 .tile-grid-small .tile-face {
   width: 56px;
   height: 56px;
+}
+/* Picker: tiles shrink so three kids and the add tile fit a 360 px phone. */
+.screen .tile-grid:not(.tile-grid-small) {
+  gap: 8px;
+  width: 100%;
+}
+.tile-grid:not(.tile-grid-small) .tile {
+  min-width: 0;
+  width: 104px;
+  min-height: 44px;
 }
 .profile-list {
   list-style: none;

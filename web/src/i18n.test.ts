@@ -75,6 +75,7 @@ describe("i18n core", () => {
       "lessonDisabled",
       "pickerTitle",
       "pickerNone",
+      "addKid",
       "changeKid",
       "notSaved",
       "familyTitle",
