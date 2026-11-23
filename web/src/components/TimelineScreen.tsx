@@ -5,6 +5,7 @@ import type { Lang } from "../progress";
 import { sfx } from "../sound";
 import { eventsFor, TIMELINE_ERAS, TIMELINE_REGIONS } from "../timeline/data";
 import type { TimelineRegion } from "../timeline/types";
+import { BackButton } from "./BackButton";
 import { LangSwitch } from "./LangSwitch";
 
 interface Props {
@@ -47,14 +48,10 @@ export function TimelineScreen({ lang, onLang, onClose }: Props) {
 
   return (
     <main className="screen timeline-screen">
+      <BackButton label={t(lang, "allLessons")} onClick={onClose} />
       <header className="topbar">
         <h1 className="logo">{t(lang, "worldTimeline")}</h1>
-        <div className="topbar-actions">
-          <LangSwitch lang={lang} onLang={onLang} />
-          <button type="button" className="btn btn-quiet" onClick={onClose}>
-            {t(lang, "back")}
-          </button>
-        </div>
+        <LangSwitch lang={lang} onLang={onLang} />
       </header>
 
       <p className="timeline-help">{t(lang, "timelineHelp")}</p>

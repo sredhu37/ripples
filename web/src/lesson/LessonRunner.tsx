@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { LessonIcon, UiIcon } from "../components/appIcons";
+import { BackButton } from "../components/BackButton";
 import { LangSwitch } from "../components/LangSwitch";
 import { Otto } from "../components/Otto";
 import { SpeechBubble } from "../components/SpeechBubble";
@@ -54,14 +55,7 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit,
     <main className="screen lesson">
       <header className="lesson-head">
         <div className="lesson-head-actions">
-          <button
-            type="button"
-            className="btn btn-quiet btn-small"
-            onClick={onExit}
-            aria-label={t(lang, "allLessons")}
-          >
-            ← {t(lang, "allLessons")}
-          </button>
+          <BackButton label={t(lang, "allLessons")} onClick={onExit} />
           {(phase.k !== "story" || phase.i > 0) && (
             <button
               type="button"

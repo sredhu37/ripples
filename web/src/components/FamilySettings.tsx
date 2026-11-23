@@ -5,6 +5,7 @@ import { NO_LESSONS } from "../features";
 import { t } from "../i18n";
 import { CURRICULUM_GROUPS, LESSONS, getGroupTitle, getLessonTitle } from "../lessons";
 import { cleanName, type Lang } from "../progress";
+import { BackButton } from "./BackButton";
 import { LangSwitch } from "./LangSwitch";
 import { ProfileTile } from "./ProfileTile";
 
@@ -117,6 +118,11 @@ export function FamilySettings({
   const [editing, setEditing] = useState<string | null>(profiles.length === 0 ? "add" : null);
   const [selectedId, setSelectedId] = useState<string | null>(activeId);
 
+  // Both the gate and the settings leave to the trail with a kid active, else the picker.
+  const backButton = (
+    <BackButton label={t(lang, activeId ? "allLessons" : "pickerTitle")} onClick={onClose} />
+  );
+
   if (!open) {
     return (
       <main className="screen center">
@@ -128,6 +134,7 @@ export function FamilySettings({
             else setGateWrong(true);
           }}
         >
+          {backButton}
           <div className="panel-head">
             <h2>{t(lang, "parents")}</h2>
             <LangSwitch lang={lang} onLang={onLang} />
@@ -145,9 +152,6 @@ export function FamilySettings({
             <button className="btn" type="submit">
               {t(lang, "gateGo")}
             </button>
-            <button className="btn btn-quiet" type="button" onClick={onClose}>
-              {t(lang, "back")}
-            </button>
           </div>
         </form>
       </main>
@@ -159,6 +163,7 @@ export function FamilySettings({
   return (
     <main className="screen parent-screen">
       <div className="panel parent-panel">
+        {backButton}
         <div className="panel-head">
           <h2>{t(lang, "familyTitle")}</h2>
           <LangSwitch lang={lang} onLang={onLang} />
@@ -306,9 +311,6 @@ export function FamilySettings({
         <div className="row">
           <button className="btn btn-quiet" type="button" onClick={onLogout}>
             {t(lang, "logout")}
-          </button>
-          <button className="btn btn-quiet" type="button" onClick={onClose}>
-            {t(lang, "close")}
           </button>
         </div>
       </div>

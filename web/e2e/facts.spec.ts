@@ -30,8 +30,9 @@ test("facts: a parent opens the fact cards behind the maths gate", async ({ page
   await expect(page.getByRole("heading", { level: 1, name: LABEL.factCards.pl })).toBeVisible();
   await step();
 
-  // Back returns to the parent area, which asks the maths question again.
-  await page.getByRole("button", { name: "Wstecz" }).click();
+  // The back button is first and names Family settings, which asks the maths question again.
+  await expect(page.locator("button").first()).toHaveText(/Ustawienia rodziny|Family settings/);
+  await page.locator(".back-btn").click();
   await expect(page.locator("form.panel p").first()).toContainText("×");
   await step();
 });

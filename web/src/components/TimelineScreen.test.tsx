@@ -54,7 +54,10 @@ describe("TimelineScreen", () => {
     const onClose = vi.fn();
     const c = await mount("de", onClose);
     expect(c.textContent).toContain("Weltzeitleiste");
-    await act(async () => c.querySelector<HTMLButtonElement>(".topbar .btn")!.click());
+    const back = c.querySelector<HTMLButtonElement>("button")!;
+    expect(back.className).toContain("back-btn");
+    expect(back.textContent).toBe("← Alle Lektionen");
+    await act(async () => back.click());
     expect(onClose).toHaveBeenCalled();
   });
 });

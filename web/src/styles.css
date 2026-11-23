@@ -681,6 +681,15 @@ p {
   font-size: 0.9rem;
 }
 
+.back-btn {
+  align-self: flex-start;
+  max-width: 100%;
+  height: auto;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  text-align: left;
+}
+
 .dots {
   display: flex;
   gap: 6px;

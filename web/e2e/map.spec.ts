@@ -27,7 +27,8 @@ test("map: a new family logs in, adds a kid and sees the trail", async ({ page }
   await step();
   await page.getByRole("button", { name: "Add profile" }).click();
   await expect(page.getByRole("button", { name: "Edit Ava" })).toBeVisible();
-  await page.getByRole("button", { name: "Close" }).click();
+  // No kid is active yet, so the back button names the picker.
+  await page.getByRole("button", { name: "Who is playing?" }).click();
 
   // The picker shows Ava; one tap opens her trail.
   await page.getByRole("button", { name: "Ava", exact: true }).click();
