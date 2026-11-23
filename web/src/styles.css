@@ -88,6 +88,98 @@ p {
   align-self: flex-end;
 }
 
+/* Trail header: wraps on phones, one row from 720px. */
+.trail-bar {
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.trail-bar .logo {
+  /* Phones: the kid's avatar matters more than the logo. */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.profile-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  max-width: 100%;
+  min-width: 0;
+  padding: 4px 12px 4px 4px;
+  border: 2px solid var(--teal);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--teal-dark);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.profile-face {
+  width: 44px;
+  height: 44px;
+  flex: none;
+}
+
+.profile-name {
+  min-width: 0;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trail-bar .topbar-actions {
+  gap: 6px;
+}
+
+.labeled-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 64px;
+  min-height: 56px;
+  padding: 4px 6px;
+  border: 2px solid var(--teal);
+  border-radius: 16px;
+  background: var(--white);
+  color: var(--teal-dark);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.1;
+  cursor: pointer;
+}
+
+@media (min-width: 720px) {
+  .trail-bar {
+    flex-wrap: nowrap;
+  }
+
+  .trail-bar .logo {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    margin-right: auto;
+    font-size: 1.6rem;
+  }
+
+  .trail-bar .topbar-actions {
+    gap: 10px;
+  }
+}
+
 .seg {
   display: inline-flex;
   flex-shrink: 0;
