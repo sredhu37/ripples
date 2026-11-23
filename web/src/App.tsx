@@ -54,6 +54,7 @@ export function App() {
 
   useEffect(() => {
     setMuted(progress.muted);
+    if (progress.muted) stopSpeaking();
     document.documentElement.lang = progress.lang;
   }, [progress.muted, progress.lang]);
 
@@ -266,6 +267,8 @@ export function App() {
             onBadge={() => awardBadge(screen.id)}
             onExit={() => setScreen({ kind: "map" })}
             onLang={setLang}
+            muted={progress.muted}
+            onToggleMute={() => active && updateProfile(active.id, { muted: !active.muted })}
           />
         );
       }
