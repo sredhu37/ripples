@@ -35,7 +35,7 @@ export function ProfilePicker({
       <Otto size={140} />
       <h1>{t(lang, "pickerTitle")}</h1>
       {profiles.length === 0 && <p>{t(lang, "pickerNone")}</p>}
-      <ul className="tile-grid">
+      <ul className="tile-grid tile-grid-picker">
         {profiles.map((p) => (
           <li key={p.id}>
             <ProfileTile nickname={p.nickname} avatar={p.avatar} onClick={() => onPick(p.id)} />

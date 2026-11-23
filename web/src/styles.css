@@ -1349,14 +1349,18 @@ mark.term {
   height: 56px;
 }
 /* Picker: tiles shrink so three kids and the add tile fit a 360 px phone. */
-.screen .tile-grid:not(.tile-grid-small) {
+.tile-grid-picker {
   gap: 8px;
   width: 100%;
 }
-.tile-grid:not(.tile-grid-small) .tile {
+.tile-grid-picker .tile {
   min-width: 0;
-  width: 104px;
+  width: 96px;
   min-height: 44px;
+}
+.tile-add {
+  background: transparent;
+  border: 3px dashed var(--teal);
 }
 .profile-list {
   list-style: none;

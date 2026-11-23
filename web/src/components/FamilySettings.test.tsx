@@ -28,12 +28,18 @@ function profile(n: number, extra: Partial<Profile> = {}): Profile {
   };
 }
 
-async function render(profiles: Profile[], gated: boolean, activeId: string | null = null) {
+async function render(
+  profiles: Profile[],
+  gated: boolean,
+  activeId: string | null = null,
+  extra: { addKid?: boolean; saved?: boolean } = {},
+) {
   const container = document.createElement("div");
   document.body.appendChild(container);
   const root = createRoot(container);
   const fns = {
-    onAdd: vi.fn(() => Promise.resolve(true)),
+    onAdd: vi.fn(() => Promise.resolve(extra.saved ?? true)),
+    onAdded: vi.fn(),
     onChange: vi.fn(),
     onDelete: vi.fn(),
     onToggleLesson: vi.fn(),
@@ -45,6 +51,7 @@ async function render(profiles: Profile[], gated: boolean, activeId: string | nu
         profiles={profiles}
         activeId={activeId}
         gated={gated}
+        addKid={extra.addKid}
         onLang={() => {}}
         onFacts={() => {}}
         onLogout={() => {}}
@@ -135,6 +142,57 @@ describe("FamilySettings", () => {
         .dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
     });
     expect(onAdd).toHaveBeenCalledWith("Ava", "Finn");
+    done();
+  });
+
+  async function submitNickname(container: HTMLElement, name: string) {
+    const input = container.querySelector<HTMLInputElement>("#profile-nickname")!;
+    await act(async () => {
+      changeInput(input, name);
+      container
+        .querySelector("form")!
+        .dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+    });
+  }
+
+  it("addKid opens the add form with the nickname focused", async () => {
+    const { container, done } = await render([profile(1)], false, null, { addKid: true });
+    const input = container.querySelector<HTMLInputElement>("#profile-nickname")!;
+    expect(input).not.toBeNull();
+    expect(document.activeElement).toBe(input);
+    done();
+  });
+
+  it("addKid calls onAdded after a successful save", async () => {
+    const { container, onAdd, onAdded, done } = await render([profile(1)], false, null, {
+      addKid: true,
+    });
+    await submitNickname(container, "Ava");
+    expect(onAdd).toHaveBeenCalled();
+    expect(onAdded).toHaveBeenCalledTimes(1);
+    done();
+  });
+
+  it("addKid does not call onAdded when the save fails", async () => {
+    const { container, onAdd, onAdded, done } = await render([profile(1)], false, null, {
+      addKid: true,
+      saved: false,
+    });
+    await submitNickname(container, "Ava");
+    expect(onAdd).toHaveBeenCalled();
+    expect(onAdded).not.toHaveBeenCalled();
+    done();
+  });
+
+  it("does not call onAdded for a normal add", async () => {
+    const { container, onAdded, done } = await render([profile(1)], false);
+    await act(async () => {
+      Array.from(container.querySelectorAll("button"))
+        .find((b) => b.textContent === "Add profile")!
+        .click();
+    });
+    await submitNickname(container, "Ava");
+    expect(onAdded).not.toHaveBeenCalled();
     done();
   });
 
