@@ -41,7 +41,7 @@ interface FormProps {
 }
 
 /** Nickname field with its hint, and the grid of villagers to pick from. */
-function ProfileForm({ lang, initial, submitLabel, onSubmit, onCancel }: FormProps) {
+export function ProfileForm({ lang, initial, submitLabel, onSubmit, onCancel }: FormProps) {
   const [nickname, setNickname] = useState(initial.nickname);
   const [avatar, setAvatar] = useState(initial.avatar);
   const clean = cleanName(nickname);
