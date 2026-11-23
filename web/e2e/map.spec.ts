@@ -40,6 +40,9 @@ test("map: a new family logs in, adds a kid and sees the trail", async ({ page }
   await expect(stops.first()).toBeEnabled();
   await expect(stops.nth(1)).toBeDisabled();
   await expect(page.getByRole("button", { name: /^Continue: / })).toBeVisible();
+  // The trail follows the curriculum groups: Currencies (Group 3) is stop 24, GDP is not last.
+  await expect(stops.nth(23)).toContainText("24. Currencies");
+  await expect(stops.last()).not.toContainText("GDP");
   await step();
 
   // Switch language: the trail and greeting follow.

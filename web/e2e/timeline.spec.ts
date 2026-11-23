@@ -36,7 +36,7 @@ test("timeline: eras and regions filter the world events", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: LABEL.worldTimeline.de })).toBeVisible();
   await step();
 
-  await page.getByRole("button", { name: "Zurueck" }).click();
+  await page.getByRole("button", { name: "Zurück" }).click();
   await expect(page.locator(".trail")).toBeVisible();
   await step();
 });
