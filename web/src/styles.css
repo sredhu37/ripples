@@ -665,14 +665,40 @@ p {
   gap: 8px;
 }
 
+.lesson-head-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  order: 1;
+}
+
 .lesson-head .btn-restart {
   color: #5f7177;
   border-color: #cbd5e1;
+  padding: 0 12px;
+}
+
+.lesson-head .btn-restart:disabled {
+  opacity: 0.5;
 }
 
 .lesson-head .lesson-title {
   font-size: 1.25rem;
-  flex: 1;
+  flex: 1 1 100%;
+  order: 2;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.lesson-head .dots {
+  order: 3;
+}
+
+@media (max-width: 420px) {
+  .lesson-head .btn-small {
+    padding: 0 10px;
+  }
 }
 
 .btn-small {
@@ -699,7 +725,7 @@ p {
 }
 
 .dot-now {
-  background: var(--orange);
+  background: linear-gradient(to right, var(--orange) var(--fill, 0%), var(--grey) var(--fill, 0%));
 }
 
 .lesson-body {
@@ -1009,23 +1035,6 @@ p {
     system-ui,
     sans-serif;
   fill: #fff;
-}
-
-.steps {
-  display: flex;
-  gap: 8px;
-}
-
-.step {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--grey);
-  transition: background 0.2s;
-}
-
-.step.on {
-  background: var(--teal);
 }
 
 mark.term {
