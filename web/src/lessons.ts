@@ -68,7 +68,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     id: "ticketsize",
-    title: { en: "Small and big prices", de: "Kleine und grosse Preise", pl: "Małe i duże ceny" },
+    title: { en: "Small and big prices", de: "Kleine und große Preise", pl: "Małe i duże ceny" },
   },
   { id: "marketshare", title: { en: "Market share", de: "Der Marktanteil", pl: "Udział w rynku" } },
   {
@@ -87,7 +87,7 @@ export const LESSONS: LessonMeta[] = [
     id: "scale",
     title: {
       en: "Big and small business",
-      de: "Wachsen und Grosswerden",
+      de: "Wachsen und Großwerden",
       pl: "Mały i duży biznes",
     },
   },
@@ -105,7 +105,7 @@ export const LESSONS: LessonMeta[] = [
     id: "gold",
     title: {
       en: "Gold and safe harbors",
-      de: "Gold und sichere Haefen",
+      de: "Gold und sichere Häfen",
       pl: "Złoto i bezpieczne przystanie",
     },
   },
@@ -125,7 +125,7 @@ export const LESSONS: LessonMeta[] = [
     id: "derivatives",
     title: {
       en: "Contracts and risk hedging",
-      de: "Vertraege und Risikoabsicherung",
+      de: "Verträge und Risikoabsicherung",
       pl: "Kontrakty i zabezpieczanie ryzyka",
     },
   },
@@ -151,7 +151,7 @@ export const LESSONS: LessonMeta[] = [
     id: "elections",
     title: {
       en: "How Leaders are Chosen",
-      de: "Wie Anfuehrer gewaehlt werden",
+      de: "Wie Anführer gewählt werden",
       pl: "Jak wybieramy przywódców",
     },
   },
@@ -172,7 +172,7 @@ export const LESSONS: LessonMeta[] = [
   { id: "mughals", title: { en: "The Mughals", de: "Das Mogulreich", pl: "Imperium Mogołów" } },
   {
     id: "spicetrade",
-    title: { en: "The Spice Trade", de: "Der Gewuerzhandel", pl: "Handel przyprawami" },
+    title: { en: "The Spice Trade", de: "Der Gewürzhandel", pl: "Handel przyprawami" },
   },
   {
     id: "britishinindia",
@@ -182,7 +182,7 @@ export const LESSONS: LessonMeta[] = [
     id: "independence",
     title: {
       en: "The Independence Movement",
-      de: "Die Unabhaengigkeitsbewegung",
+      de: "Die Unabhängigkeitsbewegung",
       pl: "Ruch niepodległościowy",
     },
   },
@@ -244,7 +244,7 @@ export const LESSONS: LessonMeta[] = [
     id: "ai",
     title: {
       en: "Artificial Intelligence",
-      de: "Kuenstliche Intelligenz",
+      de: "Künstliche Intelligenz",
       pl: "Sztuczna inteligencja",
     },
   },
@@ -266,7 +266,7 @@ export const LESSONS: LessonMeta[] = [
   },
   {
     id: "scarcity_prices",
-    title: { en: "Salaries and Assets", de: "Gehaelter und Vermoegen", pl: "Płace i aktywa" },
+    title: { en: "Salaries and Assets", de: "Gehälter und Vermögen", pl: "Płace i aktywa" },
   },
   {
     id: "centralbanks",

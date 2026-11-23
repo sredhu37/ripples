@@ -110,8 +110,7 @@ export function MapScreen({
               <li key={l.id} className={earned ? "medal medal-on" : "medal"} title={title}>
                 <span aria-hidden="true">{earned ? <LessonIcon id={l.id} size={34} /> : null}</span>
                 <span className="sr-only">
-                  {title}:{" "}
-                  {earned ? (lang === "en" ? "done" : lang === "de" ? "fertig" : "zrobione") : "-"}
+                  {title}: {earned ? t(lang, "lessonDone") : "-"}
                 </span>
               </li>
             );
