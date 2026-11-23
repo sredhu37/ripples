@@ -71,7 +71,7 @@ describe("GET /api/features", () => {
   });
 });
 
-// Needs a running Postgres: `docker compose up -d`, then
+// Needs a running Postgres (README, Running locally), then
 // DATABASE_URL=postgres://ripples:ripples@localhost:5432/ripples npm test
 describe.skipIf(!process.env.DATABASE_URL)("GET /api/health with a real Postgres", () => {
   it("returns 200", async () => {
