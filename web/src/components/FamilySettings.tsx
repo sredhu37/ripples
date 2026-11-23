@@ -11,6 +11,8 @@ import { ProfileTile } from "./ProfileTile";
 interface Props {
   lang: Lang;
   profiles: Profile[];
+  /** The kid whose trail opened this screen. The lesson list starts on this kid. */
+  activeId?: string | null;
   /** Ask the maths question first. False right after login with no profile yet. */
   gated: boolean;
   /** Paused lessons (see `features.ts`): left out of the lesson list. Default: none. */
@@ -95,6 +97,7 @@ function ProfileForm({ lang, initial, submitLabel, onSubmit, onCancel }: FormPro
 export function FamilySettings({
   lang,
   profiles,
+  activeId = null,
   gated,
   paused = NO_LESSONS,
   onLang,
@@ -112,7 +115,7 @@ export function FamilySettings({
   const [gateWrong, setGateWrong] = useState(false);
   // "add", a profile id being edited, or nothing. With no profile yet the add form starts open.
   const [editing, setEditing] = useState<string | null>(profiles.length === 0 ? "add" : null);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(activeId);
 
   if (!open) {
     return (

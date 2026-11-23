@@ -191,6 +191,7 @@ export function App() {
         <FamilySettings
           lang={progress.lang}
           profiles={profiles}
+          activeId={activeId}
           gated={screen.gated}
           paused={paused}
           onLang={setLang}

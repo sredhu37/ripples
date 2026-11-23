@@ -16,6 +16,25 @@ test("parents: a Paused lesson is missing from the lesson list", async ({ page }
   );
 });
 
+test("parents: settings opened from a kid's trail change that kid's lessons", async ({ page }) => {
+  const api = await fakeFamily(page, { kids: [{ nickname: "Ava" }, { nickname: "Ben" }] });
+  await openTrail(page, "Ben");
+  const stops = page.locator(".trail button.place");
+  const before = await stops.count();
+
+  await passParentGate(page, async () => {});
+  await expect(page.getByLabel("Lessons for")).toHaveValue(api.profiles[1].id);
+
+  const group = page.locator("details.lesson-group-accordion").first();
+  await group.locator("summary").click();
+  await group.locator("label.lesson-toggle-row").first().click();
+  await expect.poll(() => api.profiles[1].disabledLessons.length).toBe(1);
+  expect(api.profiles[0].disabledLessons).toEqual([]);
+
+  await page.getByRole("button", { name: "Close" }).click();
+  await expect(stops).toHaveCount(before - 1);
+});
+
 test("parents: family settings sit behind the maths gate and control the trail", async ({
   page,
 }) => {
