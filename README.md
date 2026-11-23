@@ -125,6 +125,26 @@ npm start           # production twin: one process on :8080 serves the app and /
                     #   (needs DATABASE_URL set, because NODE_ENV=production has no default)
 ```
 
+## Running with Docker
+
+`compose.yaml` runs the whole app: Postgres 17, the migrations, the API (`server/Dockerfile`) and the web app (`web/Dockerfile`, nginx forwarding `/api` to the API). You only need Docker.
+
+```bash
+cp .env.example .env            # git ignores .env
+# set BETTER_AUTH_SECRET in .env, for example to the output of: openssl rand -hex 32
+docker compose up --build -d --wait
+```
+
+Open http://localhost:8080/ (set `RIPPLES_PORT` in `.env` if 8080 is taken). Without `RESEND_API_KEY` the stack runs in Self-host mode: the login code is in `docker compose logs server`. Other commands:
+
+```bash
+docker compose logs -f server   # API log, including login codes
+docker compose down             # stop (data stays in the ripples-pgdata volume)
+docker compose down -v          # stop and delete the data
+```
+
+The `migrate` service applies new migrations on every `up` and then exits. Postgres is not published to your machine, so the stack does not clash with a Postgres you run for `npm run dev`.
+
 ## Software Factory
 
 Issues are built, checked, reviewed and merged by GitHub Actions workflows and AI agents. Sunny sets `factory:ready` and approves what the gate cannot merge on its own. The diagram below is kept in step with the workflows by the `flow-rule` check.

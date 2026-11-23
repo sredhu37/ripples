@@ -1,16 +1,24 @@
-# Local Postgres for development: `docker compose up -d`.
-# Matches DEV_DATABASE_URL in server/config.ts:
-#   postgres://ripples:ripples@localhost:5432/ripples
-# The image major version should match the Neon project (check it in the Neon console).
+# The whole app in Docker: Postgres, the migrations, the API and the web app.
+#
+#   cp .env.example .env      # then set BETTER_AUTH_SECRET in .env
+#   docker compose up --build
+#
+# Open http://localhost:8080/. Without RESEND_API_KEY, login codes are written to the API log:
+#   docker compose logs server
+#
+# Postgres is reachable only inside this stack. For `npm run dev` use a Postgres on your machine
+# (README, Running locally), or add `ports: ["127.0.0.1:5432:5432"]` to the postgres service and
+# run `docker compose up -d postgres`.
+# The Postgres major version should match the Neon project (check it in the Neon console).
+name: ripples
+
 services:
   postgres:
     image: postgres:17
     environment:
       POSTGRES_USER: ripples
-      POSTGRES_PASSWORD: ripples
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ripples}
       POSTGRES_DB: ripples
-    ports:
-      - "127.0.0.1:5432:5432"
     volumes:
       - ripples-pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -18,6 +26,65 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
+
+  # Creates or updates the tables, then exits. A second run prints "No migrations to run!".
+  migrate:
+    build: ./server
+    image: ripples-server:local
+    command: ["node_modules/node-pg-migrate/bin/node-pg-migrate.js", "-m", "db/migrations", "up"]
+    environment:
+      DATABASE_URL: postgres://ripples:${POSTGRES_PASSWORD:-ripples}@postgres:5432/ripples
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  server:
+    build: ./server
+    image: ripples-server:local
+    environment:
+      DATABASE_URL: postgres://ripples:${POSTGRES_PASSWORD:-ripples}@postgres:5432/ripples
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Set BETTER_AUTH_SECRET in .env (see .env.example)}
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL:-}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      EMAIL_FROM: ${EMAIL_FROM:-}
+      FEATURES: ${FEATURES:-}
+      LEGAL_NAME: ${LEGAL_NAME:-}
+      LEGAL_ADDRESS: ${LEGAL_ADDRESS:-}
+      LEGAL_EMAIL: ${LEGAL_EMAIL:-}
+      LEGAL_PHONE: ${LEGAL_PHONE:-}
+      LEGAL_VAT_ID: ${LEGAL_VAT_ID:-}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      # The image has no shell or curl, only node.
+      test:
+        - CMD
+        - /nodejs/bin/node
+        - -e
+        - "fetch('http://localhost:8080/api/health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  web:
+    build: ./web
+    image: ripples-web:local
+    environment:
+      BACKEND_URL: http://server:8080
+    ports:
+      - "127.0.0.1:${RIPPLES_PORT:-8080}:8080"
+    depends_on:
+      server:
+        condition: service_healthy
+    healthcheck:
+      # 127.0.0.1, not localhost: busybox wget tries ::1 first and nginx listens on IPv4 only.
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
 
 volumes:
   ripples-pgdata:

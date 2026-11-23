@@ -15,5 +15,9 @@ ENV NODE_ENV=production
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
+# tsc does not copy the SQL files. With them the image can create the tables itself:
+#   docker run --rm -e DATABASE_URL=... <image> node_modules/node-pg-migrate/bin/node-pg-migrate.js -m db/migrations up
+COPY --from=builder /app/db/migrations ./db/migrations
 
+EXPOSE 8080
 CMD ["dist/index.js"]
