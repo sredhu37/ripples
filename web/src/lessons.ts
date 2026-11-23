@@ -302,8 +302,6 @@ export const LESSONS: LessonMeta[] = [
   },
 ];
 
-export const LESSON_ORDER = LESSONS.map((l) => l.id);
-
 export const CURRICULUM_GROUPS: LessonGroup[] = [
   {
     id: "group1",
@@ -426,3 +424,6 @@ export const CURRICULUM_GROUPS: LessonGroup[] = [
     ],
   },
 ];
+
+/** Lesson ids in trail order: the groups in order, each in its `lessonIds` order. */
+export const CURRICULUM_ORDER: string[] = CURRICULUM_GROUPS.flatMap((g) => g.lessonIds);

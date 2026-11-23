@@ -1,6 +1,6 @@
 import { hasLesson } from "../content";
 import { NO_LESSONS } from "../features";
-import { LESSONS, getLessonTitle, LESSON_ORDER } from "../lessons";
+import { LESSONS, getLessonTitle, CURRICULUM_ORDER, type LessonMeta } from "../lessons";
 import { t } from "../i18n";
 import { lessonState, nextLessonId, type Lang, type Progress } from "../progress";
 import { sfx } from "../sound";
@@ -35,10 +35,11 @@ export function MapScreen({
 }: Props) {
   const { lang, name, muted } = progress;
   // A Paused lesson is left out like a Disabled one; its badge stays in `progress`.
-  const order = LESSON_ORDER.filter((id) => !paused.has(id));
-  const visibleLessons = LESSONS.filter(
-    (l) => !paused.has(l.id) && !progress.disabledLessons?.includes(l.id),
-  );
+  const order = CURRICULUM_ORDER.filter((id) => !paused.has(id));
+  const visibleLessons = order
+    .filter((id) => !progress.disabledLessons?.includes(id))
+    .map((id) => LESSONS.find((l) => l.id === id))
+    .filter((l): l is LessonMeta => l !== undefined);
   const next = nextLessonId(progress, order);
   const greeting =
     next === null ? t(lang, "allDone") : t(lang, returning ? "welcomeBack" : "welcome", { name });
