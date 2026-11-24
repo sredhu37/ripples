@@ -255,7 +255,7 @@ const pl: Dict = {
   mute: "Wycisz dźwięk",
   unmute: "Włącz dźwięk",
   language: "Język",
-  parents: "Strefa rodzica",
+  parents: "Rodzice",
   lessonBuilding: "Ta lekcja jest jeszcze przygotowywana. Wróć wkrótce!",
   allDone: "Zdobyłeś wszystkie odznaki na tej ścieżce!",
   gateQuestion: "Dla rodziców: ile to jest {a} × {b}?",
