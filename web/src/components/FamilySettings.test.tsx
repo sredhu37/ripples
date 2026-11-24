@@ -81,29 +81,53 @@ async function solveGate(container: HTMLElement) {
 }
 
 describe("FamilySettings", () => {
-  it("opens behind the maths gate and lists the lesson groups", async () => {
+  it("opens behind the maths gate and shows the kid list without lessons or Delete", async () => {
     const { container, done } = await render([profile(1)], true);
     expect(container.textContent).not.toContain("Kid profiles");
     await solveGate(container);
     expect(container.textContent).toContain("Family settings");
+    expect(container.querySelector(".lesson-group-accordion")).toBeNull();
+    expect(container.querySelector("select")).toBeNull();
+    expect(container.querySelector(".btn-danger")).toBeNull();
+    expect(container.textContent).not.toContain("Delete");
+    done();
+  });
+
+  it("puts Log out in its own Account section, away from Close", async () => {
+    const { container, done } = await render([profile(1)], false);
+    const account = container.querySelector(".account-section")!;
+    expect(account.textContent).toContain("Account");
+    expect(account.textContent).toContain("Log out");
+    expect(account.textContent).not.toContain("Close");
+    done();
+  });
+
+  it("opens a kid's detail with their lesson groups", async () => {
+    const { container, done } = await render([profile(1), profile(2)], false);
+    await act(async () => {
+      container.querySelector<HTMLButtonElement>("button[aria-label='Edit Kid2']")!.click();
+    });
+    expect(container.textContent).toContain("Lessons for Kid2");
     expect(container.querySelectorAll(".lesson-group-accordion").length).toBe(
       CURRICULUM_GROUPS.length,
     );
     expect(container.textContent).not.toMatch(/age group|junior|senior/i);
     expect(container.textContent).not.toMatch(/save progress|restore|start fresh/i);
+    await act(async () => {
+      Array.from(container.querySelectorAll("button"))
+        .find((b) => b.textContent === "Back to kids")!
+        .click();
+    });
+    expect(container.querySelector(".lesson-group-accordion")).toBeNull();
     done();
   });
 
-  it("toggles a lesson for the selected profile only", async () => {
+  it("toggles a lesson for the open kid only", async () => {
     const { container, onToggleLesson, done } = await render(
       [profile(1), profile(2, { disabledLessons: ["ww2"] })],
       false,
+      "p2",
     );
-    const select = container.querySelector("select")!;
-    await act(async () => {
-      select.value = "p2";
-      select.dispatchEvent(new Event("change", { bubbles: true }));
-    });
     const row = Array.from(container.querySelectorAll(".lesson-toggle-row")).find((r) =>
       r.textContent?.includes("World War 2"),
     )!;
@@ -115,9 +139,9 @@ describe("FamilySettings", () => {
     done();
   });
 
-  it("starts the lesson list on the kid whose trail opened it", async () => {
+  it("starts on the detail of the kid whose trail opened it", async () => {
     const { container, onToggleLesson, done } = await render([profile(1), profile(2)], false, "p2");
-    expect(container.querySelector("select")!.value).toBe("p2");
+    expect(container.textContent).toContain("Lessons for Kid2");
     await act(async () => {
       container.querySelector<HTMLInputElement>(".lesson-toggle-row input")!.click();
     });
@@ -125,9 +149,10 @@ describe("FamilySettings", () => {
     done();
   });
 
-  it("starts the lesson list on the first kid when no kid is active", async () => {
+  it("starts on the kid list when no kid is active", async () => {
     const { container, done } = await render([profile(1), profile(2)], false);
-    expect(container.querySelector("select")!.value).toBe("p1");
+    expect(container.textContent).toContain("Kid profiles");
+    expect(container.textContent).not.toContain("Lessons for");
     done();
   });
 
@@ -204,16 +229,28 @@ describe("FamilySettings", () => {
     done();
   });
 
-  it("asks before deleting", async () => {
-    const { container, onDelete, done } = await render([profile(1)], false);
-    const del = container.querySelector<HTMLButtonElement>("button[aria-label='Delete Kid1']")!;
+  it("asks in the app before deleting, never with a native dialog", async () => {
+    const { container, onDelete, done } = await render([profile(1)], false, "p1");
     const confirm = vi.spyOn(window, "confirm");
-    confirm.mockReturnValueOnce(false);
-    await act(async () => del.click());
+    const button = (label: string) =>
+      Array.from(container.querySelectorAll("button")).find((b) => b.textContent === label)!;
+    await act(async () => button("Delete Kid1").click());
+    const dialog = container.querySelector("[role='dialog']")!;
+    expect(dialog.textContent).toContain("Delete Kid1 and all their badges?");
+    await act(async () => button("Cancel").click());
+    expect(container.querySelector("[role='dialog']")).toBeNull();
     expect(onDelete).not.toHaveBeenCalled();
-    confirm.mockReturnValueOnce(true);
-    await act(async () => del.click());
+    await act(async () => button("Delete Kid1").click());
+    await act(async () => {
+      container
+        .querySelector("[role='dialog']")!
+        .dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+    });
+    expect(container.querySelector("[role='dialog']")).toBeNull();
+    await act(async () => button("Delete Kid1").click());
+    await act(async () => button("Delete").click());
     expect(onDelete).toHaveBeenCalledWith("p1");
+    expect(confirm).not.toHaveBeenCalled();
     confirm.mockRestore();
     done();
   });

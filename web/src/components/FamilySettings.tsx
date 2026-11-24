@@ -5,13 +5,14 @@ import { NO_LESSONS } from "../features";
 import { t } from "../i18n";
 import { CURRICULUM_GROUPS, LESSONS, getGroupTitle, getLessonTitle } from "../lessons";
 import { cleanName, type Lang } from "../progress";
+import { ConfirmDialog } from "./ConfirmDialog";
 import { LangSwitch } from "./LangSwitch";
 import { ProfileTile } from "./ProfileTile";
 
 interface Props {
   lang: Lang;
   profiles: Profile[];
-  /** The kid whose trail opened this screen. The lesson list starts on this kid. */
+  /** The kid whose trail opened this screen. The screen starts on this kid's detail. */
   activeId?: string | null;
   /** Ask the maths question first. False right after login with no profile yet. */
   gated: boolean;
@@ -46,7 +47,14 @@ interface FormProps {
 }
 
 /** Nickname field with its hint, and the grid of villagers to pick from. */
-function ProfileForm({ lang, initial, submitLabel, autoFocus, onSubmit, onCancel }: FormProps) {
+export function ProfileForm({
+  lang,
+  initial,
+  submitLabel,
+  autoFocus,
+  onSubmit,
+  onCancel,
+}: FormProps) {
   const [nickname, setNickname] = useState(initial.nickname);
   const [avatar, setAvatar] = useState(initial.avatar);
   const clean = cleanName(nickname);
@@ -99,7 +107,70 @@ function ProfileForm({ lang, initial, submitLabel, autoFocus, onSubmit, onCancel
   );
 }
 
-/** Parent area: profiles, lessons per profile, fact cards, log out. Behind a maths gate. */
+interface LessonListProps {
+  lang: Lang;
+  profile: Profile;
+  paused: ReadonlySet<string>;
+  onToggleLesson: (id: string, lessonId: string, enabled: boolean) => void;
+}
+
+/** One kid's lessons: a group accordion per curriculum group, a switch per lesson. */
+function LessonList({ lang, profile, paused, onToggleLesson }: LessonListProps) {
+  return (
+    <div className="curriculum-groups">
+      {CURRICULUM_GROUPS.map((group) => {
+        const groupLessons = LESSONS.filter(
+          (l) => group.lessonIds.includes(l.id) && !paused.has(l.id),
+        );
+        if (groupLessons.length === 0) return null;
+        const disabledCount = groupLessons.filter((l) =>
+          profile.disabledLessons.includes(l.id),
+        ).length;
+        return (
+          <details key={group.id} className="lesson-group-accordion">
+            <summary className="lesson-group-summary">
+              <span className="lesson-group-title">{getGroupTitle(group, lang)}</span>
+              <span className="lesson-group-count">
+                {groupLessons.length - disabledCount} / {groupLessons.length}
+              </span>
+            </summary>
+            <div className="lesson-toggle-list">
+              {groupLessons.map((l) => {
+                const isOff = profile.disabledLessons.includes(l.id);
+                const title = getLessonTitle(l, lang);
+                return (
+                  <label
+                    key={l.id}
+                    className={`lesson-toggle-row ${isOff ? "lesson-toggle-row-off" : ""}`}
+                  >
+                    <span className="lesson-toggle-info">
+                      <span className="lesson-toggle-title">{title}</span>
+                      <span className="lesson-toggle-status">
+                        {t(lang, isOff ? "lessonDisabled" : "lessonEnabled")}
+                      </span>
+                    </span>
+                    <span className="toggle-switch">
+                      <input
+                        type="checkbox"
+                        className="toggle-input"
+                        checked={!isOff}
+                        onChange={(e) => onToggleLesson(profile.id, l.id, e.target.checked)}
+                        aria-label={`${title}: ${t(lang, isOff ? "lessonDisabled" : "lessonEnabled")}`}
+                      />
+                      <span className="toggle-slider" aria-hidden="true" />
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
+          </details>
+        );
+      })}
+    </div>
+  );
+}
+
+/** Parent area: kid list, one detail per kid, fact cards, account. Behind a maths gate. */
 export function FamilySettings({
   lang,
   profiles,
@@ -121,11 +192,17 @@ export function FamilySettings({
   const [open, setOpen] = useState(!gated);
   const [answer, setAnswer] = useState("");
   const [gateWrong, setGateWrong] = useState(false);
-  // "add", a profile id being edited, or nothing. With no profile yet the add form starts open.
-  const [editing, setEditing] = useState<string | null>(
-    profiles.length === 0 || addKid ? "add" : null,
+  // "add", the id of the kid whose detail is open, or null for the kid list.
+  // With no profile yet, or from the picker's Add a kid tile, the add form starts open.
+  // From a trail it starts on that kid.
+  const [view, setView] = useState<string | null>(() =>
+    profiles.length === 0 || addKid
+      ? "add"
+      : profiles.some((p) => p.id === activeId)
+        ? activeId
+        : null,
   );
-  const [selectedId, setSelectedId] = useState<string | null>(activeId);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   if (!open) {
     return (
@@ -164,7 +241,56 @@ export function FamilySettings({
     );
   }
 
-  const selected = profiles.find((p) => p.id === selectedId) ?? profiles[0];
+  const kid = profiles.find((p) => p.id === view);
+
+  if (kid) {
+    return (
+      <main className="screen parent-screen">
+        <div className="panel parent-panel">
+          <div className="panel-head">
+            <button className="btn btn-quiet" type="button" onClick={() => setView(null)}>
+              {t(lang, "backToKids")}
+            </button>
+            <LangSwitch lang={lang} onLang={onLang} />
+          </div>
+
+          <h2>{kid.nickname}</h2>
+          <ProfileForm
+            key={kid.id}
+            lang={lang}
+            initial={kid}
+            submitLabel={t(lang, "save")}
+            onSubmit={(nickname, avatar) => {
+              onChange(kid.id, { nickname, avatar });
+              setView(null);
+            }}
+          />
+
+          <h2>{t(lang, "lessonsOf", { name: kid.nickname })}</h2>
+          <p>{t(lang, "lessonSelectionHelp")}</p>
+          <LessonList lang={lang} profile={kid} paused={paused} onToggleLesson={onToggleLesson} />
+
+          <button className="btn-text-danger" type="button" onClick={() => setConfirmDelete(true)}>
+            {t(lang, "deleteProfile", { name: kid.nickname })}
+          </button>
+        </div>
+        {confirmDelete && (
+          <ConfirmDialog
+            title={t(lang, "deleteTitle", { name: kid.nickname })}
+            message={t(lang, "deleteSure", { name: kid.nickname })}
+            confirmLabel={t(lang, "delete")}
+            cancelLabel={t(lang, "cancel")}
+            onCancel={() => setConfirmDelete(false)}
+            onConfirm={() => {
+              setConfirmDelete(false);
+              setView(null);
+              onDelete(kid.id);
+            }}
+          />
+        )}
+      </main>
+    );
+  }
 
   return (
     <main className="screen parent-screen">
@@ -176,48 +302,23 @@ export function FamilySettings({
 
         <h2>{t(lang, "profilesTitle")}</h2>
         <ul className="profile-list">
-          {profiles.map((p) =>
-            editing === p.id ? (
-              <li key={p.id}>
-                <ProfileForm
-                  lang={lang}
-                  initial={p}
-                  submitLabel={t(lang, "save")}
-                  onSubmit={(nickname, avatar) => {
-                    onChange(p.id, { nickname, avatar });
-                    setEditing(null);
-                  }}
-                  onCancel={() => setEditing(null)}
-                />
-              </li>
-            ) : (
-              <li key={p.id} className="profile-row">
-                <ProfileTile nickname={p.nickname} avatar={p.avatar} />
-                <button
-                  className="btn btn-quiet"
-                  type="button"
-                  aria-label={t(lang, "editProfile", { name: p.nickname })}
-                  onClick={() => setEditing(p.id)}
-                >
-                  {t(lang, "edit")}
-                </button>
-                <button
-                  className="btn btn-danger"
-                  type="button"
-                  aria-label={t(lang, "deleteProfile", { name: p.nickname })}
-                  onClick={() => {
-                    if (window.confirm(t(lang, "deleteSure", { name: p.nickname }))) onDelete(p.id);
-                  }}
-                >
-                  {t(lang, "delete")}
-                </button>
-              </li>
-            ),
-          )}
+          {profiles.map((p) => (
+            <li key={p.id} className="profile-row">
+              <ProfileTile nickname={p.nickname} avatar={p.avatar} onClick={() => setView(p.id)} />
+              <button
+                className="btn btn-quiet"
+                type="button"
+                aria-label={t(lang, "editProfile", { name: p.nickname })}
+                onClick={() => setView(p.id)}
+              >
+                {t(lang, "edit")}
+              </button>
+            </li>
+          ))}
         </ul>
         {profiles.length >= MAX_PROFILES ? (
           <p role="status">{t(lang, "profileLimit", { n: MAX_PROFILES })}</p>
-        ) : editing === "add" ? (
+        ) : view === "add" ? (
           <ProfileForm
             lang={lang}
             initial={{ nickname: "", avatar: defaultAvatar(profiles) }}
@@ -226,88 +327,16 @@ export function FamilySettings({
             onSubmit={(nickname, avatar) =>
               void onAdd(nickname, avatar).then((saved) => {
                 if (!saved) return;
-                setEditing(null);
+                setView(null);
                 if (addKid) onAdded?.();
               })
             }
-            onCancel={profiles.length > 0 ? () => setEditing(null) : undefined}
+            onCancel={profiles.length > 0 ? () => setView(null) : undefined}
           />
         ) : (
-          <button className="btn" type="button" onClick={() => setEditing("add")}>
+          <button className="btn" type="button" onClick={() => setView("add")}>
             {t(lang, "addProfile")}
           </button>
-        )}
-
-        {selected && (
-          <>
-            <h2>{t(lang, "lessonSelectionTitle")}</h2>
-            <p>{t(lang, "lessonSelectionHelp")}</p>
-            <label htmlFor="lessons-for">{t(lang, "lessonsFor")}</label>
-            <select
-              id="lessons-for"
-              className="text-input"
-              value={selected.id}
-              onChange={(e) => setSelectedId(e.target.value)}
-            >
-              {profiles.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.nickname}
-                </option>
-              ))}
-            </select>
-            <div className="curriculum-groups">
-              {CURRICULUM_GROUPS.map((group) => {
-                const groupLessons = LESSONS.filter(
-                  (l) => group.lessonIds.includes(l.id) && !paused.has(l.id),
-                );
-                if (groupLessons.length === 0) return null;
-                const disabledCount = groupLessons.filter((l) =>
-                  selected.disabledLessons.includes(l.id),
-                ).length;
-                return (
-                  <details key={group.id} className="lesson-group-accordion">
-                    <summary className="lesson-group-summary">
-                      <span className="lesson-group-title">{getGroupTitle(group, lang)}</span>
-                      <span className="lesson-group-count">
-                        {groupLessons.length - disabledCount} / {groupLessons.length}
-                      </span>
-                    </summary>
-                    <div className="lesson-toggle-list">
-                      {groupLessons.map((l) => {
-                        const isOff = selected.disabledLessons.includes(l.id);
-                        const title = getLessonTitle(l, lang);
-                        return (
-                          <label
-                            key={l.id}
-                            className={`lesson-toggle-row ${isOff ? "lesson-toggle-row-off" : ""}`}
-                          >
-                            <span className="lesson-toggle-info">
-                              <span className="lesson-toggle-title">{title}</span>
-                              <span className="lesson-toggle-status">
-                                {t(lang, isOff ? "lessonDisabled" : "lessonEnabled")}
-                              </span>
-                            </span>
-                            <span className="toggle-switch">
-                              <input
-                                type="checkbox"
-                                className="toggle-input"
-                                checked={!isOff}
-                                onChange={(e) =>
-                                  onToggleLesson(selected.id, l.id, e.target.checked)
-                                }
-                                aria-label={`${title}: ${t(lang, isOff ? "lessonDisabled" : "lessonEnabled")}`}
-                              />
-                              <span className="toggle-slider" aria-hidden="true" />
-                            </span>
-                          </label>
-                        );
-                      })}
-                    </div>
-                  </details>
-                );
-              })}
-            </div>
-          </>
         )}
 
         <h2>{t(lang, "factCards")}</h2>
@@ -317,13 +346,17 @@ export function FamilySettings({
         </button>
 
         <div className="row">
-          <button className="btn btn-quiet" type="button" onClick={onLogout}>
-            {t(lang, "logout")}
-          </button>
           <button className="btn btn-quiet" type="button" onClick={onClose}>
             {t(lang, "close")}
           </button>
         </div>
+
+        <section className="account-section" aria-labelledby="account-title">
+          <h2 id="account-title">{t(lang, "accountTitle")}</h2>
+          <button className="btn-text" type="button" onClick={onLogout}>
+            {t(lang, "logout")}
+          </button>
+        </section>
       </div>
     </main>
   );

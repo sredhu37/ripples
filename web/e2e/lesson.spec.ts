@@ -11,6 +11,41 @@ const LANGS: Lang[] = ["en", "de", "pl"];
 // A story has far fewer lines than this; the cap only stops an endless loop.
 const MAX_STORY_STEPS = 80;
 
+test("lesson header: sound switch, steady Start over, one progress bar, fits 360px", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await fakeFamily(page, { kids: [{ lang: "en", badges: ["money"], muted: true }] });
+  await openTrail(page);
+  await page.locator(".trail .stop-done button.place").click();
+  await expect(page.locator(".lesson-title")).toBeVisible();
+
+  // Start over is in the DOM from the first step, disabled there.
+  const restart = page.getByRole("button", { name: "Start over", exact: true });
+  await expect(restart).toBeDisabled();
+
+  // The sound switch works inside the lesson.
+  await page.getByRole("button", { name: "Sound on", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Sound off", exact: true })).toHaveAttribute(
+    "aria-pressed",
+    "false",
+  );
+
+  // One progress indicator: no in-scene step dots, and the bar fills during the story.
+  await expect(page.locator(".steps")).toHaveCount(0);
+  const next = page.getByRole("button", { name: "Next", exact: true });
+  await next.click();
+  await expect(restart).toBeEnabled();
+  const fill = await page.locator(".dots .dot-now").getAttribute("data-fill");
+  expect(Number(fill)).toBeGreaterThanOrEqual(0);
+
+  const widths = await page.evaluate(() => [
+    document.documentElement.scrollWidth,
+    window.innerWidth,
+  ]);
+  expect(widths[0]).toBe(widths[1]);
+});
+
 for (const id of LESSON_IDS) {
   for (const lang of LANGS) {
     test(`lesson: ${id} story to toy in ${lang}`, async ({ page }) => {
