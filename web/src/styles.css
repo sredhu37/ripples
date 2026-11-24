@@ -121,10 +121,44 @@ p {
 
 .lesson-title,
 .card h3,
-.fact-card h2 {
+.fact-card h3.fact-card-title {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: 1.2rem;
+}
+
+.fact-topbar {
+  flex-wrap: wrap;
+}
+
+.fact-topbar .logo {
+  font-size: clamp(1.4rem, 7vw, 2rem);
+  overflow-wrap: anywhere;
+}
+
+.fact-group-title {
+  margin: 18px 0 8px;
+}
+
+.fact-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--teal-dark);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.fact-link:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.fact-domain {
+  color: var(--muted, #5b6770);
+  font-weight: 400;
 }
 
 .icon-btn {
@@ -925,7 +959,7 @@ p {
   opacity: 0.75;
 }
 
-.fact-card h3 {
+.fact-card h4 {
   font-size: 1rem;
   margin-top: 6px;
 }

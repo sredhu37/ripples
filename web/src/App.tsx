@@ -13,6 +13,7 @@ import { getSessionEmail, logOut } from "./auth";
 import { loadDeviceLang, saveDeviceLang } from "./deviceLang";
 import { FactCards } from "./components/FactCards";
 import { FamilySettings } from "./components/FamilySettings";
+import { FirstKidScreen } from "./components/FirstKidScreen";
 import { LoginScreen } from "./components/LoginScreen";
 import { ProfilePicker } from "./components/ProfilePicker";
 import { LegalScreen } from "./components/LegalScreen";
@@ -32,6 +33,7 @@ import { stopSpeaking } from "./speech";
 type Screen =
   | { kind: "loading" }
   | { kind: "login" }
+  | { kind: "firstKid" }
   | { kind: "picker" }
   | { kind: "settings"; gated: boolean }
   | { kind: "map" }
@@ -58,13 +60,13 @@ export function App() {
     document.documentElement.lang = progress.lang;
   }, [progress.muted, progress.lang]);
 
-  /** Loads the family, then shows the picker, or family settings when there is no profile. */
+  /** Loads the family, then shows the picker, or the first-run screen when there is no profile. */
   async function enterFamily() {
     try {
       const family = await fetchFamily();
       setProfiles(family);
       setActiveId(null);
-      setScreen(family.length === 0 ? { kind: "settings", gated: false } : { kind: "picker" });
+      setScreen(family.length === 0 ? { kind: "firstKid" } : { kind: "picker" });
     } catch {
       setScreen({ kind: "login" });
     }
@@ -167,6 +169,17 @@ export function App() {
           onLang={setLang}
           onLoggedIn={() => void enterFamily()}
           onLegal={(page) => setScreen({ kind: "legal", page, back: screen })}
+        />
+      );
+    }
+
+    if (screen.kind === "firstKid") {
+      return (
+        <FirstKidScreen
+          lang={progress.lang}
+          onLang={setLang}
+          onAdd={addProfile}
+          onAdded={() => setScreen({ kind: "picker" })}
         />
       );
     }
