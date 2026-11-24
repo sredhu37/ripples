@@ -35,7 +35,7 @@ type Screen =
   | { kind: "login" }
   | { kind: "firstKid" }
   | { kind: "picker" }
-  | { kind: "settings"; gated: boolean }
+  | { kind: "settings"; gated: boolean; addKid?: boolean }
   | { kind: "map" }
   | { kind: "lesson"; id: string }
   | { kind: "facts" }
@@ -197,6 +197,7 @@ export function App() {
             setScreen({ kind: "map" });
           }}
           onParents={() => setScreen({ kind: "settings", gated: true })}
+          onAddKid={() => setScreen({ kind: "settings", gated: true, addKid: true })}
           onLegal={(page) => setScreen({ kind: "legal", page, back: screen })}
         />
       );
@@ -209,6 +210,8 @@ export function App() {
           profiles={profiles}
           activeId={activeId}
           gated={screen.gated}
+          addKid={screen.addKid}
+          onAdded={() => setScreen({ kind: "picker" })}
           paused={paused}
           onLang={setLang}
           onAdd={addProfile}
