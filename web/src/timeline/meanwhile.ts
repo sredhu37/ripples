@@ -72,6 +72,16 @@ export const EVENT_SOURCES: Record<string, string> = {
   covidvaccine: "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/covid-19-vaccines",
   webb: "https://science.nasa.gov/mission/webb/",
   chandrayaan3: "https://www.isro.gov.in/Chandrayaan3.html",
+  confucius: W("Confucius"),
+  hagia: W("Hagia_Sophia"),
+  borobudur: W("Borobudur"),
+  wisdom: W("House_of_Wisdom"),
+  petersburg: W("Saint_Petersburg"),
+  linnaeus: W("Carl_Linnaeus"),
+  watt: W("James_Watt"),
+  volta: W("Alessandro_Volta"),
+  braille: W("Braille"),
+  darwin: W("Charles_Darwin"),
 };
 
 export interface Meanwhile {
