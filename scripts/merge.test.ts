@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import { chmodSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { chmodSync, existsSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
@@ -19,7 +19,7 @@ case "$args" in
   *"repos/o/r/pulls/7 --jq [.state, .head.sha] | @tsv"*) printf 'open\\t%s\\n' "$SHA" ;;
   *"repos/o/r/pulls/7 --jq .base.ref"*) echo main ;;
   *"repos/o/r/compare/main..."*) echo "$BEHIND" ;;
-  *"repos/o/r/pulls/7 --jq .mergeable"*) echo "$MERGEABLE" ;;
+  *"repos/o/r/pulls/7 --jq [(.mergeable"*) echo "read" >> "$READS"; printf '%s\\t%s\\n' "$MERGEABLE" "$MSTATE" ;;
   *"repos/o/r/pulls/7 --jq .head.sha"*) echo "$NEW_SHA" ;;
   *"api user"*) echo sredhu37-bot ;;
   *"/check-runs"*) printf 'ci\\tcompleted\\tsuccess\\n' ;;
@@ -44,12 +44,17 @@ function run(env: Record<string, string>) {
       NEW_SHA: newSha,
       BEHIND: "0",
       MERGEABLE: "true",
-      MERGEABLE_WAIT: "0",
+      MSTATE: "clean",
+      MERGEABLE_SLEEP: "0",
+      READS: join(dir, "reads"),
       ...env,
     },
     encoding: "utf8",
   });
-  return { ...result, log: readFileSync(join(dir, "log"), "utf8").trim() };
+  const reads = existsSync(join(dir, "reads"))
+    ? readFileSync(join(dir, "reads"), "utf8").trim().split("\n").length
+    : 0;
+  return { ...result, reads, log: readFileSync(join(dir, "log"), "utf8").trim() };
 }
 
 describe("gate/merge.sh", () => {
@@ -77,11 +82,33 @@ describe("gate/merge.sh", () => {
     expect(log).toBe("");
   });
 
-  it("refuses when GitHub has not computed mergeable", () => {
-    const { status, stdout, log } = run({ BEHIND: "1", MERGEABLE: "null" });
-    expect(status).toBe(1);
-    expect(stdout).toContain("merged=false");
+  it("treats mergeable_state dirty as a conflict while mergeable is still null", () => {
+    const { status, stdout, log } = run({ BEHIND: "2", MERGEABLE: "null", MSTATE: "dirty" });
+    expect(status).toBe(0);
+    expect(stdout).toContain("update=conflict");
     expect(log).toBe("");
+  });
+
+  it("asks 5 times, then refuses when GitHub has not computed mergeable (#366)", () => {
+    const { status, stdout, stderr, log, reads } = run({
+      BEHIND: "1",
+      MERGEABLE: "null",
+      MSTATE: "unknown",
+    });
+    expect(status).toBe(1);
+    expect(reads).toBe(5);
+    expect(stdout).toContain("merged=false");
+    expect(stdout).toContain(
+      "GitHub did not say whether the PR conflicts with main: no answer after 5 reads",
+    );
+    expect(stderr).toContain("read 5 of 5: mergeable=null mergeable_state=unknown");
+    expect(log).toBe("");
+  });
+
+  it("honours MERGEABLE_TRIES", () => {
+    const { status, reads } = run({ BEHIND: "1", MERGEABLE: "null", MERGEABLE_TRIES: "2" });
+    expect(status).toBe(1);
+    expect(reads).toBe(2);
   });
 
   it("dry run neither updates nor merges", () => {

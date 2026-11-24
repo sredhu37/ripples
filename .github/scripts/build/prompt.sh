@@ -72,13 +72,9 @@ elif [ -n "$FIX_PR" ]; then
   else
     echo "none" > "$tmp/checks.md"
   fi
-  # A conflict with main (gate/conflict.sh starts the round): merge main and resolve it.
-  if [ "$(gh api "repos/$GITHUB_REPOSITORY/pulls/$FIX_PR" --jq '.mergeable // "null"')" = false ]; then
-    echo "yes. Run git fetch origin main and git merge origin/main, resolve every conflict, run the full check, commit the merge and push (never rebase, never force-push)" > "$tmp/conflict.md"
-  else
-    echo "none" > "$tmp/conflict.md"
-  fi
-  FIX_PR=$FIX_PR BRANCH=$BRANCH REVIEW_FILE="$tmp/review.md" CHECKS_FILE="$tmp/checks.md" CONFLICT_FILE="$tmp/conflict.md" \
+  # Every review fix round merges origin/main first (build-fix-review.md), so a conflict never
+  # depends on GitHub having computed mergeable yet (#366).
+  FIX_PR=$FIX_PR BRANCH=$BRANCH REVIEW_FILE="$tmp/review.md" CHECKS_FILE="$tmp/checks.md" \
     $render "$prompts/build-fix-review.md" > "$tmp/fix.md"
 fi
 
