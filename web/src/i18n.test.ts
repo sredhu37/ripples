@@ -13,7 +13,7 @@ describe("i18n core", () => {
   const languages: Lang[] = ["en", "de", "pl"];
 
   it("has speech codes defined for all three languages", () => {
-    expect(SPEECH_LANG.en).toBe("en-IN");
+    expect(SPEECH_LANG.en).toBe("en-US");
     expect(SPEECH_LANG.de).toBe("de-DE");
     expect(SPEECH_LANG.pl).toBe("pl-PL");
   });

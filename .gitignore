@@ -10,3 +10,13 @@ dist-server/
 .worktrees/
 .lighthouseci/
 test-results/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# npm run voices: Python tools, voice models and the job list (scripts/voices/voices.sh)
+scripts/voices/.cache/
+
+# Factory local runner working state
+.factory-local/

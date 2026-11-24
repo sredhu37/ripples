@@ -30,6 +30,12 @@ server {
         try_files $uri =404;
     }
 
+    # Otto's voice files (npm run voices) are named after their content too.
+    location /audio/ {
+        add_header Cache-Control "public, max-age=604800, immutable";
+        try_files $uri =404;
+    }
+
     # index.html, sw.js, the manifest and icons keep their names. "no-cache" means the browser
     # asks nginx first (a cheap 304 when nothing changed), so a new deploy shows up at once.
     location / {

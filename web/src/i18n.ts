@@ -366,7 +366,7 @@ export function t(lang: Lang, key: UiKey, vars: Record<string, string | number> 
 }
 
 export const SPEECH_LANG: Record<Lang, string> = {
-  en: "en-IN",
+  en: "en-US",
   de: "de-DE",
   pl: "pl-PL",
 };
