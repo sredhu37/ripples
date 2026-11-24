@@ -141,6 +141,24 @@ jobs:
       - run: npx playwright install --with-deps chromium
         working-directory: web/e2e
 
+      # The agent runs `npm run voices` after it changes a line Otto says, so text and voice files
+      # merge in one PR. Spec: docs/factory.md, Build; docs/writing-lessons.md, Voice files.
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-dependency-glob: scripts/voices/requirements.txt
+      - name: ffmpeg (installed with apt if the runner lacks it)
+        run: .github/scripts/checks/ffmpeg.sh
+      # The models are pinned by url and sha256 in scripts/voices/models.json (about 740 MB).
+      - name: Voice models (cached by their pins)
+        uses: actions/cache@v5
+        with:
+          path: scripts/voices/.cache/models
+          key: voice-models-${{ hashFiles('scripts/voices/models.json') }}
+
       # Before the branch switch, so the script and the templates come from main.
       - name: Prompt (template and build.md from main, issue, trusted comments)
         id: prompt
