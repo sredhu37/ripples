@@ -83,6 +83,16 @@ export const EVENT_SOURCES: Record<string, string> = {
   hsr: W("High-speed_rail_in_China"),
   upi: W("Unified_Payments_Interface"),
   chatgpt: W("ChatGPT"),
+  confucius: W("Confucius"),
+  hagia: W("Hagia_Sophia"),
+  borobudur: W("Borobudur"),
+  wisdom: W("House_of_Wisdom"),
+  petersburg: W("Saint_Petersburg"),
+  linnaeus: W("Carl_Linnaeus"),
+  watt: W("James_Watt"),
+  volta: W("Alessandro_Volta"),
+  braille: W("Braille"),
+  darwin: W("Charles_Darwin"),
 };
 
 export interface Meanwhile {
