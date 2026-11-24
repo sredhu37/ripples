@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { t, formatDate, formatNumber, SPEECH_LANG, CURRENCY_SYMBOL, type Lang } from "./i18n";
+import {
+  t,
+  UI_KEYS,
+  formatDate,
+  formatNumber,
+  SPEECH_LANG,
+  CURRENCY_SYMBOL,
+  type Lang,
+} from "./i18n";
 
 describe("i18n core", () => {
   const languages: Lang[] = ["en", "de", "pl"];
@@ -28,6 +36,7 @@ describe("i18n core", () => {
       "continue",
       "nextUp",
       "comingSoon",
+      "lessonDone",
       "locked",
       "badges",
       "back",
@@ -57,6 +66,7 @@ describe("i18n core", () => {
       "restartLesson",
       "factCards",
       "factCardsHelp",
+      "factSource",
       "claims",
       "simplified",
       "noLessons",
@@ -66,6 +76,9 @@ describe("i18n core", () => {
       "lessonDisabled",
       "pickerTitle",
       "pickerNone",
+      "firstKidTitle",
+      "firstKidIntro",
+      "firstKidAdd",
       "changeKid",
       "notSaved",
       "familyTitle",
@@ -78,7 +91,10 @@ describe("i18n core", () => {
       "deleteProfile",
       "deleteSure",
       "profileLimit",
-      "lessonsFor",
+      "lessonsOf",
+      "backToKids",
+      "deleteTitle",
+      "accountTitle",
       "save",
       "cancel",
       "edit",
@@ -110,6 +126,33 @@ describe("i18n core", () => {
       if (key !== "appName") {
         expect(t("de", key), `key ${key} de differs`).not.toBe(t("en", key));
         expect(t("pl", key), `key ${key} pl differs`).not.toBe(t("en", key));
+      }
+    }
+  });
+
+  it("spells German UI text with real umlauts and ß, not transliterations", () => {
+    const transliterations = [
+      "fuer",
+      "zurueck",
+      "ueber",
+      "koenn",
+      "moecht",
+      "waehl",
+      "naechst",
+      "loesch",
+      "pruef",
+      "hinzufueg",
+      "noetig",
+      "jaehrig",
+      "schliess",
+      "oeffn",
+      "waehrend",
+      "heisst",
+    ];
+    for (const key of UI_KEYS) {
+      const val = t("de", key).toLowerCase();
+      for (const bad of transliterations) {
+        expect(val, `key ${key} contains "${bad}"`).not.toContain(bad);
       }
     }
   });

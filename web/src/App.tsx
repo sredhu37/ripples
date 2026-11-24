@@ -13,6 +13,7 @@ import { getSessionEmail, logOut } from "./auth";
 import { loadDeviceLang, saveDeviceLang } from "./deviceLang";
 import { FactCards } from "./components/FactCards";
 import { FamilySettings } from "./components/FamilySettings";
+import { FirstKidScreen } from "./components/FirstKidScreen";
 import { LoginScreen } from "./components/LoginScreen";
 import { ProfilePicker } from "./components/ProfilePicker";
 import { LegalScreen } from "./components/LegalScreen";
@@ -32,6 +33,7 @@ import { stopSpeaking } from "./speech";
 type Screen =
   | { kind: "loading" }
   | { kind: "login" }
+  | { kind: "firstKid" }
   | { kind: "picker" }
   | { kind: "settings"; gated: boolean }
   | { kind: "map" }
@@ -54,16 +56,17 @@ export function App() {
 
   useEffect(() => {
     setMuted(progress.muted);
+    if (progress.muted) stopSpeaking();
     document.documentElement.lang = progress.lang;
   }, [progress.muted, progress.lang]);
 
-  /** Loads the family, then shows the picker, or family settings when there is no profile. */
+  /** Loads the family, then shows the picker, or the first-run screen when there is no profile. */
   async function enterFamily() {
     try {
       const family = await fetchFamily();
       setProfiles(family);
       setActiveId(null);
-      setScreen(family.length === 0 ? { kind: "settings", gated: false } : { kind: "picker" });
+      setScreen(family.length === 0 ? { kind: "firstKid" } : { kind: "picker" });
     } catch {
       setScreen({ kind: "login" });
     }
@@ -172,6 +175,17 @@ export function App() {
       );
     }
 
+    if (screen.kind === "firstKid") {
+      return (
+        <FirstKidScreen
+          lang={progress.lang}
+          onLang={setLang}
+          onAdd={addProfile}
+          onAdded={() => setScreen({ kind: "picker" })}
+        />
+      );
+    }
+
     if (screen.kind === "picker") {
       return (
         <ProfilePicker
@@ -269,6 +283,8 @@ export function App() {
             onBadge={() => awardBadge(screen.id)}
             onExit={() => setScreen({ kind: "map" })}
             onLang={setLang}
+            muted={progress.muted}
+            onToggleMute={() => active && updateProfile(active.id, { muted: !active.muted })}
           />
         );
       }

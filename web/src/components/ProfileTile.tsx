@@ -22,6 +22,11 @@ export function ProfileTile({ nickname, avatar, onClick, selected = false, label
         <Person {...CAST[who]} />
       </svg>
       <span className="tile-name">{nickname}</span>
+      {selected && (
+        <span className="tile-check" aria-hidden="true">
+          ✓
+        </span>
+      )}
     </>
   );
   if (!onClick) return <div className="tile">{inner}</div>;

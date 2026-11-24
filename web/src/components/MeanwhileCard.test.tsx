@@ -41,7 +41,7 @@ describe("MeanwhileCard", () => {
 
   it("shows the single intro text, in German when asked", async () => {
     const c = await mount(<MeanwhileCard meanwhile={MEANWHILE.ww2} lang="de" />);
-    expect(c.textContent).toContain("Waehrenddessen in der Welt");
+    expect(c.textContent).toContain("Währenddessen in der Welt");
     expect(c.textContent).toContain(MEANWHILE.ww2.text.de);
   });
 
