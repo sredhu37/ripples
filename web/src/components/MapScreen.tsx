@@ -1,3 +1,4 @@
+import { villagerOf } from "../avatar";
 import { hasLesson } from "../content";
 import { NO_LESSONS } from "../features";
 import {
@@ -12,6 +13,8 @@ import { nextLessonId, type Lang, type Progress } from "../progress";
 import { buildTrail } from "../trailView";
 import { sfx } from "../sound";
 import { LessonIcon, UiIcon } from "./appIcons";
+import { CAST } from "./cast";
+import { Person } from "./icons";
 import { LangSwitch } from "./LangSwitch";
 import { Otto } from "./Otto";
 import { SpeechBubble } from "./SpeechBubble";
@@ -26,7 +29,9 @@ interface Props {
   onOpenLesson: (id: string) => void;
   onParents: () => void;
   onTimeline: () => void;
-  onChangeKid: () => void;
+  onSwitchProfile: () => void;
+  /** Stored avatar of the active kid. One the app cannot draw shows the first villager. */
+  avatar: string;
 }
 
 /** Kid side: "Group 1: Money and Work" reads as "Money and Work". Parents keep the full title. */
@@ -43,9 +48,11 @@ export function MapScreen({
   onOpenLesson,
   onParents,
   onTimeline,
-  onChangeKid,
+  onSwitchProfile,
+  avatar,
 }: Props) {
   const { lang, name, muted } = progress;
+  const who = villagerOf(avatar);
   // A Paused lesson is left out like a Disabled one; its badge stays in `progress`.
   const order = CURRICULUM_ORDER.filter((id) => !paused.has(id));
   const visibleLessons = order
@@ -62,39 +69,51 @@ export function MapScreen({
 
   return (
     <main className="screen">
-      <header className="topbar">
+      <header className="topbar trail-bar">
+        <button
+          type="button"
+          className="profile-btn"
+          aria-label={`${t(lang, "switchProfile")}: ${name}`}
+          title={t(lang, "switchProfile")}
+          onClick={onSwitchProfile}
+        >
+          <svg className="profile-face" data-avatar={who} viewBox="0 0 100 100" aria-hidden="true">
+            <Person {...CAST[who]} />
+          </svg>
+          <span className="profile-name">{name}</span>
+        </button>
         <h1 className="logo">{t(lang, "appName")}</h1>
         <div className="topbar-actions">
-          <button type="button" className="btn btn-quiet" onClick={onChangeKid}>
-            {t(lang, "changeKid")}
-          </button>
-          <LangSwitch lang={lang} onLang={onLang} />
           <button
             type="button"
-            className="icon-btn"
+            className="labeled-btn"
             aria-label={t(lang, muted ? "unmute" : "mute")}
             aria-pressed={muted}
             onClick={onToggleMute}
           >
             <UiIcon name={muted ? "speakerOff" : "speakerOn"} />
+            <span aria-hidden="true">{t(lang, "soundLabel")}</span>
           </button>
           <button
             type="button"
-            className="icon-btn"
+            className="labeled-btn"
             aria-label={t(lang, "worldTimeline")}
             onClick={onTimeline}
           >
             <UiIcon name="globe" />
+            <span aria-hidden="true">{t(lang, "timelineLabel")}</span>
           </button>
           <button
             type="button"
-            className="icon-btn"
+            className="labeled-btn"
             aria-label={t(lang, "parents")}
             onClick={onParents}
           >
             <UiIcon name="gear" />
+            <span aria-hidden="true">{t(lang, "parentsLabel")}</span>
           </button>
         </div>
+        <LangSwitch lang={lang} onLang={onLang} />
       </header>
 
       <section className="hello">

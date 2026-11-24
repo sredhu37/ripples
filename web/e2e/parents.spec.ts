@@ -23,7 +23,8 @@ test("parents: settings opened from a kid's trail change that kid's lessons", as
   await expect(stops.first()).toContainText("1. What is money?");
 
   await passParentGate(page, async () => {});
-  await expect(page.getByLabel("Lessons for")).toHaveValue(api.profiles[1].id);
+  await expect(page.getByLabel("Lessons for")).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Lessons for Ben" })).toBeVisible();
 
   const group = page.locator("details.lesson-group-accordion").first();
   await group.locator("summary").click();
@@ -31,7 +32,8 @@ test("parents: settings opened from a kid's trail change that kid's lessons", as
   await expect.poll(() => api.profiles[1].disabledLessons.length).toBe(1);
   expect(api.profiles[0].disabledLessons).toEqual([]);
 
-  await page.getByRole("button", { name: "Close" }).click();
+  await page.getByRole("button", { name: "Back to kids" }).click();
+  await page.getByRole("button", { name: "All lessons" }).click();
   await expect(stops.first()).toContainText("1. Work and pay");
 });
 
@@ -47,13 +49,12 @@ test("parents: family settings sit behind the maths gate and control the trail",
 
   await passParentGate(page, step);
 
-  // The old save, restore and reset sections are gone.
-  await expect(page.getByRole("heading", { name: "Family settings" })).toBeVisible();
+  // Opened from the trail, the screen lands on that kid's detail with their lessons.
+  await expect(page.getByRole("heading", { name: "Lessons for Ava" })).toBeVisible();
   await expect(
     page.getByRole("heading", { name: /Save progress|Restore progress|Start fresh/ }),
   ).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "Age group" })).toHaveCount(0);
-  await expect(page.getByRole("heading", { name: "Lesson selection" })).toBeVisible();
 
   // Turn off the first lesson of the first group.
   const group = page.locator("details.lesson-group-accordion").first();
@@ -66,8 +67,14 @@ test("parents: family settings sit behind the maths gate and control the trail",
   await step();
   await expect.poll(() => api.profiles[0].disabledLessons.length).toBe(1);
 
-  // Close: the first lesson is gone from the trail.
-  await page.getByRole("button", { name: "Close" }).click();
+  // Back to the kid list, which has the family title and the back button at the top left.
+  await page.getByRole("button", { name: "Back to kids" }).click();
+  await expect(page.getByRole("heading", { name: "Family settings" })).toBeVisible();
+  // The only way out is the back button: no "Close" at the bottom.
+  await expect(page.getByRole("button", { name: "Close", exact: true })).toHaveCount(0);
+  await expect(page.locator("button").first()).toHaveText(/All lessons/);
+  // Back to the trail: the first lesson is gone.
+  await page.getByRole("button", { name: "All lessons" }).click();
   await expect(stops.first()).toContainText("1. Work and pay");
   await step();
 });

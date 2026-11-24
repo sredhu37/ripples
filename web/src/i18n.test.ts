@@ -50,10 +50,10 @@ describe("i18n core", () => {
       "gateQuestion",
       "gateWrong",
       "gateGo",
-      "close",
       "next",
       "prev",
       "ready",
+      "readyHint",
       "check",
       "tryAgain",
       "rightLine",
@@ -66,6 +66,7 @@ describe("i18n core", () => {
       "restartLesson",
       "factCards",
       "factCardsHelp",
+      "factSource",
       "claims",
       "simplified",
       "noLessons",
@@ -75,7 +76,14 @@ describe("i18n core", () => {
       "lessonDisabled",
       "pickerTitle",
       "pickerNone",
-      "changeKid",
+      "addKid",
+      "switchProfile",
+      "soundLabel",
+      "timelineLabel",
+      "parentsLabel",
+      "firstKidTitle",
+      "firstKidIntro",
+      "firstKidAdd",
       "notSaved",
       "familyTitle",
       "profilesTitle",
@@ -87,7 +95,10 @@ describe("i18n core", () => {
       "deleteProfile",
       "deleteSure",
       "profileLimit",
-      "lessonsFor",
+      "lessonsOf",
+      "backToKids",
+      "deleteTitle",
+      "accountTitle",
       "save",
       "cancel",
       "edit",
@@ -155,7 +166,7 @@ describe("i18n core", () => {
     expect(welcome).toContain("Ania");
 
     const gate = t("pl", "gateQuestion", { a: 7, b: 8 });
-    expect(gate).toBe("Dla rodziców: ile to jest 7 × 8?");
+    expect(gate).toBe("Ile to jest 7 × 8?");
   });
 
   it("formats numbers properly for Polish locale", () => {

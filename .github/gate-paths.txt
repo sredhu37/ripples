@@ -18,8 +18,10 @@ web/vite.config.ts
 AGENTS.md
 CLAUDE.md
 .claude/**
-ARCHITECTURE.md
-docs/**
+docs/factory.md
+docs/design.md
+docs/writing-lessons.md
+docs/adr/**
 LICENSE
 LICENSE-CONTENT.txt
 LICENSING.md

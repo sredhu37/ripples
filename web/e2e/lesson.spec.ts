@@ -11,6 +11,80 @@ const LANGS: Lang[] = ["en", "de", "pl"];
 // A story has far fewer lines than this; the cap only stops an endless loop.
 const MAX_STORY_STEPS = 80;
 
+test("lesson header: sound switch, steady Start over, one progress bar, fits 360px", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await fakeFamily(page, { kids: [{ lang: "en", badges: ["money"], muted: true }] });
+  await openTrail(page);
+  await page.locator(".trail .stop-done button.place").click();
+  await expect(page.locator(".lesson-title")).toBeVisible();
+
+  // Start over is in the DOM from the first step, disabled there.
+  const restart = page.getByRole("button", { name: "Start over", exact: true });
+  await expect(restart).toBeDisabled();
+
+  // The sound switch works inside the lesson.
+  await page.getByRole("button", { name: "Sound on", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Sound off", exact: true })).toHaveAttribute(
+    "aria-pressed",
+    "false",
+  );
+
+  // One progress indicator: no in-scene step dots, and the bar fills during the story.
+  await expect(page.locator(".steps")).toHaveCount(0);
+  const next = page.getByRole("button", { name: "Next", exact: true });
+  await next.click();
+  await expect(restart).toBeEnabled();
+  const fill = await page.locator(".dots .dot-now").getAttribute("data-fill");
+  expect(Number(fill)).toBeGreaterThanOrEqual(0);
+
+  const widths = await page.evaluate(() => [
+    document.documentElement.scrollWidth,
+    window.innerWidth,
+  ]);
+  expect(widths[0]).toBe(widths[1]);
+});
+
+for (const width of [360, 390, 1366]) {
+  test(`money toy: drag line, clear Drop here, fish inside scene, ready hint at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await fakeFamily(page, { kids: [{ lang: "en", badges: ["money"], muted: true }] });
+    await openTrail(page);
+    await page.locator(".trail .stop-done button.place").click();
+    const next = page.getByRole("button", { name: "Next", exact: true });
+    const toy = page.locator(".lesson-body .stage-wrap").first();
+    for (let i = 0; i < MAX_STORY_STEPS && (await toy.count()) === 0; i += 1) {
+      await next.click();
+    }
+    await expect(toy).toBeVisible();
+
+    await expect(page.locator(".lesson-body .hello")).toContainText("Drag");
+    await expect(page.locator(".lesson-body .hello")).not.toContainText("action button");
+
+    const label = await page.getByTestId("drop-Bea").boundingBox();
+    const name = await page.getByTestId("name-Bea").boundingBox();
+    expect(label && name).toBeTruthy();
+    expect(label!.y).toBeGreaterThanOrEqual(name!.y + name!.height);
+
+    const fish = await page.getByTestId("fish-chip").boundingBox();
+    const scene = await page.locator(".lesson-body .stage-wrap svg.diagram").boundingBox();
+    expect(fish!.y + fish!.height).toBeLessThanOrEqual(scene!.y + scene!.height);
+    expect(fish!.x).toBeGreaterThanOrEqual(scene!.x);
+
+    await expect(page.locator(".lesson-body .row.nav .btn")).toBeDisabled();
+    await expect(page.locator("#ready-hint")).toBeVisible();
+
+    const widths = await page.evaluate(() => [
+      document.documentElement.scrollWidth,
+      window.innerWidth,
+    ]);
+    expect(widths[0]).toBe(widths[1]);
+  });
+}
+
 for (const id of LESSON_IDS) {
   for (const lang of LANGS) {
     test(`lesson: ${id} story to toy in ${lang}`, async ({ page }) => {

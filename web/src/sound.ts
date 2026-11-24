@@ -9,6 +9,10 @@ export function setMuted(value: boolean): void {
   muted = value;
 }
 
+export function isMuted(): boolean {
+  return muted;
+}
+
 function context(): AudioContext | null {
   if (typeof window === "undefined") return null;
   const Ctor =

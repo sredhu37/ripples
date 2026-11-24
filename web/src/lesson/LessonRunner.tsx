@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { LessonIcon, UiIcon } from "../components/appIcons";
+import { BackButton } from "../components/BackButton";
 import { LangSwitch } from "../components/LangSwitch";
 import { Otto } from "../components/Otto";
 import { SpeechBubble } from "../components/SpeechBubble";
@@ -20,6 +21,8 @@ interface Props {
   onBadge: () => void;
   onExit: () => void;
   onLang?: (l: Lang) => void;
+  muted?: boolean;
+  onToggleMute?: () => void;
 }
 
 type Phase =
@@ -31,9 +34,21 @@ type Phase =
   | { k: "meanwhile" }
   | { k: "dad" };
 
-export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit, onLang }: Props) {
+export function LessonRunner({
+  lesson,
+  meta,
+  lang,
+  alreadyDone,
+  onBadge,
+  onExit,
+  onLang,
+  muted = false,
+  onToggleMute,
+}: Props) {
   const [phase, setPhase] = useState<Phase>({ k: "story", i: 0 });
   const [toyCompleted, setToyCompleted] = useState(false);
+  // Reported by StoryView: how far through the current beat, and whether it is step one.
+  const [storyView, setStoryView] = useState({ fill: 0, first: true });
   const wasDone = useRef(alreadyDone);
   const total = lesson.story.length + 1 + lesson.questions.length;
 
@@ -46,6 +61,10 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit,
           ? lesson.story.length + 1 + phase.i
           : total;
 
+  const storyFill = phase.k === "story" ? storyView.fill : 0;
+  // Start over stays in the header all lesson; it is disabled only on the very first step.
+  const atStart = phase.k === "story" && phase.i === 0 && storyView.first;
+
   const handleRestart = () => {
     setPhase({ k: "story", i: 0 });
   };
@@ -54,29 +73,34 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit,
     <main className="screen lesson">
       <header className="lesson-head">
         <div className="lesson-head-actions">
+          <BackButton label={t(lang, "allLessons")} onClick={onExit} />
           <button
             type="button"
-            className="btn btn-quiet btn-small"
-            onClick={onExit}
-            aria-label={t(lang, "allLessons")}
+            className="btn btn-quiet btn-small btn-restart"
+            onClick={handleRestart}
+            disabled={atStart}
           >
-            ← {t(lang, "allLessons")}
+            {t(lang, "restartLesson")}
           </button>
-          {(phase.k !== "story" || phase.i > 0) && (
+        </div>
+        <div className="lesson-head-tools">
+          {onLang && <LangSwitch lang={lang} onLang={onLang} />}
+          {onToggleMute && (
             <button
               type="button"
-              className="btn btn-quiet btn-small btn-restart"
-              onClick={handleRestart}
+              className="icon-btn"
+              aria-label={t(lang, muted ? "unmute" : "mute")}
+              aria-pressed={muted}
+              onClick={onToggleMute}
             >
-              {t(lang, "restartLesson")}
+              <UiIcon name={muted ? "speakerOff" : "speakerOn"} />
             </button>
           )}
         </div>
         <h2 className="lesson-title">
           <LessonIcon id={meta.id} size={34} /> {getLessonTitle(meta, lang)}
         </h2>
-        {onLang && <LangSwitch lang={lang} onLang={onLang} />}
-        <Dots total={total} position={position} lang={lang} />
+        <Dots total={total} position={position} fill={storyFill} lang={lang} />
       </header>
 
       {phase.k === "story" && (
@@ -86,6 +110,7 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit,
           index={phase.i}
           fromEnd={phase.back}
           lang={lang}
+          onView={setStoryView}
           onPrev={() =>
             setPhase(phase.i === 0 ? phase : { k: "story", i: phase.i - 1, back: true })
           }
@@ -111,11 +136,17 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit,
               type="button"
               className="btn"
               disabled={!toyCompleted}
+              aria-describedby={toyCompleted ? undefined : "ready-hint"}
               onClick={() => setPhase({ k: "quiz", i: 0 })}
             >
               {t(lang, "ready")}
             </button>
           </div>
+          {!toyCompleted && (
+            <p id="ready-hint" className="ready-hint">
+              {t(lang, "readyHint")}
+            </p>
+          )}
         </section>
       )}
 
@@ -195,7 +226,18 @@ export function LessonRunner({ lesson, meta, lang, alreadyDone, onBadge, onExit,
   );
 }
 
-function Dots({ total, position, lang }: { total: number; position: number; lang: Lang }) {
+function Dots({
+  total,
+  position,
+  fill,
+  lang,
+}: {
+  total: number;
+  position: number;
+  /** 0 to 1: how much of the current segment is filled (story steps) */
+  fill: number;
+  lang: Lang;
+}) {
   return (
     <div
       className="dots"
@@ -207,6 +249,12 @@ function Dots({ total, position, lang }: { total: number; position: number; lang
         <span
           key={i}
           className={i < position ? "dot dot-done" : i === position ? "dot dot-now" : "dot"}
+          style={
+            i === position
+              ? ({ "--fill": `${Math.round(fill * 100)}%` } as CSSProperties)
+              : undefined
+          }
+          data-fill={i === position ? fill.toFixed(2) : undefined}
         />
       ))}
     </div>
@@ -218,6 +266,7 @@ function StoryView({
   index,
   fromEnd,
   lang,
+  onView,
   onPrev,
   onNext,
 }: {
@@ -225,6 +274,7 @@ function StoryView({
   index: number;
   fromEnd?: boolean;
   lang: Lang;
+  onView: (v: { fill: number; first: boolean }) => void;
   onPrev: () => void;
   onNext: () => void;
 }) {
@@ -234,6 +284,10 @@ function StoryView({
   const [step, setStep] = useState(count > 0 && fromEnd ? count : 1);
   const Diagram = beat.Diagram;
   const line = count > 0 ? beat.lines![step - 1] : beat.text;
+
+  useEffect(() => {
+    onView({ fill: count > 1 ? step / count : 0, first: step <= 1 });
+  }, [step, count, onView]);
 
   const advance = () => {
     sfx.tap();
@@ -256,13 +310,6 @@ function StoryView({
         {!Diagram && beat.scene && (
           <div className="scene" aria-hidden="true">
             {beat.scene}
-          </div>
-        )}
-        {count > 1 && (
-          <div className="steps" aria-hidden="true">
-            {beat.lines!.map((_, i) => (
-              <span key={i} className={i < step ? "step on" : "step"} />
-            ))}
           </div>
         )}
       </div>

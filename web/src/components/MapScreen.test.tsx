@@ -21,7 +21,7 @@ async function renderMap(progress: Progress, paused?: ReadonlySet<string>) {
   const container = document.createElement("div");
   document.body.appendChild(container);
   const root = createRoot(container);
-  const onChangeKid = vi.fn();
+  const onSwitchProfile = vi.fn();
   await act(async () => {
     root.render(
       <MapScreen
@@ -33,13 +33,14 @@ async function renderMap(progress: Progress, paused?: ReadonlySet<string>) {
         onOpenLesson={() => {}}
         onParents={() => {}}
         onTimeline={() => {}}
-        onChangeKid={onChangeKid}
+        avatar="Finn"
+        onSwitchProfile={onSwitchProfile}
       />,
     );
   });
   return {
     container,
-    onChangeKid,
+    onSwitchProfile,
     done: () => {
       root.unmount();
       container.remove();
@@ -135,16 +136,27 @@ describe("MapScreen fresh profile", () => {
 });
 
 describe("MapScreen kid switch", () => {
-  it("has a Change kid button", async () => {
-    const { container, onChangeKid, done } = await renderMap({ ...emptyProgress(), name: "Ava" });
-    const button = Array.from(container.querySelectorAll("button")).find(
-      (b) => b.textContent === "Change kid",
-    );
-    expect(button).toBeDefined();
-    await act(async () => {
-      button!.click();
+  it("shows the kid's villager and name as the profile switch", async () => {
+    const { container, onSwitchProfile, done } = await renderMap({
+      ...emptyProgress(),
+      name: "Ava",
     });
-    expect(onChangeKid).toHaveBeenCalledTimes(1);
+    const button = container.querySelector<HTMLButtonElement>(".profile-btn")!;
+    expect(button.textContent).toBe("Ava");
+    expect(button.getAttribute("aria-label")).toBe("Switch profile: Ava");
+    expect(button.querySelector(".profile-face")?.getAttribute("data-avatar")).toBe("Finn");
+    await act(async () => {
+      button.click();
+    });
+    expect(onSwitchProfile).toHaveBeenCalledTimes(1);
+    expect(container.textContent).not.toContain("Change kid");
+    done();
+  });
+
+  it("labels the sound, timeline and parents buttons", async () => {
+    const { container, done } = await renderMap({ ...emptyProgress(), name: "Ava" });
+    const labels = Array.from(container.querySelectorAll(".labeled-btn")).map((b) => b.textContent);
+    expect(labels).toEqual(["Sound", "Timeline", "Parents"]);
     done();
   });
 });

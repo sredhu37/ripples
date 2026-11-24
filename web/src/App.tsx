@@ -13,6 +13,7 @@ import { getSessionEmail, logOut } from "./auth";
 import { loadDeviceLang, saveDeviceLang } from "./deviceLang";
 import { FactCards } from "./components/FactCards";
 import { FamilySettings } from "./components/FamilySettings";
+import { FirstKidScreen } from "./components/FirstKidScreen";
 import { LoginScreen } from "./components/LoginScreen";
 import { ProfilePicker } from "./components/ProfilePicker";
 import { LegalScreen } from "./components/LegalScreen";
@@ -32,8 +33,9 @@ import { stopSpeaking } from "./speech";
 type Screen =
   | { kind: "loading" }
   | { kind: "login" }
+  | { kind: "firstKid" }
   | { kind: "picker" }
-  | { kind: "settings"; gated: boolean }
+  | { kind: "settings"; gated: boolean; addKid?: boolean }
   | { kind: "map" }
   | { kind: "lesson"; id: string }
   | { kind: "facts" }
@@ -54,16 +56,17 @@ export function App() {
 
   useEffect(() => {
     setMuted(progress.muted);
+    if (progress.muted) stopSpeaking();
     document.documentElement.lang = progress.lang;
   }, [progress.muted, progress.lang]);
 
-  /** Loads the family, then shows the picker, or family settings when there is no profile. */
+  /** Loads the family, then shows the picker, or the first-run screen when there is no profile. */
   async function enterFamily() {
     try {
       const family = await fetchFamily();
       setProfiles(family);
       setActiveId(null);
-      setScreen(family.length === 0 ? { kind: "settings", gated: false } : { kind: "picker" });
+      setScreen(family.length === 0 ? { kind: "firstKid" } : { kind: "picker" });
     } catch {
       setScreen({ kind: "login" });
     }
@@ -91,6 +94,8 @@ export function App() {
 
   useEffect(() => {
     stopSpeaking();
+    // Every screen starts at the top, not where the last one was scrolled.
+    window.scrollTo(0, 0);
   }, [screen]);
 
   function backToLogin() {
@@ -170,6 +175,17 @@ export function App() {
       );
     }
 
+    if (screen.kind === "firstKid") {
+      return (
+        <FirstKidScreen
+          lang={progress.lang}
+          onLang={setLang}
+          onAdd={addProfile}
+          onAdded={() => setScreen({ kind: "picker" })}
+        />
+      );
+    }
+
     if (screen.kind === "picker") {
       return (
         <ProfilePicker
@@ -181,6 +197,7 @@ export function App() {
             setScreen({ kind: "map" });
           }}
           onParents={() => setScreen({ kind: "settings", gated: true })}
+          onAddKid={() => setScreen({ kind: "settings", gated: true, addKid: true })}
           onLegal={(page) => setScreen({ kind: "legal", page, back: screen })}
         />
       );
@@ -193,6 +210,8 @@ export function App() {
           profiles={profiles}
           activeId={activeId}
           gated={screen.gated}
+          addKid={screen.addKid}
+          onAdded={() => setScreen({ kind: "picker" })}
           paused={paused}
           onLang={setLang}
           onAdd={addProfile}
@@ -215,6 +234,7 @@ export function App() {
           onLang={setLang}
           onPage={(page) => setScreen({ kind: "legal", page, back })}
           onClose={() => setScreen(back)}
+          backLabel={back.kind === "login" ? "loginTitle" : "pickerTitle"}
         />
       );
     }
@@ -235,7 +255,8 @@ export function App() {
           lang={progress.lang}
           paused={paused}
           onLang={setLang}
-          onClose={() => setScreen({ kind: "settings", gated: true })}
+          // Still the same visit to the parents area: no second maths question.
+          onClose={() => setScreen({ kind: "settings", gated: false })}
         />
       );
     }
@@ -266,6 +287,8 @@ export function App() {
             onBadge={() => awardBadge(screen.id)}
             onExit={() => setScreen({ kind: "map" })}
             onLang={setLang}
+            muted={progress.muted}
+            onToggleMute={() => active && updateProfile(active.id, { muted: !active.muted })}
           />
         );
       }
@@ -289,7 +312,8 @@ export function App() {
         onOpenLesson={(id) => setScreen({ kind: "lesson", id })}
         onParents={() => setScreen({ kind: "settings", gated: true })}
         onTimeline={() => setScreen({ kind: "timeline" })}
-        onChangeKid={() => {
+        avatar={active.avatar}
+        onSwitchProfile={() => {
           setActiveId(null);
           setScreen({ kind: "picker" });
         }}

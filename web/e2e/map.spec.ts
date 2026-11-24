@@ -46,19 +46,21 @@ test("map: a new family logs in, adds a kid and sees the trail", async ({ page }
   await fakeFamily(page, { loggedIn: false, kids: [] });
   await page.goto("./");
 
-  // Log in. A family with no profile lands on family settings with the add form open.
+  // Log in. A family with no profile lands on the first-run screen.
   await page.getByLabel("Your email").fill("mum@example.com");
   await page.getByRole("button", { name: "Send my code" }).click();
   await page.getByLabel("6-digit code").fill(GOOD_CODE);
   await page.getByRole("button", { name: "Log in", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "Family settings" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Who is learning with Otto?" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Family settings" })).toHaveCount(0);
   await step();
 
+  // An empty nickname cannot be sent.
+  await expect(page.getByRole("button", { name: "Add", exact: true })).toBeDisabled();
   await page.getByLabel("Nickname").fill("Ava");
   await step();
-  await page.getByRole("button", { name: "Add profile" }).click();
-  await expect(page.getByRole("button", { name: "Edit Ava" })).toBeVisible();
-  await page.getByRole("button", { name: "Close" }).click();
+  await page.getByRole("button", { name: "Add", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Who is playing?" })).toBeVisible();
 
   // The picker shows Ava; one tap opens her trail.
   await page.getByRole("button", { name: "Ava", exact: true }).click();

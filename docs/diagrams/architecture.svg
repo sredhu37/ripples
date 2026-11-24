@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600" role="img" aria-labelledby="t d">
+<title id="t">Ripples architecture</title>
+<desc id="d">A child uses the React app in web/. The app talks to the Node API in server/ over /api with a session cookie. The API reads and writes Postgres and sends the parent's login code by email. Lessons live in code, not in the database.</desc>
+<style>
+svg{--bg:#f3fafb;--card:#ffffff;--line:#c4d6da;--grid:#d6e7ea;--ink:#1f343b;--mute:#587078;
+--teal:#168195;--teal-soft:#d9eff2;--orange:#d96f12;--orange-soft:#fde9d6;--green:#3a9047;--green-soft:#dff2e1;
+--red:#d23f3f;--on:#ffffff;--water:#cfe9ed;--shadow:#1f343b14}
+@media (prefers-color-scheme: dark){svg{--bg:#0d1d23;--card:#14292f;--line:#2b4a54;--grid:#16303a;--ink:#e9f5f6;--mute:#93b4bc;
+--teal:#47c6d8;--teal-soft:#17414b;--orange:#ffa14f;--orange-soft:#3d2b18;--green:#6fcb7d;--green-soft:#173a20;
+--red:#ff7070;--on:#0d1d23;--water:#173f49;--shadow:#00000040}}
+text{font-family:ui-rounded,'SF Pro Rounded',Nunito,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;fill:var(--ink)}
+.mono{font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+.bg{fill:var(--bg)}
+.gdot{fill:var(--grid)}
+.card{fill:var(--card);stroke:var(--line);stroke-width:1.5}
+.shadow{fill:var(--shadow)}
+.k-human{--c:var(--orange);--cs:var(--orange-soft)}
+.k-flow{--c:var(--teal);--cs:var(--teal-soft)}
+.k-done{--c:var(--green);--cs:var(--green-soft)}
+.k-bad{--c:var(--red);--cs:var(--red)}
+.edge{stroke:var(--c)}
+.halo{fill:none;stroke:var(--c);stroke-width:3.5;opacity:0}
+.nb{fill:var(--c)}
+.nt{font-size:13px;font-weight:800;fill:var(--on);text-anchor:middle}
+.pill{fill:var(--cs)}
+.pt{font-size:10.5px;font-weight:600;fill:var(--c);font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+.t-title{font-size:28px;font-weight:800}
+.t-sub{font-size:14px;fill:var(--mute)}
+.t-h{font-size:15px;font-weight:700}
+.t-b{font-size:12px;fill:var(--mute)}
+.t-m{font-size:11px;fill:var(--mute);font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+.t-lbl{font-size:11px;font-weight:700}
+.t-red{fill:var(--red)}
+.t-green{fill:var(--green)}
+.t-orange{fill:var(--orange)}
+.t-teal{fill:var(--teal)}
+.mid{text-anchor:middle}
+.rail{stroke:var(--line);stroke-width:2.5;fill:none}
+.link{stroke:var(--teal);stroke-width:2;fill:none}
+.fail{stroke:var(--red);stroke-width:2;fill:none;stroke-dasharray:6 6;animation:march 1s linear infinite}
+.lblbg{fill:var(--bg)}
+.dot-glow{fill:var(--dc);opacity:.28}
+.dot-core{fill:var(--dc)}
+.d-teal{--dc:var(--teal)}
+.d-green{--dc:var(--green)}
+.d-orange{--dc:var(--orange)}
+.d-red{--dc:var(--red)}
+.glyph{fill:var(--on)}
+.glyph-s{stroke:var(--on);fill:none;stroke-width:2.5;stroke-linecap:round}
+@keyframes march{to{stroke-dashoffset:-12}}
+@media (prefers-reduced-motion: reduce){
+  .dot{display:none}
+  .halo,.fail,.float,.ring,.bob,.eyes{animation:none!important}
+  .ring{opacity:0}
+}
+
+.zone{fill:none;stroke:var(--line);stroke-width:1.5;stroke-dasharray:5 6}
+.zt{font-size:12px;font-weight:800;fill:var(--mute);letter-spacing:.8px}
+.chipbg{fill:var(--cs)}
+.chipt{font-size:11.5px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;fill:var(--ink)}
+.chiptn{font-size:11.5px;fill:var(--ink);font-weight:600}
+@keyframes ha{0.00%{opacity:0.0}2.00%{opacity:0.0}5.00%{opacity:1.0}14.00%{opacity:0.0}60.00%{opacity:0.0}63.00%{opacity:1.0}72.00%{opacity:0.0}100.00%{opacity:0.0}}.ha{animation:ha 8s linear infinite}@keyframes hb{0.00%{opacity:0.0}22.00%{opacity:0.0}25.00%{opacity:1.0}34.00%{opacity:0.0}50.00%{opacity:0.0}53.00%{opacity:1.0}62.00%{opacity:0.0}100.00%{opacity:0.0}}.hb{animation:hb 8s linear infinite}@keyframes hp{0.00%{opacity:0.0}36.00%{opacity:0.0}39.00%{opacity:1.0}50.00%{opacity:0.0}100.00%{opacity:0.0}}.hp{animation:hp 8s linear infinite}@keyframes hr{0.00%{opacity:0.0}84.00%{opacity:0.0}87.00%{opacity:1.0}96.00%{opacity:0.0}100.00%{opacity:0.0}}.hr{animation:hr 8s linear infinite}@keyframes hc{0.00%{opacity:0.0}0.00%{opacity:0.0}3.00%{opacity:1.0}10.00%{opacity:0.0}100.00%{opacity:0.0}}.hc{animation:hc 8s linear infinite}</style>
+<defs><pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" class="gdot"/></pattern><marker id="ah-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" style="stroke:var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="ah-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" style="stroke:var(--red)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="ah-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" style="stroke:var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="ah-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" style="stroke:var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="ah-line" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" style="stroke:var(--line)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="ah-mute" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" style="stroke:var(--mute)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect class="bg" width="1200" height="600" rx="24"/>
+<rect width="1200" height="600" rx="24" fill="url(#g)"/>
+<text class="t-title" x="29" y="48">Ripples architecture</text>
+<text class="t-sub" x="29" y="72">One app, one API, one database. Lessons live in code; only what families create is stored.</text>
+<rect class="zone" x="29" y="100" width="400" height="470" rx="22"/><text class="zt" x="49" y="126">ON THE DEVICE</text>
+<rect class="zone" x="470" y="100" width="300" height="470" rx="22"/><text class="zt" x="490" y="126">API</text>
+<rect class="zone" x="810" y="100" width="361" height="470" rx="22"/><text class="zt" x="830" y="126">DATA AND MAIL</text>
+<g class="k-human"><rect class="shadow" x="59" y="144" width="340" height="58" rx="16"/><rect class="halo hc" x="55" y="136" width="348" height="66" rx="20"/><rect class="card edge" x="59" y="140" width="340" height="58" rx="16"/><text class="t-h" x="75" y="168">Child</text><text class="t-m" x="75" y="186">iPad, phone or Mac</text></g>
+<g class="k-flow"><rect class="shadow" x="59" y="242" width="340" height="214" rx="16"/><rect class="halo ha" x="55" y="234" width="348" height="222" rx="20"/><rect class="card edge" x="59" y="238" width="340" height="214" rx="16"/><text class="t-h" x="75" y="266">React app</text><text class="t-m" x="75" y="284">web/  (React, TypeScript, Vite)</text></g>
+<g class="k-flow"><rect class="chipbg" x="75" y="296" width="308" height="26" rx="8"/><text class="chiptn" x="85" y="313.5">Trail, lesson engine, badges</text></g>
+<g class="k-flow"><rect class="chipbg" x="75" y="332" width="308" height="26" rx="8"/><text class="chiptn" x="85" y="349.5">Lessons in code: EN, DE, PL</text></g>
+<g class="k-flow"><rect class="chipbg" x="75" y="368" width="308" height="26" rx="8"/><text class="chiptn" x="85" y="385.5">Family settings behind a maths gate</text></g>
+<g class="k-flow"><rect class="chipbg" x="75" y="404" width="308" height="26" rx="8"/><text class="chiptn" x="85" y="421.5">Service worker: offline app files</text></g>
+<g class="k-flow"><rect class="shadow" x="59" y="496" width="164" height="62" rx="16"/><rect class="card edge" x="59" y="492" width="164" height="62" rx="16"/><text class="t-h" x="75" y="520">Device voice</text><text class="t-m" x="75" y="538">Web Speech API</text></g>
+<g class="k-flow"><rect class="shadow" x="235" y="496" width="164" height="62" rx="16"/><rect class="card edge" x="235" y="492" width="164" height="62" rx="16"/><text class="t-h" x="251" y="520">Browser storage</text><text class="t-m" x="251" y="538">ripples.lang key</text></g>
+<path d="M229 198 V236" stroke="var(--orange)" stroke-width="2.5" fill="none" marker-end="url(#ah-orange)"/>
+<path d="M141 452 V490" stroke="var(--teal)" stroke-width="2.5" fill="none" marker-end="url(#ah-teal)"/>
+<path d="M317 452 V490" stroke="var(--teal)" stroke-width="2.5" fill="none" marker-end="url(#ah-teal)"/>
+<g class="k-flow"><rect class="shadow" x="500" y="144" width="240" height="340" rx="16"/><rect class="halo hb" x="496" y="136" width="248" height="348" rx="20"/><rect class="card edge" x="500" y="140" width="240" height="340" rx="16"/><text class="t-h" x="516" y="168">Node API</text><text class="t-m" x="516" y="186">server/  (Hono, TypeScript)</text></g>
+<g class="k-flow"><rect class="chipbg" x="516" y="198" width="208" height="30" rx="8"/><text class="chipt" x="526" y="217" style="font-weight:600">/api/auth/*</text></g>
+<g class="k-flow"><rect class="chipbg" x="516" y="234" width="208" height="30" rx="8"/><text class="chipt" x="526" y="253" style="font-weight:600">/api/family</text></g>
+<g class="k-flow"><rect class="chipbg" x="516" y="270" width="208" height="30" rx="8"/><text class="chipt" x="526" y="289" style="font-weight:600">/api/profiles</text></g>
+<g class="k-flow"><rect class="chipbg" x="516" y="306" width="208" height="30" rx="8"/><text class="chipt" x="526" y="325" style="font-weight:600">/api/features</text></g>
+<g class="k-flow"><rect class="chipbg" x="516" y="342" width="208" height="30" rx="8"/><text class="chipt" x="526" y="361" style="font-weight:600">/api/legal</text></g>
+<g class="k-flow"><rect class="chipbg" x="516" y="378" width="208" height="30" rx="8"/><text class="chipt" x="526" y="397" style="font-weight:600">/api/health</text></g>
+<text class="t-b" x="516" y="428">Serves web/dist when</text>
+<text class="t-b" x="516" y="444">DIST_DIR is set.</text>
+<text class="t-b" x="516" y="466">Session cookie lasts 90 days.</text>
+<g class="k-flow"><rect class="shadow" x="840" y="144" width="301" height="252" rx="16"/><rect class="halo hp" x="836" y="136" width="309" height="260" rx="20"/><rect class="card edge" x="840" y="140" width="301" height="252" rx="16"/><text class="t-h" x="856" y="168">Postgres 17</text><text class="t-m" x="856" y="186">compose.yaml or Neon</text></g>
+<g class="k-flow"><rect class="chipbg" x="856" y="198" width="269" height="26" rx="8"/><text class="chipt" x="866" y="215.5">family</text></g>
+<g class="k-flow"><rect class="chipbg" x="856" y="232" width="269" height="26" rx="8"/><text class="chipt" x="866" y="249.5">kid_profile</text></g>
+<g class="k-flow"><rect class="chipbg" x="856" y="266" width="269" height="26" rx="8"/><text class="chipt" x="866" y="283.5">subscription</text></g>
+<g class="k-flow"><rect class="chipbg" x="856" y="300" width="269" height="26" rx="8"/><text class="chipt" x="866" y="317.5">user, session, account</text></g>
+<text class="t-b" x="856" y="360">Lessons stay in code, not here.</text>
+<g class="k-human"><rect class="shadow" x="840" y="428" width="301" height="130" rx="16"/><rect class="halo hr" x="836" y="420" width="309" height="138" rx="20"/><rect class="card edge" x="840" y="424" width="301" height="130" rx="16"/><text class="t-h" x="856" y="452">Resend</text><text class="t-m" x="856" y="470">email API</text></g>
+<text class="t-b" x="856" y="500">Emails the 6-digit login code.</text>
+<text class="t-b" x="856" y="518">Self-host: printed in the API log.</text>
+<path d="M399 266 H498" stroke="var(--teal)" stroke-width="2.5" fill="none" marker-end="url(#ah-teal)"/>
+<path d="M501 292 H402" stroke="var(--green)" stroke-width="2.5" fill="none" marker-end="url(#ah-green)"/>
+<rect class="lblbg" x="429" y="235" width="41" height="22" rx="11"/><text class="t-lbl t-teal mono mid" x="449" y="250">/api</text>
+<path d="M740 266 H838" stroke="var(--teal)" stroke-width="2.5" fill="none" marker-end="url(#ah-teal)"/>
+<path d="M841 292 H742" stroke="var(--green)" stroke-width="2.5" fill="none" marker-end="url(#ah-green)"/>
+<rect class="lblbg" x="757" y="235" width="65" height="22" rx="11"/><text class="t-lbl t-teal mid" x="790" y="250">SQL (pg)</text>
+<path d="M740 420 H790 V489 H838" stroke="var(--orange)" stroke-width="2.5" fill="none" marker-end="url(#ah-orange)"/>
+<rect class="lblbg" x="751" y="445" width="78" height="22" rx="11"/><text class="t-lbl t-orange mid" x="790" y="460">login code</text>
+<g class="dot d-orange" opacity="0"><circle r="10.8" class="dot-glow"/><circle r="4.5" class="dot-core"/><animateMotion dur="8s" repeatCount="indefinite" path="M229 198 V238" keyPoints="0;0;1;1" keyTimes="0;0.020;0.100;1" calcMode="linear"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.020;0.030;0.090;0.100;1"/></g>
+<g class="dot d-teal" opacity="0"><circle r="10.8" class="dot-glow"/><circle r="4.5" class="dot-core"/><animateMotion dur="8s" repeatCount="indefinite" path="M399 266 H500" keyPoints="0;0;1;1" keyTimes="0;0.100;0.240;1" calcMode="linear"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.100;0.110;0.230;0.240;1"/></g>
+<g class="dot d-teal" opacity="0"><circle r="10.8" class="dot-glow"/><circle r="4.5" class="dot-core"/><animateMotion dur="8s" repeatCount="indefinite" path="M740 266 H840" keyPoints="0;0;1;1" keyTimes="0;0.240;0.380;1" calcMode="linear"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.240;0.250;0.370;0.380;1"/></g>
+<g class="dot d-green" opacity="0"><circle r="10.8" class="dot-glow"/><circle r="4.5" class="dot-core"/><animateMotion dur="8s" repeatCount="indefinite" path="M840 292 H740" keyPoints="0;0;1;1" keyTimes="0;0.380;0.520;1" calcMode="linear"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.380;0.390;0.510;0.520;1"/></g>
+<g class="dot d-green" opacity="0"><circle r="10.8" class="dot-glow"/><circle r="4.5" class="dot-core"/><animateMotion dur="8s" repeatCount="indefinite" path="M500 292 H399" keyPoints="0;0;1;1" keyTimes="0;0.520;0.660;1" calcMode="linear"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.520;0.530;0.650;0.660;1"/></g>
+<g class="dot d-orange" opacity="0"><circle r="10.8" class="dot-glow"/><circle r="4.5" class="dot-core"/><animateMotion dur="8s" repeatCount="indefinite" path="M740 420 H790 V489 H840" keyPoints="0;0;1;1" keyTimes="0;0.700;0.880;1" calcMode="linear"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.700;0.710;0.870;0.880;1"/></g>
+</svg>

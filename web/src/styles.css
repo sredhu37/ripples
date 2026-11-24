@@ -88,6 +88,101 @@ p {
   align-self: flex-end;
 }
 
+/* Trail header: wraps on phones, one row from 720px. */
+.trail-bar {
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.trail-bar .logo {
+  /* Phones: the kid's avatar matters more than the logo. */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.profile-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 60px;
+  flex: 0 0 auto;
+  max-width: 100%;
+  padding: 4px 12px 4px 4px;
+  border: 2px solid var(--teal);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--teal-dark);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.profile-face {
+  width: 44px;
+  height: 44px;
+  flex: none;
+}
+
+.profile-name {
+  flex: 0 1 auto;
+  min-width: 6ch;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trail-bar .topbar-actions {
+  gap: 6px;
+}
+
+.labeled-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 64px;
+  min-height: 60px;
+  padding: 4px 6px;
+  border: 2px solid var(--teal);
+  border-radius: 16px;
+  background: var(--white);
+  color: var(--teal-dark);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.1;
+  cursor: pointer;
+}
+
+@media (min-width: 720px) {
+  .trail-bar {
+    flex-wrap: nowrap;
+  }
+
+  .trail-bar .logo {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: nowrap;
+    min-width: 0;
+    text-overflow: ellipsis;
+    margin-right: auto;
+    font-size: 1.6rem;
+  }
+
+  .trail-bar .topbar-actions {
+    gap: 10px;
+  }
+}
+
 .seg {
   display: inline-flex;
   flex-shrink: 0;
@@ -121,10 +216,44 @@ p {
 
 .lesson-title,
 .card h3,
-.fact-card h2 {
+.fact-card h3.fact-card-title {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: 1.2rem;
+}
+
+.fact-topbar {
+  flex-wrap: wrap;
+}
+
+.fact-topbar .logo {
+  font-size: clamp(1.4rem, 7vw, 2rem);
+  overflow-wrap: anywhere;
+}
+
+.fact-group-title {
+  margin: 18px 0 8px;
+}
+
+.fact-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--teal-dark);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.fact-link:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.fact-domain {
+  color: var(--muted, #5b6770);
+  font-weight: 400;
 }
 
 .icon-btn {
@@ -292,6 +421,8 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .legal-links {
@@ -359,6 +490,10 @@ p {
 .parent-panel {
   width: min(560px, 100%);
   margin: 0 auto;
+}
+
+.parent-panel .row {
+  flex-wrap: wrap;
 }
 
 .curriculum-groups {
@@ -708,20 +843,55 @@ p {
   gap: 8px;
 }
 
+.lesson-head-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  order: 1;
+}
+
 .lesson-head .btn-restart {
   color: #5f7177;
   border-color: #cbd5e1;
+  padding: 0 12px;
+}
+
+.lesson-head .btn-restart:disabled {
+  opacity: 0.5;
 }
 
 .lesson-head .lesson-title {
   font-size: 1.25rem;
-  flex: 1;
+  flex: 1 1 100%;
+  order: 2;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.lesson-head .dots {
+  order: 3;
+}
+
+@media (max-width: 420px) {
+  .lesson-head .btn-small {
+    padding: 0 10px;
+  }
 }
 
 .btn-small {
   min-height: 44px;
   padding: 0 16px;
   font-size: 0.9rem;
+}
+
+.back-btn {
+  align-self: flex-start;
+  max-width: 100%;
+  height: auto;
+  min-height: 60px;
+  padding: 6px 20px;
+  text-align: left;
 }
 
 .dots {
@@ -742,7 +912,7 @@ p {
 }
 
 .dot-now {
-  background: var(--orange);
+  background: linear-gradient(to right, var(--orange) var(--fill, 0%), var(--grey) var(--fill, 0%));
 }
 
 .lesson-body {
@@ -785,6 +955,13 @@ p {
 .row.nav {
   justify-content: flex-end;
   flex-wrap: wrap;
+}
+
+.ready-hint {
+  margin: 0;
+  text-align: right;
+  font-size: 15px;
+  color: var(--ink);
 }
 
 .btn-toy {
@@ -935,7 +1112,7 @@ p {
   opacity: 0.75;
 }
 
-.fact-card h3 {
+.fact-card h4 {
   font-size: 1rem;
   margin-top: 6px;
 }
@@ -1052,23 +1229,6 @@ p {
     system-ui,
     sans-serif;
   fill: #fff;
-}
-
-.steps {
-  display: flex;
-  gap: 8px;
-}
-
-.step {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--grey);
-  transition: background 0.2s;
-}
-
-.step.on {
-  background: var(--teal);
 }
 
 mark.term {
@@ -1356,20 +1516,73 @@ mark.term {
 .tile-btn {
   cursor: pointer;
 }
-.tile-on,
+.tile {
+  position: relative;
+}
 .tile-btn:hover {
+  border-color: var(--grey);
+}
+.tile-on,
+.tile-on:hover {
   border-color: var(--teal);
+}
+.tile-check {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--teal-dark);
+  color: var(--white);
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
 }
 .tile-face {
   width: 80px;
   height: 80px;
 }
+.tile-grid .tile-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+.tile-plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 3px solid var(--teal);
+  color: var(--teal);
+  font-size: 2.5rem;
+  line-height: 1;
+  box-sizing: border-box;
+}
 .tile-grid-small .tile {
   min-width: 72px;
+}
+.tile-grid-small .tile-name {
+  font-size: 1rem;
 }
 .tile-grid-small .tile-face {
   width: 56px;
   height: 56px;
+}
+/* Picker: tiles shrink so three kids and the add tile fit a 360 px phone. */
+.tile-grid-picker {
+  gap: 8px;
+  width: 100%;
+}
+.tile-grid-picker .tile {
+  min-width: 0;
+  width: 96px;
+  min-height: 44px;
+}
+.tile-add {
+  background: transparent;
+  border: 3px solid var(--teal);
 }
 .profile-list {
   list-style: none;
@@ -1382,7 +1595,54 @@ mark.term {
 .profile-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
+  min-width: 0;
+}
+.profile-row .tile {
+  flex-direction: row;
+  min-width: 0;
+  flex: 1;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+.btn-text,
+.btn-text-danger {
+  align-self: flex-start;
+  min-height: var(--tap);
+  padding: 0 8px;
+  background: none;
+  border: none;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--teal-dark);
+}
+.btn-text-danger {
+  color: #b3261e;
+  margin-top: 14px;
+}
+.account-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 2px solid var(--grey);
+}
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.5);
+}
+.dialog {
+  width: min(420px, 100%);
 }
 .profile-form {
   display: flex;
