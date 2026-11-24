@@ -62,6 +62,16 @@ const PLACES: Record<string, { country: string; lon: number; lat: number }> = {
   hsr: { country: "China", lon: 117.2, lat: 39.13 },
   upi: { country: "India", lon: 72.88, lat: 19.08 },
   chatgpt: { country: "United States", lon: -122.42, lat: 37.77 },
+  confucius: { country: "China", lon: 117.0, lat: 35.6 },
+  hagia: { country: "Turkey", lon: 28.98, lat: 41.01 },
+  borobudur: { country: "Indonesia", lon: 110.2, lat: -7.61 },
+  wisdom: { country: "Iraq", lon: 44.36, lat: 33.31 },
+  petersburg: { country: "Russia", lon: 30.32, lat: 59.95 },
+  linnaeus: { country: "Sweden", lon: 17.64, lat: 59.86 },
+  watt: { country: "United Kingdom", lon: -4.25, lat: 55.86 },
+  volta: { country: "Italy", lon: 9.09, lat: 45.81 },
+  braille: { country: "France", lon: 2.32, lat: 48.85 },
+  darwin: { country: "Ecuador", lon: -90.5, lat: -0.8 },
 };
 
 /** War, genocide, partition and famine pins. Their source must not be Wikipedia. */

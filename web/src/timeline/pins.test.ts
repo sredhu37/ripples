@@ -9,9 +9,19 @@ const pin = (id: string) => {
 };
 
 describe("pins", () => {
-  it("keeps all 55 events with unchanged ids", () => {
-    expect(PINS).toHaveLength(55);
+  it("has one pin per event, in the same order", () => {
     expect(PINS.map((p) => p.id)).toEqual(TIMELINE_EVENTS.map((e) => e.id));
+    for (const id of ["indus", "giza", "athens", "ww2", "chatgpt"]) pin(id);
+  });
+
+  it("has 4 to 8 pins in at least 3 countries at each of the 9 stops before 1900", () => {
+    const before = pinsByStop().filter((g) => g.stop.year < 1900);
+    expect(before).toHaveLength(9);
+    for (const g of before) {
+      expect(g.pins.length, `${g.stop.year} pins`).toBeGreaterThanOrEqual(4);
+      expect(g.pins.length, `${g.stop.year} pins`).toBeLessThanOrEqual(8);
+      expect(g.countries.length, `${g.stop.year} countries`).toBeGreaterThanOrEqual(3);
+    }
   });
 
   it("has a place, a line and a start year for every pin", () => {

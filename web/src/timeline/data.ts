@@ -191,6 +191,18 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Myśliciel w wannie odkrywa, dlaczego rzeczy pływają.",
     ),
   ),
+  ev(
+    "confucius",
+    "ancient",
+    "east_asia",
+    T("c. 551 BCE", "um 551 v. Chr.", "ok. 551 p.n.e."),
+    T("Confucius is born", "Konfuzius wird geboren", "Narodziny Konfucjusza"),
+    T(
+      "A teacher in China says that good manners and kind rulers make a fair society.",
+      "Ein Lehrer in China sagt, dass gutes Benehmen und freundliche Herrscher eine gerechte Gesellschaft schaffen.",
+      "Nauczyciel w Chinach mówi, że dobre maniery i życzliwi władcy tworzą sprawiedliwe społeczeństwo.",
+    ),
+  ),
   // Middle Ages
   ev(
     "zero",
@@ -282,6 +294,46 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Runners carry messages along mountain roads.",
       "Läufer tragen Nachrichten über Bergstraßen.",
       "Gońcy niosą wieści górskimi drogami.",
+    ),
+  ),
+  ev(
+    "hagia",
+    "middle_ages",
+    "mideast_africa",
+    T("537", "537", "537"),
+    T("Hagia Sophia opens", "Die Hagia Sophia wird eröffnet", "Otwarcie Hagia Sophia"),
+    T(
+      "Builders in Constantinople top a huge church with a dome that seems to float.",
+      "Baumeister in Konstantinopel setzen auf eine riesige Kirche eine Kuppel, die zu schweben scheint.",
+      "Budowniczowie w Konstantynopolu wieńczą ogromny kościół kopułą, która zdaje się unosić w powietrzu.",
+    ),
+  ),
+  ev(
+    "borobudur",
+    "middle_ages",
+    "east_asia",
+    T("c. 800", "um 800", "ok. 800"),
+    T("Borobudur is built", "Borobudur wird gebaut", "Budowa Borobudur"),
+    T(
+      "On the island of Java, builders stack stone terraces carved with thousands of pictures.",
+      "Auf der Insel Java stapeln Baumeister Steinterrassen, in die tausende Bilder gemeißelt sind.",
+      "Na wyspie Jawa budowniczowie układają kamienne tarasy ozdobione tysiącami rzeźbionych obrazów.",
+    ),
+  ),
+  ev(
+    "wisdom",
+    "middle_ages",
+    "mideast_africa",
+    T("c. 830", "um 830", "ok. 830"),
+    T(
+      "The House of Wisdom in Baghdad",
+      "Das Haus der Weisheit in Bagdad",
+      "Dom Mądrości w Bagdadzie",
+    ),
+    T(
+      "Scholars in Baghdad collect and translate books from many lands.",
+      "Gelehrte in Bagdad sammeln und übersetzen Bücher aus vielen Ländern.",
+      "Uczeni w Bagdadzie zbierają i tłumaczą książki z wielu krajów.",
     ),
   ),
   // Trade and empires
@@ -475,7 +527,91 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     "democracy",
   ),
+  ev(
+    "petersburg",
+    "scientific_rev",
+    "europe",
+    T("1703", "1703", "1703"),
+    T("Saint Petersburg is founded", "Sankt Petersburg wird gegründet", "Założenie Petersburga"),
+    T(
+      "A Russian tsar builds a new port city on a marsh to open a window to Europe.",
+      "Ein russischer Zar baut auf einem Sumpf eine neue Hafenstadt, um ein Fenster nach Europa zu öffnen.",
+      "Rosyjski car buduje na bagnach nowe miasto portowe, by otworzyć okno na Europę.",
+    ),
+  ),
+  ev(
+    "linnaeus",
+    "scientific_rev",
+    "science",
+    T("1735", "1735", "1735"),
+    T("Linnaeus sorts nature", "Linné ordnet die Natur", "Linneusz porządkuje przyrodę"),
+    T(
+      "A Swedish scientist gives every plant and animal a name in a tidy system.",
+      "Ein schwedischer Forscher gibt jeder Pflanze und jedem Tier in einem übersichtlichen System einen Namen.",
+      "Szwedzki uczony nadaje każdej roślinie i każdemu zwierzęciu nazwę w uporządkowanym systemie.",
+    ),
+  ),
+  ev(
+    "watt",
+    "scientific_rev",
+    "science",
+    T("1769", "1769", "1769"),
+    T(
+      "Watt improves the steam engine",
+      "Watt verbessert die Dampfmaschine",
+      "Watt ulepsza maszynę parową",
+    ),
+    T(
+      "A Scottish engineer makes steam engines use much less coal.",
+      "Ein schottischer Ingenieur sorgt dafür, dass Dampfmaschinen viel weniger Kohle brauchen.",
+      "Szkocki inżynier sprawia, że maszyny parowe zużywają znacznie mniej węgla.",
+    ),
+  ),
   // Industrial
+  ev(
+    "volta",
+    "industrial",
+    "science",
+    T("1800", "1800", "1800"),
+    T(
+      "Volta builds the first battery",
+      "Volta baut die erste Batterie",
+      "Volta buduje pierwszą baterię",
+    ),
+    T(
+      "Stacked metal discs make a steady electric current for the first time.",
+      "Gestapelte Metallscheiben erzeugen zum ersten Mal einen gleichmäßigen Strom.",
+      "Ułożone krążki z metalu po raz pierwszy wytwarzają stały prąd elektryczny.",
+    ),
+  ),
+  ev(
+    "braille",
+    "industrial",
+    "europe",
+    T("1824", "1824", "1824"),
+    T("Braille is invented", "Die Brailleschrift wird erfunden", "Wynalezienie pisma Braille'a"),
+    T(
+      "A teenager in Paris invents dots that blind people read with their fingers.",
+      "Ein Jugendlicher in Paris erfindet Punkte, die blinde Menschen mit den Fingern lesen.",
+      "Nastolatek w Paryżu wymyśla kropki, które niewidomi czytają palcami.",
+    ),
+  ),
+  ev(
+    "darwin",
+    "industrial",
+    "science",
+    T("1835", "1835", "1835"),
+    T(
+      "Darwin visits the Galápagos",
+      "Darwin besucht die Galápagos-Inseln",
+      "Darwin odwiedza Galapagos",
+    ),
+    T(
+      "A young British scientist notices that animals on each island look a little different.",
+      "Ein junger britischer Forscher bemerkt, dass die Tiere auf jeder Insel ein wenig anders aussehen.",
+      "Młody brytyjski uczony zauważa, że zwierzęta na każdej wyspie wyglądają trochę inaczej.",
+    ),
+  ),
   ev(
     "stephenson",
     "industrial",
