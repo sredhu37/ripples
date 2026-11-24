@@ -10,6 +10,7 @@ import type { Lang } from "../progress";
 import { MeanwhileCard } from "../components/MeanwhileCard";
 import { getMeanwhile } from "../timeline/meanwhile";
 import { sfx } from "../sound";
+import { stopSpeaking } from "../speech";
 import { resolveText, type Lesson, type Question } from "./types";
 
 interface Props {
@@ -51,6 +52,9 @@ export function LessonRunner({
   const [storyView, setStoryView] = useState({ fill: 0, first: true });
   const wasDone = useRef(alreadyDone);
   const total = lesson.story.length + 1 + lesson.questions.length;
+
+  // Leaving the lesson stops the voice.
+  useEffect(() => stopSpeaking, []);
 
   const position =
     phase.k === "story"
@@ -126,7 +130,7 @@ export function LessonRunner({
         <section className="lesson-body">
           <div className="hello">
             <Otto size={96} />
-            <SpeechBubble text={resolveText(lesson.toyIntro, lang)} lang={lang} />
+            <SpeechBubble text={resolveText(lesson.toyIntro, lang)} lang={lang} auto />
           </div>
           <div className="stage-wrap">
             <lesson.Toy lang={lang} onDone={() => setToyCompleted(true)} />
@@ -315,7 +319,7 @@ function StoryView({
       </div>
       <div className="hello">
         <Otto size={96} mood={beat.mood ?? "happy"} />
-        <SpeechBubble key={step} text={resolveText(line, lang)} lang={lang} />
+        <SpeechBubble key={step} text={resolveText(line, lang)} lang={lang} auto />
       </div>
       <div className="row nav">
         {(index > 0 || step > 1) && (
@@ -368,7 +372,7 @@ function QuestionView({
     <section className="lesson-body">
       <div className="hello">
         <Otto size={96} mood={state === "wrong" ? "think" : "happy"} />
-        <SpeechBubble text={say} lang={lang} />
+        <SpeechBubble text={say} lang={lang} auto />
       </div>
 
       {state === "wrong" && <p className="try-again">{t(lang, "tryAgain")}</p>}

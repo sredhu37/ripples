@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { t } from "../i18n";
 import type { Lang } from "../progress";
 import { speak, useCanSpeak } from "../speech";
@@ -9,12 +10,17 @@ interface Props {
   lang: Lang;
   /** The line the voice file says, when it differs from `text` (a greeting without the kid's name). */
   voiceText?: string;
+  /** Read the line by itself each time it appears (inside lessons). Sound off silences it. */
+  auto?: boolean;
 }
 
 /** Otto's speech bubble with a read-aloud button. */
-export function SpeechBubble({ text, lang, voiceText }: Props) {
+export function SpeechBubble({ text, lang, voiceText, auto = false }: Props) {
   const fileText = plain(voiceText ?? text);
   const voice = useCanSpeak(fileText, lang);
+  useEffect(() => {
+    if (auto) speak(plain(text), lang, fileText);
+  }, [auto, text, lang, fileText]);
   return (
     <div className="bubble">
       <p>
