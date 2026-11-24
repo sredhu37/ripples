@@ -20,7 +20,7 @@ test("parents: settings opened from a kid's trail change that kid's lessons", as
   const api = await fakeFamily(page, { kids: [{ nickname: "Ava" }, { nickname: "Ben" }] });
   await openTrail(page, "Ben");
   const stops = page.locator(".trail button.place");
-  const before = await stops.count();
+  await expect(stops.first()).toContainText("1. What is money?");
 
   await passParentGate(page, async () => {});
   await expect(page.getByLabel("Lessons for")).toHaveCount(0);
@@ -34,7 +34,7 @@ test("parents: settings opened from a kid's trail change that kid's lessons", as
 
   await page.getByRole("button", { name: "Back to kids" }).click();
   await page.getByRole("button", { name: "All lessons" }).click();
-  await expect(stops).toHaveCount(before - 1);
+  await expect(stops.first()).toContainText("1. Work and pay");
 });
 
 test("parents: family settings sit behind the maths gate and control the trail", async ({
@@ -44,7 +44,7 @@ test("parents: family settings sit behind the maths gate and control the trail",
   const api = await fakeFamily(page);
   await openTrail(page);
   const stops = page.locator(".trail button.place");
-  const before = await stops.count();
+  await expect(stops.first()).toContainText("1. What is money?");
   await step();
 
   await passParentGate(page, step);
@@ -73,8 +73,8 @@ test("parents: family settings sit behind the maths gate and control the trail",
   // The only way out is the back button: no "Close" at the bottom.
   await expect(page.getByRole("button", { name: "Close", exact: true })).toHaveCount(0);
   await expect(page.locator("button").first()).toHaveText(/All lessons/);
-  // Back to the trail, which has one stop fewer.
+  // Back to the trail: the first lesson is gone.
   await page.getByRole("button", { name: "All lessons" }).click();
-  await expect(stops).toHaveCount(before - 1);
+  await expect(stops.first()).toContainText("1. Work and pay");
   await step();
 });

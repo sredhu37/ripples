@@ -50,18 +50,24 @@ async function renderMap(progress: Progress, paused?: ReadonlySet<string>) {
 
 describe("MapScreen with a Paused lesson", () => {
   it("leaves the lesson out but keeps its badge in progress", async () => {
-    const progress: Progress = { ...emptyProgress(), name: "Child", badges: ["loans"] };
+    const earlier = ["money", "work", "savings", "business", "equity"];
+    const progress: Progress = {
+      ...emptyProgress(),
+      name: "Child",
+      badges: [...earlier, "loans"],
+    };
     const { container, done } = await renderMap(progress, new Set(["loans"]));
-    expect(container.querySelectorAll(".trail .stop").length).toBe(LESSONS.length - 1);
-    expect(container.querySelectorAll(".shelf-row .medal").length).toBe(LESSONS.length - 1);
+    // The Paused badge is not on the shelf and not counted.
+    expect(container.querySelectorAll(".shelf-row .medal-on").length).toBe(5);
+    expect(container.querySelector(".shelf-count")?.textContent).toBe(`5 of ${LESSONS.length - 1}`);
     expect(container.textContent).not.toContain("Loans");
     // Trail numbers stay consecutive: "Loans" was 6, "Banks" is now 6.
     expect(container.querySelectorAll(".trail .stop")[5].textContent).toContain("6. Banks");
-    expect(progress.badges).toEqual(["loans"]);
+    expect(progress.badges).toContain("loans");
     done();
 
     const again = await renderMap(progress);
-    expect(again.container.querySelectorAll(".shelf-row .medal-on").length).toBe(1);
+    expect(again.container.querySelectorAll(".shelf-row .medal-on").length).toBe(6);
     again.done();
   });
 });
@@ -71,12 +77,11 @@ describe("MapScreen with disabled lessons", () => {
     const progress: Progress = { ...emptyProgress(), name: "Child", disabledLessons: ["work"] };
     const { container, done } = await renderMap(progress);
     const trailStops = container.querySelectorAll(".trail .stop");
-    expect(trailStops.length).toBe(LESSONS.length - 1);
     expect(trailStops[0].textContent).toContain("1. What is money?");
     // "Work and pay" was skipped, so stop 2 is "Savings".
     expect(trailStops[1].textContent).toContain("2. Savings");
     expect(container.textContent).not.toContain("Work and pay");
-    expect(container.querySelectorAll(".shelf-row .medal").length).toBe(LESSONS.length - 1);
+    expect(container.querySelector(".shelf-count")?.textContent).toBe(`0 of ${LESSONS.length - 1}`);
     done();
   });
 
@@ -94,10 +99,38 @@ describe("MapScreen order", () => {
     const progress: Progress = { ...emptyProgress(), name: "Child", badges: [...group1] };
     const { container, done } = await renderMap(progress);
     const stops = container.querySelectorAll(".trail .stop");
-    expect(stops[23].textContent).toContain("24. Currencies");
-    expect(stops[stops.length - 1].textContent).not.toContain("GDP");
+    // 12 done, then the next stop and two locked ones: 12 + 3 = 15 in full, numbered on.
+    expect(stops[12].textContent).toContain("13. ");
+    expect(stops.length).toBe(15);
     const first = LESSONS.find((l) => l.id === CURRICULUM_GROUPS[1].lessonIds[0])!;
     expect(container.querySelector(".continue")?.textContent).toContain(first.title.en);
+    done();
+  });
+});
+
+describe("MapScreen fresh profile", () => {
+  it("shows 0 of N, no empty medals, a heading per group and few locked stops", async () => {
+    const { container, done } = await renderMap({ ...emptyProgress(), name: "Child" });
+    expect(container.querySelector(".shelf-count")?.textContent).toBe(`0 of ${LESSONS.length}`);
+    expect(container.querySelector(".shelf-empty")?.textContent).toBe(
+      "Your first badge is waiting",
+    );
+    expect(container.querySelectorAll(".shelf-row .medal").length).toBe(0);
+    expect(container.querySelectorAll(".trail h2").length).toBe(CURRICULUM_GROUPS.length);
+    expect(container.querySelectorAll(".trail .stop-locked").length).toBe(2);
+    expect(container.querySelectorAll(".trail .stop-next").length).toBe(1);
+    expect(container.querySelector(".trail-group-muted")?.textContent).toContain("Lessons:");
+    done();
+  });
+
+  it("leaves out a group whose lessons are all disabled", async () => {
+    const progress: Progress = {
+      ...emptyProgress(),
+      name: "Child",
+      disabledLessons: [...CURRICULUM_GROUPS[1].lessonIds],
+    };
+    const { container, done } = await renderMap(progress);
+    expect(container.querySelectorAll(".trail h2").length).toBe(CURRICULUM_GROUPS.length - 1);
     done();
   });
 });

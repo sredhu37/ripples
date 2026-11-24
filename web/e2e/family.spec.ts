@@ -134,14 +134,14 @@ test("family settings: lessons are chosen per profile", async ({ page }) => {
   await expect(group.locator("input.toggle-input").first()).toBeChecked();
   await step();
 
-  // Ava's trail has one stop fewer than Ben's.
+  // Ava's trail starts one lesson later than Ben's.
   await page.getByRole("button", { name: "Back to kids" }).click();
   await page.locator(".back-btn").click();
   await page.getByRole("button", { name: "Ava", exact: true }).click();
-  const avaStops = await page.locator(".trail button.place").count();
+  await expect(page.locator(".trail button.place").first()).toContainText("1. Work and pay");
   await page.getByRole("button", { name: "Switch profile: Ava" }).click();
   await page.getByRole("button", { name: "Ben", exact: true }).click();
-  await expect(page.locator(".trail button.place")).toHaveCount(avaStops + 1);
+  await expect(page.locator(".trail button.place").first()).toContainText("1. What is money?");
   await step();
 });
 

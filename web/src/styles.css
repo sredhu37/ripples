@@ -653,16 +653,29 @@ p {
   margin-bottom: 8px;
 }
 
+.shelf-count {
+  color: var(--ink);
+}
+
 .shelf-row {
-  list-style: none;
-  margin: 0;
   padding: 12px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
   background: var(--sand);
   border: 3px solid var(--ink);
   border-radius: var(--radius);
+}
+
+.shelf-empty {
+  margin: 0;
+  font-weight: 700;
+}
+
+.shelf-medals {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .medal {
@@ -695,12 +708,42 @@ p {
 
 /* trail */
 .trail {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.trail-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.trail-heading {
+  font-size: 1.1rem;
+  color: var(--teal-dark);
+  margin: 0;
+}
+
+.trail-list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+.trail-more {
+  margin: 0;
+  padding: 8px 4px;
+  color: #5f747a;
+  font-weight: 700;
+  list-style: none;
+}
+
+.trail-group-muted .trail-heading {
+  color: #5f747a;
 }
 
 .stop {

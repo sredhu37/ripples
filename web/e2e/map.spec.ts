@@ -2,12 +2,43 @@ import { expect, test } from "@playwright/test";
 import { GOOD_CODE, fakeFamily, openTrail, steps } from "./evidence";
 
 test("map: a Paused lesson is not on the trail and numbers stay consecutive", async ({ page }) => {
-  await fakeFamily(page);
+  await fakeFamily(page, {
+    kids: [{ lang: "en", badges: ["money", "work", "savings", "business", "equity"] }],
+  });
   await page.route("**/api/features", (route) => route.fulfill({ json: { "show-loans": false } }));
   await openTrail(page);
   const stops = page.locator(".trail button.place");
   await expect(page.getByText("Loans", { exact: true })).toHaveCount(0);
   await expect(stops.nth(5)).toContainText("6. Banks");
+});
+
+test("map: group sections, badge count and the first stop above the fold on a phone", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await fakeFamily(page);
+  await openTrail(page);
+  await expect(page.locator(".shelf-count")).toHaveText(/^0 of \d+$/);
+  await expect(page.locator(".shelf-row .medal")).toHaveCount(0);
+  await expect(page.locator(".trail h2")).toHaveCount(6);
+  await expect(page.locator(".trail .stop-locked")).toHaveCount(2);
+  const viewportHeight = 844;
+  const continueBox = await page.locator(".continue").boundingBox();
+  const stopBox = await page.locator(".trail button.place").first().boundingBox();
+  expect(continueBox!.y + continueBox!.height).toBeLessThanOrEqual(viewportHeight);
+  expect(stopBox!.y + stopBox!.height).toBeLessThanOrEqual(viewportHeight);
+  for (const width of [360, 390, 820, 1366]) {
+    await page.setViewportSize({ width, height: 844 });
+    // The shelf and the trail fit. The header row is ticket #331 and is not checked here.
+    const right = await page.evaluate(() =>
+      Math.max(
+        ...Array.from(document.querySelectorAll(".shelf, .trail, .trail *")).map(
+          (el) => el.getBoundingClientRect().right,
+        ),
+      ),
+    );
+    expect(right).toBeLessThanOrEqual(width);
+  }
 });
 
 test("map: a new family logs in, adds a kid and sees the trail", async ({ page }) => {
@@ -36,13 +67,12 @@ test("map: a new family logs in, adds a kid and sees the trail", async ({ page }
   await expect(page.getByRole("heading", { level: 1, name: "Ripples" })).toBeVisible();
   await expect(page.getByText("Hi Ava! Pick a place on the trail.")).toBeVisible();
   const stops = page.locator(".trail button.place");
-  expect(await stops.count()).toBeGreaterThan(10);
+  await expect(stops).toHaveCount(3);
   await expect(stops.first()).toBeEnabled();
   await expect(stops.nth(1)).toBeDisabled();
   await expect(page.getByRole("button", { name: /^Continue: / })).toBeVisible();
-  // The trail follows the curriculum groups: Currencies (Group 3) is stop 24, GDP is not last.
-  await expect(stops.nth(23)).toContainText("24. Currencies");
-  await expect(stops.last()).not.toContainText("GDP");
+  // The trail has one section per curriculum group, in order.
+  await expect(page.locator(".trail h2").first()).toHaveText("Money and Work");
   await step();
 
   // Switch language: the trail and greeting follow.
