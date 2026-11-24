@@ -94,6 +94,8 @@ export function App() {
 
   useEffect(() => {
     stopSpeaking();
+    // Every screen starts at the top, not where the last one was scrolled.
+    window.scrollTo(0, 0);
   }, [screen]);
 
   function backToLogin() {
@@ -250,7 +252,8 @@ export function App() {
           lang={progress.lang}
           paused={paused}
           onLang={setLang}
-          onClose={() => setScreen({ kind: "settings", gated: true })}
+          // Still the same visit to the parents area: no second maths question.
+          onClose={() => setScreen({ kind: "settings", gated: false })}
         />
       );
     }

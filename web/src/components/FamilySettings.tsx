@@ -210,6 +210,7 @@ export function FamilySettings({
           <input
             className="text-input"
             inputMode="numeric"
+            autoFocus
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
             aria-label={t(lang, "gateQuestion", gate)}
