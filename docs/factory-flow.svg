@@ -98,8 +98,8 @@ text{font-family:ui-rounded,'SF Pro Rounded',Nunito,system-ui,-apple-system,'Seg
 <circle class="nb" cx="441" cy="230" r="12"/><text class="nt" x="441" y="234.5">3</text>
 <text class="t-h" x="461" y="235">Build</text>
 <text class="t-m" x="433" y="256">factory-build.yml</text>
-<text class="t-b" x="433" y="280">Claude agent writes</text>
-<text class="t-b" x="433" y="296">code, opens the PR</text>
+<text class="t-b" x="433" y="280">Claude agent writes code,</text>
+<text class="t-b" x="433" y="296">voices; opens the PR</text>
 <g class=""><rect class="pill" x="433" y="316" width="140" height="22" rx="11"/><text class="pt" x="442" y="331">factory:in-progress</text></g>
 </g>
 <g class="k-flow">
