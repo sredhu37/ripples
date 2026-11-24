@@ -89,14 +89,14 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
     lang === "pl"
       ? "Kocioł: Woda napełniona"
       : lang === "de"
-        ? "Kessel: Wasser gefuellt"
+        ? "Kessel: Wasser gefüllt"
         : "Boiler: Water Full";
 
   const fillWaterText =
     lang === "pl"
       ? "Napełnij kocioł wodą"
       : lang === "de"
-        ? "Kessel mit Wasser fuellen"
+        ? "Kessel mit Wasser füllen"
         : "Fill Boiler with Water";
 
   const powerOutputHeader =
@@ -183,7 +183,7 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
               {lang === "pl"
                 ? "Ograniczona szybkim zmęczeniem ludzi i zwierząt roboczych."
                 : lang === "de"
-                  ? "Begrenzt durch Ermuedung von Mensch und Tier."
+                  ? "Begrenzt durch Ermüdung von Mensch und Tier."
                   : "Limited by human and animal fatigue."}
             </span>
           )}
@@ -192,7 +192,7 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
               {lang === "pl"
                 ? "Czysta energia, lecz zamiera w czasie letnich susz i mroźnych zim."
                 : lang === "de"
-                  ? "Sauber, aber abhaengig von Flusspegel und Jahreszeiten."
+                  ? "Sauber, aber abhängig von Flusspegel und Jahreszeiten."
                   : "Clean, but ceases during dry summers and icy winters."}
             </span>
           )}
@@ -201,7 +201,7 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
               {lang === "pl"
                 ? "Ciągła praca w dzień i w nocy napędza potężne maszyny fabryczne i pociągi!"
                 : lang === "de"
-                  ? "Dauerhafte Kraft treibt Fabriken und Zuege Tag und Nacht an!"
+                  ? "Dauerhafte Kraft treibt Fabriken und Züge Tag und Nacht an!"
                   : "Continuous day and night power drives heavy factory machines!"}
             </span>
           )}
@@ -210,7 +210,7 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
               {lang === "pl"
                 ? "Wymaga zarówno węgla w palenisku, jak i wody w kotle, by wytworzyć parę."
                 : lang === "de"
-                  ? "Benoetigt Kohle und Wasser, um Dampfdruck aufzubauen."
+                  ? "Benötigt Kohle und Wasser, um Dampfdruck aufzubauen."
                   : "Needs both coal heat and water to create steam pressure."}
             </span>
           )}
@@ -225,12 +225,12 @@ export function ToolsToy({ lang, mode = "toy", onDone }: ToolsToyProps) {
               ? lang === "pl"
                 ? "Znakomicie! Maszyna parowa dostarcza niezmordowaną, ciągłą moc niezależnie od pory roku i pogody."
                 : lang === "de"
-                  ? "Hervorragend! Die Dampfmaschine liefert unermuedliche Kraft unabhaengig vom Wetter."
+                  ? "Hervorragend! Die Dampfmaschine liefert unermüdliche Kraft unabhängig vom Wetter."
                   : "Excellent! The steam engine provides tireless continuous power regardless of season."
               : lang === "pl"
                 ? "Wybierz Maszynę parową i dodaj do niej zarówno węgiel, jak i wodę."
                 : lang === "de"
-                  ? "Waehle Dampfmaschine und fuege Kohle und Wasser hinzu."
+                  ? "Wähle Dampfmaschine und füge Kohle und Wasser hinzu."
                   : "Select Steam Engine and add both coal and water."}
           </div>
         )}

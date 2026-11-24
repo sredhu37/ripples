@@ -71,13 +71,13 @@ export function SpiceTradeToy({ lang, mode = "toy", onDone }: SpiceTradeToyProps
     lang === "pl"
       ? "Lądowy Jedwabny Szlak"
       : lang === "de"
-        ? "Seidenstrasse ueber Land"
+        ? "Seidenstraße über Land"
         : "Overland Silk Road";
   const oceanRouteLabel =
     lang === "pl"
       ? "Morski szlak oceaniczny"
       : lang === "de"
-        ? "Seeweg ueber den Ozean"
+        ? "Seeweg über den Ozean"
         : "Maritime Ocean Route";
 
   const windLabel =
@@ -87,7 +87,7 @@ export function SpiceTradeToy({ lang, mode = "toy", onDone }: SpiceTradeToyProps
     lang === "pl"
       ? "Letni południowo-zachodni (z wiatrem)"
       : lang === "de"
-        ? "Sommer-Suedwest (Rueckenwind)"
+        ? "Sommer-Südwest (Rückenwind)"
         : "Summer South-West (Tailwind)";
 
   const winterWindLabel =
@@ -102,7 +102,7 @@ export function SpiceTradeToy({ lang, mode = "toy", onDone }: SpiceTradeToyProps
       ? lang === "pl"
         ? "Wyprawa karawaną przez góry i pustynie"
         : lang === "de"
-          ? "Karawane durch Wueste und Berge"
+          ? "Karawane durch Wüste und Berge"
           : "Silk Road Mountain Trek"
       : wind === "summer"
         ? lang === "pl"
@@ -120,10 +120,10 @@ export function SpiceTradeToy({ lang, mode = "toy", onDone }: SpiceTradeToyProps
   const monthsUnit = lang === "pl" ? "Miesięcy" : lang === "de" ? "Monate" : "Months";
 
   const cargoLabel = lang === "pl" ? "Ładunek" : lang === "de" ? "Ladung" : "Cargo";
-  const sacksUnit = lang === "pl" ? "Worków" : lang === "de" ? "Saecke" : "Sacks";
+  const sacksUnit = lang === "pl" ? "Worków" : lang === "de" ? "Säcke" : "Sacks";
 
-  const tollsLabel = lang === "pl" ? "Rogatki i cła" : lang === "de" ? "Wegzoelle" : "Road Tolls";
-  const coinsUnit = lang === "pl" ? "Monet" : lang === "de" ? "Muenzen" : "Coins";
+  const tollsLabel = lang === "pl" ? "Rogatki i cła" : lang === "de" ? "Wegzölle" : "Road Tolls";
+  const coinsUnit = lang === "pl" ? "Monet" : lang === "de" ? "Münzen" : "Coins";
 
   const profitLabel = lang === "pl" ? "Zysk" : lang === "de" ? "Gewinn" : "Profit";
   const silverUnit = lang === "pl" ? "Srebra" : lang === "de" ? "Silber" : "Silver";
@@ -222,12 +222,12 @@ export function SpiceTradeToy({ lang, mode = "toy", onDone }: SpiceTradeToyProps
               ? lang === "pl"
                 ? "Wspaniała nawigacja! Letni monsun bezpiecznie przywiódł 50 worków pieprzu prosto do portu."
                 : lang === "de"
-                  ? "Ausgezeichnete Navigation! Der Sommermonsun trug 50 Saecke Pfeffer sicher in den Hafen."
+                  ? "Ausgezeichnete Navigation! Der Sommermonsun trug 50 Säcke Pfeffer sicher in den Hafen."
                   : "Excellent navigation! The summer monsoon carried 50 sacks of pepper safely to harbor."
               : lang === "pl"
                 ? "Wybierz szlak oceaniczny z letnim monsunem, aby zmaksymalizować prędkość i zysk."
                 : lang === "de"
-                  ? "Waehle den Seeweg mit Sommermonsun, um Geschwindigkeit und Ladung zu maximieren."
+                  ? "Wähle den Seeweg mit Sommermonsun, um Geschwindigkeit und Ladung zu maximieren."
                   : "Select the Ocean Route with Summer Monsoon wind to maximize speed and cargo."}
           </div>
         )}

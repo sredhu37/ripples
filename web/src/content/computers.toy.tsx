@@ -73,7 +73,7 @@ export function ComputersToy({ lang, mode = "toy", onDone }: ComputersToyProps) 
   };
 
   const binaryCodeLabel =
-    lang === "pl" ? "Kod binarny:" : lang === "de" ? "Binaerer Code:" : "Binary Code:";
+    lang === "pl" ? "Kod binarny:" : lang === "de" ? "Binärer Code:" : "Binary Code:";
 
   const calcValueLabel =
     lang === "pl"
@@ -169,7 +169,7 @@ export function ComputersToy({ lang, mode = "toy", onDone }: ComputersToyProps) 
               ? lang === "pl"
                 ? `Brawo! Binarny ${binary} odpowiada dokładnie liczbie dziesiętnej ${target}!`
                 : lang === "de"
-                  ? `Richtig! Binaer ${binary} entspricht genau der Dezimalzahl ${target}!`
+                  ? `Richtig! Binär ${binary} entspricht genau der Dezimalzahl ${target}!`
                   : `Success! Binary ${binary} equals decimal ${target} perfectly!`
               : lang === "pl"
                 ? `Bieżąca wartość to ${decimal}. Przestaw bity, aby uzyskać ${target}.`

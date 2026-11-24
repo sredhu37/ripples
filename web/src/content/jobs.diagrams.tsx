@@ -9,7 +9,7 @@ export function HistoricalVanishedTradesDiagram({ lang, step }: DiagramProps) {
         : "Jobs of Yesterday";
 
   const lamplighterLabel =
-    lang === "pl" ? "Latarnik" : lang === "de" ? "Laternenanzuender" : "Lamplighter";
+    lang === "pl" ? "Latarnik" : lang === "de" ? "Laternenanzünder" : "Lamplighter";
 
   const switchboardLabel =
     lang === "pl" ? "Centrala tel." : lang === "de" ? "Telefonzentrale" : "Switchboard";
@@ -160,7 +160,7 @@ export function NewTechCareersWindCyberDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Powstają zupełnie nowe zawody"
       : lang === "de"
-        ? "Voellig neue Berufe entstehen"
+        ? "Völlig neue Berufe entstehen"
         : "Entirely New Professions Emerge";
 
   const windLabel =
@@ -236,7 +236,7 @@ export function TransitionCareerShiftDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Ścieżki podnoszenia kwalifikacji pracowników"
       : lang === "de"
-        ? "Weiterbildungspfade fuer Beschaeftigte"
+        ? "Weiterbildungspfade für Beschäftigte"
         : "Upskilling Pathways for Workers";
 
   const manualTitle = lang === "pl" ? "Montaż" : lang === "de" ? "Fertigung" : "Assembly";

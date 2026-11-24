@@ -77,7 +77,7 @@ export const MEANWHILE: Record<string, Meanwhile> = {
     to: 1700,
     text: T(
       "While the Mughals built palaces and gardens in India, a Dutch company sold shares in ships and Galileo looked at moons through a telescope.",
-      "Waehrend die Moguln in Indien Palaeste und Gaerten bauten, verkaufte eine niederlaendische Firma Anteile an Schiffen und Galilei sah Monde durch ein Fernrohr.",
+      "Während die Moguln in Indien Paläste und Gärten bauten, verkaufte eine niederländische Firma Anteile an Schiffen und Galilei sah Monde durch ein Fernrohr.",
       "Gdy Mogołowie budowali w Indiach pałace i ogrody, holenderska firma sprzedawała udziały w statkach, a Galileusz oglądał księżyce przez teleskop.",
     ),
   },
@@ -86,7 +86,7 @@ export const MEANWHILE: Record<string, Meanwhile> = {
     to: 1650,
     text: T(
       "While ships carried spices across the seas, Spain met the Aztecs, Timbuktu filled with books and a Polish astronomer moved the Sun to the middle.",
-      "Waehrend Schiffe Gewuerze ueber die Meere brachten, traf Spanien auf die Azteken, Timbuktu fuellte sich mit Buechern und ein polnischer Astronom stellte die Sonne in die Mitte.",
+      "Während Schiffe Gewürze über die Meere brachten, traf Spanien auf die Azteken, Timbuktu füllte sich mit Büchern und ein polnischer Astronom stellte die Sonne in die Mitte.",
       "Gdy statki wiozły przyprawy przez morza, Hiszpania spotkała Azteków, Timbuktu zapełniało się książkami, a polski astronom postawił Słońce w centrum.",
     ),
   },
@@ -95,7 +95,7 @@ export const MEANWHILE: Record<string, Meanwhile> = {
     to: 1900,
     text: T(
       "While the British ruled in India, trains started to roar in Europe, Japan built modern schools, and Edison made a bulb that glowed for hours.",
-      "Waehrend die Briten in Indien herrschten, begannen in Europa Zuege zu rollen, Japan baute moderne Schulen und Edison schuf eine Gluehbirne, die stundenlang leuchtete.",
+      "Während die Briten in Indien herrschten, begannen in Europa Züge zu rollen, Japan baute moderne Schulen und Edison schuf eine Glühbirne, die stundenlang leuchtete.",
       "Gdy Brytyjczycy rządzili w Indiach, w Europie ruszyły pociągi, Japonia budowała nowoczesne szkoły, a Edison stworzył żarówkę świecącą przez wiele godzin.",
     ),
   },
@@ -104,7 +104,7 @@ export const MEANWHILE: Record<string, Meanwhile> = {
     to: 1960,
     text: T(
       "While India worked for freedom, the world saw the first airplane, two world wars, and many African countries becoming free too.",
-      "Waehrend Indien fuer die Freiheit arbeitete, erlebte die Welt das erste Flugzeug, zwei Weltkriege und viele afrikanische Laender, die ebenfalls frei wurden.",
+      "Während Indien für die Freiheit arbeitete, erlebte die Welt das erste Flugzeug, zwei Weltkriege und viele afrikanische Länder, die ebenfalls frei wurden.",
       "Gdy Indie pracowały na wolność, świat zobaczył pierwszy samolot, dwie wojny światowe i wiele krajów afrykańskich, które również odzyskały wolność.",
     ),
   },
@@ -113,7 +113,7 @@ export const MEANWHILE: Record<string, Meanwhile> = {
     to: 1930,
     text: T(
       "While armies fought in Europe, Gandhi came home to India, Russia got a new government, and a scientist noticed mould that kills germs.",
-      "Waehrend in Europa Armeen kaempften, kehrte Gandhi nach Indien zurueck, Russland bekam eine neue Regierung und ein Forscher bemerkte Schimmel, der Keime toetet.",
+      "Während in Europa Armeen kämpften, kehrte Gandhi nach Indien zurück, Russland bekam eine neue Regierung und ein Forscher bemerkte Schimmel, der Keime tötet.",
       "Gdy w Europie walczyły armie, Gandhi wrócił do Indii, Rosja dostała nowy rząd, a naukowiec zauważył pleśń zabijającą zarazki.",
     ),
   },
@@ -122,7 +122,7 @@ export const MEANWHILE: Record<string, Meanwhile> = {
     to: 1950,
     text: T(
       "While Europe was at war, India's people asked the British to leave, and when the war ended India became free and China started a new government.",
-      "Waehrend Europa im Krieg war, baten Indiens Menschen die Briten zu gehen, und nach dem Krieg wurde Indien frei und China bekam eine neue Regierung.",
+      "Während Europa im Krieg war, baten Indiens Menschen die Briten zu gehen, und nach dem Krieg wurde Indien frei und China bekam eine neue Regierung.",
       "Gdy Europa była w stanie wojny, mieszkańcy Indii prosili Brytyjczyków o odejście, a po wojnie Indie stały się wolne, a Chiny dostały nowy rząd.",
     ),
   },
@@ -131,7 +131,7 @@ export const MEANWHILE: Record<string, Meanwhile> = {
     to: 1990,
     text: T(
       "While Europe rebuilt its cities, new countries in Africa and Asia became free, people walked on the Moon, and a wall in Berlin finally came down.",
-      "Waehrend Europa seine Staedte wieder aufbaute, wurden neue Laender in Afrika und Asien frei, Menschen gingen auf dem Mond und eine Mauer in Berlin fiel endlich.",
+      "Während Europa seine Städte wieder aufbaute, wurden neue Länder in Afrika und Asien frei, Menschen gingen auf dem Mond und eine Mauer in Berlin fiel endlich.",
       "Gdy Europa odbudowywała miasta, nowe kraje w Afryce i Azji stawały się wolne, ludzie chodzili po Księżycu, a mur w Berlinie wreszcie runął.",
     ),
   },
@@ -140,7 +140,7 @@ export const MEANWHILE: Record<string, Meanwhile> = {
     to: 2022,
     text: T(
       "History is many stories at once. Right now people are paying by phone in India and Kenya, riding fast trains in China, and talking to computers.",
-      "Geschichte sind viele Geschichten gleichzeitig. Heute bezahlen Menschen in Indien und Kenia per Handy, fahren in China mit Schnellzuegen und sprechen mit Computern.",
+      "Geschichte sind viele Geschichten gleichzeitig. Heute bezahlen Menschen in Indien und Kenia per Handy, fahren in China mit Schnellzügen und sprechen mit Computern.",
       "Historia to wiele opowieści naraz. Dziś ludzie płacą telefonem w Indiach i Kenii, jeżdżą szybkimi pociągami w Chinach i rozmawiają z komputerami.",
     ),
   },

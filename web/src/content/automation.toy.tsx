@@ -106,7 +106,7 @@ export function AutomationToy({ lang, mode = "toy", onDone }: AutomationToyProps
         ? "Produktionsleistung:"
         : "Production Output:";
 
-  const unitsLabel = lang === "pl" ? "szt./godz." : lang === "de" ? "Stueck/h" : "units/hr";
+  const unitsLabel = lang === "pl" ? "szt./godz." : lang === "de" ? "Stück/h" : "units/hr";
 
   const safetyRatingLabel =
     lang === "pl"
@@ -193,7 +193,7 @@ export function AutomationToy({ lang, mode = "toy", onDone }: AutomationToyProps
               {lang === "pl"
                 ? "Uwaga: Wysokie tempo bez kurtyny świetlnej stwarza niebezpieczeństwo dla ludzi."
                 : lang === "de"
-                  ? "Achtung: Hohes Tempo ohne Lichtgitter gefaehrdet Menschen."
+                  ? "Achtung: Hohes Tempo ohne Lichtgitter gefährdet Menschen."
                   : "Warning: High speed without safety curtain creates danger for workers."}
             </span>
           )}
@@ -217,12 +217,12 @@ export function AutomationToy({ lang, mode = "toy", onDone }: AutomationToyProps
               ? lang === "pl"
                 ? "Znakomicie! Zautomatyzowane roboty pracują z dużą prędkością, w pełni chroniąc każdego pracownika."
                 : lang === "de"
-                  ? "Perfekt! Roboter arbeiten mit hohem Tempo und schuetzen alle Mitarbeiter."
+                  ? "Perfekt! Roboter arbeiten mit hohem Tempo und schützen alle Mitarbeiter."
                   : "Perfect! Automated robots operate at high speed while safeguarding every worker."
               : lang === "pl"
                 ? "Włącz zarówno Czujniki odległości, jak i Kurtynę świetlną oraz wybierz tempo co najmniej 2x Standard."
                 : lang === "de"
-                  ? "Aktiviere Sensoren und Lichtgitter und waehle mindestens 2x Standard-Tempo."
+                  ? "Aktiviere Sensoren und Lichtgitter und wähle mindestens 2x Standard-Tempo."
                   : "Activate both Distance Sensors and Safety Curtain, and select at least 2x Standard speed."}
           </div>
         )}

@@ -26,22 +26,22 @@ export const lesson: Lesson = {
       [
         T(
           "In 1600, Queen Elizabeth I signed a royal charter creating the British East India Company.",
-          "Im Jahr 1600 unterzeichnete Koenigin Elisabeth I. den Freibrief fuer die Britische Ostindien-Kompanie.",
+          "Im Jahr 1600 unterzeichnete Königin Elisabeth I. den Freibrief für die Britische Ostindien-Kompanie.",
           "W 1600 roku królowa Elżbieta I podpisała przywilej królewski powołujący brytyjską Kompanię Wschodnioindyjską.",
         ),
         T(
           "It was not a nation or government, but a private *chartered company* owned by shareholders.",
-          "Es war kein Staat oder Volk, sondern eine private *Handelskompanie* im Besitz von Aktionaeren.",
+          "Es war kein Staat oder Volk, sondern eine private *Handelskompanie* im Besitz von Aktionären.",
           "Nie było to państwo ani naród, lecz prywatna *spółka akcyjna* należąca do kupców i inwestorów.",
         ),
         T(
           "Its goal was straightforward: make high profits by trading silk, tea, and spices.",
-          "Ihr Ziel war klar: Hohe Gewinne durch den Handel mit Seide, Tee und Gewuerzen erwirtschaften.",
+          "Ihr Ziel war klar: Hohe Gewinne durch den Handel mit Seide, Tee und Gewürzen erwirtschaften.",
           "Jej cel był prosty: przynosić zyski akcjonariuszom poprzez handel jedwabiem, herbatą i przyprawami.",
         ),
         T(
           "At first, company merchants lived peacefully in coastal ports, paying rent to local rulers.",
-          "Zunaechst lebten die Kaufleute friedlich in Kuestenhaefen und zahlten Pacht an die Herrscher.",
+          "Zunächst lebten die Kaufleute friedlich in Küstenhäfen und zahlten Pacht an die Herrscher.",
           "Początkowo kupcy mieszkali spokojnie w portach nadbrzeżnych, płacąc czynsz lokalnym władcom.",
         ),
       ],
@@ -56,7 +56,7 @@ export const lesson: Lesson = {
         ),
         T(
           "In 1757, following the Battle of Plassey, the Company took over tax collection in Bengal.",
-          "1757 uebernahm die Kompanie nach der Schlacht von Plassey das Recht der Steuereintreibung in Bengalen.",
+          "1757 übernahm die Kompanie nach der Schlacht von Plassey das Recht der Steuereintreibung in Bengalen.",
           "W 1757 roku, po bitwie pod Plassey, Kompania przejęła prawo ściągania podatków w bogatym Bengalu.",
         ),
         T(
@@ -66,7 +66,7 @@ export const lesson: Lesson = {
         ),
         T(
           "Profits flowed across the seas to company headquarters in London rather than staying local.",
-          "Die Gewinne flossen ueber die Meere nach London, anstatt vor Ort reinvestiert zu werden.",
+          "Die Gewinne flossen über die Meere nach London, anstatt vor Ort reinvestiert zu werden.",
           "Zyski i srebro odpływały przez oceany do londyńskiej centrali, zamiast służyć lokalnemu rozwojowi.",
         ),
       ],
@@ -81,17 +81,17 @@ export const lesson: Lesson = {
         ),
         T(
           "Almost every village had skilled weavers working intricate wooden handlooms.",
-          "Fast jedes Dorf hatte geschickte Handwerker an hoelzernen Webstuehlen.",
+          "Fast jedes Dorf hatte geschickte Handwerker an hölzernen Webstühlen.",
           "W niemal każdej wsi pracowali mistrzowie obsługujący misterne drewniane krosna tkackie.",
         ),
         T(
           "Their handloom textiles were treasured by families from Cairo to Tokyo and Amsterdam.",
-          "Ihre Stoffe wurden von Familien von Kairo bis Tokio und Amsterdam geschaetzt.",
+          "Ihre Stoffe wurden von Familien von Kairo bis Tokio und Amsterdam geschätzt.",
           "Ich ręcznie tkane tkaniny były poszukiwane i podziwiane od Kairu po Tokio i Amsterdam.",
         ),
         T(
           "These handcrafted traditions sustained vibrant rural communities and independent artisans.",
-          "Dieses Kunsthandwerk ernaehrte ganze Doerfer und unabhaengige Familienbetriebe.",
+          "Dieses Kunsthandwerk ernährte ganze Dörfer und unabhängige Familienbetriebe.",
           "Tradycyjne rzemiosło dawało godne utrzymanie całym osadom i niezależnym rodzinom rzemieślniczym.",
         ),
       ],
@@ -101,22 +101,22 @@ export const lesson: Lesson = {
       [
         T(
           "In Britain, the Industrial Revolution created steam-powered spinning mills in Manchester.",
-          "In Grossbritannien entstanden durch die Industrielle Revolution dampfbetriebene Spinnereien.",
+          "In Großbritannien entstanden durch die Industrielle Revolution dampfbetriebene Spinnereien.",
           "W Wielkiej Brytanii rewolucja przemysłowa stworzyła napędzane parą wielkie tkalnie w Manchesterze.",
         ),
         T(
           "To protect these new mills, the British Parliament placed high tariffs on Indian cloth.",
-          "Um diese Fabriken zu schuetzen, belegte das britische Parlament indische Stoffe mit hohen Zoellen.",
+          "Um diese Fabriken zu schützen, belegte das britische Parlament indische Stoffe mit hohen Zöllen.",
           "Aby chronić te fabryki, brytyjski parlament nałożył ogromne cła na import indyjskich tkanin.",
         ),
         T(
           "Meanwhile, British factory-made cloth entered India with zero import taxes.",
-          "Gleichzeitig durften britische Industriestoffe zollfrei nach Indien eingefuehrt werden.",
+          "Gleichzeitig durften britische Industriestoffe zollfrei nach Indien eingeführt werden.",
           "W tym samym czasie brytyjskie towary fabryczne zalewały Indie bez żadnych ceł przywozowych.",
         ),
         T(
           "Village handlooms could not compete against subsidized steam engines, and many shut down.",
-          "Gegen die subventionierten Dampfmaschinen konnten Doerfer nicht bestehen; viele Webstuehle verstummten.",
+          "Gegen die subventionierten Dampfmaschinen konnten Dörfer nicht bestehen; viele Webstühle verstummten.",
           "Wiejskie krosna nie mogły sprostać uprzywilejowanym maszynom parowym i tysiące warsztatów upadło.",
         ),
       ],
@@ -131,7 +131,7 @@ export const lesson: Lesson = {
         ),
         T(
           "The main tracks ran from inland cotton fields and coal mines to export docks.",
-          "Die Hauptstrecken fuehrten von Baumwollfeldern und Minen direkt zu den Ausfuhrhaefen.",
+          "Die Hauptstrecken führten von Baumwollfeldern und Minen direkt zu den Ausfuhrhäfen.",
           "Główne trasy wiodły z plantacji bawełny i kopalń prosto do doków morskich portów wywozowych.",
         ),
         T(
@@ -141,7 +141,7 @@ export const lesson: Lesson = {
         ),
         T(
           "In 1858, following widespread uprisings, the British Crown took direct control, establishing the *Raj*.",
-          "1858 uebernahm die britische Krone nach Aufstaenden die direkte Macht: Die Zeit des *Raj* begann.",
+          "1858 übernahm die britische Krone nach Aufständen die direkte Macht: Die Zeit des *Raj* begann.",
           "W 1858 roku, po wielkim powstaniu, brytyjska korona przejęła bezpośrednią władzę, tworząc tzw. *Raj*.",
         ),
       ],
@@ -150,7 +150,7 @@ export const lesson: Lesson = {
   ],
   toyIntro: T(
     "Compare unfair colonial monopoly tariffs with fair reciprocal trade between weavers and factories.",
-    "Vergleiche einseitige Kolonialzoelle mit fairen Handelsregeln zwischen Webern und Fabriken.",
+    "Vergleiche einseitige Kolonialzölle mit fairen Handelsregeln zwischen Webern und Fabriken.",
     "Porównaj jednostronne cła kolonialne z uczciwym, partnerskim handlem między tkaczami a fabrykami.",
   ),
   Toy,
@@ -159,14 +159,14 @@ export const lesson: Lesson = {
       kind: "choice",
       prompt: T(
         "What was the British East India Company originally?",
-        "Was war die Britische Ostindien-Kompanie urspruenglich?",
+        "Was war die Britische Ostindien-Kompanie ursprünglich?",
         "Czym pierwotnie była brytyjska Kompania Wschodnioindyjska?",
       ),
       options: [
         {
           text: T(
             "A private corporation owned by shareholders seeking trade profits",
-            "Ein privates Unternehmen im Besitz von Aktionaeren mit dem Ziel, Handelsgewinne zu erzielen",
+            "Ein privates Unternehmen im Besitz von Aktionären mit dem Ziel, Handelsgewinne zu erzielen",
             "Prywatną korporacją należącą do akcjonariuszy pragnących osiągać zyski handlowe",
           ),
           correct: true,
@@ -174,7 +174,7 @@ export const lesson: Lesson = {
         {
           text: T(
             "A charity that provided free bicycles to schoolchildren",
-            "Eine Wohltatigkeitsorganisation, die Fahrraeder an Schueler verteilte",
+            "Eine Wohltatigkeitsorganisation, die Fahrräder an Schüler verteilte",
             "Organizacją charytatywną rozdającą rowery dzieciom szkolnym",
           ),
         },
@@ -188,7 +188,7 @@ export const lesson: Lesson = {
       ],
       hint: T(
         "It was created by a royal charter as a joint-stock business enterprise.",
-        "Sie entstand durch einen Freibrief als fruehe Aktiengesellschaft.",
+        "Sie entstand durch einen Freibrief als frühe Aktiengesellschaft.",
         "Powstała na mocy przywileju królewskiego jako wczesna spółka akcyjna.",
       ),
     },
@@ -196,14 +196,14 @@ export const lesson: Lesson = {
       kind: "choice",
       prompt: T(
         "How did one-sided trade rules harm local village handlooms?",
-        "Wie schadeten einseitige Zollregeln den Doerfern und ihren Handwebstuehlen?",
+        "Wie schadeten einseitige Zollregeln den Dörfern und ihren Handwebstühlen?",
         "W jaki sposób jednostronne zasady handlowe zaszkodziły wiejskiemu tkactwu?",
       ),
       options: [
         {
           text: T(
             "High tariffs taxed Indian cloth exports, while British factory goods entered without taxes",
-            "Hohe Zoelle verteuerten indische Exporte, waehrend britische Fabrikwaren zollfrei blieben",
+            "Hohe Zölle verteuerten indische Exporte, während britische Fabrikwaren zollfrei blieben",
             "Wysokie cła obciążały eksport tkanin indyjskich, podczas gdy brytyjskie towary fabryczne wwożono bez ceł",
           ),
           correct: true,
@@ -211,21 +211,21 @@ export const lesson: Lesson = {
         {
           text: T(
             "All cotton plants turned into broccoli overnight",
-            "Alle Baumwollpflanzen verwandelten sich ueber Nacht in Brokkoli",
+            "Alle Baumwollpflanzen verwandelten sich über Nacht in Brokkoli",
             "Wszystkie krzewy bawełny z dnia na dzień zamieniły się w brokuły",
           ),
         },
         {
           text: T(
             "The rivers began flowing backwards into the mountain peaks",
-            "Die Fluesse begannen rueckwaerts in die Berge hinaufzufliessen",
+            "Die Flüsse begannen rückwärts in die Berge hinaufzufliessen",
             "Wszystkie rzeki nagle zaczęły płynąć pod górę w stronę szczytów",
           ),
         },
       ],
       hint: T(
         "Tariff imbalances made handmade cloth artificially expensive in world markets.",
-        "Zollunterschiede machten handgewebte Stoffe auf den Maerkten kuenstlich teuer.",
+        "Zollunterschiede machten handgewebte Stoffe auf den Märkten künstlich teuer.",
         "Asymetria celna uczyniła tkaniny rzemieślnicze sztucznie drogimi na rynkach światowych.",
       ),
     },
@@ -233,20 +233,20 @@ export const lesson: Lesson = {
       kind: "widget",
       prompt: T(
         "Switch trade policy to 'Fair Reciprocal Trade' to balance tariffs and allow weavers to thrive.",
-        "Schalte auf 'Faire Handelsbedingungen' um, damit die Dorfweber wieder aufbluehen koennen.",
+        "Schalte auf 'Faire Handelsbedingungen' um, damit die Dorfweber wieder aufblühen können.",
         "Przełącz politykę na 'Uczciwy handel wzajemny', aby wyrównać cła i dać tkaczom szansę rozwoju.",
       ),
       Widget,
       hint: T(
         "Click the Fair Reciprocal Trade button and tap check.",
-        "Klicke auf Faire Handelsbedingungen und tippe auf pruefen.",
+        "Klicke auf Faire Handelsbedingungen und tippe auf prüfen.",
         "Kliknij przycisk Uczciwy handel wzajemny i naciśnij sprawdź.",
       ),
     },
   ],
   askDad: T(
     "Papa, why is it important for countries today to trade fairly so both sides benefit equally?",
-    "Papa, warum ist es fuer Laender heute so wichtig, fair zu handeln, damit beide Seiten gewinnen?",
+    "Papa, warum ist es für Länder heute so wichtig, fair zu handeln, damit beide Seiten gewinnen?",
     "Tato, dlaczego dzisiaj tak ważne jest, aby handel między państwami był sprawiedliwy i korzystny dla obu stron?",
   ),
   realLife: {
@@ -257,7 +257,7 @@ export const lesson: Lesson = {
     },
     body: {
       en: "The Deutsches Historisches Museum (DHM) in Berlin and the Victoria Memorial in Kolkata preserve historical shipping ledgers, textile swatches, and currency tokens from the East India Company era. Historians study these primary records to explain how trade monopolies and tariffs affected global economic development.",
-      de: "Das Deutsche Historische Museum in Berlin und das Victoria Memorial in Kolkata bewahren Frachtbuecher, Stoffmuster und Handelsmuenzen aus der Zeit der Ostindien-Kompanie auf. Historiker erforschen diese Originaldokumente, um die Auswirkungen von Monopolen und Zoellen zu verstehen.",
+      de: "Das Deutsche Historische Museum in Berlin und das Victoria Memorial in Kolkata bewahren Frachtbücher, Stoffmuster und Handelsmünzen aus der Zeit der Ostindien-Kompanie auf. Historiker erforschen diese Originaldokumente, um die Auswirkungen von Monopolen und Zöllen zu verstehen.",
       pl: "Zbiory Muzeum Narodowego i Muzeum Azji i Pacyfiku w Warszawie oraz Victoria Memorial w Kolkacie przechowują zabytkowe rejestry okrętowe, próbki tkanin i monety z czasów Kompanii Wschodnioindyjskiej. Historycy badają te archiwa, aby zrozumieć, jak monopole i jednostronne cła wpłynęły na rozwój światowej gospodarki.",
     },
   },
@@ -266,7 +266,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The East India Company was granted an exclusive English trade monopoly charter by Queen Elizabeth I on 31 December 1600.",
-          de: "Die Ostindien-Kompanie erhielt am 31. Dezember 1600 ein koenigliches Handelsmonopol von Koenigin Elisabeth I.",
+          de: "Die Ostindien-Kompanie erhielt am 31. Dezember 1600 ein königliches Handelsmonopol von Königin Elisabeth I.",
           pl: "Brytyjska Kompania Wschodnioindyjska otrzymała wyłączny przywilej monopolowy na handel azjatycki od królowej Elżbiety I w dniu 31 grudnia 1600 roku.",
         },
         source: "https://www.britannica.com/topic/East-India-Company",
@@ -291,7 +291,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The Government of India Act 1858 transferred corporate control from the East India Company directly to the British Crown.",
-          de: "Der Government of India Act 1858 uebertrug die Herrschaft von der Handelsgesellschaft direkt auf die britische Krone.",
+          de: "Der Government of India Act 1858 übertrug die Herrschaft von der Handelsgesellschaft direkt auf die britische Krone.",
           pl: "Ustawa Government of India Act z 1858 roku odebrała władzę prywatnej Kompanii i przekazała bezpośrednią kontrolę Koronie Brytyjskiej.",
         },
         source: "https://www.britannica.com/topic/Government-of-India-Act-1858",
@@ -299,7 +299,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "Railway construction in colonial India connected interior agricultural hinterlands directly to coastal export ports.",
-          de: "Der Eisenbahnbau im kolonialen Indien verband das landwirtschaftliche Binnenland direkt mit den Exportseehaefen.",
+          de: "Der Eisenbahnbau im kolonialen Indien verband das landwirtschaftliche Binnenland direkt mit den Exportseehäfen.",
           pl: "Budowa kolei w Indiach kolonialnych łączyła rolnicze i surowcowe zaplecze kraju bezpośrednio z portami morskimi służącymi do eksportu surowców.",
         },
         source:
@@ -309,7 +309,7 @@ export const lesson: Lesson = {
     simplified: [
       {
         en: "We explain the East India Company as a private chartered business corporation driven by shareholder dividends.",
-        de: "Wir erklaeren die Ostindien-Kompanie als privates Unternehmen, das Dividenden an Aktionaere zahlte.",
+        de: "Wir erklären die Ostindien-Kompanie als privates Unternehmen, das Dividenden an Aktionäre zahlte.",
         pl: "Wyjaśniamy rolę Kompanii Wschodnioindyjskiej jako prywatnej spółki akcyjnej wypłacającej zyski udziałowcom.",
       },
       {
@@ -319,7 +319,7 @@ export const lesson: Lesson = {
       },
       {
         en: "We emphasize economic mechanisms and trade balance over caricature.",
-        de: "Wir betonen oekonomische Mechanismen und Handelsbilanzen statt Klischees.",
+        de: "Wir betonen ökonomische Mechanismen und Handelsbilanzen statt Klischees.",
         pl: "Podkreślamy mechanizmy ekonomiczne i równowagę handlową zamiast uproszczeń.",
       },
     ],

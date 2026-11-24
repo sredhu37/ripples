@@ -268,7 +268,7 @@ export const lesson: Lesson = {
       kind: "widget",
       prompt: T(
         "The town owes 8 coins. Build the school and the road without a new gap. Then press Check.",
-        "Die Stadt schuldet 8 Münzen. Baue Schule und Straße ohne neue Lücke. Drücke dann Pruefen.",
+        "Die Stadt schuldet 8 Münzen. Baue Schule und Straße ohne neue Lücke. Drücke dann Prüfen.",
         "Miasteczko jest winne 8 monet. Zbuduj szkołę i drogę bez nowej luki. Potem naciśnij Sprawdź.",
       ),
       Widget,

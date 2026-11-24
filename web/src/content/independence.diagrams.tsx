@@ -100,7 +100,7 @@ export function CharkhaSpinningWheelDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Własna nić, cierpliwość, godność"
       : lang === "de"
-        ? "Eigenes Garn, Geduld, Wuerde"
+        ? "Eigenes Garn, Geduld, Würde"
         : "Homespun thread, patience, dignity";
 
   return (
@@ -153,7 +153,7 @@ export function TriColorAshokaDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "15 sierpnia 1947: Niepodległość"
       : lang === "de"
-        ? "15. August 1947: Unabhaengigkeit"
+        ? "15. August 1947: Unabhängigkeit"
         : "15 August 1947: Independence";
 
   return (

@@ -26,22 +26,22 @@ export const lesson: Lesson = {
       [
         T(
           "By the twentieth century, millions of people across South Asia shared a heartfelt dream.",
-          "Im zwanzigsten Jahrhundert teilten Millionen Menschen in Suedasien einen tiefen Traum.",
+          "Im zwanzigsten Jahrhundert teilten Millionen Menschen in Südasien einen tiefen Traum.",
           "W dwudziestym wieku miliony ludzi w Azji Południowej łączyło gorące marzenie.",
         ),
         T(
           "They dreamed of self-rule, democratic freedom, and deciding their own laws in peace.",
-          "Sie traeumten von Selbstbestimmung, demokratischer Freiheit und eigenen Gesetzen.",
+          "Sie träumten von Selbstbestimmung, demokratischer Freiheit und eigenen Gesetzen.",
           "Marzyli o samostanowieniu, demokratycznej wolności i stanowieniu własnych praw w pokoju.",
         ),
         T(
           "Yet foreign rulers held all military weapons, stone prisons, and armed police forces.",
-          "Doch die Kolonialmacht kontrollierte Militaerwaffen, Gefaengnisse und Polizeitruppen.",
+          "Doch die Kolonialmacht kontrollierte Militärwaffen, Gefängnisse und Polizeitruppen.",
           "Jednak obca władza kontrolowała broń, kamienne więzienia i uzbrojone formacje policyjne.",
         ),
         T(
           "How could ordinary farmers and families win freedom against such overwhelming force?",
-          "Wie konnten Bauern und Familien ihre Freiheit gegen solche Uebermacht erringen?",
+          "Wie konnten Bauern und Familien ihre Freiheit gegen solche Übermacht erringen?",
           "Jak zwykli rolnicy, tkacze i rodziny mogli odzyskać wolność w obliczu tak wielkiej siły militarnej?",
         ),
       ],
@@ -61,7 +61,7 @@ export const lesson: Lesson = {
         ),
         T(
           "Satyagraha means holding firmly to moral truth with quiet, fearless determination.",
-          "Satyagraha bedeutet, mutig und friedlich fuer die Gerechtigkeit einzustehen.",
+          "Satyagraha bedeutet, mutig und friedlich für die Gerechtigkeit einzustehen.",
           "Satyagraha oznacza niezłomne trwanie przy prawdzie moralnej ze spokojną, odważną determinacją.",
         ),
         T(
@@ -76,17 +76,17 @@ export const lesson: Lesson = {
       [
         T(
           "In 1930, the colonial government strictly forbade citizens from gathering natural sea salt.",
-          "1930 verbot die Kolonialregierung den Buergern, Meersalz selbst zu gewinnen, und erhob eine Salzsteuer.",
+          "1930 verbot die Kolonialregierung den Bürgern, Meersalz selbst zu gewinnen, und erhob eine Salzsteuer.",
           "W 1930 roku władze kolonialne surowo zabroniły zbierania naturalnej soli morskiej i nałożyły podatek solny.",
         ),
         T(
           "Gandhi walked two hundred and forty dusty miles to the coastal village of Dandi.",
-          "Gandhi marschierte zweihundertvierzig Meilen zu Fuss an die Kueste nach Dandi.",
+          "Gandhi marschierte zweihundertvierzig Meilen zu Fuss an die Küste nach Dandi.",
           "Gandhi przeszedł pieszo dwieście czterdzieści mil pylistymi drogami aż do nadmorskiej wsi Dandi.",
         ),
         T(
           "He bent down, lifted a handful of pure white sea salt, and smiled.",
-          "Er bueckte sich, hob eine Handvoll weisses Meersalz auf und laechelte.",
+          "Er bückte sich, hob eine Handvoll weißes Meersalz auf und lächelte.",
           "Schylił się ku falom, podniósł garść czystej, białej soli morskiej i uśmiechnął się.",
         ),
         T(
@@ -101,22 +101,22 @@ export const lesson: Lesson = {
       [
         T(
           "Citizens also turned to the *Charkha*, the traditional wooden spinning wheel.",
-          "Die Menschen nutzten auch das *Charkha*, das traditionelle hoelzerne Spinnrad.",
+          "Die Menschen nutzten auch das *Charkha*, das traditionelle hölzerne Spinnrad.",
           "Obywatele sięgnęli również po *Charkha*, tradycyjny drewniany kołowrotek tkacki.",
         ),
         T(
           "Families gathered on verandahs to spin their own cotton thread and weave homespun Khadi cloth.",
-          "Familien sassen zusammen, spannen ihr eigenes Garn und woben einfache Khadi-Kleidung.",
+          "Familien saßen zusammen, spannen ihr eigenes Garn und woben einfache Khadi-Kleidung.",
           "Rodziny siadały razem na gankach, aby prząść własną nić bawełnianą i tkać prostą odzież khadi.",
         ),
         T(
           "By wearing homespun cloth, they boycotted foreign goods and supported local artisan neighbors.",
-          "Durch die selbstgemachte Kleidung unterstuetzten sie Nachbarn und wurden unabhaengig.",
+          "Durch die selbstgemachte Kleidung unterstützten sie Nachbarn und wurden unabhängig.",
           "Nosząc własnoręcznie utkaną odzież, bojkotowali importowane towary i wspierali miejscowych rzemieślników.",
         ),
         T(
           "Patience, dignity, and collective solidarity proved stronger than any military fleet.",
-          "Geduld, Wuerde und Zusammenhalt erwiesen sich als staerker als jede Militaerflotte.",
+          "Geduld, Würde und Zusammenhalt erwiesen sich als stärker als jede Militärflotte.",
           "Cierpliwość, ludzka godność i wspólna solidarność okazały się silniejsze niż jakiekolwiek armie.",
         ),
       ],
@@ -126,22 +126,22 @@ export const lesson: Lesson = {
       [
         T(
           "At midnight on August 15, 1947, India celebrated its hard-won national *independence*.",
-          "Um Mitternacht am 15. August 1947 feierte Indien seine erkaempfte *Unabhaengigkeit*.",
+          "Um Mitternacht am 15. August 1947 feierte Indien seine erkämpfte *Unabhängigkeit*.",
           "O północy 15 sierpnia 1947 roku Indie świętowały upragnioną, wywalczoną pokojem *niepodległość*.",
         ),
         T(
           "To safeguard liberty for all, Dr. B. R. Ambedkar guided the drafting of a democratic *constitution*.",
-          "Um die Freiheit zu schuetzen, leitete Dr. B. R. Ambedkar den Entwurf einer demokratischen *Verfassung*.",
+          "Um die Freiheit zu schützen, leitete Dr. B. R. Ambedkar den Entwurf einer demokratischen *Verfassung*.",
           "Aby strzec wolności wszystkich obywateli, dr B. R. Ambedkar pokierował pracami nad demokratyczną *konstytucją*.",
         ),
         T(
           "It abolished discrimination, guaranteed equality before the law, and established universal voting rights.",
-          "Sie schaffte Diskriminierung ab, garantierte Gleichheit vor dem Gesetz und fuehrte das Wahlrecht ein.",
+          "Sie schaffte Diskriminierung ab, garantierte Gleichheit vor dem Gesetz und führte das Wahlrecht ein.",
           "Konstytucja zniosła dyskryminację, zagwarantowała równość wobec prawa i powszechne prawo głosu.",
         ),
         T(
           "The peaceful journey inspired civil rights leaders around the globe. Martin Luther King and Nelson Mandela were among them.",
-          "Dieser friedliche Weg inspirierte Buergerrechtler weltweit, von Martin Luther King bis Nelson Mandela.",
+          "Dieser friedliche Weg inspirierte Bürgerrechtler weltweit, von Martin Luther King bis Nelson Mandela.",
           "Ta droga pokojowego oporu zainspirowała na całym świecie obrońców praw obywatelskich. Byli wśród nich Martin Luther King i Nelson Mandela.",
         ),
       ],
@@ -150,7 +150,7 @@ export const lesson: Lesson = {
   ],
   toyIntro: T(
     "Turn the wooden Charkha wheel to spin spools of thread and build community solidarity.",
-    "Drehe das hoelzerne Charkha-Spinnrad, um Garn zu spinnen und Verbundenheit zu staerken.",
+    "Drehe das hölzerne Charkha-Spinnrad, um Garn zu spinnen und Verbundenheit zu stärken.",
     "Obróć drewniany kołowrotek Charkha, aby uprząść szpulki nici i zbudować solidarność wspólnoty.",
   ),
   Toy,
@@ -159,14 +159,14 @@ export const lesson: Lesson = {
       kind: "choice",
       prompt: T(
         "What does the term 'Ahimsa' mean in the philosophy of peaceful independence?",
-        "Was bedeutet der Begriff 'Ahimsa' auf dem Weg zur Unabhaengigkeit?",
+        "Was bedeutet der Begriff 'Ahimsa' auf dem Weg zur Unabhängigkeit?",
         "Co oznacza pojęcie 'Ahimsa' w filozofii pokojowej walki o niepodległość?",
       ),
       options: [
         {
           text: T(
             "Complete non-violence and respect for all living beings",
-            "Vollkommene Gewaltfreiheit und Respekt fuer alle Lebewesen",
+            "Vollkommene Gewaltfreiheit und Respekt für alle Lebewesen",
             "Całkowite wyrzeczenie się przemocy i poszanowanie dla wszelkich żywych istot",
           ),
           correct: true,
@@ -174,14 +174,14 @@ export const lesson: Lesson = {
         {
           text: T(
             "A fast racing car with shiny golden wheels",
-            "Ein schneller Rennwagen mit glaenzenden Goldraedern",
+            "Ein schneller Rennwagen mit glänzenden Goldrädern",
             "Wyścigowy bolid z lśniącymi złotymi kołami",
           ),
         },
         {
           text: T(
             "The secret art of hiding coins under sofa cushions",
-            "Die geheime Kunst, Muenzen unter Sofakissen zu verstecken",
+            "Die geheime Kunst, Münzen unter Sofakissen zu verstecken",
             "Tajemną sztukę chowania monet pod poduszkami na kanapie",
           ),
         },
@@ -203,7 +203,7 @@ export const lesson: Lesson = {
         {
           text: T(
             "It represented self-reliance, local craftsmanship, and peaceful collective unity",
-            "Es stand fuer Selbstbestimmung, eigenes Handwerk und friedlichen Zusammenhalt",
+            "Es stand für Selbstbestimmung, eigenes Handwerk und friedlichen Zusammenhalt",
             "Reprezentował samowystarczalność, lokalne rzemiosło i pokojową solidarność ludzi",
           ),
           correct: true,
@@ -211,7 +211,7 @@ export const lesson: Lesson = {
         {
           text: T(
             "It was used to play musical tunes during lunch breaks",
-            "Man spielte damit Musikstuecke in den Mittagspausen",
+            "Man spielte damit Musikstücke in den Mittagspausen",
             "Służył do grania wesołych melodii podczas przerw obiadowych",
           ),
         },
@@ -225,7 +225,7 @@ export const lesson: Lesson = {
       ],
       hint: T(
         "Spinning thread allowed families to produce their own clothes without relying on foreign mills.",
-        "Das Spinnen ermoeglichte es Familien, eigene Kleidung ohne fremde Fabriken herzustellen.",
+        "Das Spinnen ermöglichte es Familien, eigene Kleidung ohne fremde Fabriken herzustellen.",
         "Własnoręczne przędzenie pozwalało rodzinom ubierać się bez zależności od obcych monopoli.",
       ),
     },
@@ -239,14 +239,14 @@ export const lesson: Lesson = {
       Widget,
       hint: T(
         "Click the Spin Thread button until you have at least 3 spools, then tap check.",
-        "Klicke auf Rad drehen, bis du mindestens 3 Spulen hast, und tippe auf pruefen.",
+        "Klicke auf Rad drehen, bis du mindestens 3 Spulen hast, und tippe auf prüfen.",
         "Klikaj przycisk obracania koła, aż uzyskasz 3 szpulki nici, a następnie naciśnij sprawdź.",
       ),
     },
   ],
   askDad: T(
     "Papa, how can we use peaceful words and patience when solving disagreements with our friends?",
-    "Papa, wie koennen wir friedliche Worte und Geduld nutzen, wenn wir uns mit Freunden streiten?",
+    "Papa, wie können wir friedliche Worte und Geduld nutzen, wenn wir uns mit Freunden streiten?",
     "Tato, jak możemy używać spokojnych słów i cierpliwości, gdy rozwiązujemy spory z przyjaciółmi?",
   ),
   realLife: {
@@ -257,7 +257,7 @@ export const lesson: Lesson = {
     },
     body: {
       en: "The power of non-violent civic courage was demonstrated in Germany during the autumn of 1989. In Leipzig and other East German cities, tens of thousands of citizens carried candles during peaceful Monday demonstrations (Montagsdemonstrationen), chanting 'Wir sind das Volk' (We are the people). Their peaceful courage brought down the Berlin Wall without weapons.",
-      de: "Die Kraft friedlicher Zivilcourage zeigte sich in Deutschland im Herbst 1989. In Leipzig und anderen Staedten trugen zehntausende Buerger Kerzen bei den friedlichen Montagsdemonstrationen und riefen 'Wir sind das Volk'. Ihr gewaltloser Mut brachte die Berliner Mauer ohne Waffen zu Fall.",
+      de: "Die Kraft friedlicher Zivilcourage zeigte sich in Deutschland im Herbst 1989. In Leipzig und anderen Städten trugen zehntausende Bürger Kerzen bei den friedlichen Montagsdemonstrationen und riefen 'Wir sind das Volk'. Ihr gewaltloser Mut brachte die Berliner Mauer ohne Waffen zu Fall.",
       pl: "W Polsce siła pokojowego oporu ujawniła się w powstaniu Niezależnego Samorządnego Związku Zawodowego „Solidarność” w sierpniu 1980 roku. Miliony pracowników, intelektualistów i całych rodzin zjednoczyły się w pokojowych strajkach, domagając się godności, wolności słowa i praw człowieka. Podobnie jak marsz solny Gandhiego czy demonstracje w Lipsku w 1989 roku, ruch Solidarności dowiódł, że cierpliwa odwaga obywatelska potrafi obalić autorytaryzm bez użycia przemocy.",
     },
   },
@@ -266,7 +266,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The Dandi Salt March covered 240 miles from Sabarmati Ashram to the Arabian Sea in March-April 1930.",
-          de: "Der Salzmarsch nach Dandi fuehrte im Maerz und April 1930 ueber 240 Meilen vom Sabarmati-Ashram an das Arabische Meer.",
+          de: "Der Salzmarsch nach Dandi führte im März und April 1930 über 240 Meilen vom Sabarmati-Ashram an das Arabische Meer.",
           pl: "Marsz solny do Dandi przebył 240 mil z aśramu Sabarmati nad Morze Arabskie w marcu i kwietniu 1930 roku.",
         },
         source: "https://www.britannica.com/event/Salt-March",
@@ -274,7 +274,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The Indian Independence Act 1947 granted legislative independence to India on 15 August 1947.",
-          de: "Der Indian Independence Act 1947 gewaehrte Indien am 15. August 1947 die volle Unabhaengigkeit.",
+          de: "Der Indian Independence Act 1947 gewährte Indien am 15. August 1947 die volle Unabhängigkeit.",
           pl: "Ustawa Indian Independence Act z 1947 roku przyznała Indiom pełną suwerenność państwową w dniu 15 sierpnia 1947 roku.",
         },
         source: "https://www.legislation.gov.uk/ukpga/1947/30/enacted",
@@ -282,7 +282,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "Dr. Bhimrao Ramji Ambedkar served as the chairman of the Drafting Committee for the Constitution of India.",
-          de: "Dr. Bhimrao Ramji Ambedkar leitete den Verfassungsausschuss fuer die demokratische Verfassung Indiens.",
+          de: "Dr. Bhimrao Ramji Ambedkar leitete den Verfassungsausschuss für die demokratische Verfassung Indiens.",
           pl: "Dr Bhimrao Ramji Ambedkar przewodniczył komisji redagującej demokratyczną konstytucję Indii uchwaloną w 1949 roku.",
         },
         source: "https://www.britannica.com/biography/Bhimrao-Ramji-Ambedkar",
@@ -298,7 +298,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The 1980 Polish Solidarity movement and the 1989 peaceful Leipzig demonstrations demonstrated that non-violent civic solidarity can overcome authoritarian rule.",
-          de: "Die Montagsdemonstrationen 1989 in Leipzig und die polnische Solidarność-Bewegung von 1980 bewiesen die Kraft gewaltlosen Buergermuts.",
+          de: "Die Montagsdemonstrationen 1989 in Leipzig und die polnische Solidarność-Bewegung von 1980 bewiesen die Kraft gewaltlosen Bürgermuts.",
           pl: "Powstanie Solidarności w 1980 roku w Polsce oraz demonstracje ze świecami w Lipsku w 1989 roku dowiodły, że pokojowa solidarność obywatelska potrafi przełamać dyktaturę.",
         },
         source:
@@ -308,12 +308,12 @@ export const lesson: Lesson = {
     simplified: [
       {
         en: "We explain non-violent civil resistance through the physical metaphors of the Salt March and the Charkha spinning wheel.",
-        de: "Wir erklaeren gewaltlosen Widerstand anhand des Salzmarsches und des Spinnrads.",
+        de: "Wir erklären gewaltlosen Widerstand anhand des Salzmarsches und des Spinnrads.",
         pl: "Wyjaśniamy pokojowy opór obywatelski na przykładzie marszu solnego oraz kołowrotka Charkha.",
       },
       {
         en: "We focus on self-reliance, moral dignity, and constitutional equality under the rule of law.",
-        de: "Wir betonen Selbstbestimmung, Wuerde und demokratische Gleichheit vor dem Gesetz.",
+        de: "Wir betonen Selbstbestimmung, Würde und demokratische Gleichheit vor dem Gesetz.",
         pl: "Kładziemy nacisk na samowystarczalność, godność osobistą i równość konstytucyjną wobec prawa.",
       },
       {

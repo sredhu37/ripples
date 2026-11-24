@@ -52,7 +52,7 @@ export function IndependenceToy({ lang, mode = "toy", onDone }: IndependenceToyP
     lang === "pl"
       ? "Tradycyjny drewniany kołowrotek Charkha"
       : lang === "de"
-        ? "Am hoelzernen Spinnrad"
+        ? "Am hölzernen Spinnrad"
         : "Spinning the Wooden Charkha";
 
   const spoolsLabel =
@@ -69,7 +69,7 @@ export function IndependenceToy({ lang, mode = "toy", onDone }: IndependenceToyP
         ? "Rad drehen (+1 Spule)"
         : "Spin Thread (+1 Spool)";
 
-  const resetBtnLabel = lang === "pl" ? "Reset" : lang === "de" ? "Zuruecksetzen" : "Reset";
+  const resetBtnLabel = lang === "pl" ? "Reset" : lang === "de" ? "Zurücksetzen" : "Reset";
 
   const solLabel =
     lang === "pl"

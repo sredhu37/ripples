@@ -248,22 +248,22 @@ export const lesson: Lesson = {
       [
         T(
           "Imagine your favorite toy shop receives just five shiny dragon trading cards.",
-          "Stell dir vor, dein Lieblingsladen bekommt nur fuenf seltene Drachenkarten.",
+          "Stell dir vor, dein Lieblingsladen bekommt nur fünf seltene Drachenkarten.",
           "Wyobraź sobie, że twój ulubiony sklep z zabawkami dostaje tylko pięć błyszczących kart ze smokami.",
         ),
         T(
           "Outside the door, fifty excited kids are waiting in line, each clutching pocket money.",
-          "Draussen warten fuenfzig aufgeregte Kinder mit ihrem Taschengeld.",
+          "Draußen warten fünfzig aufgeregte Kinder mit ihrem Taschengeld.",
           "Przed drzwiami w kolejce stoi pięćdziesięcioro dzieci z kieszonkowym w dłoniach.",
         ),
         T(
           "When *demand* is huge and *supply* is tiny, buyers gladly pay more to get one.",
-          "Wenn die *Nachfrage* riesig ist und das *Angebot* winzig, zahlen Kaeufer mehr.",
+          "Wenn die *Nachfrage* riesig ist und das *Angebot* winzig, zahlen Käufer mehr.",
           "Gdy *popyt* jest olbrzymi, a *podaż* znikoma, kupujący chętnie płacą więcej.",
         ),
         T(
           "The seller can raise the price tag because people compete for the few available cards.",
-          "Der Verkaeufer kann den Preis erhoehen, weil alle um die wenigen Karten wetteifern.",
+          "Der Verkäufer kann den Preis erhöhen, weil alle um die wenigen Karten wetteifern.",
           "Sprzedawca może podnieść cenę, bo wszyscy rywalizują o nieliczne dostępne karty.",
         ),
       ],
@@ -273,7 +273,7 @@ export const lesson: Lesson = {
       [
         T(
           "Now consider the opposite situation: a toy maker crafts ten thousand robotic frogs.",
-          "Nun das Gegenteil: Ein Spielzeughersteller baut zehntausend Roboterfroesche.",
+          "Nun das Gegenteil: Ein Spielzeughersteller baut zehntausend Roboterfrösche.",
           "A teraz odwrotna sytuacja: producent zabawek tworzy dziesięć tysięcy robotów-żabek.",
         ),
         T(
@@ -283,7 +283,7 @@ export const lesson: Lesson = {
         ),
         T(
           "When *supply* is much higher than *demand*, the shop faces an unsold *surplus*.",
-          "Ist das *Angebot* viel groesser als die *Nachfrage*, entsteht ein unverkaufter *Ueberschuss*.",
+          "Ist das *Angebot* viel größer als die *Nachfrage*, entsteht ein unverkaufter *Überschuss*.",
           "Gdy *podaż* znacznie przewyższa *popyt*, w sklepie powstaje niesprzedana *nadwyżka*.",
         ),
         T(
@@ -298,12 +298,12 @@ export const lesson: Lesson = {
       [
         T(
           "When the quantity sellers offer equals the quantity buyers want, prices steady out.",
-          "Wenn angebotene Menge und gewuenschte Menge uebereinstimmen, stabilisiert sich der Preis.",
+          "Wenn angebotene Menge und gewünschte Menge übereinstimmen, stabilisiert sich der Preis.",
           "Gdy oferowana ilość zabawek odpowiada potrzebom kupujących, ceny się stabilizują.",
         ),
         T(
           "Economists call this point *market balance* or the clearing price.",
-          "Fachleute nennen diesen Punkt *Marktgleichgewicht* oder Raeumungspreis.",
+          "Fachleute nennen diesen Punkt *Marktgleichgewicht* oder Räumungspreis.",
           "Eksperci nazywają ten stan *równowagą rynkową* lub ceną czyszczącą rynek.",
         ),
         T(
@@ -318,7 +318,7 @@ export const lesson: Lesson = {
       [
         T(
           "Some companies restrict supply on purpose: this is called *artificial scarcity*.",
-          "Manche Firmen verknappen Waren absichtlich: Das heisst *kuenstliche Verknappung*.",
+          "Manche Firmen verknappen Waren absichtlich: Das heißt *künstliche Verknappung*.",
           "Niektóre firmy celowo ograniczają dostawy towaru: to *sztuczna rzadkość*.",
         ),
         T(
@@ -348,7 +348,7 @@ export const lesson: Lesson = {
         ),
         T(
           "Recognizing artificial scarcity helps you see through hype and protect your piggy bank.",
-          "Kuenstliche Verknappung zu erkennen schuetzt dein Sparschwein vor teuren Modetrends.",
+          "Künstliche Verknappung zu erkennen schützt dein Sparschwein vor teuren Modetrends.",
           "Dostrzeganie sztucznej rzadkości chroni twoją skarbonkę przed drogimi modami.",
         ),
       ],
@@ -357,7 +357,7 @@ export const lesson: Lesson = {
   ],
   toyIntro: T(
     "Slide supply and demand to see how prices climb with scarcity and drop with surplus.",
-    "Bewege Angebot und Nachfrage, um zu sehen, wie Preise bei Knappheit steigen und bei Ueberschuss fallen.",
+    "Bewege Angebot und Nachfrage, um zu sehen, wie Preise bei Knappheit steigen und bei Überschuss fallen.",
     "Przesuwaj suwaki podaży i popytu, aby zobaczyć, jak ceny rosną przy rzadkości i spadają przy nadwyżce.",
   ),
   Toy,
@@ -373,7 +373,7 @@ export const lesson: Lesson = {
         {
           text: T(
             "The price rises because buyers compete for the scarce items",
-            "Der Preis steigt, weil Kaeufer um die knappen Exemplare konkurrieren",
+            "Der Preis steigt, weil Käufer um die knappen Exemplare konkurrieren",
             "Cena rośnie, ponieważ kupujący rywalizują o rzadkie egzemplarze",
           ),
           correct: true,
@@ -381,21 +381,21 @@ export const lesson: Lesson = {
         {
           text: T(
             "The price drops to zero and the store gives them away for free",
-            "Der Preis faellt auf null und der Laden verschenkt alles kostenlos",
+            "Der Preis fällt auf null und der Laden verschenkt alles kostenlos",
             "Cena spada do zera, a sklep rozdaje wszystko za darmo",
           ),
         },
         {
           text: T(
             "The item instantly dissolves into sparkling water",
-            "Der Gegenstand loest sich sofort in Sprudelwasser auf",
+            "Der Gegenstand löst sich sofort in Sprudelwasser auf",
             "Przedmiot natychmiast rozpuszcza się w wodzie gazowanej",
           ),
         },
       ],
       hint: T(
         "Scarcity gives sellers the power to ask for higher prices.",
-        "Knappheit erlaubt es Verkaeufern, hoehere Preise zu verlangen.",
+        "Knappheit erlaubt es Verkäufern, höhere Preise zu verlangen.",
         "Rzadkość pozwala sprzedawcom żądać wyższych cen.",
       ),
     },
@@ -410,7 +410,7 @@ export const lesson: Lesson = {
         {
           text: T(
             "To create artificial scarcity, making the item feel rare and prestigious",
-            "Um kuenstliche Verknappung zu erzeugen, damit der Artikel selten und exklusiv wirkt",
+            "Um künstliche Verknappung zu erzeugen, damit der Artikel selten und exklusiv wirkt",
             "Aby stworzyć sztuczną rzadkość, dzięki czemu rzecz wydaje się unikatowa i prestiżowa",
           ),
           correct: true,
@@ -418,7 +418,7 @@ export const lesson: Lesson = {
         {
           text: T(
             "Because their sewing machines can only run for five minutes a year",
-            "Weil ihre Naehmaschinen nur fuenf Minuten im Jahr funktionieren",
+            "Weil ihre Nähmaschinen nur fünf Minuten im Jahr funktionieren",
             "Ponieważ ich maszyny do szycia mogą pracować tylko pięć minut w roku",
           ),
         },
@@ -432,7 +432,7 @@ export const lesson: Lesson = {
       ],
       hint: T(
         "Exclusivity makes buyers feel special and willing to spend extra.",
-        "Exklusivitaet laesst Kunden sich besonders fuehlen und mehr bezahlen.",
+        "Exklusivität lässt Kunden sich besonders fühlen und mehr bezahlen.",
         "Ekskluzywność sprawia, że klienci czują się wyjątkowo i płacą więcej.",
       ),
     },
@@ -440,20 +440,20 @@ export const lesson: Lesson = {
       kind: "widget",
       prompt: T(
         "Identify what happens when a store has way more items than buyers wanting them.",
-        "Finde heraus, was passiert, wenn ein Laden viel mehr Waren als Kaeufer hat.",
+        "Finde heraus, was passiert, wenn ein Laden viel mehr Waren als Käufer hat.",
         "Wskaż, co się dzieje, gdy sklep ma znacznie więcej towaru niż chętnych klientów.",
       ),
       Widget: SupplyDemandWidget,
       hint: T(
         "Shops discount overstocked items to clear shelf space.",
-        "Geschaefte reduzieren Preise, um ueberfuellte Regale zu leeren.",
+        "Geschäfte reduzieren Preise, um überfüllte Regale zu leeren.",
         "Sklepy przeceniają nadmiar towaru, by zwolnić miejsce na półkach.",
       ),
     },
   ],
   askDad: T(
     "Ask your parent: Have you ever seen the price of concert tickets or airline flights jump when everyone wanted them at once?",
-    "Frage deine Eltern: Habt ihr schon erlebt, wie Konzertkarten oder Fluege teurer wurden, als alle gleichzeitig buchen wollten?",
+    "Frage deine Eltern: Habt ihr schon erlebt, wie Konzertkarten oder Flüge teurer wurden, als alle gleichzeitig buchen wollten?",
     "Zapytaj rodziców: Czy widzieliście, jak bilety na koncert lub loty drożały, gdy wszyscy chcieli je kupić w tym samym czasie?",
   ),
   realLife: {
@@ -464,7 +464,7 @@ export const lesson: Lesson = {
     ),
     body: T(
       "When streetwear brands announce a limited sneaker drop, thousands of buyers register online for the chance to buy one pair. Seconds after selling out, pairs appear on resale platforms at triple the original retail price because supply was capped while demand remained intense.",
-      "Wenn Modemarken limitierte Sneaker herausbringen, registrieren sich Tausende fuer wenige Paare. Sekunden nach Verkaufsstart werden sie im Internet zum dreifachen Preis weiterverkauft, weil das Angebot kuenstlich knapp gehalten wurde.",
+      "Wenn Modemarken limitierte Sneaker herausbringen, registrieren sich Tausende für wenige Paare. Sekunden nach Verkaufsstart werden sie im Internet zum dreifachen Preis weiterverkauft, weil das Angebot künstlich knapp gehalten wurde.",
       "Gdy znane marki ogłaszają limitowany drop butów, tysiące chętnych zapisuje się na losowanie. Chwilę po wyprzedaniu pary trafiają na portale aukcyjne za trzykrotność ceny sklepowej, ponieważ podaż była ściśle ograniczona przy ogromnym popycie.",
     ),
   },
@@ -481,7 +481,7 @@ export const lesson: Lesson = {
       {
         text: T(
           "Thorstein Veblen introduced the concept of conspicuous consumption and prestige goods in 1899.",
-          "Thorstein Veblen praegte 1899 das Konzept des demonstrativen Konsums und der Prestigegueter.",
+          "Thorstein Veblen prägte 1899 das Konzept des demonstrativen Konsums und der Prestigegüter.",
           "Thorstein Veblen wprowadził pojęcie ostentacyjnej konsumpcji i dóbr prestiżowych w 1899 roku.",
         ),
         source: "https://www.gutenberg.org/ebooks/833",
@@ -489,7 +489,7 @@ export const lesson: Lesson = {
       {
         text: T(
           "The De Beers diamond cartel controlled over 80% of world rough diamond distribution during the 20th century to regulate supply.",
-          "Das De-Beers-Kartell kontrollierte im 20. Jahrhundert ueber 80 Prozent des weltweiten Rohdiamantenhandels.",
+          "Das De-Beers-Kartell kontrollierte im 20. Jahrhundert über 80 Prozent des weltweiten Rohdiamantenhandels.",
           "Kartel De Beers kontrolował w XX wieku ponad 80 procent światowego handlu surowymi diamentami.",
         ),
         source: "https://www.justice.gov/archive/atr/public/press_releases/2004/204732.htm",
@@ -497,7 +497,7 @@ export const lesson: Lesson = {
       {
         text: T(
           "The US Federal Trade Commission enforces rules against deceptive artificial scarcity claims under Section 5 of the FTC Act.",
-          "Die US-Wettbewerbsbehoerde FTC verbietet irrefuehrende falsche Verknappungshinweise im Onlinehandel.",
+          "Die US-Wettbewerbsbehörde FTC verbietet irreführende falsche Verknappungshinweise im Onlinehandel.",
           "Amerykańska FTC ściga wprowadzające w błąd deklaracje o sztucznej rzadkości na mocy art. 5 ustawy FTC Act.",
         ),
         source: "https://www.ftc.gov/legal-library/browse/statutes/federal-trade-commission-act",
@@ -505,7 +505,7 @@ export const lesson: Lesson = {
       {
         text: T(
           "The global athletic footwear resale market grew past six billion dollars by 2021 driven by limited-edition drops.",
-          "Der weltweite Zweitmarkt fuer Sammlersneaker ueberschritt 2021 sechs Milliarden Dollar durch limitierte Drops.",
+          "Der weltweite Zweitmarkt für Sammlersneaker überschritt 2021 sechs Milliarden Dollar durch limitierte Drops.",
           "Światowy rynek wtórny rzadkich butów sportowych przekroczył 6 miliardów dolarów do 2021 roku.",
         ),
         source:
@@ -515,7 +515,7 @@ export const lesson: Lesson = {
     simplified: [
       T(
         "Complex auction mechanics and resale trading bots are simplified into a direct price balancer.",
-        "Komplexe Auktionsmechanismen und Handelsbots wurden zu einer uebersichtlichen Preiswaage vereinfacht.",
+        "Komplexe Auktionsmechanismen und Handelsbots wurden zu einer übersichtlichen Preiswaage vereinfacht.",
         "Złożone mechanizmy aukcyjne i boty zakupowe uproszczono do przejrzystej wagi cenowej.",
       ),
     ],

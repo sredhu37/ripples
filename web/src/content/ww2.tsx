@@ -26,7 +26,7 @@ export const lesson: Lesson = {
       [
         T(
           "In the nineteen thirties, economic distress and false promises led to dictatorship in Germany.",
-          "In den 1930er Jahren fuehrten Not und falsche Heilsversprechen zur Diktatur in Deutschland.",
+          "In den 1930er Jahren führten Not und falsche Heilsversprechen zur Diktatur in Deutschland.",
           "W latach trzydziestych dwudziestego wieku kryzys gospodarczy i fałszywe obietnice doprowadziły do dyktatury w Niemczech.",
         ),
         T(
@@ -36,7 +36,7 @@ export const lesson: Lesson = {
         ),
         T(
           "Independent newspapers were closed, and radio broadcasts repeated state *propaganda*.",
-          "Unabhaengige Zeitungen wurden verboten und das Radio wiederholte staatliche *Propaganda*.",
+          "Unabhängige Zeitungen wurden verboten und das Radio wiederholte staatliche *Propaganda*.",
           "Niezależne gazety zamknięto, a odbiorniki radiowe bez przerwy nadawały państwową *propagandę*.",
         ),
         T(
@@ -51,17 +51,17 @@ export const lesson: Lesson = {
       [
         T(
           "In September 1939, aggressive expansion ignited World War 2 across continents.",
-          "Im September 1939 loeste der Angriff auf Polen den Zweiten Weltkrieg aus.",
+          "Im September 1939 löste der Angriff auf Polen den Zweiten Weltkrieg aus.",
           "We wrześniu 1939 roku napaść na Polskę zapoczątkowała II wojnę światową na wielu kontynentach.",
         ),
         T(
           "The conflict unleashed total industrial destruction on an unprecedented, tragic scale.",
-          "Der Krieg brachte Zerstoerung in einem nie dagewesenen, tragischen Ausmass.",
+          "Der Krieg brachte Zerstörung in einem nie dagewesenen, tragischen Ausmaß.",
           "Konflikt przyniósł uprzemysłowioną machinę zniszczenia na niespotykaną dotąd, tragiczną skalę.",
         ),
         T(
           "Homes, schools, libraries, and historic city centers across Europe were left in smoking ruins.",
-          "Haeuser, Schulen und historische Innenstaedte lagen quer durch Europa in Truemmern.",
+          "Häuser, Schulen und historische Innenstädte lagen quer durch Europa in Trümmern.",
           "Domy, szkoły, biblioteki i zabytkowe centra miast w całej Europie legły w gruzach.",
         ),
         T(
@@ -76,22 +76,22 @@ export const lesson: Lesson = {
       [
         T(
           "Even under terrifying danger, courageous individuals showed extraordinary *civil courage*.",
-          "Selbst unter Lebensgefahr zeigten mutige Menschen aussergewoehnliche *Zivilcourage*.",
+          "Selbst unter Lebensgefahr zeigten mutige Menschen außergewöhnliche *Zivilcourage*.",
           "Nawet w śmiertelnym niebezpieczeństwie odważni ludzie wykazywali się niezwykłą *odwagą cywilną*.",
         ),
         T(
           "In Munich, university students Hans and Sophie Scholl formed the White Rose resistance.",
-          "In Muenchen gruendeten die Geschwister Hans und Sophie Scholl die Widerstandsgruppe Weisse Rose.",
-          "W Monachium studenci Hans i Sophie Scholl powołali ruch oporu Biała Róża (Die Weisse Rose).",
+          "In München gründeten die Geschwister Hans und Sophie Scholl die Widerstandsgruppe Weiße Rose.",
+          "W Monachium studenci Hans i Sophie Scholl powołali ruch oporu Biała Róża (Die Weiße Rose).",
         ),
         T(
           "They secretly printed leaflets urging citizens to reject cruelty and stand up for human decency.",
-          "Sie druckten heimlich Flugblaetter, die dazu aufriefen, fuer Menschlichkeit einzustehen.",
+          "Sie druckten heimlich Flugblätter, die dazu aufriefen, für Menschlichkeit einzustehen.",
           "W tajemnicy drukowali ulotki wzywające obywateli do odrzucenia okrucieństwa i obrony ludzkiej przyzwoitości.",
         ),
         T(
           "Their brave words reminded the world that the human spirit cannot be crushed by tyranny.",
-          "Ihr Mut erinnerte daran, dass das Gewissen der Menschen nicht erdrueckt werden kann.",
+          "Ihr Mut erinnerte daran, dass das Gewissen der Menschen nicht erdrückt werden kann.",
           "Ich odwaga przypomniała światu, że ludzkie sumienie i godność nie mogą zostać złamane przez tyranię.",
         ),
       ],
@@ -106,17 +106,17 @@ export const lesson: Lesson = {
         ),
         T(
           "Representatives of fifty nations met in San Francisco to form the United Nations.",
-          "In San Francisco gruendeten Vertreter aus 50 Laendern die Vereinten Nationen.",
+          "In San Francisco gründeten Vertreter aus 50 Ländern die Vereinten Nationen.",
           "Przedstawiciele pięćdziesięciu państw zebrali się w San Francisco, aby powołać Organizację Narodów Zjednoczonych.",
         ),
         T(
           "They pledged to work together so international law would prevent such horrors from recurring.",
-          "Sie versprachen, durch Voelkerrecht ein solches Leid fuer die Zukunft zu verhindern.",
+          "Sie versprachen, durch Völkerrecht ein solches Leid für die Zukunft zu verhindern.",
           "Złożyli uroczystą obietnicę współpracy, by prawo międzynarodowe zapobiegło powtórzeniu takich tragedii.",
         ),
         T(
           "In 1948, the world adopted the Universal Declaration of Human Rights.",
-          "1948 verabschiedete die Welt die Allgemeine Erklaerung der Menschenrechte.",
+          "1948 verabschiedete die Welt die Allgemeine Erklärung der Menschenrechte.",
           "W 1948 roku świat uchwalił Powszechną Deklarację Praw Człowieka.",
         ),
       ],
@@ -126,7 +126,7 @@ export const lesson: Lesson = {
       [
         T(
           "In Germany, democratic leaders founded a new constitutional republic grounded in peace.",
-          "In Deutschland gruendeten Demokraten eine neue Verfassungsordnung des Friedens.",
+          "In Deutschland gründeten Demokraten eine neue Verfassungsordnung des Friedens.",
           "W powojennej Europie odrodziła się demokracja konstytucyjna oparta na pokoju.",
         ),
         T(
@@ -136,12 +136,12 @@ export const lesson: Lesson = {
         ),
         T(
           "Article 1 solemnly declares: 'Human dignity shall be inviolable.'",
-          "Artikel 1 erklaert feierlich: 'Die Wuerde des Menschen ist unantastbar.'",
+          "Artikel 1 erklärt feierlich: 'Die Würde des Menschen ist unantastbar.'",
           "Konstytucja głosi uroczyście: 'Godność człowieka jest nienaruszalna'.",
         ),
         T(
           "Remembering history is a shared promise to defend human dignity every single day.",
-          "Erinnerung ist das Versprechen, diese Wuerde an jedem Tag unseres Lebens zu schuetzen.",
+          "Erinnerung ist das Versprechen, diese Würde an jedem Tag unseres Lebens zu schützen.",
           "Pamięć o historii to wspólne zobowiązanie do obrony ludzkiej godności każdego dnia.",
         ),
       ],
@@ -150,7 +150,7 @@ export const lesson: Lesson = {
   ],
   toyIntro: T(
     "Raise the pillars of free speech, equal rights, and civil courage to protect human dignity.",
-    "Errichte die Pfeiler fuer freie Presse, gleiche Rechte und Zivilcourage, um die Wuerde zu schuetzen.",
+    "Errichte die Pfeiler für freie Presse, gleiche Rechte und Zivilcourage, um die Würde zu schützen.",
     "Wznieś filary wolnej prasy, równych praw i odwagi cywilnej, aby chronić ludzką godność.",
   ),
   Toy,
@@ -159,15 +159,15 @@ export const lesson: Lesson = {
       kind: "choice",
       prompt: T(
         "What does the famous opening line of modern democratic constitutions state?",
-        "Wie lautet der beruehmte erste Satz in Artikel 1 des deutschen Grundgesetzes?",
+        "Wie lautet der berühmte erste Satz in Artikel 1 des deutschen Grundgesetzes?",
         "Jak brzmi fundamentalna zasada współczesnych demokratycznych konstytucji?",
       ),
       options: [
         {
           text: T(
-            "'Human dignity shall be inviolable' (Die Wuerde des Menschen ist unantastbar)",
-            "'Die Wuerde des Menschen ist unantastbar'",
-            "„Godność człowieka jest nienaruszalna” (Die Wuerde des Menschen ist unantastbar)",
+            "'Human dignity shall be inviolable' (Die Würde des Menschen ist unantastbar)",
+            "'Die Würde des Menschen ist unantastbar'",
+            "„Godność człowieka jest nienaruszalna” (Die Würde des Menschen ist unantastbar)",
           ),
           correct: true,
         },
@@ -181,14 +181,14 @@ export const lesson: Lesson = {
         {
           text: T(
             "'All school bags must be painted neon yellow with purple stripes'",
-            "'Alle Schulranzen muessen neon-gelb mit lila Streifen bemalt sein'",
+            "'Alle Schulranzen müssen neon-gelb mit lila Streifen bemalt sein'",
             "„Wszystkie plecaki szkolne muszą być pomalowane na jaskrawy żółty kolor”",
           ),
         },
       ],
       hint: T(
         "Human dignity is the supreme, inviolable constitutional principle.",
-        "Die Menschenwuerde ist das oberste, unverletzliche Grundrecht in Deutschland.",
+        "Die Menschenwürde ist das oberste, unverletzliche Grundrecht in Deutschland.",
         "Godność człowieka stanowi najwyższe, nienaruszalne źródło wszelkich praw obywatelskich.",
       ),
     },
@@ -196,14 +196,14 @@ export const lesson: Lesson = {
       kind: "choice",
       prompt: T(
         "Who were Hans and Sophie Scholl, and what did the White Rose stand for?",
-        "Wer waren Hans und Sophie Scholl und wofuer stand die Weisse Rose?",
+        "Wer waren Hans und Sophie Scholl und wofür stand die Weiße Rose?",
         "Kim byli Hans i Sophie Scholl i co symbolizowała grupa Biała Róża?",
       ),
       options: [
         {
           text: T(
             "Brave students who showed peaceful civil courage by printing leaflets against tyranny",
-            "Mutige Studenten, die mit Flugblaettern friedliche Zivilcourage gegen die Tyrannei zeigten",
+            "Mutige Studenten, die mit Flugblättern friedliche Zivilcourage gegen die Tyrannei zeigten",
             "Odważnymi studentami, którzy wykazali się pokojową odwagą cywilną, drukując ulotki przeciw tyranii",
           ),
           correct: true,
@@ -218,14 +218,14 @@ export const lesson: Lesson = {
         {
           text: T(
             "Circus performers who walked across telephone cables on wooden stilts",
-            "Zirkusartisten, die auf Holzstelzen ueber Telefonkabel balancierten",
+            "Zirkusartisten, die auf Holzstelzen über Telefonkabel balancierten",
             "Akrobatami cyrkowymi chodzącymi na szczudłach po liniach telefonicznych",
           ),
         },
       ],
       hint: T(
         "They demonstrated heroic civil courage in Munich during dark times.",
-        "Sie zeigten heldenhafte Zivilcourage in Muenchen waehrend der Diktatur.",
+        "Sie zeigten heldenhafte Zivilcourage in München während der Diktatur.",
         "Dali heroiczny przykład odwagi cywilnej w Monachium w mrocznych czasach dyktatury.",
       ),
     },
@@ -239,7 +239,7 @@ export const lesson: Lesson = {
       Widget,
       hint: T(
         "Click on each pillar so all three display checkmarks, then tap check.",
-        "Klicke auf jeden Pfeiler, sodass alle drei ein Haekchen haben, und tippe auf pruefen.",
+        "Klicke auf jeden Pfeiler, sodass alle drei ein Häkchen haben, und tippe auf prüfen.",
         "Kliknij każdy z trzech filarów, aby pojawiły się przy nich znaczniki, a następnie naciśnij sprawdź.",
       ),
     },
@@ -252,12 +252,12 @@ export const lesson: Lesson = {
   realLife: {
     title: {
       en: "Stolpersteine in European Towns",
-      de: "Stolpersteine in deutschen Staedten",
+      de: "Stolpersteine in deutschen Städten",
       pl: "Kamienie Pamięci (Stolpersteine) w Europie i Polsce",
     },
     body: {
       en: "In hundreds of German towns and cities, small brass cobblestones called Stolpersteine (stumbling stones) are embedded in pavements outside houses. Created by artist Gunter Demnig, each stone is hand-engraved with the name and dates of an individual persecuted under the Nazi regime, ensuring that their names and human dignity are never forgotten.",
-      de: "In hunderten deutschen Staedten sind kleine Messing-Pflastersteine in Gehwege vor Haeusern eingelassen: Stolpersteine. Geschaffen vom Kuenstler Gunter Demnig, traegt jeder Stein den eingravierten Namen eines verfolgten Menschen, damit deren Schicksal und Wuerde niemals in Vergessenheit geraten.",
+      de: "In hunderten deutschen Städten sind kleine Messing-Pflastersteine in Gehwege vor Häusern eingelassen: Stolpersteine. Geschaffen vom Künstler Gunter Demnig, trägt jeder Stein den eingravierten Namen eines verfolgten Menschen, damit deren Schicksal und Würde niemals in Vergessenheit geraten.",
       pl: "W setkach miast w całej Europie, również w Polsce (m.in. we Wrocławiu, Słubicach, Białymstoku czy Mińsku Mazowieckim), w chodniki wmurowywane są małe mosiężne kostki zwane Stolpersteine (kamienie pamięci). Stworzone przez artystę Guntera Demniga, upamiętniają z imienia i nazwiska osoby prześladowane przez reżim nazistowski przed ich dawnymi domami, aby ich los i ludzka godność nigdy nie zostały zapomniane.",
     },
   },
@@ -266,7 +266,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The German Basic Law (Grundgesetz) was promulgated on 23 May 1949, opening with Article 1: Human dignity shall be inviolable.",
-          de: "Das deutsche Grundgesetz wurde am 23. Mai 1949 verkuendet und beginnt mit Artikel 1: Die Wuerde des Menschen ist unantastbar.",
+          de: "Das deutsche Grundgesetz wurde am 23. Mai 1949 verkündet und beginnt mit Artikel 1: Die Würde des Menschen ist unantastbar.",
           pl: "Niemiecka Ustawa Zasadnicza z 23 maja 1949 r. (Art. 1) oraz Konstytucja RP z 1997 r. (Art. 30) uznają przyrodzoną i nienaruszalną godność człowieka za fundament państwa prawa.",
         },
         source: "https://www.gesetze-im-internet.de/gg/art_1.html",
@@ -274,8 +274,8 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The White Rose student resistance group distributed six anti-regime leaflets at Ludwig Maximilian University of Munich in 1942-1943.",
-          de: "Die Weisse Rose verteilte 1942 und 1943 sechs Flugblaetter des Widerstands an der Ludwig-Maximilians-Universitaet Muenchen.",
-          pl: "Młodzieżowa grupa oporu Biała Róża (Die Weisse Rose) rozprowadziła sześć ulotków wzywających do sprzeciwu wobec tyranii na Uniwersytecie w Monachium w latach 1942-1943.",
+          de: "Die Weiße Rose verteilte 1942 und 1943 sechs Flugblätter des Widerstands an der Ludwig-Maximilians-Universität München.",
+          pl: "Młodzieżowa grupa oporu Biała Róża (Die Weiße Rose) rozprowadziła sześć ulotków wzywających do sprzeciwu wobec tyranii na Uniwersytecie w Monachium w latach 1942-1943.",
         },
         source: "https://www.weisse-rose-stiftung.de/die-weisse-rose/",
       },
@@ -290,7 +290,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The Universal Declaration of Human Rights was adopted by the United Nations General Assembly in Paris on 10 December 1948.",
-          de: "Die Allgemeine Erklaerung der Menschenrechte wurde am 10. Dezember 1948 von der UN-Generalversammlung in Paris verabschiedet.",
+          de: "Die Allgemeine Erklärung der Menschenrechte wurde am 10. Dezember 1948 von der UN-Generalversammlung in Paris verabschiedet.",
           pl: "Powszechna Deklaracja Praw Człowieka została przyjęta przez Zgromadzenie Ogólne ONZ w Paryżu w dniu 10 grudnia 1948 roku.",
         },
         source: "https://www.un.org/en/about-us/universal-declaration-of-human-rights",
@@ -298,7 +298,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "Over 100,000 Stolpersteine brass commemorative memorials have been installed across thirty European countries.",
-          de: "Ueber 100.000 Stolpersteine aus Messing wurden bisher in dreissig europaeischen Laendern verlegt.",
+          de: "Über 100.000 Stolpersteine aus Messing wurden bisher in dreißig europäischen Ländern verlegt.",
           pl: "Ponad 100 000 mosiężnych tabliczek pamięci Stolpersteine wmurowano w chodniki w trzydziestu państwach Europy.",
         },
         source: "https://www.stolpersteine.eu/",
@@ -307,17 +307,17 @@ export const lesson: Lesson = {
     simplified: [
       {
         en: "We emphasize the defense of civil liberties and human dignity rather than graphic wartime trauma.",
-        de: "Wir betonen den Schutz der Grundrechte und der Wuerde statt traumatischer Kriegsbilder.",
+        de: "Wir betonen den Schutz der Grundrechte und der Würde statt traumatischer Kriegsbilder.",
         pl: "Podkreślamy ochronę praw obywatelskich i godności ludzkiej zamiast drastycznych obrazów wojennych.",
       },
       {
         en: "We highlight ethical civil courage through the courageous example of the White Rose students.",
-        de: "Wir heben ethische Zivilcourage am mutigen Beispiel der Weissen Rose hervor.",
+        de: "Wir heben ethische Zivilcourage am mutigen Beispiel der Weißen Rose hervor.",
         pl: "Wskazujemy na wartość odwagi cywilnej na heroicznym przykładzie studentów z Białej Róży.",
       },
       {
         en: "We ground modern constitutional democracy in its founding moral commitment: Never Again.",
-        de: "Wir begruenden moderne Verfassungsdemokratie im Versprechen: Nie wieder.",
+        de: "Wir begründen moderne Verfassungsdemokratie im Versprechen: Nie wieder.",
         pl: "Opieramy nowoczesną demokrację konstytucyjną na fundamencie moralnej obietnicy: Nigdy więcej.",
       },
     ],

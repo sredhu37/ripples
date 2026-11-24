@@ -64,7 +64,7 @@ export function LuxuryPriceTagDiagram({ lang, step }: DiagramProps) {
         ? "Handgefertigte Waren: seltener Luxus"
         : "Handmade Goods: Rare Luxuries";
 
-  const coinsLabel = lang === "pl" ? "500 monet" : lang === "de" ? "500 Muenzen" : "500 Coins";
+  const coinsLabel = lang === "pl" ? "500 monet" : lang === "de" ? "500 Münzen" : "500 Coins";
   const wageLabel =
     lang === "pl" ? "1 miesiąc pensji" : lang === "de" ? "1 Monatslohn" : "1 Month of Wages";
 
@@ -176,12 +176,12 @@ export function MovingConveyorAssemblyDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Ruchoma linia montażowa"
       : lang === "de"
-        ? "Das bewegliche Fliessband"
+        ? "Das bewegliche Fließband"
         : "The Moving Assembly Line";
 
   const station1 = lang === "pl" ? "1. Rama" : lang === "de" ? "1. Rahmen" : "1. Frame";
-  const station2 = lang === "pl" ? "2. Koła" : lang === "de" ? "2. Raeder" : "2. Wheels";
-  const station3 = lang === "pl" ? "3. Kontrola" : lang === "de" ? "3. Pruefung" : "3. Inspect";
+  const station2 = lang === "pl" ? "2. Koła" : lang === "de" ? "2. Räder" : "2. Wheels";
+  const station3 = lang === "pl" ? "3. Kontrola" : lang === "de" ? "3. Prüfung" : "3. Inspect";
 
   const sub =
     lang === "pl"
@@ -272,7 +272,7 @@ export function BicyclesForEveryoneDiagram({ lang, step }: DiagramProps) {
         ? "Fahrräder für jede Familie"
         : "Bicycles for Every Family";
 
-  const priceLabel = lang === "pl" ? "50 monet" : lang === "de" ? "50 Muenzen" : "50 Coins";
+  const priceLabel = lang === "pl" ? "50 monet" : lang === "de" ? "50 Münzen" : "50 Coins";
   const badgeLabel =
     lang === "pl" ? "Dostępne dla każdego!" : lang === "de" ? "Bezahlbar!" : "Affordable!";
 

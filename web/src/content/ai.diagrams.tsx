@@ -184,7 +184,7 @@ export function PatternScatterFeatureDiagram({ lang, step }: DiagramProps) {
 
   const xLabel = lang === "pl" ? "Okrągłość →" : lang === "de" ? "Rundung →" : "Roundness →";
 
-  const yLabel = lang === "pl" ? "Czerwień ↑" : lang === "de" ? "Roete ↑" : "Redness ↑";
+  const yLabel = lang === "pl" ? "Czerwień ↑" : lang === "de" ? "Röte ↑" : "Redness ↑";
 
   const appleCluster =
     lang === "pl" ? "Grupa jabłek" : lang === "de" ? "Apfel-Cluster" : "Apple Cluster";
@@ -286,7 +286,7 @@ export function ScientificAssistantScansDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Tłumacz natychmiastowy"
       : lang === "de"
-        ? "Sofort-Uebersetzer"
+        ? "Sofort-Übersetzer"
         : "Instant Translator";
 
   const sub =
