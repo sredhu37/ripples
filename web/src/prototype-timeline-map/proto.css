@@ -1,0 +1,270 @@
+/* PROTOTYPE, throwaway. */
+.tm-screen {
+  max-width: 1200px;
+  padding-bottom: 90px;
+}
+
+.tm-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+.tm-head h2 {
+  font-size: 1.8rem;
+  color: var(--ink);
+}
+.tm-note {
+  font-size: 0.85rem;
+  color: #4b6168;
+}
+.tm-snap {
+  margin-left: auto;
+}
+
+.tm-stage {
+  position: relative;
+  width: 100%;
+}
+.tm-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 2px solid var(--ink);
+  touch-action: manipulation;
+}
+.tm-pin {
+  cursor: pointer;
+  outline: none;
+}
+.tm-pin:focus-visible path:first-of-type,
+.tm-pin:focus-visible circle:nth-of-type(2) {
+  stroke: var(--teal);
+}
+
+/* thought cloud */
+.tm-cloud {
+  position: absolute;
+  z-index: 5;
+  animation: tm-pop 180ms ease-out;
+}
+.tm-cloud-inner {
+  position: relative;
+  padding: 24px 26px 20px;
+}
+.tm-cloud-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: visible;
+}
+.tm-cloud-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--teal-dark);
+}
+.tm-x {
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  width: 36px;
+  height: 36px;
+  margin: -8px -8px -8px 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.tm-cloud-line {
+  margin: 6px 0 10px;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+.tm-cloud-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.tm-cloud-actions .icon-btn {
+  width: 44px;
+  height: 44px;
+}
+.tm-read {
+  min-height: 48px;
+  padding: 0 20px;
+}
+.tm-dot {
+  position: absolute;
+  z-index: 5;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--ink);
+}
+@keyframes tm-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* A: stepper */
+.tm-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.tm-step {
+  min-width: 150px;
+}
+@media (max-width: 600px) {
+  .tm-step {
+    min-width: 0;
+    padding: 0 22px;
+  }
+  .tm-step-label {
+    display: none;
+  }
+}
+.tm-step-dots {
+  display: flex;
+  gap: 8px;
+}
+.tm-step-dots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: #fff;
+}
+.tm-step-dots span.on {
+  background: var(--orange);
+}
+
+/* B: slider and Otto */
+.tm-slider input {
+  width: 100%;
+  accent-color: var(--orange-dark);
+  height: 36px;
+}
+.tm-slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #4b6168;
+}
+.tm-slider-ticks span.on {
+  color: var(--ink);
+  font-weight: 800;
+}
+.tm-b-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.tm-otto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tm-otto .tm-cloud {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+}
+.tm-otto-trail {
+  position: relative;
+  height: 26px;
+  width: 60px;
+}
+.tm-otto-trail span {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--ink);
+}
+.tm-otto-trail span:first-child {
+  width: 14px;
+  height: 14px;
+  left: 30px;
+  top: 0;
+}
+.tm-otto-trail span:last-child {
+  width: 9px;
+  height: 9px;
+  left: 22px;
+  top: 17px;
+}
+@media (min-width: 900px) {
+  .tm-b-body {
+    grid-template-columns: 1fr 300px;
+    align-items: start;
+  }
+}
+
+/* C: chips, zoom */
+.tm-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tm-world {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  min-height: 48px;
+  padding: 0 18px;
+  z-index: 4;
+}
+
+/* prototype chrome */
+.tm-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 84px;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  z-index: 20;
+  max-width: 90vw;
+}
+.tm-switcher {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #111;
+  color: #fff;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font:
+    600 14px system-ui,
+    sans-serif;
+  z-index: 30;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+.tm-switcher button {
+  background: #333;
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  width: 34px;
+  height: 34px;
+  font-size: 16px;
+  cursor: pointer;
+}
