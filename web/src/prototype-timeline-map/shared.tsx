@@ -40,34 +40,6 @@ export const decadeLabel = (start: number, lang: Lang) =>
   lang === "pl" ? `lata ${String(start).slice(2)}.` : lang === "de" ? `${start}er` : `${start}s`;
 
 // Flat pastel per ruling power, so empires read as one colour.
-const PALETTE = [
-  "#f2d48f",
-  "#b7d7a8",
-  "#f1b3a0",
-  "#a8cde6",
-  "#f5c99b",
-  "#a9dccf",
-  "#e6d3b3",
-  "#e9b8b8",
-  "#d3d79a",
-  "#c9d9e3",
-];
-const OWNER_FIXED: Record<string, string> = {
-  "United Kingdom": "#f1b3a0",
-  France: "#a8cde6",
-  USSR: "#e9b8b8",
-  "Russian Empire": "#e9b8b8",
-  Germany: "#d3d79a",
-  India: "#f5c99b",
-  China: "#f2d48f",
-};
-function ownerColor(owner: string): string {
-  const key = owner.replace(/ of Great Britain.*$/, "");
-  if (OWNER_FIXED[key]) return OWNER_FIXED[key];
-  let h = 0;
-  for (const c of key) h = (h * 31 + c.charCodeAt(0)) >>> 0;
-  return PALETTE[h % PALETTE.length];
-}
 
 export type ViewBox = [number, number, number, number];
 export const WORLD: ViewBox = [0, 0, MAP_W, MAP_H];
@@ -119,7 +91,7 @@ export function WorldMap({
           key={`${snapshot}-${i}`}
           className="tm-land"
           d={s.d}
-          fill={ownerColor(s.o)}
+          fill={s.c}
           stroke="#ffffff"
           strokeWidth={0.8}
           vectorEffect="non-scaling-stroke"

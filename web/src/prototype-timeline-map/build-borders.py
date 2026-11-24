@@ -92,8 +92,58 @@ def feature_path(geom):
     return "".join(ring_path(poly[0]) for poly in polys)
 
 
+PALETTE = ["#f2d48f", "#b7d7a8", "#f1b3a0", "#a8cde6", "#d9c6ea", "#a9dccf", "#e3d2b4", "#c9dd8f"]
+# Fixed picks so the countries the lessons talk about look the same every time.
+FIXED = {"India": "#f7b37a", "Russia": "#e9b8b8", "Germany": "#d3d79a", "China": "#f2d48f"}
+
+
+def modern_colours():
+    """One colour per modern country (world_2010), neighbours different, fixed for every decade."""
+    from shapely.geometry import shape
+    from shapely.strtree import STRtree
+
+    d = json.load(open("w2010.geojson"))
+    feats = [(f["properties"].get("NAME") or "", shape(f["geometry"]).buffer(0)) for f in d["features"] if f["geometry"]]
+    tree = STRtree([g for _, g in feats])
+    near = {i: set() for i in range(len(feats))}
+    for i, (_, g) in enumerate(feats):
+        for j in tree.query(g.buffer(0.4)):
+            if j != i and g.buffer(0.4).intersects(feats[j][1]):
+                near[i].add(int(j))
+    # Keyed by name: a country split into several features (mainland, islands) gets one colour.
+    colour = dict(FIXED)
+    for i in sorted(range(len(feats)), key=lambda i: -feats[i][1].area):
+        name = feats[i][0]
+        if name in colour:
+            continue
+        used = {colour.get(feats[j][0]) for j in near[i]}
+        # Least-used free colour, so the map is not mostly one colour.
+        free = [c for c in PALETTE if c not in used] or PALETTE
+        counts = {c: list(colour.values()).count(c) for c in free}
+        colour[name] = min(free, key=lambda c: (counts[c], PALETTE.index(c)))
+    return feats, tree, colour
+
+
+def colour_for(geom, feats, tree, colour):
+    """Colour of the modern country under the shape's main point, so a country keeps its colour."""
+    from shapely.geometry import shape
+
+    g = shape(geom).buffer(0)
+    # The modern country that covers most of the shape (USSR -> Russia, British Raj -> India).
+    best, area = None, 0.0
+    for j in tree.query(g):
+        a = g.intersection(feats[int(j)][1]).area
+        if a > area:
+            best, area = int(j), a
+    if best is None:
+        best = int(tree.nearest(g.representative_point()))
+    name = feats[best][0]
+    return colour[name], name
+
+
 def main():
     out = {}
+    feats, tree, colour = modern_colours()
     for year in sys.argv[1:]:
         d = json.load(open(f"w{year}.geojson"))
         shapes = []
@@ -101,7 +151,8 @@ def main():
             p = f["properties"]
             path = feature_path(f["geometry"])
             if path:
-                shapes.append({"n": p.get("NAME") or "", "o": p.get("SUBJECTO") or p.get("NAME") or "", "d": path})
+                c, modern = colour_for(f["geometry"], feats, tree, colour)
+                shapes.append({"n": p.get("NAME") or "", "o": modern, "c": c, "d": path})
         out[year] = shapes
         print(year, len(shapes), sum(len(s["d"]) for s in shapes), file=sys.stderr)
     ts = [
@@ -109,7 +160,7 @@ def main():
         "// Natural Earth I projection, viewBox 0 0 1000 " + f"{H:.0f}.",
         f"export const MAP_W = {W:.0f};",
         f"export const MAP_H = {H:.0f};",
-        "export interface Shape { n: string; o: string; d: string }",
+        "export interface Shape { n: string; o: string; c: string; d: string }",
         "export const BORDERS: Record<string, Shape[]> = " + json.dumps(out, ensure_ascii=False) + ";",
     ]
     print("\n".join(ts))
