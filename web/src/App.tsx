@@ -93,9 +93,11 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    stopSpeaking();
     // Every screen starts at the top, not where the last one was scrolled.
     window.scrollTo(0, 0);
+    // The cleanup runs before the new screen's effects, so it never cuts off a line
+    // the new screen starts by itself (lessons).
+    return stopSpeaking;
   }, [screen]);
 
   function backToLogin() {
