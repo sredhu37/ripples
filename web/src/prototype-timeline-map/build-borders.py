@@ -141,13 +141,44 @@ def colour_for(geom, feats, tree, colour):
     return colour[name], name
 
 
+def india_pov():
+    """India as Indian law defines it (Natural Earth India point of view, public domain)."""
+    import shapefile
+    from shapely.geometry import shape
+
+    r = shapefile.Reader("ne_ind/ne_10m_admin_0_countries_ind")
+    for rec, sh in zip(r.records(), r.shapes()):
+        if rec.as_dict()["ADMIN"] == "India":
+            return shape(sh.__geo_interface__).buffer(0)
+    raise SystemExit("India not found in the India POV file")
+
+
+def apply_india(features, india):
+    """Hard rule: disputed areas are India. The shape that is India in this year (British Raj before 1947)
+    takes in the whole India POV outline; every other shape loses whatever part of it they hold."""
+    from shapely.geometry import mapping, shape
+
+    geoms = [shape(f["geometry"]).buffer(0) if f["geometry"] else None for f in features]
+    home = max(range(len(geoms)), key=lambda i: geoms[i].intersection(india).area if geoms[i] else 0)
+    for i, (f, g) in enumerate(zip(features, geoms)):
+        if g is None:
+            continue
+        g = g.union(india) if i == home else g.difference(india)
+        f["geometry"] = mapping(g) if not g.is_empty else None
+        if f["geometry"] and f["geometry"]["type"] == "GeometryCollection":
+            polys = [x for x in g.geoms if x.geom_type in ("Polygon", "MultiPolygon")]
+            f["geometry"] = mapping(polys[0]) if len(polys) == 1 else None
+    return features
+
+
 def main():
     out = {}
     feats, tree, colour = modern_colours()
+    india = india_pov()
     for year in sys.argv[1:]:
         d = json.load(open(f"w{year}.geojson"))
         shapes = []
-        for f in d["features"]:
+        for f in apply_india(d["features"], india):
             p = f["properties"]
             path = feature_path(f["geometry"])
             if path:
@@ -157,6 +188,7 @@ def main():
         print(year, len(shapes), sum(len(s["d"]) for s in shapes), file=sys.stderr)
     ts = [
         "// PROTOTYPE, throwaway. Generated from aourednik/historical-basemaps (GPL-3.0) by a scratch script.",
+        "// India drawn from Natural Earth India point of view (hard rule: disputed areas are India).",
         "// Natural Earth I projection, viewBox 0 0 1000 " + f"{H:.0f}.",
         f"export const MAP_W = {W:.0f};",
         f"export const MAP_H = {H:.0f};",
