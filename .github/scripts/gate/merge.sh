@@ -11,7 +11,8 @@
 #                  workflow. Never in a step that runs an agent.
 #        REPO      owner/name, defaults to GITHUB_REPOSITORY, then to the current gh repo
 #        DRY_RUN   1: check everything, do not update or merge
-#        MERGEABLE_WAIT  seconds to wait while GitHub computes whether the PR conflicts (default 60)
+#        MERGEABLE_TRIES, MERGEABLE_SLEEP  how often gate/mergeable.sh asks whether the PR conflicts
+#                         (default 5 reads, 60 s apart); still unknown: refused, Sunny hears it
 # Output: merged=true|false, reason=<text>, and when behind update=updated|conflict (with
 #         new_sha=<sha> for updated) on stdout (also GITHUB_OUTPUT when set).
 #         Exit 0 when merged, updated, conflicting, or skipped for a moved head (a new head gets its
@@ -57,25 +58,20 @@ fi
 base=$(gh api "repos/$repo/pulls/$pr" --jq .base.ref)
 behind=$(gh api "repos/$repo/compare/$base...$sha" --jq .behind_by)
 if [ "$behind" -gt 0 ]; then
-  # mergeable is null while GitHub computes it.
-  waited=0
-  while :; do
-    mergeable=$(gh api "repos/$repo/pulls/$pr" --jq '.mergeable // "null"')
-    [ "$mergeable" != "null" ] && break
-    if [ "$waited" -ge "${MERGEABLE_WAIT:-60}" ]; then
+  conflict=$("$here/mergeable.sh" "$pr")
+  case "$(sed -n 's/^conflict=//p' <<< "$conflict")" in
+    yes)
       emit merged false
-      emit reason "GitHub did not say within ${MERGEABLE_WAIT:-60}s whether the PR conflicts with $base"
+      emit update conflict
+      emit reason "the PR is $behind commit(s) behind $base and conflicts with it"
+      exit 0
+      ;;
+    unknown)
+      emit merged false
+      emit reason "GitHub did not say whether the PR conflicts with $base: $(sed -n 's/^detail=//p' <<< "$conflict")"
       exit 1
-    fi
-    sleep 5
-    waited=$((waited + 5))
-  done
-  if [ "$mergeable" = "false" ]; then
-    emit merged false
-    emit update conflict
-    emit reason "the PR is $behind commit(s) behind $base and conflicts with it"
-    exit 0
-  fi
+      ;;
+  esac
   if [ "${DRY_RUN:-}" = "1" ]; then
     emit merged false
     emit update updated

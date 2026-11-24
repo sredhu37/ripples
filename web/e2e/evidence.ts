@@ -184,8 +184,8 @@ export async function openTrail(page: Page, nickname = "Ava") {
 
 /** Labels from src/i18n.ts that the specs click or check. */
 export const LABEL = {
-  parents: { en: "For parents", de: "Fuer Eltern", pl: "Strefa rodzica" },
-  gateGo: { en: "Open", de: "Oeffnen", pl: "Otwórz" },
+  parents: { en: "For parents", de: "Für Eltern", pl: "Strefa rodzica" },
+  gateGo: { en: "Open", de: "Öffnen", pl: "Otwórz" },
   next: { en: "Next", de: "Weiter", pl: "Dalej" },
   factCards: { en: "Fact cards", de: "Fakten-Karten", pl: "Karty faktów" },
   worldTimeline: { en: "World Timeline", de: "Weltzeitleiste", pl: "Oś czasu świata" },

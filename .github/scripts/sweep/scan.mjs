@@ -6,23 +6,28 @@
 // Pure: sweep/scan.sh collects the state with gh and carries the plan out.
 //
 // State: { now, max, only, tickets: [ticket] }
-//   ticket: { number, column: "review" | "progress" | "ready", local, active, updatedAt,
-//             blockers, continues, pr }
+//   ticket: { number, column: "human" | "review" | "progress" | "ready", local, active, updatedAt,
+//             blockers, continues, pr, approval }
 //     local      the ticket is driven from Sunny's Claude Code (label set by a person, or an In
 //                review PR that is not on factory/issue-<n>)
 //     active     a factory-build, factory-review or factory-gate run for it has not finished
 //     continues  scan continues since the ticket last entered Ready by hand
 //     pr         null, or { number, checks: "green" | "red" | "pending", checksDetail,
 //                summaryForHead, reviewStatus: "success" | "failure" | "error" | "none",
-//                rounds, gateForHead, updateForHead, conflict, checksDoneAt }
+//                rounds, gateForHead, updateForHead, approvedForHead, conflict, checksDoneAt }
 //                checksDoneAt: when the head's last check run finished (ISO time, may be empty)
 //                updateForHead: the bot's factory-update marker names the head (gate/updated.sh)
-//                conflict: GitHub says the PR conflicts with its base
-//   Tickets in other columns (Needs human, for example) come in with only number and active, so
-//   their runs still use a slot.
+//                approvedForHead: the bot's factory-approved marker names the head (gate/approved.sh)
+//                conflict: "yes" | "no" | "unknown" (GitHub has not computed it yet), one read
+//     approval   Needs human only: Sunny approved the PR's current head after the ticket last
+//                entered Needs human (the loop guard). Needs human tickets come in only with a
+//                factory PR; tickets in other columns come in with only number and active, so
+//                their runs still use a slot.
 //
 // Plan: { used, free, actions: [{ issue, kind, workflow, inputs, reason }], skipped: [{ issue, reason }] }
-//   kind "start" (Ready), "continue" (In progress or In review), "human" (continue cap reached)
+//   kind "start" (Ready), "continue" (In progress or In review), "human" (continue cap reached),
+//        "approve" (Needs human with a new approval: factory-gate.yml mode approve, no slot),
+//        "approved" (In review, Sunny approved the head: merge mode, no continue cap)
 
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -31,7 +36,7 @@ export const MAX_CONTINUES = 3;
 export const MAX_ROUNDS = 5;
 export const LOCAL_ACTIVE_HOURS = 2;
 export const REVIEW_GRACE_MINUTES = 10;
-const ORDER = { review: 0, progress: 1, ready: 2 };
+const ORDER = { human: 0, review: 1, progress: 2, ready: 3 };
 
 /** Is a local ticket still being worked on: issue or PR touched in the last 2 hours? */
 export function localActive(ticket, now) {
@@ -51,12 +56,33 @@ export function slotsUsed(tickets, now) {
 
 /**
  * The missing station of a factory ticket in In review.
- * Returns { action: "build" | "fix" | "review" | "gate" | "merge" | "wait" | "none", reason }.
- * "wait" and "none" use no slot.
+ * Returns { action: "build" | "fix" | "review" | "gate" | "merge" | "wait" | "none", reason,
+ * approved }. "wait" and "none" use no slot. approved: Sunny approved this head (no continue cap).
  */
 export function station(ticket, now = new Date().toISOString()) {
   const pr = ticket.pr;
   if (!pr) return { action: "build", reason: "In review without an open factory PR" };
+  // A conflict first: GitHub runs no CI on a conflicting PR, so its checks would wait forever.
+  if (pr.conflict === "yes")
+    return { action: "fix", reason: `PR #${pr.number}: conflicts with main` };
+  if (pr.conflict === "unknown")
+    return {
+      action: "wait",
+      reason: `PR #${pr.number}: GitHub has not said yet whether it conflicts with main`,
+    };
+  if (pr.approvedForHead) {
+    if (pr.checks === "red")
+      return {
+        action: "fix",
+        reason: `PR #${pr.number}: approved, but ${pr.checksDetail || "a required check is red"}`,
+      };
+    // Merge mode waits for running checks and brings a head behind main up to date first.
+    return {
+      action: "merge",
+      reason: `PR #${pr.number}: Sunny approved this head`,
+      approved: true,
+    };
+  }
   if (pr.checks === "pending")
     return { action: "wait", reason: `PR #${pr.number}: required checks still run` };
   if (pr.checks === "red")
@@ -97,9 +123,7 @@ export function station(ticket, now = new Date().toISOString()) {
       action: "gate",
       reason: `PR #${pr.number}: review passed, no gate decision for this head`,
     };
-  // Still in review after the gate decided: MERGE whose merge, update or fix round did not run.
-  if (pr.conflict)
-    return { action: "fix", reason: `PR #${pr.number}: gate decided, but it conflicts with main` };
+  // Still in review after the gate decided: MERGE whose merge or update did not run.
   return { action: "merge", reason: `PR #${pr.number}: gate decided, still in review` };
 }
 
@@ -125,6 +149,11 @@ export function dispatchFor(ticket, action) {
         workflow: "factory-gate.yml",
         inputs: { pr: String(ticket.pr.number), mode: "gate" },
       };
+    case "approve":
+      return {
+        workflow: "factory-gate.yml",
+        inputs: { pr: String(ticket.pr.number), mode: "approve" },
+      };
     default:
       throw new Error(`no dispatch for ${action}`);
   }
@@ -141,6 +170,8 @@ export function plan(state) {
 
   const candidates = tickets
     .filter((t) => t.column in ORDER)
+    // Needs human: only a new approval of the current head (the loop guard is in the state).
+    .filter((t) => t.column !== "human" || t.approval)
     .filter((t) => !only || t.number === Number(only))
     .sort((a, b) => ORDER[a.column] - ORDER[b.column] || a.number - b.number);
 
@@ -152,6 +183,17 @@ export function plan(state) {
     }
     if (t.local) {
       skip(localActive(t, now) ? "local run, active" : "local run, quiet for over 2 hours");
+      continue;
+    }
+
+    if (t.column === "human") {
+      // A short run that moves the ticket back to In review: no slot, no continue.
+      actions.push({
+        issue: t.number,
+        kind: "approve",
+        ...dispatchFor(t, "approve"),
+        reason: `PR #${t.pr.number}: Sunny approved it, no approval run picked it up`,
+      });
       continue;
     }
 
@@ -171,15 +213,18 @@ export function plan(state) {
         skip(s.reason);
         continue;
       }
-      if (t.continues >= MAX_CONTINUES) {
+      if (s.approved) {
+        step = { kind: "approved", action: s.action, reason: s.reason };
+      } else if (t.continues >= MAX_CONTINUES) {
         actions.push({
           issue: t.number,
           kind: "human",
           reason: `continued ${t.continues} times and it still stopped (${s.reason})`,
         });
         continue;
+      } else {
+        step = { kind: "continue", action: s.action, reason: s.reason };
       }
-      step = { kind: "continue", action: s.action, reason: s.reason };
     }
 
     if (free === 0) {

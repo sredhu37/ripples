@@ -9,15 +9,18 @@
 #            risky list: changed files (old names of renames too) against GATE_PATHS.
 #   approve  Sunny's approval: the PR is in Needs human (a factory PR whose issue has
 #            factory:human, or a revert PR by sredhu37-bot on revert-<sha>), sredhu37's latest
-#            approving or blocking review is APPROVED on the current head, every required check
-#            green (waits up to CHECK_WAIT seconds while checks run).
+#            approving or blocking review is APPROVED on the current head. Factory PR: the review
+#            came after the issue last got factory:human (loop guard); no check wait, the PR goes
+#            back to In review and the scan merges it (gate/approved.sh). Revert PR: every required
+#            check green (waits up to CHECK_WAIT seconds while checks run).
 #   fix      Sunny's comment: <source> is review:<id> or comment:<id> by sredhu37 on this PR, a
 #            factory PR whose issue has factory:human. The workflow then starts a fix round.
 #            While the issue has factory:in-review, only a comment containing @build counts.
 #   merge    a head the factory may merge without a new review: the bot's factory-update marker
-#            names it (gate/updated.sh after update-branch), or the gate said MERGE to it and the
+#            names it (gate/updated.sh after update-branch), the bot's factory-approved marker names
+#            it (gate/approved.sh after Sunny's approval), or the gate said MERGE to it and the
 #            issue is still factory:in-review. Factory PR (in-review or human) or revert PR, every
-#            required check green (waits up to CHECK_WAIT). Output approved=update|gate.
+#            required check green (waits up to CHECK_WAIT). Output approved=update|sunny|gate.
 # Env:   GH_TOKEN    token with pull-requests, issues, checks and statuses read (GITHUB_TOKEN)
 #        REPO        owner/name, defaults to GITHUB_REPOSITORY, then to the current gh repo
 #        SUNNY       the account whose review or comment counts (default sredhu37)
@@ -153,6 +156,17 @@ case "$mode" in
     if [ "$review_sha" != "$sha" ]; then
       skip "$sunny approved ${review_sha:0:7}, the head is now ${sha:0:7}: approve the new head"
     fi
+    if [ "$kind" = "factory" ]; then
+      # Loop guard: a failed attempt sends the PR back to Needs human; the same approval must not
+      # send it to In review again.
+      submitted=$(gh api "repos/$repo/pulls/$pr/reviews/$review_id" --jq .submitted_at)
+      since=$(gh api --paginate "repos/$repo/issues/$issue/timeline?per_page=100" --jq '
+        .[] | select(.event == "labeled" and .label.name == "factory:human") | .created_at')
+      since=${since##*$'\n'}
+      if [ -n "$since" ] && ! [[ "$submitted" > "$since" ]]; then
+        skip "$sunny's approval ($submitted) is older than the latest move to Needs human ($since): approve again"
+      fi
+    fi
     emit review "$review_id"
     ;;
   merge)
@@ -169,11 +183,13 @@ case "$mode" in
       .[] | select(.user.login == "github-actions[bot]") | (.body // "") | split("\n") | .[0] + "\t" + (.[1] // "")')
     if grep -q "^<!-- factory-update sha=$sha from=[0-9a-f]\{40\} -->" <<< "$firsts"; then
       emit approved update
+    elif [ "$kind" = "factory" ] && grep -q "^<!-- factory-approved sha=$sha review=[0-9]* -->" <<< "$firsts"; then
+      emit approved sunny
     elif [ "$kind" = "factory" ] && [ "$label" = "factory:in-review" ] &&
       grep -qF "<!-- factory-gate sha=$sha -->"$'\t'"## Gate at \`${sha:0:7}\`: MERGE" <<< "$firsts"; then
       emit approved gate
     else
-      skip "${sha:0:7} is neither the factory's update of an approved head nor a head the gate said MERGE to"
+      skip "${sha:0:7} is not the factory's update of an approved head, a head Sunny approved, or a head the gate said MERGE to"
     fi
     ;;
   fix)
@@ -208,8 +224,9 @@ case "$mode" in
     ;;
 esac
 
-# Required checks: the gate and an approval merge only a green head.
-if [ "$mode" != "fix" ]; then
+# Required checks: the gate and an approval merge only a green head. An approved factory PR goes
+# back to In review instead, where the scan waits for its checks (or fixes a conflict first).
+if [ "$mode" != "fix" ] && ! { [ "$mode" = "approve" ] && [ "$kind" = "factory" ]; }; then
   default_wait=600
   { [ "$mode" = "approve" ] || [ "$mode" = "merge" ]; } && default_wait=1200
   checks=$("$here/checks-green.sh" "$sha" "${CHECK_WAIT:-$default_wait}")
@@ -235,7 +252,13 @@ fi
 
 case "$mode" in
   gate) reason="review passed and every required check is green for ${sha:0:7}" ;;
-  approve) reason="$sunny approved ${sha:0:7} and every required check is green" ;;
+  approve)
+    if [ "$kind" = "factory" ]; then
+      reason="$sunny approved ${sha:0:7}: back to In review"
+    else
+      reason="$sunny approved ${sha:0:7} and every required check is green"
+    fi
+    ;;
   fix) reason="$sunny's $source on a PR with $label" ;;
   merge) reason="${sha:0:7} is approved for merge and every required check is green" ;;
 esac
