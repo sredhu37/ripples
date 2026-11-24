@@ -99,3 +99,38 @@ test("voice: a line without a voice file falls back to the device voice", async 
     .toEqual(["Hi Ava! Pick a place on the trail."]);
   expect((await played(page)).files).toBe(0);
 });
+
+test("voice: inside a lesson Otto reads each new line by himself", async ({ page }) => {
+  await spyOnSound(page);
+  await fakeFamily(page, { kids: [{ badges: ["money"], muted: false }] });
+  await openTrail(page);
+  // The trail map stays tap to hear: nothing played yet.
+  expect((await played(page)).files).toBe(0);
+
+  await page.locator(".trail .stop-done button.place").click();
+  await expect(page.locator(".lesson-title")).toBeVisible();
+  const lines = async () => {
+    const p = await played(page);
+    return p.files + p.device.length;
+  };
+  await expect.poll(lines, { timeout: 10_000 }).toBeGreaterThanOrEqual(1);
+  const before = await lines();
+
+  // Next plays the new line's voice file without a tap on the speaker.
+  const response = page.waitForResponse((r) => r.url().includes("/audio/"));
+  await page.getByRole("button", { name: "Next", exact: true }).click();
+  expect((await response).url()).toMatch(/\/audio\/en\/.+\.m4a$/);
+  await expect.poll(lines, { timeout: 10_000 }).toBeGreaterThan(before);
+});
+
+test("voice: Sound off plays nothing inside a lesson", async ({ page }) => {
+  await spyOnSound(page);
+  await fakeFamily(page, { kids: [{ badges: ["money"], muted: true }] });
+  await openTrail(page);
+  await page.locator(".trail .stop-done button.place").click();
+  await expect(page.locator(".lesson-title")).toBeVisible();
+  await page.getByRole("button", { name: "Next", exact: true }).click();
+  await page.getByRole("button", { name: "Next", exact: true }).click();
+  await page.waitForTimeout(1500);
+  expect(await played(page)).toEqual({ files: 0, device: [] });
+});
