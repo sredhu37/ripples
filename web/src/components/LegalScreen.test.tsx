@@ -22,6 +22,7 @@ async function mount(page: "impressum" | "privacy", lang: "en" | "de" = "en") {
         onLang={() => {}}
         onPage={() => {}}
         onClose={() => {}}
+        backLabel="loginTitle"
       />,
     );
   });

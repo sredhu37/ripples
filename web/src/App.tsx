@@ -231,6 +231,7 @@ export function App() {
           onLang={setLang}
           onPage={(page) => setScreen({ kind: "legal", page, back })}
           onClose={() => setScreen(back)}
+          backLabel={back.kind === "login" ? "loginTitle" : "pickerTitle"}
         />
       );
     }

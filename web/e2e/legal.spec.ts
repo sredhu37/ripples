@@ -47,7 +47,8 @@ test("legal pages: linked from login, Impressum details come from the API, in EN
   await step();
 
   // Back to the login screen.
-  await page.getByRole("button", { name: "Zurück" }).click();
+  await expect(page.locator("button").first()).toHaveText(/Anmelden|Einloggen|Log in/);
+  await page.locator(".back-btn").click();
   await expect(page.getByRole("button", { name: "Impressum" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Datenschutz" })).toBeVisible();
   await step();

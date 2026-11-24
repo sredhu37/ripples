@@ -136,7 +136,7 @@ test("family settings: lessons are chosen per profile", async ({ page }) => {
 
   // Ava's trail has one stop fewer than Ben's.
   await page.getByRole("button", { name: "Back to kids" }).click();
-  await page.getByRole("button", { name: "Close" }).click();
+  await page.locator(".back-btn").click();
   await page.getByRole("button", { name: "Ava", exact: true }).click();
   const avaStops = await page.locator(".trail button.place").count();
   await page.getByRole("button", { name: "Change kid" }).click();
