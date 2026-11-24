@@ -35,6 +35,31 @@ describe("pins", () => {
     }
   });
 
+  it("keeps the original event ids", () => {
+    for (const id of ["indus", "giza", "ww2", "holocaust", "india1947", "wall", "chatgpt"]) {
+      expect(
+        PINS.some((p) => p.id === id),
+        id,
+      ).toBe(true);
+    }
+  });
+
+  it("has 4 to 8 pins in at least 3 countries for every decade from 1900s to 1980s", () => {
+    const decades = pinsByStop().filter((g) => g.stop.year >= 1900 && g.stop.year <= 1980);
+    expect(decades).toHaveLength(9);
+    for (const g of decades) {
+      expect(g.pins.length, `${g.stop.year}s pins`).toBeGreaterThanOrEqual(4);
+      expect(g.pins.length, `${g.stop.year}s pins`).toBeLessThanOrEqual(8);
+      expect(g.countries.length, `${g.stop.year}s countries`).toBeGreaterThanOrEqual(3);
+    }
+  });
+
+  it("uses no dashes of the em or en kind in any pin text", () => {
+    for (const p of PINS) {
+      expect(JSON.stringify([p.title, p.line, p.year]), p.id).not.toMatch(/[–—]/);
+    }
+  });
+
   it("has a place, a line and a start year for every pin", () => {
     for (const p of PINS) {
       expect(p.country, p.id).not.toBe("");
