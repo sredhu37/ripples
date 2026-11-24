@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import { MapScreen } from "./MapScreen";
 import { NameScreen } from "./NameScreen";
 import { emptyProgress, type Progress } from "../progress";
-import { LESSONS } from "../lessons";
+import { CURRICULUM_GROUPS, LESSONS } from "../lessons";
 
 // Tell React it is in a test environment so act(...) warnings are suppressed
 // @ts-expect-error test flag
@@ -83,6 +83,20 @@ describe("MapScreen with disabled lessons", () => {
     const progress: Progress = { ...emptyProgress(), name: "Child", disabledLessons: ["money"] };
     const { container, done } = await renderMap(progress);
     expect(container.querySelector(".continue")?.textContent).toContain("Work and pay");
+    done();
+  });
+});
+
+describe("MapScreen order", () => {
+  it("follows the curriculum groups and continues after the last badge of Group 1", async () => {
+    const group1 = CURRICULUM_GROUPS[0].lessonIds;
+    const progress: Progress = { ...emptyProgress(), name: "Child", badges: [...group1] };
+    const { container, done } = await renderMap(progress);
+    const stops = container.querySelectorAll(".trail .stop");
+    expect(stops[23].textContent).toContain("24. Currencies");
+    expect(stops[stops.length - 1].textContent).not.toContain("GDP");
+    const first = LESSONS.find((l) => l.id === CURRICULUM_GROUPS[1].lessonIds[0])!;
+    expect(container.querySelector(".continue")?.textContent).toContain(first.title.en);
     done();
   });
 });

@@ -23,7 +23,7 @@ test("picker: each kid keeps their own badges, language and mute", async ({ page
 
   // Ava: German, one badge, sound on.
   await page.getByRole("button", { name: "Ava", exact: true }).click();
-  await expect(page.getByText("Willkommen zurueck, Ava!")).toBeVisible();
+  await expect(page.getByText("Willkommen zurück, Ava!")).toBeVisible();
   await expect(page.locator(".shelf-row .medal-on")).toHaveCount(1);
   await expect(page.getByRole("button", { name: "Ton aus" })).toBeVisible();
   await step();

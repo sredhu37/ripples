@@ -21,13 +21,18 @@ run-name: "factory-gate PR #${{ inputs.pr || github.event.pull_request.number ||
 #                HUMAN -> factory:human, board Needs human, Slack (reason, PR, evidence video)
 #     mode approve  Sunny approved: his latest approving or blocking review is APPROVED on the
 #                   current head of a PR in Needs human (factory PR with factory:human, or a
-#                   revert PR), every required check green (waits up to 20 minutes)
-#                   -> squash merge as sredhu37-bot, factory:done, board Done
+#                   revert PR). Also dispatched by the scan for an approval no relay picked up
+#                   (GitHub starts no review run on a conflicting PR).
+#                   factory PR: the review came after the issue last got factory:human (loop
+#                   guard) -> factory:in-review, marker <!-- factory-approved sha=<sha> -->,
+#                   scan for the issue, which dispatches mode merge (or a fix round)
+#                   revert PR: every required check green (waits up to 20 minutes)
+#                   -> squash merge as sredhu37-bot
 #     behind main   every merge above first checks the base (gate/merge.sh): no conflict ->
 #                   update-branch as sredhu37-bot, comment <!-- factory-update sha=<new> -->,
 #                   dispatch mode merge; conflict -> factory:in-review, factory-build.yml fix round
-#     mode merge    the factory's update of an approved head, or a head the gate said MERGE to that
-#                   is still in review; every required check green (waits up to 20 minutes)
+#     mode merge    the factory's update of an approved head, a head Sunny approved (marker), or a
+#                   head the gate said MERGE to that is still in review; every required check green (waits up to 20 minutes)
 #                   -> squash merge as sredhu37-bot (or up to date again), factory:done, board Done
 #     mode fix      Sunny commented, or requested changes, on a factory PR in factory:human
 #                   (in factory:in-review only a comment containing @build counts)
@@ -132,6 +137,7 @@ jobs:
       issue: ${{ steps.check.outputs.issue }}
       risky: ${{ steps.check.outputs.risky }}
       source: ${{ steps.check.outputs.source }}
+      review: ${{ steps.check.outputs.review }}
     steps:
       # Rules come from main, never from a PR branch: the scripts and .github/gate-paths.txt.
       - uses: actions/checkout@v7
@@ -322,7 +328,7 @@ jobs:
     needs: check
     if: needs.check.outputs.mode == 'approve' && (needs.check.outputs.go == 'true' || needs.check.outputs.tell == 'true')
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15 # gate/mergeable.sh may ask GitHub for up to 5 minutes
     environment: factory
     permissions:
       contents: read # scripts
@@ -342,19 +348,23 @@ jobs:
           ref: main
           sparse-checkout: .github/scripts
           persist-credentials: false
-      # gate/merge.sh writes merged= and reason= to GITHUB_OUTPUT itself.
-      - name: Merge as sredhu37-bot
-        id: merge
-        if: needs.check.outputs.go == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
-        run: .github/scripts/gate/merge.sh "$PR" "$SHA" || true
-      - name: Done (label and board)
-        if: steps.merge.outputs.merged == 'true' && env.KIND == 'factory'
+      # A factory PR goes back to In review; the scan merges it (gate/approved.sh).
+      - name: Back to In review
+        if: needs.check.outputs.go == 'true' && env.KIND == 'factory'
         env:
           GH_TOKEN: ${{ github.token }}
           BOARD_TOKEN: ${{ secrets.FACTORY_TOKEN }}
-        run: .github/scripts/shared/move.sh "$ISSUE" factory:done
+          REVIEW: ${{ needs.check.outputs.review }}
+          SUNNY: sredhu37
+        run: .github/scripts/gate/approved.sh
+      # A revert PR has no ticket: merge it here. gate/merge.sh writes merged= and reason= to
+      # GITHUB_OUTPUT itself.
+      - name: Merge as sredhu37-bot
+        id: merge
+        if: needs.check.outputs.go == 'true' && env.KIND == 'revert'
+        env:
+          GH_TOKEN: ${{ secrets.FACTORY_TOKEN }}
+        run: .github/scripts/gate/merge.sh "$PR" "$SHA" || true
       - name: Up to date with main, merge when green
         if: steps.merge.outputs.update == 'updated'
         env:
@@ -370,6 +380,7 @@ jobs:
           KIND: ${{ env.KIND }}
         run: .github/scripts/gate/conflict.sh
       - name: Note on the PR
+        if: needs.check.outputs.go != 'true' || env.KIND != 'factory'
         env:
           GH_TOKEN: ${{ github.token }}
           UPDATE: ${{ steps.merge.outputs.update }}
@@ -383,7 +394,7 @@ jobs:
     needs: check
     if: needs.check.outputs.go == 'true' && needs.check.outputs.mode == 'merge'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15 # gate/mergeable.sh may ask GitHub for up to 5 minutes
     environment: factory
     permissions:
       contents: read # scripts

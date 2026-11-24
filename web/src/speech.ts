@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { SPEECH_LANG } from "./i18n";
 import type { Lang } from "./progress";
+import { isMuted } from "./sound";
 
 export function canSpeak(): boolean {
   return typeof window !== "undefined" && "speechSynthesis" in window;
@@ -8,7 +9,7 @@ export function canSpeak(): boolean {
 
 /** Read text aloud with the device voice. Stops anything already playing. */
 export function speak(text: string, lang: Lang): void {
-  if (!canSpeak()) return;
+  if (!canSpeak() || isMuted()) return;
   const synth = window.speechSynthesis;
   synth.cancel();
   const u = new SpeechSynthesisUtterance(text);
