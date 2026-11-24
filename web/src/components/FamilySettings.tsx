@@ -28,6 +28,10 @@ interface Props {
   onFacts: () => void;
   onLogout: () => void;
   onClose: () => void;
+  /** Opened from the picker's "Add a kid" tile: the add form starts open and focused. */
+  addKid?: boolean;
+  /** Called after a profile was saved from the "Add a kid" path. */
+  onAdded?: () => void;
 }
 
 function makeGate() {
@@ -38,12 +42,20 @@ interface FormProps {
   lang: Lang;
   initial: { nickname: string; avatar: string };
   submitLabel: string;
+  autoFocus?: boolean;
   onSubmit: (nickname: string, avatar: string) => void;
   onCancel?: () => void;
 }
 
 /** Nickname field with its hint, and the grid of villagers to pick from. */
-export function ProfileForm({ lang, initial, submitLabel, onSubmit, onCancel }: FormProps) {
+export function ProfileForm({
+  lang,
+  initial,
+  submitLabel,
+  autoFocus,
+  onSubmit,
+  onCancel,
+}: FormProps) {
   const [nickname, setNickname] = useState(initial.nickname);
   const [avatar, setAvatar] = useState(initial.avatar);
   const clean = cleanName(nickname);
@@ -61,6 +73,7 @@ export function ProfileForm({ lang, initial, submitLabel, onSubmit, onCancel }: 
         className="text-input"
         value={nickname}
         maxLength={20}
+        autoFocus={autoFocus}
         autoComplete="off"
         aria-describedby="profile-nickname-hint"
         onChange={(e) => setNickname(e.target.value)}
@@ -173,15 +186,22 @@ export function FamilySettings({
   onFacts,
   onLogout,
   onClose,
+  addKid = false,
+  onAdded,
 }: Props) {
   const [gate] = useState(makeGate);
   const [open, setOpen] = useState(!gated);
   const [answer, setAnswer] = useState("");
   const [gateWrong, setGateWrong] = useState(false);
   // "add", the id of the kid whose detail is open, or null for the kid list.
-  // With no profile yet the add form starts open. From a trail it starts on that kid.
+  // With no profile yet, or from the picker's Add a kid tile, the add form starts open.
+  // From a trail it starts on that kid.
   const [view, setView] = useState<string | null>(() =>
-    profiles.length === 0 ? "add" : profiles.some((p) => p.id === activeId) ? activeId : null,
+    profiles.length === 0 || addKid
+      ? "add"
+      : profiles.some((p) => p.id === activeId)
+        ? activeId
+        : null,
   );
   const [confirmDelete, setConfirmDelete] = useState(false);
 
@@ -307,9 +327,12 @@ export function FamilySettings({
             lang={lang}
             initial={{ nickname: "", avatar: defaultAvatar(profiles) }}
             submitLabel={t(lang, "addProfile")}
+            autoFocus={addKid}
             onSubmit={(nickname, avatar) =>
               void onAdd(nickname, avatar).then((saved) => {
-                if (saved) setView(null);
+                if (!saved) return;
+                setView(null);
+                if (addKid) onAdded?.();
               })
             }
             onCancel={profiles.length > 0 ? () => setView(null) : undefined}
