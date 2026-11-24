@@ -8,6 +8,8 @@ test("facts: a parent opens the fact cards behind the maths gate", async ({ page
   await step();
 
   await passParentGate(page, step);
+  // Opened from the trail, the screen starts on the kid's detail; the fact cards are on the list.
+  await page.getByRole("button", { name: "Back to kids" }).click();
   await page.getByRole("button", { name: LABEL.factCards.en }).click();
 
   await expect(page.getByRole("heading", { level: 1, name: LABEL.factCards.en })).toBeVisible();

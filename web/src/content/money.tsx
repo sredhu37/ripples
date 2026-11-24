@@ -157,9 +157,9 @@ export const lesson: Lesson = {
     ),
   ],
   toyIntro: T(
-    "Help Finn get bread. Read what to do now, then tap the action button.",
-    "Hilf Finn, an Brot zu kommen. Lies, was du tun kannst, und tippe auf den Knopf.",
-    "Pomóż Finnowi zdobyć chleb. Przeczytaj instrukcję i naciśnij przycisk działania.",
+    "Help Finn get bread. Drag his things to the other villagers.",
+    "Hilf Finn, an Brot zu kommen. Zieh seine Sachen zu den anderen Dorfbewohnern.",
+    "Pomóż Finnowi zdobyć chleb. Przeciągnij jego rzeczy do pozostałych mieszkańców.",
   ),
   Toy,
   questions: [

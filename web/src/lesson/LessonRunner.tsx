@@ -142,11 +142,17 @@ export function LessonRunner({
               type="button"
               className="btn"
               disabled={!toyCompleted}
+              aria-describedby={toyCompleted ? undefined : "ready-hint"}
               onClick={() => setPhase({ k: "quiz", i: 0 })}
             >
               {t(lang, "ready")}
             </button>
           </div>
+          {!toyCompleted && (
+            <p id="ready-hint" className="ready-hint">
+              {t(lang, "readyHint")}
+            </p>
+          )}
         </section>
       )}
 
