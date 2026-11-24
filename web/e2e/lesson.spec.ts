@@ -46,6 +46,45 @@ test("lesson header: sound switch, steady Start over, one progress bar, fits 360
   expect(widths[0]).toBe(widths[1]);
 });
 
+for (const width of [360, 390, 1366]) {
+  test(`money toy: drag line, clear Drop here, fish inside scene, ready hint at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await fakeFamily(page, { kids: [{ lang: "en", badges: ["money"], muted: true }] });
+    await openTrail(page);
+    await page.locator(".trail .stop-done button.place").click();
+    const next = page.getByRole("button", { name: "Next", exact: true });
+    const toy = page.locator(".lesson-body .stage-wrap").first();
+    for (let i = 0; i < MAX_STORY_STEPS && (await toy.count()) === 0; i += 1) {
+      await next.click();
+    }
+    await expect(toy).toBeVisible();
+
+    await expect(page.locator(".lesson-body .hello")).toContainText("Drag");
+    await expect(page.locator(".lesson-body .hello")).not.toContainText("action button");
+
+    const label = await page.getByTestId("drop-Bea").boundingBox();
+    const name = await page.getByTestId("name-Bea").boundingBox();
+    expect(label && name).toBeTruthy();
+    expect(label!.y).toBeGreaterThanOrEqual(name!.y + name!.height);
+
+    const fish = await page.getByTestId("fish-chip").boundingBox();
+    const scene = await page.locator(".lesson-body .stage-wrap svg.diagram").boundingBox();
+    expect(fish!.y + fish!.height).toBeLessThanOrEqual(scene!.y + scene!.height);
+    expect(fish!.x).toBeGreaterThanOrEqual(scene!.x);
+
+    await expect(page.locator(".lesson-body .row.nav .btn")).toBeDisabled();
+    await expect(page.locator("#ready-hint")).toBeVisible();
+
+    const widths = await page.evaluate(() => [
+      document.documentElement.scrollWidth,
+      window.innerWidth,
+    ]);
+    expect(widths[0]).toBe(widths[1]);
+  });
+}
+
 for (const id of LESSON_IDS) {
   for (const lang of LANGS) {
     test(`lesson: ${id} story to toy in ${lang}`, async ({ page }) => {

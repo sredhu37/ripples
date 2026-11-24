@@ -40,7 +40,8 @@ const START: Board = {
 // Triangle Coordinates (viewBox 640 x 280)
 // Finn: bottom-left
 const FINN_X = 50;
-const FINN_Y = 125;
+// Raised so Finn's 44 high item chip below him stays inside the 280 high scene.
+const FINN_Y = 110;
 
 // Bea: top-center
 const BEA_X = 275;
@@ -85,17 +86,29 @@ function Villager({
           x={-8}
           y={-6}
           width={PERSON + 16}
-          height={PERSON + 42}
+          height={PERSON + 54}
           rx={16}
           className="target-glow"
         />
       )}
       <Person hat={hat} shirt={shirt} mood={mood} y={0} size={PERSON} />
-      <text className="diagram-name" x={PERSON / 2} y={PERSON + 20} textAnchor="middle">
+      <text
+        className="diagram-name"
+        data-testid={`name-${name}`}
+        x={PERSON / 2}
+        y={PERSON + 20}
+        textAnchor="middle"
+      >
         {name}
       </text>
       {isTarget && targetLabel && (
-        <text className="target-badge-text" x={PERSON / 2} y={PERSON + 34} textAnchor="middle">
+        <text
+          className="target-badge-text"
+          data-testid={`drop-${name}`}
+          x={PERSON / 2}
+          y={PERSON + 42}
+          textAnchor="middle"
+        >
           {targetLabel}
         </text>
       )}
@@ -413,6 +426,7 @@ export function TradeBoard({
             <g
               transform={`translate(${FINN_X - 4} ${FINN_Y + PERSON + 26})`}
               className="draggable-source"
+              data-testid="fish-chip"
               onPointerDown={(e) => handlePointerDown("fish", e)}
               style={{ cursor: "grab" }}
             >

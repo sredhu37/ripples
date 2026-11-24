@@ -54,6 +54,7 @@ describe("i18n core", () => {
       "next",
       "prev",
       "ready",
+      "readyHint",
       "check",
       "tryAgain",
       "rightLine",
