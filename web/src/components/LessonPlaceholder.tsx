@@ -2,6 +2,7 @@ import { LessonIcon } from "./appIcons";
 import { LESSONS, getLessonTitle } from "../lessons";
 import { t } from "../i18n";
 import type { Lang, Progress } from "../progress";
+import { BackButton } from "./BackButton";
 import { LangSwitch } from "./LangSwitch";
 import { Otto } from "./Otto";
 import { SpeechBubble } from "./SpeechBubble";
@@ -20,6 +21,7 @@ export function LessonPlaceholder({ lessonId, progress, onBack, onLang }: Props)
 
   return (
     <main className="screen center">
+      <BackButton label={t(lang, "allLessons")} onClick={onBack} />
       <div style={{ alignSelf: "flex-end", marginBottom: "12px" }}>
         {onLang && <LangSwitch lang={lang} onLang={onLang} />}
       </div>
@@ -29,9 +31,6 @@ export function LessonPlaceholder({ lessonId, progress, onBack, onLang }: Props)
       </h2>
       <Otto size={170} mood="think" />
       <SpeechBubble text={t(lang, "lessonBuilding")} lang={lang} />
-      <button className="btn" type="button" onClick={onBack}>
-        {t(lang, "back")}
-      </button>
     </main>
   );
 }

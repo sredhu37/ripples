@@ -3,6 +3,7 @@ import { sendLoginCode, verifyLoginCode } from "../auth";
 import { t } from "../i18n";
 import type { Lang } from "../progress";
 import type { LegalPage } from "../legal/texts";
+import { BackButton } from "./BackButton";
 import { LangSwitch } from "./LangSwitch";
 import { LegalLinks } from "./LegalLinks";
 
@@ -82,6 +83,7 @@ export function LoginScreen({ lang, onLang, onLoggedIn, onClose, onLegal }: Prop
             if (cleanEmail) void send();
           }}
         >
+          {onClose && <BackButton label={t(lang, "back")} onClick={onClose} />}
           <div className="panel-head">
             <h2>{t(lang, "loginTitle")}</h2>
             <LangSwitch lang={lang} onLang={onLang} />
@@ -101,11 +103,6 @@ export function LoginScreen({ lang, onLang, onLoggedIn, onClose, onLegal }: Prop
             <button className="btn" type="submit" disabled={busy || !cleanEmail}>
               {t(lang, "loginSend")}
             </button>
-            {onClose && (
-              <button className="btn btn-quiet" type="button" onClick={onClose}>
-                {t(lang, "back")}
-              </button>
-            )}
           </div>
         </form>
       ) : (

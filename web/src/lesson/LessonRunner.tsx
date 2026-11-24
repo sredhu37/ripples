@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { LessonIcon, UiIcon } from "../components/appIcons";
+import { BackButton } from "../components/BackButton";
 import { LangSwitch } from "../components/LangSwitch";
 import { Otto } from "../components/Otto";
 import { SpeechBubble } from "../components/SpeechBubble";
@@ -72,14 +73,7 @@ export function LessonRunner({
     <main className="screen lesson">
       <header className="lesson-head">
         <div className="lesson-head-actions">
-          <button
-            type="button"
-            className="btn btn-quiet btn-small"
-            onClick={onExit}
-            aria-label={t(lang, "allLessons")}
-          >
-            ← {t(lang, "allLessons")}
-          </button>
+          <BackButton label={t(lang, "allLessons")} onClick={onExit} />
           <button
             type="button"
             className="btn btn-quiet btn-small btn-restart"
@@ -142,11 +136,17 @@ export function LessonRunner({
               type="button"
               className="btn"
               disabled={!toyCompleted}
+              aria-describedby={toyCompleted ? undefined : "ready-hint"}
               onClick={() => setPhase({ k: "quiz", i: 0 })}
             >
               {t(lang, "ready")}
             </button>
           </div>
+          {!toyCompleted && (
+            <p id="ready-hint" className="ready-hint">
+              {t(lang, "readyHint")}
+            </p>
+          )}
         </section>
       )}
 
