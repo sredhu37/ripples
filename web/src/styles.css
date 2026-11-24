@@ -109,8 +109,8 @@ p {
   align-items: center;
   gap: 8px;
   min-height: 60px;
+  flex: 0 0 auto;
   max-width: 100%;
-  min-width: 0;
   padding: 4px 12px 4px 4px;
   border: 2px solid var(--teal);
   border-radius: 999px;
@@ -128,7 +128,8 @@ p {
 }
 
 .profile-name {
-  min-width: 0;
+  flex: 0 1 auto;
+  min-width: 6ch;
   max-width: 140px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -170,7 +171,9 @@ p {
     height: auto;
     overflow: visible;
     clip: auto;
-    white-space: normal;
+    white-space: nowrap;
+    min-width: 0;
+    text-overflow: ellipsis;
     margin-right: auto;
     font-size: 1.6rem;
   }

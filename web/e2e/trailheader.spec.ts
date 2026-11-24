@@ -21,6 +21,11 @@ for (const size of WIDTHS) {
     await expect(profile.locator(".profile-face")).toHaveAttribute("data-avatar", "Finn");
     await expect(profile).toContainText("Ava");
     await expect(page.getByText("Change kid")).toHaveCount(0);
+    // The nickname is not clipped.
+    const clipped = await profile
+      .locator(".profile-name")
+      .evaluate((el) => el.scrollWidth > el.clientWidth);
+    expect(clipped).toBe(false);
 
     // Icon buttons carry a visible label.
     await expect(page.locator(".labeled-btn")).toHaveText(["Sound", "Timeline", "Parents"]);
