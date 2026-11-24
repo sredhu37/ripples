@@ -184,14 +184,14 @@ export function HeartEmpathyCompassionDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Empatia: Wyjątkowy ludzki dar"
       : lang === "de"
-        ? "Mitgefuehl: Menschliche Gabe"
+        ? "Mitgefühl: Menschliche Gabe"
         : "Empathy: A Human Gift";
 
   const sub =
     lang === "pl"
       ? "Algorytm nie pocieszy przyjaciela"
       : lang === "de"
-        ? "Algorithmen koennen nicht troesten"
+        ? "Algorithmen können nicht trösten"
         : "Algorithms cannot comfort friends";
 
   return (
@@ -239,7 +239,7 @@ export function CreativeTeamCollaborationDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Kreatywność i praca zespołowa"
       : lang === "de"
-        ? "Kreativitaet und Teamgeist"
+        ? "Kreativität und Teamgeist"
         : "Creativity and Teamwork";
 
   const sub =
@@ -288,14 +288,14 @@ export function AmplifiedHumanValuesFutureDiagram({ lang, step }: DiagramProps) 
     lang === "pl"
       ? "Technologia wzmacnia ludzkie wartości"
       : lang === "de"
-        ? "Technik verstaerkt menschliche Werte"
+        ? "Technik verstärkt menschliche Werte"
         : "Technology Amplifies Human Purpose";
 
   const sub =
     lang === "pl"
       ? "Dobroć kieruje naszymi narzędziami"
       : lang === "de"
-        ? "Guete lenkt unsere Werkzeuge"
+        ? "Güte lenkt unsere Werkzeuge"
         : "Kindness steers our tools";
 
   return (

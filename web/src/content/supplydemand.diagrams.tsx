@@ -45,16 +45,16 @@ export function HighPriceDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Nadwyżka przy wysokiej cenie"
       : lang === "de"
-        ? "Hoher Preis Ueberschuss"
+        ? "Hoher Preis Überschuss"
         : "High Price Surplus";
   const priceTag =
     lang === "pl"
       ? "Cena: 8 monet"
       : lang === "de"
-        ? "Preisschild: 8 Muenzen"
+        ? "Preisschild: 8 Münzen"
         : "Price Tag: 8 Coins";
   const fishLeft =
-    lang === "pl" ? "Zostało 5 ryb" : lang === "de" ? "5 Fische uebrig" : "5 Fish Left";
+    lang === "pl" ? "Zostało 5 ryb" : lang === "de" ? "5 Fische übrig" : "5 Fish Left";
   const spoiling =
     lang === "pl"
       ? "Psują się na słońcu"
@@ -62,14 +62,14 @@ export function HighPriceDiagram({ lang, step }: DiagramProps) {
         ? "Verderben in der Sonne"
         : "Spoiling in Sun";
   const buyersCount =
-    lang === "pl" ? "Tylko 1 kupiec" : lang === "de" ? "Nur 1 Kaeufer" : "Only 1 Buyer";
+    lang === "pl" ? "Tylko 1 kupiec" : lang === "de" ? "Nur 1 Käufer" : "Only 1 Buyer";
   const tooExpensive =
     lang === "pl" ? "O wiele za drogo!" : lang === "de" ? "Viel zu teuer!" : "Too Expensive!";
   const surplusMsg =
     lang === "pl"
       ? "Nadwyżka (niesprzedane marnotrawstwo)"
       : lang === "de"
-        ? "Ueberschuss (Waren verschwendet)"
+        ? "Überschuss (Waren verschwendet)"
         : "Surplus (Unsold Waste)";
 
   return (
@@ -138,20 +138,16 @@ export function LowPriceDiagram({ lang, step }: DiagramProps) {
         ? "Niedriger Preis Mangel"
         : "Low Price Shortage";
   const priceTag =
-    lang === "pl"
-      ? "Cena: 1 moneta"
-      : lang === "de"
-        ? "Preisschild: 1 Muenze"
-        : "Price Tag: 1 Coin";
+    lang === "pl" ? "Cena: 1 moneta" : lang === "de" ? "Preisschild: 1 Münze" : "Price Tag: 1 Coin";
   const fishLeft =
-    lang === "pl" ? "0 ryb w skrzyni" : lang === "de" ? "0 Fische uebrig" : "0 Fish Left";
+    lang === "pl" ? "0 ryb w skrzyni" : lang === "de" ? "0 Fische übrig" : "0 Fish Left";
   const soldOut =
     lang === "pl" ? "Sprzedane w 10 sekund" : lang === "de" ? "In 10 Sek. weg" : "Sold in 10s";
   const buyersCount =
     lang === "pl"
       ? "15 głodnych kupców"
       : lang === "de"
-        ? "15 Hungrige Kaeufer"
+        ? "15 Hungrige Käufer"
         : "15 Hungry Buyers";
   const shouting =
     lang === "pl"
@@ -163,7 +159,7 @@ export function LowPriceDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Niedobór (puste brzuchy)"
       : lang === "de"
-        ? "Mangel (Leere Baeuche)"
+        ? "Mangel (Leere Bäuche)"
         : "Shortage (Empty Stomachs)";
 
   return (
@@ -235,11 +231,11 @@ export function EquilibriumDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Uczciwa cena: 4 monety"
       : lang === "de"
-        ? "Fairer Preis: 4 Muenzen"
+        ? "Fairer Preis: 4 Münzen"
         : "Fair Price: 4 Coins";
   const supplyCount = lang === "pl" ? "6 ryb" : lang === "de" ? "6 Fische" : "6 Fish";
   const supplyWord = lang === "pl" ? "Podaż" : lang === "de" ? "Angebot" : "Supply";
-  const demandCount = lang === "pl" ? "6 kupców" : lang === "de" ? "6 Kaeufer" : "6 Buyers";
+  const demandCount = lang === "pl" ? "6 kupców" : lang === "de" ? "6 Käufer" : "6 Buyers";
   const demandWord = lang === "pl" ? "Popyt" : lang === "de" ? "Nachfrage" : "Demand";
   const clearedMsg =
     lang === "pl"

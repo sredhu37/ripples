@@ -70,7 +70,7 @@ export function WindWaterMillDiagram({ lang, step }: DiagramProps) {
         : "Harnessing Wind and Water";
 
   const waterLabel = lang === "pl" ? "Koło wodne" : lang === "de" ? "Wasserrad" : "Waterwheel";
-  const windLabel = lang === "pl" ? "Wiatrak" : lang === "de" ? "Windmuehle" : "Windmill";
+  const windLabel = lang === "pl" ? "Wiatrak" : lang === "de" ? "Windmühle" : "Windmill";
 
   const sub =
     lang === "pl"

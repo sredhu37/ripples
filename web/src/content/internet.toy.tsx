@@ -89,12 +89,12 @@ export function InternetToy({ lang, mode = "toy", onDone }: InternetToyProps) {
     ? lang === "pl"
       ? "Kabel Południowy: Aktywny (Pakiet 3)"
       : lang === "de"
-        ? "Sued-Kabel: Aktiv (Paket 3)"
+        ? "Süd-Kabel: Aktiv (Paket 3)"
         : "South Cable: Active (Packet 3)"
     : lang === "pl"
       ? "Podłącz Kabel Południowy"
       : lang === "de"
-        ? "Sued-Kabel verbinden"
+        ? "Süd-Kabel verbinden"
         : "Connect South Cable";
 
   const deliveredLabel =
@@ -182,12 +182,12 @@ export function InternetToy({ lang, mode = "toy", onDone }: InternetToyProps) {
               ? lang === "pl"
                 ? "Wspaniale! Wszystkie 3 pakiety dotarły bez uszkodzeń i złożyły się w kompletną wiadomość!"
                 : lang === "de"
-                  ? "Hervorragend! Alle 3 Pakete kamen an und wurden zur vollstaendigen Nachricht zusammengesetzt!"
+                  ? "Hervorragend! Alle 3 Pakete kamen an und wurden zur vollständigen Nachricht zusammengesetzt!"
                   : "Brilliant! All 3 packets arrived intact and assembled into the original message!"
               : lang === "pl"
                 ? "Podłącz wszystkie trzy kable sieciowe, aby przesłać każdy pakiet danych."
                 : lang === "de"
-                  ? "Verbinde alle drei Netzwerkkabel, um jedes Datenpaket zu uebertragen."
+                  ? "Verbinde alle drei Netzwerkkabel, um jedes Datenpaket zu übertragen."
                   : "Connect all three network cables to deliver every packet."}
           </div>
         )}

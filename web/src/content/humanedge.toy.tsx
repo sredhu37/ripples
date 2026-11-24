@@ -94,7 +94,7 @@ export function HumanEdgeToy({ lang, mode = "toy", onDone }: HumanEdgeToyProps) 
     return lang === "pl"
       ? "Głęboka empatia i troska"
       : lang === "de"
-        ? "Mitgefuehl & Ethik"
+        ? "Mitgefühl & Ethik"
         : "Deep Empathy & Care";
   };
 
@@ -106,7 +106,7 @@ export function HumanEdgeToy({ lang, mode = "toy", onDone }: HumanEdgeToyProps) 
           {lang === "pl"
             ? "Poziom zaawansowania technologii:"
             : lang === "de"
-              ? "Technologische Leistungsfaehigkeit:"
+              ? "Technologische Leistungsfähigkeit:"
               : "Technological Capability:"}
         </span>
         <div className="tier-buttons">
@@ -175,7 +175,7 @@ export function HumanEdgeToy({ lang, mode = "toy", onDone }: HumanEdgeToyProps) 
               {lang === "pl"
                 ? "Rozkwit! Zaawansowana technologia kierowana empatią buduje szczęśliwe społeczeństwo."
                 : lang === "de"
-                  ? "Bluehende Zukunft! Technik verstaerkt menschliche Waerme und Lebensqualitaet."
+                  ? "Blühende Zukunft! Technik verstärkt menschliche Wärme und Lebensqualität."
                   : "Flourishing! Advanced technology guided by empathy creates a thriving society."}
             </span>
           )}
@@ -184,7 +184,7 @@ export function HumanEdgeToy({ lang, mode = "toy", onDone }: HumanEdgeToyProps) 
               {lang === "pl"
                 ? "Uwaga: Wysokie tempo bez empatii grozi pozostawieniem słabszych w tyle."
                 : lang === "de"
-                  ? "Achtung: Hohes Tempo ohne Mitgefuehl laesst schwaechere Menschen zurueck."
+                  ? "Achtung: Hohes Tempo ohne Mitgefühl lässt schwächere Menschen zurück."
                   : "Warning: High speed without empathy risks leaving vulnerable people behind."}
             </span>
           )}
@@ -193,7 +193,7 @@ export function HumanEdgeToy({ lang, mode = "toy", onDone }: HumanEdgeToyProps) 
               {lang === "pl"
                 ? "Pozytywna równowaga, gotowa na głębszą empatię i nowoczesne narzędzia."
                 : lang === "de"
-                  ? "Guter Weg, bereit fuer staerkere Werte und kluge Werkzeuge."
+                  ? "Guter Weg, bereit für stärkere Werte und kluge Werkzeuge."
                   : "Positive balance, ready to embrace deeper empathy and advanced tools."}
             </span>
           )}
@@ -208,12 +208,12 @@ export function HumanEdgeToy({ lang, mode = "toy", onDone }: HumanEdgeToyProps) 
               ? lang === "pl"
                 ? "Cudownie! Empatia, etyczna troska i kreatywność sprawiają, że technologia służy wszystkim ludziom."
                 : lang === "de"
-                  ? "Wunderbar! Mitgefuehl, Ethik und Kreativitaet lenken Technik zum Wohle aller."
+                  ? "Wunderbar! Mitgefühl, Ethik und Kreativität lenken Technik zum Wohle aller."
                   : "Wonderful! Empathy, ethical care, and creativity guide technology to lift all humanity."
               : lang === "pl"
                 ? "Wybierz 'Głęboka empatia i troska' oraz co najmniej Inteligentną automatyzację, by uzyskać >90% rozkwitu."
                 : lang === "de"
-                  ? "Waehle 'Mitgefuehl & Ethik' und mindestens Kluge Automation fuer ueber 90% Wohlstand."
+                  ? "Wähle 'Mitgefühl & Ethik' und mindestens Kluge Automation für über 90% Wohlstand."
                   : "Select 'Deep Empathy & Care' and at least Smart Automation to achieve >90% flourishing."}
           </div>
         )}

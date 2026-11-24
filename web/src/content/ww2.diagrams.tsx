@@ -50,14 +50,14 @@ export function TotalDevastationRubbleDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Zniszczenie: 1939 do 1945"
       : lang === "de"
-        ? "Zerstoerung: 1939 bis 1945"
+        ? "Zerstörung: 1939 bis 1945"
         : "Devastation: 1939 to 1945";
 
   const sub =
     lang === "pl"
       ? "Miasta w gruzach"
       : lang === "de"
-        ? "Staedte in Truemmern"
+        ? "Städte in Trümmern"
         : "Cities and lives shattered";
 
   return (
@@ -93,7 +93,7 @@ export function WhiteRoseLeafletDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Odwaga cywilna: Biała Róża"
       : lang === "de"
-        ? "Zivilcourage: Die Weisse Rose"
+        ? "Zivilcourage: Die Weiße Rose"
         : "Civil Courage: White Rose";
 
   const sub =
@@ -212,14 +212,14 @@ export function GrundgesetzArticle1Diagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "„Godność człowieka jest nienaruszalna”"
       : lang === "de"
-        ? '"Die Wuerde ist unantastbar"'
+        ? '"Die Würde ist unantastbar"'
         : '"Human dignity is inviolable"';
 
   const sub =
     lang === "pl"
       ? "Z niej wynikają prawa"
       : lang === "de"
-        ? "Menschenwuerde kommt zuerst"
+        ? "Menschenwürde kommt zuerst"
         : "Rights start with dignity";
 
   return (

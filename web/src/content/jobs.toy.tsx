@@ -75,7 +75,7 @@ export function JobsToy({ lang, mode = "toy", onDone }: JobsToyProps) {
           {lang === "pl"
             ? "Strategia szkolenia i rozwoju kadr:"
             : lang === "de"
-              ? "Bildungs- und Foerderstrategie:"
+              ? "Bildungs- und Förderstrategie:"
               : "Workforce Training Policy:"}
         </span>
         <div className="policy-buttons">
@@ -139,7 +139,7 @@ export function JobsToy({ lang, mode = "toy", onDone }: JobsToyProps) {
             {lang === "pl"
               ? "Powtarzalne zadania podatne na automatyzację"
               : lang === "de"
-                ? "Anfaellig fuer Automatisierung"
+                ? "Anfällig für Automatisierung"
                 : "Repetitive tasks vulnerable to machines"}
           </span>
         </div>
@@ -170,7 +170,7 @@ export function JobsToy({ lang, mode = "toy", onDone }: JobsToyProps) {
             {lang === "pl"
               ? "Odporność gospodarki na zmiany:"
               : lang === "de"
-                ? "Zukunftsfaehigkeit der Wirtschaft:"
+                ? "Zukunftsfähigkeit der Wirtschaft:"
                 : "Future Workforce Resilience:"}
           </span>
           <strong className="readiness-val">{readinessScore}%</strong>
@@ -188,12 +188,12 @@ export function JobsToy({ lang, mode = "toy", onDone }: JobsToyProps) {
               ? lang === "pl"
                 ? "Doskonale! Inwestycja w podnoszenie kwalifikacji przygotowuje 85% pracowników na zawody przyszłości."
                 : lang === "de"
-                  ? "Hervorragend! Weiterbildung bereitet 85% der Arbeitskraefte auf zukunftssichere Berufe vor."
+                  ? "Hervorragend! Weiterbildung bereitet 85% der Arbeitskräfte auf zukunftssichere Berufe vor."
                   : "Excellent! Investing in upskilling prepares 85% of workers for rewarding future careers."
               : lang === "pl"
                 ? "Wybierz 'Inwestycja w zawody przyszłości', aby uzyskać >90% odporności gospodarki."
                 : lang === "de"
-                  ? "Waehle 'Investition in Zukunftsberufe', um ueber 90% Zukunftsfaehigkeit zu erreichen."
+                  ? "Wähle 'Investition in Zukunftsberufe', um über 90% Zukunftsfähigkeit zu erreichen."
                   : "Select 'Invest in Green & Tech Skills' to achieve >90% future workforce resilience."}
           </div>
         )}

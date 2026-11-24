@@ -52,7 +52,7 @@ export function CompanyFortressDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Prywatna armia chroni magazyny"
       : lang === "de"
-        ? "Privatarmee bewacht Lagerhaeuser"
+        ? "Privatarmee bewacht Lagerhäuser"
         : "Private army guards warehouses";
 
   return (
@@ -199,17 +199,17 @@ export function RailwayExportPortDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Kolej do wywozu surowców"
       : lang === "de"
-        ? "Eisenbahnen fuer den Rohstoffexport"
+        ? "Eisenbahnen für den Rohstoffexport"
         : "Railways built for export";
 
   const cotton = lang === "pl" ? "Bawełna" : lang === "de" ? "Rohbaumwolle" : "Raw Cotton";
-  const tea = lang === "pl" ? "Herbata" : lang === "de" ? "Teeblaetter" : "Tea Leaves";
+  const tea = lang === "pl" ? "Herbata" : lang === "de" ? "Teeblätter" : "Tea Leaves";
 
   const sub =
     lang === "pl"
       ? "Bogactwa wypływają przez porty"
       : lang === "de"
-        ? "Rohstoffe verlassen die Haefen"
+        ? "Rohstoffe verlassen die Häfen"
         : "Wealth leaves through ports";
 
   return (
