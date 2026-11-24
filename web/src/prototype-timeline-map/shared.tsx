@@ -8,6 +8,7 @@ import { SpeakerIcon } from "../components/SpeechBubble";
 import { BORDERS } from "./borders";
 import { DECADES, MAP_H, MAP_W, type Pin } from "./pins";
 import { LESSONS } from "../lessons";
+import { Otto } from "../components/Otto";
 
 export const S = {
   tapPin: { en: "Tap a pin.", de: "Tippe auf eine Nadel.", pl: "Dotknij pinezki." },
@@ -80,6 +81,8 @@ interface MapProps {
   view?: ViewBox;
   /** Rendered width in CSS px, so pins keep one finger size on every screen. */
   pxWidth?: number;
+  /** How much bigger the open pin is drawn. */
+  openScale?: number;
   onPin: (id: string) => void;
   onBackground: () => void;
   children?: ReactNode;
@@ -93,6 +96,7 @@ export function WorldMap({
   lang,
   view = WORLD,
   pxWidth = 0,
+  openScale = 1.35,
   onPin,
   onBackground,
   children,
@@ -109,7 +113,7 @@ export function WorldMap({
           onBackground();
       }}
     >
-      <rect x={-50} y={-50} width={MAP_W + 100} height={MAP_H + 100} fill="#cfe8ec" />
+      <rect x={-2000} y={-2000} width={MAP_W + 4000} height={MAP_H + 4000} fill="#cfe8ec" />
       {BORDERS[snapshot].map((s, i) => (
         <path
           key={`${snapshot}-${i}`}
@@ -123,13 +127,14 @@ export function WorldMap({
           <title>{s.n}</title>
         </path>
       ))}
-      {pins.map((p) => (
+      {[...pins.filter((p) => p.id !== openId), ...pins.filter((p) => p.id === openId)].map((p) => (
         <PinMark
           key={p.id}
           pin={p}
           k={k}
           lang={lang}
           open={p.id === openId}
+          openScale={openScale}
           seen={visited.has(p.id)}
           onClick={() => onPin(p.id)}
         />
@@ -142,6 +147,7 @@ export function WorldMap({
 function PinMark({
   pin,
   k,
+  openScale,
   lang,
   open,
   seen,
@@ -149,12 +155,13 @@ function PinMark({
 }: {
   pin: Pin;
   k: number;
+  openScale: number;
   lang: Lang;
   open: boolean;
   seen: boolean;
   onClick: () => void;
 }) {
-  const s = k * (open ? 1.35 : 1);
+  const s = k * (open ? openScale : 1);
   return (
     <g
       className="tm-pin"
@@ -227,6 +234,8 @@ interface CloudProps {
   onReadMore: (lessonId: string) => void;
   style?: React.CSSProperties;
   cloudRef?: React.Ref<HTMLDivElement>;
+  /** Show Otto inside the cloud, telling the line. */
+  otto?: boolean;
 }
 
 /** White scalloped cloud that sizes itself to its content. */
@@ -271,11 +280,30 @@ export function CloudShell({
   );
 }
 
-export function ThoughtCloud({ pin, lang, onClose, onReadMore, style, cloudRef }: CloudProps) {
+export function ThoughtCloud({
+  pin,
+  lang,
+  onClose,
+  onReadMore,
+  style,
+  cloudRef,
+  otto = false,
+}: CloudProps) {
   const line = resolveText(pin.event.summary, lang);
   const lessonId = pin.event.lessonId;
   return (
-    <CloudShell style={style} cloudRef={cloudRef} key={pin.id}>
+    <CloudShell
+      style={style}
+      cloudRef={cloudRef}
+      key={pin.id}
+      className={otto ? "tm-cloud-otto" : ""}
+    >
+      {otto && (
+        <div className="tm-cloud-face" aria-hidden="true">
+          <Otto size={64} mood="think" />
+        </div>
+      )}
+      <div className="tm-cloud-body">
         <div className="tm-cloud-head">
           <span>
             {resolveText(pin.place, lang)}, {resolveText(pin.event.year, lang)}
@@ -322,6 +350,7 @@ export function ThoughtCloud({ pin, lang, onClose, onReadMore, style, cloudRef }
             </button>
           )}
         </div>
+      </div>
     </CloudShell>
   );
 }

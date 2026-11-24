@@ -8,8 +8,10 @@ import type { Lang } from "../progress";
 import "./proto.css";
 import { lessonTitle, S } from "./shared";
 import { VariantA, VariantB, VariantC } from "./variants";
+import { VariantD } from "./variantD";
 
 const VARIANTS = [
+  { key: "D", name: "Mix of A, B and C", C: VariantD },
   { key: "A", name: "Cloud at the pin", C: VariantA },
   { key: "B", name: "Otto thinks it", C: VariantB },
   { key: "C", name: "Zoom into a region", C: VariantC },
@@ -27,7 +29,7 @@ interface Props {
 
 /** Mounted by the World Timeline button on the prototype branch, and by the standalone page. */
 export function TimelineMapPrototype({ lang, onLang: setLang, onClose }: Props) {
-  const [variant, setVariant] = useState(readParam("variant", "A"));
+  const [variant, setVariant] = useState(readParam("variant", "D"));
   const [toast, setToast] = useState<string | null>(null);
   const i = Math.max(
     0,
@@ -47,6 +49,7 @@ export function TimelineMapPrototype({ lang, onLang: setLang, onClose }: Props) 
     const onKey = (e: KeyboardEvent) => {
       const el = document.activeElement;
       if (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) return;
+      if (el?.getAttribute("role") === "slider") return;
       if (e.key === "ArrowLeft") go(-1);
       if (e.key === "ArrowRight") go(1);
     };

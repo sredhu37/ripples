@@ -268,3 +268,194 @@
   font-size: 16px;
   cursor: pointer;
 }
+
+/* D: cloud with Otto */
+.tm-cloud-otto .tm-cloud-inner {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.tm-cloud-face {
+  flex: none;
+  margin: -4px 0 0 -6px;
+}
+.tm-cloud-body {
+  flex: 1;
+  min-width: 0;
+}
+
+/* D: map you can move */
+.tm-d-stage {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+.tm-d-stage .tm-map {
+  height: 100%;
+}
+.tm-d-stage:active {
+  cursor: grabbing;
+}
+.tm-d-stage .tm-map {
+  border-radius: 14px;
+}
+.tm-zoom {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 4;
+}
+.tm-zoom-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: 2px solid var(--ink);
+  background: #fff;
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.tm-zoom-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* D: decade slider that looks clickable */
+.tm-ds {
+  user-select: none;
+  -webkit-user-select: none;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  padding: 10px 12px 6px;
+}
+.tm-ds-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin-bottom: 4px;
+}
+.tm-ds-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tm-ds-arrow {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--teal);
+  background: #fff;
+  color: var(--teal-dark);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  margin-bottom: 22px;
+}
+.tm-ds-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.tm-ds-track {
+  position: relative;
+  flex: 1;
+  height: 74px;
+  margin: 0 22px;
+  cursor: pointer;
+  touch-action: none;
+  outline: none;
+}
+.tm-ds-track:focus-visible .tm-ds-thumb {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+}
+.tm-ds-line,
+.tm-ds-fill {
+  position: absolute;
+  left: 0;
+  top: 22px;
+  height: 10px;
+  border-radius: 5px;
+}
+.tm-ds-line {
+  right: 0;
+  background: #d7e4e7;
+  border: 2px solid var(--ink);
+  top: 20px;
+  height: 14px;
+  border-radius: 7px;
+}
+.tm-ds-fill {
+  background: var(--orange);
+  transition: width 160ms ease-out;
+}
+.tm-ds-stop {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 64px;
+}
+.tm-ds-dot {
+  margin-top: 19px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--ink);
+}
+.tm-ds-label {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #4b6168;
+  white-space: nowrap;
+}
+.tm-ds-stop.on .tm-ds-label {
+  color: var(--ink);
+  font-weight: 800;
+}
+.tm-ds-thumb {
+  position: absolute;
+  top: 5px;
+  width: 44px;
+  height: 44px;
+  margin-left: -22px;
+  border-radius: 50%;
+  background: var(--orange-dark);
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px var(--ink);
+  display: grid;
+  place-items: center;
+  transition: left 160ms ease-out;
+  pointer-events: none;
+}
+@media (max-width: 600px) {
+  .tm-ds-arrow {
+    width: 40px;
+    height: 40px;
+  }
+  .tm-ds-track {
+    margin: 0 14px;
+  }
+  .tm-ds-label {
+    font-size: 0.7rem;
+  }
+  .tm-ds-stop:not(.on):not(:nth-child(3)):not(:nth-last-child(2)) .tm-ds-label {
+    visibility: hidden;
+  }
+}
+
+/* Prototype chrome steps aside while a cloud is open. */
+.tm-screen:has(.tm-cloud .tm-read) .tm-switcher {
+  display: none;
+}

@@ -21,7 +21,7 @@ export interface VariantProps {
   onReadMore: (lessonId: string) => void;
 }
 
-function useExplore(startIndex = 4) {
+export function useExplore(startIndex = 4) {
   const [index, setIndex] = useState(startIndex);
   const [openId, setOpenId] = useState<string | null>(null);
   const [visited, setVisited] = useState<Set<string>>(new Set());
@@ -45,8 +45,8 @@ function useExplore(startIndex = 4) {
 const CLOUD_W = 300;
 
 /** Where a cloud goes for a pin at screen point (px, py) on a W x H stage, plus its trail dots. */
-function cloudPlacement(px: number, py: number, W: number, H: number) {
-  const cw = Math.min(CLOUD_W, W - 16);
+export function cloudPlacement(px: number, py: number, W: number, H: number, maxW = CLOUD_W) {
+  const cw = Math.min(maxW, W - 16);
   const left = Math.max(8, Math.min(W - cw - 8, px - cw / 2));
   const roomAbove = py - 58;
   const roomBelow = H - py - 34;
@@ -66,7 +66,7 @@ function cloudPlacement(px: number, py: number, W: number, H: number) {
   return { style, dots };
 }
 
-function TrailDots({ dots }: { dots: { x: number; y: number; r: number }[] }) {
+export function TrailDots({ dots }: { dots: { x: number; y: number; r: number }[] }) {
   return (
     <>
       {dots.map((d, i) => (
@@ -230,13 +230,13 @@ function PlaceTag({ pin, lang, k }: { pin: Pin; lang: Lang; k: number }) {
 
 /* ---------- C: close pins group into a bubble; tap to zoom into the region ---------- */
 
-interface Cluster {
+export interface Cluster {
   pins: Pin[];
   x: number;
   y: number;
 }
 
-function clusterPins(pins: Pin[], radius = 48): Cluster[] {
+export function clusterPins(pins: Pin[], radius = 48): Cluster[] {
   const out: Cluster[] = [];
   for (const p of pins) {
     const c = out.find((k) => Math.hypot(k.x - p.x, k.y - p.y) < radius);
