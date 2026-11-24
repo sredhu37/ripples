@@ -1504,6 +1504,7 @@ mark.term {
   background: #eef4f5;
   border-radius: 8px;
   padding: 6px 4px;
+  min-height: 60px;
   font: inherit;
   font-size: 0.8rem;
   font-weight: 700;
@@ -1523,7 +1524,7 @@ mark.term {
   display: block;
   width: calc(100% - 100% / 22);
   margin: 0 calc(50% / 22);
-  height: 36px;
+  height: 60px;
   background: transparent;
   appearance: none;
   -webkit-appearance: none;
@@ -1565,13 +1566,10 @@ mark.term {
 .time-stop {
   flex: 1 1 0;
   min-width: 0;
-  min-height: 44px;
+  display: flex;
+  justify-content: center;
   padding: 2px 0;
-  border: 0;
-  background: transparent;
-  font: inherit;
   font-size: 0.7rem;
-  cursor: pointer;
   color: #4b6b72;
 }
 .time-stop-label {
@@ -1585,13 +1583,14 @@ mark.term {
   color: var(--orange-dark);
   font-weight: 800;
 }
-.time-stop:focus-visible {
-  outline: 3px solid var(--orange);
-}
 .time-steps {
   display: flex;
   justify-content: space-between;
   margin-top: 6px;
+}
+.time-steps .chip {
+  min-height: 60px;
+  min-width: 60px;
 }
 .time-steps .chip:disabled {
   opacity: 0.4;

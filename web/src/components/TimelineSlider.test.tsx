@@ -23,7 +23,7 @@ async function mount(lang: "en" | "de" | "pl" = "en", start = 0) {
   return container;
 }
 
-const stops = (c: HTMLElement) => c.querySelectorAll<HTMLButtonElement>(".time-stop");
+const stops = (c: HTMLElement) => c.querySelectorAll<HTMLElement>(".time-stop");
 const range = (c: HTMLElement) => c.querySelector<HTMLInputElement>("input[type=range]")!;
 const step = (c: HTMLElement, label: RegExp) =>
   Array.from(c.querySelectorAll<HTMLButtonElement>(".time-steps button")).find((b) =>
@@ -31,7 +31,7 @@ const step = (c: HTMLElement, label: RegExp) =>
   )!;
 
 describe("TimelineSlider", () => {
-  it("shows the box, hint and one button per stop", async () => {
+  it("shows the box, hint and one label per stop", async () => {
     const c = await mount();
     expect(c.textContent).toContain("Pick a time");
     expect(c.textContent).toContain("Tap a year");
@@ -39,10 +39,19 @@ describe("TimelineSlider", () => {
     expect(stops(c)[0].textContent).toBe("3000 BCE");
   });
 
-  it("picks a stop by tapping it and fills up to it", async () => {
+  it("stop labels are not tappable and are hidden from screen readers", async () => {
     const c = await mount();
-    await act(async () => stops(c)[9].click());
-    expect(stops(c)[9].getAttribute("aria-pressed")).toBe("true");
+    expect(c.querySelectorAll(".time-stops button")).toHaveLength(0);
+    expect(c.querySelector(".time-stops")!.getAttribute("aria-hidden")).toBe("true");
+  });
+
+  it("clamps an out-of-range index", async () => {
+    const c = await mount("en", 99);
+    expect(range(c).value).toBe(String(TIMELINE_STOPS.length - 1));
+  });
+
+  it("fills up to the current stop", async () => {
+    const c = await mount("en", 9);
     expect(range(c).value).toBe("9");
     expect(c.querySelectorAll(".time-stop-past")).toHaveLength(10);
     expect(c.querySelector<HTMLElement>(".time-track")!.style.getPropertyValue("--fill")).toBe(
@@ -58,7 +67,7 @@ describe("TimelineSlider", () => {
       set.call(input, "4");
       input.dispatchEvent(new Event("input", { bubbles: true }));
     });
-    expect(stops(c)[4].getAttribute("aria-pressed")).toBe("true");
+    expect(stops(c)[4].className).toContain("time-stop-on");
     expect(input.getAttribute("aria-valuetext")).toContain("Global Trade and Empires");
   });
 

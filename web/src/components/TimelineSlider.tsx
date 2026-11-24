@@ -13,16 +13,18 @@ interface Props {
 
 const LAST = TIMELINE_STOPS.length - 1;
 
-/** The 22-stop slider with the era band above it. */
-export function TimelineSlider({ lang, index, onChange }: Props) {
-  const current = TIMELINE_STOPS[index];
-  const fill = (index / LAST) * 100;
+const eras = TIMELINE_ERAS.map((era) => {
+  const first = TIMELINE_STOPS.findIndex((s) => s.era === era.id);
+  const count = TIMELINE_STOPS.filter((s) => s.era === era.id).length;
+  return { era, first, count };
+});
 
-  const eras = TIMELINE_ERAS.map((era) => {
-    const first = TIMELINE_STOPS.findIndex((s) => s.era === era.id);
-    const count = TIMELINE_STOPS.filter((s) => s.era === era.id).length;
-    return { era, first, count };
-  });
+/** The 22-stop slider with the era band above it. */
+export function TimelineSlider({ lang, index: rawIndex, onChange }: Props) {
+  const index = Math.min(LAST, Math.max(0, Math.round(rawIndex) || 0));
+  const current = TIMELINE_STOPS[index];
+  const currentEra = eras.find((e) => e.era.id === current.era)!.era;
+  const fill = (index / LAST) * 100;
 
   return (
     <section className="time-slider" aria-label={t(lang, "pickTime")}>
@@ -54,22 +56,19 @@ export function TimelineSlider({ lang, index, onChange }: Props) {
           value={index}
           aria-label={t(lang, "pickTime")}
           aria-valuetext={`${resolveText(current.label, lang)}, ${resolveText(
-            TIMELINE_ERAS.find((e) => e.id === current.era)!.label,
+            currentEra.label,
             lang,
           )}`}
           onChange={(e) => onChange(Number(e.target.value))}
         />
-        <div className="time-stops" role="group" aria-label={t(lang, "timeStops")}>
+        <div className="time-stops" aria-hidden="true">
           {TIMELINE_STOPS.map((s, i) => (
-            <button
+            <span
               key={s.year}
-              type="button"
               className={`time-stop${i === index ? " time-stop-on" : ""}${i <= index ? " time-stop-past" : ""}`}
-              aria-pressed={i === index}
-              onClick={() => onChange(i)}
             >
               <span className="time-stop-label">{resolveText(s.label, lang)}</span>
-            </button>
+            </span>
           ))}
         </div>
       </div>
