@@ -11,7 +11,18 @@ const pin = (id: string) => {
 describe("pins", () => {
   it("has one pin per event, in the same order", () => {
     expect(PINS.map((p) => p.id)).toEqual(TIMELINE_EVENTS.map((e) => e.id));
+    expect(new Set(PINS.map((p) => p.id)).size).toBe(PINS.length);
     for (const id of ["indus", "giza", "athens", "ww2", "chatgpt"]) pin(id);
+  });
+
+  it("has 4 to 8 pins in at least 3 countries for every decade from the 1990s to the 2020s", () => {
+    const decades = pinsByStop().filter((g) => g.stop.year >= 1990);
+    expect(decades.map((g) => g.stop.year)).toEqual([1990, 2000, 2010, 2020]);
+    for (const g of decades) {
+      expect(g.pins.length, `${g.stop.year}s pins`).toBeGreaterThanOrEqual(4);
+      expect(g.pins.length, `${g.stop.year}s pins`).toBeLessThanOrEqual(8);
+      expect(g.countries.length, `${g.stop.year}s countries`).toBeGreaterThanOrEqual(3);
+    }
   });
 
   it("has 4 to 8 pins in at least 3 countries at each of the 9 stops before 1900", () => {
@@ -24,7 +35,7 @@ describe("pins", () => {
     }
   });
 
-  it("keeps the original 55 event ids", () => {
+  it("keeps the original event ids", () => {
     for (const id of ["indus", "giza", "ww2", "holocaust", "india1947", "wall", "chatgpt"]) {
       expect(
         PINS.some((p) => p.id === id),

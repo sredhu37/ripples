@@ -1121,7 +1121,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T(
       "The first small satellite circles Earth and beeps, and the space age begins.",
       "Der erste kleine Satellit umkreist die Erde und piept, und das Raumfahrtzeitalter beginnt.",
-      "Pierwszy mały satelita krąży wokół Ziemi i piszczy, a zaczyna się era kosmiczna.",
+      "Pierwszy mały satelita krąży wokół Ziemi i wysyła sygnał, a zaczyna się era kosmiczna.",
     ),
   ),
   ev(
@@ -1181,7 +1181,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     "twentieth",
     "science",
     T("1978", "1978", "1978"),
-    T("The first test-tube baby", "Das erste Retortenbaby", "Pierwsze dziecko z probówki"),
+    T("The first test-tube baby", "Das erste Baby aus dem Labor", "Pierwsze dziecko z probówki"),
     T(
       "Doctors in England help a baby start to grow in a lab dish, and a healthy girl is born.",
       "Ärzte in England helfen einem Baby, in einer Laborschale zu wachsen, und ein gesundes Mädchen wird geboren.",
@@ -1196,7 +1196,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("The Walkman", "Der Walkman", "Walkman"),
     T(
       "A small player lets people carry their music in a pocket and listen with headphones.",
-      "Ein kleiner Spieler lässt Menschen ihre Musik in der Tasche tragen und mit Kopfhörern hören.",
+      "Ein kleines Abspielgerät lässt Menschen ihre Musik in der Tasche tragen und mit Kopfhörern hören.",
       "Mały odtwarzacz pozwala nosić muzykę w kieszeni i słuchać jej w słuchawkach.",
     ),
   ),
@@ -1241,6 +1241,66 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Naukowiec w Szwajcarii łączy strony, aby każdy mógł je czytać.",
     ),
     "internet",
+  ),
+  ev(
+    "hubble",
+    "digital",
+    "science",
+    T("1990", "1990", "1990"),
+    T(
+      "Hubble Space Telescope launches",
+      "Das Weltraumteleskop Hubble startet",
+      "Startuje Kosmiczny Teleskop Hubble'a",
+    ),
+    T(
+      "A telescope in space sends back sharp pictures of faraway stars.",
+      "Ein Teleskop im Weltall schickt scharfe Bilder von fernen Sternen zur Erde.",
+      "Teleskop w kosmosie przesyła ostre zdjęcia dalekich gwiazd.",
+    ),
+  ),
+  ev(
+    "liberalisation1991",
+    "digital",
+    "india",
+    T("1991", "1991", "1991"),
+    T(
+      "India opens its economy",
+      "Indien öffnet seine Wirtschaft",
+      "Indie otwierają swoją gospodarkę",
+    ),
+    T(
+      "Shops and firms in India can trade with the world more freely.",
+      "Läden und Firmen in Indien können freier mit der ganzen Welt Handel treiben.",
+      "Sklepy i firmy w Indiach mogą swobodniej handlować z całym światem.",
+    ),
+  ),
+  ev(
+    "mandela1994",
+    "digital",
+    "mideast_africa",
+    T("1994", "1994", "1994"),
+    T(
+      "South Africa votes together",
+      "Südafrika wählt gemeinsam",
+      "Republika Południowej Afryki głosuje razem",
+    ),
+    T(
+      "For the first time, everyone in South Africa can vote in the same election.",
+      "Zum ersten Mal dürfen alle Menschen in Südafrika bei derselben Wahl abstimmen.",
+      "Po raz pierwszy wszyscy w Republice Południowej Afryki mogą głosować w tych samych wyborach.",
+    ),
+  ),
+  ev(
+    "dolly",
+    "digital",
+    "science",
+    T("1996", "1996", "1996"),
+    T("Dolly the sheep is born", "Das Schaf Dolly wird geboren", "Rodzi się owca Dolly"),
+    T(
+      "Scientists in Scotland grow a lamb that is a copy of another sheep.",
+      "Forscher in Schottland ziehen ein Lamm groß, das eine Kopie eines anderen Schafs ist.",
+      "Naukowcy w Szkocji wychowują jagnię, które jest kopią innej owcy.",
+    ),
   ),
   ev(
     "euro",
@@ -1310,6 +1370,50 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
   ),
   ev(
+    "higgs",
+    "digital",
+    "science",
+    T("2012", "2012", "2012"),
+    T(
+      "Scientists find the Higgs boson",
+      "Forscher finden das Higgs-Teilchen",
+      "Naukowcy znajdują bozon Higgsa",
+    ),
+    T(
+      "A huge machine under Switzerland and France shows a tiny particle that gives things weight.",
+      "Eine riesige Maschine unter der Schweiz und Frankreich zeigt ein winziges Teilchen, das den Dingen Gewicht gibt.",
+      "Ogromna maszyna pod Szwajcarią i Francją pokazuje malutką cząstkę, która nadaje rzeczom masę.",
+    ),
+  ),
+  ev(
+    "rosetta",
+    "digital",
+    "science",
+    T("2014", "2014", "2014"),
+    T("A probe lands on a comet", "Eine Sonde landet auf einem Kometen", "Sonda ląduje na komecie"),
+    T(
+      "A small lander from Europe touches down on a comet far from Earth.",
+      "Ein kleines Landegerät aus Europa setzt auf einem Kometen weit weg von der Erde auf.",
+      "Mały lądownik z Europy osiada na komecie daleko od Ziemi.",
+    ),
+  ),
+  ev(
+    "paris2015",
+    "digital",
+    "europe",
+    T("2015", "2015", "2015"),
+    T(
+      "The Paris climate agreement",
+      "Das Pariser Klimaabkommen",
+      "Porozumienie klimatyczne z Paryża",
+    ),
+    T(
+      "Almost every country promises to work together against a warming planet.",
+      "Fast alle Länder versprechen, gemeinsam gegen die Erwärmung der Erde zu arbeiten.",
+      "Prawie wszystkie kraje obiecują wspólnie działać przeciw ocieplaniu planety.",
+    ),
+  ),
+  ev(
     "upi",
     "digital",
     "india",
@@ -1342,6 +1446,54 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Komputery potrafią teraz pisać i odpowiadać na pytania prostymi słowami.",
     ),
     "ai",
+  ),
+  ev(
+    "covidvaccine",
+    "digital",
+    "science",
+    T("2020", "2020", "2020"),
+    T(
+      "The first COVID-19 vaccines",
+      "Die ersten Corona-Impfstoffe",
+      "Pierwsze szczepionki na COVID-19",
+    ),
+    T(
+      "Doctors give the first shots that protect people from a new illness.",
+      "Ärztinnen und Ärzte geben die ersten Impfungen, die Menschen vor einer neuen Krankheit schützen.",
+      "Lekarze podają pierwsze szczepionki, które chronią ludzi przed nową chorobą.",
+    ),
+  ),
+  ev(
+    "webb",
+    "digital",
+    "science",
+    T("2021", "2021", "2021"),
+    T(
+      "The James Webb Space Telescope launches",
+      "Das James-Webb-Weltraumteleskop startet",
+      "Startuje Kosmiczny Teleskop Jamesa Webba",
+    ),
+    T(
+      "A giant space telescope flies off to see the oldest light in the sky.",
+      "Ein riesiges Weltraumteleskop fliegt los, um das älteste Licht am Himmel zu sehen.",
+      "Wielki teleskop kosmiczny leci, by zobaczyć najstarsze światło na niebie.",
+    ),
+  ),
+  ev(
+    "chandrayaan3",
+    "digital",
+    "india",
+    T("2023", "2023", "2023"),
+    T(
+      "Chandrayaan-3 lands near the Moon's south pole",
+      "Chandrayaan-3 landet nahe dem Südpol des Mondes",
+      "Chandrayaan-3 ląduje przy biegunie południowym Księżyca",
+    ),
+    T(
+      "An Indian lander softly touches down in a part of the Moon no one had reached.",
+      "Ein indisches Landegerät setzt sanft in einer Gegend des Mondes auf, die noch niemand erreicht hatte.",
+      "Indyjski lądownik miękko osiada w miejscu na Księżycu, do którego nikt jeszcze nie dotarł.",
+    ),
   ),
 ];
 
