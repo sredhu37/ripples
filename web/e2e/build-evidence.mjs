@@ -90,6 +90,13 @@ function makeVideo(videos, file) {
 /** Replaced in pr-checks.yml (job demo) with the evidence branch commit, once it is pushed. */
 export const EVIDENCE_SHA = "__EVIDENCE_SHA__";
 
+/**
+ * GitHub rejects a comment over 65536 characters. One screenshot line is about 200 characters,
+ * so a PR touching 5 or more lessons (3 languages each) would go over. The margin covers the
+ * evidence commit sha that replaces EVIDENCE_SHA later.
+ */
+export const COMMENT_LIMIT = 60_000;
+
 export function commentBody({
   runs,
   hasVideo,
@@ -121,14 +128,53 @@ export function commentBody({
       : "No video artifact was uploaded.",
     "",
   );
-  for (const r of runs) {
-    lines.push(`<details><summary>${r.name}: ${r.steps.length} steps</summary>`, "");
-    for (const s of r.steps) {
-      lines.push(`<img src="${raw(`${r.name}/${s}`)}" width="400" alt="${r.name} ${s}">`);
-    }
-    lines.push("", "</details>", "");
+  // Runs are shown inline in screen order while they fit. Each run after that gets one link to
+  // its folder on the evidence branch, so the comment stays under COMMENT_LIMIT.
+  const folder = (r) => `https://github.com/${repo}/tree/evidence/pr-${pr}/${r.name}`;
+  const linkLine = (r) => `- [${r.name}](${folder(r)}): ${r.steps.length} steps`;
+  const inline = (r) =>
+    [
+      `<details><summary>${r.name}: ${r.steps.length} steps</summary>`,
+      "",
+      ...r.steps.map(
+        (s) => `<img src="${raw(`${r.name}/${s}`)}" width="400" alt="${r.name} ${s}">`,
+      ),
+      "",
+      "</details>",
+      "",
+    ].join("\n");
+  const linkHeader = (n) =>
+    `<details><summary>${n} more runs: screenshots on the evidence branch</summary>\n`;
+  const linkFooter = "\n</details>\n";
+
+  const links = runs.map(linkLine);
+  // linksAfter[i]: room needed to link runs i..end, header and footer included.
+  const linksAfter = runs.map((_, i) => {
+    const rest = links.slice(i);
+    return rest.length === 0
+      ? 0
+      : linkHeader(rest.length).length + rest.join("\n").length + 2 + linkFooter.length;
+  });
+  let text = lines.join("\n") + "\n";
+  let shown = 0;
+  for (const [i, r] of runs.entries()) {
+    const block = inline(r) + "\n";
+    const after = i + 1 < runs.length ? linksAfter[i + 1] : 0;
+    if (text.length + block.length + after > COMMENT_LIMIT) break;
+    text += block;
+    shown = i + 1;
   }
-  return lines.join("\n");
+  if (shown < runs.length) {
+    const rest = links.slice(shown);
+    text += [linkHeader(rest.length), ...rest, linkFooter].join("\n");
+  }
+  if (text.length > COMMENT_LIMIT) {
+    // Only with hundreds of runs: even the links do not fit. Point at the whole PR folder.
+    const all = `https://github.com/${repo}/tree/evidence/pr-${pr}`;
+    const note = `\n\nCut at the comment size limit. [All screenshots](${all}).\n`;
+    text = text.slice(0, COMMENT_LIMIT - note.length) + note;
+  }
+  return text;
 }
 
 function main() {
