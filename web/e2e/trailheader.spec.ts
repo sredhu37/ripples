@@ -32,6 +32,11 @@ for (const size of WIDTHS) {
     }));
     expect(widths.scroll).toBe(widths.view);
 
+    // Profile switch and labelled buttons meet the 60px touch target.
+    for (const c of [profile, ...(await page.locator(".labeled-btn").all())]) {
+      expect((await c.boundingBox())!.height).toBeGreaterThanOrEqual(60);
+    }
+
     // Every control is at least 44x44 and a click lands on it (no force).
     const controls = [
       profile,
