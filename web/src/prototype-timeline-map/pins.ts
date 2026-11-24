@@ -33,7 +33,7 @@ interface PinSpec {
 
 const SPECS: PinSpec[] = [
   { id: "wright", decade: 1900, place: T("USA", "USA", "USA"), lon: -75.7, lat: 36.0 },
-  { id: "ww1", decade: 1910, place: T("Europe", "Europa", "Europa"), lon: 3.0, lat: 50.3 },
+  { id: "ww1", decade: 1910, place: T("France", "Frankreich", "Francja"), lon: 3.0, lat: 50.3 },
   { id: "gandhi1915", decade: 1910, place: T("India", "Indien", "Indie"), lon: 72.8, lat: 19.0 },
   {
     id: "revolution1917",
@@ -43,28 +43,28 @@ const SPECS: PinSpec[] = [
     lat: 59.9,
   },
   { id: "ottoman1922", decade: 1920, place: T("Turkey", "Türkei", "Turcja"), lon: 29.0, lat: 41.0 },
-  { id: "penicillin", decade: 1920, place: T("London", "London", "Londyn"), lon: -0.2, lat: 51.5 },
+  { id: "penicillin", decade: 1920, place: T("United Kingdom", "Großbritannien", "Wielka Brytania"), lon: -0.2, lat: 51.5 },
   { id: "ww2", decade: 1940, place: T("Germany", "Deutschland", "Niemcy"), lon: 13.4, lat: 52.5 },
   {
     id: "holocaust",
     decade: 1940,
-    place: T("Occupied Poland", "Besetztes Polen", "Okupowana Polska"),
+    place: T("Poland", "Polen", "Polska"),
     lon: 19.2,
     lat: 50.0,
   },
   {
     id: "marshall1948",
     decade: 1940,
-    place: T("Western Europe", "Westeuropa", "Europa Zachodnia"),
+    place: T("France", "Frankreich", "Francja"),
     lon: 2.3,
     lat: 48.9,
   },
   { id: "quitindia", decade: 1940, place: T("India", "Indien", "Indie"), lon: 72.8, lat: 19.0 },
-  { id: "bengal1943", decade: 1940, place: T("Bengal", "Bengalen", "Bengal"), lon: 88.4, lat: 22.6 },
+  { id: "bengal1943", decade: 1940, place: T("India", "Indien", "Indie"), lon: 88.4, lat: 22.6 },
   { id: "india1947", decade: 1940, place: T("India", "Indien", "Indie"), lon: 77.2, lat: 28.6 },
   { id: "atom", decade: 1940, place: T("Japan", "Japan", "Japonia"), lon: 132.5, lat: 34.4 },
   { id: "prc", decade: 1940, place: T("China", "China", "Chiny"), lon: 116.4, lat: 39.9 },
-  { id: "africa1960", decade: 1960, place: T("Africa", "Afrika", "Afryka"), lon: 3.4, lat: 6.5 },
+  { id: "africa1960", decade: 1960, place: T("Nigeria", "Nigeria", "Nigeria"), lon: 3.4, lat: 6.5 },
   { id: "moon", decade: 1960, place: T("USA", "USA", "USA"), lon: -80.6, lat: 28.6 },
 ];
 

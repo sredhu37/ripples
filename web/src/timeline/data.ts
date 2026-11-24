@@ -703,7 +703,11 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     "twentieth",
     "india",
     T("1915", "1915", "1915"),
-    T("Gandhi returns to India", "Gandhi kehrt nach Indien zurueck", "Gandhi wraca do Indii"),
+    T(
+      "Mahatma Gandhi returns to India",
+      "Mahatma Gandhi kehrt nach Indien zurück",
+      "Mahatma Gandhi wraca do Indii",
+    ),
     T(
       "A lawyer comes home from South Africa with a plan to protest peacefully.",
       "Ein Anwalt kehrt aus Suedafrika mit dem Plan zurueck, friedlich zu protestieren.",
@@ -760,9 +764,9 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("1942", "1942", "1942"),
     T("The Quit India Movement", "Die Quit-India-Bewegung", "Ruch Quit India"),
     T(
-      "While Europe is at war, Gandhi asks the British to leave India.",
-      "Waehrend Europa im Krieg ist, bittet Gandhi die Briten, Indien zu verlassen.",
-      "Gdy Europa jest w stanie wojny, Gandhi prosi Brytyjczyków o opuszczenie Indii.",
+      "While Europe is at war, Mahatma Gandhi asks the British to leave India.",
+      "Während Europa im Krieg ist, bittet Mahatma Gandhi die Briten, Indien zu verlassen.",
+      "Gdy Europa jest w stanie wojny, Mahatma Gandhi prosi Brytyjczyków o opuszczenie Indii.",
     ),
     "independence",
   ),

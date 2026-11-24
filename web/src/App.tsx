@@ -25,7 +25,7 @@ import { LessonRunner } from "./lesson/LessonRunner";
 import { LESSONS } from "./lessons";
 import { LessonPlaceholder } from "./components/LessonPlaceholder";
 import { MapScreen } from "./components/MapScreen";
-import { TimelineScreen } from "./components/TimelineScreen";
+import { TimelineMapPrototype } from "./prototype-timeline-map/TimelineMapPrototype";
 import { emptyProgress, progressFromProfile, toggleLesson, type Lang } from "./progress";
 import { setMuted } from "./sound";
 import { stopSpeaking } from "./speech";
@@ -241,7 +241,7 @@ export function App() {
 
     if (screen.kind === "timeline") {
       return (
-        <TimelineScreen
+        <TimelineMapPrototype
           lang={progress.lang}
           onLang={setLang}
           onClose={() => setScreen({ kind: "map" })}
