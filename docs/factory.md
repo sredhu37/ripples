@@ -193,7 +193,7 @@ review passed ──► any changed file on the risky list? ──yes──► f
 
 **Risky list** (`.github/gate-paths.txt`, one pattern per line; the file is on its own list):
 
-`web/src/progress.ts`, `web/public/sw.js`, `web/public/manifest.webmanifest`, `package.json`, `package-lock.json`, `web/package.json`, `web/package-lock.json`, `server/package.json`, `server/package-lock.json`, `web/vite.config.ts`, `.github/**`, `AGENTS.md`, `CLAUDE.md`, `.claude/**`, `ARCHITECTURE.md`, `docs/**`, `LICENSE`, `LICENSE-CONTENT.txt`, `LICENSING.md`.
+`web/src/progress.ts`, `web/public/sw.js`, `web/public/manifest.webmanifest`, `package.json`, `package-lock.json`, `web/package.json`, `web/package-lock.json`, `server/package.json`, `server/package-lock.json`, `web/vite.config.ts`, `.github/**`, `AGENTS.md`, `CLAUDE.md`, `.claude/**`, `docs/factory.md`, `docs/design.md`, `docs/writing-lessons.md`, `docs/adr/**`, `LICENSE`, `LICENSE-CONTENT.txt`, `LICENSING.md`.
 
 **Gate agent** (PRs outside the risky list):
 
