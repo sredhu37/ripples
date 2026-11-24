@@ -102,7 +102,7 @@
   <rect class="box" x="480" y="610" width="360" height="80" rx="8"/>
   <text x="660" y="633" text-anchor="middle" class="head">Needs human: factory:human</text>
   <text x="660" y="652" text-anchor="middle" class="small">Slack to Sunny, evidence video</text>
-  <text x="660" y="668" text-anchor="middle" class="small">Sunny approves: bot merges</text>
+  <text x="660" y="668" text-anchor="middle" class="small">Sunny approves: back to In review, bot merges</text>
   <text x="660" y="684" text-anchor="middle" class="small">Sunny comments: fix round, back to factory-build.yml</text>
 
   <!-- human approves: arrow into Bot squash merge -->

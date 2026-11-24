@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # The hourly scan: fill free slots with factory tickets, In review first, then In progress, then Ready.
+# Needs human: only a new approval of the current head, which goes back to factory-gate.yml approve.
 # Collects the board and the runs with gh, asks sweep/scan.mjs for the plan, and carries it out.
 # Spec: docs/factory.md, section Scan.
 #
@@ -13,12 +14,14 @@
 #        ONLY_ISSUE        optional: consider only this issue ("Run now" for one ticket)
 #        DRY_RUN           1: print the state and the plan, change nothing
 #        FACTORY_BOT       login that sets labels in factory workflows, default github-actions[bot]
+#        SUNNY             the account whose approval counts (default sredhu37)
 #        STATE_OUT         optional: also write the collected state json here
 set -euo pipefail
 
 here=$(cd "$(dirname "$0")" && pwd)
 shared="$here/../shared"
 bot=${FACTORY_BOT:-github-actions[bot]}
+sunny=${SUNNY:-sredhu37}
 max=${MAX_PARALLEL:-5}
 only=${ONLY_ISSUE:-}
 repo=${REPO:-${GITHUB_REPOSITORY:-}}
@@ -59,7 +62,11 @@ tickets_of_runs() {
        // (capture("PR #(?<m>[0-9]+)") | $issue_of_pr[.m])
      | select(. != null)] | unique'
 }
-tickets_of_runs "$tmp/runs.txt" > "$tmp/active.json"
+# An approval run (mode approve) ends by dispatching a scan for its ticket, so it does not count as
+# active: otherwise that scan would skip the ticket. A second approve run is harmless (it queues per
+# PR and then finds the ticket already back in In review).
+grep -v ' approve$' "$tmp/runs.txt" > "$tmp/runs-active.txt" || true
+tickets_of_runs "$tmp/runs-active.txt" > "$tmp/active.json"
 
 issues_with() {
   gh api --paginate "repos/$repo/issues?state=open&labels=$1&per_page=100" \
@@ -102,7 +109,10 @@ pr_facts() {
         summaryForHead: any($first[]; test("^<!-- factory-review round=[0-9]+ sha=" + $sha + " -->$")),
         gateForHead: any($first[]; . == "<!-- factory-gate sha=" + $sha + " -->"),
         updateForHead: any($first[]; startswith("<!-- factory-update sha=" + $sha + " ")),
-        conflict: ($p[0].mergeable == false),
+        approvedForHead: any($first[]; startswith("<!-- factory-approved sha=" + $sha + " ")),
+        # One read: null means GitHub is still computing it; the next scan reads again.
+        conflict: (if $p[0].mergeable == false or $p[0].mergeable_state == "dirty" then "yes"
+          elif $p[0].mergeable == true then "no" else "unknown" end),
         reviewStatus: ([$s[0].statuses[] | select(.context == "factory-review") | .state] | first // "none")
       }'
 }
@@ -145,6 +155,27 @@ for column in progress review; do
         continues: $f.continues, pr: $pr}')"
   done < <(issues_with "$label")
 done
+
+# Needs human: a factory PR approved by Sunny on its current head after the ticket last entered
+# Needs human (the loop guard: a failed attempt sends it back there, and the old approval no longer
+# counts). The relay normally handles an approval at once; GitHub starts no run for an approval of a
+# conflicting PR, so the scan picks those up.
+while read -r n updated; do
+  [ -n "$n" ] || continue
+  fpr=$(jq -c --argjson n "$n" '[.[] | select((.isCrossRepository | not) and .headRefName == "factory/issue-\($n)")][0] // null' "$tmp/prs.json")
+  [ "$fpr" != null ] || continue
+  prn=$(jq -r .number <<< "$fpr")
+  head=$(jq -r .headRefOid <<< "$fpr")
+  since=$(gh api --paginate "repos/$repo/issues/$n/timeline?per_page=100" | jq -rs '
+    [add // [] | .[] | select(.event == "labeled" and .label.name == "factory:human") | .created_at] | last // ""')
+  approval=$(gh api --paginate "repos/$repo/pulls/$prn/reviews?per_page=100" | jq -s --arg sunny "$sunny" \
+    --arg head "$head" --arg since "$since" '
+    [add // [] | .[] | select(.user.login == $sunny and .state != "COMMENTED" and .state != "PENDING")] | last
+    | . != null and .state == "APPROVED" and .commit_id == $head and .submitted_at > $since')
+  add_ticket "$(jq -nc --argjson n "$n" --arg u "$updated" --argjson prn "$prn" --argjson a "$approval" \
+    '{number: $n, column: "human", local: false, updatedAt: $u, blockers: 0, continues: 0,
+      pr: {number: $prn}, approval: $a}')"
+done < <(issues_with factory:human)
 
 jq -s --slurpfile active "$tmp/active.json" --arg now "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
   --argjson max "$max" --arg only "$only" '
@@ -195,6 +226,7 @@ $words
     fields+=("$f")
     args+=(-f "$f")
   done < <(jq -r '.inputs | to_entries[] | "\(.key)=\(.value)"' <<< "$action")
+  # approve and approved (Sunny's approval) are not continues: no comment, no cap.
   if [ "$kind" = continue ]; then
     count=$(( $(jq -r --argjson n "$issue" '.tickets[] | select(.number == $n) | .continues' "$tmp/state.json") + 1 ))
     gh issue comment "$issue" --repo "$repo" --body "<!-- factory-continue -->
