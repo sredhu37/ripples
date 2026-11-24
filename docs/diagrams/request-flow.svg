@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600" role="img" aria-labelledby="t d">
+<title id="t">A request, start to finish</title>
+<desc id="d">A child earns a badge. The app changes the screen at once, then sends POST /api/profiles/:id/badges with the session cookie. The edge forwards it to the Node API, Better Auth checks the session, Postgres adds the badge once and the profile comes back. A 401 sends the app to login.</desc>
+<style>
+svg{--bg:#f3fafb;--card:#ffffff;--line:#c4d6da;--grid:#d6e7ea;--ink:#1f343b;--mute:#587078;
+--teal:#168195;--teal-soft:#d9eff2;--orange:#d96f12;--orange-soft:#fde9d6;--green:#3a9047;--green-soft:#dff2e1;
+--red:#d23f3f;--on:#ffffff;--water:#cfe9ed;--shadow:#1f343b14}
+@media (prefers-color-scheme: dark){svg{--bg:#0d1d23;--card:#14292f;--line:#2b4a54;--grid:#16303a;--ink:#e9f5f6;--mute:#93b4bc;
+--teal:#47c6d8;--teal-soft:#17414b;--orange:#ffa14f;--orange-soft:#3d2b18;--green:#6fcb7d;--green-soft:#173a20;
+--red:#ff7070;--on:#0d1d23;--water:#173f49;--shadow:#00000040}}
+text{font-family:ui-rounded,'SF Pro Rounded',Nunito,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;fill:var(--ink)}
+.mono{font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+.bg{fill:var(--bg)}
+.gdot{fill:var(--grid)}
+.card{fill:var(--card);stroke:var(--line);stroke-width:1.5}
+.shadow{fill:var(--shadow)}
+.k-human{--c:var(--orange);--cs:var(--orange-soft)}
+.k-flow{--c:var(--teal);--cs:var(--teal-soft)}
+.k-done{--c:var(--green);--cs:var(--green-soft)}
+.k-bad{--c:var(--red);--cs:var(--red)}
+.edge{stroke:var(--c)}
+.halo{fill:none;stroke:var(--c);stroke-width:3.5;opacity:0}
+.nb{fill:var(--c)}
+.nt{font-size:13px;font-weight:800;fill:var(--on);text-anchor:middle}
+.pill{fill:var(--cs)}
+.pt{font-size:10.5px;font-weight:600;fill:var(--c);font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+.t-title{font-size:28px;font-weight:800}
+.t-sub{font-size:14px;fill:var(--mute)}
+.t-h{font-size:15px;font-weight:700}
+.t-b{font-size:12px;fill:var(--mute)}
+.t-m{font-size:11px;fill:var(--mute);font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+.t-lbl{font-size:11px;font-weight:700}
+.t-red{fill:var(--red)}
+.t-green{fill:var(--green)}
+.t-orange{fill:var(--orange)}
+.t-teal{fill:var(--teal)}
+.mid{text-anchor:middle}
+.rail{stroke:var(--line);stroke-width:2.5;fill:none}
+.link{stroke:var(--teal);stroke-width:2;fill:none}
+.fail{stroke:var(--red);stroke-width:2;fill:none;stroke-dasharray:6 6;animation:march 1s linear infinite}
+.lblbg{fill:var(--bg)}
+.dot-glow{fill:var(--dc);opacity:.28}
+.dot-core{fill:var(--dc)}
+.d-teal{--dc:var(--teal)}
+.d-green{--dc:var(--green)}
+.d-orange{--dc:var(--orange)}
+.d-red{--dc:var(--red)}
+.glyph{fill:var(--on)}
+.glyph-s{stroke:var(--on);fill:none;stroke-width:2.5;stroke-linecap:round}
+@keyframes march{to{stroke-dashoffset:-12}}
+@media (prefers-reduced-motion: reduce){
+  .dot{display:none}
+  .halo,.fail,.float,.ring,.bob,.eyes{animation:none!important}
+  .ring{opacity:0}
+}
+
+.k-mute{--c:var(--mute);--cs:var(--line)}
+.zone{fill:var(--card);stroke:var(--line);stroke-width:1.5;stroke-dasharray:5 6}
+.life{stroke:var(--line);stroke-width:2;stroke-dasharray:3 7;fill:none}
+.row{font-size:11.5px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;fill:var(--ink)}
+.rowk{font-size:11.5px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;fill:var(--mute)}
+.thin{stroke:var(--mute);stroke-width:1.5;fill:none;stroke-dasharray:3 4}
+@keyframes ha{0.00%{opacity:0.0}0.00%{opacity:0.0}3.00%{opacity:1.0}12.00%{opacity:0.0}62.00%{opacity:0.0}65.00%{opacity:1.0}74.00%{opacity:0.0}100.00%{opacity:0.0}}.ha{animation:ha 11s linear infinite}@keyframes he{0.00%{opacity:0.0}10.00%{opacity:0.0}13.00%{opacity:1.0}22.00%{opacity:0.0}52.00%{opacity:0.0}55.00%{opacity:1.0}64.00%{opacity:0.0}100.00%{opacity:0.0}}.he{animation:he 11s linear infinite}@keyframes hb{0.00%{opacity:0.0}17.00%{opacity:0.0}20.00%{opacity:1.0}24.00%{opacity:0.0}30.00%{opacity:0.0}33.00%{opacity:1.0}37.00%{opacity:0.0}44.00%{opacity:0.0}47.00%{opacity:1.0}51.00%{opacity:0.0}100.00%{opacity:0.0}}.hb{animation:hb 11s linear infinite}@keyframes hba{0.00%{opacity:0.0}23.00%{opacity:0.0}26.00%{opacity:1.0}35.00%{opacity:0.0}100.00%{opacity:0.0}}.hba{animation:hba 11s linear infinite}@keyframes hp{0.00%{opacity:0.0}37.00%{opacity:0.0}40.00%{opacity:1.0}49.00%{opacity:0.0}100.00%{opacity:0.0}}.hp{animation:hp 11s linear infinite}</style>
+<defs><pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" class="gdot"/></pattern><marker id="ah-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" style="stroke:var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="ah-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" style="stroke:var(--red)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="ah-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" style="stroke:var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="ah-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" style="stroke:var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="ah-line" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" style="stroke:var(--line)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker><marker id="ah-mute" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" style="stroke:var(--mute)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect class="bg" width="1200" height="600" rx="24"/>
+<rect width="1200" height="600" rx="24" fill="url(#g)"/>
+<text class="t-title" x="40" y="48">A request, start to finish</text>
+<text class="t-sub" x="40" y="72">Example: a child earns a badge. The screen changes first, the save follows.</text>
+<path class="fail" d="M745 188 C745 95 165 95 165 186" marker-end="url(#ah-red)"/>
+<rect class="lblbg" x="253" y="108" width="404" height="22" rx="11"/><text class="t-lbl t-red mid" x="455.0" y="123">or on failure: 401 back to login, no answer: "not saved" notice</text>
+<g class="k-done">
+<rect class="shadow" x="65" y="194" width="200" height="170" rx="16"/>
+<rect class="halo ha" x="61" y="186" width="208" height="178" rx="20"/>
+<rect class="card edge" x="65" y="190" width="200" height="170" rx="16"/>
+<circle class="nb" cx="89" cy="220" r="11.5"/><text class="nt" x="89" y="224.5">1</text>
+<text class="t-h" x="109" y="225">React app</text>
+<text class="t-m" x="81" y="244">web/src/api.ts</text>
+<text class="t-b" x="81" y="268">The screen changes at once.</text>
+<text class="t-b" x="81" y="285">fetch sends the call with</text>
+<text class="t-b" x="81" y="302">the session cookie (httpOnly,</text>
+<text class="t-b" x="81" y="319">the app never sees it).</text>
+</g>
+<g class="k-mute">
+<rect class="shadow" x="355" y="194" width="200" height="170" rx="16"/>
+<rect class="halo he" x="351" y="186" width="208" height="178" rx="20"/>
+<rect class="card edge" x="355" y="190" width="200" height="170" rx="16"/>
+<text class="t-h" x="371" y="222">Edge</text>
+<text class="t-m" x="371" y="244">forwards /api</text>
+<text class="t-b" x="371" y="268">dev: Vite proxy</text>
+<text class="t-b" x="371" y="285">Docker: nginx</text>
+<text class="t-b" x="371" y="302">npm start: none, the API</text>
+<text class="t-b" x="371" y="319">serves the app itself</text>
+</g>
+<g class="k-flow">
+<rect class="shadow" x="645" y="194" width="200" height="170" rx="16"/>
+<rect class="halo hb" x="641" y="186" width="208" height="178" rx="20"/>
+<rect class="card edge" x="645" y="190" width="200" height="170" rx="16"/>
+<circle class="nb" cx="669" cy="220" r="11.5"/><text class="nt" x="669" y="224.5">4</text>
+<text class="t-h" x="689" y="225">Node API</text>
+<text class="t-m" x="661" y="244">Hono, server/app.ts</text>
+<text class="t-b" x="661" y="268">requireFamily reads the</text>
+<text class="t-b" x="661" y="285">session, finds the family,</text>
+<text class="t-b" x="661" y="302">then the route runs.</text>
+</g>
+<g class="k-flow">
+<rect class="shadow" x="935" y="194" width="200" height="170" rx="16"/>
+<rect class="halo hp" x="931" y="186" width="208" height="178" rx="20"/>
+<rect class="card edge" x="935" y="190" width="200" height="170" rx="16"/>
+<circle class="nb" cx="959" cy="220" r="11.5"/><text class="nt" x="959" y="224.5">5</text>
+<text class="t-h" x="979" y="225">Postgres 17</text>
+<text class="t-m" x="951" y="244">server/db/profiles.ts</text>
+<text class="t-b" x="951" y="268">One SQL statement adds</text>
+<text class="t-b" x="951" y="285">the badge once, only to a</text>
+<text class="t-b" x="951" y="302">profile of this family.</text>
+</g>
+<path d="M268 252 H350" style="stroke:var(--teal)" stroke-width="2.5" fill="none" marker-end="url(#ah-teal)"/>
+<path d="M352 318 H270" style="stroke:var(--green)" stroke-width="2.5" fill="none" marker-end="url(#ah-green)"/>
+<path d="M558 252 H640" style="stroke:var(--teal)" stroke-width="2.5" fill="none" marker-end="url(#ah-teal)"/>
+<path d="M642 318 H560" style="stroke:var(--green)" stroke-width="2.5" fill="none" marker-end="url(#ah-green)"/>
+<path d="M848 252 H930" style="stroke:var(--teal)" stroke-width="2.5" fill="none" marker-end="url(#ah-teal)"/>
+<path d="M932 318 H850" style="stroke:var(--green)" stroke-width="2.5" fill="none" marker-end="url(#ah-green)"/>
+<circle cx="310" cy="230" r="11.5" style="fill:var(--teal)"/><text class="nt" x="310" y="234.5">2</text>
+<circle cx="600" cy="230" r="11.5" style="fill:var(--teal)"/><text class="nt" x="600" y="234.5">3</text>
+<circle cx="310" cy="342" r="11.5" style="fill:var(--green)"/><text class="nt" x="310" y="346.5">6</text>
+<text class="t-m mid" x="310" y="270">POST</text>
+<text class="t-m mid" x="310" y="310">200</text>
+<g class="k-mute">
+<rect class="shadow" x="65" y="424" width="200" height="110" rx="16"/>
+<rect class="card edge" x="65" y="420" width="200" height="110" rx="16"/>
+<text class="t-h" x="81" y="452">Service worker</text>
+<text class="t-m" x="81" y="474">web/public/sw.js</text>
+<text class="t-b" x="81" y="498">Never touches /api/:</text>
+<text class="t-b" x="81" y="515">always the network.</text>
+</g>
+<path class="thin" d="M165 364 V416"/>
+<rect class="lblbg" x="178" y="379" width="78" height="22" rx="11"/><text class="t-m mid" x="217.0" y="394">skips /api</text>
+<g class="k-flow">
+<rect class="shadow" x="645" y="424" width="200" height="110" rx="16"/>
+<rect class="halo hba" x="641" y="416" width="208" height="118" rx="20"/>
+<rect class="card edge" x="645" y="420" width="200" height="110" rx="16"/>
+<text class="t-h" x="661" y="452">Better Auth</text>
+<text class="t-m" x="661" y="474">auth.api.getSession</text>
+<text class="t-b" x="661" y="498">Cookie to session row.</text>
+<text class="t-b" x="661" y="515">No session: 401.</text>
+</g>
+<path d="M719 363 V415" style="stroke:var(--teal)" stroke-width="2.2" fill="none" marker-end="url(#ah-teal)"/>
+<path d="M771 417 V365" style="stroke:var(--teal)" stroke-width="2.2" fill="none" marker-end="url(#ah-teal)"/>
+<path class="thin" d="M847 475 H1035 V364"/>
+<rect class="lblbg" x="867" y="464" width="145" height="22" rx="11"/><text class="t-m mid" x="940.0" y="479">reads the session row</text>
+<rect class="zone" x="355" y="420" width="200" height="110" rx="16"/>
+<text class="t-b" x="371" y="454">Not on this path:</text>
+<text class="t-b" x="371" y="474">the login email goes</text>
+<text class="t-b" x="371" y="491">out through Resend</text>
+<text class="t-b" x="371" y="508">(see Parent login).</text>
+<g class="dot d-teal" opacity="0"><circle r="10.8" class="dot-glow"/><circle r="4.5" class="dot-core"/><animateMotion dur="11s" repeatCount="indefinite" path="M268 252 H350" keyPoints="0;0;1;1" keyTimes="0;0.030;0.100;1" calcMode="linear"/><animate attributeName="opacity" dur="11s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.030;0.040;0.090;0.100;1"/></g>
+<g class="dot d-teal" opacity="0"><circle r="10.8" class="dot-glow"/><circle r="4.5" class="dot-core"/><animateMotion dur="11s" repeatCount="indefinite" path="M558 252 H640" keyPoints="0;0;1;1" keyTimes="0;0.110;0.180;1" calcMode="linear"/><animate attributeName="opacity" dur="11s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.110;0.120;0.170;0.180;1"/></g>
+<g class="dot d-teal" opacity="0"><circle r="9.6" class="dot-glow"/><circle r="4" class="dot-core"/><animateMotion dur="11s" repeatCount="indefinite" path="M719 363 V415" keyPoints="0;0;1;1" keyTimes="0;0.200;0.250;1" calcMode="linear"/><animate attributeName="opacity" dur="11s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.200;0.210;0.240;0.250;1"/></g>
+<g class="dot d-teal" opacity="0"><circle r="9.6" class="dot-glow"/><circle r="4" class="dot-core"/><animateMotion dur="11s" repeatCount="indefinite" path="M771 417 V365" keyPoints="0;0;1;1" keyTimes="0;0.260;0.310;1" calcMode="linear"/><animate attributeName="opacity" dur="11s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.260;0.270;0.300;0.310;1"/></g>
+<g class="dot d-teal" opacity="0"><circle r="10.8" class="dot-glow"/><circle r="4.5" class="dot-core"/><animateMotion dur="11s" repeatCount="indefinite" path="M848 252 H930" keyPoints="0;0;1;1" keyTimes="0;0.330;0.400;1" calcMode="linear"/><animate attributeName="opacity" dur="11s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.330;0.340;0.390;0.400;1"/></g>
+<g class="dot d-green" opacity="0"><circle r="10.8" class="dot-glow"/><circle r="4.5" class="dot-core"/><animateMotion dur="11s" repeatCount="indefinite" path="M932 318 H850" keyPoints="0;0;1;1" keyTimes="0;0.450;0.520;1" calcMode="linear"/><animate attributeName="opacity" dur="11s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.450;0.460;0.510;0.520;1"/></g>
+<g class="dot d-green" opacity="0"><circle r="10.8" class="dot-glow"/><circle r="4.5" class="dot-core"/><animateMotion dur="11s" repeatCount="indefinite" path="M642 318 H560" keyPoints="0;0;1;1" keyTimes="0;0.530;0.600;1" calcMode="linear"/><animate attributeName="opacity" dur="11s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.530;0.540;0.590;0.600;1"/></g>
+<g class="dot d-green" opacity="0"><circle r="10.8" class="dot-glow"/><circle r="4.5" class="dot-core"/><animateMotion dur="11s" repeatCount="indefinite" path="M352 318 H270" keyPoints="0;0;1;1" keyTimes="0;0.610;0.680;1" calcMode="linear"/><animate attributeName="opacity" dur="11s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.610;0.620;0.670;0.680;1"/></g>
+<g class="dot d-red" opacity="0"><circle r="9.6" class="dot-glow"/><circle r="4" class="dot-core"/><animateMotion dur="11s" repeatCount="indefinite" path="M745 188 C745 95 165 95 165 186" keyPoints="0;0;1;1" keyTimes="0;0.780;0.940;1" calcMode="linear"/><animate attributeName="opacity" dur="11s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.780;0.790;0.930;0.940;1"/></g>
+</svg>
