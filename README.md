@@ -1,10 +1,18 @@
 # Ripples
 
-A web app that explains how the real world works (money, taxes, governments, history, technology) to an 8-year-old, with Otto the otter as guide. English and German.
+![Ripples: how the real world works, explained to an 8-year-old, with Otto the otter as guide](docs/diagrams/readme-hero.svg)
+
+A web app that explains how the real world works (money, taxes, governments, history, technology) to an 8-year-old, with Otto the otter as guide. English, German and Polish.
 
 [![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-Ko--fi-FF5E5B?logo=kofi&logoColor=white)](https://ko-fi.com/sunnyredhu)
 
 Each lesson is a short story, then a toy the child can play with, then three questions. A badge is earned when all three are right. Wrong answers get a hint, never a red cross.
+
+## How it fits together
+
+![Architecture: the React app talks to the Node API over /api, the API reads and writes Postgres and emails the parent's login code](docs/diagrams/architecture.svg)
+
+Detail for every part: [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Prerequisites
 
