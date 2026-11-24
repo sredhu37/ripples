@@ -5,6 +5,7 @@ import { t } from "../i18n";
 import { CURRICULUM_GROUPS, LESSONS, getGroupTitle, getLessonTitle } from "../lessons";
 import { resolveFactText } from "../lesson/types";
 import type { Lang } from "../progress";
+import { BackButton } from "./BackButton";
 import { LangSwitch } from "./LangSwitch";
 
 interface Props {
@@ -29,14 +30,10 @@ export function FactCards({ lang, onLang, onClose, paused = NO_LESSONS }: Props)
   const built = LESSONS.filter((l) => hasLesson(l.id) && !paused.has(l.id));
   return (
     <main className="screen">
+      <BackButton label={t(lang, "familyTitle")} onClick={onClose} />
       <header className="topbar fact-topbar">
         <h1 className="logo">{t(lang, "factCards")}</h1>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          {onLang && <LangSwitch lang={lang} onLang={onLang} />}
-          <button type="button" className="btn btn-quiet btn-small" onClick={onClose}>
-            {t(lang, "back")}
-          </button>
-        </div>
+        {onLang && <LangSwitch lang={lang} onLang={onLang} />}
       </header>
       <p>{t(lang, "factCardsHelp")}</p>
       {built.length === 0 && <p>{t(lang, "noLessons")}</p>}

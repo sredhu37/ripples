@@ -50,7 +50,6 @@ describe("i18n core", () => {
       "gateQuestion",
       "gateWrong",
       "gateGo",
-      "close",
       "next",
       "prev",
       "ready",

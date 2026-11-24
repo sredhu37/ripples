@@ -47,8 +47,11 @@ test("facts: a parent opens the fact cards behind the maths gate", async ({ page
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
   }
 
-  // Back returns to the parent area, which asks the maths question again.
-  await page.getByRole("button", { name: "Wstecz" }).click();
+  // The back button is first and names Family settings, which asks the maths question again.
+  await expect(page.locator("button").first()).toHaveText(/Ustawienia rodziny|Family settings/);
+  const backBox = await page.locator(".back-btn").boundingBox();
+  expect(backBox?.height ?? 0).toBeGreaterThanOrEqual(60);
+  await page.locator(".back-btn").click();
   await expect(page.locator("form.panel p").first()).toContainText("×");
   await step();
 });

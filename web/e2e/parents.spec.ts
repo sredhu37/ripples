@@ -33,7 +33,7 @@ test("parents: settings opened from a kid's trail change that kid's lessons", as
   expect(api.profiles[0].disabledLessons).toEqual([]);
 
   await page.getByRole("button", { name: "Back to kids" }).click();
-  await page.getByRole("button", { name: "Close" }).click();
+  await page.getByRole("button", { name: "All lessons" }).click();
   await expect(stops).toHaveCount(before - 1);
 });
 
@@ -67,10 +67,14 @@ test("parents: family settings sit behind the maths gate and control the trail",
   await step();
   await expect.poll(() => api.profiles[0].disabledLessons.length).toBe(1);
 
-  // Back to the kid list, which has the family title. Close: the trail has one stop fewer.
+  // Back to the kid list, which has the family title and the back button at the top left.
   await page.getByRole("button", { name: "Back to kids" }).click();
   await expect(page.getByRole("heading", { name: "Family settings" })).toBeVisible();
-  await page.getByRole("button", { name: "Close" }).click();
+  // The only way out is the back button: no "Close" at the bottom.
+  await expect(page.getByRole("button", { name: "Close", exact: true })).toHaveCount(0);
+  await expect(page.locator("button").first()).toHaveText(/All lessons/);
+  // Back to the trail, which has one stop fewer.
+  await page.getByRole("button", { name: "All lessons" }).click();
   await expect(stops).toHaveCount(before - 1);
   await step();
 });

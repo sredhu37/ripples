@@ -3,6 +3,7 @@ import { t } from "../i18n";
 import type { Lang } from "../progress";
 import { getLegalDetails, type LegalDetails } from "../legal/api";
 import { IMPRESSUM_LABELS, TEXTS, UPDATED, UPDATED_LABEL, type LegalPage } from "../legal/texts";
+import { BackButton } from "./BackButton";
 import { LangSwitch } from "./LangSwitch";
 
 interface Props {
@@ -11,6 +12,8 @@ interface Props {
   onLang: (l: Lang) => void;
   onPage: (page: LegalPage) => void;
   onClose: () => void;
+  /** Name of the screen `onClose` goes to. */
+  backLabel: "loginTitle" | "pickerTitle";
 }
 
 const TABS: { page: LegalPage; label: "legalImpressum" | "legalPrivacy" | "legalTerms" }[] = [
@@ -64,11 +67,12 @@ function Impressum({ lang }: { lang: Lang }) {
 }
 
 /** One legal page (Impressum, privacy policy or terms) with tabs for the other two. */
-export function LegalScreen({ lang, page, onLang, onPage, onClose }: Props) {
+export function LegalScreen({ lang, page, onLang, onPage, onClose, backLabel }: Props) {
   const text = TEXTS[page][lang];
   return (
     <main className="screen center">
       <div className="panel">
+        <BackButton label={t(lang, backLabel)} onClick={onClose} />
         <div className="panel-head">
           <h2>{text.title}</h2>
           <LangSwitch lang={lang} onLang={onLang} />
@@ -98,11 +102,6 @@ export function LegalScreen({ lang, page, onLang, onPage, onClose }: Props) {
           <p className="legal-updated">
             {UPDATED_LABEL[lang]}: {UPDATED}
           </p>
-        </div>
-        <div className="row">
-          <button className="btn btn-quiet" type="button" onClick={onClose}>
-            {t(lang, "back")}
-          </button>
         </div>
       </div>
     </main>
