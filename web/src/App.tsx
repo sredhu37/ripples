@@ -309,7 +309,8 @@ export function App() {
         onOpenLesson={(id) => setScreen({ kind: "lesson", id })}
         onParents={() => setScreen({ kind: "settings", gated: true })}
         onTimeline={() => setScreen({ kind: "timeline" })}
-        onChangeKid={() => {
+        avatar={active.avatar}
+        onSwitchProfile={() => {
           setActiveId(null);
           setScreen({ kind: "picker" });
         }}

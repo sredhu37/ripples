@@ -139,7 +139,7 @@ test("family settings: lessons are chosen per profile", async ({ page }) => {
   await page.locator(".back-btn").click();
   await page.getByRole("button", { name: "Ava", exact: true }).click();
   const avaStops = await page.locator(".trail button.place").count();
-  await page.getByRole("button", { name: "Change kid" }).click();
+  await page.getByRole("button", { name: "Switch profile: Ava" }).click();
   await page.getByRole("button", { name: "Ben", exact: true }).click();
   await expect(page.locator(".trail button.place")).toHaveCount(avaStops + 1);
   await step();
