@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { LABEL, fakeFamily, openTrail, steps } from "./evidence";
 
+// TimelineSlider (#387) is not on a screen yet. The screen swap ticket adds its e2e steps here.
 test("timeline: eras and regions filter the world events", async ({ page }) => {
   const step = await steps(page, "timeline");
   await fakeFamily(page);
