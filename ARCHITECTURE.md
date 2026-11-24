@@ -72,7 +72,8 @@ All in `web/src/components/`.
 
 - **World timeline** (`web/src/timeline/`, `web/src/components/TimelineScreen.tsx`): static event data (7 eras, 6 tracks: India, Europe, Americas, East Asia, Africa and Middle East, Science) with trilingual titles and one summary each. Opened from the globe button on the map header. Events can name a `lessonId` they relate to.
   - **Meanwhile card:** group 5 lessons also get a "Meanwhile around the world" card (`web/src/timeline/meanwhile.ts`, `web/src/components/MeanwhileCard.tsx`) shown after the real life card: a year slider over a per-lesson window, one latest event per track, one intro text. Each event shown is also appended to the lesson's fact card with a source.
-  - Tested in `web/src/timeline/timeline.test.ts` and `web/src/components/TimelineScreen.test.tsx`.
+  - **Pins and stops** (`web/src/timeline/pins.ts`, spec `docs/specs/world-timeline-map.md`): `PINS` is the 55 events in the pin model (map year, country, lon, lat, one https source from `EVENT_SOURCES`, `sensitive`). `TIMELINE_STOPS` holds the 22 slider stops, `stopForYear` returns the last stop at or before a map year, `pinsByStop` returns pins and distinct countries per stop. No screen uses them yet; the list screen above still runs on `TIMELINE_EVENTS`.
+  - Tested in `web/src/timeline/pins.test.ts`, `web/src/timeline/timeline.test.ts` and `web/src/components/TimelineScreen.test.tsx`.
 - **Sound and speech** (`web/src/sound.ts`, `web/src/speech.ts`): synthesized effects and read-aloud.
 - **Offline** (`web/public/sw.js`): caches app files after the first visit. It never touches `/api/` requests: those always go to the network.
 

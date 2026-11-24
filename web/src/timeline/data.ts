@@ -7,7 +7,9 @@ export const TIMELINE_ERAS: TimelineEra[] = [
   {
     id: "ancient",
     label: T("Ancient Civilizations", "Alte Hochkulturen", "Starożytne cywilizacje"),
-    dateRange: T("3000 BCE to 500 CE", "3000 v. Chr. bis 500 n. Chr.", "3000 p.n.e. do 500 n.e."),
+    dateRange: T("3000 BCE to 499 CE", "3000 v. Chr. bis 499 n. Chr.", "3000 p.n.e. do 499 n.e."),
+    from: -3000,
+    to: 499,
     description: T(
       "First cities, writing and trade.",
       "Erste Staedte, Schrift und Handel.",
@@ -21,7 +23,9 @@ export const TIMELINE_ERAS: TimelineEra[] = [
       "Seidenstrasse und Mittelalter",
       "Jedwabny Szlak i średniowiecze",
     ),
-    dateRange: T("500 to 1500", "500 bis 1500", "500 do 1500"),
+    dateRange: T("500 to 1499", "500 bis 1499", "500 do 1499"),
+    from: 500,
+    to: 1499,
     description: T(
       "Caravans, kingdoms and big ideas travel far.",
       "Karawanen, Koenigreiche und grosse Ideen reisen weit.",
@@ -31,7 +35,9 @@ export const TIMELINE_ERAS: TimelineEra[] = [
   {
     id: "trade_empires",
     label: T("Global Trade and Empires", "Welthandel und Reiche", "Światowy handel i imperia"),
-    dateRange: T("1500 to 1600", "1500 bis 1600", "1500 do 1600"),
+    dateRange: T("1500 to 1599", "1500 bis 1599", "1500 do 1599"),
+    from: 1500,
+    to: 1599,
     description: T(
       "Ships link the continents.",
       "Schiffe verbinden die Kontinente.",
@@ -41,7 +47,9 @@ export const TIMELINE_ERAS: TimelineEra[] = [
   {
     id: "scientific_rev",
     label: T("Scientific Revolution", "Wissenschaftliche Revolution", "Rewolucja naukowa"),
-    dateRange: T("1600 to 1800", "1600 bis 1800", "1600 do 1800"),
+    dateRange: T("1600 to 1799", "1600 bis 1799", "1600 do 1799"),
+    from: 1600,
+    to: 1799,
     description: T(
       "Telescopes, gravity and new ways to think.",
       "Fernrohre, Schwerkraft und neues Denken.",
@@ -51,7 +59,9 @@ export const TIMELINE_ERAS: TimelineEra[] = [
   {
     id: "industrial",
     label: T("Industrial Revolution", "Industrielle Revolution", "Rewolucja przemysłowa"),
-    dateRange: T("1800 to 1900", "1800 bis 1900", "1800 do 1900"),
+    dateRange: T("1800 to 1899", "1800 bis 1899", "1800 do 1899"),
+    from: 1800,
+    to: 1899,
     description: T(
       "Steam, electricity and medicine change daily life.",
       "Dampf, Strom und Medizin veraendern den Alltag.",
@@ -61,7 +71,9 @@ export const TIMELINE_ERAS: TimelineEra[] = [
   {
     id: "twentieth",
     label: T("The 20th Century", "Das 20. Jahrhundert", "Wiek XX"),
-    dateRange: T("1900 to 1999", "1900 bis 1999", "1900 do 1999"),
+    dateRange: T("1900 to 1989", "1900 bis 1989", "1900 do 1989"),
+    from: 1900,
+    to: 1989,
     description: T(
       "Flight, world wars, freedom and the Moon.",
       "Fliegen, Weltkriege, Freiheit und der Mond.",
@@ -72,6 +84,8 @@ export const TIMELINE_ERAS: TimelineEra[] = [
     id: "digital",
     label: T("Digital and Modern Era", "Digitale Moderne", "Era cyfrowa"),
     dateRange: T("1990 to today", "1990 bis heute", "1990 do dziś"),
+    from: 1990,
+    to: null,
     description: T(
       "The web, phones and AI.",
       "Netz, Handys und KI.",
