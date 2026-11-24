@@ -18,7 +18,8 @@ type Pr = {
   gateForHead: boolean;
   checksDoneAt?: string;
   updateForHead?: boolean;
-  conflict?: boolean;
+  approvedForHead?: boolean;
+  conflict?: "yes" | "no" | "unknown";
 };
 
 function pr(over: Partial<Pr> = {}): Pr {
@@ -30,6 +31,7 @@ function pr(over: Partial<Pr> = {}): Pr {
     rounds: 0,
     gateForHead: false,
     checksDoneAt: "2026-11-22T11:00:00Z",
+    conflict: "no",
     ...over,
   };
 }
@@ -68,10 +70,17 @@ describe("station (In review)", () => {
         reviewStatus: "success",
         rounds: 1,
         gateForHead: true,
-        conflict: true,
+        conflict: "yes",
       },
       "fix",
     ],
+    // #366: a conflict comes first, because GitHub runs no CI on a conflicting PR.
+    [{ conflict: "yes", checks: "pending" }, "fix"],
+    [{ conflict: "unknown" }, "wait"],
+    [{ approvedForHead: true }, "merge"],
+    [{ approvedForHead: true, checks: "pending" }, "merge"],
+    [{ approvedForHead: true, checks: "red" }, "fix"],
+    [{ approvedForHead: true, conflict: "yes" }, "fix"],
     [{ updateForHead: true }, "merge"],
     [{ updateForHead: true, checks: "pending" }, "wait"],
     [{ updateForHead: true, checks: "red" }, "fix"],
@@ -209,6 +218,40 @@ describe("plan", () => {
 
   it("never starts a Ready ticket's continue count", () => {
     expect(run([ticket(1, "ready", { continues: 5 })]).actions[0].kind).toBe("start");
+  });
+
+  it("sends a new approval in Needs human to approve mode, without a slot (#366)", () => {
+    const result = run(
+      [
+        ticket(1, "human", { pr: { number: 11 }, approval: true }),
+        ticket(2, "human", { pr: { number: 12 }, approval: false }),
+        ticket(3, "ready"),
+      ],
+      1,
+    );
+    expect(result.actions.map((a) => [a.issue, a.kind, a.workflow, a.inputs])).toEqual([
+      [1, "approve", "factory-gate.yml", { pr: "11", mode: "approve" }],
+      [3, "start", "factory-build.yml", { issue: "3" }],
+    ]);
+    expect(result.skipped).toEqual([]);
+  });
+
+  it("skips a Needs human approval while a run for the ticket is active", () => {
+    const result = run([ticket(1, "human", { pr: { number: 11 }, approval: true, active: true })]);
+    expect(result.actions).toEqual([]);
+    expect(result.skipped).toEqual([{ issue: 1, reason: "a factory run is active" }]);
+  });
+
+  it("merges a head Sunny approved even after 3 continues, with no continue comment", () => {
+    const result = run([
+      ticket(1, "review", { continues: 3, pr: pr({ number: 11, approvedForHead: true }) }),
+    ]);
+    expect(result.actions[0]).toMatchObject({
+      issue: 1,
+      kind: "approved",
+      workflow: "factory-gate.yml",
+      inputs: { pr: "11", mode: "merge" },
+    });
   });
 
   it("considers only one issue when asked, within the slots", () => {
