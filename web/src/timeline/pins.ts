@@ -65,7 +65,7 @@ const PLACES: Record<string, { country: string; lon: number; lat: number }> = {
 };
 
 /** War, genocide, partition and famine pins. Their source must not be Wikipedia. */
-const SENSITIVE = new Set(["ww1", "ww2", "holocaust", "india1947", "bengal1943"]);
+const SENSITIVE = new Set(["ww1", "ww2", "atom", "holocaust", "india1947", "bengal1943"]);
 
 function decade(year: number, era: TimelineEraId): TimelineStop {
   return { year, label: T(`${year}s`, `${year}er`, `lata ${year}`), era };

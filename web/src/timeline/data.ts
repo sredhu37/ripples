@@ -154,7 +154,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     T(
       "In Mexico, artists carve heads as tall as a person.",
-      "In Mexiko meißeln Künstler Köpfe, die so gross sind wie ein Mensch.",
+      "In Mexiko meißeln Künstler Köpfe, die so groß sind wie ein Mensch.",
       "W Meksyku artyści rzeźbią głowy wielkie jak człowiek.",
     ),
   ),
@@ -313,9 +313,9 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Luter rozpoczyna reformację",
     ),
     T(
-      "A German monk argues about church rules, and printed leaflets spread his ideas.",
-      "Ein deutscher Mönch streitet über Kirchenregeln, und gedruckte Flugblätter verbreiten seine Ideen.",
-      "Niemiecki mnich spiera się o zasady Kościoła, a drukowane ulotki roznoszą jego pomysły.",
+      "A monk in Wittenberg argues about church rules, and printed leaflets spread his ideas.",
+      "Ein Mönch in Wittenberg streitet über Kirchenregeln, und gedruckte Flugblätter verbreiten seine Ideen.",
+      "Mnich z Wittenbergi spiera się o zasady Kościoła, a drukowane ulotki roznoszą jego pomysły.",
     ),
   ),
   ev(
@@ -325,9 +325,9 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("1521", "1521", "1521"),
     T("The Aztec capital falls", "Die Aztekenhauptstadt fällt", "Upada stolica Azteków"),
     T(
-      "Tenochtitlan, a city on a lake, is conquered by Spain and its allies.",
-      "Tenochtitlan, eine Stadt im See, wird von Spanien und seinen Verbündeten erobert.",
-      "Tenochtitlan, miasto na jeziorze, zostaje podbite przez Hiszpanię i jej sojuszników.",
+      "Tenochtitlan, a city on a lake, comes under Spanish rule after a long conflict.",
+      "Tenochtitlan, eine Stadt im See, kommt nach einem langen Konflikt unter spanische Herrschaft.",
+      "Tenochtitlan, miasto na jeziorze, trafia pod panowanie hiszpańskie po długim konflikcie.",
     ),
   ),
   ev(
@@ -454,7 +454,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     T(
       "Peace comes and cities like Edo grow big.",
-      "Es herrscht Frieden und Städte wie Edo werden gross.",
+      "Es herrscht Frieden und Städte wie Edo werden groß.",
       "Nastaje pokój, a miasta takie jak Edo rosną.",
     ),
   ),
@@ -636,9 +636,9 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("1947", "1947", "1947"),
     T("India becomes independent", "Indien wird unabhängig", "Indie stają się niepodległe"),
     T(
-      "After a long struggle, India raises its own flag.",
-      "Nach langem Kampf hisst Indien seine eigene Flagge.",
-      "Po długiej walce Indie podnoszą własną flagę.",
+      "After a long struggle, British rule ends and the land is divided into two countries, India and Pakistan.",
+      "Nach langem Kampf endet die britische Herrschaft und das Land wird in zwei Staaten geteilt, Indien und Pakistan.",
+      "Po długiej walce kończą się rządy brytyjskie, a kraj zostaje podzielony na dwa państwa, Indie i Pakistan.",
     ),
     "independence",
   ),
@@ -757,9 +757,9 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("1941 to 1945", "1941 bis 1945", "1941 do 1945"),
     T("The Holocaust", "Der Holocaust", "Holokaust"),
     T(
-      "During the war, the Nazi government hurt and killed millions of people, especially Jewish families. We remember so it never happens again.",
-      "Im Krieg verletzte und tötete die Nazi-Regierung Millionen Menschen, vor allem jüdische Familien. Wir erinnern uns, damit es nie wieder geschieht.",
-      "W czasie wojny rząd nazistowski krzywdził i zabijał miliony ludzi, zwłaszcza żydowskie rodziny. Pamiętamy, by to się nigdy nie powtórzyło.",
+      "During the war, the Nazi government took away the rights of Jewish families and many others, and we remember so it never happens again.",
+      "Im Krieg nahm die Nazi-Regierung jüdischen Familien und vielen anderen ihre Rechte, und wir erinnern uns, damit es nie wieder geschieht.",
+      "W czasie wojny rząd nazistowski odebrał prawa żydowskim rodzinom i wielu innym ludziom, a my pamiętamy, by to się nigdy nie powtórzyło.",
     ),
     "ww2",
   ),
@@ -770,9 +770,9 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("1942", "1942", "1942"),
     T("The Quit India Movement", "Die Quit-India-Bewegung", "Ruch Quit India"),
     T(
-      "While Europe is at war, Gandhi asks the British to leave India.",
-      "Während Europa im Krieg ist, bittet Gandhi die Briten, Indien zu verlassen.",
-      "Gdy Europa jest w stanie wojny, Gandhi prosi Brytyjczyków o opuszczenie Indii.",
+      "While Europe is at war, Gandhi asks the British government to leave India.",
+      "Während Europa im Krieg ist, bittet Gandhi die britische Regierung, Indien zu verlassen.",
+      "Gdy Europa jest w stanie wojny, Gandhi prosi rząd brytyjski o opuszczenie Indii.",
     ),
     "independence",
   ),
