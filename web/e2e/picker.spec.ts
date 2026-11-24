@@ -28,8 +28,8 @@ test("picker: each kid keeps their own badges, language and mute", async ({ page
   await expect(page.getByRole("button", { name: "Ton aus" })).toBeVisible();
   await step();
 
-  // Change kid: the picker is back. Ben has no badge, English, sound off.
-  await page.getByRole("button", { name: "Kind wechseln" }).click();
+  // Switch profile: the picker is back. Ben has no badge, English, sound off.
+  await page.getByRole("button", { name: "Profil wechseln: Ava" }).click();
   await page.getByRole("button", { name: "Ben", exact: true }).click();
   await expect(page.getByText("Hi Ben! Pick a place on the trail.")).toBeVisible();
   await expect(page.locator(".shelf-row .medal-on")).toHaveCount(0);
