@@ -34,7 +34,7 @@ describe("TimelineSlider", () => {
   it("shows the box, hint and one label per stop", async () => {
     const c = await mount();
     expect(c.textContent).toContain("Pick a time");
-    expect(c.textContent).toContain("Tap a year");
+    expect(c.textContent).toContain("tap an era");
     expect(stops(c)).toHaveLength(TIMELINE_STOPS.length);
     expect(stops(c)[0].textContent).toBe("3000 BCE");
   });
