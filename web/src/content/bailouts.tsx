@@ -244,7 +244,7 @@ export const lesson: Lesson = {
       kind: "widget",
       prompt: T(
         "Stop the dominoes before they reach the shops. Set the buffer, then press Check.",
-        "Stoppe die Steine, bevor sie die Läden erreichen. Stelle den Puffer ein und drücke Pruefen.",
+        "Stoppe die Steine, bevor sie die Läden erreichen. Stelle den Puffer ein und drücke Prüfen.",
         "Zatrzymaj kostki, zanim dotrą do sklepów. Ustaw bufor i naciśnij Sprawdź.",
       ),
       Widget,

@@ -26,7 +26,7 @@ export const lesson: Lesson = {
       [
         T(
           "A hundred years ago, cities employed people to light gas lanterns every evening.",
-          "Vor hundert Jahren beschaeftigten Staedte tausende Menschen, um abends Strassenlaternen von Hand anzuenden.",
+          "Vor hundert Jahren beschäftigten Städte tausende Menschen, um abends Straßenlaternen von Hand anzünden.",
           "Sto lat temu miasta zatrudniały tysiące ludzi do zapalania latarni gazowych każdego wieczoru.",
         ),
         T(
@@ -36,7 +36,7 @@ export const lesson: Lesson = {
         ),
         T(
           "At bowling alleys, young pin-setters stood the fallen pins up after each roll.",
-          "Auf Kegelbahnen stellten fleissige Helfer nach jedem Wurf die umgefallenen Holzkegel muehsam wieder auf.",
+          "Auf Kegelbahnen stellten fleißige Helfer nach jedem Wurf die umgefallenen Holzkegel mühsam wieder auf.",
           "Na torach kręglarskich pomocnicy po każdym rzucie mozolnie ustawiali przewrócone kręgle.",
         ),
       ],
@@ -56,7 +56,7 @@ export const lesson: Lesson = {
         ),
         T(
           "While repetitive tasks vanish, society becomes more productive and discovers new needs.",
-          "Waehrend monotone Handgriffe weichen, wird die Gesellschaft produktiver und neue Beduerfnisse entstehen.",
+          "Während monotone Handgriffe weichen, wird die Gesellschaft produktiver und neue Bedürfnisse entstehen.",
           "Podczas gdy monotonne czynności znikają, społeczeństwo staje się bardziej produktywne i odkrywa nowe potrzeby.",
         ),
       ],
@@ -66,7 +66,7 @@ export const lesson: Lesson = {
       [
         T(
           "Technology has never eliminated human work: it continuously creates jobs our ancestors never imagined.",
-          "Technik hat menschliche Arbeit nie abgeschafft: Sie schafft staendig Berufe, die frueher undenkbar waren.",
+          "Technik hat menschliche Arbeit nie abgeschafft: Sie schafft ständig Berufe, die früher undenkbar waren.",
           "Technologia nigdy nie zlikwidowała ludzkiej pracy. Stale tworzy zawody, o jakich nasi przodkowie nie śnili.",
         ),
         T(
@@ -76,7 +76,7 @@ export const lesson: Lesson = {
         ),
         T(
           "Each invention unlocks hundreds of new specializations, services, and creative fields.",
-          "Jede Erfindung eroeffnet hunderte neue Fachgebiete, Dienstleistungen und kreative Taetigkeiten.",
+          "Jede Erfindung eröffnet hunderte neue Fachgebiete, Dienstleistungen und kreative Tätigkeiten.",
           "Każdy wynalazek otwiera setki nowych specjalizacji, usług i fascynujących obszarów twórczości.",
         ),
       ],
@@ -91,12 +91,12 @@ export const lesson: Lesson = {
         ),
         T(
           "Wind turbine technicians climb high towers, and battery chemists engineer cleaner electric buses.",
-          "Windkraft-Techniker klettern auf hohe Tuerme, waehrend Batterie-Forscher saubere Busse ermoeglichen.",
+          "Windkraft-Techniker klettern auf hohe Türme, während Batterie-Forscher saubere Busse ermöglichen.",
           "Technicy turbin wiatrowych wspinają się na wysokie maszty, a chemicy baterii projektują czyste autobusy elektryczne.",
         ),
         T(
           "Hospitals need healthcare workers and therapists who bring genuine human warmth to patient care.",
-          "Kliniken brauchen Pflegekraefte und Therapeuten, die Patienten echte menschliche Waerme schenken.",
+          "Kliniken brauchen Pflegekräfte und Therapeuten, die Patienten echte menschliche Wärme schenken.",
           "Szpitale potrzebują opiekunów, pielęgniarek i terapeutów, którzy wnoszą prawdziwe ludzkie ciepło do opieki nad chorymi.",
         ),
       ],
@@ -106,12 +106,12 @@ export const lesson: Lesson = {
       [
         T(
           "The greatest skill you can build for the future is a mindset of *lifelong learning*.",
-          "Die wertvollste Faehigkeit fuer deine Zukunft ist die Freude an *lebenslanges Lernen*.",
+          "Die wertvollste Fähigkeit für deine Zukunft ist die Freude an *lebenslanges Lernen*.",
           "Najwspanialszą umiejętnością na przyszłość jest postawa *uczenia się przez całe życie*.",
         ),
         T(
           "Curiosity, adaptability, and learning how to learn matter more than memorizing any single tool.",
-          "Neugier und die Bereitschaft, Neues zu probieren, zaehlen weit mehr als starres Auswendiglernen.",
+          "Neugier und die Bereitschaft, Neues zu probieren, zählen weit mehr als starres Auswendiglernen.",
           "Ciekawość świata, elastyczność i umiejętność uczenia się liczą się bardziej niż wkuwanie jednego narzędzia.",
         ),
         T(
@@ -125,7 +125,7 @@ export const lesson: Lesson = {
   ],
   toyIntro: T(
     "Choose a workforce training policy to invest in green and tech skills and reach over 90% resilience.",
-    "Waehle die Foerderstrategie fuer Zukunftsberufe, um ueber 90% Zukunftsfaehigkeit zu erreichen.",
+    "Wähle die Förderstrategie für Zukunftsberufe, um über 90% Zukunftsfähigkeit zu erreichen.",
     "Wybierz strategię szkolenia i rozwoju kadr, aby zainwestować w zawody przyszłości i osiągnąć ponad 90% odporności.",
   ),
   Toy,
@@ -134,14 +134,14 @@ export const lesson: Lesson = {
       kind: "choice",
       prompt: T(
         "What happened to jobs like street lamplighters and telephone switchboard operators?",
-        "Was geschah mit Berufen wie Laternenanzuender und Telefon-Stoepselvermittler?",
+        "Was geschah mit Berufen wie Laternenanzünder und Telefon-Stöpselvermittler?",
         "Co stało się z zawodami takimi jak latarnicy uliczni czy telefonistki w centrali?",
       ),
       options: [
         {
           text: T(
             "They were automated by electricity and digital circuits, opening room for new modern careers",
-            "Sie wurden durch Strom und Digitaltechnik ersetzt und machten Platz fuer moderne Zukunftsberufe",
+            "Sie wurden durch Strom und Digitaltechnik ersetzt und machten Platz für moderne Zukunftsberufe",
             "Zostały zautomatyzowane przez elektryczność i układy cyfrowe, otwierając miejsce na nowoczesne zawody",
           ),
           correct: true,
@@ -156,14 +156,14 @@ export const lesson: Lesson = {
         {
           text: T(
             "They moved to Mars to set up bowling alleys on the red dunes",
-            "Sie zogen auf den Mars, um Bowlingbahnen auf den roten Duenen zu bauen",
+            "Sie zogen auf den Mars, um Bowlingbahnen auf den roten Dünen zu bauen",
             "Przeprowadzili się na Marsa, aby budować kręgielnie na czerwonych wydmach",
           ),
         },
       ],
       hint: T(
         "Routine tasks were replaced by automatic systems, paving the way for newer, higher-skilled jobs.",
-        "Monotone Handgriffe wurden automatisiert und schufen Raum fuer anspruchsvollere Berufe.",
+        "Monotone Handgriffe wurden automatisiert und schufen Raum für anspruchsvollere Berufe.",
         "Rutynowe czynności zostały zastąpione automatyzacją, torując drogę nowym, ciekawszym zawodom.",
       ),
     },
@@ -171,14 +171,14 @@ export const lesson: Lesson = {
       kind: "choice",
       prompt: T(
         "Why is lifelong learning the most valuable mindset for navigating the future?",
-        "Warum ist lebenslanges Lernen die wichtigste Faehigkeit fuer die Zukunft?",
+        "Warum ist lebenslanges Lernen die wichtigste Fähigkeit für die Zukunft?",
         "Dlaczego uczenie się przez całe życie to najcenniejsza umiejętność na przyszłość?",
       ),
       options: [
         {
           text: T(
             "Because technology evolves constantly, and curiosity helps us adopt new tools and skills",
-            "Weil Technik sich staendig wandelt und Neugier uns hilft, neue Werkzeuge schnell zu lernen",
+            "Weil Technik sich ständig wandelt und Neugier uns hilft, neue Werkzeuge schnell zu lernen",
             "Ponieważ technologia ciągle się zmienia, a ciekawość pomaga nam szybko opanowywać nowe narzędzia",
           ),
           correct: true,
@@ -186,7 +186,7 @@ export const lesson: Lesson = {
         {
           text: T(
             "Because it allows people to avoid brushing their teeth before going to bed",
-            "Weil man sich dadurch abends vor dem Schlafen nicht mehr die Zaehne putzen muss",
+            "Weil man sich dadurch abends vor dem Schlafen nicht mehr die Zähne putzen muss",
             "Ponieważ pozwala unikać mycia zębów wieczorem przed pójściem spać",
           ),
         },
@@ -200,7 +200,7 @@ export const lesson: Lesson = {
       ],
       hint: T(
         "Being adaptable and eager to learn allows workers to thrive through economic changes.",
-        "Wer anpassungsfaehig und lernbereit bleibt, meistert wirtschaftliche Veraenderungen souveraen.",
+        "Wer anpassungsfähig und lernbereit bleibt, meistert wirtschaftliche Veränderungen souverän.",
         "Elastyczność i chęć do nauki pozwalają ze spokojem odnaleźć się w zmieniającej się gospodarce.",
       ),
     },
@@ -208,20 +208,20 @@ export const lesson: Lesson = {
       kind: "widget",
       prompt: T(
         "Select 'Invest in Green & Tech Skills' to achieve over 90% future workforce resilience.",
-        "Waehle 'Investition in Zukunftsberufe', um ueber 90% Zukunftsfaehigkeit der Wirtschaft zu erreichen.",
+        "Wähle 'Investition in Zukunftsberufe', um über 90% Zukunftsfähigkeit der Wirtschaft zu erreichen.",
         "Wybierz opcję 'Inwestycja w zawody przyszłości', aby uzyskać ponad 90% odporności gospodarki.",
       ),
       Widget,
       hint: T(
         "Tap the green button for skills investment, check the resilience bar, and tap check.",
-        "Tippe auf den Button fuer Zukunftsberufe, pruefe den Balken und druecke auf pruefen.",
+        "Tippe auf den Button für Zukunftsberufe, prüfe den Balken und drücke auf prüfen.",
         "Kliknij przycisk inwestycji w umiejętności, sprawdź pasek odporności i kliknij sprawdź.",
       ),
     },
   ],
   askDad: T(
     "Papa, if machines can do many jobs in the future, what skills should I learn while I grow up?",
-    "Papa, wenn Maschinen spaeter viele Berufe uebernehmen, welche Faehigkeiten soll ich heute lernen?",
+    "Papa, wenn Maschinen später viele Berufe übernehmen, welche Fähigkeiten soll ich heute lernen?",
     "Tato, jeśli maszyny w przyszłości przejmą wiele zadań, jakich umiejętności warto się uczyć, dorastając?",
   ),
   realLife: {
@@ -232,7 +232,7 @@ export const lesson: Lesson = {
     },
     body: {
       en: "In Germany, the dual vocational training system (Duale Ausbildung) combines classroom study at trade schools with paid on-the-job apprenticeship at real companies. Working with chambers of commerce (IHK and Handwerkskammern), the curriculum is regularly updated to train young people in cutting-edge robotics, solar installation, and digital manufacturing.",
-      de: "In Deutschland kombiniert das duale Ausbildungssystem Berufsschulunterricht mit bezahlter Praxis im Betrieb. Gemeinsam mit Industrie- und Handelskammern (IHK) sowie Handwerkskammern werden Lehrplaene laufend modernisiert, um junge Menschen in Robotik, Solartechnik und digitaler Fertigung auszubilden.",
+      de: "In Deutschland kombiniert das duale Ausbildungssystem Berufsschulunterricht mit bezahlter Praxis im Betrieb. Gemeinsam mit Industrie- und Handelskammern (IHK) sowie Handwerkskammern werden Lehrpläne laufend modernisiert, um junge Menschen in Robotik, Solartechnik und digitaler Fertigung auszubilden.",
       pl: "W Polsce dynamicznie rozwija się szkolnictwo branżowe i techniczne we współpracy z przedsiębiorstwami oraz inicjatywy takie jak Baza Usług Rozwojowych (BUR) PARP czy Krajowy Fundusz Szkoleniowy (KFS). Dzięki państwowym i unijnym dofinansowaniom pracownicy zdobywają nowe kwalifikacje w zakresie obsługi robotów przemysłowych, montażu instalacji OZE i programowania.",
     },
   },
@@ -241,7 +241,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The World Economic Forum's Future of Jobs Report estimates that 69 million new roles will emerge in green technology, data, and education by 2027.",
-          de: "Der Future of Jobs Report des Weltwirtschaftsforums schaetzt, dass bis 2027 weltweit 69 Millionen neue Stellen in Umwelt, Daten und Bildung entstehen.",
+          de: "Der Future of Jobs Report des Weltwirtschaftsforums schätzt, dass bis 2027 weltweit 69 Millionen neue Stellen in Umwelt, Daten und Bildung entstehen.",
           pl: "Raport Future of Jobs Światowego Forum Ekonomicznego szacuje, że do 2027 roku w zielonych technologiach, analizie danych i edukacji powstanie 69 milionów nowych miejsc pracy.",
         },
         source: "https://www.weforum.org/publications/the-future-of-jobs-report-2023/",
@@ -249,7 +249,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The OECD Employment Outlook shows that technological progress shifts job composition toward higher-skilled, non-routine tasks.",
-          de: "Der OECD Employment Outlook belegt, dass technischer Fortschritt die Beschaeftigung hin zu anspruchsvollen Taetigkeiten verschiebt.",
+          de: "Der OECD Employment Outlook belegt, dass technischer Fortschritt die Beschäftigung hin zu anspruchsvollen Tätigkeiten verschiebt.",
           pl: "Raport OECD Employment Outlook wykazuje, że postęp technologiczny przesuwa strukturę zatrudnienia w kierunku zadań nierutynowych i wyższych kwalifikacji.",
         },
         source: "https://www.oecd.org/employment/Employment-Outlook-2023-Key-Findings.pdf",
@@ -257,7 +257,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "According to the German Federal Statistical Office (Destatis), employment in renewable energy and green technologies has grown steadily over two decades.",
-          de: "Laut Destatis ist die Beschaeftigung im Bereich erneuerbare Energien und Umweltschutz ueber zwei Jahrzehnte kontinuierlich gewachsen.",
+          de: "Laut Destatis ist die Beschäftigung im Bereich erneuerbare Energien und Umweltschutz über zwei Jahrzehnte kontinuierlich gewachsen.",
           pl: "Badania rynku pracy (NBER) wykazują, że chociaż ponad 60% zawodów z 1940 roku nie istnieje w tamtej formie, ogólna liczba miejsc pracy ogromnie wzrosła.",
         },
         source: "https://www.nber.org/papers/w29974",
@@ -265,7 +265,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "Historical labor studies show that while 60% of jobs in 1940 no longer exist in the same form, overall employment has expanded dramatically.",
-          de: "Historische Arbeitsmarktstudien zeigen, dass 60% der Berufe von 1940 heute nicht mehr existieren, die Gesamtbeschaeftigung jedoch stark stieg.",
+          de: "Historische Arbeitsmarktstudien zeigen, dass 60% der Berufe von 1940 heute nicht mehr existieren, die Gesamtbeschäftigung jedoch stark stieg.",
           pl: "W Polsce Krajowy Fundusz Szkoleniowy (KFS) dofinansowuje podnoszenie kwalifikacji dorosłych pracowników w zakresie nowoczesnych technologii.",
         },
         source: "https://psz.praca.gov.pl/krajowy-fundusz-szkoleniowy",
@@ -273,7 +273,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The German Federal Institute for Vocational Education and Training (BIBB) continuously adapts training regulations for emerging technological occupations.",
-          de: "Das Bundesinstitut fuer Berufsbildung (BIBB) passt Ausbildungsordnungen laufend an neue technologische Berufe an.",
+          de: "Das Bundesinstitut für Berufsbildung (BIBB) passt Ausbildungsordnungen laufend an neue technologische Berufe an.",
           pl: "Zintegrowany System Kwalifikacji (ZSK) w Polsce umożliwia formalne potwierdzanie umiejętności zdobytych w ramach uczenia się przez całe życie.",
         },
         source: "https://kwalifikacje.gov.pl/",
@@ -282,7 +282,7 @@ export const lesson: Lesson = {
     simplified: [
       {
         en: "We explain that technology automates routine manual chores while creating new professions.",
-        de: "Wir erklaeren, dass Technik monotone Handarbeit automatisiert und gleichzeitig neue Berufe schafft.",
+        de: "Wir erklären, dass Technik monotone Handarbeit automatisiert und gleichzeitig neue Berufe schafft.",
         pl: "Tłumaczymy, że technologia automatyzuje rutynowe czynności, tworząc jednocześnie zupełnie nowe zawody.",
       },
       {
@@ -292,7 +292,7 @@ export const lesson: Lesson = {
       },
       {
         en: "We show that lifelong learning, curiosity, and adaptability are key skills for the future.",
-        de: "Wir zeigen, dass lebenslanges Lernen, Neugier und Anpassungsfaehigkeit der Schluessel zur Zukunft sind.",
+        de: "Wir zeigen, dass lebenslanges Lernen, Neugier und Anpassungsfähigkeit der Schlüssel zur Zukunft sind.",
         pl: "Pokazujemy, że uczenie się przez całe życie, ciekawość świata i elastyczność są najważniejszymi kompetencjami na przyszłość.",
       },
     ],

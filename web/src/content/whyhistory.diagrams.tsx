@@ -12,7 +12,7 @@ export function MagnifyingGlassArchiveDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Prawdziwe listy, traktaty, pamiętniki"
       : lang === "de"
-        ? "Echte Briefe, Urkunden, Tagebuecher"
+        ? "Echte Briefe, Urkunden, Tagebücher"
         : "Real letters and diaries";
 
   return (
@@ -80,7 +80,7 @@ export function PrimarySourcesTapestryDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Źródła pierwotne: dawne głosy"
       : lang === "de"
-        ? "Primaerquellen: Stimmen von frueher"
+        ? "Primärquellen: Stimmen von früher"
         : "Primary Sources: Old Voices";
 
   const lettersLabel = lang === "pl" ? "Listy" : lang === "de" ? "Briefe" : "Letters";
@@ -90,7 +90,7 @@ export function PrimarySourcesTapestryDiagram({ lang, step }: DiagramProps) {
   const treatiesSub = lang === "pl" ? "Pieczęcie" : lang === "de" ? "Mit Siegel" : "Signed Seals";
 
   const toolsLabel = lang === "pl" ? "Narzędzia" : lang === "de" ? "Werkzeuge" : "Tools";
-  const toolsSub = lang === "pl" ? "Przedmioty" : lang === "de" ? "Gegenstaende" : "Real Objects";
+  const toolsSub = lang === "pl" ? "Przedmioty" : lang === "de" ? "Gegenstände" : "Real Objects";
 
   const sub =
     lang === "pl"
@@ -164,7 +164,7 @@ export function MemorialStolpersteineDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Uczciwa pamięć chroni demokrację"
       : lang === "de"
-        ? "Ehrliches Erinnern schuetzt Demokratie"
+        ? "Ehrliches Erinnern schützt Demokratie"
         : "Honest memory protects democracy";
 
   return (
@@ -220,14 +220,14 @@ export function CompassFutureCompassDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Historia: kompas na jutro"
       : lang === "de"
-        ? "Geschichte: Kompass fuer morgen"
+        ? "Geschichte: Kompass für morgen"
         : "History: a Compass Forward";
 
   const sub =
     lang === "pl"
       ? "Znasz przeszłość, wybierasz mądrze"
       : lang === "de"
-        ? "Vergangenes kennen, klug waehlen"
+        ? "Vergangenes kennen, klug wählen"
         : "Past helps us choose";
 
   return (
@@ -271,7 +271,7 @@ export function InterlockingGenerationsDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Ciekawi, życzliwi budują jutro!"
       : lang === "de"
-        ? "Neugierige Koepfe gestalten morgen!"
+        ? "Neugierige Köpfe gestalten morgen!"
         : "Curious minds shape tomorrow!";
 
   return (

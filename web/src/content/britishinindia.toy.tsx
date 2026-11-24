@@ -14,7 +14,7 @@ export function calcColonialTrade(policy: "colonial" | "fair") {
       artisanStatus: "struggling",
       statusText: {
         en: "Heavy export taxes crushed the village handlooms.",
-        de: "Hohe Exportzoelle brachten die Doerfer in Not.",
+        de: "Hohe Exportzölle brachten die Dörfer in Not.",
         pl: "Wysokie cła eksportowe zniszczyły wiejskie krosna tkackie.",
       } as Text,
     };
@@ -27,7 +27,7 @@ export function calcColonialTrade(policy: "colonial" | "fair") {
     artisanStatus: "thriving",
     statusText: {
       en: "Fair trade allows weavers and factories to thrive on merit.",
-      de: "Faire Bedingungen lassen Handwerker und Fabriken aufbluehen.",
+      de: "Faire Bedingungen lassen Handwerker und Fabriken aufblühen.",
       pl: "Uczciwe warunki handlu pozwalają tkaczom i fabrykom rozwijać się dzięki pracy.",
     } as Text,
   };
@@ -80,7 +80,7 @@ export function BritishInIndiaToy({ lang, mode = "toy", onDone }: BritishInIndia
           {lang === "en"
             ? "Colonial Monopoly Tariffs"
             : lang === "de"
-              ? "Koloniale Schutzzoelle"
+              ? "Koloniale Schutzzölle"
               : "Kolonialne cła monopolistyczne"}
         </button>
         <button
@@ -116,7 +116,7 @@ export function BritishInIndiaToy({ lang, mode = "toy", onDone }: BritishInIndia
           </div>
           <div className="income-badge">
             {artisanIncome}{" "}
-            {lang === "en" ? "Coins/day" : lang === "de" ? "Muenzen/Tag" : "Monet/dzień"}
+            {lang === "en" ? "Coins/day" : lang === "de" ? "Münzen/Tag" : "Monet/dzień"}
           </div>
           <div className="prod-state">
             {artisanStatus === "thriving"
@@ -128,7 +128,7 @@ export function BritishInIndiaToy({ lang, mode = "toy", onDone }: BritishInIndia
               : lang === "en"
                 ? "Loom Silent (Crushed by Tax)"
                 : lang === "de"
-                  ? "Webstuhl still (Ueberlastet)"
+                  ? "Webstuhl still (Überlastet)"
                   : "Krosno milczy (zniszczone podatkiem)"}
           </div>
         </div>
@@ -139,7 +139,7 @@ export function BritishInIndiaToy({ lang, mode = "toy", onDone }: BritishInIndia
             {lang === "en"
               ? "Industrial Steam Mill"
               : lang === "de"
-                ? "Industrie-Dampfmuehle"
+                ? "Industrie-Dampfmühle"
                 : "Fabryka parowa"}
           </div>
           <div className="tariff-tag">
@@ -148,7 +148,7 @@ export function BritishInIndiaToy({ lang, mode = "toy", onDone }: BritishInIndia
           </div>
           <div className="income-badge">
             {factoryIncome}{" "}
-            {lang === "en" ? "Coins/day" : lang === "de" ? "Muenzen/Tag" : "Monet/dzień"}
+            {lang === "en" ? "Coins/day" : lang === "de" ? "Münzen/Tag" : "Monet/dzień"}
           </div>
           <div className="prod-state">
             {policy === "colonial"
@@ -176,7 +176,7 @@ export function BritishInIndiaToy({ lang, mode = "toy", onDone }: BritishInIndia
               ? lang === "en"
                 ? "Excellent! Removing unfair colonial tariffs restored balance and protected local weavers."
                 : lang === "de"
-                  ? "Ausgezeichnet! Faire Handelsregeln schuetzen Handwerker und schaffen Balance."
+                  ? "Ausgezeichnet! Faire Handelsregeln schützen Handwerker und schaffen Balance."
                   : "Wspaniale! Usunięcie niesprawiedliwych ceł przywróciło równowagę i ochroniło tkaczy."
               : lang === "en"
                 ? "Switch to Fair Reciprocal Trade to give local artisans an equal chance."

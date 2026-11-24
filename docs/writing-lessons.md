@@ -18,7 +18,7 @@ Prefer `animatedBeat(lines, Diagram, mood?)` from `web/src/lesson/toolkit.tsx` o
 ## Rules
 
 1. **Reader:** an 8-year-old who reads simply. Story beats (or each line of an animated beat): one idea each, at most 190 characters in English, short sentences, concrete things (fish, bread, coins) before any word like "economy".
-2. **Three languages, written together.** English, German and Polish for every text. German is natural child German (du-form, "Papa"), not a word-for-word copy. Check grammar and umlauts. Polish is natural child Polish (informal "ty", "Tata"), not a word-for-word copy.
+2. **Three languages, written together.** English, German and Polish for every text. German is natural child German (du-form, "Papa"), not a word-for-word copy. Check grammar and umlauts: write ä, ö, ü and ß, never ae, oe, ue or ss for them (`web/src/germanSpelling.test.ts` fails on them). Polish is natural child Polish (informal "ty", "Tata"), not a word-for-word copy.
 3. **No em dashes or en dashes** anywhere (tests fail on them). No filler, no "Great job!" padding.
 4. **The world:** Ripple Town. Otto the otter is the guide. Recurring cast: Finn (fisherman), Bea (baker), Sam (shoemaker). Add new town people if needed (for example Mayor Moss in the tax lesson). Town money is "coins". Do not reuse a lesson's toy idea from another lesson. Otto and the Ripple Town cast keep their names in every language. Other story characters get a name that fits each language:
    - EN: Indian names. Girls Aish, Anjali, Kriti; boys Abhi, Arjun, Karan, Aarav.

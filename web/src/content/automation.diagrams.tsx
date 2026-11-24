@@ -5,7 +5,7 @@ export function DangerousFoundryLaborDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Ciężka i niebezpieczna praca"
       : lang === "de"
-        ? "Schwere und gefaehrliche Handarbeit"
+        ? "Schwere und gefährliche Handarbeit"
         : "Heavy and Dangerous Work";
 
   const sub =
@@ -142,7 +142,7 @@ export function PrecisionWeldingDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Niestrudzona precyzja na linii"
       : lang === "de"
-        ? "Ermuedungsfreie Praezision am Band"
+        ? "Ermüdungsfreie Präzision am Band"
         : "Tireless Precision at Work";
 
   const sub =
@@ -192,7 +192,7 @@ export function SafetySensorsCurtainDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Kurtyny bezpieczeństwa chronią ludzi"
       : lang === "de"
-        ? "Sicherheitssensoren schuetzen Menschen"
+        ? "Sicherheitssensoren schützen Menschen"
         : "Safety Sensors Protect Humans";
 
   const sub =

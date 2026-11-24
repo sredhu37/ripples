@@ -51,7 +51,7 @@ export function Ww1Toy({ lang, mode = "toy", onDone }: Ww1ToyProps) {
     lang === "pl"
       ? "Sztywne tajne sojusze"
       : lang === "de"
-        ? "Geheime Buendnisfallen"
+        ? "Geheime Bündnisfallen"
         : "Rigid Secret Alliances";
 
   const mediationTableLabel =
@@ -65,19 +65,19 @@ export function Ww1Toy({ lang, mode = "toy", onDone }: Ww1ToyProps) {
     ? lang === "pl"
       ? "Genewska rada otwartego dialogu"
       : lang === "de"
-        ? "Genfer Gespraechsrat"
+        ? "Genfer Gesprächsrat"
         : "Geneva Open Dialogue Council"
     : lang === "pl"
       ? "Sześć państw spętanych tajnymi paktami"
       : lang === "de"
-        ? "Sechs Staaten in Buendnisketten"
+        ? "Sechs Staaten in Bündnisketten"
         : "Six Nations Bound by Secret Treaties";
 
   const triggerIncidentLabel =
     lang === "pl"
       ? "Wywołaj spór graniczny"
       : lang === "de"
-        ? "Grenzstreit ausloesen"
+        ? "Grenzstreit auslösen"
         : "Trigger Border Dispute";
 
   return (
@@ -140,7 +140,7 @@ export function Ww1Toy({ lang, mode = "toy", onDone }: Ww1ToyProps) {
             {lang === "pl"
               ? "W Europie panuje pokój. Wywołaj spór, aby przetestować system."
               : lang === "de"
-                ? "Europa hat Frieden. Loese einen Streit aus, um das System zu testen."
+                ? "Europa hat Frieden. Löse einen Streit aus, um das System zu testen."
                 : "Europe is at peace. Trigger a dispute to test the system."}
           </span>
         )}
@@ -160,7 +160,7 @@ export function Ww1Toy({ lang, mode = "toy", onDone }: Ww1ToyProps) {
             {lang === "pl"
               ? "Spór został skierowany do stołu mediacji i rozwiązany pokojowo! (Konflikt: 0%)"
               : lang === "de"
-                ? "Der Streit wurde am Vermittlungstisch friedlich geloest! (Konflikt: 0%)"
+                ? "Der Streit wurde am Vermittlungstisch friedlich gelöst! (Konflikt: 0%)"
                 : "The dispute was brought to the mediation table and defused peacefully! (Conflict: 0%)"}
           </span>
         )}
@@ -174,12 +174,12 @@ export function Ww1Toy({ lang, mode = "toy", onDone }: Ww1ToyProps) {
               ? lang === "pl"
                 ? "Doskonale! Genewski stół mediacji pokojowej zapobiegł pułapce domina sojuszy."
                 : lang === "de"
-                  ? "Perfekt! Der Vermittlungstisch verhinderte die Buendnis-Kettenreaktion."
+                  ? "Perfekt! Der Vermittlungstisch verhinderte die Bündnis-Kettenreaktion."
                   : "Perfect! The Geneva Peace Mediation Table prevented the alliance domino trap."
               : lang === "pl"
                 ? "Przełącz na Genewski stół mediacji pokojowej, aby zatrzymać kaskadę domina."
                 : lang === "de"
-                  ? "Waehle den Genfer Vermittlungstisch, um die Kettenreaktion zu stoppen."
+                  ? "Wähle den Genfer Vermittlungstisch, um die Kettenreaktion zu stoppen."
                   : "Switch to the Geneva Peace Mediation Table to prevent the domino cascade."}
           </div>
         )}

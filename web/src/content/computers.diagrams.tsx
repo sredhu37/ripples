@@ -5,14 +5,14 @@ export function AbacusGearsDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Wczesne narzędzia liczące: liczydło"
       : lang === "de"
-        ? "Fruehe Rechenhilfen: Der Abakus"
+        ? "Frühe Rechenhilfen: Der Abakus"
         : "Counting Tools: The Abacus";
 
   const sub =
     lang === "pl"
       ? "Liczenie: koraliki, koła zębate"
       : lang === "de"
-        ? "Rechnen mit Perlen, Zahnraedern"
+        ? "Rechnen mit Perlen, Zahnrädern"
         : "Counting with beads, gears";
 
   return (

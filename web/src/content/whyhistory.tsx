@@ -26,22 +26,22 @@ export const lesson: Lesson = {
       [
         T(
           "Why do we spend time learning about events that happened decades, centuries, or millennia ago?",
-          "Warum beschaeftigen wir uns mit Ereignissen, die Jahrzehnte, Jahrhunderte oder Jahrtausende zurueckliegen?",
+          "Warum beschäftigen wir uns mit Ereignissen, die Jahrzehnte, Jahrhunderte oder Jahrtausende zurückliegen?",
           "Dlaczego poświęcamy czas na poznawanie wydarzeń, które miały miejsce dziesiątki, setki lub tysiące lat temu?",
         ),
         T(
           "Every bridge, law, book, and freedom we enjoy today was built by earlier generations.",
-          "Weil jede Bruecke, jedes Gesetz und jede Freiheit von frueheren Generationen geschaffen wurde.",
+          "Weil jede Brücke, jedes Gesetz und jede Freiheit von früheren Generationen geschaffen wurde.",
           "Każdy most, prawo, książka i każda wolność, które znamy, powstały dzięki dawnym pokoleniom.",
         ),
         T(
           "History is not a dusty list of dry dates and dead kings.",
-          "Geschichte ist keine verstaubte Liste aus trockenen Jahreszahlen fuer eine Pruefung.",
+          "Geschichte ist keine verstaubte Liste aus trockenen Jahreszahlen für eine Prüfung.",
           "Historia nie jest zakurzoną listą suchych dat i dawnych królów do zapamiętania na sprawdzian.",
         ),
         T(
           "It is the living, breathing human story of how our modern world came to be.",
-          "Sie ist die lebendige Erzaehlung darueber, wie unsere heutige Welt entstanden ist.",
+          "Sie ist die lebendige Erzählung darüber, wie unsere heutige Welt entstanden ist.",
           "To żywa opowieść o ludziach, ich wyborach i drogach, które ukształtowały nasz dzisiejszy świat.",
         ),
       ],
@@ -51,17 +51,17 @@ export const lesson: Lesson = {
       [
         T(
           "When historians investigate the past, they search for genuine *primary sources*.",
-          "Wenn Historiker die Vergangenheit erforschen, suchen sie nach echten *Primaerquellen*.",
+          "Wenn Historiker die Vergangenheit erforschen, suchen sie nach echten *Primärquellen*.",
           "Gdy historycy badają przeszłość, poszukują autentycznych *źródeł pierwotnych*.",
         ),
         T(
           "A primary source is direct evidence made at the time. Think of diaries, stone seals, letters, and tools.",
-          "Eine Primaerquelle ist ein direktes Zeugnis aus der Zeit: Tagebuecher, Urkunden, Briefe und Werkzeuge.",
+          "Eine Primärquelle ist ein direktes Zeugnis aus der Zeit: Tagebücher, Urkunden, Briefe und Werkzeuge.",
           "Źródło pierwotne to bezpośrednie świadectwo z epoki: ręcznie pisane pamiętniki, pieczęcie, listy i narzędzia.",
         ),
         T(
           "Historians compare different eyewitness accounts to separate verified facts from exaggeration or bias.",
-          "Sie vergleichen Augenzeugenberichte, um echte Fakten von Uebertreibung und Vorurteilen zu trennen.",
+          "Sie vergleichen Augenzeugenberichte, um echte Fakten von Übertreibung und Vorurteilen zu trennen.",
           "Badacze porównują relacje naocznych świadków, by odróżnić sprawdzone fakty od uprzedzeń i mitów.",
         ),
         T(
@@ -106,17 +106,17 @@ export const lesson: Lesson = {
         ),
         T(
           "It shows us which paths led to flourishing cooperation, and which paths led to tragedy.",
-          "Sie zeigt uns, welche Wege zu bluehendem Frieden und welche in die Sackgasse fuehrten.",
+          "Sie zeigt uns, welche Wege zu blühendem Frieden und welche in die Sackgasse führten.",
           "Ukazuje, które drogi prowadziły do rozkwitu i współpracy, a które do tragedii i upadku.",
         ),
         T(
           "When we understand why past institutions succeeded or failed, we make smarter decisions today.",
-          "Wenn wir verstehen, warum Ideen funktionierten oder scheiterten, treffen wir heute kluegere Entscheidungen.",
+          "Wenn wir verstehen, warum Ideen funktionierten oder scheiterten, treffen wir heute klügere Entscheidungen.",
           "Gdy rozumiemy, dlaczego dawne instytucje odnosiły sukcesy lub upadały, podejmujemy dziś mądrzejsze decyzje.",
         ),
         T(
           "History empowers every citizen with wisdom, perspective, and moral clarity.",
-          "Geschichte schenkt jedem Buerger Weitsicht, Urteilskraft und Klarheit.",
+          "Geschichte schenkt jedem Bürger Weitsicht, Urteilskraft und Klarheit.",
           "Znajomość historii obdarza każdego obywatela mądrością, szerszą perspektywą i jasnością moralną.",
         ),
       ],
@@ -131,17 +131,17 @@ export const lesson: Lesson = {
         ),
         T(
           "Every kind word, fair rule, and good idea ripples forward in time.",
-          "Jedes freundliche Wort, jede faire Regel und jede gute Idee schlaegt Wellen in die Zukunft.",
+          "Jedes freundliche Wort, jede faire Regel und jede gute Idee schlägt Wellen in die Zukunft.",
           "Każde dobre słowo, sprawiedliwa zasada, którą szanujesz, i pomysł, który tworzysz, zataczają fale w przyszłość.",
         ),
         T(
           "You are not just a spectator watching history; you are actively writing the next page.",
-          "Du bist nicht nur Zuschauer der Geschichte; du schreibst aktiv das naechste Kapitel.",
+          "Du bist nicht nur Zuschauer der Geschichte; du schreibst aktiv das nächste Kapitel.",
           "Nie jesteś tylko widzem obserwującym przeszłość; piszesz kolejną stronę historii świata.",
         ),
         T(
           "Let us build an open, thoughtful, and compassionate tomorrow for everyone on Earth!",
-          "Lasst uns eine offene, kluge und friedliche Zukunft fuer alle Menschen gestalten!",
+          "Lasst uns eine offene, kluge und friedliche Zukunft für alle Menschen gestalten!",
           "Zbudujmy otwarte, mądre i pełne życzliwości jutro dla wszystkich ludzi na Ziemi!",
         ),
       ],
@@ -150,7 +150,7 @@ export const lesson: Lesson = {
   ],
   toyIntro: T(
     "Connect each historical artifact in the archive with its enduring lesson for humanity.",
-    "Verknuepfe jedes Fundstueck im Archiv mit seiner bleibenden Bedeutung fuer die Menschheit.",
+    "Verknüpfe jedes Fundstück im Archiv mit seiner bleibenden Bedeutung für die Menschheit.",
     "Połącz każde znalezisko w archiwum z jego trwałą lekcją dla ludzkości.",
   ),
   Toy,
@@ -159,14 +159,14 @@ export const lesson: Lesson = {
       kind: "choice",
       prompt: T(
         "What is a primary source in historical research?",
-        "Was versteht man unter einer Primaerquelle in der Geschichtswissenschaft?",
+        "Was versteht man unter einer Primärquelle in der Geschichtswissenschaft?",
         "Czym jest źródło pierwotne w badaniach historycznych?",
       ),
       options: [
         {
           text: T(
             "Direct evidence created at the time, such as diaries, handwritten letters, treaties, or tools",
-            "Ein direktes Zeugnis aus der Zeit, wie Tagebuecher, Briefe, Vertraege oder Werkzeuge",
+            "Ein direktes Zeugnis aus der Zeit, wie Tagebücher, Briefe, Verträge oder Werkzeuge",
             "Bezpośrednim świadectwem powstałym w epoce, jak pamiętniki, listy, traktaty czy narzędzia",
           ),
           correct: true,
@@ -181,14 +181,14 @@ export const lesson: Lesson = {
         {
           text: T(
             "A comic book written yesterday about dragons dancing in sixteenth-century castles",
-            "Ein Comic von gestern ueber tanzende Drachen in Schloessern",
+            "Ein Comic von gestern über tanzende Drachen in Schlössern",
             "Komiksem napisanym wczoraj o smokach tańczących w szesnastowiecznych zamkach",
           ),
         },
       ],
       hint: T(
         "Primary sources are genuine physical artifacts and written documents from the period.",
-        "Primaerquellen stammen unmittelbar aus der Zeit, die erforscht wird.",
+        "Primärquellen stammen unmittelbar aus der Zeit, die erforscht wird.",
         "Źródła pierwotne to autentyczne przedmioty i dokumenty powstałe bezpośrednio w badanych czasach.",
       ),
     },
@@ -203,7 +203,7 @@ export const lesson: Lesson = {
         {
           text: T(
             "To learn honestly from past mistakes, protect human dignity, and defend democratic freedoms",
-            "Um aus Fehlern zu lernen, die Menschenwuerde zu schuetzen und die Freiheit zu verteidigen",
+            "Um aus Fehlern zu lernen, die Menschenwürde zu schützen und die Freiheit zu verteidigen",
             "Aby rzetelnie uczyć się na błędach, chronić ludzką godność i bronić wolności demokratycznych",
           ),
           correct: true,
@@ -211,14 +211,14 @@ export const lesson: Lesson = {
         {
           text: T(
             "To test how many museum postcards can fit inside an empty cereal box",
-            "Um auszuprobieren, wie viele Museumskarten in eine Mueslischachtel passen",
+            "Um auszuprobieren, wie viele Museumskarten in eine Müslischachtel passen",
             "Aby sprawdzić, ile pocztówek z muzeum zmieści się w pustym pudełku po płatkach",
           ),
         },
         {
           text: T(
             "To forbid all students from ever eating strawberry ice cream after school",
-            "Um allen Schuelern zu verbieten, jemals wieder Erdbeereis zu essen",
+            "Um allen Schülern zu verbieten, jemals wieder Erdbeereis zu essen",
             "Aby zabronić uczniom jedzenia lodów truskawkowych po lekcjach",
           ),
         },
@@ -233,31 +233,31 @@ export const lesson: Lesson = {
       kind: "widget",
       prompt: T(
         "Match all 4 historical artifacts in the archive to their meaning to achieve 100% insight.",
-        "Ordne alle 4 Fundstuecke im Archiv ihrer Bedeutung zu, um 100% Erkenntnis zu erreichen.",
+        "Ordne alle 4 Fundstücke im Archiv ihrer Bedeutung zu, um 100% Erkenntnis zu erreichen.",
         "Dopasuj wszystkie 4 obiekty w archiwum do ich znaczenia, aby osiągnąć 100% wiedzy.",
       ),
       Widget,
       hint: T(
         "Select Cultural Dialogue for Astrolabe, Self-Reliance for Yarn, Diplomacy for Treaty, and Reconciliation for Steel Beam.",
-        "Waehle Kulturaustausch fuers Astrolabium, Selbstbestimmung fuer Garn, Diplomatie fuer Vertrag und Versoehnung fuer Stahl.",
+        "Wähle Kulturaustausch fürs Astrolabium, Selbstbestimmung für Garn, Diplomatie für Vertrag und Versöhnung für Stahl.",
         "Wybierz Dialog kulturowy dla Astrolabium, Samowystarczalność dla Przędzy, Dyplomację dla Traktatu i Pojednanie dla Dźwigara.",
       ),
     },
   ],
   askDad: T(
     "Papa, what is one historical lesson or family story that has guided your decisions in life?",
-    "Papa, welche historische Lektion oder Familiengeschichte hat dich in deinem Leben besonders gepraegt?",
+    "Papa, welche historische Lektion oder Familiengeschichte hat dich in deinem Leben besonders geprägt?",
     "Tato, jaka lekcja z historii lub opowieść rodzinna była dla Ciebie najważniejszym drogowskazem w życiu?",
   ),
   realLife: {
     title: {
       en: "Archives and History Workshops",
-      de: "Archive und Geschichtswerkstaetten",
+      de: "Archive und Geschichtswerkstätten",
       pl: "Archiwa państwowe i pracownie historyczne",
     },
     body: {
       en: "Almost every town in Germany has a municipal archive (Stadtarchiv) where original birth registers, maps, building plans, and council minutes going back centuries are preserved in climate-controlled vaults. Citizen historians and students can visit to examine original primary sources for their own school projects, discovering how world events shaped their own neighborhood.",
-      de: "Fast jede Stadt in Deutschland besitzt ein Stadtarchiv, in dem Originalurkunden, Karten und Ratsprotokolle aus vielen Jahrhunderten sicher aufbewahrt werden. Schueler und Buerger koennen dort historische Originalquellen einsehen und erforschen, wie die Weltgeschichte ihre eigene Nachbarschaft gepraegt hat.",
+      de: "Fast jede Stadt in Deutschland besitzt ein Stadtarchiv, in dem Originalurkunden, Karten und Ratsprotokolle aus vielen Jahrhunderten sicher aufbewahrt werden. Schüler und Bürger können dort historische Originalquellen einsehen und erforschen, wie die Weltgeschichte ihre eigene Nachbarschaft geprägt hat.",
       pl: "Niemal w każdym mieście w Polsce działa archiwum państwowe lub biblioteka z działem starodruków, gdzie przechowuje się oryginalne księgi metrykalne, mapy, plany architektoniczne i kroniki miejskie sprzed wieków. Każdy uczeń i mieszkaniec może bezpłatnie przeglądać zdigitalizowane źródła w serwisie szukajwarchiwach.gov.pl lub odwiedzić czytelnię, by badać historię własnej rodziny i miejscowości.",
     },
   },
@@ -266,7 +266,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The discipline of modern historical methodology is rooted in the systematic analysis and critical cross-referencing of primary sources.",
-          de: "Die Methodik der modernen Geschichtswissenschaft beruht auf der systematischen und kritischen Auswertung von Primaerquellen.",
+          de: "Die Methodik der modernen Geschichtswissenschaft beruht auf der systematischen und kritischen Auswertung von Primärquellen.",
           pl: "Metodologia współczesnej historiografii opiera się na krytycznej analizie, weryfikacji i porównywaniu źródeł pierwotnych.",
         },
         source:
@@ -283,7 +283,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The UNESCO Recommendation concerning the Protection and Promotion of Museums and Collections underscores museums as places of civic dialogue.",
-          de: "Die UNESCO-Empfehlung zum Schutz von Museen und Sammlungen wuerdigt Museen als Raeume des buergerlichen Dialogs.",
+          de: "Die UNESCO-Empfehlung zum Schutz von Museen und Sammlungen würdigt Museen als Räume des bürgerlichen Dialogs.",
           pl: "Zalecenie UNESCO dotyczące ochrony i promocji muzeów i kolekcji (2015) podkreśla ich rolę jako przestrzeni dialogu społecznego i edukacji.",
         },
         source: "https://unesdoc.unesco.org/ark:/48223/pf0000246331",
@@ -291,7 +291,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The International Council on Archives (ICA) promotes the preservation and accessible use of documentary heritage worldwide.",
-          de: "Der Internationale Archivrat (ICA) foerdert weltweit den Erhalt und die zugaengliche Nutzung des schriftlichen Kulturerbes.",
+          de: "Der Internationale Archivrat (ICA) fördert weltweit den Erhalt und die zugängliche Nutzung des schriftlichen Kulturerbes.",
           pl: "Międzynarodowa Rada Archiwów (ICA) oraz Archiwa Państwowe w Polsce dbają o zachowanie i powszechną dostępność dziedzictwa dokumentacyjnego.",
         },
         source: "https://www.ica.org/en/about-archives",
@@ -299,7 +299,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The Universal Declaration on Cultural Diversity (UNESCO 2001) affirms intercultural heritage as essential for human flourishing.",
-          de: "Die Allgemeine Erklaerung zur kulturellen Vielfalt (UNESCO 2001) betont das interkulturelle Erbe fuer das friedliche Zusammenleben.",
+          de: "Die Allgemeine Erklärung zur kulturellen Vielfalt (UNESCO 2001) betont das interkulturelle Erbe für das friedliche Zusammenleben.",
           pl: "Powszechna Deklaracja o Różnorodności Kulturowej (UNESCO 2001) uznaje dziedzictwo międzykulturowe za warunek pomyślnego rozwoju ludzkości.",
         },
         source:
@@ -309,7 +309,7 @@ export const lesson: Lesson = {
     simplified: [
       {
         en: "We explain the nature of primary sources using relatable everyday examples like letters and tools.",
-        de: "Wir erklaeren das Wesen von Primaerquellen an alltaeglichen Beispielen wie Briefen und Werkzeugen.",
+        de: "Wir erklären das Wesen von Primärquellen an alltäglichen Beispielen wie Briefen und Werkzeugen.",
         pl: "Tłumaczymy istotę źródeł pierwotnych na prostych przykładach z życia, takich jak listy i narzędzia.",
       },
       {
@@ -319,7 +319,7 @@ export const lesson: Lesson = {
       },
       {
         en: "We show that honest remembrance builds an ethical foundation for democratic responsibility.",
-        de: "Wir zeigen, dass aufrichtiges Erinnern das ethische Fundament fuer demokratische Verantwortung legt.",
+        de: "Wir zeigen, dass aufrichtiges Erinnern das ethische Fundament für demokratische Verantwortung legt.",
         pl: "Pokazujemy, że rzetelna pamięć o przeszłości stanowi etyczny fundament odpowiedzialności obywatelskiej.",
       },
     ],

@@ -45,7 +45,7 @@ export function Ww2Toy({ lang, mode = "toy", onDone }: Ww2ToyProps) {
     lang === "pl"
       ? "Godność człowieka jest nienaruszalna"
       : lang === "de"
-        ? "Die Wuerde des Menschen ist unantastbar"
+        ? "Die Würde des Menschen ist unantastbar"
         : "Human Dignity is Inviolable";
 
   const protectionLevel =
@@ -125,12 +125,12 @@ export function Ww2Toy({ lang, mode = "toy", onDone }: Ww2ToyProps) {
               ? lang === "pl"
                 ? "Wspaniale! Wzniesienie wszystkich trzech filarów chroni społeczeństwo przed tyranią i bezprawiem."
                 : lang === "de"
-                  ? "Grossartig! Alle drei Pfeiler schuetzen die Gesellschaft vor Willkuer und Unrecht."
+                  ? "Großartig! Alle drei Pfeiler schützen die Gesellschaft vor Willkür und Unrecht."
                   : "Brilliant! Raising all three pillars protects society against tyranny and prejudice."
               : lang === "pl"
                 ? "Aktywuj wszystkie trzy filary, aby zapewnić pełną 100% ochronę godności ludzkiej."
                 : lang === "de"
-                  ? "Aktiviere alle drei Pfeiler fuer vollstaendigen Schutz."
+                  ? "Aktiviere alle drei Pfeiler für vollständigen Schutz."
                   : "Activate all three pillars to achieve complete 100% protection."}
           </div>
         )}

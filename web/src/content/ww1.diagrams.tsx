@@ -5,7 +5,7 @@ export function CompetingFleetsDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Europa 1914: wyścig zbrojeń"
       : lang === "de"
-        ? "Europa 1914: Wettruesten"
+        ? "Europa 1914: Wettrüsten"
         : "Europe 1914: Arms Race";
 
   const ships = lang === "pl" ? "Pancerniki" : lang === "de" ? "Schlachtschiffe" : "Battleships";
@@ -59,20 +59,20 @@ export function AllianceBlocksDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Dwa wrogie bloki sojusznicze"
       : lang === "de"
-        ? "Die zwei Buendnisbloecke"
+        ? "Die zwei Bündnisblöcke"
         : "The Two Alliance Blocs";
 
   const centralTitle =
-    lang === "pl" ? "Państwa Centralne" : lang === "de" ? "Mittelmaechte" : "Central Powers";
+    lang === "pl" ? "Państwa Centralne" : lang === "de" ? "Mittelmächte" : "Central Powers";
   const centralSub =
     lang === "pl"
       ? "Niemcy i Austro-Węgry"
       : lang === "de"
-        ? "Deutschland & Oesterreich"
+        ? "Deutschland & Österreich"
         : "Germany & Austria";
 
   const alliedTitle =
-    lang === "pl" ? "Ententa (Sojusznicy)" : lang === "de" ? "Alliierte Maechte" : "Allied Powers";
+    lang === "pl" ? "Ententa (Sojusznicy)" : lang === "de" ? "Alliierte Mächte" : "Allied Powers";
   const alliedSub =
     lang === "pl"
       ? "Francja, UK, Rosja"
@@ -84,7 +84,7 @@ export function AllianceBlocksDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Tajne pakty łączyły państwa"
       : lang === "de"
-        ? "Geheime Vertraege verbanden Staaten"
+        ? "Geheime Verträge verbanden Staaten"
         : "Secret treaties linked nations";
 
   return (
@@ -298,7 +298,7 @@ export function LeagueOfNationsGenevaDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Liga Narodów w Genewie"
       : lang === "de"
-        ? "Der Voelkerbund in Genf"
+        ? "Der Völkerbund in Genf"
         : "The League of Nations";
 
   const tableLabel = lang === "pl" ? "Genewa" : lang === "de" ? "Genf" : "Geneva";
@@ -307,7 +307,7 @@ export function LeagueOfNationsGenevaDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Rozmowy zamiast tajnych paktów"
       : lang === "de"
-        ? "Gespraeche statt Geheimbuendnisse"
+        ? "Gespräche statt Geheimbündnisse"
         : "Open talks, not traps";
 
   return (

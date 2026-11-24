@@ -31,7 +31,7 @@ export const lesson: Lesson = {
         ),
         T(
           "A programmer had to write a rule for every situation the computer might meet.",
-          "Programmierer mussten fuer jeden denkbaren Fall eine feste Regel wie Wenn-Dann formulieren.",
+          "Programmierer mussten für jeden denkbaren Fall eine feste Regel wie Wenn-Dann formulieren.",
           "Programista musiał zapisać wyraźną regułę dla każdej pojedynczej sytuacji, na jaką mógł natrafić komputer.",
         ),
         T(
@@ -46,17 +46,17 @@ export const lesson: Lesson = {
       [
         T(
           "A revolutionary method called *machine learning* changed how computers solve complex problems.",
-          "Ein neuer Ansatz namens *maschinelles Lernen* veraenderte, wie Computer Probleme loesen.",
+          "Ein neuer Ansatz namens *maschinelles Lernen* veränderte, wie Computer Probleme lösen.",
           "Przełomowa metoda zwana *uczeniem maszynowym* zmieniła sposób, w jaki komputery rozwiązują złożone problemy.",
         ),
         T(
           "Instead of writing thousands of strict rules, researchers feed algorithms vast libraries of examples.",
-          "Statt tausende starre Regeln zu tippen, fuettern Forscher den Algorithmus mit Millionen Beispielen.",
+          "Statt tausende starre Regeln zu tippen, füttern Forscher den Algorithmus mit Millionen Beispielen.",
           "Zamiast pisać tysiące sztywnych reguł, naukowcy dostarczają algorytmom ogromne zbiory przykładów.",
         ),
         T(
           "The computer studies thousands of photos. It figures out its own math guide to identify things.",
-          "Durch das Betrachten vieler Fotos lernt der Computer selbststaendig, Dinge zu unterscheiden.",
+          "Durch das Betrachten vieler Fotos lernt der Computer selbstständig, Dinge zu unterscheiden.",
           "Analizując tysiące zdjęć, komputer samodzielnie buduje matematyczny przewodnik do rozpoznawania obiektów.",
         ),
       ],
@@ -66,7 +66,7 @@ export const lesson: Lesson = {
       [
         T(
           "This statistical technique is known as *pattern recognition*.",
-          "Dieses mathematische Verfahren heisst *Mustererkennung*.",
+          "Dieses mathematische Verfahren heißt *Mustererkennung*.",
           "Ta technika statystyczna nosi nazwę *rozpoznawania wzorców*.",
         ),
         T(
@@ -76,7 +76,7 @@ export const lesson: Lesson = {
         ),
         T(
           "With enough clean examples, the model correctly sorts new fruits it has never seen.",
-          "Mit genuegend guten Trainingsdaten sortiert das Modell auch neue Fruechte treffsicher ein.",
+          "Mit genügend guten Trainingsdaten sortiert das Modell auch neue Früchte treffsicher ein.",
           "Gdy dostanie dość czystych danych, model trafnie rozpoznaje nowe owoce, których jeszcze nie widział.",
         ),
       ],
@@ -86,17 +86,17 @@ export const lesson: Lesson = {
       [
         T(
           "Doctors use these pattern finders to spot tiny early tumors in medical X-ray scans.",
-          "Aerzte nutzen diese Musterfinder, um fruehe Spuren von Krankheiten in Roentgenbildern zu erkennen.",
+          "Ärzte nutzen diese Musterfinder, um frühe Spuren von Krankheiten in Röntgenbildern zu erkennen.",
           "Lekarze wykorzystują wykrywacze wzorców, by zauważyć wczesne zmiany chorobowe na zdjęciach rentgenowskich.",
         ),
         T(
           "Astronomers analyze petabytes of starlight data to discover new exoplanets orbiting distant suns.",
-          "Astronomen durchkaemmen riesige Datenmengen, um ferne Planeten um fremde Sonnen zu entdecken.",
+          "Astronomen durchkämmen riesige Datenmengen, um ferne Planeten um fremde Sonnen zu entdecken.",
           "Astronomowie analizują petabajty danych ze stacji kosmicznych, odkrywając planety krążące wokół odległych gwiazd.",
         ),
         T(
           "Translation systems allow people speaking different languages to communicate across borders instantly.",
-          "Uebersetzungsprogramme ermoeglichen Menschen weltweit den sofortigen Austausch ohne Sprachbarriere.",
+          "Übersetzungsprogramme ermöglichen Menschen weltweit den sofortigen Austausch ohne Sprachbarriere.",
           "Systemy tłumaczące pozwalają ludziom mówiącym różnymi językami porozumiewać się bez barier w czasie rzeczywistym.",
         ),
       ],
@@ -106,12 +106,12 @@ export const lesson: Lesson = {
       [
         T(
           "Modern *artificial intelligence* is a brilliant mathematical calculator, not a conscious creature.",
-          "Moderne *Kuenstliche Intelligenz* ist ein Rechenwerkzeug fuer Muster, kein fuehlendes Lebewesen.",
+          "Moderne *Künstliche Intelligenz* ist ein Rechenwerkzeug für Muster, kein fühlendes Lebewesen.",
           "Współczesna *sztuczna inteligencja* to błyskotliwy kalkulator matematyczny, a nie istota obdarzona świadomością.",
         ),
         T(
           "An AI does not possess feelings, hopes, pain, personal intentions, or moral judgment.",
-          "Eine KI hat weder Gefuehle noch Traeume, Absichten oder ein eigenes Gewissen.",
+          "Eine KI hat weder Gefühle noch Träume, Absichten oder ein eigenes Gewissen.",
           "Sztuczna inteligencja nie ma uczuć, marzeń, bólu, własnych zamiarów ani zmysłu moralnego.",
         ),
         T(
@@ -125,7 +125,7 @@ export const lesson: Lesson = {
   ],
   toyIntro: T(
     "Train the pattern model by selecting 10 cards with verified labels to achieve over 90% accuracy.",
-    "Trainiere das Modell mit 10 Karten und sauberen Daten, um ueber 90% Erkennungsgenauigkeit zu erreichen.",
+    "Trainiere das Modell mit 10 Karten und sauberen Daten, um über 90% Erkennungsgenauigkeit zu erreichen.",
     "Wytrenuj model, wybierając 10 kart ze zweryfikowanymi etykietami, aby uzyskać ponad 90% dokładności.",
   ),
   Toy,
@@ -156,7 +156,7 @@ export const lesson: Lesson = {
         {
           text: T(
             "It only works on rainy Sundays when thunder strikes the roof",
-            "Es funktioniert nur an regnerischen Sonntagen, wenn der Blitz ins Dach einschlaegt",
+            "Es funktioniert nur an regnerischen Sonntagen, wenn der Blitz ins Dach einschlägt",
             "Działa tylko w deszczowe niedziele, gdy piorun uderza w dach budynku",
           ),
         },
@@ -171,7 +171,7 @@ export const lesson: Lesson = {
       kind: "choice",
       prompt: T(
         "Does an artificial intelligence model have feelings, emotions, or consciousness?",
-        "Hat ein kuenstliches Intelligenzmodell Gefuehle, Emotionen oder ein echtes Bewusstsein?",
+        "Hat ein künstliches Intelligenzmodell Gefühle, Emotionen oder ein echtes Bewusstsein?",
         "Czy model sztucznej inteligencji posiada uczucia, emocje lub świadomość?",
       ),
       options: [
@@ -193,14 +193,14 @@ export const lesson: Lesson = {
         {
           text: T(
             "Yes, algorithms dream of eating strawberry ice cream at the park",
-            "Ja, Algorithmen traeumen nachts davon, im Park Erdbeereis zu essen",
+            "Ja, Algorithmen träumen nachts davon, im Park Erdbeereis zu essen",
             "Tak, algorytmy marzą nocami o jedzeniu lodów truskawkowych w parku",
           ),
         },
       ],
       hint: T(
         "AI is a powerful computational tool that calculates probabilities without feelings or sentience.",
-        "KI ist ein mathematisches Werkzeug zur Wahrscheinlichkeitsrechnung ohne Gefuehle oder Bewusstsein.",
+        "KI ist ein mathematisches Werkzeug zur Wahrscheinlichkeitsrechnung ohne Gefühle oder Bewusstsein.",
         "Sztuczna inteligencja to narzędzie do obliczania prawdopodobieństwa bez uczuć i świadomości.",
       ),
     },
@@ -208,20 +208,20 @@ export const lesson: Lesson = {
       kind: "widget",
       prompt: T(
         "Select 10 Cards and make sure Verified Labels are active to achieve over 90% pattern accuracy.",
-        "Waehle 10 Karten und saubere Daten, um ueber 90% Mustererkennungs-Genauigkeit zu erreichen.",
+        "Wähle 10 Karten und saubere Daten, um über 90% Mustererkennungs-Genauigkeit zu erreichen.",
         "Wybierz 10 kart i włącz zweryfikowane etykiety, aby osiągnąć ponad 90% dokładności rozpoznawania wzorców.",
       ),
       Widget,
       hint: T(
         "Tap 10 Cards, ensure clean labels are active, and tap check when the meter turns green.",
-        "Tippe auf 10 Karten, aktiviere saubere Daten und druecke pruefen, wenn die Anzeige gruen wird.",
+        "Tippe auf 10 Karten, aktiviere saubere Daten und drücke prüfen, wenn die Anzeige grün wird.",
         "Wybierz 10 kart, upewnij się, że czyste etykiety są aktywne, i kliknij sprawdź, gdy wskaźnik zmieni kolor na zielony.",
       ),
     },
   ],
   askDad: T(
     "Papa, if an AI can compose a poem or draw a picture, does that mean it has feelings or imagination?",
-    "Papa, wenn eine KI ein Gedicht schreibt oder ein Bild malt, hat sie dann echte Gefuehle oder Fantasie?",
+    "Papa, wenn eine KI ein Gedicht schreibt oder ein Bild malt, hat sie dann echte Gefühle oder Fantasie?",
     "Tato, jeśli sztuczna inteligencja potrafi napisać wiersz lub narysować obraz, czy to znaczy, że ma uczucia lub wyobraźnię?",
   ),
   realLife: {
@@ -232,7 +232,7 @@ export const lesson: Lesson = {
     },
     body: {
       en: "At the German Meteorological Service (Deutscher Wetterdienst, DWD) in Offenbach, supercomputers analyze petabytes of satellite imagery, atmospheric pressure readings, and wind measurements. Deep learning models help meteorologists predict severe storms, flash floods, and heatwaves hours earlier, saving lives and protecting communities.",
-      de: "Beim Deutschen Wetterdienst (DWD) in Offenbach verarbeiten Supercomputer gewaltige Datenmengen aus Satellitenbildern, Luftdruck- und Windmessungen. Deep-Learning-Modelle helfen Meteorologen, Unwetter und Hitzewellen fruehzeitig vorherzusagen und Menschen rechtzeitig zu warnen.",
+      de: "Beim Deutschen Wetterdienst (DWD) in Offenbach verarbeiten Supercomputer gewaltige Datenmengen aus Satellitenbildern, Luftdruck- und Windmessungen. Deep-Learning-Modelle helfen Meteorologen, Unwetter und Hitzewellen frühzeitig vorherzusagen und Menschen rechtzeitig zu warnen.",
       pl: "W Polsce rozwijane są innowacyjne systemy medyczne oparte na sztucznej inteligencji, takie jak wrocławski Infermedica czy poznański BrainScan. Algorytmy uczenia maszynowego analizują skany tomografii komputerowej mózgu oraz wywiady lekarskie, pomagając lekarzom w szpitalach błyskawicznie wykrywać udary i ratować ludzkie życie.",
     },
   },
@@ -241,7 +241,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "Alan Turing proposed the foundational question 'Can machines think?' in his famous 1950 paper 'Computing Machinery and Intelligence'.",
-          de: "Alan Turing stellte 1950 in seiner Abhandlung 'Computing Machinery and Intelligence' die Frage 'Koennen Maschinen denken?'.",
+          de: "Alan Turing stellte 1950 in seiner Abhandlung 'Computing Machinery and Intelligence' die Frage 'Können Maschinen denken?'.",
           pl: "Alan Turing postawił fundamentalne pytanie 'Czy maszyny mogą myśleć?' w słynnej pracy z 1950 roku.",
         },
         source: "https://www.turing.ac.uk/about-us/alan-turing",
@@ -249,7 +249,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The term 'Artificial Intelligence' was officially coined at the Dartmouth Summer Research Project on Artificial Intelligence in 1956.",
-          de: "Der Begriff 'Kuenstliche Intelligenz' wurde 1956 beim Dartmouth Summer Research Project gepraegt.",
+          de: "Der Begriff 'Künstliche Intelligenz' wurde 1956 beim Dartmouth Summer Research Project geprägt.",
           pl: "Termin 'Sztuczna Inteligencja' został oficjalnie ukuty podczas konferencji w Dartmouth w 1956 roku.",
         },
         source: "https://www.britannica.com/technology/artificial-intelligence",
@@ -257,7 +257,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "Deep neural networks trained on the ImageNet visual dataset in 2012 triggered a major boom in modern computer vision and deep learning.",
-          de: "Auf dem ImageNet-Datensatz trainierte tiefe neuronale Netze loesten 2012 den weltweiten Boom des Deep Learnings aus.",
+          de: "Auf dem ImageNet-Datensatz trainierte tiefe neuronale Netze lösten 2012 den weltweiten Boom des Deep Learnings aus.",
           pl: "Głębokie sieci neuronowe trenowane na zbiorze ImageNet w 2012 roku zapoczątkowały rewolucję głębokiego uczenia.",
         },
         source: "https://cacm.acm.org/magazines/2017/6/217743-imagenet/fulltext",
@@ -265,7 +265,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The Stanford Institute for Human-Centered AI publishes an annual AI Index detailing the global progress and research of machine learning systems.",
-          de: "Das Stanford Institute for Human-Centered AI veroeffentlicht jaehrlich den AI Index zur weltweiten Entwicklung.",
+          de: "Das Stanford Institute for Human-Centered AI veröffentlicht jährlich den AI Index zur weltweiten Entwicklung.",
           pl: "Stanford Institute for Human-Centered AI publikuje doroczny raport AI Index dokumentujący globalny rozwój uczenia maszynowego.",
         },
         source: "https://aiindex.stanford.edu/report/",
@@ -273,7 +273,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "Germany adopted its national Artificial Intelligence Strategy in 2018 to foster responsible, trustworthy AI research and European innovation.",
-          de: "Deutschland beschloss 2018 seine nationale Strategie Kuenstliche Intelligenz fuer verantwortungsvolle Forschung.",
+          de: "Deutschland beschloss 2018 seine nationale Strategie Künstliche Intelligenz für verantwortungsvolle Forschung.",
           pl: "Polska przyjęła Politykę Rozwoju Sztucznej Inteligencji, wspierając etyczny rozwój AI i europejski akt o sztucznej inteligencji (AI Act).",
         },
         source:
@@ -283,7 +283,7 @@ export const lesson: Lesson = {
     simplified: [
       {
         en: "We explain machine learning as finding statistical patterns in examples rather than writing rules by hand.",
-        de: "Wir erklaeren maschinelles Lernen als Erkennen statistischer Muster aus Beispielen statt handgeschriebener Regeln.",
+        de: "Wir erklären maschinelles Lernen als Erkennen statistischer Muster aus Beispielen statt handgeschriebener Regeln.",
         pl: "Tłumaczymy uczenie maszynowe jako odnajdywanie statystycznych wzorców na przykładach zamiast pisania reguł ręcznie.",
       },
       {
@@ -293,7 +293,7 @@ export const lesson: Lesson = {
       },
       {
         en: "We emphasize that AI models are human-created mathematical tools without feelings, soul, or consciousness.",
-        de: "Wir betonen, dass KI-Modelle mathematische Werkzeuge ohne Gefuehle, Seele oder Bewusstsein sind.",
+        de: "Wir betonen, dass KI-Modelle mathematische Werkzeuge ohne Gefühle, Seele oder Bewusstsein sind.",
         pl: "Podkreślamy, że modele sztucznej inteligencji to matematyczne narzędzia bez uczuć, duszy i świadomości.",
       },
     ],

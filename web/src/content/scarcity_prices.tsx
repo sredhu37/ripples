@@ -257,12 +257,12 @@ export const lesson: Lesson = {
         ),
         T(
           "Hundreds of people can do simple tasks. So those skills are abundant and pay modest wages.",
-          "Weil viele das koennen, sind solche Faehigkeiten reichlich vorhanden und bringen Grundlohn.",
+          "Weil viele das können, sind solche Fähigkeiten reichlich vorhanden und bringen Grundlohn.",
           "Ponieważ setki osób potrafią to robić, takie umiejętności są powszechne i dają podstawową płacę.",
         ),
         T(
           "The secret behind wages is not just sweat: it is *skill scarcity*.",
-          "Das Geheimnis hinter Loehnen ist nicht nur Anstrengung: Es ist *Faehigkeitenknappheit*.",
+          "Das Geheimnis hinter Löhnen ist nicht nur Anstrengung: Es ist *Fähigkeitenknappheit*.",
           "Tajemnicą zarobków jest nie tylko wysiłek: to *rzadkość umiejętności*.",
         ),
       ],
@@ -272,22 +272,22 @@ export const lesson: Lesson = {
       [
         T(
           "Now imagine a giant airplane engine breaks down at the airport.",
-          "Stell dir vor, ein riesiges Flugzeugtriebwerk faellt am Flughafen aus.",
+          "Stell dir vor, ein riesiges Flugzeugtriebwerk fällt am Flughafen aus.",
           "Wyobraź sobie teraz, że na lotnisku psuje się silnik wielkiego samolotu.",
         ),
         T(
           "Fixing a jet engine requires ten years of advanced engineering school and rigorous safety exams.",
-          "Die Reparatur erfordert zehn Jahre Ingenieurstudium und strengste Sicherheitspruefungen.",
+          "Die Reparatur erfordert zehn Jahre Ingenieurstudium und strengste Sicherheitsprüfungen.",
           "Naprawa silnika odrzutowego wymaga dziesięciu lat studiów inżynierskich i trudnych egzaminów.",
         ),
         T(
           "Only three people in the entire region possess the certification to complete the repair.",
-          "Nur drei Menschen in der gesamten Region besitzen die noetige Lizenz dafuer.",
+          "Nur drei Menschen in der gesamten Region besitzen die nötige Lizenz dafür.",
           "Tylko trzy osoby w całym regionie mają certyfikat pozwalający wykonać tę naprawę.",
         ),
         T(
           "Airlines gladly offer high salaries because qualified candidates are extremely *scarce*.",
-          "Fluggesellschaften zahlen gerne hohe Gehaelter, weil Fachkraefte extrem *knapp* sind.",
+          "Fluggesellschaften zahlen gerne hohe Gehälter, weil Fachkräfte extrem *knapp* sind.",
           "Linie lotnicze chętnie oferują wysokie pensje, ponieważ wykwalifikowani specjaliści są niezwykle *rzadcy*.",
         ),
       ],
@@ -297,22 +297,22 @@ export const lesson: Lesson = {
       [
         T(
           "The exact same scarcity rule governs precious physical assets like *gold*.",
-          "Dieselbe Knappheitsregel gilt fuer wertvolle Sachschaetze wie *Gold*.",
+          "Dieselbe Knappheitsregel gilt für wertvolle Sachschätze wie *Gold*.",
           "Dokładnie ta sama reguła rzadkości rządzi cennymi aktywami, takimi jak *złoto*.",
         ),
         T(
           "River pebbles sit everywhere in unlimited quantities, so nobody pays coins for a common stone.",
-          "Kieselsteine gibt es an jedem Fluss unbegrenzt, niemand zahlt Geld dafuer.",
+          "Kieselsteine gibt es an jedem Fluss unbegrenzt, niemand zahlt Geld dafür.",
           "Kamyki rzeczne leżą wszędzie w nieskończonych ilościach, więc nikt za nie nie płaci.",
         ),
         T(
           "All the gold ever mined by humans fits in one cube. The cube is about twenty-two meters wide.",
-          "Alles jemals gefoerderte Gold der Menschheit passt in einen Wuerfel von nur 22 Metern Kantenlaenge.",
+          "Alles jemals geförderte Gold der Menschheit passt in einen Würfel von nur 22 Metern Kantenlänge.",
           "Całe złoto wydobyte w dziejach ludzkości zmieściłoby się w sześcianie o boku zaledwie 22 metrów.",
         ),
         T(
           "Nature made gold rare and difficult to extract, preserving its purchasing power across centuries.",
-          "Die Natur machte Gold selten und muehsam zu foerdern, was seinen Wert ueber Jahrhunderte bewahrt.",
+          "Die Natur machte Gold selten und mühsam zu fördern, was seinen Wert über Jahrhunderte bewahrt.",
           "Natura uczyniła złoto rzadkim i trudnym do wydobycia, co chroni jego wartość od stuleci.",
         ),
       ],
@@ -322,7 +322,7 @@ export const lesson: Lesson = {
       [
         T(
           "Scarcity also explains why company *shares and stocks* gain great value.",
-          "Knappheit erklaert auch, warum Firmenanteile und *Aktien* wertvoll werden.",
+          "Knappheit erklärt auch, warum Firmenanteile und *Aktien* wertvoll werden.",
           "Rzadkość wyjaśnia także, dlaczego udziały w firmach i *akcje* zyskują dużą wartość.",
         ),
         T(
@@ -337,7 +337,7 @@ export const lesson: Lesson = {
         ),
         T(
           "With many buyers chasing a fixed pool of shares, the price per share shoots higher.",
-          "Wenn viele Kaeufer um wenige Aktien wetteifern, klettert der Boersenpreis nach oben.",
+          "Wenn viele Käufer um wenige Aktien wetteifern, klettert der Börsenpreis nach oben.",
           "Gdy wielu chętnych rywalizuje o stałą pulę akcji, cena za jedną akcję szybuje w górę.",
         ),
       ],
@@ -347,17 +347,17 @@ export const lesson: Lesson = {
       [
         T(
           "Understanding scarcity gives you a roadmap for your own education and career.",
-          "Knappheit zu verstehen gibt dir einen Kompass fuer Ausbildung und Zukunft.",
+          "Knappheit zu verstehen gibt dir einen Kompass für Ausbildung und Zukunft.",
           "Zrozumienie rzadkości daje kompas dla twojej edukacji i przyszłej kariery.",
         ),
         T(
           "Instead of competing where everyone else is doing easy tasks, focus on building *rare skills*.",
-          "Statt um einfache Aufgaben zu konkurrieren, baue gezielt *seltene Faehigkeiten* auf.",
+          "Statt um einfache Aufgaben zu konkurrieren, baue gezielt *seltene Fähigkeiten* auf.",
           "Zamiast konkurować przy prostych zadaniach, skup się na zdobywaniu *rzadkich umiejętności*.",
         ),
         T(
           "When your knowledge is hard to replace and useful, your future is bright and secure.",
-          "Wenn dein Koennen schwer ersetzbar und nuetzlich ist, wird deine Zukunft sicher und erfolgreich.",
+          "Wenn dein Können schwer ersetzbar und nützlich ist, wird deine Zukunft sicher und erfolgreich.",
           "Gdy twoja wiedza jest trudna do zastąpienia i naprawdę przydatna, twoja przyszłość będzie bezpieczna.",
         ),
       ],
@@ -366,7 +366,7 @@ export const lesson: Lesson = {
   ],
   toyIntro: T(
     "Compare common jobs with rare specializations to discover how skill scarcity drives earnings.",
-    "Vergleiche einfache Taetigkeiten mit seltenen Spezialberufen und entdecke die Wirkung von Knappheit.",
+    "Vergleiche einfache Tätigkeiten mit seltenen Spezialberufen und entdecke die Wirkung von Knappheit.",
     "Porównaj proste zajęcia z rzadkimi specjalizacjami i zobacz, jak rzadkość talentu podnosi zarobki.",
   ),
   Toy,
@@ -375,14 +375,14 @@ export const lesson: Lesson = {
       kind: "choice",
       prompt: T(
         "Why do specialized engineers or surgeons earn higher salaries than entry-level helpers?",
-        "Warum verdienen Fachingenieure oder Chirurgen hoehere Gehaelter als Hilfskraefte?",
+        "Warum verdienen Fachingenieure oder Chirurgen höhere Gehälter als Hilfskräfte?",
         "Dlaczego wyspecjalizowani inżynierowie lub chirurdzy zarabiają więcej niż pracownicy pomocniczy?",
       ),
       options: [
         {
           text: T(
             "Their specialized skills take years of study and are scarce in the job market",
-            "Ihre Spezialfaehigkeiten erfordern jahrelange Ausbildung und sind auf dem Arbeitsmarkt knapp",
+            "Ihre Spezialfähigkeiten erfordern jahrelange Ausbildung und sind auf dem Arbeitsmarkt knapp",
             "Ich specjalistyczne umiejętności wymagają lat trudnej nauki i są rzadkie na rynku pracy",
           ),
           correct: true,
@@ -397,14 +397,14 @@ export const lesson: Lesson = {
         {
           text: T(
             "Because their job requires only three minutes of practice per week",
-            "Weil ihre Arbeit nur drei Minuten Uebung pro Woche erfordert",
+            "Weil ihre Arbeit nur drei Minuten Übung pro Woche erfordert",
             "Ponieważ ich praca wymaga zaledwie trzech minut ćwiczeń w tygodniu",
           ),
         },
       ],
       hint: T(
         "Hard-to-replace skills give workers higher bargaining power.",
-        "Schwer ersetzbare Faehigkeiten staerken die Verhandlungsposition.",
+        "Schwer ersetzbare Fähigkeiten stärken die Verhandlungsposition.",
         "Trudne do zastąpienia umiejętności dają pracownikom silniejszą pozycję negocjacyjną.",
       ),
     },
@@ -412,14 +412,14 @@ export const lesson: Lesson = {
       kind: "choice",
       prompt: T(
         "Why has physical gold kept its high purchasing value across thousands of human generations?",
-        "Warum hat echtes Gold seinen hohen Wert ueber Jahrtausende hinweg bewahrt?",
+        "Warum hat echtes Gold seinen hohen Wert über Jahrtausende hinweg bewahrt?",
         "Dlaczego fizyczne złoto utrzymało wysoką wartość przez tysiące pokoleń?",
       ),
       options: [
         {
           text: T(
             "Because its total supply in nature is strictly scarce and difficult to mine",
-            "Weil sein natuerliches Vorkommen streng knapp und schwer abzubauen ist",
+            "Weil sein natürliches Vorkommen streng knapp und schwer abzubauen ist",
             "Ponieważ jego zasoby w naturze są ściśle ograniczone i trudne do wydobycia",
           ),
           correct: true,
@@ -427,21 +427,21 @@ export const lesson: Lesson = {
         {
           text: T(
             "Because gold can be made in any kitchen blender from honey and butter",
-            "Weil Gold in jedem Kuechenmixer aus Honig und Butter hergestellt werden kann",
+            "Weil Gold in jedem Küchenmixer aus Honig und Butter hergestellt werden kann",
             "Ponieważ złoto można zrobić w blenderze kuchennym z miodu i masła",
           ),
         },
         {
           text: T(
             "Because governments print five tons of gold paper every morning",
-            "Weil Regierungen jeden Morgen fuenf Tonnen Goldpapier drucken",
+            "Weil Regierungen jeden Morgen fünf Tonnen Goldpapier drucken",
             "Ponieważ rządy drukują każdego ranka pięć ton złotego papieru",
           ),
         },
       ],
       hint: T(
         "You cannot artificially duplicate or inflate the physical supply of gold.",
-        "Der physische Goldbestand laesst sich nicht beliebig vermehren.",
+        "Der physische Goldbestand lässt sich nicht beliebig vermehren.",
         "Fizycznych zasobów złota nie da się dowolnie powielić ani dodrukować.",
       ),
     },
@@ -462,18 +462,18 @@ export const lesson: Lesson = {
   ],
   askDad: T(
     "Ask your parent: What difficult, specialized skill did you spend years learning that helped you stand out?",
-    "Frage deine Eltern: Welche schwierige Spezialfaehigkeit habt ihr euch muehsam angeeignet, die euch beruflich geholfen hat?",
+    "Frage deine Eltern: Welche schwierige Spezialfähigkeit habt ihr euch mühsam angeeignet, die euch beruflich geholfen hat?",
     "Zapytaj rodziców: Jakiej trudnej, specjalistycznej umiejętności uczyliście się latami, która pomogła Wam w karierze?",
   ),
   realLife: {
     title: T(
       "Real world: Deep-sea saturation divers and flight engineers",
-      "Echte Welt: Tiefsee-Saettigungstaucher und Flugingenieure",
+      "Echte Welt: Tiefsee-Sättigungstaucher und Flugingenieure",
       "Prawdziwy świat: Nurkowie głębinowi i inżynierowie lotnictwa",
     ),
     body: T(
       "Commercial saturation divers spend weeks in pressurized living chambers hundreds of meters beneath the ocean to inspect pipelines. Because so few people in the world endure the intense physical risks and rigorous technical certifications, daily pay rates can exceed thousands of dollars.",
-      "Saettigungstaucher leben wochenlang in Druckkammern tief im Meer, um Pipelines zu reparieren. Weil weltweit nur wenige Menschen diese koerperlichen Risiken und extremen Pruefungen bestehen, betragen Tagesgagen oft mehrere Tausend Dollar.",
+      "Sättigungstaucher leben wochenlang in Druckkammern tief im Meer, um Pipelines zu reparieren. Weil weltweit nur wenige Menschen diese körperlichen Risiken und extremen Prüfungen bestehen, betragen Tagesgagen oft mehrere Tausend Dollar.",
       "Nurkowie saturacyjni spędzają tygodnie w komorach ciśnieniowych setki metrów pod wodą, naprawiając rurociągi. Ponieważ na świecie garstka osób posiada kwalifikacje i znosi to ryzyko, ich stawki dzienne sięgają tysięcy dolarów.",
     ),
   },
@@ -482,7 +482,7 @@ export const lesson: Lesson = {
       {
         text: T(
           "Gary Becker pioneered human capital theory, linking specialized education to wage differentials (Nobel Prize 1992).",
-          "Gary Becker begruendete die Humankapitaltheorie zur Erklaerung von Lohnunterschieden (Nobelpreis 1992).",
+          "Gary Becker begründete die Humankapitaltheorie zur Erklärung von Lohnunterschieden (Nobelpreis 1992).",
           "Gary Becker stworzył teorię kapitału ludzkiego, wiążąc specjalistyczną edukację z różnicami płac (Nagroda Nobla 1992).",
         ),
         source: "https://www.nobelprize.org/prizes/economic-sciences/1992/summary/",
@@ -490,7 +490,7 @@ export const lesson: Lesson = {
       {
         text: T(
           "The World Gold Council estimates total above-ground gold stocks at approximately 212,500 metric tons as of 2024.",
-          "Der World Gold Council schaetzt die weltweiten Goldbestaende auf etwa 212.500 Tonnen (Stand 2024).",
+          "Der World Gold Council schätzt die weltweiten Goldbestände auf etwa 212.500 Tonnen (Stand 2024).",
           "World Gold Council szacuje łączne światowe zasoby wydobytego złota na około 212 500 ton metrycznych (stan na 2024 r.).",
         ),
         source: "https://www.gold.org/goldhub/data/how-much-gold",
@@ -506,7 +506,7 @@ export const lesson: Lesson = {
       {
         text: T(
           "Eugene Fama received the 2013 Nobel Prize in Economic Sciences for empirical analysis of asset pricing and equity markets.",
-          "Eugene Fama erhielt 2013 den Nobelpreis fuer empirische Analysen zur Bewertung von Vermoegenswerten.",
+          "Eugene Fama erhielt 2013 den Nobelpreis für empirische Analysen zur Bewertung von Vermögenswerten.",
           "Eugene Fama otrzymał w 2013 roku Nagrodę Nobla za badania nad wyceną aktywów i rynkami akcji.",
         ),
         source: "https://www.nobelprize.org/prizes/economic-sciences/2013/summary/",
@@ -514,7 +514,7 @@ export const lesson: Lesson = {
       {
         text: T(
           "Adam Smith analyzed wage variations based on the hardship, trust, and expense of learning a trade in 1776.",
-          "Adam Smith erklaerte 1776 Lohnunterschiede durch Ausbildungsaufwand und gefordertes Vertrauen.",
+          "Adam Smith erklärte 1776 Lohnunterschiede durch Ausbildungsaufwand und gefordertes Vertrauen.",
           "Adam Smith w 1776 roku wyjaśnił różnice w płacach trudnością nauki zawodu i wymaganym zaufaniem.",
         ),
         source: "https://www.gutenberg.org/ebooks/3300",
@@ -523,7 +523,7 @@ export const lesson: Lesson = {
     simplified: [
       T(
         "Complex institutional labor collective bargaining models are simplified into direct skill supply scarcity.",
-        "Tarifvertraege und institutionelle Arbeitsmarktregeln wurden auf das Grundprinzip der Faehigkeitenknappheit vereinfacht.",
+        "Tarifverträge und institutionelle Arbeitsmarktregeln wurden auf das Grundprinzip der Fähigkeitenknappheit vereinfacht.",
         "Układy zbiorowe i złożone regulacje rynku pracy uproszczono do kluczowej zasady rzadkości umiejętności.",
       ),
     ],

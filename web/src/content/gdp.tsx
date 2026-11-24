@@ -234,7 +234,7 @@ export const lesson: Lesson = {
       kind: "widget",
       prompt: T(
         "Finn catches 4 fish. Bea gives her bread away. Make the bar show 8. Then press Check.",
-        "Finn fängt 4 Fische. Bea verschenkt ihr Brot. Lass den Balken 8 zeigen. Drücke dann Pruefen.",
+        "Finn fängt 4 Fische. Bea verschenkt ihr Brot. Lass den Balken 8 zeigen. Drücke dann Prüfen.",
         "Finn łowi 4 ryby. Bea rozdaje chleb. Ustaw słupek na 8. Potem naciśnij Sprawdź.",
       ),
       Widget,

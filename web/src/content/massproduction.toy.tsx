@@ -84,43 +84,35 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
     lang === "pl"
       ? "Taśma montażowa"
       : lang === "de"
-        ? "Fliessband-Fertigung"
+        ? "Fließband-Fertigung"
         : "Moving Assembly Line";
 
   const station1Name =
     lang === "pl" ? "Spawanie ramy" : lang === "de" ? "Rahmen schweißen" : "Weld Frame";
 
   const station2Name =
-    lang === "pl" ? "Montaż kół" : lang === "de" ? "Raeder montieren" : "Attach Wheels";
+    lang === "pl" ? "Montaż kół" : lang === "de" ? "Räder montieren" : "Attach Wheels";
 
   const station3Name =
-    lang === "pl"
-      ? "Kontrola jakości"
-      : lang === "de"
-        ? "Qualitaetspruefung"
-        : "Final Quality Check";
+    lang === "pl" ? "Kontrola jakości" : lang === "de" ? "Qualitätsprüfung" : "Final Quality Check";
 
   const advanceLabel =
     lang === "pl"
       ? "Przesuń taśmę montażową"
       : lang === "de"
-        ? "Fliessband weiterruecken"
+        ? "Fließband weiterrücken"
         : "Advance Assembly Line";
 
   const resetLabel =
-    lang === "pl" ? "Resetuj taśmę" : lang === "de" ? "Zuruecksetzen" : "Reset Line";
+    lang === "pl" ? "Resetuj taśmę" : lang === "de" ? "Zurücksetzen" : "Reset Line";
 
   const timeSpentLabel =
-    lang === "pl" ? "Czas pracy:" : lang === "de" ? "Benoetigte Arbeitszeit:" : "Time spent:";
+    lang === "pl" ? "Czas pracy:" : lang === "de" ? "Benötigte Arbeitszeit:" : "Time spent:";
 
   const hoursLabel = lang === "pl" ? "godzin" : lang === "de" ? "Stunden" : "hours";
 
   const bikesCompletedLabel =
-    lang === "pl"
-      ? "Gotowe rowery:"
-      : lang === "de"
-        ? "Fertige Fahrraeder:"
-        : "Bicycles completed:";
+    lang === "pl" ? "Gotowe rowery:" : lang === "de" ? "Fertige Fahrräder:" : "Bicycles completed:";
 
   const costPerBikeLabel =
     lang === "pl"
@@ -129,7 +121,7 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
         ? "Kosten pro Fahrrad:"
         : "Cost per bicycle:";
 
-  const coinsLabel = lang === "pl" ? "złotych monet" : lang === "de" ? "Goldmuenzen" : "gold coins";
+  const coinsLabel = lang === "pl" ? "złotych monet" : lang === "de" ? "Goldmünzen" : "gold coins";
 
   return (
     <div className="massproduction-wrap">
@@ -230,12 +222,12 @@ export function MassProductionToy({ lang, mode = "toy", onDone }: MassProduction
               ? lang === "pl"
                 ? "Wspaniale! Standardowy montaż na taśmie obniżył koszt jednostkowy z 500 do 50 monet!"
                 : lang === "de"
-                  ? "Grossartig! Die getaktete Montage senkte die Stueckkosten von 500 auf 50 Muenzen!"
+                  ? "Großartig! Die getaktete Montage senkte die Stückkosten von 500 auf 50 Münzen!"
                   : "Terrific! Standardized assembly lowered unit costs from 500 down to 50 coins!"
               : lang === "pl"
                 ? "Wybierz Taśmę montażową i przesuń wszystkie 3 stanowiska."
                 : lang === "de"
-                  ? "Waehle Fliessband-Fertigung und ruecke alle 3 Stationen vor."
+                  ? "Wähle Fließband-Fertigung und rücke alle 3 Stationen vor."
                   : "Select Moving Assembly Line and advance all 3 stations."}
           </div>
         )}

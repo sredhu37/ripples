@@ -177,12 +177,12 @@ export function AiToy({ lang, mode = "toy", onDone }: AiToyProps) {
               ? lang === "pl"
                 ? "Sukces! 10 czystych przykładów treningowych pozwala algorytmowi rozpoznawać wzorce z dokładnością 98%."
                 : lang === "de"
-                  ? "Erfolg! 10 saubere Beispiele ermoeglichen eine 98% zuverlaessige Mustererkennung."
+                  ? "Erfolg! 10 saubere Beispiele ermöglichen eine 98% zuverlässige Mustererkennung."
                   : "Success! 10 clean training examples allow the algorithm to spot patterns with 98% accuracy."
               : lang === "pl"
                 ? "Wybierz 10 kart i upewnij się, że Zweryfikowane etykiety są włączone, aby osiągnąć dokładność >90%."
                 : lang === "de"
-                  ? "Waehle 10 Karten und saubere Daten, um ueber 90% Genauigkeit zu erreichen."
+                  ? "Wähle 10 Karten und saubere Daten, um über 90% Genauigkeit zu erreichen."
                   : "Select 10 Cards and make sure Verified Labels are active to reach >90% accuracy."}
           </div>
         )}

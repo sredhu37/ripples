@@ -26,12 +26,12 @@ export const lesson: Lesson = {
       [
         T(
           "For decades, computers were massive machines locked in separate basement rooms.",
-          "Jahrzehntelang standen Computer als riesige Schraenke in getrennten Kellerräumen.",
+          "Jahrzehntelang standen Computer als riesige Schränke in getrennten Kellerräumen.",
           "Przez dziesięciolecia komputery były gigantycznymi maszynami zamkniętymi w osobnych salach piwnicznych.",
         ),
         T(
           "A scientist in London wanted data from Paris. Someone had to mail a heavy tape reel in a box.",
-          "Wollte ein Forscher in London Daten aus Paris, musste jemand schwere Magnetbaender per Post schicken.",
+          "Wollte ein Forscher in London Daten aus Paris, musste jemand schwere Magnetbänder per Post schicken.",
           "Naukowiec z Londynu chciał dane z Paryża. Ktoś musiał wysłać pocztą ciężką szpulę z taśmą.",
         ),
         T(
@@ -51,12 +51,12 @@ export const lesson: Lesson = {
         ),
         T(
           "Computers slice a giant file into small digital parcels instead of sending it whole.",
-          "Statt eine riesige Datei auf einmal zu senden, zerlegen Rechner Nachrichten in kleine digitale Paeckchen.",
+          "Statt eine riesige Datei auf einmal zu senden, zerlegen Rechner Nachrichten in kleine digitale Päckchen.",
           "Zamiast przesyłać ogromny plik w całości, komputery dzielą wiadomości na małe paczki cyfrowe zwane pakietami.",
         ),
         T(
           "Each packet gets a numbered stamp showing its destination address and its sequence number.",
-          "Jedes Paket erhaelt eine Nummer und die genaue Zieladresse aufgestempelt.",
+          "Jedes Paket erhält eine Nummer und die genaue Zieladresse aufgestempelt.",
           "Każdy pakiet otrzymuje stempel z adresem docelowym oraz numerem porządkowym w kolejce.",
         ),
       ],
@@ -66,17 +66,17 @@ export const lesson: Lesson = {
       [
         T(
           "Specialized computers called routers direct these packets across thousands of different cables.",
-          "Spezielle Knotenrechner namens Router leiten diese Pakete ueber tausende Leitungen weiter.",
+          "Spezielle Knotenrechner namens Router leiten diese Pakete über tausende Leitungen weiter.",
           "Wyspecjalizowane komputery zwane routerami kierują tymi pakietami przez tysiące różnych kabli i łączy.",
         ),
         T(
           "One packet might zip through the North line while another races along the South line.",
-          "Ein Paket reist vielleicht ueber die Nordleitung, waehrend ein anderes die Suedroute nimmt.",
+          "Ein Paket reist vielleicht über die Nordleitung, während ein anderes die Südroute nimmt.",
           "Jeden pakiet może mknąć kablem północnym, podczas gdy inny leci trasą południową.",
         ),
         T(
           "At the destination, the receiving computer puts the numbered puzzle pieces back in perfect order.",
-          "Am Zielort setzt der Empfaenger-Computer alle nummerierten Puzzlestuecke passgenau zusammen.",
+          "Am Zielort setzt der Empfänger-Computer alle nummerierten Puzzlestücke passgenau zusammen.",
           "U celu komputer odbiorcy układa ponumerowane klocki układanki z powrotem w nienagannym porządku.",
         ),
       ],
@@ -91,7 +91,7 @@ export const lesson: Lesson = {
         ),
         T(
           "He created web addresses, browsers, and clickable hyperlinks that link documents together.",
-          "Er erfand Webadressen, Browser und klickbare Hyperlinks, die Dokumente miteinander verknuepfen.",
+          "Er erfand Webadressen, Browser und klickbare Hyperlinks, die Dokumente miteinander verknüpfen.",
           "Stworzył adresy internetowe, przeglądarki i klikalne hiperłącza, które łączą ze sobą dokumenty na całym świecie.",
         ),
         T(
@@ -106,17 +106,17 @@ export const lesson: Lesson = {
       [
         T(
           "Today, thousands of *fiber optic* cables stretch across ocean floors connecting all continents.",
-          "Heute spannen sich tausende *Glasfaserkabel* ueber den Meeresboden und verbinden alle Kontinente.",
+          "Heute spannen sich tausende *Glasfaserkabel* über den Meeresboden und verbinden alle Kontinente.",
           "Dziś setki podmorskich kabli *światłowodowych* ciągnie się po dnie oceanów, łącząc wszystkie kontynenty.",
         ),
         T(
           "Inside the glass strands, pulses of laser light carry billions of calls and videos.",
-          "In den duennen Glasfaeden tragen Laser-Lichtblitze Milliarden von Anrufen und Videostreams.",
+          "In den dünnen Glasfäden tragen Laser-Lichtblitze Milliarden von Anrufen und Videostreams.",
           "Wewnątrz tych szklanych włókien impulsy światła laserowego przenoszą miliardy rozmów i filmów wideo.",
         ),
         T(
           "The internet connects the human family. Friends across the globe can learn and talk together.",
-          "Das Internet verbindet die Menschheit, sodass Freunde rund um den Globus gemeinsam lernen koennen.",
+          "Das Internet verbindet die Menschheit, sodass Freunde rund um den Globus gemeinsam lernen können.",
           "Internet łączy rodzinę ludzką, umożliwiając przyjaciołom z całego globu wspólną naukę i rozmowę bez granic.",
         ),
       ],
@@ -125,7 +125,7 @@ export const lesson: Lesson = {
   ],
   toyIntro: T(
     "Connect the network cables to route all three data packets and reassemble the greeting message.",
-    "Verbinde die Netzwerkkabel, um alle drei Datenpakete zu uebertragen und die Nachricht zusammenzusetzen.",
+    "Verbinde die Netzwerkkabel, um alle drei Datenpakete zu übertragen und die Nachricht zusammenzusetzen.",
     "Podłącz kable sieciowe, aby przesłać wszystkie trzy pakiety danych i złożyć powitalną wiadomość.",
   ),
   Toy,
@@ -163,7 +163,7 @@ export const lesson: Lesson = {
       ],
       hint: T(
         "Packets travel separately across different cables and reassemble in correct order.",
-        "Pakete reisen getrennt ueber verschiedene Wege und fuegen sich am Ziel wieder zusammen.",
+        "Pakete reisen getrennt über verschiedene Wege und fügen sich am Ziel wieder zusammen.",
         "Pakiety podróżują oddzielnie różnymi trasami i łączą się w całość w odpowiedniej kolejności.",
       ),
     },
@@ -193,7 +193,7 @@ export const lesson: Lesson = {
         {
           text: T(
             "A mechanical toaster that sends toasted waffles into orbit",
-            "Einen Toaster, der geroestete Waffeln in die Erdumlaufbahn katapultiert",
+            "Einen Toaster, der geröstete Waffeln in die Erdumlaufbahn katapultiert",
             "Toster parowy wystrzeliwujący chrupiące gofry na orbitę okołoziemską",
           ),
         },
@@ -214,7 +214,7 @@ export const lesson: Lesson = {
       Widget,
       hint: T(
         "Click each unconnected cable until North, Central, and South are active, then tap check.",
-        "Klicke auf die Kabel, bis Nord, Zentral und Sued aktiv sind, und tippe auf pruefen.",
+        "Klicke auf die Kabel, bis Nord, Zentral und Süd aktiv sind, und tippe auf prüfen.",
         "Klikaj niepodłączone kable, aż Północ, Środek i Południe będą aktywne, a potem kliknij sprawdź.",
       ),
     },
@@ -232,7 +232,7 @@ export const lesson: Lesson = {
     },
     body: {
       en: "In Frankfurt am Main, Germany hosts DE-CIX, one of the largest internet exchange points in the world. Deep underground in secure data centers, fiber-optic switches route hundreds of terabits of data every second, connecting internet service providers from across Europe, Asia, and North America.",
-      de: "In Frankfurt am Main betreibt Deutschland mit dem DE-CIX einen der weltweit groessten Internet-Knoten. In hochsicheren Rechenzentren leiten Hochgeschwindigkeits-Glasfaserverteiler jede Sekunde hunderte Terabit an Daten weiter und verbinden Netzanbieter aus Europa, Asien und Amerika.",
+      de: "In Frankfurt am Main betreibt Deutschland mit dem DE-CIX einen der weltweit größten Internet-Knoten. In hochsicheren Rechenzentren leiten Hochgeschwindigkeits-Glasfaserverteiler jede Sekunde hunderte Terabit an Daten weiter und verbinden Netzanbieter aus Europa, Asien und Amerika.",
       pl: "W Polsce kluczowym węzłem wymiany ruchu internetowego jest m.in. PLIX w Warszawie oraz ośrodki NASK (Naukowa i Akademicka Sieć Komputerowa). To w sierpniu 1991 roku z Wydziału Fizyki Uniwersytetu Warszawskiego wysłano pierwszy oficjalny e-mail do Kopenhagi, łącząc Polskę z globalnym internetem. Dziś gigabitowe światłowody łączą polskie szkoły, szpitale i domy z całym światem.",
     },
   },
@@ -241,7 +241,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "Paul Baran and Donald Davies independently pioneered the concept of packet switching in the early 1960s.",
-          de: "Paul Baran und Donald Davies entwickelten unabhaengig voneinander die Paketvermittlung in den fruehen 1960er-Jahren.",
+          de: "Paul Baran und Donald Davies entwickelten unabhängig voneinander die Paketvermittlung in den frühen 1960er-Jahren.",
           pl: "Paul Baran i Donald Davies niezależnie od siebie stworzyli koncepcję komutacji pakietów na początku lat sześćdziesiątych XX wieku.",
         },
         source: "https://www.britannica.com/technology/packet-switching",
@@ -249,7 +249,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The ARPANET made its first successful host-to-host transmission between UCLA and Stanford on 29 October 1969.",
-          de: "Das ARPANET uebertrug am 29. Oktober 1969 die erste erfolgreiche Verbindung zwischen der UCLA und Stanford.",
+          de: "Das ARPANET übertrug am 29. Oktober 1969 die erste erfolgreiche Verbindung zwischen der UCLA und Stanford.",
           pl: "Sieć ARPANET przeprowadziła pierwszą udaną transmisję między uniwersytetami UCLA i Stanford 29 października 1969 roku.",
         },
         source: "https://www.history.com/this-day-in-history/first-computer-to-computer-link",
@@ -257,7 +257,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "Tim Berners-Lee submitted his proposal for an information management system at CERN in March 1989, creating the World Wide Web.",
-          de: "Tim Berners-Lee reichte im Maerz 1989 am CERN seinen Vorschlag fuer das World Wide Web ein.",
+          de: "Tim Berners-Lee reichte im März 1989 am CERN seinen Vorschlag für das World Wide Web ein.",
           pl: "Tim Berners-Lee przedstawił w instytucie CERN w marcu 1989 roku projekt systemu zarządzania informacją, dając początek World Wide Web.",
         },
         source: "https://home.cern/science/computing/birth-web",
@@ -265,7 +265,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "Over 500 undersea fiber-optic cable systems span hundreds of thousands of miles along the global ocean floor.",
-          de: "Ueber 500 Untersee-Glasfaserkabel durchziehen mit Hunderttausenden Kilometern Laenge die Ozeane der Welt.",
+          de: "Über 500 Untersee-Glasfaserkabel durchziehen mit Hunderttausenden Kilometern Länge die Ozeane der Welt.",
           pl: "Ponad 500 podmorskich kabli światłowodowych o długości setek tysięcy kilometrów spoczywa na dnie oceanów.",
         },
         source: "https://www.submarinecablemap.com/",
@@ -273,7 +273,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "DE-CIX in Frankfurt reached a record data peak throughput of more than 16 terabits per second in 2023.",
-          de: "Der DE-CIX in Frankfurt erreichte 2023 einen neuen Spitzenwert von ueber 16 Terabit Daten pro Sekunde.",
+          de: "Der DE-CIX in Frankfurt erreichte 2023 einen neuen Spitzenwert von über 16 Terabit Daten pro Sekunde.",
           pl: "17 sierpnia 1991 roku z Wydziału Fizyki UW wysłano pierwszy w Polsce e-mail do Kopenhagi, inaugurując polskie połączenie z internetem.",
         },
         source: "https://nask.pl/pl/o-nask/historia-nask/3257,Historia-NASK.html",
@@ -282,17 +282,17 @@ export const lesson: Lesson = {
     simplified: [
       {
         en: "We explain packet switching by slicing a long sentence into numbered envelopes sent across different routes.",
-        de: "Wir erklaeren die Paketvermittlung, indem wir einen Satz in nummerierte Umschlaege aufteilen, die getrennte Wege nehmen.",
+        de: "Wir erklären die Paketvermittlung, indem wir einen Satz in nummerierte Umschläge aufteilen, die getrennte Wege nehmen.",
         pl: "Tłumaczymy komutację pakietów jako cięcie zdania na ponumerowane koperty podróżujące różnymi drogami.",
       },
       {
         en: "We show how routers navigate traffic around blocked or damaged cables automatically.",
-        de: "Wir zeigen, wie Router Datenstroeme automatisch um beschaedigte oder ueberlastete Kabel herumleiten.",
+        de: "Wir zeigen, wie Router Datenströme automatisch um beschädigte oder überlastete Kabel herumleiten.",
         pl: "Pokazujemy, jak routery samoczynnie kierują ruchem z dala od uszkodzonych lub przeciążonych linii.",
       },
       {
         en: "We connect everyday video calls to real undersea fiber-optic cables flashing laser light.",
-        de: "Wir verbinden taegliche Videoanrufe mit echten Untersee-Glasfaserkabeln, in denen Laserblitze pulsieren.",
+        de: "Wir verbinden tägliche Videoanrufe mit echten Untersee-Glasfaserkabeln, in denen Laserblitze pulsieren.",
         pl: "Łączymy codzienne rozmowy wideo z prawdziwymi podmorskimi światłowodami, w których pulsuje światło lasera.",
       },
     ],

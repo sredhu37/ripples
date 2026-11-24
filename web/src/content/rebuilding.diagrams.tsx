@@ -5,13 +5,13 @@ export function RuinsOfEuropeDiagram({ lang, step }: DiagramProps) {
     lang === "pl" ? "Europa w 1945 roku" : lang === "de" ? "Europa im Jahr 1945" : "Europe in 1945";
 
   const brokenLink =
-    lang === "pl" ? "Przerwany szlak" : lang === "de" ? "Zerstoerte Verbindung" : "Broken Link";
+    lang === "pl" ? "Przerwany szlak" : lang === "de" ? "Zerstörte Verbindung" : "Broken Link";
 
   const sub =
     lang === "pl"
       ? "Zniszczone fabryki, bezdomne rodziny"
       : lang === "de"
-        ? "Zerstoerte Fabriken, obdachlose Familien"
+        ? "Zerstörte Fabriken, obdachlose Familien"
         : "Ruined factories, homeless families";
 
   return (
@@ -50,7 +50,7 @@ export function SchumanDeclarationDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Deklaracja Schumana, 1950"
       : lang === "de"
-        ? "Schuman-Erklaerung, 1950"
+        ? "Schuman-Erklärung, 1950"
         : "Schuman Declaration, 1950";
 
   const poolTitle =
@@ -78,7 +78,7 @@ export function SchumanDeclarationDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Początek jedności europejskiej"
       : lang === "de"
-        ? "Beginn der europaeischen Einigung"
+        ? "Beginn der europäischen Einigung"
         : "Start of European unity";
 
   return (
@@ -136,7 +136,7 @@ export function CoalAndSteelVatsDiagram({ lang, step }: DiagramProps) {
   const coalTitle =
     lang === "pl" ? "Węgiel z Zagłębia" : lang === "de" ? "Ruhrkohle" : "Rhine Coal";
   const coalSub =
-    lang === "pl" ? "Ciepło dla domów" : lang === "de" ? "Energie fuer Heime" : "Energy for homes";
+    lang === "pl" ? "Ciepło dla domów" : lang === "de" ? "Energie für Heime" : "Energy for homes";
 
   const steelTitle =
     lang === "pl" ? "Stal na mosty" : lang === "de" ? "Lothringer Stahl" : "Lorraine Steel";
@@ -144,7 +144,7 @@ export function CoalAndSteelVatsDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Dźwigary i szyny"
       : lang === "de"
-        ? "Traeger fuer Bruecken"
+        ? "Träger für Brücken"
         : "Girders for bridges";
 
   const sub =
@@ -200,14 +200,14 @@ export function RebuiltRailwayBridgeDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Odbudowany Most Pokoju"
       : lang === "de"
-        ? "Die wiederaufgebaute Friedensbruecke"
+        ? "Die wiederaufgebaute Friedensbrücke"
         : "The Rebuilt Peace Bridge";
 
   const sub =
     lang === "pl"
       ? "Pociągi jadą przez granice"
       : lang === "de"
-        ? "Zuege fahren ueber Grenzen"
+        ? "Züge fahren über Grenzen"
         : "Trains cross open borders";
 
   return (
@@ -248,7 +248,7 @@ export function EuropeanUnionStarsDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Unia Europejska"
       : lang === "de"
-        ? "Die Europaeische Union"
+        ? "Die Europäische Union"
         : "The European Union";
 
   const sub =

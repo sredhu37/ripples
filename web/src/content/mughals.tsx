@@ -26,22 +26,22 @@ export const lesson: Lesson = {
       [
         T(
           "In the sixteenth century, the Mughal dynasty built a vast, flourishing realm in South Asia.",
-          "Im sechzehnten Jahrhundert errichtete die Mogul-Dynastie ein grosses, bluehendes Reich in Suedasien.",
+          "Im sechzehnten Jahrhundert errichtete die Mogul-Dynastie ein grosses, blühendes Reich in Südasien.",
           "W szesnastym wieku dynastia Mogołów zbudowała rozległe i kwitnące państwo w Azji Południowej.",
         ),
         T(
           "It united mountains, fertile river valleys, and coastal ports into one grand *empire*.",
-          "Es vereinte Gebirge, fruchtbare Flusstaeler und Kuestenhaefen zu einem grossen *Grossreich*.",
+          "Es vereinte Gebirge, fruchtbare Flusstäler und Küstenhäfen zu einem großen *Großreich*.",
           "Połączyło góry, żyzne doliny rzeczne i porty morskie w jedno potężne *imperium*.",
         ),
         T(
           "Artisans carved red sandstone palaces and wove the finest cotton textiles in the world.",
-          "Handwerker meisselten Palaeste aus rotem Sandstein und woben die feinsten Baumwollstoffe der Welt.",
+          "Handwerker meißelten Paläste aus rotem Sandstein und woben die feinsten Baumwollstoffe der Welt.",
           "Rzemieślnicy wznosili pałace z czerwonego piaskowca i tkali najdelikatniejsze tkaniny bawełniane na świecie.",
         ),
         T(
           "Yet the greatest challenge was bringing peace to a land of many diverse cultures.",
-          "Doch die groesste Aufgabe bestand darin, vielen unterschiedlichen Kulturen Frieden zu schenken.",
+          "Doch die größte Aufgabe bestand darin, vielen unterschiedlichen Kulturen Frieden zu schenken.",
           "Jednak największym wyzwaniem było zapewnienie pokoju i jedności w kraju wielu różnorodnych kultur.",
         ),
       ],
@@ -51,17 +51,17 @@ export const lesson: Lesson = {
       [
         T(
           "Emperor Akbar realized that no realm could thrive through force or military conquest alone.",
-          "Kaiser Akbar erkannte, dass kein Reich allein durch militaerische Gewalt bluehen kann.",
+          "Kaiser Akbar erkannte, dass kein Reich allein durch militärische Gewalt blühen kann.",
           "Cesarz Akbar zrozumiał, że żadne państwo nie może trwale rozkwitać wyłącznie dzięki sile oręża.",
         ),
         T(
           "He understood that lasting stability required wise laws, fair taxation, and honest governance.",
-          "Er verstand: Dauerhafte Stabilitaet braucht gerechte Gesetze, faire Steuern und kluge Verwaltung.",
+          "Er verstand: Dauerhafte Stabilität braucht gerechte Gesetze, faire Steuern und kluge Verwaltung.",
           "Wiedział, że trwały spokój wymaga mądrych praw, sprawiedliwych podatków i uczciwej administracji.",
         ),
         T(
           "Akbar abolished special taxes on pilgrims and welcomed capable advisors from every background.",
-          "Akbar schaffte Sondersteuern fuer Pilger ab und begruesste faehige Berater aller Herkuenfte.",
+          "Akbar schaffte Sondersteuern für Pilger ab und begrüßte fähige Berater aller Herkünfte.",
           "Akbar zniósł obciążające podatki od pielgrzymów i zaprosił do rady zdolnych doradców każdego pochodzenia.",
         ),
         T(
@@ -86,12 +86,12 @@ export const lesson: Lesson = {
         ),
         T(
           "Every Thursday night, they gathered around the council table to discuss justice and ethics.",
-          "Jeden Donnerstagabend versammelten sie sich am Beratungstisch, um ueber Gerechtigkeit und Ethik zu sprechen.",
+          "Jeden Donnerstagabend versammelten sie sich am Beratungstisch, um über Gerechtigkeit und Ethik zu sprechen.",
           "W każdy czwartkowy wieczór zasiadali przy okrągłym stole rady, by rozmawiać o sprawiedliwości i etyce.",
         ),
         T(
           "This practice of *tolerance* allowed people of differing faiths to live together in mutual respect.",
-          "Diese gelebte *Toleranz* ermoeglichte es Menschen unterschiedlichen Glaubens, in gegenseitigem Respekt zu leben.",
+          "Diese gelebte *Toleranz* ermöglichte es Menschen unterschiedlichen Glaubens, in gegenseitigem Respekt zu leben.",
           "Ta praktyka *tolerancji* pozwalała ludziom różnych wyznań i tradycji żyć obok siebie w szacunku.",
         ),
       ],
@@ -106,17 +106,17 @@ export const lesson: Lesson = {
         ),
         T(
           "Shaded rest stops, freshwater wells, and horse messengers connected distant trading hubs.",
-          "Schattige Rasthaeuser, Brunnen und berittene Boten verbanden weit entfernte Handelsplaetze.",
+          "Schattige Rasthäuser, Brunnen und berittene Boten verbanden weit entfernte Handelsplätze.",
           "Zacienione karawanseraje, studnie ze słodką wodą i konni posłańcy połączyli odległe targowiska.",
         ),
         T(
           "Merchants carried spices, tea, indigo, and silk safely without fear of highway bandits.",
-          "Kaufleute transportierten Gewuerze, Tee, Indigo und Seide sicher und ohne Furcht vor Raeubern.",
+          "Kaufleute transportierten Gewürze, Tee, Indigo und Seide sicher und ohne Furcht vor Räubern.",
           "Kupcy przewozili przyprawy, herbatę, indygo i jedwab bez lęku przed rozbójnikami na traktach.",
         ),
         T(
           "South Asia produced nearly a quarter of all goods manufactured on Earth.",
-          "Suedasien stellte damals fast ein Viertel aller auf der Erde gefertigten Gueter her.",
+          "Südasien stellte damals fast ein Viertel aller auf der Erde gefertigten Güter her.",
           "Ówczesna Azja Południowa wytwarzała blisko jedną czwartą wszystkich dóbr produkowanych na Ziemi.",
         ),
       ],
@@ -126,22 +126,22 @@ export const lesson: Lesson = {
       [
         T(
           "This great era created a lasting cultural *synthesis* between Persian, Indian, and Central Asian ideas.",
-          "Diese Aera schuf eine dauerhafte kulturelle *Verschmelzung* persischer, indischer und asiatischer Ideen.",
+          "Diese Ära schuf eine dauerhafte kulturelle *Verschmelzung* persischer, indischer und asiatischer Ideen.",
           "Ta epoka przyniosła trwałą kulturową *syntezę* tradycji perskich, indyjskich i środkowoazjatyckich.",
         ),
         T(
           "It blossomed in breathtaking wonders like the Taj Mahal and royal astronomical observatories.",
-          "Sie bluehte in atemberaubenden Wunderwerken wie dem Taj Mahal und Sternwarten auf.",
+          "Sie blühte in atemberaubenden Wunderwerken wie dem Taj Mahal und Sternwarten auf.",
           "Zaowocowała cudami architektury, takimi jak Tadź Mahal czy królewskie obserwatoria astronomiczne.",
         ),
         T(
           "Poets, musicians, and painters exchanged styles, creating new musical ragas and miniature paintings.",
-          "Dichter, Musiker und Maler tauschten Stile aus und schufen neue Ragas und Miniaturgemaelde.",
+          "Dichter, Musiker und Maler tauschten Stile aus und schufen neue Ragas und Miniaturgemälde.",
           "Poeci, muzycy i malarze wymieniali się doświadczeniami, tworząc nowe melodie i subtelne miniatury.",
         ),
         T(
           "History shows that societies flourish when they open their doors and listen to each other.",
-          "Die Geschichte lehrt uns: Gesellschaften bluehen auf, wenn sie ihre Tueren oeffnen und einander zuhoeren.",
+          "Die Geschichte lehrt uns: Gesellschaften blühen auf, wenn sie ihre Türen öffnen und einander zuhören.",
           "Historia uczy nas, że społeczeństwa rozkwitają, gdy otwierają drzwi i z uwagą słuchają się nawzajem.",
         ),
       ],
@@ -150,7 +150,7 @@ export const lesson: Lesson = {
   ],
   toyIntro: T(
     "Invite scholars of philosophy, astronomy, farming, and trade to the council table to build harmony.",
-    "Lade Gelehrte fuer Philosophie, Astronomie, Landbau und Handel an den Tisch ein, um Harmonie zu stiften.",
+    "Lade Gelehrte für Philosophie, Astronomie, Landbau und Handel an den Tisch ein, um Harmonie zu stiften.",
     "Zaproś mędrców filozofii, astronomii, rolnictwa i handlu do stołu rady, by zbudować imperialną harmonię.",
   ),
   Toy,
@@ -166,7 +166,7 @@ export const lesson: Lesson = {
         {
           text: T(
             "To invite scholars of diverse traditions to discuss ethics, justice, and shared wisdom",
-            "Um Gelehrte verschiedener Traditionen einzuladen und ueber Ethik, Recht und Weisheit zu sprechen",
+            "Um Gelehrte verschiedener Traditionen einzuladen und über Ethik, Recht und Weisheit zu sprechen",
             "Aby zaprosić myślicieli różnych kultur do rozmowy o etyce, sprawiedliwości i wspólnej mądrości",
           ),
           correct: true,
@@ -174,21 +174,21 @@ export const lesson: Lesson = {
         {
           text: T(
             "To challenge neighboring kings to arm-wrestling contests",
-            "Um Nachbarkoenige zum Armdruecken herauszufordern",
+            "Um Nachbarkönige zum Armdrücken herauszufordern",
             "Aby wyzywać sąsiednich władców na pojedynki w siłowaniu na rękę",
           ),
         },
         {
           text: T(
             "To count how many gold coins could fit into a teapot",
-            "Um zu zaehlen, wie viele Goldmuenzen in eine Teekanne passen",
+            "Um zu zählen, wie viele Goldmünzen in eine Teekanne passen",
             "Aby sprawdzić, ile złotych monet zmieści się w glinianym dzbanku do herbaty",
           ),
         },
       ],
       hint: T(
         "Akbar sought truth and understanding across different philosophies and traditions.",
-        "Akbar suchte nach Wahrheit und Verstaendnis zwischen verschiedenen Traditionen.",
+        "Akbar suchte nach Wahrheit und Verständnis zwischen verschiedenen Traditionen.",
         "Akbar poszukiwał prawdy i wzajemnego zrozumienia ponad granicami wyznań i kultur.",
       ),
     },
@@ -203,7 +203,7 @@ export const lesson: Lesson = {
         {
           text: T(
             "Blending ideas, architecture, and traditions from different cultures into something new and beautiful",
-            "Das Verbinden von Ideen, Bauwerken und Braeuche verschiedener Kulturen zu etwas Neuem und Schoenem",
+            "Das Verbinden von Ideen, Bauwerken und Bräuche verschiedener Kulturen zu etwas Neuem und Schönem",
             "Łączenie idei, architektury i tradycji z różnych kultur w nową i piękną całość",
           ),
           correct: true,
@@ -211,14 +211,14 @@ export const lesson: Lesson = {
         {
           text: T(
             "Forcing everyone to wear the exact same grey hat every day",
-            "Jeden Menschen zu zwingen, taeglich den gleichen grauen Hut zu tragen",
+            "Jeden Menschen zu zwingen, täglich den gleichen grauen Hut zu tragen",
             "Zmuszanie wszystkich mieszkańców do noszenia identycznej szarej czapki",
           ),
         },
         {
           text: T(
             "Locking all library books in an iron chest at the bottom of the ocean",
-            "Alle Buecher der Bibliothek in einer Eisenkiste auf dem Meeresgrund einzusperren",
+            "Alle Bücher der Bibliothek in einer Eisenkiste auf dem Meeresgrund einzusperren",
             "Zamykanie wszystkich książek w żelaznej skrzyni na dnie oceanu",
           ),
         },
@@ -233,13 +233,13 @@ export const lesson: Lesson = {
       kind: "widget",
       prompt: T(
         "Assemble all four scholars at the council table and select 'Listen & Learn Together' to reach full harmony.",
-        "Versammle alle vier Gelehrten am Tisch und waehle 'Zuhoeren & Miteinander lernen' fuer volle Harmonie.",
+        "Versammle alle vier Gelehrten am Tisch und wähle 'Zuhören & Miteinander lernen' für volle Harmonie.",
         "Zbierz wszystkich czterech mędrców przy stole i wybierz 'Słuchaj i ucz się wspólnie', aby osiągnąć pełną harmonię.",
       ),
       Widget,
       hint: T(
         "Click to invite all four scholars and ensure the listening mode is active, then tap check.",
-        "Klicke, um alle vier Gelehrten einzuladen, aktiviere den Zuhoer-Modus und tippe auf pruefen.",
+        "Klicke, um alle vier Gelehrten einzuladen, aktiviere den Zuhör-Modus und tippe auf prüfen.",
         "Kliknij, aby zaprosić czterech mędrców, upewnij się, że tryb uważnego słuchania jest włączony i kliknij sprawdź.",
       ),
     },
@@ -257,7 +257,7 @@ export const lesson: Lesson = {
     },
     body: {
       en: "The Mughal era left monuments like the Taj Mahal in Agra, the Red Fort in Delhi, and Fatehpur Sikri. It also made India the epicenter of pre-industrial global trade, producing fine calico cotton and silk fabrics sought by European and Asian merchants across maritime and overland routes.",
-      de: "Museen in Berlin und Muenchen bewahren wunderschoene Mogul-Miniaturgemaelde, handgeknoepfte Teppiche und Astrolabien auf. Das Museum fuer Islamische Kunst in Berlin zeigt, wie Handelsrouten im 17. Jahrhundert deutsche Kaufleute mit Mogul-Baumwollwebern verbanden.",
+      de: "Museen in Berlin und München bewahren wunderschöne Mogul-Miniaturgemälde, handgeknöpfte Teppiche und Astrolabien auf. Das Museum für Islamische Kunst in Berlin zeigt, wie Handelsrouten im 17. Jahrhundert deutsche Kaufleute mit Mogul-Baumwollwebern verbanden.",
       pl: "Kunsztowne dzieła rzemiosła, dywany oraz jedwabie z epoki Mogołów docierały do dawnej Rzeczypospolitej szlakami handlowymi przez Persję i Imperium Osmańskie. W zbiorach Muzeum Narodowego w Warszawie i Krakowie (Muzeum Książąt Czartoryskich) zachowały się wspaniałe orientalne tkaniny, pasy jedwabne oraz szable z damasceńskiej stali wysadzane klejnotami, które polska szlachta ceniła jako symbol wykwintnego gustu.",
     },
   },
@@ -266,7 +266,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The Mughal Empire governed over one hundred million people across South Asia at its height in the seventeenth century.",
-          de: "Das Mogulreich regierte auf seinem Hoehepunkt im 17. Jahrhundert ueber hundert Millionen Menschen in Suedasien.",
+          de: "Das Mogulreich regierte auf seinem Höhepunkt im 17. Jahrhundert über hundert Millionen Menschen in Südasien.",
           pl: "Imperium Mogołów u szczytu swojego rozwoju w XVII wieku obejmowało ponad sto milionów mieszkańców na subkontynencie indyjskim.",
         },
         source: "https://www.britannica.com/summary/Mughal-Dynasty",
@@ -274,7 +274,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "Emperor Akbar established the Ibadat Khana at Fatehpur Sikri in 1575 for philosophical and interfaith discussions.",
-          de: "Kaiser Akbar gruendete 1575 das Ibadat Khana in Fatehpur Sikri fuer philosophische und religioese Gespraeche.",
+          de: "Kaiser Akbar gründete 1575 das Ibadat Khana in Fatehpur Sikri für philosophische und religiöse Gespräche.",
           pl: "Cesarz Akbar wzniósł w 1575 r. w Fatehpur Sikri Dom Mądrości (Ibadat Chana), gdzie mędrcy różnych tradycji prowadzili otwarte dysputy filozoficzne.",
         },
         source: "https://www.britannica.com/biography/Akbar",
@@ -291,7 +291,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The Grand Trunk Road was upgraded with regular caravan serais, mile markers, and security patrols connecting Bengal to Kabul.",
-          de: "Die Grand Trunk Road wurde mit Rasthaeusern, Meilensteinen und Wachposten von Bengalen bis Kabul ausgebaut.",
+          de: "Die Grand Trunk Road wurde mit Rasthäusern, Meilensteinen und Wachposten von Bengalen bis Kabul ausgebaut.",
           pl: "Trakt Grand Trunk Road wyposażono w gęstą sieć karawanserajów, studni, słupów milowych i strażnic, łącząc Bengal z Kabulem.",
         },
         source: "https://whc.unesco.org/en/tentativelists/5492/",
@@ -308,12 +308,12 @@ export const lesson: Lesson = {
     simplified: [
       {
         en: "We focus on administration, dialogue, and public infrastructure rather than military campaigns.",
-        de: "Wir betonen Verwaltung, Dialog und Infrastruktur statt militaerischer Feldzuege.",
+        de: "Wir betonen Verwaltung, Dialog und Infrastruktur statt militärischer Feldzüge.",
         pl: "Skupiamy się na administracji, dialogu mędrców i drogach handlowych, a nie na wojnach.",
       },
       {
         en: "We explain Akbar's council table as a model for how diverse communities solve problems peacefully.",
-        de: "Wir zeigen Akbars Beratungstisch als Vorbild fuer friedliche Verstaendigung verschiedener Gemeinschaften.",
+        de: "Wir zeigen Akbars Beratungstisch als Vorbild für friedliche Verständigung verschiedener Gemeinschaften.",
         pl: "Przedstawiamy stół rady Akbara jako przykład pokojowego rozwiązywania sporów w zróżnicowanym społeczeństwie.",
       },
       {

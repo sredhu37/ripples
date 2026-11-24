@@ -189,10 +189,10 @@ export function NetworkRoutersDiagram({ lang, step }: DiagramProps) {
         : "Routing Across Many Paths";
 
   const senderLabel = lang === "pl" ? "Nadawca" : lang === "de" ? "Sender" : "Sender";
-  const receiverLabel = lang === "pl" ? "Odbiorca" : lang === "de" ? "Empfaenger" : "Receiver";
+  const receiverLabel = lang === "pl" ? "Odbiorca" : lang === "de" ? "Empfänger" : "Receiver";
   const northLabel = lang === "pl" ? "Północ" : lang === "de" ? "Nord" : "North";
   const centralLabel = lang === "pl" ? "Środek" : lang === "de" ? "Zentral" : "Central";
-  const southLabel = lang === "pl" ? "Południe" : lang === "de" ? "Sued" : "South";
+  const southLabel = lang === "pl" ? "Południe" : lang === "de" ? "Süd" : "South";
 
   const sub =
     lang === "pl"
@@ -282,14 +282,14 @@ export function TimBernersLeeWebDiagram({ lang, step }: DiagramProps) {
     lang === "pl"
       ? "Kliknij tutaj po informacje"
       : lang === "de"
-        ? "Hier klicken fuer Informationen"
+        ? "Hier klicken für Informationen"
         : "Click here for Information";
 
   const link2 =
     lang === "pl"
       ? "Przeglądaj wspólne strony naukowe"
       : lang === "de"
-        ? "Gemeinsame Forschungsberichte oeffnen"
+        ? "Gemeinsame Forschungsberichte öffnen"
         : "Browse shared research pages";
 
   const sub =

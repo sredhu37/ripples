@@ -26,17 +26,17 @@ export const lesson: Lesson = {
       [
         T(
           "For thousands of years, people built and farmed with muscle power alone.",
-          "Jahrtausende lang war jeder gehauene Stein und jeder gepfluegte Acker durch Muskelkraft begrenzt.",
+          "Jahrtausende lang war jeder gehauene Stein und jeder gepflügte Acker durch Muskelkraft begrenzt.",
           "Przez tysiące lat każdy ociosany kamień, zaorane pole i wzniesiony mur były ograniczone siłą mięśni.",
         ),
         T(
           "Farmers pushed heavy wooden plows by hand. Or they hitched oxen and horses to pull them through thick clay.",
-          "Bauern schoben schwere Holzpfluege von Hand oder spannten Ochsen und Pferde vor das Gespann.",
+          "Bauern schoben schwere Holzpflüge von Hand oder spannten Ochsen und Pferde vor das Gespann.",
           "Rolnicy pchali ciężkie drewniane pługi rękami. Albo zaprzęgali woły i konie do ciągnięcia w gliniastej ziemi.",
         ),
         T(
           "Even with animals, work was slow and exhausting. When muscles grew tired, all work had to stop.",
-          "Selbst mit Tieren war die Arbeit muehsam. Wenn die Kraefte schwanden, stand alles still.",
+          "Selbst mit Tieren war die Arbeit mühsam. Wenn die Kräfte schwanden, stand alles still.",
           "Nawet ze zwierzętami praca była powolna i wyczerpująca. Gdy brakowało sił, wszystko musiało stanąć w miejscu.",
         ),
       ],
@@ -46,12 +46,12 @@ export const lesson: Lesson = {
       [
         T(
           "Clever builders caught the wind with sails. They used river currents to turn mill wheels.",
-          "Kluge Baumeister nutzten den Wind fuer Segelschiffe und Wasserstroeme fuer Muehlraeder.",
+          "Kluge Baumeister nutzten den Wind für Segelschiffe und Wasserströme für Mühlräder.",
           "Pomysłowi rzemieślnicy łapali wiatr w żagle statków. Nurt rzek obracał koła młyńskie.",
         ),
         T(
           "Waterwheels ground grain into flour and sawed timber, but they depended completely on the weather.",
-          "Wasserraeder mahlten Korn zu Mehl und saegten Holz, doch sie hingen voellig vom Wetter ab.",
+          "Wasserräder mahlten Korn zu Mehl und sägten Holz, doch sie hingen völlig vom Wetter ab.",
           "Koła wodne mieliły ziarno na mąkę i przecierały drewno. Ale zależały całkowicie od pogody.",
         ),
         T(
@@ -71,12 +71,12 @@ export const lesson: Lesson = {
         ),
         T(
           "When water boils into steam, it expands. Steam takes up over a thousand times more space.",
-          "Wenn Wasser zu Dampf kocht, dehnt es sich auf das ueber tausendfache Volumen aus.",
+          "Wenn Wasser zu Dampf kocht, dehnt es sich auf das über tausendfache Volumen aus.",
           "Gdy woda wrze, zmienia się w parę i rozpręża się. Para zajmuje ponad tysiąc razy więcej miejsca niż woda.",
         ),
         T(
           "Thomas Newcomen built an early *steam engine* to pump water out of deep coal mines.",
-          "Thomas Newcomen baute eine fruehe *Dampfmaschine*, um Grubenwasser aus Bergwerken zu pumpen.",
+          "Thomas Newcomen baute eine frühe *Dampfmaschine*, um Grubenwasser aus Bergwerken zu pumpen.",
           "Thomas Newcomen skonstruował wczesną *maszynę parową*, by wypompowywać wodę zalewającą kopalnie węgla.",
         ),
       ],
@@ -91,12 +91,12 @@ export const lesson: Lesson = {
         ),
         T(
           "Instead of only pumping up and down, Watt designed gears to produce continuous *rotary motion*.",
-          "Statt nur auf und ab zu pumpen, erzeugte Watts Maschine eine gleichmaessige *Drehbewegung*.",
+          "Statt nur auf und ab zu pumpen, erzeugte Watts Maschine eine gleichmäßige *Drehbewegung*.",
           "Zamiast ruchu w górę i w dół, Watt dodał przekładnie dające ciągły *ruch obrotowy*.",
         ),
         T(
           "Now a steam engine could turn factory wheels day and night without stopping.",
-          "Nun konnte eine Dampfmaschine Spinnraeder und Fabrikwellen Tag und Nacht zuverlaessig drehen.",
+          "Nun konnte eine Dampfmaschine Spinnräder und Fabrikwellen Tag und Nacht zuverlässig drehen.",
           "Od tej pory maszyna parowa mogła napędzać wrzeciona i wały fabryczne dzień i noc.",
         ),
       ],
@@ -106,17 +106,17 @@ export const lesson: Lesson = {
       [
         T(
           "Steam power sparked the *Industrial Revolution*, reshaping manufacturing, travel, and cities.",
-          "Die Dampfkraft entfachte die *Industrielle Revolution* und veraenderte Handwerk, Reisen und Staedte.",
+          "Die Dampfkraft entfachte die *Industrielle Revolution* und veränderte Handwerk, Reisen und Städte.",
           "Energia pary zapoczątkowała *rewolucję przemysłową*, odmieniając fabryki, podróże i rozwój miast.",
         ),
         T(
           "Steam locomotives carried grain, coal, and passengers across vast countries in just hours.",
-          "Dampflokomotiven transportierten Getreide, Kohle und Fahrgaeste in wenigen Stunden ueber Land.",
+          "Dampflokomotiven transportierten Getreide, Kohle und Fahrgäste in wenigen Stunden über Land.",
           "Parowozy przewoziły zboże, węgiel i pasażerów przez całe kraje w zaledwie kilka godzin.",
         ),
         T(
           "Humanity had stepped beyond muscle power into an era of tireless mechanical energy.",
-          "Die Menschheit liess die reine Muskelkraft hinter sich und betrat das Zeitalter der Maschinen.",
+          "Die Menschheit ließ die reine Muskelkraft hinter sich und betrat das Zeitalter der Maschinen.",
           "Ludzkość wykroczyła poza ograniczenia siły mięśni, wkraczając w erę niestrudzonej energii mechanicznej.",
         ),
       ],
@@ -125,7 +125,7 @@ export const lesson: Lesson = {
   ],
   toyIntro: T(
     "Choose a power source and run the steam engine with coal and water to produce continuous power.",
-    "Waehle eine Kraftquelle und betreibe die Dampfmaschine mit Kohle und Wasser fuer dauerhafte Kraft.",
+    "Wähle eine Kraftquelle und betreibe die Dampfmaschine mit Kohle und Wasser für dauerhafte Kraft.",
     "Wybierz źródło zasilania i uruchom maszynę parową z węglem i wodą, aby wytworzyć ciągłą moc.",
   ),
   Toy,
@@ -134,14 +134,14 @@ export const lesson: Lesson = {
       kind: "choice",
       prompt: T(
         "Why did waterwheels sometimes stop working before steam engines were invented?",
-        "Warum standen Wasserraeder manchmal still, bevor Dampfmaschinen erfunden wurden?",
+        "Warum standen Wasserräder manchmal still, bevor Dampfmaschinen erfunden wurden?",
         "Dlaczego koła wodne czasami przestawały działać, zanim wynaleziono maszyny parowe?",
       ),
       options: [
         {
           text: T(
             "Rivers could freeze in winter or dry up during hot summers",
-            "Fluesse konnten im Winter zufrieren oder im Sommer austrocknen",
+            "Flüsse konnten im Winter zufrieren oder im Sommer austrocknen",
             "Rzeki mogły zamarznąć zimą lub wyschnąć w czasie upalnego lata",
           ),
           correct: true,
@@ -156,14 +156,14 @@ export const lesson: Lesson = {
         {
           text: T(
             "The wheels had to be tucked into bed for an afternoon nap",
-            "Die Raeder mussten sich fuer einen Mittagsschlaf ins Bett legen",
+            "Die Räder mussten sich für einen Mittagsschlaf ins Bett legen",
             "Koła młyńskie musiały położyć się do łóżka na popołudniową drzemkę",
           ),
         },
       ],
       hint: T(
         "Waterwheels depended on river flow, which changed with seasons and weather.",
-        "Wasserraeder hingen vom Fluss ab, der sich je nach Jahreszeit veraenderte.",
+        "Wasserräder hingen vom Fluss ab, der sich je nach Jahreszeit veränderte.",
         "Koła wodne zależały od poziomu wody w rzece, który zmieniał się wraz z porami roku i pogodą.",
       ),
     },
@@ -171,7 +171,7 @@ export const lesson: Lesson = {
       kind: "choice",
       prompt: T(
         "What key improvement did James Watt make to the steam engine?",
-        "Welche wichtige Verbesserung erfand James Watt fuer die Dampfmaschine?",
+        "Welche wichtige Verbesserung erfand James Watt für die Dampfmaschine?",
         "Jakiego kluczowego ulepszenia dokonał James Watt w maszynie parowej?",
       ),
       options: [
@@ -193,14 +193,14 @@ export const lesson: Lesson = {
         {
           text: T(
             "He replaced coal with scoops of vanilla ice cream",
-            "Er ersetzte die Kohle durch Loeffel voller Vanilleeis",
+            "Er ersetzte die Kohle durch Löffel voller Vanilleeis",
             "Zastąpił węgiel gałkami lodów waniliowych",
           ),
         },
       ],
       hint: T(
         "Watt made the engine far more efficient and capable of turning factory wheels.",
-        "Watt machte die Maschine viel sparsamer und liess sie Fabrikraeder drehen.",
+        "Watt machte die Maschine viel sparsamer und ließ sie Fabrikräder drehen.",
         "Watt uczynił maszynę znacznie wydajniejszą i zdolną do ciągłego napędzania fabryk.",
       ),
     },
@@ -208,20 +208,20 @@ export const lesson: Lesson = {
       kind: "widget",
       prompt: T(
         "Switch to the Steam Engine, add coal to the furnace, and fill the boiler with water.",
-        "Waehle die Dampfmaschine, gib Kohle in den Ofen und fuelle den Kessel mit Wasser.",
+        "Wähle die Dampfmaschine, gib Kohle in den Ofen und fülle den Kessel mit Wasser.",
         "Przełącz na Maszynę parową, dorzuć węgiel do pieca i napełnij kocioł wodą.",
       ),
       Widget,
       hint: T(
         "Click Steam Engine, activate both coal fuel and boiler water, then tap check.",
-        "Klicke auf Dampfmaschine, aktiviere Kohle und Wasser, und tippe auf pruefen.",
+        "Klicke auf Dampfmaschine, aktiviere Kohle und Wasser, und tippe auf prüfen.",
         "Wybierz Maszynę parową, włącz węgiel i wodę, a następnie kliknij sprawdź.",
       ),
     },
   ],
   askDad: T(
     "Papa, how did people travel long distances before steam trains and cars were invented?",
-    "Papa, wie sind die Menschen weite Strecken gereist, bevor es Dampfzuege und Autos gab?",
+    "Papa, wie sind die Menschen weite Strecken gereist, bevor es Dampfzüge und Autos gab?",
     "Tato, jak ludzie podróżowali na dalekie odległości, zanim wynaleziono pociągi parowe i samochody?",
   ),
   realLife: {
@@ -232,7 +232,7 @@ export const lesson: Lesson = {
     },
     body: {
       en: "In Germany, preserved steam locomotives still climb the scenic Harz mountains on the Harzer Schmalspurbahnen, and historic engines are maintained at the Eisenbahnmuseum Bochum-Dahlhausen. These giant machines demonstrate how boiling water and hot coal transformed transport across continents.",
-      de: "In Deutschland dampfen historische Lokomotiven noch heute auf den Harzer Schmalspurbahnen durch die Berge, und im Eisenbahnmuseum Bochum-Dahlhausen kann man Dampfriesen bestaunen. Diese Maschinen zeigen eindrucksvoll, wie heisses Wasser und Kohle das Reisen fuer immer veraendert haben.",
+      de: "In Deutschland dampfen historische Lokomotiven noch heute auf den Harzer Schmalspurbahnen durch die Berge, und im Eisenbahnmuseum Bochum-Dahlhausen kann man Dampfriesen bestaunen. Diese Maschinen zeigen eindrucksvoll, wie heißes Wasser und Kohle das Reisen für immer verändert haben.",
       pl: "W Wolsztynie w Wielkopolsce działa słynna parowozownia obsługująca planowe pociągi pasażerskie z zabytkowymi parowozami. W Muzeum Kolejnictwa w Jaworzynie Śląskiej oraz w Zabytkowej Kopalni Srebra w Tarnowskich Górach dzieci mogą zobaczyć gigantyczne maszyny parowe, które zrewolucjonizowały transport i przemysł, uwalniając ludzi od morderczej pracy mięśni.",
     },
   },
@@ -241,7 +241,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "Thomas Newcomen built the first practical atmospheric steam engine in 1712 for draining flooded coal mines.",
-          de: "Thomas Newcomen baute 1712 die erste praxistaugliche atmosphaerische Dampfmaschine zur Entwaesserung von Kohlegruben.",
+          de: "Thomas Newcomen baute 1712 die erste praxistaugliche atmosphärische Dampfmaschine zur Entwässerung von Kohlegruben.",
           pl: "Thomas Newcomen zbudował w 1712 roku pierwszą praktyczną atmosferyczną maszynę parową do odwadniania kopalń węgla.",
         },
         source: "https://www.britannica.com/technology/Newcomen-steam-engine",
@@ -249,7 +249,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "James Watt patented his separate condenser steam engine in 1769, drastically cutting fuel consumption.",
-          de: "James Watt liess sich 1769 seine Dampfmaschine mit getrenntem Kondensator patentieren und senkte den Brennstoffverbrauch drastisch.",
+          de: "James Watt ließ sich 1769 seine Dampfmaschine mit getrenntem Kondensator patentieren und senkte den Brennstoffverbrauch drastisch.",
           pl: "James Watt opatentował w 1769 roku maszynę parową z oddzielnym skraplaczem, radykalnie obniżając zużycie węgla.",
         },
         source: "https://www.britannica.com/biography/James-Watt",
@@ -257,7 +257,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "Watt adapted his engine in 1781 to produce continuous rotary motion, enabling factories to run machinery.",
-          de: "Watt entwickelte seine Maschine 1781 so weiter, dass sie eine gleichmaessige Drehbewegung erzeugte und Fabriken antrieb.",
+          de: "Watt entwickelte seine Maschine 1781 so weiter, dass sie eine gleichmäßige Drehbewegung erzeugte und Fabriken antrieb.",
           pl: "Watt udoskonalił maszynę w 1781 roku do wytwarzania ciągłego ruchu obrotowego, co umożliwiło mechanizację fabryk.",
         },
         source: "https://www.sciencemuseum.org.uk/objects-and-stories/james-watt-and-steam-engine",
@@ -265,15 +265,15 @@ export const lesson: Lesson = {
       {
         text: {
           en: "George Stephenson's Rocket won the Rainhill Trials in 1829, establishing steam locomotives on public railways.",
-          de: "George Stephensons Lokomotive Rocket gewann 1829 die Rainhill Trials und begruendete das oeffentliche Eisenbahnzeitalter.",
+          de: "George Stephensons Lokomotive Rocket gewann 1829 die Rainhill Trials und begründete das öffentliche Eisenbahnzeitalter.",
           pl: "Parowóz Rakieta (Rocket) George'a Stephensona zwyciężył w próbach w Rainhill w 1829 roku, otwierając erę kolei parowej.",
         },
         source: "https://www.railwaymuseum.org.uk/objects-and-stories/stephensons-rocket",
       },
       {
         text: {
-          en: "The Adler steam locomotive inaugurated Germany's first passenger railway between Nuremberg and Fuerth in 1835.",
-          de: "Die Dampflokomotive Adler eroeffnete 1835 die erste deutsche Personenbahnstrecke zwischen Nuernberg und Fuerth.",
+          en: "The Adler steam locomotive inaugurated Germany's first passenger railway between Nuremberg and Fürth in 1835.",
+          de: "Die Dampflokomotive Adler eröffnete 1835 die erste deutsche Personenbahnstrecke zwischen Nürnberg und Fürth.",
           pl: "Pierwsza maszyna parowa na ziemiach polskich ruszyła w Tarnowskich Górach w 1788 roku, odwadniając kopalnię kruszców Fryderyk.",
         },
         source: "https://kopalniasrebra.pl/historia-maszyny-parowej/",
@@ -282,12 +282,12 @@ export const lesson: Lesson = {
     simplified: [
       {
         en: "We explain mechanical energy through the simple expansion of boiling water into steam.",
-        de: "Wir erklaeren mechanische Energie an der Dehnung von kochendem Wasser zu Dampf.",
+        de: "Wir erklären mechanische Energie an der Dehnung von kochendem Wasser zu Dampf.",
         pl: "Tłumaczymy energię mechaniczną poprzez zjawisko rozprężania się gotującej wody w parę.",
       },
       {
         en: "We contrast weather-dependent waterwheels with continuous fuel-powered steam engines.",
-        de: "Wir stellen wetterabhaengige Wasserraeder der zuverlaessigen Kraft von Dampfmaschinen gegenueber.",
+        de: "Wir stellen wetterabhängige Wasserräder der zuverlässigen Kraft von Dampfmaschinen gegenüber.",
         pl: "Porównujemy zależne od pogody koła wodne z niezawodną mocą maszyn parowych.",
       },
       {

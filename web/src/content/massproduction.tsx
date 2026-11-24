@@ -31,12 +31,12 @@ export const lesson: Lesson = {
         ),
         T(
           "Master artisans measured and filed each metal cog to fit only one specific clock case.",
-          "Meister feilten jedes Zahnrad passgenau zurecht, sodass es nur in dieses eine Gehaeuse passte.",
+          "Meister feilten jedes Zahnrad passgenau zurecht, sodass es nur in dieses eine Gehäuse passte.",
           "Mistrzowie piłowali każde koło zębate tak, by pasowało tylko do jednej obudowy zegara.",
         ),
         T(
           "If a part broke years later, a blacksmith had to forge a unique replacement.",
-          "Ging spaeter ein Teil kaputt, musste ein Schmied ein einzelnes Ersatzteil muehsam neu anfertigen.",
+          "Ging später ein Teil kaputt, musste ein Schmied ein einzelnes Ersatzteil mühsam neu anfertigen.",
           "Jeśli część pękła po latach, kowal musiał od podstaw wykuwać unikalny zamiennik na specjalne zamówienie.",
         ),
       ],
@@ -46,7 +46,7 @@ export const lesson: Lesson = {
       [
         T(
           "Because handcrafting required weeks of labor, clocks and bicycles were extraordinarily expensive.",
-          "Weil die Handarbeit Wochen dauerte, waren Uhren und Fahrraeder ausserordentlich teuer.",
+          "Weil die Handarbeit Wochen dauerte, waren Uhren und Fahrräder außerordentlich teuer.",
           "Ponieważ ręczne rzemiosło wymagało tygodni żmudnej pracy, zegary i rowery były niezwykle drogie.",
         ),
         T(
@@ -71,7 +71,7 @@ export const lesson: Lesson = {
         ),
         T(
           "Instead of making unique one-off pieces, precision stamping machines made identical metal parts.",
-          "Statt Einzelstuecken stanzten praezise Maschinen tausende vollkommen gleiche Bauteile.",
+          "Statt Einzelstücken stanzten präzise Maschinen tausende vollkommen gleiche Bauteile.",
           "Zamiast unikalnych pojedynczych sztuk, precyzyjne maszyny tłoczyły tysiące identycznych elementów.",
         ),
         T(
@@ -86,17 +86,17 @@ export const lesson: Lesson = {
       [
         T(
           "Automakers like Henry Ford combined standardized parts with the moving *assembly line*.",
-          "Automobilpioniere wie Henry Ford verbanden Standardteile mit dem beweglichen *Fliessband*.",
+          "Automobilpioniere wie Henry Ford verbanden Standardteile mit dem beweglichen *Fließband*.",
           "Pionierzy motoryzacji, tacy jak Henry Ford, połączyli standaryzację części z ruchomą *taśmą montażową*.",
         ),
         T(
           "Instead of workers walking around collecting parts, a motorized conveyor belt brought work to them.",
-          "Statt dass Arbeiter durch die Halle liefen, brachte ein Foerderband die Teile direkt zu ihnen.",
+          "Statt dass Arbeiter durch die Halle liefen, brachte ein Förderband die Teile direkt zu ihnen.",
           "Zamiast pracowników krążących po hali po śruby, taśmociąg dostarczał części prosto do ich rąk.",
         ),
         T(
           "Each worker mastered one specific task, completing complex assemblies in minutes instead of days.",
-          "Jeder Arbeiter meisterte einen Handgriff und montierte Geraete in Minuten statt in Tagen.",
+          "Jeder Arbeiter meisterte einen Handgriff und montierte Geräte in Minuten statt in Tagen.",
           "Każdy robotnik opanował do perfekcji jedną czynność, składając skomplikowane maszyny w minuty zamiast dni.",
         ),
       ],
@@ -106,17 +106,17 @@ export const lesson: Lesson = {
       [
         T(
           "This efficient process, known as *mass production*, caused the prices of everyday goods to plummet.",
-          "Dieses Verfahren, die sogenannte *Massenfertigung*, liess die Preise fuer Alltagsgueter purzeln.",
+          "Dieses Verfahren, die sogenannte *Massenfertigung*, ließ die Preise für Alltagsgüter purzeln.",
           "Ten wydajny proces, znany jako *produkcja masowa*, doprowadził do gwałtownego spadku cen towarów.",
         ),
         T(
           "Suddenly, millions of working families could afford safety bicycles, sewing machines, and radios.",
-          "Ploetzlich konnten sich Millionen von Familien Fahrraeder, Naehmaschinen und Radios leisten.",
+          "Plötzlich konnten sich Millionen von Familien Fahrräder, Nähmaschinen und Radios leisten.",
           "Nagle miliony pracujących rodzin mogły kupić bezpieczne rowery, maszyny do szycia i odbiorniki radiowe.",
         ),
         T(
           "Standardization and assembly lines brought comfort and freedom to regular homes across the world.",
-          "Standardisierung und Fliessbaender brachten Komfort und Freiheit in die Haushalte der Welt.",
+          "Standardisierung und Fließbänder brachten Komfort und Freiheit in die Haushalte der Welt.",
           "Standaryzacja i taśmy montażowe przyniosły wygodę i wolność milionom domów na całym świecie.",
         ),
       ],
@@ -125,7 +125,7 @@ export const lesson: Lesson = {
   ],
   toyIntro: T(
     "Compare an artisan workshop to a moving assembly line and advance the line to make affordable bicycles.",
-    "Vergleiche eine Werkstatt mit einem Fliessband und ruecke die Stationen vor, um guenstige Raeder zu bauen.",
+    "Vergleiche eine Werkstatt mit einem Fließband und rücke die Stationen vor, um günstige Räder zu bauen.",
     "Porównaj warsztat rzemieślniczy z taśmą montażową i przesuń stanowiska, aby złożyć tanie rowery.",
   ),
   Toy,
@@ -141,7 +141,7 @@ export const lesson: Lesson = {
         {
           text: T(
             "Identical standard components that fit into any unit without custom hand trimming",
-            "Gleiche Standardteile, die ohne Nachfeilen in jedes hergestellte Geraet passen",
+            "Gleiche Standardteile, die ohne Nachfeilen in jedes hergestellte Gerät passen",
             "Identyczne elementy standardowe pasujące do każdego egzemplarza bez ręcznego docinania",
           ),
           correct: true,
@@ -149,7 +149,7 @@ export const lesson: Lesson = {
         {
           text: T(
             "Parts made of chocolate that melt whenever it begins to rain outside",
-            "Bauteile aus Schokolade, die schmelzen, sobald es draussen regnet",
+            "Bauteile aus Schokolade, die schmelzen, sobald es draußen regnet",
             "Części zrobione z czekolady, które topnieją na deszczu",
           ),
         },
@@ -171,7 +171,7 @@ export const lesson: Lesson = {
       kind: "choice",
       prompt: T(
         "How did the moving assembly line lower the price of manufactured goods?",
-        "Wie senkte das Fliessband die Preise fuer hergestellte Waren?",
+        "Wie senkte das Fließband die Preise für hergestellte Waren?",
         "W jaki sposób ruchoma taśma montażowa obniżyła ceny wytwarzanych towarów?",
       ),
       options: [
@@ -186,21 +186,21 @@ export const lesson: Lesson = {
         {
           text: T(
             "It made products invisible so stores did not have to pay for lighting",
-            "Es machte Waren unsichtbar, damit Geschaefte kein Licht bezahlen mussten",
+            "Es machte Waren unsichtbar, damit Geschäfte kein Licht bezahlen mussten",
             "Uczyniła produkty niewidzialnymi, by sklepy nie musiały płacić za oświetlenie",
           ),
         },
         {
           text: T(
             "It replaced factory workers with magical leaping rabbits",
-            "Es ersetzte Fabrikarbeiter durch magische huepfende Kaninchen",
+            "Es ersetzte Fabrikarbeiter durch magische hüpfende Kaninchen",
             "Zastąpiła pracowników fabryki magicznymi skaczącymi królikami",
           ),
         },
       ],
       hint: T(
         "High efficiency and high volume drastically reduced the labor cost for each item.",
-        "Hohe Effizienz und grosse Stueckzahlen senkten die Arbeitskosten pro Stueck gewaltig.",
+        "Hohe Effizienz und große Stückzahlen senkten die Arbeitskosten pro Stück gewaltig.",
         "Wysoka wydajność i duża skala dramatycznie obniżyły koszt robocizny przypadający na jedną sztukę.",
       ),
     },
@@ -208,20 +208,20 @@ export const lesson: Lesson = {
       kind: "widget",
       prompt: T(
         "Select Moving Assembly Line and advance all three stations to produce bicycles at 50 coins each.",
-        "Waehle Fliessband-Fertigung und ruecke alle drei Stationen vor, um Raeder fuer 50 Muenzen zu bauen.",
+        "Wähle Fließband-Fertigung und rücke alle drei Stationen vor, um Räder für 50 Münzen zu bauen.",
         "Wybierz Taśmę montażową i przesuń wszystkie trzy stanowiska, by produkować rowery po 50 monet za sztukę.",
       ),
       Widget,
       hint: T(
         "Click Moving Assembly Line, advance through frame, wheels, and inspection, then tap check.",
-        "Klicke auf Fliessband, ruecke Rahmen, Raeder und Pruefung vor und tippe auf pruefen.",
+        "Klicke auf Fließband, rücke Rahmen, Räder und Prüfung vor und tippe auf prüfen.",
         "Wybierz Taśmę montażową, przejdź przez ramę, koła i kontrolę jakości, a potem kliknij sprawdź.",
       ),
     },
   ],
   askDad: T(
     "Papa, why is it that today almost every store sells clothes in standard sizes like S, M, and L?",
-    "Papa, warum verkaufen fast alle Geschaefte heute Kleidung in festen Groessen wie S, M und L?",
+    "Papa, warum verkaufen fast alle Geschäfte heute Kleidung in festen Größen wie S, M und L?",
     "Tato, dlaczego dzisiaj prawie każdy sklep sprzedaje ubrania w gotowych rozmiarach, takich jak S, M i L?",
   ),
   realLife: {
@@ -232,7 +232,7 @@ export const lesson: Lesson = {
     },
     body: {
       en: "In modern manufacturing plants in Wolfsburg, Sindelfingen, and Leipzig, high-precision assembly lines produce motor vehicles with millimeter accuracy. Thousands of standardized components arrive just in time to be installed by skilled workers and robotic systems, ensuring high reliability and efficiency.",
-      de: "In modernen Autowerken in Wolfsburg, Sindelfingen und Leipzig fertigen Fliessbaender Fahrzeuge mit Millimetergenauigkeit. Tausende genormte Bauteile treffen puenktlich ein und werden von Fachkraeften und Robotern verbaut, was Qualitaet und Zuverlaessigkeit gewaehrleistet.",
+      de: "In modernen Autowerken in Wolfsburg, Sindelfingen und Leipzig fertigen Fließbänder Fahrzeuge mit Millimetergenauigkeit. Tausende genormte Bauteile treffen pünktlich ein und werden von Fachkräften und Robotern verbaut, was Qualität und Zuverlässigkeit gewährleistet.",
       pl: "W Polsce działają wielkie, zautomatyzowane zakłady produkcyjne, na przykład fabryki samochodów w Gliwicach, Tychach i Poznaniu oraz zakłady sprzętu AGD we Wrocławiu i Łodzi. Tysiące standaryzowanych części dociera na taśmę dokładnie na czas, gdzie pracownicy i precyzyjne roboty montują urządzenia z dokładnością do milimetra, czyniąc je powszechnie dostępnymi dla milionów rodzin.",
     },
   },
@@ -241,7 +241,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The concept of interchangeable parts was pioneered in the late eighteenth century by gunsmiths like Honore Blanc and Eli Whitney.",
-          de: "Das Prinzip austauschbarer Bauteile wurde im spaeten 18. Jahrhundert von Buechsenmachern wie Honore Blanc und Eli Whitney entwickelt.",
+          de: "Das Prinzip austauschbarer Bauteile wurde im späten 18. Jahrhundert von Büchsenmachern wie Honore Blanc und Eli Whitney entwickelt.",
           pl: "Zasadę wymiennych części wprowadzili pod koniec XVIII wieku rusznikarze i mechanicy, tacy jak Honoré Blanc i Eli Whitney.",
         },
         source: "https://www.britannica.com/technology/interchangeable-parts",
@@ -249,7 +249,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "Henry Ford installed the first moving assembly line for mass automobile production at Highland Park in 1913.",
-          de: "Henry Ford fuehrte 1913 in Highland Park das erste bewegliche Fliessband fuer die Automobilmassenfertigung ein.",
+          de: "Henry Ford führte 1913 in Highland Park das erste bewegliche Fließband für die Automobilmassenfertigung ein.",
           pl: "Henry Ford uruchomił w 1913 roku w Highland Park pierwszą ruchomą linię montażową do seryjnej produkcji samochodów.",
         },
         source:
@@ -258,7 +258,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The moving assembly line reduced the production time of a Model T car from over 12 hours to roughly 93 minutes.",
-          de: "Das Fliessband senkte die Bauzeit eines Ford Modell T von ueber 12 Stunden auf rund 93 Minuten.",
+          de: "Das Fließband senkte die Bauzeit eines Ford Modell T von über 12 Stunden auf rund 93 Minuten.",
           pl: "Ruchoma taśma montażowa skróciła czas montażu samochodu Ford Model T z ponad 12 godzin do około 93 minut.",
         },
         source: "https://www.history.com/this-day-in-history/fords-assembly-line-starts-rolling",
@@ -274,7 +274,7 @@ export const lesson: Lesson = {
       {
         text: {
           en: "The Deutsches Museum in Munich displays historic machine tools and production exhibits tracing modern industrial standardization.",
-          de: "Das Deutsche Museum in Muenchen zeigt historische Werkzeugmaschinen und Ausstellungen zur industriellen Normung.",
+          de: "Das Deutsche Museum in München zeigt historische Werkzeugmaschinen und Ausstellungen zur industriellen Normung.",
           pl: "Centralny Okręg Przemysłowy (COP) w II RP w latach 1936-1939 stworzył nowoczesne fabryki maszynowe i zbrojeniowe w Stalowej Woli i Mielcu.",
         },
         source:
@@ -284,17 +284,17 @@ export const lesson: Lesson = {
     simplified: [
       {
         en: "We explain interchangeable parts using identical gears that fit any machine without filing.",
-        de: "Wir erklaeren austauschbare Bauteile anhand gleicher Zahnraeder, die ohne Feilen in jede Maschine passen.",
+        de: "Wir erklären austauschbare Bauteile anhand gleicher Zahnräder, die ohne Feilen in jede Maschine passen.",
         pl: "Tłumaczymy wymienne części na przykładzie identycznych kół zębatych pasujących do każdej maszyny.",
       },
       {
         en: "We show how moving conveyor belts bring parts directly to specialized workstations.",
-        de: "Wir zeigen, wie Foerderbaender Teile direkt zu spezialisierten Stationen bringen.",
+        de: "Wir zeigen, wie Förderbänder Teile direkt zu spezialisierten Stationen bringen.",
         pl: "Pokazujemy, jak taśmociągi dostarczają części bezpośrednio do wyspecjalizowanych stanowisk montażowych.",
       },
       {
         en: "We demonstrate how higher throughput makes everyday goods affordable for regular families.",
-        de: "Wir veranschaulichen, wie grosse Stueckzahlen Alltagsgueter fuer Familien bezahlbar machen.",
+        de: "Wir veranschaulichen, wie große Stückzahlen Alltagsgüter für Familien bezahlbar machen.",
         pl: "Wskazujemy, jak masowa skala produkcji czyni codzienne towary przystępnymi cenowo dla zwykłych rodzin.",
       },
     ],

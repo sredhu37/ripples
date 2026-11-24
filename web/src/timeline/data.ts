@@ -10,7 +10,7 @@ export const TIMELINE_ERAS: TimelineEra[] = [
     dateRange: T("3000 BCE to 500 CE", "3000 v. Chr. bis 500 n. Chr.", "3000 p.n.e. do 500 n.e."),
     description: T(
       "First cities, writing and trade.",
-      "Erste Staedte, Schrift und Handel.",
+      "Erste Städte, Schrift und Handel.",
       "Pierwsze miasta, pismo i handel.",
     ),
   },
@@ -18,13 +18,13 @@ export const TIMELINE_ERAS: TimelineEra[] = [
     id: "middle_ages",
     label: T(
       "Silk Road and Middle Ages",
-      "Seidenstrasse und Mittelalter",
+      "Seidenstraße und Mittelalter",
       "Jedwabny Szlak i średniowiecze",
     ),
     dateRange: T("500 to 1500", "500 bis 1500", "500 do 1500"),
     description: T(
       "Caravans, kingdoms and big ideas travel far.",
-      "Karawanen, Koenigreiche und grosse Ideen reisen weit.",
+      "Karawanen, Königreiche und große Ideen reisen weit.",
       "Karawany, królestwa i wielkie idee wędrują daleko.",
     ),
   },
@@ -54,7 +54,7 @@ export const TIMELINE_ERAS: TimelineEra[] = [
     dateRange: T("1800 to 1900", "1800 bis 1900", "1800 do 1900"),
     description: T(
       "Steam, electricity and medicine change daily life.",
-      "Dampf, Strom und Medizin veraendern den Alltag.",
+      "Dampf, Strom und Medizin verändern den Alltag.",
       "Para, prąd i medycyna zmieniają codzienne życie.",
     ),
   },
@@ -97,10 +97,10 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     "ancient",
     "india",
     T("c. 2500 BCE", "um 2500 v. Chr.", "ok. 2500 p.n.e."),
-    T("Indus Valley cities", "Die Staedte am Indus", "Miasta doliny Indusu"),
+    T("Indus Valley cities", "Die Städte am Indus", "Miasta doliny Indusu"),
     T(
       "People build neat cities with drains and shared wells.",
-      "Menschen bauen ordentliche Staedte mit Abwasserkanaelen und Brunnen.",
+      "Menschen bauen ordentliche Städte mit Abwasserkanälen und Brunnen.",
       "Ludzie budują zadbane miasta z kanałami i wspólnymi studniami.",
     ),
   ),
@@ -112,7 +112,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("The Great Pyramid of Giza", "Die Cheops-Pyramide", "Wielka Piramida w Gizie"),
     T(
       "Thousands of workers stack huge stones for a king's tomb.",
-      "Tausende Arbeiter stapeln riesige Steine fuer das Grab eines Koenigs.",
+      "Tausende Arbeiter stapeln riesige Steine für das Grab eines Königs.",
       "Tysiące robotników układa ogromne kamienie na grobowiec króla.",
     ),
   ),
@@ -124,7 +124,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("Writing on oracle bones", "Schrift auf Orakelknochen", "Pismo na kościach wróżebnych"),
     T(
       "Kings in China scratch questions on bones to ask the future.",
-      "Koenige in China ritzen Fragen in Knochen, um die Zukunft zu erfragen.",
+      "Könige in China ritzen Fragen in Knochen, um die Zukunft zu erfragen.",
       "Królowie w Chinach rysują pytania na kościach, by zapytać o przyszłość.",
     ),
   ),
@@ -135,12 +135,12 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("c. 1200 BCE", "um 1200 v. Chr.", "ok. 1200 p.n.e."),
     T(
       "The Olmec carve giant stone heads",
-      "Die Olmeken meisseln riesige Steinkoepfe",
+      "Die Olmeken meißeln riesige Steinköpfe",
       "Olmekowie rzeźbią olbrzymie kamienne głowy",
     ),
     T(
       "In Mexico, artists carve heads as tall as a person.",
-      "In Mexiko meisseln Kuenstler Koepfe, die so gross sind wie ein Mensch.",
+      "In Mexiko meißeln Künstler Köpfe, die so gross sind wie ein Mensch.",
       "W Meksyku artyści rzeźbią głowy wielkie jak człowiek.",
     ),
   ),
@@ -156,7 +156,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     T(
       "Citizens in Athens vote on laws together.",
-      "Buerger in Athen stimmen gemeinsam ueber Gesetze ab.",
+      "Bürger in Athen stimmen gemeinsam über Gesetze ab.",
       "Obywatele Aten wspólnie głosują nad prawami.",
     ),
     "democracy",
@@ -168,7 +168,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("c. 250 BCE", "um 250 v. Chr.", "ok. 250 p.n.e."),
     T(
       "Archimedes explains floating",
-      "Archimedes erklaert das Schwimmen",
+      "Archimedes erklärt das Schwimmen",
       "Archimedes wyjaśnia pływanie",
     ),
     T(
@@ -201,12 +201,12 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("800", "800", "800"),
     T(
       "Charlemagne is crowned emperor",
-      "Karl der Grosse wird Kaiser",
+      "Karl der Große wird Kaiser",
       "Karol Wielki zostaje cesarzem",
     ),
     T(
       "A Frankish king gets a crown in Rome.",
-      "Ein fraenkischer Koenig bekommt in Rom eine Krone.",
+      "Ein fränkischer König bekommt in Rom eine Krone.",
       "Frankijski król dostaje koronę w Rzymie.",
     ),
   ),
@@ -254,7 +254,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     T(
       "The king of Mali brings so much gold that prices in Cairo jump.",
-      "Der Koenig von Mali bringt so viel Gold mit, dass in Kairo die Preise steigen.",
+      "Der König von Mali bringt so viel Gold mit, dass in Kairo die Preise steigen.",
       "Król Mali przywozi tyle złota, że ceny w Kairze rosną.",
     ),
   ),
@@ -263,10 +263,10 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     "middle_ages",
     "americas",
     T("1438", "1438", "1438"),
-    T("The Inca Empire grows", "Das Inka-Reich waechst", "Imperium Inków rośnie"),
+    T("The Inca Empire grows", "Das Inka-Reich wächst", "Imperium Inków rośnie"),
     T(
       "Runners carry messages along mountain roads.",
-      "Laeufer tragen Nachrichten ueber Bergstrassen.",
+      "Läufer tragen Nachrichten über Bergstraßen.",
       "Gońcy niosą wieści górskimi drogami.",
     ),
   ),
@@ -278,12 +278,12 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("1526", "1526", "1526"),
     T(
       "Babur founds the Mughal Empire",
-      "Babur gruendet das Mogulreich",
+      "Babur gründet das Mogulreich",
       "Babur zakłada imperium Mogołów",
     ),
     T(
       "A new empire grows in northern India.",
-      "Im Norden Indiens waechst ein neues Reich.",
+      "Im Norden Indiens wächst ein neues Reich.",
       "Na północy Indii rośnie nowe imperium.",
     ),
     "mughals",
@@ -295,12 +295,12 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("1517", "1517", "1517"),
     T(
       "Luther starts the Reformation",
-      "Luther loest die Reformation aus",
+      "Luther löst die Reformation aus",
       "Luter rozpoczyna reformację",
     ),
     T(
       "A German monk argues about church rules, and printed leaflets spread his ideas.",
-      "Ein deutscher Moench streitet ueber Kirchenregeln, und gedruckte Flugblaetter verbreiten seine Ideen.",
+      "Ein deutscher Mönch streitet über Kirchenregeln, und gedruckte Flugblätter verbreiten seine Ideen.",
       "Niemiecki mnich spiera się o zasady Kościoła, a drukowane ulotki roznoszą jego pomysły.",
     ),
   ),
@@ -309,10 +309,10 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     "trade_empires",
     "americas",
     T("1521", "1521", "1521"),
-    T("The Aztec capital falls", "Die Aztekenhauptstadt faellt", "Upada stolica Azteków"),
+    T("The Aztec capital falls", "Die Aztekenhauptstadt fällt", "Upada stolica Azteków"),
     T(
       "Tenochtitlan, a city on a lake, is conquered by Spain and its allies.",
-      "Tenochtitlan, eine Stadt im See, wird von Spanien und seinen Verbuendeten erobert.",
+      "Tenochtitlan, eine Stadt im See, wird von Spanien und seinen Verbündeten erobert.",
       "Tenochtitlan, miasto na jeziorze, zostaje podbite przez Hiszpanię i jej sojuszników.",
     ),
   ),
@@ -328,7 +328,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     T(
       "Ships carry Chinese silk across the Pacific for silver.",
-      "Schiffe bringen chinesische Seide ueber den Pazifik gegen Silber.",
+      "Schiffe bringen chinesische Seide über den Pazifik gegen Silber.",
       "Statki wożą chiński jedwab przez Pacyfik w zamian za srebro.",
     ),
     "spicetrade",
@@ -340,12 +340,12 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("1500s", "1500er", "XVI wiek"),
     T(
       "Timbuktu is a city of books",
-      "Timbuktu wird zur Stadt der Buecher",
+      "Timbuktu wird zur Stadt der Bücher",
       "Timbuktu miastem ksiąg",
     ),
     T(
       "Traders and students meet in a desert city.",
-      "Haendler und Schueler treffen sich in einer Wuestenstadt.",
+      "Händler und Schüler treffen sich in einer Wüstenstadt.",
       "Kupcy i uczniowie spotykają się w pustynnym mieście.",
     ),
   ),
@@ -387,10 +387,10 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     "scientific_rev",
     "science",
     T("1687", "1687", "1687"),
-    T("Newton explains gravity", "Newton erklaert die Schwerkraft", "Newton wyjaśnia grawitację"),
+    T("Newton explains gravity", "Newton erklärt die Schwerkraft", "Newton wyjaśnia grawitację"),
     T(
       "The same pull makes an apple fall and the Moon circle Earth.",
-      "Dieselbe Kraft laesst einen Apfel fallen und den Mond die Erde umkreisen.",
+      "Dieselbe Kraft lässt einen Apfel fallen und den Mond die Erde umkreisen.",
       "Ta sama siła sprawia, że jabłko spada, a Księżyc krąży wokół Ziemi.",
     ),
   ),
@@ -401,12 +401,12 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("1602", "1602", "1602"),
     T(
       "The Dutch East India Company starts",
-      "Die Niederlaendische Ostindien-Kompanie entsteht",
+      "Die Niederländische Ostindien-Kompanie entsteht",
       "Powstaje Holenderska Kompania Wschodnioindyjska",
     ),
     T(
       "People can buy shares in a trading fleet.",
-      "Menschen koennen Anteile an einer Handelsflotte kaufen.",
+      "Menschen können Anteile an einer Handelsflotte kaufen.",
       "Ludzie mogą kupować udziały we flocie handlowej.",
     ),
     "stocks",
@@ -423,7 +423,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     T(
       "Thousands of builders make a white marble tomb.",
-      "Tausende Bauleute errichten ein Grabmal aus weissem Marmor.",
+      "Tausende Bauleute errichten ein Grabmal aus weißem Marmor.",
       "Tysiące budowniczych wznosi grobowiec z białego marmuru.",
     ),
     "mughals",
@@ -440,7 +440,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     T(
       "Peace comes and cities like Edo grow big.",
-      "Es herrscht Frieden und Staedte wie Edo werden gross.",
+      "Es herrscht Frieden und Städte wie Edo werden gross.",
       "Nastaje pokój, a miasta takie jak Edo rosną.",
     ),
   ),
@@ -451,7 +451,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("1776", "1776", "1776"),
     T(
       "The United States declares independence",
-      "Die USA erklaeren ihre Unabhaengigkeit",
+      "Die USA erklären ihre Unabhängigkeit",
       "Stany Zjednoczone ogłaszają niepodległość",
     ),
     T(
@@ -474,7 +474,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     T(
       "Stephenson's Rocket shows trains can be fast.",
-      "Stephensons Rocket zeigt, dass Zuege schnell sein koennen.",
+      "Stephensons Rocket zeigt, dass Züge schnell sein können.",
       "Rakieta Stephensona pokazuje, że pociągi mogą być szybkie.",
     ),
     "tools",
@@ -513,10 +513,10 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     "industrial",
     "mideast_africa",
     T("1869", "1869", "1869"),
-    T("The Suez Canal opens", "Der Suezkanal wird eroeffnet", "Otwarto Kanał Sueski"),
+    T("The Suez Canal opens", "Der Suezkanal wird eröffnet", "Otwarto Kanał Sueski"),
     T(
       "Ships can sail from Europe to Asia without going around Africa.",
-      "Schiffe koennen von Europa nach Asien fahren, ohne Afrika zu umrunden.",
+      "Schiffe können von Europa nach Asien fahren, ohne Afrika zu umrunden.",
       "Statki mogą płynąć z Europy do Azji bez opływania Afryki.",
     ),
   ),
@@ -541,11 +541,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     "industrial",
     "science",
     T("1879", "1879", "1879"),
-    T(
-      "Edison's long-lasting light bulb",
-      "Edisons langlebige Gluehbirne",
-      "Trwała żarówka Edisona",
-    ),
+    T("Edison's long-lasting light bulb", "Edisons langlebige Glühbirne", "Trwała żarówka Edisona"),
     T(
       "A glowing bulb lights a room for hours.",
       "Eine leuchtende Birne erhellt einen Raum stundenlang.",
@@ -564,7 +560,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     T(
       "A doctor finds a way to protect people from a dangerous germ.",
-      "Ein Arzt findet einen Weg, Menschen vor einem gefaehrlichen Keim zu schuetzen.",
+      "Ein Arzt findet einen Weg, Menschen vor einem gefährlichen Keim zu schützen.",
       "Lekarz znajduje sposób, by chronić ludzi przed groźnym zarazkiem.",
     ),
   ),
@@ -574,10 +570,10 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     "twentieth",
     "science",
     T("1903", "1903", "1903"),
-    T("The Wright brothers fly", "Die Gebrueder Wright fliegen", "Bracia Wright latają"),
+    T("The Wright brothers fly", "Die Gebrüder Wright fliegen", "Bracia Wright latają"),
     T(
       "A small plane stays in the air for twelve seconds.",
-      "Ein kleines Flugzeug bleibt zwoelf Sekunden in der Luft.",
+      "Ein kleines Flugzeug bleibt zwölf Sekunden in der Luft.",
       "Mały samolot utrzymuje się w powietrzu przez dwanaście sekund.",
     ),
   ),
@@ -589,7 +585,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("Fleming finds penicillin", "Fleming entdeckt das Penicillin", "Fleming odkrywa penicylinę"),
     T(
       "Mould on a dish kills germs around it.",
-      "Schimmel auf einer Schale toetet Keime in seiner Naehe.",
+      "Schimmel auf einer Schale tötet Keime in seiner Nähe.",
       "Pleśń na szalce zabija zarazki wokół siebie.",
     ),
   ),
@@ -614,7 +610,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("The first atomic bombs", "Die ersten Atombomben", "Pierwsze bomby atomowe"),
     T(
       "Scientists learn how to release the power inside atoms, and the world sees how dangerous it is.",
-      "Forscher lernen, die Kraft in Atomen freizusetzen, und die Welt sieht, wie gefaehrlich sie ist.",
+      "Forscher lernen, die Kraft in Atomen freizusetzen, und die Welt sieht, wie gefährlich sie ist.",
       "Naukowcy uczą się uwalniać moc atomu, a świat widzi, jak jest groźna.",
     ),
     "ww2",
@@ -624,7 +620,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     "twentieth",
     "india",
     T("1947", "1947", "1947"),
-    T("India becomes independent", "Indien wird unabhaengig", "Indie stają się niepodległe"),
+    T("India becomes independent", "Indien wird unabhängig", "Indie stają się niepodległe"),
     T(
       "After a long struggle, India raises its own flag.",
       "Nach langem Kampf hisst Indien seine eigene Flagge.",
@@ -639,12 +635,12 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("1949", "1949", "1949"),
     T(
       "The People's Republic of China is founded",
-      "Die Volksrepublik China wird gegruendet",
+      "Die Volksrepublik China wird gegründet",
       "Powstaje Chińska Republika Ludowa",
     ),
     T(
       "A new government forms after a long civil war.",
-      "Nach einem langen Buergerkrieg entsteht eine neue Regierung.",
+      "Nach einem langen Bürgerkrieg entsteht eine neue Regierung.",
       "Po długiej wojnie domowej powstaje nowy rząd.",
     ),
     "communism",
@@ -657,7 +653,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("The Year of Africa", "Das Afrikajahr", "Rok Afryki"),
     T(
       "Seventeen African countries become independent in one year.",
-      "Siebzehn afrikanische Laender werden in einem Jahr unabhaengig.",
+      "Siebzehn afrikanische Länder werden in einem Jahr unabhängig.",
       "Siedemnaście krajów afrykańskich uzyskuje niepodległość w jednym roku.",
     ),
   ),
@@ -678,10 +674,10 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     "twentieth",
     "europe",
     T("1989", "1989", "1989"),
-    T("The Berlin Wall falls", "Die Berliner Mauer faellt", "Pada mur berliński"),
+    T("The Berlin Wall falls", "Die Berliner Mauer fällt", "Pada mur berliński"),
     T(
       "Families in Germany can cross between East and West again.",
-      "Familien in Deutschland koennen wieder zwischen Ost und West wechseln.",
+      "Familien in Deutschland können wieder zwischen Ost und West wechseln.",
       "Rodziny w Niemczech znów mogą przechodzić między wschodem a zachodem.",
     ),
   ),
@@ -693,7 +689,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("The First World War", "Der Erste Weltkrieg", "I wojna światowa"),
     T(
       "Countries that had promised to help each other are pulled into a huge war.",
-      "Laender, die sich Hilfe versprochen hatten, werden in einen riesigen Krieg gezogen.",
+      "Länder, die sich Hilfe versprochen hatten, werden in einen riesigen Krieg gezogen.",
       "Kraje, które obiecały sobie pomoc, zostają wciągnięte w ogromną wojnę.",
     ),
     "ww1",
@@ -703,10 +699,10 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     "twentieth",
     "india",
     T("1915", "1915", "1915"),
-    T("Gandhi returns to India", "Gandhi kehrt nach Indien zurueck", "Gandhi wraca do Indii"),
+    T("Gandhi returns to India", "Gandhi kehrt nach Indien zurück", "Gandhi wraca do Indii"),
     T(
       "A lawyer comes home from South Africa with a plan to protest peacefully.",
-      "Ein Anwalt kehrt aus Suedafrika mit dem Plan zurueck, friedlich zu protestieren.",
+      "Ein Anwalt kehrt aus Südafrika mit dem Plan zurück, friedlich zu protestieren.",
       "Prawnik wraca z Afryki Południowej z planem pokojowego protestu.",
     ),
     "independence",
@@ -736,7 +732,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     T(
       "A very old empire is replaced by a new country, Turkey.",
-      "Ein sehr altes Reich wird durch ein neues Land ersetzt, die Tuerkei.",
+      "Ein sehr altes Reich wird durch ein neues Land ersetzt, die Türkei.",
       "Bardzo stare imperium zostaje zastąpione nowym krajem, Turcją.",
     ),
   ),
@@ -748,7 +744,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("The Holocaust", "Der Holocaust", "Holokaust"),
     T(
       "During the war, the Nazi government hurt and killed millions of people, especially Jewish families. We remember so it never happens again.",
-      "Im Krieg verletzte und toetete die Nazi-Regierung Millionen Menschen, vor allem juedische Familien. Wir erinnern uns, damit es nie wieder geschieht.",
+      "Im Krieg verletzte und tötete die Nazi-Regierung Millionen Menschen, vor allem jüdische Familien. Wir erinnern uns, damit es nie wieder geschieht.",
       "W czasie wojny rząd nazistowski krzywdził i zabijał miliony ludzi, zwłaszcza żydowskie rodziny. Pamiętamy, by to się nigdy nie powtórzyło.",
     ),
     "ww2",
@@ -761,7 +757,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("The Quit India Movement", "Die Quit-India-Bewegung", "Ruch Quit India"),
     T(
       "While Europe is at war, Gandhi asks the British to leave India.",
-      "Waehrend Europa im Krieg ist, bittet Gandhi die Briten, Indien zu verlassen.",
+      "Während Europa im Krieg ist, bittet Gandhi die Briten, Indien zu verlassen.",
       "Gdy Europa jest w stanie wojny, Gandhi prosi Brytyjczyków o opuszczenie Indii.",
     ),
     "independence",
@@ -774,7 +770,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("The Bengal famine", "Die Hungersnot in Bengalen", "Głód w Bengalu"),
     T(
       "Many families in Bengal cannot get enough food during the war.",
-      "Viele Familien in Bengalen bekommen waehrend des Krieges nicht genug zu essen.",
+      "Viele Familien in Bengalen bekommen während des Krieges nicht genug zu essen.",
       "Wiele rodzin w Bengalu nie ma dość jedzenia w czasie wojny.",
     ),
     "britishinindia",
@@ -791,7 +787,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     T(
       "America sends money, food and machines to help broken cities in Europe.",
-      "Amerika schickt Geld, Essen und Maschinen, um zerstoerte Staedte in Europa zu unterstuetzen.",
+      "Amerika schickt Geld, Essen und Maschinen, um zerstörte Städte in Europa zu unterstützen.",
       "Ameryka wysyła pieniądze, żywność i maszyny, by pomóc zniszczonym miastom Europy.",
     ),
     "rebuilding",
@@ -809,7 +805,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     T(
       "A scientist in Switzerland links pages together so anyone can read them.",
-      "Ein Forscher in der Schweiz verknuepft Seiten, damit jeder sie lesen kann.",
+      "Ein Forscher in der Schweiz verknüpft Seiten, damit jeder sie lesen kann.",
       "Naukowiec w Szwajcarii łączy strony, aby każdy mógł je czytać.",
     ),
     "internet",
@@ -821,12 +817,12 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("2002", "2002", "2002"),
     T(
       "Euro coins and notes arrive",
-      "Euro-Muenzen und Scheine kommen",
+      "Euro-Münzen und Scheine kommen",
       "Pojawiają się monety i banknoty euro",
     ),
     T(
       "Many countries start using the same money.",
-      "Viele Laender nutzen auf einmal dasselbe Geld.",
+      "Viele Länder nutzen auf einmal dasselbe Geld.",
       "Wiele krajów zaczyna używać tych samych pieniędzy.",
     ),
     "rates",
@@ -872,12 +868,12 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("2008", "2008", "2008"),
     T(
       "China builds high speed trains",
-      "China baut Hochgeschwindigkeitszuege",
+      "China baut Hochgeschwindigkeitszüge",
       "Chiny budują koleje dużych prędkości",
     ),
     T(
       "Trains zoom between big cities faster than cars.",
-      "Zuege sausen schneller als Autos zwischen grossen Staedten.",
+      "Züge sausen schneller als Autos zwischen großen Städten.",
       "Pociągi mkną między dużymi miastami szybciej niż samochody.",
     ),
   ),
@@ -910,7 +906,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     T(
       "Computers can now write and answer questions in plain words.",
-      "Computer koennen jetzt in einfachen Worten schreiben und Fragen beantworten.",
+      "Computer können jetzt in einfachen Worten schreiben und Fragen beantworten.",
       "Komputery potrafią teraz pisać i odpowiadać na pytania prostymi słowami.",
     ),
     "ai",
