@@ -59,7 +59,8 @@ const en: Dict = {
   restartLesson: "Start over",
   factCards: "Fact cards",
   factCardsHelp:
-    "Claims and primary sources behind each lesson. Review these before claiming a lesson verified.",
+    "The facts behind each lesson, with the sources we checked. Use them to answer your kid's questions.",
+  factSource: "Source",
   claims: "Claims",
   simplified: "Simplified for an 8-year-old",
   noLessons: "No lessons built yet.",
@@ -163,7 +164,8 @@ const de: Dict = {
   restartLesson: "Neu starten",
   factCards: "Fakten-Karten",
   factCardsHelp:
-    "Behauptungen und Quellen zu jeder Lektion. Prüfe diese, bevor eine Lektion als verifiziert gilt.",
+    "Die Fakten hinter jeder Lektion, mit den Quellen, die wir geprüft haben. Damit kannst du die Fragen deines Kindes beantworten.",
+  factSource: "Quelle",
   claims: "Behauptungen",
   simplified: "Für ein 8-jähriges Kind vereinfacht",
   noLessons: "Noch keine Lektionen gebaut.",
@@ -269,7 +271,8 @@ const pl: Dict = {
   restartLesson: "Zacznij od nowa",
   factCards: "Karty faktów",
   factCardsHelp:
-    "Tezy i źródła stojące za każdą lekcją. Sprawdź je, zanim lekcja zostanie uznana za zweryfikowaną.",
+    "Fakty stojące za każdą lekcją, razem ze źródłami, które sprawdziliśmy. Skorzystaj z nich, odpowiadając na pytania swojego dziecka.",
+  factSource: "Źródło",
   claims: "Tezy",
   simplified: "Uproszczone dla 8-latka",
   noLessons: "Brak gotowych lekcji.",

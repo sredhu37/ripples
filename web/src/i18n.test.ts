@@ -66,6 +66,7 @@ describe("i18n core", () => {
       "restartLesson",
       "factCards",
       "factCardsHelp",
+      "factSource",
       "claims",
       "simplified",
       "noLessons",

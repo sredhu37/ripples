@@ -18,6 +18,14 @@ test("facts: a parent opens the fact cards behind the maths gate", async ({ page
   const claims = firstCard.locator("ol > li");
   expect(await claims.count()).toBeGreaterThan(0);
   await expect(firstCard.locator("ol > li a[href^='http']")).toHaveCount(await claims.count());
+  // Parent wording, grouped by curriculum, readable source links.
+  await expect(page.locator("main")).not.toContainText(/claiming|verified/i);
+  await expect(page.locator("h2.fact-group-title")).toHaveCount(6);
+  const link = firstCard.locator("a.fact-link").first();
+  await expect(link).toContainText(/^Source: \S+\.\S+/);
+  expect(await link.evaluate((el) => getComputedStyle(el).color)).not.toBe("rgb(0, 0, 238)");
+  const box = (await link.boundingBox())!;
+  expect(box.height).toBeGreaterThanOrEqual(44);
   await step();
 
   await cards.nth(1).scrollIntoViewIfNeeded();
@@ -25,10 +33,17 @@ test("facts: a parent opens the fact cards behind the maths gate", async ({ page
 
   await page.getByRole("button", { name: "DE", exact: true }).click();
   await expect(page.getByRole("heading", { level: 1, name: LABEL.factCards.de })).toBeVisible();
+  await expect(page.locator("a.fact-link").first()).toContainText("Quelle");
   await step();
   await page.getByRole("button", { name: "PL", exact: true }).click();
   await expect(page.getByRole("heading", { level: 1, name: LABEL.factCards.pl })).toBeVisible();
+  await expect(page.locator("a.fact-link").first()).toContainText("Źródło");
   await step();
+
+  for (const width of [360, 390, 820, 1366]) {
+    await page.setViewportSize({ width, height: 900 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
+  }
 
   // Back returns to the parent area, which asks the maths question again.
   await page.getByRole("button", { name: "Wstecz" }).click();
