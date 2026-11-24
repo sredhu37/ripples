@@ -39,6 +39,7 @@ Prefer `animatedBeat(lines, Diagram, mood?)` from `web/src/lesson/toolkit.tsx` o
     - Answer options: under 15 words, one clause, no walls of text.
     - Distractors: plausible but distinct, in a fun and gentle tone.
 13. **Facts from today:** the current date is late October 2026. Use web search for anything time-sensitive (rates, minimum wage, deadlines).
+14. **Otto has no gender in the text.** Otto speaks with a female voice and keeps the name Otto. Never give Otto a pronoun, and never let Otto use a word that shows a gender for itself (Polish past forms such as "byłem" or "byłam", German "ich bin ein..." with a gendered noun). Rephrase in the present tense ("Widzę to") or leave Otto out of the sentence.
 
 ## Mechanics
 
@@ -47,3 +48,13 @@ Prefer `animatedBeat(lines, Diagram, mood?)` from `web/src/lesson/toolkit.tsx` o
 - `npm test` runs `web/src/content/content.test.ts` over your lesson automatically (structure, all three languages, no dashes, sources). Add your own tests next to your file only if the toy has real logic worth testing.
 - `npm run build` must pass (type check included).
 - Look at it in a browser if you can: `npx vite preview --port <your port>` after a build, then walk the whole lesson (story, toy, wrong answer, right answer, widget question, badge). To unlock your lesson, run the API locally (Self-host mode, the Login code is in the API log), log in, add a profile, and in family settings (gear icon, maths gate) turn off the lessons before yours for that profile. Your lesson then becomes the next stop. Check German and Polish too.
+
+## Voice files
+
+Otto reads every line in a speech bubble aloud from a voice file (`web/public/audio/<lang>/`). When you add or change a line Otto says (story line, toy intro, quiz prompt or hint, or a bubble text in `web/src/i18n.ts`):
+
+1. **Numbers get a spoken version.** If the line has a digit or a Roman numeral, add it to `web/src/voice/spoken.<lang>.json`: the key is the line as shown (stars removed), the value is the same sentence with every number written out the way a teacher reads it aloud (EN "In 1963" becomes "In nineteen sixty-three"; DE "1963" becomes "neunzehnhundertdreiundsechzig"; PL "W 1963 roku" becomes "W tysiąc dziewięćset sześćdziesiątym trzecim roku", in the right case). Change only the numbers. Remove the entry of a line you deleted or changed.
+2. **Run `npm run voices`.** It renders only the lines without a file and deletes files no line uses. Commit the new files in `web/public/audio/` and the changed `web/src/voice/manifest.<lang>.json` with the text change.
+3. `npm test` fails until both are done (`web/src/voice/voice.test.ts`).
+
+`npm run voices` needs [uv](https://docs.astral.sh/uv/) and ffmpeg (`brew install uv ffmpeg`). The first run downloads about 740 MB of voice models into `scripts/voices/.cache/` (pinned versions, checked by sha256). One line takes 1 to 2 seconds; a full render of all three languages (a new voice or speed in `web/src/voice/voices.json`) takes about 2 hours on an M1 Pro.

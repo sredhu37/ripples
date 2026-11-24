@@ -1,17 +1,20 @@
 import { t } from "../i18n";
 import type { Lang } from "../progress";
-import { speak, useHasVoice } from "../speech";
+import { speak, useCanSpeak } from "../speech";
 import { sfx } from "../sound";
 import { Marked, plain } from "./Marked";
 
 interface Props {
   text: string;
   lang: Lang;
+  /** The line the voice file says, when it differs from `text` (a greeting without the kid's name). */
+  voiceText?: string;
 }
 
 /** Otto's speech bubble with a read-aloud button. */
-export function SpeechBubble({ text, lang }: Props) {
-  const voice = useHasVoice(lang);
+export function SpeechBubble({ text, lang, voiceText }: Props) {
+  const fileText = plain(voiceText ?? text);
+  const voice = useCanSpeak(fileText, lang);
   return (
     <div className="bubble">
       <p>
@@ -24,7 +27,7 @@ export function SpeechBubble({ text, lang }: Props) {
           aria-label={t(lang, "readAloud")}
           onClick={() => {
             sfx.tap();
-            speak(plain(text), lang);
+            speak(plain(text), lang, fileText);
           }}
         >
           <SpeakerIcon />

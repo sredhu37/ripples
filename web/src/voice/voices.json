@@ -1,0 +1,24 @@
+{
+  "format": "aac 32k mono",
+  "en": {
+    "engine": "kokoro",
+    "model": "kokoro-v1.0",
+    "voice": "af_bella",
+    "lang": "en-us",
+    "speed": 0.95
+  },
+  "de": {
+    "engine": "kokoro",
+    "model": "kokoro-de",
+    "voice": "df_kerstin",
+    "lang": "de",
+    "speed": 0.95
+  },
+  "pl": {
+    "engine": "piper",
+    "model": "pl_PL-justyna_wg_glos-medium",
+    "voice": "justyna",
+    "lang": "pl",
+    "speed": 1
+  }
+}

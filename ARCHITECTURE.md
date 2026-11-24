@@ -58,7 +58,7 @@ All in `web/src/components/`.
 
 | Piece                            | Does                                                                                                                                                                                                                                                    |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Otto`, `SpeechBubble`           | The otter guide; the bubble highlights _term_ words.                                                                                                                                                                                                    |
+| `Otto`, `SpeechBubble`           | The otter guide; the bubble highlights _term_ words and has the read-aloud button.                                                                                                                                                                      |
 | `icons.tsx`, `diagram.tsx`       | Flat SVG icons and villagers, drawn in code; the diagram canvas, pop-in, arrows, bubbles and term chip.                                                                                                                                                 |
 | `LangSwitch`, `BackButton`       | The global 3-way language toggle; the one "← destination" button at the top left of every sub-screen.                                                                                                                                                   |
 | `NameScreen`                     | Not shown for now, reused by the anonymous start.                                                                                                                                                                                                       |
@@ -74,8 +74,9 @@ All in `web/src/components/`.
   - **Meanwhile card:** group 5 lessons also get a "Meanwhile around the world" card (`web/src/timeline/meanwhile.ts`, `web/src/components/MeanwhileCard.tsx`) shown after the real life card: a year slider over a per-lesson window, one latest event per track, one intro text. Each event shown is also appended to the lesson's fact card with a source.
   - **Pins and stops** (`web/src/timeline/pins.ts`, spec `docs/specs/world-timeline-map.md`): `PINS` is the 55 events in the pin model (map year, country, lon, lat, one https source from `EVENT_SOURCES`, `sensitive`). `TIMELINE_STOPS` holds the 22 slider stops, `stopForYear` returns the last stop at or before a map year, `pinsByStop` returns pins and distinct countries per stop. No screen uses them yet; the list screen above still runs on `TIMELINE_EVENTS`.
   - Tested in `web/src/timeline/pins.test.ts`, `web/src/timeline/timeline.test.ts` and `web/src/components/TimelineScreen.test.tsx`.
-- **Sound and speech** (`web/src/sound.ts`, `web/src/speech.ts`): synthesized effects and read-aloud.
-- **Offline** (`web/public/sw.js`): caches app files after the first visit. It never touches `/api/` requests: those always go to the network.
+- **Sound and speech** (`web/src/sound.ts`, `web/src/speech.ts`): synthesized effects and read-aloud. Read-aloud plays Otto's voice file for the line through the shared Web Audio context; without a file it uses the device voice.
+- **Voice files** (`web/public/audio/<lang>/<id>.m4a`, `web/src/voice/`): one AAC file per line Otto can say, made by `npm run voices` (`scripts/voices/`, see [docs/writing-lessons.md](docs/writing-lessons.md#voice-files)). The app finds a file through `manifest.<lang>.json` (a hash of the screen line to the file name), loaded as a lazy chunk per language. The file name is a hash of the voice, its speed and the spoken text, so a changed line or voice gets a new file. `spoken.<lang>.json` holds the spoken version of lines with numbers. `web/src/voice/voice.test.ts` fails when a line has no file or a number line has no spoken version.
+- **Offline** (`web/public/sw.js`): caches app files after the first visit. Voice files go to a separate cache on their first play and are never fetched again (their names change with their content). It never touches `/api/` requests: those always go to the network.
 
 ## The API (`server/`)
 
@@ -192,9 +193,11 @@ Each folder below has its own `package.json` and lockfile. No code is shared bet
 | `server/` | The Hono API, migrations, unit tests                                       | hono, pg, node-pg-migrate, tsx |
 | repo root | Docs, CI, `scripts/` (CI tools and their tests), lint and format           | oxlint, oxfmt, vitest          |
 
+`scripts/voices/` is not a package: it holds the Python tools behind `npm run voices` (kokoro-onnx, piper-tts in `requirements.txt`, installed by uv into a gitignored `.cache/`). They make the voice files and are never shipped.
+
 The root `package.json` only forwards commands (`npm test`, `npm run build`, `npm run dev`) to `web/` and `server/`. Each package has its own Dockerfile and builds from its own folder: `docker build web/` and `docker build server/`.
 
-- **Frontend image:** nginx serving the built app (gzip; hashed files in `assets/` cached for one week, everything else revalidated on each visit) and forwarding `/api` to `BACKEND_URL`.
+- **Frontend image:** nginx serving the built app (gzip; hashed files in `assets/` and voice files in `audio/` cached for one week, everything else revalidated on each visit) and forwarding `/api` to `BACKEND_URL`.
 - **Backend image:** needs `DATABASE_URL`. It also holds the SQL migrations, so it can run `node-pg-migrate` itself. Both variables are listed in the `.env.example` next to each Dockerfile.
 - **Compose:** `compose.yaml` runs the whole app with both images: Postgres (not published to the host), a one-off `migrate` service, the API, and the web app on `127.0.0.1:${RIPPLES_PORT:-8080}`; its settings come from the root `.env` (`.env.example`), and it refuses to start without `BETTER_AUTH_SECRET`.
 

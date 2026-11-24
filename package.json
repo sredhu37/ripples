@@ -18,6 +18,7 @@
     "lint": "oxlint",
     "format": "oxfmt --write",
     "format:check": "oxfmt --check",
+    "voices": "scripts/voices/voices.sh",
     "workflows:map": "node scripts/workflows-map.mjs",
     "workflows:check": "node scripts/workflows-map.mjs --check"
   },

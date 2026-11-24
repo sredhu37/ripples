@@ -11,6 +11,7 @@ import {
 import { t } from "../i18n";
 import { nextLessonId, type Lang, type Progress } from "../progress";
 import { buildTrail } from "../trailView";
+import { withoutName } from "../voice/key";
 import { sfx } from "../sound";
 import { LessonIcon, UiIcon } from "./appIcons";
 import { CAST } from "./cast";
@@ -63,8 +64,10 @@ export function MapScreen({
   const total = visibleLessons.length;
   const sections = buildTrail(progress, order);
   const next = nextLessonId(progress, order);
-  const greeting =
-    next === null ? t(lang, "allDone") : t(lang, returning ? "welcomeBack" : "welcome", { name });
+  const greetingKey = next === null ? "allDone" : returning ? "welcomeBack" : "welcome";
+  const greeting = t(lang, greetingKey, { name });
+  // The voice file cannot know the kid's name, so it says the greeting without it.
+  const greetingVoice = withoutName(t(lang, greetingKey, { name: "{name}" }));
   const nextLesson = LESSONS.find((l) => l.id === next);
 
   return (
@@ -118,7 +121,7 @@ export function MapScreen({
 
       <section className="hello">
         <Otto size={120} />
-        <SpeechBubble text={greeting} lang={lang} />
+        <SpeechBubble text={greeting} voiceText={greetingVoice} lang={lang} />
       </section>
 
       {next && (

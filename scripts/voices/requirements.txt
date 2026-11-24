@@ -1,0 +1,7 @@
+# Tools that make Otto's voice files. Used only by `npm run voices`, never shipped in the app.
+# kokoro-onnx: MIT. piper-tts: GPL-3.0 (covers the tool, not the audio it makes).
+kokoro-onnx==0.6.1
+piper-tts==1.8.0
+onnxruntime==1.32.0
+numpy==2.5.5
+soundfile==0.14.0

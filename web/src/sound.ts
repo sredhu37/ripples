@@ -13,7 +13,8 @@ export function isMuted(): boolean {
   return muted;
 }
 
-function context(): AudioContext | null {
+/** The one shared AudioContext, created or resumed on use. Also plays Otto's voice files (speech.ts). */
+export function audioContext(): AudioContext | null {
   if (typeof window === "undefined") return null;
   const Ctor =
     window.AudioContext ??
@@ -31,7 +32,7 @@ function tone(
   type: OscillatorType = "sine",
   volume = 0.15,
 ) {
-  const c = context();
+  const c = audioContext();
   if (!c) return;
   const osc = c.createOscillator();
   const gain = c.createGain();
