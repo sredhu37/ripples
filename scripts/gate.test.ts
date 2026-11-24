@@ -108,8 +108,16 @@ describe("matchRisky", () => {
     ).toEqual([
       { file: ".github/workflows/factory-gate.yml", pattern: ".github/**" },
       { file: "web/src/progress.ts", pattern: "web/src/progress.ts" },
-      { file: "docs/factory.md", pattern: "docs/**" },
+      { file: "docs/factory.md", pattern: "docs/factory.md" },
     ]);
+  });
+
+  it("gates the rule docs and ADRs, not the other docs or ARCHITECTURE.md", () => {
+    const files = (list: string[]) => matchRisky(patterns, list).map((m) => m.file);
+    expect(files(["docs/design.md", "docs/writing-lessons.md", "docs/adr/0013-x.md"])).toHaveLength(
+      3,
+    );
+    expect(files(["docs/agents/domain.md", "docs/WORKFLOWS.md", "ARCHITECTURE.md"])).toEqual([]);
   });
 
   it("the list is on its own list", () => {

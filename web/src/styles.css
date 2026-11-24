@@ -747,6 +747,15 @@ p {
   font-size: 0.9rem;
 }
 
+.back-btn {
+  align-self: flex-start;
+  max-width: 100%;
+  height: auto;
+  min-height: 60px;
+  padding: 6px 20px;
+  text-align: left;
+}
+
 .dots {
   display: flex;
   gap: 6px;
@@ -808,6 +817,13 @@ p {
 .row.nav {
   justify-content: flex-end;
   flex-wrap: wrap;
+}
+
+.ready-hint {
+  margin: 0;
+  text-align: right;
+  font-size: 15px;
+  color: var(--ink);
 }
 
 .btn-toy {

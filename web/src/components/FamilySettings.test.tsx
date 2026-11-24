@@ -115,7 +115,7 @@ describe("FamilySettings", () => {
     expect(container.textContent).not.toMatch(/save progress|restore|start fresh/i);
     await act(async () => {
       Array.from(container.querySelectorAll("button"))
-        .find((b) => b.textContent === "Back to kids")!
+        .find((b) => b.textContent?.includes("Back to kids"))!
         .click();
     });
     expect(container.querySelector(".lesson-group-accordion")).toBeNull();
