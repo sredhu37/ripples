@@ -47,11 +47,42 @@ test("facts: a parent opens the fact cards behind the maths gate", async ({ page
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
   }
 
-  // The back button is first and names Family settings, which asks the maths question again.
+  // The back button is first and names Family settings; going back asks no second maths question.
   await expect(page.locator("button").first()).toHaveText(/Ustawienia rodziny|Family settings/);
   const backBox = await page.locator(".back-btn").boundingBox();
   expect(backBox?.height ?? 0).toBeGreaterThanOrEqual(60);
   await page.locator(".back-btn").click();
-  await expect(page.locator("form.panel p").first()).toContainText("×");
+  await expect(page.locator("form.panel")).toHaveCount(0);
+  // Opened from the trail, Family settings starts on the kid's detail.
+  await expect(page.getByRole("button", { name: "Wróć do dzieci" })).toBeVisible();
   await step();
+});
+
+test("parents: the gate focuses the answer and is asked once per visit", async ({ page }) => {
+  await fakeFamily(page);
+  await openTrail(page);
+  await page.getByRole("button", { name: LABEL.parents.en }).click();
+  await expect(page.getByRole("textbox")).toBeFocused();
+  await expect(page.locator("form.panel p").first()).not.toContainText("For parents");
+  await page.getByRole("button", { name: "All lessons" }).click();
+
+  await passParentGate(page, async () => {});
+  await page.getByRole("button", { name: "Back to kids" }).click();
+  await expect(page.getByRole("heading", { name: "Family settings" })).toBeVisible();
+  // Scroll to the bottom, then open Fact cards: the new screen starts at the top.
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.getByRole("button", { name: LABEL.factCards.en }).click();
+  await expect(page.getByRole("heading", { level: 1, name: LABEL.factCards.en })).toBeVisible();
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+
+  // Back: still no second question.
+  await page.getByRole("button", { name: "Family settings" }).click();
+  await expect(page.locator("form.panel")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Back to kids" })).toBeVisible();
+
+  // Leave to the trail: the next visit asks again.
+  await page.getByRole("button", { name: "Back to kids" }).click();
+  await page.getByRole("button", { name: "All lessons" }).click();
+  await page.getByRole("button", { name: LABEL.parents.en }).click();
+  await expect(page.locator("form.panel")).toBeVisible();
 });
