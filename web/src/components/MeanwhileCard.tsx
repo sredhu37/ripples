@@ -1,10 +1,19 @@
 import { useState } from "react";
-import { t } from "../i18n";
+import { t, type UiKey } from "../i18n";
 import { resolveText } from "../lesson/types";
 import type { Lang } from "../progress";
-import { REGION_KEY } from "./TimelineScreen";
 import { eventYear } from "../timeline/data";
 import { snapshotAt, type Meanwhile } from "../timeline/meanwhile";
+import type { TimelineRegion } from "../timeline/types";
+
+const REGION_KEY: Record<TimelineRegion, UiKey> = {
+  india: "regionIndia",
+  europe: "regionEurope",
+  americas: "regionAmericas",
+  east_asia: "regionEastAsia",
+  mideast_africa: "regionMideastAfrica",
+  science: "regionScience",
+};
 
 interface Props {
   meanwhile: Meanwhile;

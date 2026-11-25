@@ -1497,19 +1497,6 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
   ),
 ];
 
-export const TIMELINE_REGIONS: TimelineRegion[] = [
-  "india",
-  "europe",
-  "americas",
-  "east_asia",
-  "mideast_africa",
-  "science",
-];
-
-export function eventsFor(era: TimelineEraId, region: TimelineRegion | "all"): TimelineEvent[] {
-  return TIMELINE_EVENTS.filter((e) => e.era === era && (region === "all" || e.region === region));
-}
-
 /** Sort key in years. BCE is negative. "1500s" counts as 1500. */
 export function eventYear(e: TimelineEvent): number {
   const n = Number(/\d+/.exec(e.year.en)?.[0] ?? "0");

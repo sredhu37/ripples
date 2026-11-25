@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { LESSONS } from "../lessons";
-import { TIMELINE_ERAS, TIMELINE_EVENTS, TIMELINE_REGIONS, eventsFor } from "./data";
+import { TIMELINE_ERAS, TIMELINE_EVENTS } from "./data";
 import type { Text } from "../lesson/types";
 
 function allTexts(): { where: string; text: Text }[] {
@@ -26,7 +26,9 @@ describe("world timeline data", () => {
   it("has 7 eras, each with at least 4 events", () => {
     expect(TIMELINE_ERAS).toHaveLength(7);
     for (const era of TIMELINE_ERAS)
-      expect(eventsFor(era.id, "all").length, era.id).toBeGreaterThanOrEqual(4);
+      expect(TIMELINE_EVENTS.filter((e) => e.era === era.id).length, era.id).toBeGreaterThanOrEqual(
+        4,
+      );
   });
 
   it("has unique event ids and valid eras", () => {
@@ -37,7 +39,7 @@ describe("world timeline data", () => {
   });
 
   it("covers every regional track and science", () => {
-    for (const r of TIMELINE_REGIONS)
+    for (const r of ["india", "europe", "americas", "east_asia", "mideast_africa", "science"])
       expect(
         TIMELINE_EVENTS.some((e) => e.region === r),
         r,
