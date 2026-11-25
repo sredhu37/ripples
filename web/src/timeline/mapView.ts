@@ -101,7 +101,7 @@ export function clusterTarget(c: Cluster, W: number, a: number): ViewBox {
 
 const CLOUD_MAX_W = 340;
 /** Room the cloud needs above or below the pin, in px. */
-const CLOUD_ROOM = 210;
+const CLOUD_ROOM = 230;
 
 /** Where the cloud goes for a pin at screen point (px, py) on a W x H stage, with its trail dots. */
 export function cloudPlacement(px: number, py: number, W: number, H: number) {
@@ -110,9 +110,10 @@ export function cloudPlacement(px: number, py: number, W: number, H: number) {
   const roomAbove = py - 58;
   const roomBelow = H - py - 34;
   const above = roomAbove >= CLOUD_ROOM || (roomBelow < CLOUD_ROOM && roomAbove > roomBelow);
+  const maxOffset = Math.max(8, H - CLOUD_ROOM - 8);
   const style = above
-    ? { left, bottom: Math.max(8, Math.min(H - CLOUD_ROOM - 8, H - py + 58)), width }
-    : { left, top: Math.max(8, Math.min(H - CLOUD_ROOM - 8, py + 34)), width };
+    ? { left, bottom: Math.max(8, Math.min(maxOffset, H - py + 58)), width, maxHeight: H - 16 }
+    : { left, top: Math.max(8, Math.min(maxOffset, py + 34)), width, maxHeight: H - 16 };
   const dots = above
     ? [
         { x: px + 6, y: py - 42, r: 5 },
