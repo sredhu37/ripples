@@ -80,6 +80,12 @@ describe("label-set.sh", () => {
     expect(r.stderr).toContain("HTTP 403");
   });
 
+  it("accepts factory:suggestion, the Agent suggestions column (#412)", () => {
+    const r = run("factory:suggestion", "factory:triage\\n");
+    expect(r.status).toBe(0);
+    expect(r.log).toContain("-X DELETE repos/o/r/issues/7/labels/factory:triage");
+  });
+
   it("rejects an unknown label", () => {
     expect(run("bug", "").status).toBe(2);
   });

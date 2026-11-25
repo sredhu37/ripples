@@ -15,7 +15,7 @@ run-name: "factory-review ${{ inputs.pr && format('PR #{0}', inputs.pr) || githu
 #               (.github/prompts/review.md) and rules from main;
 #               tools Read, Grep, Glob, WebFetch, WebSearch only; each ends with a json block
 #     summary:  one review-summary comment per round, marker <!-- factory-review round=<k> sha=<sha> -->
-#               PASS  -> one deduplicated suggestions issue (factory:triage), status factory-review
+#               PASS  -> one deduplicated suggestions issue (factory:suggestion, Agent suggestions), status factory-review
 #                        success, dispatch factory-gate.yml if it exists
 #               FAIL  -> round < 5: dispatch factory-build.yml (issue, pr) for a fix round
 #                        round 5: factory:human, board Needs human, Slack

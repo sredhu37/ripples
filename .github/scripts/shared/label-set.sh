@@ -11,7 +11,7 @@ issue=${1:?usage: shared/label-set.sh <issue> <label>}
 label=${2:?usage: shared/label-set.sh <issue> <label>}
 
 case "$label" in
-  factory:triage | factory:ready | factory:in-progress | factory:in-review | factory:human | factory:done) ;;
+  factory:triage | factory:suggestion | factory:ready | factory:in-progress | factory:in-review | factory:human | factory:done) ;;
   *)
     echo "label-set: unknown factory label '$label'" >&2
     exit 2

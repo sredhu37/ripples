@@ -19,6 +19,7 @@ label=${2:?usage: shared/move.sh <issue> <label>}
 
 case "$label" in
   factory:triage) column=Backlog ;;
+  factory:suggestion) column="Agent suggestions" ;;
   factory:ready) column=Ready ;;
   factory:in-progress) column="In progress" ;;
   factory:in-review) column="In review" ;;

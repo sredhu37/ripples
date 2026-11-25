@@ -10,8 +10,8 @@
 #        FACTORY_SCRIPTS  directory with move.sh, defaults to ../shared
 #
 # Skipped: a closed or draft PR, a PR from a fork (a stranger must not move cards), an issue of
-# another repo, a closed issue, and an issue that is not factory:triage, factory:ready or
-# factory:in-progress (human, in-review and done stay as they are).
+# another repo, a closed issue, and an issue that is not factory:triage, factory:suggestion,
+# factory:ready or factory:in-progress (human, in-review and done stay as they are).
 set -euo pipefail
 
 pr=${1:?usage: pr-link/pr-in-review.sh <pr>}
@@ -56,7 +56,7 @@ while IFS=$'\t' read -r issue_repo issue; do
     continue
   fi
   case ",$labels," in
-    *,factory:triage,* | *,factory:ready,* | *,factory:in-progress,*) ;;
+    *,factory:triage,* | *,factory:suggestion,* | *,factory:ready,* | *,factory:in-progress,*) ;;
     *)
       echo "#$issue has '${labels:-no factory label}'; left as is"
       continue
