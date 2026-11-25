@@ -38,14 +38,15 @@ new issue ──► TRIAGE ──► READY ──► BUILD ──► CI TOOLS �
 
 Exactly one `factory:` label per issue at a time. The factory swaps it at each step; adding one by hand removes the others (`factory-sync.yml`). Labels sit on the issue only; the PR links with `Closes #n`. A PR opened by hand with `Closes #n` puts #n in review (`factory-pr-link.yml`): the label and the card move at once. The scan treats such a ticket as local (its PR is not on `factory/issue-<n>`). Drafts, fork PRs and issues in `factory:human`, `factory:in-review` or `factory:done` are skipped.
 
-| Label                 | Board column                  | Set by                                                                          |
-| --------------------- | ----------------------------- | ------------------------------------------------------------------------------- |
-| `factory:triage`      | Backlog                       | automatically on every new issue and every suggestions issue; also parked items |
-| `factory:ready`       | Ready                         | Sunny, or a confirmed wayfinder spec                                            |
-| `factory:in-progress` | In progress                   | factory, when the build starts                                                  |
-| `factory:in-review`   | In review                     | factory, when the PR opens                                                      |
-| `factory:human`       | Needs human (new column, red) | factory, whenever it needs Sunny                                                |
-| `factory:done`        | Done                          | factory, when the issue closes (merged, or closed with plain `wontfix`)         |
+| Label                 | Board column                   | Set by                                                                                                     |
+| --------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| `factory:triage`      | Backlog                        | automatically on every new issue; also parked items                                                        |
+| `factory:suggestion`  | Agent suggestions (last, grey) | factory, on every suggestions issue from a review ([#412](https://github.com/sredhu37/ripples/issues/412)) |
+| `factory:ready`       | Ready                          | Sunny, or a confirmed wayfinder spec                                                                       |
+| `factory:in-progress` | In progress                    | factory, when the build starts                                                                             |
+| `factory:in-review`   | In review                      | factory, when the PR opens                                                                                 |
+| `factory:human`       | Needs human (new column, red)  | factory, whenever it needs Sunny                                                                           |
+| `factory:done`        | Done                           | factory, when the issue closes (merged, or closed with plain `wontfix`)                                    |
 
 ```
 triage ─► ready ─► in-progress ─► in-review ─► done
@@ -55,6 +56,7 @@ triage ─► ready ─► in-progress ─► in-review ─► done
 
 - Status changes on a user-owned board cannot trigger anything (`projects_v2_item` is org-only), so the scan reads the labels and the engine moves the card. Nobody drags cards.
 - **Board reconcile:** every hour `factory-sweep.yml` puts each card back in the column of its issue's `factory:` label, so a dragged card or a missed label event fixes itself. A closed issue goes to Done. An issue with no `factory:` label, more than one, or an open issue with `factory:done` (Done would close it) stays where it is.
+- **Agent suggestions** keep Backlog for Sunny's planned work. Only the review's "Suggestions from PR #n" issues get `factory:suggestion`; issues an agent files after Sunny discussed a feature get `factory:triage`. To act on a suggestion, Sunny swaps its label to `factory:triage` (Backlog) or `factory:ready`. The Monday triage reminder counts only `factory:triage`.
 - `wontfix` stays a plain label. GitHub's other default labels stay and the factory ignores them.
 - Build tickets split from a confirmed wayfinder spec get `factory:ready`. `wayfinder:task` keeps its meaning: work that unblocks a decision.
 - `docs/agents/triage-labels.md` maps the `/triage` skill's roles: `needs-triage` → `factory:triage`, `ready-for-agent` → `factory:ready`, `needs-info` and `ready-for-human` → `factory:human`, `wontfix` → `wontfix`.
@@ -178,7 +180,7 @@ Rule:    Nielsen, error prevention (link to the exact section)
 ```
 
 - **FAIL** only when the finding breaks a rule the agent can link to. One FAIL sends the PR back to build.
-- **SUGGESTION** never blocks. After review passes, all suggestions from all agents are deduplicated into **one suggestions issue per PR**, linked to the PR, labelled `factory:triage`.
+- **SUGGESTION** never blocks. After review passes, all suggestions from all agents are deduplicated into **one suggestions issue per PR**, linked to the PR, labelled `factory:suggestion` (board column Agent suggestions, not Backlog).
 - ux-ui also judges from the evidence screenshots, not only the code.
 
 ## Gate

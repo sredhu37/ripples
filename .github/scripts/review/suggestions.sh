@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# PASS: one deduplicated suggestions issue per PR, in triage (label and board Backlog).
+# PASS: one deduplicated suggestions issue per PR, label factory:suggestion, board Agent suggestions
+# (kept out of Backlog, which holds Sunny's planned work).
 #
 # Usage: review/suggestions.sh
 # Env:   GH_TOKEN, BOARD_TOKEN (as shared/move.sh), ISSUE, PR, COUNT; the issue body in
@@ -21,6 +22,6 @@ if [ -n "$existing" ]; then
 fi
 title=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR" --jq .title)
 url=$(gh issue create --repo "$GITHUB_REPOSITORY" --title "Suggestions from PR #$PR: $title" \
-  --body-file "$RUNNER_TEMP/summary/suggestions.md" --label factory:triage)
+  --body-file "$RUNNER_TEMP/summary/suggestions.md" --label factory:suggestion)
 echo "Filed $url"
-.github/scripts/shared/move.sh "${url##*/}" factory:triage
+.github/scripts/shared/move.sh "${url##*/}" factory:suggestion
