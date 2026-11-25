@@ -151,4 +151,5 @@ Chosen while writing this spec, not grilled. Sunny checks these.
 1. Border detail was not compared against a reference atlas. Sunny reviews each map once in the build ([#374](https://github.com/sredhu37/ripples/issues/374) deferred).
 2. OpenHistoricalMap gaps in 1942 (Oman, Yemen, UAE) and 1900 (Egypt) are filled in the build from Natural Earth or fixed in OpenHistoricalMap itself.
 3. Maps before 1000 are mostly empty land: that is the state of the data, not a bug.
-4. The Natural Earth India outline (ADR 0016) holds only the western part of the Shaksgam Valley; the rest of the valley is drawn as China. Coasts are simplified to 0.08 to 0.2 degrees to keep each file under 70 KB.
+4. India's outline is the Natural Earth India point-of-view file as it is (decided by Sunny, 2026-11-25), also at the Shaksgam Valley: whatever the file holds is India, and nothing is added by hand. How much of the Trans-Karakoram (Shaksgam) Tract it holds has not been measured.
+5. Coasts are simplified to 0.08 to 0.2 degrees to keep each file under 70 KB.
