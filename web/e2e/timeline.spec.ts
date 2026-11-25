@@ -1,7 +1,8 @@
 import { expect, test } from "@playwright/test";
 import { LABEL, fakeFamily, openTrail, steps } from "./evidence";
 
-// TimelineSlider (#387) is not on a screen yet. The screen swap ticket adds its e2e steps here.
+// TimelineSlider (#387) and TimelineMap (#388) are not on a screen yet. The screen swap ticket adds
+// their e2e steps here (zoom, bubble, cloud, Read more).
 // Its stop labels are non-interactive ticks (60 px touch targets: range input, era band, Earlier, Later).
 test("timeline: eras and regions filter the world events", async ({ page }) => {
   const step = await steps(page, "timeline");
