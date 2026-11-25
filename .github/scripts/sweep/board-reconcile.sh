@@ -67,6 +67,7 @@ cards=$(gh api graphql --paginate -f project="$project" -f query='
 column_for() {
   case "$1" in
     factory:triage) echo "Backlog" ;;
+    factory:suggestion) echo "Agent suggestions" ;;
     factory:ready) echo "Ready" ;;
     factory:in-progress) echo "In progress" ;;
     factory:in-review) echo "In review" ;;

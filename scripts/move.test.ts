@@ -50,6 +50,7 @@ function run(label: string, env: Record<string, string> = {}) {
 describe("move.sh", () => {
   it.each([
     ["factory:triage", "Backlog"],
+    ["factory:suggestion", "Agent suggestions"],
     ["factory:ready", "Ready"],
     ["factory:in-progress", "In progress"],
     ["factory:in-review", "In review"],

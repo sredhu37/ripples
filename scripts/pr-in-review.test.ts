@@ -68,7 +68,7 @@ function run(pr: string, closes: string, issues: string) {
 }
 
 describe("pr-in-review.sh", () => {
-  it.each(["factory:triage", "factory:ready", "factory:in-progress"])(
+  it.each(["factory:triage", "factory:suggestion", "factory:ready", "factory:in-progress"])(
     "moves an open issue in %s to In review, the card with the board token",
     (label) => {
       const { log } = run(sameRepo, "o/r\\t5\\n", `5=open\\t${label}`);

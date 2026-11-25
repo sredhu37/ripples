@@ -3,7 +3,8 @@
 # Spec: docs/factory.md, section Labels and board (the label is the truth, the board mirrors it).
 #
 # Usage: shared/board-move.sh <issue> <column>
-#        column is a Status option name: Backlog, Ready, "In progress", "In review", "Needs human", Done
+#        column is a Status option name: Backlog, Ready, "In progress", "In review", "Needs human", Done,
+#        "Agent suggestions"
 # Env:   GH_TOKEN                 token with the project scope (FACTORY_TOKEN in workflows,
 #                                 never in a step that runs an agent)
 #        REPO                     owner/name, defaults to GITHUB_REPOSITORY, then to the current gh repo
