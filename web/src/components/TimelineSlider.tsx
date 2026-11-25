@@ -32,18 +32,24 @@ export function TimelineSlider({ lang, index: rawIndex, onChange }: Props) {
       <p className="time-slider-hint">{t(lang, "pickTimeHint")}</p>
 
       <div className="era-band" role="group" aria-label={t(lang, "timelineEra")}>
-        {eras.map(({ era, first, count }) => (
+        {eras.map(({ era, first }) => (
           <button
             key={era.id}
             type="button"
             className={`era-seg${era.id === current.era ? " era-seg-on" : ""}`}
-            style={{ flexGrow: count }}
+            title={resolveText(era.label, lang)}
             aria-current={era.id === current.era ? "true" : undefined}
             onClick={() => onChange(first)}
           >
-            {resolveText(era.label, lang)}
+            {resolveText(era.shortLabel ?? era.label, lang)}
           </button>
         ))}
+      </div>
+
+      <div className="time-current">
+        <span className="time-current-stop">{resolveText(current.label, lang)}</span>
+        <span className="time-current-sep">•</span>
+        <span className="time-current-era">{resolveText(currentEra.label, lang)}</span>
       </div>
 
       <div className="time-track" style={{ ["--fill" as string]: `${fill}%` }}>
@@ -62,14 +68,20 @@ export function TimelineSlider({ lang, index: rawIndex, onChange }: Props) {
           onChange={(e) => onChange(Number(e.target.value))}
         />
         <div className="time-stops" aria-hidden="true">
-          {TIMELINE_STOPS.map((s, i) => (
-            <span
-              key={s.year}
-              className={`time-stop${i === index ? " time-stop-on" : ""}${i <= index ? " time-stop-past" : ""}`}
-            >
-              <span className="time-stop-label">{resolveText(s.label, lang)}</span>
-            </span>
-          ))}
+          {TIMELINE_STOPS.map((s, i) => {
+            const isMilestone =
+              (i === 0 || i === 7 || i === 14 || i === LAST) &&
+              (i === index || Math.abs(i - index) > 1);
+            return (
+              <span
+                key={s.year}
+                className={`time-stop${i === index ? " time-stop-on" : ""}${i <= index ? " time-stop-past" : ""}${isMilestone ? " time-stop-major" : ""}`}
+              >
+                <span className="time-stop-tick" />
+                <span className="time-stop-label">{resolveText(s.label, lang)}</span>
+              </span>
+            );
+          })}
         </div>
       </div>
 

@@ -1445,29 +1445,57 @@ mark.term {
 }
 .era-band {
   display: flex;
-  gap: 2px;
+  gap: 4px;
   margin-bottom: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.era-band::-webkit-scrollbar {
+  display: none;
 }
 .era-seg {
-  flex-basis: 0;
+  flex: 1 1 0;
   min-width: 0;
-  display: none;
+  display: block;
   border: 2px solid #1d3f47;
   background: #eef4f5;
   border-radius: 8px;
-  padding: 6px 4px;
-  min-height: 60px;
+  padding: 6px 2px;
+  min-height: 38px;
   font: inherit;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
   cursor: pointer;
-  overflow-wrap: anywhere;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .era-seg-on {
   display: block;
   background: var(--orange-dark);
   border-color: var(--orange-dark);
   color: #fff;
+}
+.time-current {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.time-current-stop {
+  color: var(--orange-dark);
+  font-weight: 800;
+}
+.time-current-sep {
+  color: #4b6b72;
+}
+.time-current-era {
+  color: #1d3f47;
 }
 .time-track {
   --fill: 0%;
@@ -1514,19 +1542,42 @@ mark.term {
 }
 .time-stops {
   display: flex;
+  position: relative;
+  margin-top: 2px;
 }
 .time-stop {
   flex: 1 1 0;
   min-width: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: 2px 0;
   font-size: 0.7rem;
   color: #4b6b72;
 }
+.time-stop-tick {
+  width: 2px;
+  height: 6px;
+  background: #a0bec4;
+  border-radius: 1px;
+  margin-bottom: 3px;
+}
+.time-stop-past .time-stop-tick {
+  background: var(--ink);
+}
+.time-stop-on .time-stop-tick {
+  background: var(--orange-dark);
+  height: 8px;
+  width: 3px;
+}
 .time-stop-label {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
+  display: none;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.time-stop-major .time-stop-label,
+.time-stop-on .time-stop-label {
+  display: block;
 }
 .time-stop-past {
   color: #1d3f47;
@@ -1551,9 +1602,11 @@ mark.term {
 @media (min-width: 720px) {
   .era-seg {
     display: block;
+    font-size: 0.82rem;
+    padding: 8px 4px;
   }
   .time-stop {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
   }
 }
 
@@ -1818,16 +1871,20 @@ mark.term {
 .tm-cloud {
   position: absolute;
   display: flex;
-  gap: 4px;
+  gap: 8px;
   padding: 12px 14px;
   border: 3px solid var(--ink);
   border-radius: 32px;
   background: var(--white);
   box-shadow: 0 4px 0 rgba(35, 56, 63, 0.25);
+  box-sizing: border-box;
+  max-height: calc(100% - 16px);
+  overflow-y: auto;
+  z-index: 5;
 }
 .tm-cloud-face {
   flex: none;
-  align-self: flex-end;
+  align-self: flex-start;
 }
 .tm-cloud-body {
   flex: 1;

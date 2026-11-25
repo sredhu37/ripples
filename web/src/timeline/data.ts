@@ -7,6 +7,7 @@ export const TIMELINE_ERAS: TimelineEra[] = [
   {
     id: "ancient",
     label: T("Ancient Civilizations", "Alte Hochkulturen", "Starożytne cywilizacje"),
+    shortLabel: T("Ancient", "Antike", "Starożytność"),
     dateRange: T("3000 BCE to 499 CE", "3000 v. Chr. bis 499 n. Chr.", "3000 p.n.e. do 499 n.e."),
     from: -3000,
     to: 499,
@@ -23,6 +24,7 @@ export const TIMELINE_ERAS: TimelineEra[] = [
       "Seidenstraße und Mittelalter",
       "Jedwabny Szlak i średniowiecze",
     ),
+    shortLabel: T("Middle Ages", "Mittelalter", "Średniowiecze"),
     dateRange: T("500 to 1499", "500 bis 1499", "500 do 1499"),
     from: 500,
     to: 1499,
@@ -35,6 +37,7 @@ export const TIMELINE_ERAS: TimelineEra[] = [
   {
     id: "trade_empires",
     label: T("Global Trade and Empires", "Welthandel und Reiche", "Światowy handel i imperia"),
+    shortLabel: T("Global Trade", "Welthandel", "Handel"),
     dateRange: T("1500 to 1599", "1500 bis 1599", "1500 do 1599"),
     from: 1500,
     to: 1599,
@@ -47,6 +50,7 @@ export const TIMELINE_ERAS: TimelineEra[] = [
   {
     id: "scientific_rev",
     label: T("Scientific Revolution", "Wissenschaftliche Revolution", "Rewolucja naukowa"),
+    shortLabel: T("Science", "Wissenschaft", "Nauka"),
     dateRange: T("1600 to 1799", "1600 bis 1799", "1600 do 1799"),
     from: 1600,
     to: 1799,
@@ -59,6 +63,7 @@ export const TIMELINE_ERAS: TimelineEra[] = [
   {
     id: "industrial",
     label: T("Industrial Revolution", "Industrielle Revolution", "Rewolucja przemysłowa"),
+    shortLabel: T("Industry", "Industrie", "Przemysł"),
     dateRange: T("1800 to 1899", "1800 bis 1899", "1800 do 1899"),
     from: 1800,
     to: 1899,
@@ -71,6 +76,7 @@ export const TIMELINE_ERAS: TimelineEra[] = [
   {
     id: "twentieth",
     label: T("The 20th Century", "Das 20. Jahrhundert", "Wiek XX"),
+    shortLabel: T("20th Century", "20. Jh.", "XX wiek"),
     dateRange: T("1900 to 1989", "1900 bis 1989", "1900 do 1989"),
     from: 1900,
     to: 1989,
@@ -83,6 +89,7 @@ export const TIMELINE_ERAS: TimelineEra[] = [
   {
     id: "digital",
     label: T("Digital and Modern Era", "Digitale Moderne", "Era cyfrowa"),
+    shortLabel: T("Modern", "Moderne", "Współczesność"),
     dateRange: T("1990 to today", "1990 bis heute", "1990 do dziś"),
     from: 1990,
     to: null,

@@ -94,4 +94,14 @@ describe("cloudPlacement", () => {
     const right = cloudPlacement(398, 200, 400, 400).style;
     expect((right.left as number) + (right.width as number)).toBeLessThanOrEqual(392);
   });
+
+  it("clamps vertical placement so the cloud stays inside the stage", () => {
+    const below = cloudPlacement(300, 100, 600, 300).style;
+    expect(below.top).toBeLessThanOrEqual(300 - 210 - 8);
+    expect(below.top).toBeGreaterThanOrEqual(8);
+
+    const above = cloudPlacement(300, 200, 600, 300).style;
+    expect(above.bottom).toBeLessThanOrEqual(300 - 210 - 8);
+    expect(above.bottom).toBeGreaterThanOrEqual(8);
+  });
 });
