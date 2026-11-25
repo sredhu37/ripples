@@ -26,3 +26,4 @@ The World Timeline becomes a world map with borders per period (#373). Every his
 - Any map build script needs the India point-of-view file next to its border source. If the build cannot find India in that file, it fails; it never falls back.
 - Reviewers check India's northern border and the northeast on every new or changed map.
 - Maps may differ from those in German or Polish schoolbooks. That is accepted.
+- The India point-of-view file is the whole definition of India's outline. Where it holds less of a disputed area than a claim does, the map follows the file and nothing is added by hand (Sunny, 2026-11-25, for the Shaksgam Valley).

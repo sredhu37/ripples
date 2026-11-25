@@ -1,5 +1,5 @@
 {
-  "source": "docs/adr/0016-india-borders-on-maps.md. Present-day coordinates, each inside the Natural Earth India point-of-view outline that ADR 0016 names as the source. Every map from 1858 must draw each point inside India and inside no other country; before 1858 inside no other country. The Natural Earth outline holds only the western part of the Shaksgam Valley (it ends near 76.4 E at 36.2 N), so this point sits there.",
+  "source": "docs/adr/0016-india-borders-on-maps.md. Present-day coordinates, each inside the Natural Earth India point-of-view outline that ADR 0016 names as the source. Every map from 1858 must draw each point inside India and inside no other country; before 1858 inside no other country. The Shaksgam Valley point sits inside the outline; the coordinate from the #374 research (76.5 E, 36.3 N) is 9 km outside it.",
   "points": [
     {
       "name": "Srinagar",
