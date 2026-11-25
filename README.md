@@ -157,7 +157,8 @@ The `migrate` service applies new migrations on every `up` and then exits. Postg
 
 To run the images without Compose (for example on Kubernetes), keep these in mind:
 
-- Both containers listen on port 8080. Only the web container faces the browser. It forwards `/api` to the API.
+- Both containers listen on port 8080 inside the container. That is fine, because each container has its own network. Publish only the web container to your machine (`-p 8080:8080`). The API stays on the Docker network, and the web container reaches it by name.
+- Without Compose, create a network first (`docker network create ripples`) and start all containers on it with `--network ripples` and a name (`--name server`). On the default Docker network the name does not resolve, and nginx stops with `host not found in upstream`.
 - The web container needs one variable, `BACKEND_URL`, the API's address with no trailing slash (Compose uses `http://server:8080`). nginx does not start without it.
 - The API image has no shell and no npm. Run the migrations with `node node_modules/node-pg-migrate/bin/node-pg-migrate.js -m db/migrations up` and `DATABASE_URL` set, as the `migrate` service does.
 - Use `GET /api/health` as the health check. It returns 200, or 503 when Postgres is down.
