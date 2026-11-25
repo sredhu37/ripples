@@ -153,6 +153,15 @@ docker compose down -v          # stop and delete the data
 
 The `migrate` service applies new migrations on every `up` and then exits. Postgres is not published to your machine, so the stack does not clash with a Postgres you run for `npm run dev`.
 
+### Running the two images yourself
+
+To run the images without Compose (for example on Kubernetes), keep these in mind:
+
+- Both containers listen on port 8080. Only the web container faces the browser. It forwards `/api` to the API.
+- The web container needs one variable, `BACKEND_URL`, the API's address with no trailing slash (Compose uses `http://server:8080`). nginx does not start without it.
+- The API image has no shell and no npm. Run the migrations with `node node_modules/node-pg-migrate/bin/node-pg-migrate.js -m db/migrations up` and `DATABASE_URL` set, as the `migrate` service does.
+- Use `GET /api/health` as the health check. It returns 200, or 503 when Postgres is down.
+
 ## Software Factory
 
 Issues are built, checked, reviewed and merged by GitHub Actions workflows and AI agents. Sunny sets `factory:ready` and approves what the gate cannot merge on its own. The diagram below is kept in step with the workflows by the `flow-rule` check.
