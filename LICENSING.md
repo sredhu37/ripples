@@ -54,6 +54,18 @@ The npm dependencies keep their own licenses (mostly MIT). They are not covered 
 - **Known risk, accepted by Sunny:** the Polish voice is a fine-tune of the Piper `lessac` checkpoint, which Piper does not list as cleared for commercial use, and its speaker and consent are not documented. If it has to go, the clean replacement is Piper `pl_PL-gosia-medium` (CC0): change `web/src/voice/voices.json` and `scripts/voices/models.json`, then run `npm run voices -- pl`.
 - The tools that make the files are not part of the app: `kokoro-onnx` (MIT) and `piper-tts` (GPL-3.0). The GPL covers the tool, not the audio it outputs (reading of the GPL FAQ, not legal advice).
 
+## Map border files
+
+`web/public/borders/**` holds the borders the world map draws. They are data derived from other people's maps, not lesson content, so they are not covered by CC BY-NC-ND. They keep the licenses of their sources:
+
+| Source                                                                                                                                  | Used for                                         | License                                                                                                                                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [OpenHistoricalMap](https://wiki.openstreetmap.org/wiki/OpenHistoricalMap/License) country relations                                    | Borders from 1900                                | CC0 (public domain). The license page adds that most coastlines were imported from OpenStreetMap under CC BY-SA 2.0, so no OpenHistoricalMap coastline is used |
+| [Cliopatria](https://github.com/Seshat-Global-History-Databank/cliopatria/blob/main/LICENSE.md) v0.2.1 (Seshat Global History Databank) | Borders before 1900                              | CC BY 4.0. The map shows the credit line "Historical borders derived from Cliopatria (Seshat Global History Databank, CC BY 4.0)"                              |
+| [Natural Earth](https://www.naturalearthdata.com/about/terms-of-use/) 5.1.1 land and India point of view                                | Coastlines, India's outline, the present-day map | Public domain                                                                                                                                                  |
+
+Every shape is cut to Natural Earth land, so the files hold no coastline from a share-alike source. The sources were checked on 2026-11-24 in [#374](https://github.com/sredhu37/ripples/issues/374) and [#380](https://github.com/sredhu37/ripples/issues/380) (reading of the license pages, not legal advice). The Python tools that make the files (shapely, pyshp, numpy, matplotlib) are not part of the app.
+
 ## Contributions
 
 By opening a pull request you agree that your contribution is licensed under the same terms as the files it changes, and that Sunny Redhu may also relicense it.

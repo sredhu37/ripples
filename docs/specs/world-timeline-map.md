@@ -134,18 +134,21 @@ Decided: [decisions comment](https://github.com/sredhu37/ripples/issues/373#issu
 
 Chosen while writing this spec, not grilled. Sunny checks these.
 
-| #   | Default                                                                                                                                         | Why                                                                       |
-| --- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| D1  | With no pin open, a stop draws its start year (1940s draws 1 January 1940; 1500 draws 1500).                                                    | Simplest rule; #374 left it to the build.                                 |
-| D2  | One border file per distinct map year plus one per stop default, loaded on demand when a stop or pin opens.                                     | About 100 map years at 45 to 65 KB each would be 5 MB or more if bundled. |
-| D3  | The build fails if any pin's map year or any stop has no border file.                                                                           | Same spirit as the India build failure.                                   |
-| D4  | Land with no polity in the data is drawn in a neutral colour with no label.                                                                     | Cliopatria leaves 97% of land blank at 3000 BCE and 54% at 1800.          |
-| D5  | Pins whose point falls just outside a shape (Syracuse at 250 BCE in the sea, Meerut 1857 in a gap) are moved onto land by hand in the pin data. | Research left both open; a hand fix is one number per pin.                |
-| D6  | The Olmec pin (1200 BCE) shows with no border around it.                                                                                        | No source has an Olmec polity.                                            |
-| D7  | This spec lives at `docs/specs/world-timeline-map.md`.                                                                                          | No specs folder existed.                                                  |
+| #   | Default                                                                                                                                         | Why                                                                                |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| D1  | With no pin open, a stop draws its start year (1940s draws 1 January 1940; 1500 draws 1500).                                                    | Simplest rule; #374 left it to the build.                                          |
+| D2  | One border file per distinct map year plus one per stop default, loaded on demand when a stop or pin opens.                                     | About 100 map years at 45 to 65 KB each would be 5 MB or more if bundled.          |
+| D3  | The build fails if any pin's map year or any stop has no border file.                                                                           | Same spirit as the India build failure.                                            |
+| D4  | Land with no polity in the data is drawn in a neutral colour with no label.                                                                     | Cliopatria leaves 97% of land blank at 3000 BCE and 54% at 1800.                   |
+| D5  | Pins whose point falls just outside a shape (Syracuse at 250 BCE in the sea, Meerut 1857 in a gap) are moved onto land by hand in the pin data. | Research left both open; a hand fix is one number per pin.                         |
+| D6  | The Olmec pin (1200 BCE) shows with no border around it.                                                                                        | No source has an Olmec polity.                                                     |
+| D7  | This spec lives at `docs/specs/world-timeline-map.md`.                                                                                          | No specs folder existed.                                                           |
+| D8  | Land that no polity held is drawn from one shared file, `web/public/borders/land.json`, under every map. The border files hold shapes only.     | D4 needs ground to draw neutral; one 67 KB file beats 102 copies.                  |
+| D9  | A border file is JSON with one polyline-encoded ring list per shape (`web/src/timeline/borders.ts` decodes it), at most 70 KB.                  | Four bytes a point instead of fifteen, so coasts keep about four times the detail. |
 
 ## 8. Known limits
 
 1. Border detail was not compared against a reference atlas. Sunny reviews each map once in the build ([#374](https://github.com/sredhu37/ripples/issues/374) deferred).
 2. OpenHistoricalMap gaps in 1942 (Oman, Yemen, UAE) and 1900 (Egypt) are filled in the build from Natural Earth or fixed in OpenHistoricalMap itself.
 3. Maps before 1000 are mostly empty land: that is the state of the data, not a bug.
+4. The Natural Earth India outline (ADR 0016) holds only the western part of the Shaksgam Valley; the rest of the valley is drawn as China. Coasts are simplified to 0.08 to 0.2 degrees to keep each file under 70 KB.

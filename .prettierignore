@@ -1,3 +1,6 @@
 docs/WORKFLOWS.md
 # Prompt templates: the agent gets the text exactly as written.
 .github/prompts/
+
+# Border files: compact on purpose, the 70 KB limit counts bytes (scripts/borders/).
+web/public/borders/

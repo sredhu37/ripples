@@ -1,0 +1,6 @@
+# Tools that make the border files for the world map. Used only by `npm run borders`, never shipped.
+# shapely: BSD-3-Clause. pyshp: MIT. numpy: BSD-3-Clause. matplotlib: PSF-based (only draws the contact sheet).
+shapely==2.2.0
+pyshp==3.1.9
+numpy==2.5.5
+matplotlib==3.11.2

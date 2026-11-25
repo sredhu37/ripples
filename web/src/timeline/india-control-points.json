@@ -1,0 +1,55 @@
+{
+  "source": "docs/adr/0016-india-borders-on-maps.md. Present-day coordinates, each inside the Natural Earth India point-of-view outline that ADR 0016 names as the source. Every map from 1858 must draw each point inside India and inside no other country; before 1858 inside no other country. The Natural Earth outline holds only the western part of the Shaksgam Valley (it ends near 76.4 E at 36.2 N), so this point sits there.",
+  "points": [
+    {
+      "name": "Srinagar",
+      "lon": 74.8,
+      "lat": 34.08
+    },
+    {
+      "name": "Muzaffarabad",
+      "lon": 73.47,
+      "lat": 34.37
+    },
+    {
+      "name": "Gilgit",
+      "lon": 74.31,
+      "lat": 35.92
+    },
+    {
+      "name": "Aksai Chin",
+      "lon": 79.5,
+      "lat": 35.2
+    },
+    {
+      "name": "Siachen",
+      "lon": 77.1,
+      "lat": 35.4
+    },
+    {
+      "name": "Shaksgam Valley",
+      "lon": 76.3,
+      "lat": 36.1
+    },
+    {
+      "name": "Kalapani",
+      "lon": 80.9,
+      "lat": 30.2
+    },
+    {
+      "name": "Tawang",
+      "lon": 91.86,
+      "lat": 27.59
+    },
+    {
+      "name": "Itanagar",
+      "lon": 93.6,
+      "lat": 27.1
+    },
+    {
+      "name": "Sir Creek",
+      "lon": 68.5,
+      "lat": 23.9
+    }
+  ]
+}
