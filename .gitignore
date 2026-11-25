@@ -18,5 +18,8 @@ __pycache__/
 # npm run voices: Python tools, voice models and the job list (scripts/voices/voices.sh)
 scripts/voices/.cache/
 
+# npm run borders: Python tools, downloaded map data and working files (scripts/borders/borders.sh)
+scripts/borders/.cache/
+
 # Factory local runner working state
 .factory-local/

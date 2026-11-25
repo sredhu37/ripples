@@ -19,6 +19,7 @@
     "format": "oxfmt --write",
     "format:check": "oxfmt --check",
     "voices": "scripts/voices/voices.sh",
+    "borders": "scripts/borders/borders.sh",
     "workflows:map": "node scripts/workflows-map.mjs",
     "workflows:check": "node scripts/workflows-map.mjs --check"
   },

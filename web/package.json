@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "voices:export": "vitest run --config vitest.voices.config.ts"
+    "voices:export": "vitest run --config vitest.voices.config.ts",
+    "borders:export": "vitest run --config vitest.borders.config.ts"
   },
   "dependencies": {
     "react": "^19.3.1",
