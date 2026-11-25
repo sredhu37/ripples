@@ -20,6 +20,7 @@ export type TimelineRegion =
 export interface TimelineEra {
   id: TimelineEraId;
   label: Text;
+  shortLabel?: Text;
   dateRange: Text;
   /** First year of the era. BCE is negative. */
   from: number;

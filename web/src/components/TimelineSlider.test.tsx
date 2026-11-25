@@ -71,16 +71,16 @@ describe("TimelineSlider", () => {
     expect(input.getAttribute("aria-valuetext")).toContain("Global Trade and Empires");
   });
 
-  it("shows the 7 era labels, each as wide as its stops", async () => {
+  it("shows the 7 era buttons with compact labels and full title", async () => {
     const c = await mount();
     const segs = c.querySelectorAll<HTMLButtonElement>(".era-seg");
     expect(segs).toHaveLength(7);
     TIMELINE_ERAS.forEach((era, i) => {
-      expect(segs[i].textContent).toBe(era.label.en);
-      expect(segs[i].style.flexGrow).toBe(
-        String(TIMELINE_STOPS.filter((s) => s.era === era.id).length),
-      );
+      expect(segs[i].textContent).toBe(era.shortLabel?.en ?? era.label.en);
+      expect(segs[i].getAttribute("title")).toBe(era.label.en);
     });
+    expect(c.querySelector(".time-current-stop")!.textContent).toBe("3000 BCE");
+    expect(c.querySelector(".time-current-era")!.textContent).toBe("Ancient Civilizations");
   });
 
   it("jumps to the first stop of a tapped era and marks it current", async () => {
