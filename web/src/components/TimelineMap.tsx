@@ -115,7 +115,8 @@ export function TimelineMap({ lang, pins, defaultYear, onReadMore }: Props) {
     if (openId && !open) setOpenId(null);
   }, [openId, open]);
 
-  const { land, shapes } = useBorders(open ? open.pin.mapYear : defaultYear);
+  const year = open ? open.pin.mapYear : defaultYear;
+  const { land, shapes } = useBorders(year);
 
   const pointers = useRef(new Map<number, { x: number; y: number }>());
   const gesture = useRef({ moved: false, startX: 0, startY: 0 });
@@ -242,6 +243,7 @@ export function TimelineMap({ lang, pins, defaultYear, onReadMore }: Props) {
         <svg
           className="tm-map"
           viewBox={view.join(" ")}
+          data-year={year}
           aria-label={t(lang, "mapLabel")}
           onClick={(e) => {
             if (!suppressClick.current && !(e.target as Element).closest(".tm-pin"))

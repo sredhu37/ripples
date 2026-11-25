@@ -1382,46 +1382,7 @@ mark.term {
 .timeline-screen {
   padding-bottom: 32px;
 }
-.timeline-help {
-  margin: 4px 0 8px;
-}
-.timeline-scrubber {
-  width: 100%;
-  max-width: 700px;
-  height: auto;
-  margin: 4px auto;
-  display: block;
-}
-.timeline-eras,
-.timeline-regions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 8px 0;
-}
-.timeline-era-head h2 {
-  margin: 8px 0 2px;
-}
-.timeline-era-head p {
-  margin: 0 0 8px;
-}
-.timeline-lane {
-  margin: 12px 0;
-}
-.timeline-lane h3 {
-  margin: 0 0 6px;
-  padding-bottom: 2px;
-  border-bottom: 4px solid;
-  display: inline-block;
-}
-.timeline-lane ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+/* The Meanwhile card reuses the card styles below. */
 .timeline-card {
   background: #fff;
   border: 2px solid #d9e4e6;
@@ -1464,15 +1425,6 @@ mark.term {
   height: 10px;
   border-radius: 50%;
   display: inline-block;
-}
-@media (min-width: 720px) {
-  .timeline-lane ul {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  .timeline-card {
-    flex: 1 1 260px;
-  }
 }
 
 /* World timeline slider and era band */

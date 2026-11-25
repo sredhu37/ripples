@@ -247,6 +247,7 @@ export function App() {
           lang={progress.lang}
           onLang={setLang}
           onClose={() => setScreen({ kind: "map" })}
+          onReadMore={(id) => setScreen({ kind: "lesson", id })}
         />
       );
     }
