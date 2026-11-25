@@ -154,7 +154,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     T(
       "In Mexico, artists carve heads as tall as a person.",
-      "In Mexiko meißeln Künstler Köpfe, die so gross sind wie ein Mensch.",
+      "In Mexiko meißeln Künstler Köpfe, die so groß sind wie ein Mensch.",
       "W Meksyku artyści rzeźbią głowy wielkie jak człowiek.",
     ),
   ),
@@ -365,9 +365,9 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Luter rozpoczyna reformację",
     ),
     T(
-      "A German monk argues about church rules, and printed leaflets spread his ideas.",
-      "Ein deutscher Mönch streitet über Kirchenregeln, und gedruckte Flugblätter verbreiten seine Ideen.",
-      "Niemiecki mnich spiera się o zasady Kościoła, a drukowane ulotki roznoszą jego pomysły.",
+      "A German monk in Wittenberg argues about church rules, and printed leaflets spread his ideas.",
+      "Ein deutscher Mönch in Wittenberg streitet über Kirchenregeln, und gedruckte Flugblätter verbreiten seine Ideen.",
+      "Niemiecki mnich z Wittenbergi spiera się o zasady Kościoła, a drukowane ulotki roznoszą jego pomysły.",
     ),
   ),
   ev(
@@ -506,7 +506,7 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     ),
     T(
       "Peace comes and cities like Edo grow big.",
-      "Es herrscht Frieden und Städte wie Edo werden gross.",
+      "Es herrscht Frieden und Städte wie Edo werden groß.",
       "Nastaje pokój, a miasta takie jak Edo rosną.",
     ),
   ),
@@ -772,9 +772,9 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("1947", "1947", "1947"),
     T("India becomes independent", "Indien wird unabhängig", "Indie stają się niepodległe"),
     T(
-      "After a long struggle, India raises its own flag.",
-      "Nach langem Kampf hisst Indien seine eigene Flagge.",
-      "Po długiej walce Indie podnoszą własną flagę.",
+      "After a long struggle India gets independence, but the British divide the land into two countries, India and Pakistan.",
+      "Nach langem Kampf wird Indien unabhängig, aber die Briten teilen das Land in zwei Staaten, Indien und Pakistan.",
+      "Po długiej walce Indie zdobywają niepodległość, ale Brytyjczycy dzielą kraj na dwa państwa, Indie i Pakistan.",
     ),
     "independence",
   ),
@@ -893,9 +893,9 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("1941 to 1945", "1941 bis 1945", "1941 do 1945"),
     T("The Holocaust", "Der Holocaust", "Holokaust"),
     T(
-      "During the war, the Nazi government hurt and killed millions of people, especially Jewish families. We remember so it never happens again.",
-      "Im Krieg verletzte und tötete die Nazi-Regierung Millionen Menschen, vor allem jüdische Familien. Wir erinnern uns, damit es nie wieder geschieht.",
-      "W czasie wojny rząd nazistowski krzywdził i zabijał miliony ludzi, zwłaszcza żydowskie rodziny. Pamiętamy, by to się nigdy nie powtórzyło.",
+      "During the war, the Nazi government hurt and took the lives of many people, especially Jewish families, and we remember so it never happens again.",
+      "Im Krieg verletzte die Nazi-Regierung viele Menschen, besonders jüdische Familien, und nahm ihnen das Leben, und wir erinnern uns, damit es nie wieder geschieht.",
+      "W czasie wojny rząd nazistowski krzywdził wielu ludzi, zwłaszcza żydowskie rodziny, i odbierał im życie, a my pamiętamy, by to się nigdy nie powtórzyło.",
     ),
     "ww2",
   ),
@@ -906,9 +906,9 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
     T("1942", "1942", "1942"),
     T("The Quit India Movement", "Die Quit-India-Bewegung", "Ruch Quit India"),
     T(
-      "While Europe is at war, Gandhi asks the British to leave India.",
-      "Während Europa im Krieg ist, bittet Gandhi die Briten, Indien zu verlassen.",
-      "Gdy Europa jest w stanie wojny, Gandhi prosi Brytyjczyków o opuszczenie Indii.",
+      "While Europe is at war, Mahatma Gandhi demands that the British leave India.",
+      "Während Europa im Krieg ist, fordert Mahatma Gandhi die Briten auf, Indien zu verlassen.",
+      "Gdy Europa jest w stanie wojny, Mahatma Gandhi żąda, by Brytyjczycy opuścili Indie.",
     ),
     "independence",
   ),
@@ -1095,9 +1095,9 @@ export const TIMELINE_EVENTS: TimelineEvent[] = [
       "Szczepionka na polio jest gotowa",
     ),
     T(
-      "A vaccine tested on millions of children protects them from an illness that can make legs weak.",
-      "Ein Impfstoff, der an Millionen Kindern getestet wurde, schützt sie vor einer Krankheit, die die Beine schwach machen kann.",
-      "Szczepionka przetestowana na milionach dzieci chroni je przed chorobą, która może osłabiać nogi.",
+      "A vaccine tested on many children protects them from an illness that can make legs weak.",
+      "Ein Impfstoff, der an vielen Kindern getestet wurde, schützt sie vor einer Krankheit, die die Beine schwach machen kann.",
+      "Szczepionka przetestowana na wielu dzieciach chroni je przed chorobą, która może osłabiać nogi.",
     ),
   ),
   ev(

@@ -78,11 +78,46 @@ describe("pins", () => {
     for (const p of PINS) expect(p.source, p.id).toMatch(/^https:\/\//);
   });
 
-  it("keeps sensitive pins off Wikipedia", () => {
+  it("marks war, genocide, partition and famine pins sensitive, with an institution source", () => {
     expect(PINS.filter((p) => p.sensitive).map((p) => p.id)).toEqual(
-      expect.arrayContaining(["ww1", "ww2", "holocaust", "india1947", "bengal1943"]),
+      expect.arrayContaining(["ww1", "ww2", "atom", "holocaust", "india1947", "bengal1943"]),
     );
-    for (const p of PINS) if (p.sensitive) expect(p.source, p.id).not.toMatch(/wikipedia\.org/);
+    const institutions = [
+      "encyclopedia.ushmm.org",
+      "hpmmuseum.jp",
+      "museum.manchester.ac.uk",
+      "nam.ac.uk",
+    ];
+    for (const p of PINS) {
+      if (!p.sensitive) continue;
+      expect(p.source, p.id).not.toMatch(/wikipedia\.org/);
+      expect(institutions, p.id).toContain(new URL(p.source).hostname.replace(/^www\./, ""));
+    }
+  });
+
+  it("tells every line as one sentence, in every language", () => {
+    for (const p of PINS) {
+      for (const l of ["en", "de", "pl"] as const) {
+        const ends = p.line[l].match(/[.!?](\s|$)/g) ?? [];
+        expect(ends, `${p.id} ${l}`).toHaveLength(1);
+        expect(p.line[l].trim().endsWith("."), `${p.id} ${l}`).toBe(true);
+      }
+    }
+  });
+
+  it("names regimes, not peoples, and gives no death counts or methods", () => {
+    const banned = /\b(the Germans|the Japanese|the Jews|die Deutschen|die Juden|Niemcy zabili)\b/i;
+    for (const p of PINS) {
+      for (const l of ["en", "de", "pl"] as const) {
+        expect(p.line[l], `${p.id} ${l}`).not.toMatch(banned);
+        expect(p.line[l], `${p.id} ${l}`).not.toMatch(/\b(million|Million|milion)/);
+        expect(p.line[l], `${p.id} ${l}`).not.toMatch(/\b(killed|tötete|zabijał\w*)\b/i);
+      }
+    }
+  });
+
+  it("writes German with ß, not ss, in common words", () => {
+    for (const p of PINS) expect(p.line.de, p.id).not.toMatch(/\b(gross|strasse|weiss|heiss)\w*/i);
   });
 });
 
