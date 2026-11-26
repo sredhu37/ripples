@@ -14,7 +14,33 @@ Each lesson is a short story, then a toy the child can play with, then three que
 
 Detail for every part: [ARCHITECTURE.md](ARCHITECTURE.md).
 
-## Prerequisites
+## Running locally
+
+Two ways: with Docker (one command, nothing else to install) or without Docker (Node and Postgres on your machine, for development).
+
+### With Docker
+
+`compose.yaml` runs the whole app: Postgres 17, the migrations, the API (`server/Dockerfile`) and the web app (`web/Dockerfile`, nginx forwarding `/api` to the API). You only need Docker.
+
+```bash
+cp .env.example .env            # git ignores .env
+# set BETTER_AUTH_SECRET in .env, for example to the output of: openssl rand -hex 32
+docker compose up --build -d --wait
+```
+
+Open http://localhost:8080/ (set `RIPPLES_PORT` in `.env` if 8080 is taken). Without `RESEND_API_KEY` the stack runs in Self-host mode: the login code is in `docker compose logs server`. Other commands:
+
+```bash
+docker compose logs -f server   # API log, including login codes
+docker compose down             # stop (data stays in the ripples-pgdata volume)
+docker compose down -v          # stop and delete the data
+```
+
+The `migrate` service applies new migrations on every `up` and then exits. Postgres is not published to your machine, so the stack does not clash with a Postgres you run for `npm run dev`.
+
+### Without Docker
+
+#### Prerequisites
 
 | Tool                     | Version | Used for                                     |
 | ------------------------ | ------- | -------------------------------------------- |
@@ -55,16 +81,14 @@ psql --version      # psql (PostgreSQL) 17.x
 pg_isready          # accepting connections
 ```
 
-## Running locally
-
-### 1. Install dependencies
+#### 1. Install dependencies
 
 ```bash
 nvm use             # reads .nvmrc, selects Node 26
 npm run install:all # npm ci in the root, web/ and server/
 ```
 
-### 2. Environment variables
+#### 2. Environment variables
 
 None are needed for local development. There is no `.env` file: the app does not load one. The defaults are:
 
@@ -82,7 +106,7 @@ None are needed for local development. There is no `.env` file: the app does not
 
 One exception: `npm run migrate` has no default, so pass the URL yourself (next step).
 
-### 3. Database
+#### 3. Database
 
 Create the `ripples` user and database once. On macOS, Homebrew makes your own macOS user a Postgres superuser, so no `sudo` is needed:
 
@@ -104,7 +128,7 @@ dropdb ripples && dropuser ripples                         # delete the database
 
 The API starts even when Postgres is down. `/api/health` then returns 503.
 
-### 4. Start the backend and the frontend
+#### 4. Start the backend and the frontend
 
 Both together (Ctrl-C stops both):
 
@@ -121,7 +145,7 @@ npm run dev:web     # app on http://localhost:5173 (Vite, hot reload)
 
 Open http://localhost:5173/. Check the API with `curl http://localhost:8080/api/health` (`{"status":"ok"}`). The same call through Vite, `http://localhost:5173/api/health`, also works.
 
-### 5. Test and build
+#### 5. Test and build
 
 ```bash
 npm test            # unit tests; the real-Postgres health test also runs when DATABASE_URL is set:
@@ -132,26 +156,6 @@ npm run build       # app to web/dist/, API to server/dist/
 npm start           # production twin: one process on :8080 serves the app and /api (run build first)
                     #   (needs DATABASE_URL set, because NODE_ENV=production has no default)
 ```
-
-## Running with Docker
-
-`compose.yaml` runs the whole app: Postgres 17, the migrations, the API (`server/Dockerfile`) and the web app (`web/Dockerfile`, nginx forwarding `/api` to the API). You only need Docker.
-
-```bash
-cp .env.example .env            # git ignores .env
-# set BETTER_AUTH_SECRET in .env, for example to the output of: openssl rand -hex 32
-docker compose up --build -d --wait
-```
-
-Open http://localhost:8080/ (set `RIPPLES_PORT` in `.env` if 8080 is taken). Without `RESEND_API_KEY` the stack runs in Self-host mode: the login code is in `docker compose logs server`. Other commands:
-
-```bash
-docker compose logs -f server   # API log, including login codes
-docker compose down             # stop (data stays in the ripples-pgdata volume)
-docker compose down -v          # stop and delete the data
-```
-
-The `migrate` service applies new migrations on every `up` and then exits. Postgres is not published to your machine, so the stack does not clash with a Postgres you run for `npm run dev`.
 
 ## Software Factory
 
