@@ -18,6 +18,7 @@ import { CAST } from "./cast";
 import { Person } from "./icons";
 import { LangSwitch } from "./LangSwitch";
 import { Otto } from "./Otto";
+import { RiverMapBackdrop } from "./RiverMapBackdrop";
 import { SpeechBubble } from "./SpeechBubble";
 
 interface Props {
@@ -167,78 +168,81 @@ export function MapScreen({
         </div>
       </section>
 
-      <div className="trail">
-        {sections.map((section) => {
-          const heading = groupHeading(getGroupTitle(section.group, lang));
-          return (
-            <section
-              key={section.group.id}
-              className={section.muted ? "trail-group trail-group-muted" : "trail-group"}
-              aria-label={heading}
-            >
-              <h2 className="trail-heading">{heading}</h2>
-              {section.muted ? (
-                <p className="trail-more">
-                  {t(lang, "groupLessons", { n: String(section.total) })}
-                </p>
-              ) : (
-                <ol className="trail-list">
-                  {section.stops.map((s) => {
-                    const { lesson: l, state } = s;
-                    const open = state !== "locked";
-                    const title = getLessonTitle(l, lang);
-                    return (
-                      <li
-                        key={l.id}
-                        className={`stop stop-${state} ${s.number % 2 ? "left" : "right"}`}
-                      >
-                        <button
-                          type="button"
-                          className="place"
-                          disabled={!open}
-                          onClick={() => {
-                            sfx.tap();
-                            onOpenLesson(l.id);
-                          }}
+      <div className="river-map-wrap">
+        <RiverMapBackdrop />
+        <div className="trail">
+          {sections.map((section) => {
+            const heading = groupHeading(getGroupTitle(section.group, lang));
+            return (
+              <section
+                key={section.group.id}
+                className={section.muted ? "trail-group trail-group-muted" : "trail-group"}
+                aria-label={heading}
+              >
+                <h2 className="trail-heading">{heading}</h2>
+                {section.muted ? (
+                  <p className="trail-more">
+                    {t(lang, "groupLessons", { n: String(section.total) })}
+                  </p>
+                ) : (
+                  <ol className="trail-list">
+                    {section.stops.map((s) => {
+                      const { lesson: l, state } = s;
+                      const open = state !== "locked";
+                      const title = getLessonTitle(l, lang);
+                      return (
+                        <li
+                          key={l.id}
+                          className={`stop stop-${state} ${s.number % 2 ? "left" : "right"}`}
                         >
-                          <span className="place-icon" aria-hidden="true">
-                            {state === "locked" ? (
-                              <UiIcon name="lock" size={40} />
-                            ) : (
-                              <LessonIcon id={l.id} size={48} />
-                            )}
-                          </span>
-                          <span className="place-text">
-                            <span className="place-title">
-                              {s.number}. {title}
-                            </span>
-                            <span className="place-tag">
-                              {state === "done" ? (
-                                <UiIcon name="medal" size={22} label={t(lang, "badges")} />
-                              ) : state === "next" ? (
-                                t(lang, "nextUp")
+                          <button
+                            type="button"
+                            className="place"
+                            disabled={!open}
+                            onClick={() => {
+                              sfx.tap();
+                              onOpenLesson(l.id);
+                            }}
+                          >
+                            <span className="place-icon" aria-hidden="true">
+                              {state === "locked" ? (
+                                <UiIcon name="lock" size={40} />
                               ) : (
-                                t(lang, "locked")
+                                <LessonIcon id={l.id} size={48} />
                               )}
-                              {state !== "locked" && !hasLesson(l.id)
-                                ? ` · ${t(lang, "comingSoon")}`
-                                : ""}
                             </span>
-                          </span>
-                        </button>
+                            <span className="place-text">
+                              <span className="place-title">
+                                {s.number}. {title}
+                              </span>
+                              <span className="place-tag">
+                                {state === "done" ? (
+                                  <UiIcon name="medal" size={22} label={t(lang, "badges")} />
+                                ) : state === "next" ? (
+                                  t(lang, "nextUp")
+                                ) : (
+                                  t(lang, "locked")
+                                )}
+                                {state !== "locked" && !hasLesson(l.id)
+                                  ? ` · ${t(lang, "comingSoon")}`
+                                  : ""}
+                              </span>
+                            </span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                    {section.moreLocked > 0 && (
+                      <li className="trail-more">
+                        {t(lang, "moreLessons", { n: String(section.moreLocked) })}
                       </li>
-                    );
-                  })}
-                  {section.moreLocked > 0 && (
-                    <li className="trail-more">
-                      {t(lang, "moreLessons", { n: String(section.moreLocked) })}
-                    </li>
-                  )}
-                </ol>
-              )}
-            </section>
-          );
-        })}
+                    )}
+                  </ol>
+                )}
+              </section>
+            );
+          })}
+        </div>
       </div>
     </main>
   );

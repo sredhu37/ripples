@@ -30,6 +30,9 @@ export function Otto({ size = 140, mood = "happy" }: OttoProps) {
         <circle cx="136" cy="49" r="6" fill="#ecd3ab" />
         {/* head */}
         <ellipse cx="100" cy="82" rx="50" ry="44" fill="#8d5a3b" />
+        {/* terracotta neckerchief */}
+        <path d="M74 116 Q100 132 126 116 Q108 138 100 144 Q92 138 74 116 Z" fill="#d05d3d" />
+        <path d="M95 136 L90 150 L100 145 L106 149 Z" fill="#b04326" />
         {/* muzzle */}
         <ellipse cx="100" cy="100" rx="30" ry="21" fill="#ecd3ab" />
         <ellipse cx="100" cy="91" rx="8" ry="5.5" fill="#2d1b12" />

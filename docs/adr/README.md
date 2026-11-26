@@ -18,3 +18,4 @@ One file per decision, named `NNNN-short-title.md`. Keep each to: context, decis
 - [0014-feature-flags-server-setting.md](0014-feature-flags-server-setting.md): Feature flags in a server setting
 - [0015-factory-notifications-slack.md](0015-factory-notifications-slack.md): Factory notifications in Slack
 - [0016-india-borders-on-maps.md](0016-india-borders-on-maps.md): India's borders on every map
+- [0017-river-trail-design-c-redesign.md](0017-river-trail-design-c-redesign.md): River Trail Design C Redesign
