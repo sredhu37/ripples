@@ -66,6 +66,7 @@ test("map: a new family logs in, adds a kid and sees the trail", async ({ page }
   await page.getByRole("button", { name: "Ava", exact: true }).click();
   await expect(page.getByRole("heading", { level: 1, name: "Ripples" })).toBeVisible();
   await expect(page.getByText("Hi Ava! Pick a place on the trail.")).toBeVisible();
+  await expect(page.locator(".river-svg-bg")).toBeVisible();
   const stops = page.locator(".trail button.place");
   await expect(stops).toHaveCount(3);
   await expect(stops.first()).toBeEnabled();
