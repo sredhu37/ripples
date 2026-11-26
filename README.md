@@ -8,17 +8,17 @@ A web app that explains how the real world works (money, taxes, governments, his
 
 Each lesson is a short story, then a toy the child can play with, then three questions. A badge is earned when all three are right. Wrong answers get a hint, never a red cross.
 
-## How it fits together
+## 1. How it fits together
 
 ![Architecture: the React app talks to the Node API over /api, the API reads and writes Postgres and emails the parent's login code](docs/diagrams/architecture.svg)
 
 Detail for every part: [ARCHITECTURE.md](ARCHITECTURE.md).
 
-## Running locally
+## 2. Running locally
 
 Two ways: with Docker (one command, nothing else to install) or without Docker (Node and Postgres on your machine, for development).
 
-### With Docker
+### 2.1 With Docker
 
 `compose.yaml` runs the whole app: Postgres 17, the migrations, the API (`server/Dockerfile`) and the web app (`web/Dockerfile`, nginx forwarding `/api` to the API). You only need Docker.
 
@@ -38,9 +38,9 @@ docker compose down -v          # stop and delete the data
 
 The `migrate` service applies new migrations on every `up` and then exits. Postgres is not published to your machine, so the stack does not clash with a Postgres you run for `npm run dev`.
 
-### Without Docker
+### 2.2 Without Docker
 
-#### Prerequisites
+#### 2.2.1 Prerequisites
 
 | Tool                     | Version | Used for                                     |
 | ------------------------ | ------- | -------------------------------------------- |
@@ -81,20 +81,20 @@ psql --version      # psql (PostgreSQL) 17.x
 pg_isready          # accepting connections
 ```
 
-#### 1. Install dependencies
+#### 2.2.2 Install dependencies
 
 ```bash
 nvm use             # reads .nvmrc, selects Node 26
 npm run install:all # npm ci in the root, web/ and server/
 ```
 
-#### 2. Environment variables
+#### 2.2.3 Environment variables
 
 None are needed for local development. There is no `.env` file: the app does not load one. The defaults are:
 
 | Variable                                                                    | Default in dev                                      | Notes                                                                                                                      |
 | --------------------------------------------------------------------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `DATABASE_URL`                                                              | `postgres://ripples:ripples@localhost:5432/ripples` | The database from step 3. Required in production. Neon needs `?sslmode=require`.                                           |
+| `DATABASE_URL`                                                              | `postgres://ripples:ripples@localhost:5432/ripples` | The database from section 2.2.4. Required in production. Neon needs `?sslmode=require`.                                    |
 | `PORT`                                                                      | `8080`                                              | API port. Vite proxies `/api` to it, so change `web/vite.config.ts` too.                                                   |
 | `NODE_ENV`                                                                  | unset                                               | `production` makes `DATABASE_URL` required.                                                                                |
 | `DIST_DIR`                                                                  | unset                                               | Built app the API serves at `/`. Unset: the API serves `/api` only.                                                        |
@@ -106,7 +106,7 @@ None are needed for local development. There is no `.env` file: the app does not
 
 One exception: `npm run migrate` has no default, so pass the URL yourself (next step).
 
-#### 3. Database
+#### 2.2.4 Database
 
 Create the `ripples` user and database once. On macOS, Homebrew makes your own macOS user a Postgres superuser, so no `sudo` is needed:
 
@@ -128,7 +128,7 @@ dropdb ripples && dropuser ripples                         # delete the database
 
 The API starts even when Postgres is down. `/api/health` then returns 503.
 
-#### 4. Start the backend and the frontend
+#### 2.2.5 Start the backend and the frontend
 
 Both together (Ctrl-C stops both):
 
@@ -145,7 +145,7 @@ npm run dev:web     # app on http://localhost:5173 (Vite, hot reload)
 
 Open http://localhost:5173/. Check the API with `curl http://localhost:8080/api/health` (`{"status":"ok"}`). The same call through Vite, `http://localhost:5173/api/health`, also works.
 
-#### 5. Test and build
+#### 2.2.6 Test and build
 
 ```bash
 npm test            # unit tests; the real-Postgres health test also runs when DATABASE_URL is set:
@@ -157,7 +157,7 @@ npm start           # production twin: one process on :8080 serves the app and /
                     #   (needs DATABASE_URL set, because NODE_ENV=production has no default)
 ```
 
-## Software Factory
+## 3. Software Factory
 
 Issues are built, checked, reviewed and merged by GitHub Actions workflows and AI agents. Sunny sets `factory:ready` and approves what the gate cannot merge on its own. The diagram below is kept in step with the workflows by the `flow-rule` check.
 
@@ -165,11 +165,11 @@ Issues are built, checked, reviewed and merged by GitHub Actions workflows and A
 
 Detail for every step: [docs/factory.md](docs/factory.md).
 
-## Privacy
+## 4. Privacy
 
 No accounts, no tracking, no server. The child's name, language and badges stay in the browser on the device. Parents can save and restore progress with a code (gear icon, behind a small maths question). Never put names or photos in this repository: it is public.
 
-## Working with AI agents
+## 5. Working with AI agents
 
 - Rules and definition of done: [AGENTS.md](AGENTS.md)
 - Architecture map: [ARCHITECTURE.md](ARCHITECTURE.md), vocabulary: [GLOSSARY.md](GLOSSARY.md), decisions: [docs/adr](docs/adr)
@@ -180,10 +180,10 @@ No accounts, no tracking, no server. The child's name, language and badges stay 
 claude plugin install mattpocock-skills@claude-plugins-official --scope project
 ```
 
-## License
+## 6. License
 
 Source-available, free for noncommercial use: practise DevOps on it, learn from it, run it yourself. Commercial use is not allowed. Code is PolyForm Noncommercial 1.0.0, lesson content is CC BY-NC-ND 4.0. Details: [LICENSING.md](LICENSING.md).
 
-## Support
+## 7. Support
 
 If this saved you time, you can [buy me a coffee](https://ko-fi.com/sunnyredhu).
