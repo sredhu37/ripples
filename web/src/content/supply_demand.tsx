@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { animatedBeat } from "../lesson/toolkit";
 import type { Lesson, Text, ToyProps, WidgetProps } from "../lesson/types";
+import { AppleStallScenario } from "../components/AppleStallScenario";
 
 const T = (en: string, de: string, pl: string): Text => ({ en, de, pl });
 
@@ -222,23 +223,8 @@ function Toy({ onDone }: ToyProps) {
   );
 }
 
-function SupplyDemandWidget({ onAnswer }: WidgetProps) {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
-      <p style={{ margin: 0 }}>
-        If a toy shop orders 200 teddy bears but only 10 kids want one, what happens to the price?
-      </p>
-      <button type="button" className="btn btn-quiet" onClick={() => onAnswer(false)}>
-        The price doubles to 50 coins
-      </button>
-      <button type="button" className="btn" onClick={() => onAnswer(true)}>
-        The price drops in a clearance sale to attract buyers
-      </button>
-      <button type="button" className="btn btn-quiet" onClick={() => onAnswer(false)}>
-        The teddy bears turn into gold statues
-      </button>
-    </div>
-  );
+function SupplyDemandWidget({ lang, onAnswer }: WidgetProps) {
+  return <AppleStallScenario lang={lang} onAnswer={onAnswer} />;
 }
 
 export const lesson: Lesson = {
