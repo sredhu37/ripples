@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { fakeFamily, openTrail } from "./evidence";
+import { fakeFamily, openTrail, steps } from "./evidence";
 
 const PRIOR_BADGES = [
   "money",
@@ -34,8 +34,10 @@ const PRIOR_BADGES = [
   "philanthropy",
 ];
 
-test("fidelity: capture map and lesson 4 scenario screens", async ({ page }) => {
-  // 1. Capture Page 1: River Trail Map Viewport
+test("fidelity: river trail map and lesson 4 scenario screens", async ({ page }) => {
+  const step = await steps(page, "fidelity");
+
+  // 1. River Trail Map Viewport
   await page.setViewportSize({ width: 1280, height: 900 });
   await fakeFamily(page, {
     kids: [{ nickname: "Ava", lang: "en", badges: ["money", "work", "savings"], muted: true }],
@@ -46,27 +48,14 @@ test("fidelity: capture map and lesson 4 scenario screens", async ({ page }) => 
   // Scroll to show the river map wrap with landmarks and trail stops
   await page.locator(".river-map-wrap").scrollIntoViewIfNeeded();
   await page.waitForTimeout(500);
-
-  await page.screenshot({
-    path: "/Users/admin/.hermes/cache/scratch/rendered_map_desktop.png",
-    fullPage: false,
-  });
-
-  // Also capture the river-map-wrap element directly
-  const riverWrap = page.locator(".river-map-wrap");
-  await riverWrap.screenshot({
-    path: "/Users/admin/.hermes/cache/scratch/rendered_map_river_wrap.png",
-  });
+  await step();
 
   // Mobile portrait map
   await page.setViewportSize({ width: 414, height: 896 });
   await page.waitForTimeout(500);
-  await page.screenshot({
-    path: "/Users/admin/.hermes/cache/scratch/rendered_map.png",
-    fullPage: false,
-  });
+  await step();
 
-  // 2. Capture Page 2: Lesson 4 (Prices and Scarcity / supply_demand) Scenario Screen
+  // 2. Lesson 4 (Prices and Scarcity / supply_demand) Scenario Screen
   await page.setViewportSize({ width: 1280, height: 850 });
   await fakeFamily(page, {
     kids: [{ nickname: "Ava", lang: "en", badges: PRIOR_BADGES, muted: true }],
@@ -118,16 +107,10 @@ test("fidelity: capture map and lesson 4 scenario screens", async ({ page }) => 
   // Question 3: AppleStallScenario
   await expect(page.locator(".apple-stall-scenario")).toBeVisible();
   await page.waitForTimeout(600);
-  await page.screenshot({
-    path: "/Users/admin/.hermes/cache/scratch/rendered_lesson_desktop.png",
-    fullPage: false,
-  });
+  await step();
 
   // Mobile portrait lesson
   await page.setViewportSize({ width: 414, height: 896 });
   await page.waitForTimeout(500);
-  await page.screenshot({
-    path: "/Users/admin/.hermes/cache/scratch/rendered_lesson.png",
-    fullPage: false,
-  });
+  await step();
 });
